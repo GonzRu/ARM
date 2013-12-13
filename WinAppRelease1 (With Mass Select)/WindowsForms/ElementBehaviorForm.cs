@@ -62,7 +62,7 @@ namespace WindowsForms
         }
         private void DataGridViewOnCellClick( object sender, DataGridViewCellEventArgs eventArgs )
         {
-            if ( eventArgs.ColumnIndex == 0 )
+            if ( eventArgs.ColumnIndex == 0 || eventArgs.RowIndex == -1 )
                 return;
 
             var dataGrid = (DataGridView)sender;
