@@ -51,7 +51,7 @@ namespace WinAppRelease1
       /// <param name="filedialog">פאיכמגûי הטאכמד</param>
       private static void InitFileDialog(FileDialog filedialog)
       {
-         filedialog.InitialDirectory = Environment.CurrentDirectory;
+          filedialog.InitialDirectory = Properties.Settings.Default.FileDialogLastDirectory;
          filedialog.RestoreDirectory = true;
          filedialog.Filter = ProgrammExtensions.GetSchemaFilter() + ProgrammExtensions.GetAnyFilesFilter();
          filedialog.FilterIndex = 1;
@@ -193,6 +193,9 @@ namespace WinAppRelease1
 
             OpenMethod(fname);
          }
+
+          Properties.Settings.Default.FileDialogLastDirectory = openFileDialog.InitialDirectory;
+
          openFileDialog.Dispose();
       }
       private void SaveAsToolStripMenuItemClick(object sender, EventArgs e)
@@ -210,6 +213,9 @@ namespace WinAppRelease1
                var frm = (MnemoSchemaForm)ActiveMdiChild;
                frm.SaveMethod(fname);
             }
+
+            Properties.Settings.Default.FileDialogLastDirectory = saveFileDialog.InitialDirectory;
+
             saveFileDialog.Dispose();
          }
       }
