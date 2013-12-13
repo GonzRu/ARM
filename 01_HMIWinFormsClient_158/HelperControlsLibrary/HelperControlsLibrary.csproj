@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{64E89B33-C72B-45D6-B6EC-7FBBC027BC95}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HelperControlsLibrary</RootNamespace>
+    <AssemblyName>HelperControlsLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CRZADevices">
+      <HintPath>..\AdapterLib\bin\Debug\CRZADevices.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TraceSourceLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TraceSourceLib\TraceSourceLib\bin\Debug\TraceSourceLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BlockViewCollector.cs" />
+    <Compile Include="BlockViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BlockViewControl.Designer.cs">
+      <DependentUpon>BlockViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BlockViewTagPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="IndicatorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IndicatorControl.Designer.cs">
+      <DependentUpon>IndicatorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventBlockControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventBlockControl.Designer.cs">
+      <DependentUpon>EventBlockControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventBlockTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="InformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InformationControl.Designer.cs">
+      <DependentUpon>InformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InformationTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MaxMeterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MaxMeterControl.Designer.cs">
+      <DependentUpon>MaxMeterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperationalControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OperationalControl.Designer.cs">
+      <DependentUpon>OperationalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OscDiagControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OscDiagControl.Designer.cs">
+      <DependentUpon>OscDiagControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OscDiagPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OscDiagPanelControl.Designer.cs">
+      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OscDiagTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PanelBottomEventBlock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadWriteUstavkyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReadWriteUstavkyControl.Designer.cs">
+      <DependentUpon>ReadWriteUstavkyControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportLibrary\ReportHelper.cs" />
+    <Compile Include="SelectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SelectControl.Designer.cs">
+      <DependentUpon>SelectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SrabatPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SrabatPanelControl.Designer.cs">
+      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StorageDeviceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StorageDeviceControl.Designer.cs">
+      <DependentUpon>StorageDeviceControl.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BlockViewControl.resx">
+      <DependentUpon>BlockViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventBlockControl.resx">
+      <DependentUpon>EventBlockControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventBlockTabPage.resx">
+      <DependentUpon>EventBlockTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IndicatorControl.resx">
+      <DependentUpon>IndicatorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InformationControl.resx">
+      <DependentUpon>InformationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaxMeterControl.resx">
+      <DependentUpon>MaxMeterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperationalControl.resx">
+      <DependentUpon>OperationalControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OscDiagControl.resx">
+      <DependentUpon>OscDiagControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OscDiagPanelControl.resx">
+      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReadWriteUstavkyControl.resx">
+      <DependentUpon>ReadWriteUstavkyControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectControl.resx">
+      <DependentUpon>SelectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SrabatPanelControl.resx">
+      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageDeviceControl.resx">
+      <DependentUpon>StorageDeviceControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataBaseLib\DataBaseLib.csproj">
+      <Project>{53CC22F8-9153-47A8-9654-B9172A2FD551}</Project>
+      <Name>DataBaseLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Calculator\Calculator.csproj">
+      <Project>{4E8A009D-B64C-418A-A334-DE7483545F8A}</Project>
+      <Name>Calculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonUtils\CommonUtils.csproj">
+      <Project>{B389D78D-0E11-4A7A-A770-B06AC4828E27}</Project>
+      <Name>CommonUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DebugStatisticLibrary\DebugStatisticLibrary.csproj">
+      <Project>{5102CEC9-B71D-407C-8F7C-F1EFB227A854}</Project>
+      <Name>DebugStatisticLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HelperLibrary\HelperLibrary.csproj">
+      <Project>{C68C58BC-7108-4FCA-A951-90CD60BEAC74}</Project>
+      <Name>HelperLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
+      <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
+      <Name>HMI_MT_Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
+      <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
+      <Name>InterfaceLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LabelTextbox\LabelTextbox.csproj">
+      <Project>{812A9E1D-FDA6-430C-8B75-5FB0CDAC3664}</Project>
+      <Name>LabelTextbox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OscillogramsLib\OscillogramsLib.csproj">
+      <Project>{8BBCE97B-B7D1-4F2A-9707-C5E1587F864D}</Project>
+      <Name>OscillogramsLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,1145 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Calculator;
+using LabelTextbox;
+using CRZADevices;
+using CommonUtils;
+using System.Xml.Linq;
+using System.Data.Common;
+using System.Data.SqlClient;
+using FileManager;
+using LibraryElements;
+using WindowsForms;
+using Structure;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
+
+namespace HMI_MT
+{
+   public partial class frm_Sirius_ACHR : frmBMRZbase
+   {
+      #region Public
+      public ArrayList arrDeviceInfo = new ArrayList( );
+      #endregion
+
+      #region private
+      // hashTable для хранения строк событий и ключей доступа к ним
+      Hashtable htStringEvent;
+      uint lenMaskInModbusWords;
+      // сортированный список с именами панелей и фреймов
+      SortedList DevPanelTypes;
+      SortedList slLocal;
+
+      // нижние панели
+      ConfigPanelControl   pnlConfig;
+      SrabatPanelControl   pnlSrabat;
+      CurrentPanelControl  pnlCurrent;
+      OscDiagPanelControl  pnlOscDiag;
+      LogDevPanelControl   pnlLogDev;
+
+      DataTable dtO;    // таблица с осциллограммами
+      DataTable dtG;    // таблица с диаграммами
+      DataTable dtA;    // таблица с авариями
+      DataTable dtU;    // таблица с уставками
+      DataTable dtLD;    // журнал событий блока
+      #endregion
+
+      #region Конструкторы
+      public frm_Sirius_ACHR( )
+      {
+         InitializeComponent( );
+      }
+      public frm_Sirius_ACHR( MainForm linkMainForm, int iFC, int iIDDev, string fxml )
+         : base( linkMainForm, iFC, iIDDev, fxml )
+      {
+         InitializeComponent( );
+
+         //переупорядочим вкладки, отодвинув базовые назад
+         ArrayList artp = new ArrayList( );
+
+         foreach ( TabPage tp in tc_Main_frmBMRZbase.TabPages )
+         {
+            artp.Add( tp );
+         }
+
+         int i = artp.Count - 1;
+
+         tc_Main_frmBMRZbase.Multiline = true;  // отображение корешков в несколько рядов
+
+         foreach ( TabPage tp in artp )
+         {
+            tc_Main_frmBMRZbase.TabPages [ i ] = tp;
+            i--;
+         }
+      }
+      #endregion
+
+      #region Load
+      private void frm_Sirius_ACHR_Load( object sender, EventArgs e )
+      {
+         tabpageControl.Enter += new EventHandler( tabpageControl_Enter );
+         slTPtoArrVars.Add( tabpageControl.Text, new ArrayList( ) );
+
+         //tabStatusDev_Command.Enter += new EventHandler(tabStatusDev_Command_Enter);
+         //slTPtoArrVars.Add(tabStatusDev_Command.Text, new ArrayList());
+
+         //tabpageDeviceInfo.Enter += new EventHandler( tabStatusDev_Command_Enter );
+         //slTPtoArrVars.Add( tabpageDeviceInfo.Text, new ArrayList( ) );
+
+         tabpageConfig.Enter += new EventHandler( tabpageConfig_Enter );
+         slTPtoArrVars.Add( tabpageConfig.Text, new ArrayList( ) );
+
+         tabpageSrabat.Enter += new EventHandler( tabpageSrabat_Enter );
+         slTPtoArrVars.Add( tabpageSrabat.Text, new ArrayList( ) );
+
+         //tbpPacketViewer.Enter += new EventHandler( tbpPacketViewer_Enter );
+
+         #region по источнику и номеру устройства опрделяем пути к файлам 
+         path2PrgDevCFG = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "Project" + Path.DirectorySeparatorChar + "PrgDevCFG.cdp";
+         XDocument xdoc = XDocument.Load( path2PrgDevCFG );
+         IEnumerable<XElement> xes = xdoc.Descendants( "FC" );
+         var xe = ( from nn in
+                       ( from n in xes
+                         where n.Attribute( "numFC" ).Value == StrFC
+                         select n ).Descendants( "Device" )
+                    where nn.Element("NumDev").Value == IIDDev.ToString()  //( IIDDev - ( 256 * IFC ) )
+                    select nn ).First( );
+
+         path2DeviceCFG = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + xe.Element( "nameR" ).Value + Path.DirectorySeparatorChar + "Device.cfg";
+         path2FrmDev = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + xe.Element( "nameR" ).Value + Path.DirectorySeparatorChar + "frm" + xe.Element( "nameELowLevel" ).Value + ".xml";
+         if ( !File.Exists( path2DeviceCFG ) )
+         {
+            MessageBox.Show( "Файл =" + path2DeviceCFG + " = не существует.", this.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning );
+            return;
+         }
+         if ( !File.Exists( path2FrmDev ) )
+         {
+            MessageBox.Show( "Файл =" + path2FrmDev + " = не существует.", this.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning );
+            return;
+         }
+         #endregion
+
+         // формируем сортированный список с панелями
+         xdoc = XDocument.Load( path2DeviceCFG );
+         DevPanelTypes = new SortedList( );
+
+         if ( !String.IsNullOrEmpty( ( string ) xdoc.Element( "Device" ).Element( "TypeOfPanelSections" ) ) )
+         {
+            IEnumerable<XElement> etypes = xdoc.Element( "Device" ).Element( "TypeOfPanelSections" ).Elements( "TypeOfPanel" );
+
+            foreach ( XElement xr in etypes )
+               // определим вариант формата секции TypeOfPanel
+               if ( ( string ) xr.Element( "Name" ) == null )
+                  DevPanelTypes.Add( xr.Value, String.Empty );
+               else
+                  DevPanelTypes.Add( xr.Element( "Name" ).Value, xr.Element( "Caption" ).Value );
+         }
+         else
+            MessageBox.Show( "Типы панелей в файле Device.cfg отсутсвуют", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning );
+
+         GetCCforFLP( ( ControlCollection ) this.Controls );
+
+         // заголовок формы
+         //this.Text = xe.Element( "nameR" ).Value + " ( ид.№ " + this.IIDDev.ToString( ) + " )"; // + " " + rr.cwInfo.strRefDesign+ " ( ид.№ " + rr.cwInfo.idDev + " ) - яч. № " + rr.cwInfo.nLoc
+
+         // создаем нижние панели
+         CreateTabPanel( );
+
+         #region устанавливаем пикеры для вывода аварийной информации за последние сутки
+		 pnlSrabat.dtpEndDateAvar.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59, 999);
+		 pnlSrabat.dtpEndTimeAvar.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59, 999);
+		 pnlSrabat.dtpStartDateAvar.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
+         TimeSpan ts = new TimeSpan( 3, 0, 0, 0 );
+         pnlSrabat.dtpStartDateAvar.Value = pnlSrabat.dtpStartDateAvar.Value - ts;
+		 pnlSrabat.dtpStartTimeAvar.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
+         #endregion
+      }
+      #endregion
+
+      #region Обработчики входов на вкладки
+      #region Текущая
+      void tabpageControl_Enter( object sender, EventArgs e )
+      {
+         /*
+          * скрываем панели
+          */
+         foreach ( UserControl p in arDopPanel )
+            p.Visible = false;
+
+         pnlCurrent.Visible = true;
+
+         TabPage tp_this = ( TabPage ) sender;
+         ArrayList arrVars = ( ArrayList ) slTPtoArrVars [ tp_this.Text ];
+         if ( arrVars.Count != 0 )
+            return;
+
+         PrepareTabPagesForGroup( tp_this.Text, tp_this, ref arrVars, null/*pnlTPControl*/  );
+         slTPtoArrVars [ tp_this.Text ] = arrVars; // ref не отрабатывает (?)
+         PrepareAdditionalFLP( pnlCurrent.Controls );
+      }
+      
+      /// <summary>
+      /// сформировать виз элементы на доп панелях MTRANamedFLPanel, кот принадлежат некоторому контролу
+      /// </summary>
+      private void PrepareAdditionalFLP(Control.ControlCollection cntrlCC )
+      {
+         // новые flp нужно добавить в список, скорее всего они там уже есть
+         GetCCforFLP( cntrlCC );
+
+         /* 
+          * читаем файл с доп панелями, имя файла или файлов
+          * извлекаем из frmxxx.xml,
+          * формируем arrList для каждой из них, 
+          * добавляем их в slTPtoArrVars
+          * создаем виз элементы для формул
+          * и отображаем
+          */
+         if ( !File.Exists( path2FrmDev ) )
+            throw new Exception( "Файл не найден : " + path2FrmDev );
+
+         XDocument xdoc_frm = XDocument.Load( path2FrmDev );
+         string faddname = String.Empty;
+
+         if ( !String.IsNullOrEmpty( ( string ) xdoc_frm.Element( "MT" ).Element( "FileAdditionalFLP" ) ) )
+            faddname = xdoc_frm.Element( "MT" ).Element( "FileAdditionalFLP" ).Element( "Name" ).Value;
+         else
+         {
+            MessageBox.Show( "В файле описания формы нет ссылки на доп панель", this.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning );
+            return;
+         }
+
+         faddname = Path.GetDirectoryName( path2FrmDev ) + Path.DirectorySeparatorChar + faddname;
+
+         if ( !File.Exists( faddname ) )
+         {
+            MessageBox.Show( "Файл с описанием доп панели не найден : " + faddname, this.Name,MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            return;
+         }
+
+         XDocument xdoc_addflp;
+         try
+         {
+            xdoc_addflp = XDocument.Load( faddname );
+         }
+         catch ( Exception e )
+         {
+            throw new Exception( "Ошибка в формате xml-документа: " + faddname );
+         }         
+
+         IEnumerable<XElement> flpframes = xdoc_addflp.Element( "MT" ).Element( "AdditionalFLP" ).Elements( "FLPframe" );
+
+         foreach ( XElement flpframe in flpframes )
+         {
+            // формируем массив формул
+            ArrayList arrf = GetArrFrmls( flpframe, String.Empty );
+
+            // отображаем
+            PlaceVisElemOnForm( "", flpframe.Attribute( "MTFLPNameR" ).Value, arrf );
+         }
+      }
+	   #endregion
+      
+      #region Срабатывание
+      void tabpageSrabat_Enter( object sender, EventArgs e )
+      {
+         /*
+         * скрываем панели
+         */
+         foreach ( UserControl p in arDopPanel )
+            p.Visible = false;
+
+         pnlSrabat.Visible = true;
+
+         lstvAvar.Items.Clear( );
+
+         AvarBD( );
+
+         //-------------------------------------------------------------------
+         //готовим инф. для отображения текущих значений аналоговых и дискретных сигналов
+         TabPage tp_this = ( TabPage ) sender;
+         ArrayList arrVars = ( ArrayList ) slTPtoArrVars [ tp_this.Text ];
+         if ( arrVars.Count != 0 )//arrStatusDevCommand
+            return;
+
+         PrepareTabPagesForGroup( tp_this.Text, tp_this, ref arrVars, pnlTPSpab );
+         slTPtoArrVars [ tp_this.Text ] = arrVars; // ref не отрабатывает (?)
+      }
+
+      void btnResetValues_Click( object sender, EventArgs e )
+      {
+         parent.newKB.ResetGroup( IFC, IIDDev, 14 );
+      }
+
+      void btnReNew_Click( object sender, EventArgs e )
+      {
+         AvarBD( );
+         //pnlSrabat.tcAvarBottomPanel.SelectTab( 0 );
+      }
+      #endregion
+
+      #region Уставки
+      void tabpageConfig_Enter( object sender, EventArgs e )
+      {
+         #region устанавливаем пикеры для изменения уставок за последние сутки
+		  pnlConfig.dtpEndDateConfig.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59, 999);
+		  pnlConfig.dtpEndTimeConfig.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59, 999);
+		 pnlConfig.dtpStartDateConfig.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
+
+         TimeSpan ts = new TimeSpan( 1, 0, 0, 0 );
+         pnlConfig.dtpStartDateConfig.Value = pnlConfig.dtpStartDateConfig.Value - ts;
+		 pnlConfig.dtpStartTimeConfig.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
+         #endregion
+
+         /*
+          * скрываем панели
+          */
+         foreach ( UserControl p in arDopPanel )
+            p.Visible = false;
+
+         pnlConfig.Visible = true;
+
+         TabPage tp_this = ( TabPage ) sender;
+         ArrayList arrVars = ( ArrayList ) slTPtoArrVars [ tp_this.Text ];
+         if ( arrVars.Count != 0 )
+            return;
+
+         PrepareTabPagesForGroup( tp_this.Text, tp_this, ref arrVars, pnlTPConfig );
+         slTPtoArrVars [ tp_this.Text ] = arrVars; // ref не отрабатывает (?)
+
+         UstavBD( );
+      }
+
+      void btnReNewUstBD_Click( object sender, EventArgs e )
+      {
+         UstavBD( );
+         //pnlConfig.tcUstConfigBottomPanel.SelectTab( 0 );
+      }
+
+      void btnReadConfig_Click( object sender, EventArgs e )
+      {
+         if ( parent.newKB.ExecuteCommand( IFC, IIDDev, "RCP", String.Empty, null, parent.toolStripProgressBar1, parent.statusStrip1, this ) )
+				parent.WriteEventToLog(35, "Команда \"RCP\" ушла в сеть. Устройство - " + IIDDev.ToString(), this.Name, true);//, true, false );
+
+         // документирование действия пользователя
+			parent.WriteEventToLog(7, IIDDev.ToString(), this.Name, true);//, true, false );//"выдана команда RCP - чтения уставок."
+
+         HMI_Settings.ClientDFE.SetReq4PeriodicPacketQuery(IFC ,IIDDev, 14);
+      }
+
+      void btnReadUstFC_Click( object sender, EventArgs e )
+      {
+         if ( parent.newKB.ExecuteCommand( IFC, IIDDev, "IMP", String.Empty, null, parent.toolStripProgressBar1, parent.statusStrip1, this ) )
+				parent.WriteEventToLog(35, "Команда \"IMP\" ушла в сеть. Устройство - " + IIDDev.ToString(), this.Name, true);//, true, false );
+
+         // документирование действия пользователя
+			parent.WriteEventToLog(7, IIDDev.ToString(), this.Name, true);//, true, false );//"выдана команда IMP - чтения уставок."
+
+			HMI_Settings.ClientDFE.SetReq4PeriodicPacketQuery(IFC, IIDDev, 14);
+      }
+
+      void btnWriteConfig_Click(object sender, EventArgs e)
+      {
+         if (CommonUtils.CommonUtils.IsUserActionBan(CommonUtils.CommonUtils.UserActionType.b05_Set_ustav_config, parent.UserRight))
+            return;
+
+         if (parent.isReqPassword)
+            if (!parent.CanAction())
+            {
+               MessageBox.Show("Выполнение действия запрещено");
+               return;
+            }
+
+         DialogResult dr = MessageBox.Show("Записать уставки?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+         if (dr == DialogResult.No)
+            return;
+
+         string stri;
+         TabPage tp;
+         ctlLabelTextbox ultb;
+         CheckBoxVar chbTmp;
+         ComboBoxVar cbTmp;
+
+         FlowLayoutPanel flp;
+         bool isUstChange = false;   // факт изменения уставок для последующего формирования команды
+         StringBuilder sb = new StringBuilder();
+         uint ainmemX;    // адрес в массиве memX
+         byte[] aTmp2 = new byte[2];
+
+         // найдем SortedList для нужного устройства
+         slLocal = new SortedList();
+         foreach (FC aFC in parent.KB)
+            if (aFC.NumFC == IFC) //iFC
+            {
+               foreach (TCRZADirectDevice aDev in aFC)
+                  if (aDev.NumDev == IIDDev) //iIDDev
+                  {
+                     slLocal = aDev.CRZAMemDev;
+                     break;
+                  }
+               break;
+            }
+
+         int lenpack = 0;
+         try
+         {
+            lenpack = BitConverter.ToInt16((byte[])slLocal[60200], 0);
+         }
+         catch (ArgumentNullException ex)
+         {
+            MessageBox.Show("Нет данных для записи: " + ex.Message + ". \nВыполнение команды отменено.", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+         }
+
+         short numdev = BitConverter.ToInt16((byte[])slLocal[60200], 2);
+
+         ushort add10 = BitConverter.ToUInt16((byte[])slLocal[60200], 4);	//читаем адрес блока данных
+
+         byte[] memX = new byte[lenpack - 6];   // 6 байт - номер устройства, длина пакета, адрес блока данных
+
+         System.Buffer.BlockCopy((byte[])slLocal[60200], 14, memX, 0, lenpack - 14);//6 <-> 6+8 - 8 байт - два времени (см. протокол)
+
+         CommonUtils.CommonUtils.PrintHexDump("Уставки перед изменением", "LogHexPacket.dat", memX, GetAdrBlockData(path2DeviceCFG, 14), IFC, IIDDev);  // выведем в файл для контроля
+
+         TabControl tbkConfig = new TabControl();
+
+         //foreach ( Control cc in tabpageConfig.Controls )
+         //   if ( cc is TabControl )
+         //   {
+         //      tbkConfig = ( TabControl ) cc;
+         //      break;
+         //   }
+
+         foreach (Control cc in tabpageConfig.Controls)
+            if (cc.Name == "splitContainer_tpConfig")
+            {
+               SplitContainer sc = (SplitContainer)cc;
+               foreach (Control ccc in sc.Panel2.Controls)
+                  if (ccc is Panel)
+                  {
+                     Panel pnl = (Panel)ccc;
+                     foreach (Control cccc in pnl.Controls)
+                        if (cccc is TabControl)
+                        {
+                           tbkConfig = (TabControl)cccc;
+                           break;
+                        }
+                  }
+            }
+
+         // смотрим изменения
+         for (int i = 0; i < tbkConfig.Controls.Count; i++)
+         {
+            if (tbkConfig.Controls[i] is TabPage)
+            {
+               tp = (TabPage)tbkConfig.Controls[i];
+               for (int j = 0; j < tp.Controls.Count; j++)
+               {
+                  if (tp.Controls[j] is FlowLayoutPanel)
+                  {
+                     flp = (FlowLayoutPanel)tp.Controls[j];
+                     for (int n = 0; n < flp.Controls.Count; n++)
+                     {
+                        if (flp.Controls[n] is ctlLabelTextbox)
+                        {
+                           ultb = (ctlLabelTextbox)flp.Controls[n];
+                           if (ultb.isChange)
+                           {
+                              ultb.isChange = false;  // сбросим флаг индикации изменения уставки
+
+                              //if ( !CommonUtils.CommonUtils.StrToBCD_Field( ultb, memX, 60204 ) )
+                              //   return;
+                              /*
+                               * для сириусов особенность в работе с уставками:
+                               * значения уставок хранятся в uint16, если есть коэф трансф, то после умножения 
+                               * разряды могут терятся, значение искажается, 
+                               * чтобы восстановить его, требуется заново умножить новое значение на на 
+                               * коэф трансформации
+                               */
+                              switch (ultb.typetag)
+                              {
+                                 case "TUIntVariable":
+                                    UInt16 tu16 = 0;
+                                    CultureInfo cinfo = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
+                                    RezFormulaEval rfe = (RezFormulaEval)ultb.Tag;
+
+                                    // выясним есть ли у поля коэф. трансф.
+                                    if (!String.IsNullOrEmpty(rfe.strKTR))
+                                    {
+                                       // проверим десятичный разделитель
+                                       if (ultb.TextboxText.Contains("."))
+                                          cinfo.NumberFormat.NumberDecimalSeparator = ".";
+                                       else if (ultb.TextboxText.Contains(","))
+                                          cinfo.NumberFormat.NumberDecimalSeparator = ",";
+
+                                       Thread.CurrentThread.CurrentCulture = cinfo;
+
+                                       float fltmp = Convert.ToSingle(ultb.TextboxText);
+
+                                       fltmp = fltmp * Convert.ToUInt16(rfe.strKTR);
+                                       tu16 = Convert.ToUInt16(fltmp);
+                                    }
+                                    else
+                                       tu16 = Convert.ToUInt16(ultb.TextboxText);
+
+                                    byte[] tmask = new byte[2];
+                                    tmask = BitConverter.GetBytes(tu16);
+                                    // запоминаем изменения
+                                    ainmemX = (ultb.addrLinkVar - 60204) * 2;//baseAdr
+
+                                    memX[ainmemX] = tmask[1];
+                                    memX[ainmemX + 1] = tmask[0];
+
+                                    break;
+                              }
+                              isUstChange = true;
+                           }
+                        }
+                        else if (flp.Controls[n] is ComboBoxVar)
+                        {
+                           cbTmp = (ComboBoxVar)flp.Controls[n];
+                           if (cbTmp.isChange)
+                           {
+                              isUstChange = true;
+                              cbTmp.isChange = false;  // сбрасываем признак изменения у конкретного ComboBoxVar'а
+                              // записываем изменения по ComboBoxVar'ам в исходный пакет (корректируем массив memX)
+                              uint a = cbTmp.addrLinkVar; // адрес переменной
+                              // получим значение
+                              int st = cbTmp.cbVar.SelectedIndex;
+                              byte[] bst = new byte[4];
+                              bst = BitConverter.GetBytes(st);
+                              Buffer.BlockCopy(bst, 0, aTmp2, 0, 2);
+                              Array.Reverse(aTmp2);
+                              // запоминаем изменения
+                              ainmemX = (a - 60204) * 2;//60200 <> 60204
+                              Buffer.BlockCopy(aTmp2, 0, memX, (int)ainmemX, 2);
+                           }
+                        }
+                        else if (flp.Controls[n] is CheckBoxVar)
+                        {
+                           chbTmp = (CheckBoxVar)flp.Controls[n];
+                           if (chbTmp.isChange)
+                           {
+                              isUstChange = true;
+                              chbTmp.isChange = false;    // сбрасываем признак изменения у конкретного CheckBoxVar'а
+                              // извлечем битовое поле из исходного массива
+                              ainmemX = (chbTmp.addrLinkVar - 60200) * 2;   // это адрес
+                              //aTmp2 = new byte[2];
+                              Buffer.BlockCopy(memX, (int)ainmemX, aTmp2, 0, 2);
+                              string bitmask = chbTmp.addrLinkVarBitMask;
+                              UInt16 ibitmask = Convert.ToUInt16(chbTmp.addrLinkVarBitMask, 16);
+                              Array.Reverse(aTmp2);
+                              UInt16 rezbit = BitConverter.ToUInt16(aTmp2, 0);
+                              if (chbTmp.checkBox1.Checked == true)
+                                 rezbit = Convert.ToUInt16(rezbit | ibitmask);
+                              else
+                              {
+                                 UInt16 ti = (UInt16)~ibitmask; //Convert.ToUInt16()
+                                 rezbit = Convert.ToUInt16(rezbit & ~ibitmask);
+                              }
+                              // записать на место
+                              aTmp2 = BitConverter.GetBytes(rezbit);
+                              Array.Reverse(aTmp2);
+                              Buffer.BlockCopy(aTmp2, 0, memX, (int)ainmemX, 2);
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+         //------------------------------
+         #region пока для сириуса закомментировали
+         //// аналогично для панели уставок
+         ////for( int n = 0 ; n < pnlConfig.Controls.Count ; n++ )
+         //for ( int n = 0 ;n < Config_BottomPanel.Controls.Count ;n++ )
+         //   //if( pnlConfig.Controls[n] is ctlLabelTextbox )
+         //   if ( ( Config_BottomPanel.Controls [ n ] as ctlLabelTextbox ) != null )
+         //   {
+         //      ultb = ( ctlLabelTextbox ) Config_BottomPanel.Controls [ n ];
+         //      if ( ultb.Name == "ctlTimeUstavkiSbros" )
+         //         continue;
+
+         //      if ( ultb.isChange )
+         //      {
+         //         if ( !CommonUtils.CommonUtils.StrToBCD_Field( ultb, memX, 62000 ) )
+         //            return;
+         //         isUstChange = true;
+         //      }
+         //   }
+         #endregion
+         //------------------------------
+         if (!isUstChange)
+         {
+            MessageBox.Show("Уставки не изменялись. \nВыполнение команды отменено.", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+         }
+         // формируем пакет и команду для отправки изменения уставок
+         //byte[] memXOut = new byte [ memX.Length ];
+         byte[] memXOut = new byte[memX.Length + 4];
+
+         // размер д.б. не менее 196 слов = 196 * 2 = 392 байта
+         if (memXOut.Length < 392)
+            memXOut = new byte[392];
+
+         StringBuilder cmd2 = new StringBuilder();
+         cmd2.Append("PN1\0");
+         byte[] scmd2 = Encoding.UTF8.GetBytes(cmd2.ToString());
+         Buffer.BlockCopy(scmd2, 0, memXOut, 0, 4);
+         Buffer.BlockCopy(memX, 0, memXOut, 4, memX.Length);
+         //Buffer.BlockCopy( memX, 4, memXOut, 4, memX.Length - 4 );  // Handle пока нулевой
+
+         CommonUtils.CommonUtils.PrintHexDump("Уставки после изменения", "LogHexPacket.dat", memXOut, GetAdrBlockData(path2DeviceCFG, 14), IFC, IIDDev);  // выведем в файл для контроля
+
+         if (parent.newKB.ExecuteCommand(IFC, IIDDev, "WCP", String.Empty, memXOut, parent.toolStripProgressBar1, parent.statusStrip1, parent))
+            parent.WriteEventToLog(35, "Команда \"WCP\" ушла в сеть. Устройство - " + IIDDev.ToString(), this.Name, true);//, true, false );
+         // документирование действия пользователя
+         int numdevfc = IFC * 256 + IIDDev;
+         parent.WriteEventToLog(6, numdevfc.ToString(), this.Name, true);//, true, false );			//"выдана команда WCP - запись уставок."
+         isUstChange = false;
+      }
+      #endregion
+
+      #region События блока
+      PanelBottomEventBlock pnlBottomEV;
+      private void tabpageEventBlock_Enter(object sender, EventArgs e)
+      {
+         //pnlBottomEV.InitPickers();
+
+         /*
+          * скрываем панели
+          */
+         foreach (UserControl p in arDopPanel)
+            p.Visible = false;
+
+         pnlBottomEV.Visible = true;
+
+         TabPage tp_this = (TabPage)sender;
+      }
+      #endregion   
+      #endregion
+
+      #region Формирование вкладок
+      #region Формирование нижних (доп) панелей
+      void CreateTabPanel( )
+      {
+         if ( arDopPanel == null )
+            arDopPanel = new ArrayList( );
+
+         #region Текущая - контроль
+         pnlCurrent = new CurrentPanelControl( );
+         SplitContMain.Panel2.Controls.Add( pnlCurrent );
+         pnlCurrent.Dock = DockStyle.Fill;
+         arDopPanel.Add( pnlCurrent);
+
+         DinamicControl rr;
+         /* 
+          * создадим динамический элемент для его размещения на панели pnl
+         */
+         int xx = pnlCurrent.PnlImgDev.Width;
+         int yy = pnlCurrent.PnlImgDev.Height;
+
+         ArrayList arrFE = new ArrayList();
+         CommonUtils.CommonUtils.CreateDevImg4Panel( out rr, parent.KB, IFC, IIDDev, pnlCurrent.PnlImgDev, ref arrFE); //, xed, ControlSizeVariant.SizeofControl 
+         #endregion
+
+         #region Уставки
+         pnlConfig = new ConfigPanelControl( );
+         SplitContMain.Panel2.Controls.Add( pnlConfig );
+         //формируем панель для уставок
+         pnlConfig.Dock = DockStyle.Fill;
+         //pnlConfig.btnReadUstBlock.Click += new EventHandler( btnReadConfig_Click );
+         pnlConfig.btnReadUstFC.Click += new EventHandler( btnReadUstFC_Click );
+         pnlConfig.btnWriteUst.Click += new EventHandler( btnWriteConfig_Click );
+         pnlConfig.btnResetValues.Click += new EventHandler( btnResetValues_Click );
+         pnlConfig.btnReNewUstBD.Click += new EventHandler( btnReNewUstBD_Click );
+         pnlConfig.Visible = false;
+         arDopPanel.Add( pnlConfig );
+         #endregion
+
+         #region Аварии-срабатывание
+         pnlSrabat = new SrabatPanelControl( );
+         SplitContMain.Panel2.Controls.Add( pnlSrabat );
+         //формируем панель для уставок
+         pnlSrabat.Dock = DockStyle.Fill;
+         pnlSrabat.Visible = false;
+         pnlSrabat.btnReNew.Click += new EventHandler( btnReNew_Click );
+         arDopPanel.Add( pnlSrabat );
+         //lstvAvar.ItemActivate += new EventHandler( lstvAvar_ItemActivate );
+         #endregion
+
+         #region События блока
+         pnlBottomEV = new PanelBottomEventBlock();
+         SplitContMain.Panel2.Controls.Add(pnlBottomEV);
+         //формируем панель для выборки диапазона событий блока
+         pnlBottomEV.Dock = DockStyle.Fill;
+         pnlBottomEV.InitPanel(IFC, IIDDev, lstvEventBlock);
+
+         arDopPanel.Add(pnlBottomEV);
+         #endregion
+
+         foreach ( UserControl p in arDopPanel )
+            p.Visible = false;
+      }
+      #endregion
+
+      #region вывод информации при выборе конкретной аварии
+      private void lstvAvar_ItemActivate( object sender, EventArgs e )
+      {
+         if ( lstvAvar.SelectedItems.Count > 0 )
+         {
+            // получение строк соединения и поставщика данных из файла *.config
+            //string cnStr = ConfigurationManager.ConnectionStrings["SqlProviderPTK"].ConnectionString;
+            SqlConnection asqlconnect = new SqlConnection( HMI_Settings.cstr );
+            try
+            {
+               asqlconnect.Open( );
+            }
+            catch ( SqlException ex )
+            {
+               string errorMes = "";
+               // интеграция всех возвращаемых ошибок
+               foreach ( SqlError connectError in ex.Errors )
+                  errorMes += connectError.Message + " (ощибка: " + connectError.Number.ToString( ) + ")" + Environment.NewLine;
+					parent.WriteEventToLog(21, "Нет связи с БД (lstvAvar_ItemActivate): " + errorMes, this.Name, false);//, true, false ); // событие нет связи с БД
+               System.Diagnostics.Trace.TraceInformation( "\n" + DateTime.Now.ToString( ) + " : frmBMRZ : lstvAvar_ItemActivate()" );
+               asqlconnect.Close( );
+               return;
+            }
+            catch ( Exception ex )
+            {
+               MessageBox.Show( "Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information );
+               asqlconnect.Close( );
+               return;
+            }
+            // формирование данных для вызова хранимой процедуры
+            SqlCommand cmd = new SqlCommand( "ShowDataLog", asqlconnect );
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // входные параметры
+            // 1. ip FC
+            SqlParameter pipFC = new SqlParameter( );
+            pipFC.ParameterName = "@IP";
+            pipFC.SqlDbType = SqlDbType.BigInt;
+            pipFC.Value = 0;
+            pipFC.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add( pipFC );
+            // 2. id устройства
+            SqlParameter pidBlock = new SqlParameter( );
+            pidBlock.ParameterName = "@id";
+            pidBlock.SqlDbType = SqlDbType.Int;
+            pidBlock.Value = 0;
+            pidBlock.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add( pidBlock );
+            // 3. время старт
+            SqlParameter ptimeStart = new SqlParameter( );
+            ptimeStart.ParameterName = "@dt_start";
+            ptimeStart.SqlDbType = SqlDbType.DateTime;
+            ptimeStart.Value = DateTime.Now;
+            ptimeStart.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add( ptimeStart );
+            // 4. время конец
+            SqlParameter ptimeFin = new SqlParameter( );
+            ptimeFin.ParameterName = "@dt_end";
+            ptimeFin.SqlDbType = SqlDbType.DateTime;
+            ptimeFin.Value = DateTime.Now;
+            ptimeFin.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add( ptimeFin );
+            // 5. тип записи
+            SqlParameter ptypeRec = new SqlParameter( );
+            ptypeRec.ParameterName = "@type";
+            ptypeRec.SqlDbType = SqlDbType.Int;
+            ptypeRec.Value = 0;
+            ptypeRec.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add( ptypeRec );
+            // 6. ид записи журнала
+            SqlParameter pid = new SqlParameter( );
+            pid.ParameterName = "@id_record";
+            pid.SqlDbType = SqlDbType.Int;
+            pid.Value = lstvAvar.SelectedItems [ 0 ].Tag;
+            pid.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add( pid );
+
+            // заполнение DataSet
+            DataSet aDS = new DataSet( "ptk" );
+            SqlDataAdapter aSDA = new SqlDataAdapter( );
+            aSDA.SelectCommand = cmd;
+
+            //aSDA.sq
+            aSDA.Fill( aDS );//, "DataLog" 
+
+            asqlconnect.Close( );
+
+            //PrintDataSet( aDS );
+            // извлекаем данные по аварии
+            DataTable dt = aDS.Tables [ 0 ];
+            byte[] adata = ( byte [ ] ) dt.Rows [ 0 ] [ "Data" ];
+
+            // вызываем процедуру разбора пакета с аварийной информацией из базы
+            // извлекаем шапку
+            //const int headingLength = 4;  //6
+            //byte[] headingPacket = new byte [ headingLength ];
+            //Buffer.BlockCopy( adata, 0, headingPacket, 0, headingLength );
+            //byte [] adataToVis = new byte[adata.Length - headingPacket.Length];
+            //Buffer.BlockCopy( adata,headingPacket.Length,adataToVis, 0, adataToVis.Length);
+//            ParseBDPacket( adataToVis, 10280, IIDDev ); // или 61100 ???
+            ParseBDPacket( adata, GetAdrBlockData(path2DeviceCFG,8), 8 ); // 10280или 61100 ???
+
+            aSDA.Dispose( );
+         }
+      }
+      private void AvarBD( )
+      {
+         // получение строк соединения и поставщика данных из файла *.config
+         //string cnStr = ConfigurationManager.ConnectionStrings["SqlProviderPTK"].ConnectionString;
+         SqlConnection asqlconnect = new SqlConnection( HMI_Settings.cstr );
+         try
+         {
+            asqlconnect.Open( );
+         }
+         catch ( SqlException ex )
+         {
+            string errorMes = "";
+            // интеграция всех возвращаемых ошибок
+            foreach ( SqlError connectError in ex.Errors )
+               errorMes += connectError.Message + " (ощибка: " + connectError.Number.ToString( ) + ") ";
+
+				parent.WriteEventToLog(21, "Нет связи с БД (AvarBD): " + errorMes, this.Name, false);//, true, false ); // событие нет связи с БД
+            System.Diagnostics.Trace.TraceInformation( "\n" + DateTime.Now.ToString( ) + " : frmBMRZ : Нет связи с БД (AvarBD)" );
+            asqlconnect.Close( );
+            return;
+         }
+         catch ( Exception ex )
+         {
+            MessageBox.Show( "Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information );
+            asqlconnect.Close( );
+            return;
+         }
+
+
+         // формирование данных для вызова хранимой процедуры
+         SqlCommand cmd = new SqlCommand( "ShowDataLog", asqlconnect );
+         cmd.CommandType = CommandType.StoredProcedure;
+
+         // входные параметры
+         // 1. ip FC
+         SqlParameter pipFC = new SqlParameter( );
+         pipFC.ParameterName = "@IP";
+         pipFC.SqlDbType = SqlDbType.BigInt;
+         pipFC.Value = 0;
+         pipFC.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( pipFC );
+         // 2. id устройства
+         SqlParameter pidBlock = new SqlParameter( );
+         pidBlock.ParameterName = "@id";
+         pidBlock.SqlDbType = SqlDbType.Int;
+         pidBlock.Value = IFC * 256 + IIDDev;//IIDDev;;
+         pidBlock.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( pidBlock );
+
+         // 3. начальное время
+         SqlParameter dtMim = new SqlParameter( );
+         dtMim.ParameterName = "@dt_start";
+         dtMim.SqlDbType = SqlDbType.DateTime;
+         TimeSpan tss = new TimeSpan( 0, pnlSrabat.dtpStartDateAvar.Value.Hour - pnlSrabat.dtpStartTimeAvar.Value.Hour, pnlSrabat.dtpStartDateAvar.Value.Minute - pnlSrabat.dtpStartTimeAvar.Value.Minute, pnlSrabat.dtpStartDateAvar.Value.Second - pnlSrabat.dtpStartTimeAvar.Value.Second );
+         DateTime tim = pnlSrabat.dtpStartDateAvar.Value - tss;
+         dtMim.Value = tim;
+         dtMim.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( dtMim );
+
+         // 2. конечное время
+         SqlParameter dtMax = new SqlParameter( );
+         dtMax.ParameterName = "@dt_end";
+         dtMax.SqlDbType = SqlDbType.DateTime;
+         tss = new TimeSpan( 0, pnlSrabat.dtpEndDateAvar.Value.Hour - pnlSrabat.dtpEndTimeAvar.Value.Hour, pnlSrabat.dtpEndDateAvar.Value.Minute - pnlSrabat.dtpEndTimeAvar.Value.Minute, pnlSrabat.dtpEndDateAvar.Value.Second - pnlSrabat.dtpEndTimeAvar.Value.Second );
+         tim = pnlSrabat.dtpEndDateAvar.Value - tss;
+         dtMax.Value = tim;
+         dtMax.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( dtMax );
+
+         // 5. тип записи
+         SqlParameter ptypeRec = new SqlParameter( );
+         ptypeRec.ParameterName = "@type";
+         ptypeRec.SqlDbType = SqlDbType.Int;
+         ptypeRec.Value = 2; // информация по авариям
+         ptypeRec.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( ptypeRec );
+         // 6. ид записи журнала
+         SqlParameter pid = new SqlParameter( );
+         pid.ParameterName = "@id_record";
+         pid.SqlDbType = SqlDbType.Int;
+         pid.Value = 0;
+         pid.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( pid );
+
+         // заполнение DataSet
+         DataSet aDS = new DataSet( "ptk" );
+         SqlDataAdapter aSDA = new SqlDataAdapter( );
+         aSDA.SelectCommand = cmd;
+
+         //aSDA.sq
+         aSDA.Fill( aDS, "TbAlarm" );
+
+         asqlconnect.Close( );
+
+         //PrintDataSet( aDS );
+         // извлекаем данные по аварии
+         dtA = aDS.Tables [ "TbAlarm" ];
+
+         // заполняем ListView
+         lstvAvar.Items.Clear( );
+         for ( int curRow = 0 ;curRow < dtA.Rows.Count ;curRow++ )
+         {
+            DateTime t = ( DateTime ) dtA.Rows [ curRow ] [ "TimeBlock" ];
+            ListViewItem li = new ListViewItem( CRZADevices.CommonCRZADeviceFunction.GetTimeInMTRACustomFormat( t ) );
+            li.Tag = dtA.Rows [ curRow ] [ "ID" ];
+            lstvAvar.Items.Add( li );
+         }
+         aSDA.Dispose( );
+         aDS.Dispose( );
+      }
+      #endregion
+
+      #region вывод информации при выборе конкретной записи по уставкам
+      private void lstvConfig_ItemActivate( object sender, EventArgs e )
+      {
+         if ( lstvConfig.SelectedItems.Count == 0 )
+            return;
+
+         // получение строк соединения и поставщика данных из файла *.config
+         //string cnStr = ConfigurationManager.ConnectionStrings["SqlProviderPTK"].ConnectionString;
+         SqlConnection asqlconnect = new SqlConnection( HMI_Settings.cstr );
+         try
+         {
+            asqlconnect.Open( );
+         }
+         catch ( SqlException ex )
+         {
+            string errorMes = "";
+            // интеграция всех возвращаемых ошибок
+            foreach ( SqlError connectError in ex.Errors )
+               errorMes += connectError.Message + " (ощибка: " + connectError.Number.ToString( ) + ")" + Environment.NewLine;
+				parent.WriteEventToLog(21, "Нет связи с БД (lstvConfig_ItemActivate): " + errorMes, this.Name, false);//, true, false ); // событие нет связи с БД
+            System.Diagnostics.Trace.TraceInformation( "\n" + DateTime.Now.ToString( ) + " : frmBMRZ : Нет связи с БД (lstvConfig_ItemActivate)" );
+            asqlconnect.Close( );
+            return;
+         }
+         catch ( Exception ex )
+         {
+            MessageBox.Show( "Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information );
+            asqlconnect.Close( );
+            return;
+         }
+         // формирование данных для вызова хранимой процедуры
+         SqlCommand cmd = new SqlCommand( "ShowDataLog", asqlconnect );
+         cmd.CommandType = CommandType.StoredProcedure;
+
+         // входные параметры
+         // 1. ip FC
+         SqlParameter pipFC = new SqlParameter( );
+         pipFC.ParameterName = "@IP";
+         pipFC.SqlDbType = SqlDbType.BigInt;
+         pipFC.Value = 0;
+         pipFC.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( pipFC );
+         // 2. id устройства
+         SqlParameter pidBlock = new SqlParameter( );
+         pidBlock.ParameterName = "@id";
+         pidBlock.SqlDbType = SqlDbType.Int;
+         pidBlock.Value = 0;
+         pidBlock.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( pidBlock );
+         // 3. время старт
+         SqlParameter ptimeStart = new SqlParameter( );
+         ptimeStart.ParameterName = "@dt_start";
+         ptimeStart.SqlDbType = SqlDbType.DateTime;
+         ptimeStart.Value = DateTime.Now;
+         ptimeStart.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( ptimeStart );
+         // 4. время конец
+         SqlParameter ptimeFin = new SqlParameter( );
+         ptimeFin.ParameterName = "@dt_end";
+         ptimeFin.SqlDbType = SqlDbType.DateTime;
+         ptimeFin.Value = DateTime.Now;
+         ptimeFin.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( ptimeFin );
+         // 5. тип записи - не нужен - все по Tag
+         SqlParameter ptypeRec = new SqlParameter( );
+         ptypeRec.ParameterName = "@type";
+         ptypeRec.SqlDbType = SqlDbType.Int;
+         ptypeRec.Value = 0;
+         ptypeRec.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( ptypeRec );
+         // 6. ид записи журнала
+         SqlParameter pid = new SqlParameter( );
+         pid.ParameterName = "@id_record";
+         pid.SqlDbType = SqlDbType.Int;
+         pid.Value = lstvConfig.SelectedItems [ 0 ].Tag;
+         pid.Direction = ParameterDirection.Input;
+         cmd.Parameters.Add( pid );
+
+         // заполнение DataSet
+         DataSet aDS = new DataSet( "ptk" );
+         SqlDataAdapter aSDA = new SqlDataAdapter( );
+         aSDA.SelectCommand = cmd;
+
+         //aSDA.sq
+         aSDA.Fill( aDS );//, "DataLog" 
+
+         asqlconnect.Close( );
+
+         //PrintDataSet( aDS );
+         // извлекаем данные по уставкам
+         DataTable dt = aDS.Tables [ 0 ];
+         byte[] adata = ( byte [ ] ) dt.Rows [ 0 ] [ "Data" ];
+
+         // вызываем процедуру разбора пакета из базы
+         ParseBDPacket( adata, GetAdrBlockData(path2DeviceCFG,14) , 14 );//60200
+
+         dt.Dispose( );
+         aSDA.Dispose( );
+         aDS.Dispose( );
+
+         pnlConfig.btnWriteUst.Enabled = true;
+      }
+      private void UstavBD( )
+   {
+      //dgvAvar.Rows.Clear();
+      // получение строк соединения и поставщика данных из файла *.config
+      //string cnStr = ConfigurationManager.ConnectionStrings["SqlProviderPTK"].ConnectionString;
+      SqlConnection asqlconnect = new SqlConnection( HMI_Settings.cstr );
+      try
+      {
+         asqlconnect.Open( );
+      }
+      catch ( SqlException ex )
+      {
+         string errorMes = "";
+
+         // интеграция всех возвращаемых ошибок
+         foreach ( SqlError connectError in ex.Errors )
+            errorMes += connectError.Message + " (ощибка: " + connectError.Number.ToString( ) + ")" + Environment.NewLine;
+			parent.WriteEventToLog(21, "Нет связи с БД (UstavBD): " + errorMes, this.Name, false);//, true, false ); // событие нет связи с БД
+         System.Diagnostics.Trace.TraceInformation( "\n" + DateTime.Now.ToString( ) + " : frmBMRZ : Нет связи с БД (UstavBD)" );
+         asqlconnect.Close( );
+         return;
+      }
+      catch ( Exception ex )
+      {
+         MessageBox.Show( "Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information );
+         asqlconnect.Close( );
+         return;
+      }
+      // формирование данных для вызова хранимой процедуры
+      SqlCommand cmd = new SqlCommand( "ShowDataLog", asqlconnect );
+      cmd.CommandType = CommandType.StoredProcedure;
+
+      // входные параметры
+      // 1. ip FC
+      SqlParameter pipFC = new SqlParameter( );
+      pipFC.ParameterName = "@IP";
+      pipFC.SqlDbType = SqlDbType.BigInt;
+      pipFC.Value = 0;
+      pipFC.Direction = ParameterDirection.Input;
+      cmd.Parameters.Add( pipFC );
+      // 2. id устройства
+      SqlParameter pidBlock = new SqlParameter( );
+      pidBlock.ParameterName = "@id";
+      pidBlock.SqlDbType = SqlDbType.Int;
+      pidBlock.Value = IFC * 256 + IIDDev;//IIDDev;;
+      pidBlock.Direction = ParameterDirection.Input;
+      cmd.Parameters.Add( pidBlock );
+
+      // 3. начальное время
+      SqlParameter dtMim = new SqlParameter( );
+      dtMim.ParameterName = "@dt_start";
+      dtMim.SqlDbType = SqlDbType.DateTime;
+      TimeSpan tss = new TimeSpan( 0, pnlConfig.dtpStartDateConfig.Value.Hour - pnlConfig.dtpStartTimeConfig.Value.Hour, pnlConfig.dtpStartDateConfig.Value.Minute - pnlConfig.dtpStartTimeConfig.Value.Minute, pnlConfig.dtpStartDateConfig.Value.Second - pnlConfig.dtpStartTimeConfig.Value.Second );
+      DateTime tim = pnlConfig.dtpStartDateConfig.Value - tss;
+      dtMim.Value = tim;
+      dtMim.Direction = ParameterDirection.Input;
+      cmd.Parameters.Add( dtMim );
+
+      // 2. конечное время
+      SqlParameter dtMax = new SqlParameter( );
+      dtMax.ParameterName = "@dt_end";
+      dtMax.SqlDbType = SqlDbType.DateTime;
+      tss = new TimeSpan( 0, pnlConfig.dtpEndDateConfig.Value.Hour - pnlConfig.dtpEndTimeConfig.Value.Hour, pnlConfig.dtpEndDateConfig.Value.Minute - pnlConfig.dtpEndTimeConfig.Value.Minute, pnlConfig.dtpEndDateConfig.Value.Second - pnlConfig.dtpEndTimeConfig.Value.Second );
+      tim = pnlConfig.dtpEndDateConfig.Value - tss;
+      dtMax.Value = tim;
+      dtMax.Direction = ParameterDirection.Input;
+      cmd.Parameters.Add( dtMax );
+
+      // 5. тип записи
+      SqlParameter ptypeRec = new SqlParameter( );
+      ptypeRec.ParameterName = "@type";
+      ptypeRec.SqlDbType = SqlDbType.Int;
+      ptypeRec.Value = 1; // информация по уставкам
+      ptypeRec.Direction = ParameterDirection.Input;
+      cmd.Parameters.Add( ptypeRec );
+      // 6. ид записи журнала
+      SqlParameter pid = new SqlParameter( );
+      pid.ParameterName = "@id_record";
+      pid.SqlDbType = SqlDbType.Int;
+      pid.Value = 0;
+      pid.Direction = ParameterDirection.Input;
+      cmd.Parameters.Add( pid );
+
+      // заполнение DataSet
+      DataSet aDS = new DataSet( "ptk" );
+      SqlDataAdapter aSDA = new SqlDataAdapter( );
+      aSDA.SelectCommand = cmd;
+
+      //aSDA.sq
+      aSDA.Fill( aDS, "TbUstav" );
+
+      asqlconnect.Close( );
+
+      //PrintDataSet( aDS );
+      // извлекаем данные по уставкам
+      dtU = aDS.Tables [ "TbUstav" ];
+
+      // заполняем ListView
+      lstvConfig.Items.Clear( );
+      for ( int curRow = 0 ;curRow < dtU.Rows.Count ;curRow++ )
+      {
+         DateTime t = ( DateTime ) dtU.Rows [ curRow ] [ "TimeBlock" ];
+         ListViewItem li = new ListViewItem( CRZADevices.CommonCRZADeviceFunction.GetTimeInMTRACustomFormat( t ) );
+         li.Tag = dtU.Rows [ curRow ] [ "ID" ];
+         lstvConfig.Items.Add( li );
+      }
+      aSDA.Dispose( );
+      aDS.Dispose( );
+   }
+      #endregion
+
+      #region процедура разбора пакета с аварийной информацией из базы
+      //private void ParseBDPacket( byte [ ] pack, ushort adr, int dev )
+      //{
+      //   PrintHexDump( "LogHexPacket.dat", pack );  // выведем в файл для контроля
+      //   parent.newKB.PacketToQueDev( pack, adr, IFC,dev ); // 10280 пакет  по адресу  устройства
+      //   // объявить соответсвующую группу переменных архивной
+      //   SetArhivGroupInDev( dev, 8 );
+      //}
+      #endregion
+
+      #endregion
+      private void tabPageInfo_Enter( object sender, EventArgs e )
+      {
+          if( rtbInfo.Lines.Count( ) != 0 )
+              return;
+
+          base.FillTAbPageInfo( PanelInfoTextBox, rtbInfo );
+      }
+   }
+}

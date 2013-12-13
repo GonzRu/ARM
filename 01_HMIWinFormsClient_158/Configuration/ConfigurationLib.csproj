@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60607A97-97F8-46F9-9608-F85317F49B71}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Configuration</RootNamespace>
+    <AssemblyName>Configuration</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="InterfaceLibrary">
+      <HintPath>..\InterfaceLibrary\bin\Debug\InterfaceLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigurationFactory.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
+      <Project>{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}</Project>
+      <Name>TraceSourceLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandLib\CommandLib.csproj">
+      <Project>{7BBBF32A-7BF6-4A07-A1E8-8964EBAE80D4}</Project>
+      <Name>CommandLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonUtils\CommonUtils.csproj">
+      <Project>{B389D78D-0E11-4A7A-A770-B06AC4828E27}</Project>
+      <Name>CommonUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataServersLib\DataServersLib.csproj">
+      <Project>{4FA0EB0D-7A70-4F60-967B-B6D6D39B78CD}</Project>
+      <Name>DataServersLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OscillogramsLib\OscillogramsLib.csproj">
+      <Project>{8BBCE97B-B7D1-4F2A-9707-C5E1587F864D}</Project>
+      <Name>OscillogramsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RequsEtntryLib\RequsEtntryLib.csproj">
+      <Project>{3A681CCB-6981-434E-AC2D-0CF01C270F7F}</Project>
+      <Name>RequsEtntryLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SourceMOA\SourceMOA.csproj">
+      <Project>{67A89781-635D-4EA9-916E-A212FE4C82A3}</Project>
+      <Name>SourceMOA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8EC6681F-7A76-457A-8A00-591D35291B7E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HMI_MT</RootNamespace>
+    <AssemblyName>HMI_MT</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <ManifestCertificateThumbprint>EE581DE858AC3C1EB21BA5262AF34C8A6D003B50</ManifestCertificateThumbprint>
+    <ManifestKeyFile>HMI_MT_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <SignManifests>true</SignManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkProfile />
+    <PublishUrl>c:\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DataBaseLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DataBaseLib\bin\Debug\DataBaseLib.dll</HintPath>
+    </Reference>
+    <Reference Include="fConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\fConnectionString\bin\Debug\fConnectionString.dll</HintPath>
+    </Reference>
+    <Reference Include="InterfaceLibrary">
+      <HintPath>..\InterfaceLibrary\bin\Debug\InterfaceLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActUserCurrentMess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActUserCurrentMess.Designer.cs">
+      <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArrayForExchange.cs" />
+    <Compile Include="Autorization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Autorization.Designer.cs">
+      <DependentUpon>Autorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMPFormula.cs" />
+    <Compile Include="ConfigPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConfigPanelControl.Designer.cs">
+      <DependentUpon>ConfigPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmCommand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmCommand.Designer.cs">
+      <DependentUpon>ConfirmCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentModePanels.cs" />
+    <Compile Include="CurrentPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CurrentPanelControl.Designer.cs">
+      <DependentUpon>CurrentPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCreateEditCalculatedTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCreateEditCalculatedTag.Designer.cs">
+      <DependentUpon>dlgCreateEditCalculatedTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDeleteTagsFromCMP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDeleteTagsFromCMP.Designer.cs">
+      <DependentUpon>dlgDeleteTagsFromCMP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSetSystemTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSetSystemTime.Designer.cs">
+      <DependentUpon>dlgSetSystemTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewReqestData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewReqestData.Designer.cs">
+      <DependentUpon>dlgViewReqestData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormForDeviceByType.cs" />
+    <Compile Include="Frm2mnemopanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm2mnemopanel.Designer.cs">
+      <DependentUpon>Frm2mnemopanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDiagPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDiagPanel.Designer.cs">
+      <DependentUpon>frmDiagPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHelp.Designer.cs">
+      <DependentUpon>frmHelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoadProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoadProgress.Designer.cs">
+      <DependentUpon>frmLoadProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogLocal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogLocal.Designer.cs">
+      <DependentUpon>frmLogLocal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogs.Designer.cs">
+      <DependentUpon>frmLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNormalMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNormalMode.Designer.cs">
+      <DependentUpon>frmNormalMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSmartPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSmartPanel.designer.cs">
+      <DependentUpon>frmSmartPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplash.Designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplashScreen.Designer.cs">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTreeViewSelectDev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTreeViewSelectDev.Designer.cs">
+      <DependentUpon>frmTreeViewSelectDev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserGroupRights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserGroupRights.Designer.cs">
+      <DependentUpon>frmUserGroupRights.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserRights.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserRights.Designer.cs">
+      <DependentUpon>frmUserRights.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HMIStruct.cs" />
+    <Compile Include="Hmi_MT.cs" />
+    <Compile Include="Hmi_MT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Hmi_MT.settings</DependentUpon>
+    </Compile>
+    <Compile Include="IMainForm.cs" />
+    <Compile Include="ITimeServer.cs" />
+    <Compile Include="KeyboardLayout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KeyboardLayout.Designer.cs">
+      <DependentUpon>KeyboardLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuItemNewFielDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuItemNewFielDlg.Designer.cs">
+      <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewMainMnemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewMainMnemo.Designer.cs">
+      <DependentUpon>NewMainMnemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OscDiagPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OscDiagPanelControl.Designer.cs">
+      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OscPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="OscPanelControl.Designer.cs">
+      <DependentUpon>OscPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintHMI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintHMI.Designer.cs">
+      <DependentUpon>PrintHMI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActUserCurrentMess.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Autorization.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Autorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigPanelControl.resx">
+      <DependentUpon>ConfigPanelControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmCommand.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConfirmCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CurrentPanelControl.resx">
+      <DependentUpon>CurrentPanelControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCreateEditCalculatedTag.resx">
+      <DependentUpon>dlgCreateEditCalculatedTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDeleteTagsFromCMP.resx">
+      <DependentUpon>dlgDeleteTagsFromCMP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSetSystemTime.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>dlgSetSystemTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewReqestData.resx">
+      <DependentUpon>dlgViewReqestData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm2mnemopanel.resx">
+      <DependentUpon>Frm2mnemopanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDiagPanel.resx">
+      <DependentUpon>frmDiagPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHelp.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmHelp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogLocal.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmLogLocal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogs.resx">
+      <DependentUpon>frmLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNormalMode.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmNormalMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTreeViewSelectDev.resx">
+      <DependentUpon>frmTreeViewSelectDev.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserGroupRights.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmUserGroupRights.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserRights.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmUserRights.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeyboardLayout.resx">
+      <DependentUpon>KeyboardLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuItemNewFielDlg.resx">
+      <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewMainMnemo.resx">
+      <DependentUpon>NewMainMnemo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OscDiagPanelControl.resx">
+      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OscPanelControl.resx">
+      <DependentUpon>OscPanelControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintHMI.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PrintHMI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgOptionsFormEditor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>dlgOptionsFormEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpeedAccess.resx">
+      <DependentUpon>SpeedAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SrabatPanelControl.resx">
+      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSingleAvar.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ViewSingleAvar.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="dlgOptionsFormEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgOptionsFormEditor.Designer.cs">
+      <DependentUpon>dlgOptionsFormEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpeedAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpeedAccess.Designer.cs">
+      <DependentUpon>SpeedAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SQLConnectionString.cs" />
+    <Compile Include="SrabatPanelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SrabatPanelControl.Designer.cs">
+      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatusBarLabel.cs" />
+    <Compile Include="TextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TimeServer.cs" />
+    <Compile Include="TreeViewConfig.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TreeViewLogicalConfig.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TreeViewPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Trend.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Trend.Designer.cs">
+      <DependentUpon>Trend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSingleAvar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSingleAvar.Designer.cs">
+      <DependentUpon>ViewSingleAvar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XmlCreater.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\sysleave.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\alarm.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\clock.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\database.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\gears.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\mnemo_pict2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\setup.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\sysenter.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\syslock.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\user.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\userinfo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toolstripLine.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Resources\toolstripText.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MISC02.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eventlogInfo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eventlogWarn.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHECKMRK.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_16x.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CIRC1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CIRC11.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LIGHTOFF.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Hmi_MT.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Hmi_MT.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\DataSources\frmLogs.datasource" />
+    <None Include="Resources\LIGHTON.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\3007.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\9002.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Images\btnAvarSoundEnable.bmp" />
+    <None Include="bin\Debug\Images\btnAvarSoundDisable.bmp" />
+    <None Include="bin\Debug\Images\btnWarnrSoundEnable.bmp" />
+    <None Include="bin\Debug\Images\btnWarnSoundDisable.bmp" />
+    <None Include="bin\Debug\Images\DRAW.ICO" />
+    <None Include="bin\Debug\Images\Xena Scroll.ico" />
+    <None Include="bin\Debug\Images\FONT02.ICO" />
+    <None Include="bin\Debug\Images\Printer.bmp" />
+    <None Include="bin\Debug\Images\MISC04.ICO" />
+    <None Include="bin\Debug\Images\LABELS.ICO" />
+    <None Include="bin\Debug\Images\MAIL20.ICO" />
+    <None Include="bin\Debug\Images\Shutdown.bmp" />
+    <None Include="bin\Debug\Images\script.ico" />
+    <None Include="bin\Debug\Images\Control Panel.bmp" />
+    <None Include="bin\Debug\Images\consumer.ico" />
+    <None Include="bin\Debug\Images\CLOCK03.ICO" />
+    <None Include="bin\Debug\Images\RULERS.ICO" />
+    <None Include="bin\Debug\Images\INFO.ICO" />
+    <None Include="bin\Debug\Images\keys.ico" />
+    <None Include="bin\Debug\Images\sound.ico" />
+    <None Include="bin\Debug\Images\MGXDES.ICO" />
+    <None Include="bin\Debug\Images\oh#0.ico" />
+    <None Include="bin\Debug\Images\OSA#15.ico" />
+    <None Include="bin\Debug\Images\SNDVOL32#4.jpg" />
+    <None Include="bin\Debug\Images\mtLogo.bmp" />
+    <None Include="bin\Debug\Images\mtLep.bmp" />
+    <None Include="bin\Debug\Images\DEPENDS#0.ico" />
+    <None Include="bin\Debug\Images\DEPENDS0.ico" />
+    <None Include="HMI_MT_TemporaryKey.pfx" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="bin\Debug\Images\rem17.ico" />
+    <None Include="bin\Debug\Images\CascadeWindowsHS.png" />
+    <None Include="bin\Debug\Images\Help.png" />
+    <None Include="bin\Debug\Images\SychronizeListHS.png" />
+    <None Include="bin\Debug\Images\параметры норм режима.bmp" />
+    <None Include="bin\Debug\Images\SymapImage.png" />
+    <None Include="bin\Debug\Images\SymapImagePNG.png" />
+    <None Include="bin\Debug\Images\MtRA.ico" />
+    <Content Include="CascadeWindowsHS.png" />
+    <Content Include="DRAW.bmp" />
+    <Content Include="Help.png" />
+    <Content Include="Logo.ico" />
+    <Content Include="MtRA.ico" />
+    <None Include="Resources\About%2816p%29.png" />
+    <Content Include="Resources\alarm1.wav" />
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Свирь-Тимбер-4.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Resources\FastAccess%2832p%29.png" />
+    <None Include="Resources\DiagPanel%2832p%29.png" />
+    <None Include="Resources\CurrentMode%2832p%29.png" />
+    <None Include="Resources\Clock%2832p%29.png" />
+    <None Include="Resources\FAClose%2816p%29.png" />
+    <None Include="Resources\FAOpen%2816p%29.png" />
+    <None Include="Resources\Journals%2832p%29.png" />
+    <None Include="Resources\Logo%2832p%29.png" />
+    <None Include="Resources\Exit%2816p%29.png" />
+    <None Include="Resources\Lock%2832p%29.png" />
+    <Content Include="Resources\MtRA.ico" />
+    <None Include="Resources\ResetAllCmd%2832p%29.png" />
+    <None Include="Resources\Reconnect%2832p%29.png" />
+    <Content Include="Resources\Schema%2832p%29.png" />
+    <None Include="Resources\UseAccess%2832p%29.png" />
+    <None Include="Resources\ViewCmds%2832p%29.png" />
+    <None Include="Resources\SwitchUser%2832p%29.png" />
+    <None Include="Resources\UserInformation%2832p%29.png" />
+    <Content Include="SychronizeListHS.png" />
+    <Content Include="параметры норм режима.bmp" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoadProgress.resx">
+      <DependentUpon>frmLoadProgress.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSmartPanel.resx">
+      <DependentUpon>frmSmartPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Resources\clock01.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
+      <Project>{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}</Project>
+      <Name>TraceSourceLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\FileManager\FileManager.csproj">
+      <Project>{A3D8540F-865D-43B2-A07A-1D8B7A4A4938}</Project>
+      <Name>FileManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\LibraryElements\LibraryElements.csproj">
+      <Project>{33B9796A-C318-42B7-95D2-50A9CB4E8904}</Project>
+      <Name>LibraryElements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\NormalModeLibrary\NormalModeLibrary.csproj">
+      <Project>{C4311573-8C37-4634-A5D4-6FFDFB52A2F7}</Project>
+      <Name>NormalModeLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\Structure\Structure.csproj">
+      <Project>{95D1591D-378A-42C4-82AE-CAAC7CE8838E}</Project>
+      <Name>Structure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\WindowsForms\WindowsForms.csproj">
+      <Project>{93F2274D-3199-4DD4-BDBC-2A7792204EB5}</Project>
+      <Name>WindowsForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AdapterLib\AdapterLib.csproj">
+      <Project>{D2517AA2-9425-4A75-AE17-773E2D82669D}</Project>
+      <Name>AdapterLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlockDataComposer\BlockDataComposer.csproj">
+      <Project>{74835D67-DB0D-4956-8328-7E2B9182DA80}</Project>
+      <Name>BlockDataComposer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Calculator\Calculator.csproj">
+      <Project>{4E8A009D-B64C-418A-A334-DE7483545F8A}</Project>
+      <Name>Calculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonUtils\CommonUtils.csproj">
+      <Project>{B389D78D-0E11-4A7A-A770-B06AC4828E27}</Project>
+      <Name>CommonUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Configuration\ConfigurationLib.csproj">
+      <Project>{60607A97-97F8-46F9-9608-F85317F49B71}</Project>
+      <Name>ConfigurationLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DebugStatisticLibrary\DebugStatisticLibrary.csproj">
+      <Project>{5102CEC9-B71D-407C-8F7C-F1EFB227A854}</Project>
+      <Name>DebugStatisticLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevicesLibrary\DevicesLibrary.csproj">
+      <Project>{C92EBDA9-9A82-4D5A-9EB1-74DF213F7676}</Project>
+      <Name>DevicesLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DiscretClock\DiscretClock.csproj">
+      <Project>{E2EB2CAE-A628-4154-943A-AA23DBB43C8F}</Project>
+      <Name>DiscretClock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HelperControlsLibrary\HelperControlsLibrary.csproj">
+      <Project>{64E89B33-C72B-45D6-B6EC-7FBBC027BC95}</Project>
+      <Name>HelperControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HelperLibrary\HelperLibrary.csproj">
+      <Project>{C68C58BC-7108-4FCA-A951-90CD60BEAC74}</Project>
+      <Name>HelperLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
+      <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
+      <Name>HMI_MT_Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LabelTextbox\LabelTextbox.csproj">
+      <Project>{812A9E1D-FDA6-430C-8B75-5FB0CDAC3664}</Project>
+      <Name>LabelTextbox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OscillogramsLib\OscillogramsLib.csproj">
+      <Project>{8BBCE97B-B7D1-4F2A-9707-C5E1587F864D}</Project>
+      <Name>OscillogramsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProviderCustomerExchangeLib\ProviderCustomerExchangeLib.csproj">
+      <Project>{9C42D88A-F77B-4C0A-9137-1FEDB83A7F0C}</Project>
+      <Name>ProviderCustomerExchangeLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PTKState\PTKStateLib.csproj">
+      <Project>{CE4F69AE-A00B-4639-ADE9-60994E426921}</Project>
+      <Name>PTKStateLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RibbonSource0.4 + GlobalHook_BugsFix\System.Windows.Forms.Ribbon.csproj">
+      <Project>{46A18A55-5AE8-49CE-91CD-C7421B642E7E}</Project>
+      <Name>System.Windows.Forms.Ribbon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SourceMOA\SourceMOA.csproj">
+      <Project>{67A89781-635D-4EA9-916E-A212FE4C82A3}</Project>
+      <Name>SourceMOA</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,7 @@
+﻿<Window x:Class="WpfDashboards.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfDashboards"
+        Title="TestWindow" Height="Auto" Width="Auto" Loaded="Window_Loaded">
+   
+</Window>

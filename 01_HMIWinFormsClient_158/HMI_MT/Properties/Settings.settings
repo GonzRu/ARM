@@ -1,0 +1,72 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HMI_MT.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="color_btnChAvarCC_pnlColors_pnl2" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">255, 192, 128</Value>
+    </Setting>
+    <Setting Name="color_btnChWarnCC_pnlColors_pnl2" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">255, 255, 192</Value>
+    </Setting>
+    <Setting Name="color_btnChInfoCC_pnlColors_pnl2" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">192, 255, 192</Value>
+    </Setting>
+    <Setting Name="isReqPass" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PathToLogFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LogFileMaxSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500000</Value>
+    </Setting>
+    <Setting Name="WhatToDoLogFileMaxSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Сохранить</Value>
+    </Setting>
+    <Setting Name="NumStringsInMesPanel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="PathToSoundAvar" Type="System.String" Scope="User">
+      <Value Profile="(Default)">alarm4.wav</Value>
+    </Setting>
+    <Setting Name="PathToSoundWarn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">alarm2.wav</Value>
+    </Setting>
+    <Setting Name="IsToolTipShow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="IsShowTabForms" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="IsToolTipRefDesign" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Precision" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="AliveInterval" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">3600000</Value>
+    </Setting>
+    <Setting Name="LogOnlyDisk" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IsTCPServer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IsTCPClient" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IntervalDataReNew" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="IPPointForSerializeMesPan" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.1.1</Value>
+    </Setting>
+    <Setting Name="PortPointForSerializeMesPan" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">9059</Value>
+    </Setting>
+    <Setting Name="IsUDPSecondClient" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

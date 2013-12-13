@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C42D88A-F77B-4C0A-9137-1FEDB83A7F0C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProviderCustomerExchangeLib</RootNamespace>
+    <AssemblyName>ProviderCustomerExchangeLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArrayForExchange.cs" />
+    <Compile Include="ClientServerDataExchange.cs" />
+    <Compile Include="ClientServerOnPipes.cs" />
+    <Compile Include="ClientServerOnTCPSockets.cs" />
+    <Compile Include="ClientServerOnWCF.cs.cs" />
+    <Compile Include="ClientServerOn_MOA_UDPSockets.cs" />
+    <Compile Include="IPacketParser.cs" />
+    <Compile Include="IProviderCustomer.cs" />
+    <Compile Include="NSPublic.cs" />
+    <Compile Include="PacketHandler.cs" />
+    <Compile Include="PacketParser_udp_MOA.cs" />
+    <Compile Include="PipeClientInOut.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderCustomerFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
+      <Project>{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}</Project>
+      <Name>TraceSourceLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DSDecoy\DSDecoy.csproj">
+      <Project>{A7518611-C086-4328-B56B-7DEB78EBA99F}</Project>
+      <Name>DSDecoy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
+      <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
+      <Name>HMI_MT_Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
+      <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
+      <Name>InterfaceLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

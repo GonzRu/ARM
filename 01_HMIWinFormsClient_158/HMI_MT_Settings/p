@@ -1,0 +1,8 @@
+Microsoft (R) Service Model Metadata Tool
+[Microsoft (R) Windows (R) Communication Foundation, Version 3.0.4506.648]
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Attempting to download metadata from 'http://localhost:3333/DSRouterService.svc?wsdl' using WS-Metadata Exchange or DISCO.
+Generating files...
+X:\Projects\01_HMIWinFormsClient_158\HMI_MT_Settings\Proxy.cs
+X:\Projects\01_HMIWinFormsClient_158\HMI_MT_Settings\output.config

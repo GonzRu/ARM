@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C68C58BC-7108-4FCA-A951-90CD60BEAC74}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HelperLibrary</RootNamespace>
+    <AssemblyName>HelperLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandContent.cs" />
+    <Compile Include="ContentHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Regions.cs" />
+    <Compile Include="Simulation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\LibraryElements\LibraryElements.csproj">
+      <Project>{33B9796A-C318-42B7-95D2-50A9CB4E8904}</Project>
+      <Name>LibraryElements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\Structure\Structure.csproj">
+      <Project>{95D1591D-378A-42C4-82AE-CAAC7CE8838E}</Project>
+      <Name>Structure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DebugStatisticLibrary\DebugStatisticLibrary.csproj">
+      <Project>{5102CEC9-B71D-407C-8F7C-F1EFB227A854}</Project>
+      <Name>DebugStatisticLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
+      <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
+      <Name>HMI_MT_Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
+      <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
+      <Name>InterfaceLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PTKState\PTKStateLib.csproj">
+      <Project>{CE4F69AE-A00B-4639-ADE9-60994E426921}</Project>
+      <Name>PTKStateLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

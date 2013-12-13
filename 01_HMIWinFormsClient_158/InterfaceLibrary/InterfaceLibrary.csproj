@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{110E34F6-A97B-4693-9252-95529B4BA9BB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InterfaceLibrary</RootNamespace>
+    <AssemblyName>InterfaceLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IActiveCommands.cs" />
+    <Compile Include="IActiveOscillograms.cs" />
+    <Compile Include="ICfgReqEntry.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="IConfiguration.cs" />
+    <Compile Include="IDataServer.cs" />
+    <Compile Include="IDevice.cs" />
+    <Compile Include="IDeviceCommand.cs" />
+    <Compile Include="IDeviceForm.cs" />
+    <Compile Include="IECU.cs" />
+    <Compile Include="IGroup.cs" />
+    <Compile Include="IHMITagAccess.cs" />
+    <Compile Include="ILongTimeAction.cs" />
+    <Compile Include="InterfaceLibrary.cs" />
+    <Compile Include="IOscillogramma.cs" />
+    <Compile Include="IRequestData.cs" />
+    <Compile Include="IRequestEntry.cs" />
+    <Compile Include="IResetStateProtocol.cs" />
+    <Compile Include="ISourceConfiguration.cs" />
+    <Compile Include="ISpecificDeviceValue.cs" />
+    <Compile Include="ISubscribe.cs" />
+    <Compile Include="ITag.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

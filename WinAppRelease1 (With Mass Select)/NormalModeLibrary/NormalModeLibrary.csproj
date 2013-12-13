@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C4311573-8C37-4634-A5D4-6FFDFB52A2F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NormalModeLibrary</RootNamespace>
+    <AssemblyName>NormalModeLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters.cs" />
+    <Compile Include="Places.cs" />
+    <Compile Include="SoundSystem.cs" />
+    <Compile Include="Sources\AnalogSignal.cs" />
+    <Compile Include="Sources\BaseObject.cs" />
+    <Compile Include="Sources\BaseSignal.cs" />
+    <Compile Include="ComponentFactory.cs" />
+    <Compile Include="Sources\Configuration.cs" />
+    <Compile Include="Sources\DigitalSignal.cs" />
+    <Compile Include="Sources\Panel.cs" />
+    <Compile Include="Sources\Ranges.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\User.cs" />
+    <Compile Include="TimeMode.cs" />
+    <Compile Include="ViewModel\AnalogViewModel.cs" />
+    <Compile Include="ViewModel\BaseCollectionViewModel.cs" />
+    <Compile Include="ViewModel\BaseSignalViewModel.cs" />
+    <Compile Include="ViewModel\ConfigurationViewModel.cs" />
+    <Compile Include="ViewModel\DigitalViewModel.cs" />
+    <Compile Include="ViewModel\IOutOfRangeHandler.cs" />
+    <Compile Include="ViewModel\PanelViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Windows\ConfigurationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\ConfigurationWindow.Designer.cs">
+      <DependentUpon>ConfigurationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PanelWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\PanelWindow.Designer.cs">
+      <DependentUpon>PanelWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectSignalsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SelectSignalsWindow.Designer.cs">
+      <DependentUpon>SelectSignalsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SignalWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SignalWindow.Designer.cs">
+      <DependentUpon>SignalWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TableControl.xaml.cs">
+      <DependentUpon>TableControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UserWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\UserWindow.Designer.cs">
+      <DependentUpon>UserWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UserWindows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\UserWindows.Designer.cs">
+      <DependentUpon>UserWindows.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ViewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\ViewWindow.Designer.cs">
+      <DependentUpon>ViewWindow.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Windows\ConfigurationWindow.resx">
+      <DependentUpon>ConfigurationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\PanelWindow.resx">
+      <DependentUpon>PanelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SelectSignalsWindow.resx">
+      <DependentUpon>SelectSignalsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SignalWindow.resx">
+      <DependentUpon>SignalWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\UserWindow.resx">
+      <DependentUpon>UserWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\UserWindows.resx">
+      <DependentUpon>UserWindows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\ViewWindow.resx">
+      <DependentUpon>ViewWindow.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\01_HMIWinFormsClient_158\HMI_MT_Settings\HMI_MT_Settings.csproj">
+      <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
+      <Name>HMI_MT_Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\01_HMIWinFormsClient_158\InterfaceLibrary\InterfaceLibrary.csproj">
+      <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
+      <Name>InterfaceLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Windows\TableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

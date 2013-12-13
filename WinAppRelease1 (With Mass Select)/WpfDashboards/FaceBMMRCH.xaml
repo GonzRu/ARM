@@ -1,0 +1,101 @@
+﻿<local:BaseFace x:Class="WpfDashboards.FaceBMMRCH"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfDashboards"
+             Width="575" Height="515" MinWidth="575" MinHeight="515" Background="LightGray" x:Name="BMRZ">
+
+   <Border BorderBrush="Black" BorderThickness="5" CornerRadius="5">
+      <Grid>
+         <Label Margin="80,40,0,0" FontFamily="Times New Roman" FontSize="32" FontWeight="Bold"
+                HorizontalAlignment="Left" VerticalAlignment="Top">БММРЧ-А</Label>
+         <Border Margin="60,150,0,0" Width="190" Height="70" HorizontalAlignment="Left" VerticalAlignment="Top"
+                 BorderBrush="Black" BorderThickness="5" CornerRadius="5">
+            <TextBlock FontSize="14" Foreground="Black" TextWrapping="Wrap" Text="{Binding ElementName=BMRZ, Path=Model, Mode=OneWay}" />
+         </Border>
+         <Line X1="300" Y1="50" X2="300" Y2="450" Stroke="Black" StrokeThickness="5" HorizontalAlignment="Left" VerticalAlignment="Top" />
+         
+         <StackPanel Margin="320,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                           Fill="{Binding ElementName=BMRZ, Path=LEDPower.LED, Mode=OneWay}" Stroke="Black" />
+               <Label Foreground="Black" FontSize="16" VerticalAlignment="Center">Питание</Label>
+               <Ellipse Margin="5,0,0,0" Width="15" Height="15" VerticalAlignment="Center"
+                           Fill="{Binding ElementName=BMRZ, Path=LEDRun.LED, Mode=OneWay}" Stroke="Black" />
+               <Label Foreground="Black" FontSize="16" VerticalAlignment="Center">Пуск</Label>
+            </StackPanel>
+            <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel1.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel1.Label, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel2.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel2.Label, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel3.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel3.Label, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel4.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel4.Label, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel5.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel5.Label, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel6.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel6.Label, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel7.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel7.Label, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Ellipse Width="15" Height="15" VerticalAlignment="Center"
+                        Fill="{Binding ElementName=BMRZ, Path=LEDLabel8.LED, Mode=OneWay}" Stroke="Black" />
+               <Label FontSize="12" Content="{Binding ElementName=BMRZ, Path=LEDLabel8.Label, Mode=OneWay}"/>
+            </StackPanel>
+         </StackPanel>
+         <StackPanel Margin="80,0,0,100" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Grid Width="50" Height="50">
+               <Rectangle Width="50" Height="50" Stroke="Black" StrokeThickness="4" Fill="Gray" />
+               <!--Arrow up-->
+               <Line X1="25" Y1="10" X2="25" Y2="40" Stroke="White" StrokeThickness="2" />
+               <Line X1="25" Y1="10" X2="31" Y2="30" Stroke="White" StrokeThickness="3" />
+               <Line X1="25" Y1="10" X2="19" Y2="30" Stroke="White" StrokeThickness="3" />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+               <Grid Width="50" Height="50">
+                  <Rectangle Width="50" Height="50" Stroke="Black" StrokeThickness="4" Fill="Gray" />
+                  <!--Arrow left-->
+                  <Line X1="10" Y1="25" X2="40" Y2="25" Stroke="White" StrokeThickness="2" />
+                  <Line X1="10" Y1="25" X2="30" Y2="31" Stroke="White" StrokeThickness="3" />
+                  <Line X1="10" Y1="25" X2="30" Y2="19" Stroke="White" StrokeThickness="3" />
+               </Grid>
+               <Grid Width="50" Height="50">
+                  <Rectangle Width="50" Height="50" Stroke="Black" StrokeThickness="4" Fill="Gray" />
+                  <!--Arrow down-->
+                  <Line X1="25" Y1="10" X2="25" Y2="40" Stroke="White" StrokeThickness="2" />
+                  <Line X1="25" Y1="40" X2="31" Y2="20" Stroke="White" StrokeThickness="3" />
+                  <Line X1="25" Y1="40" X2="19" Y2="20" Stroke="White" StrokeThickness="3" />
+               </Grid>
+               <Grid Width="50" Height="50">
+                  <Rectangle Width="50" Height="50" Stroke="Black" StrokeThickness="4" Fill="Gray" />
+                  <!--Arrow right-->
+                  <Line X1="10" Y1="25" X2="40" Y2="25" Stroke="White" StrokeThickness="2" />
+                  <Line X1="40" Y1="25" X2="20" Y2="31" Stroke="White" StrokeThickness="3" />
+                  <Line X1="40" Y1="25" X2="20" Y2="19" Stroke="White" StrokeThickness="3" />                  
+               </Grid>
+            </StackPanel>
+         </StackPanel>
+      </Grid>
+   </Border>
+</local:BaseFace>

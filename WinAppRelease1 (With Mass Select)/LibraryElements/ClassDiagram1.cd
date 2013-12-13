@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LibraryElements.Block" Collapsed="true">
+    <Position X="4.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAEAAAAACAAAQQgAAAAAIAAAIAIAQAACAAAA=</HashCode>
+      <FileName>Blocks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.BlockParameters" Collapsed="true">
+    <Position X="43" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAEAAAAAAAAACAAAAAgAAAAAAA=</HashCode>
+      <FileName>Blocks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.DynamicElement" Collapsed="true">
+    <Position X="29.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAABAAAAGAAAIQQgAAAECAAAAAAIAAEAAACQA=</HashCode>
+      <FileName>Custom.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.StaticElement" Collapsed="true">
+    <Position X="33.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEQQAEQAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Custom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.Key" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAABAAIAAACAAAQQgEAAEAAAEAAAAAAwEAQAEA=</HashCode>
+      <FileName>Custom.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.DinamicParameters" Collapsed="true">
+    <Position X="44.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAIAAAAQAACgAAAQBCSAQAAEAAAAoCAQJAAIQACAA=</HashCode>
+      <FileName>DinamicElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.EditorArc" Collapsed="true">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAACAAAQAAAAAAAAAEAAAAAAAAAQAAA=</HashCode>
+      <FileName>EditorElements.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.EditorFillEllipse" Collapsed="true">
+    <Position X="22.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAIAAAAAAAAAQQAAAAAAAAAAAAAwAAAAEAAA=</HashCode>
+      <FileName>EditorElements.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.EditorFillRectangle" Collapsed="true">
+    <Position X="24.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAIAAAAAAAAAQQAAAAAAAAAAAAAwAAAAEAAA=</HashCode>
+      <FileName>EditorElements.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.Element" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAMAQkAAAHAIRQAAAgAgASgIBAAIEAABIKAg=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.Figure" Collapsed="true">
+    <Position X="22.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAIAAgAOBAgAAAAgAKSAAAggAAAiICAQAAAARAgAA=</HashCode>
+      <FileName>Figure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.FloorChassis" Collapsed="true">
+    <Position X="15.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAACAAAQAAAAAAAAAEAAAAAAAAAQAAA=</HashCode>
+      <FileName>FloorChassis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.BaseImageData" Collapsed="true">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAQAAAAEAAAAAAgASAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.ImageData" Collapsed="true">
+    <Position X="9.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAgAAAAAEAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.DescriptionData" Collapsed="true">
+    <Position X="8.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.DefaultImageData" Collapsed="true">
+    <Position X="10.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.BaseColorData" Collapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAEAAAAAAAAABCAAAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.ColorData" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.FormulaTag" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAABAABEAABAQCAAQAgAAAEAIgAAAAEEA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryElements.Formula" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAACAAACAYAAAAAAAAQAAAgAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.ServiceFormula" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAIAAAAAAAAAAAAAAAAAAAAABABAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.FormulaResult" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="46.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQgAAAAAAYAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryElements.CalculationData" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAgAAKCAIACACCQAAAAAACAAAAEgAIABgAAAAIAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.CalculationTrunk" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAACAAAAAAAAAAAAAAAACAIAAAgAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.CalculationElement" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAACAAAAAAAAAAEAAAABAAIAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.CalculationKey" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABIAAAAAAAAAA=</HashCode>
+      <FileName>Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.Ground" Collapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAIAAACAAAQAAAAAAAAAEAAAAAAwAAQAAA=</HashCode>
+      <FileName>Ground.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.Key2" Collapsed="true">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAAAAABAAIAAASAAAQRgAAAEAAAEAAAAAAwAAQCAA=</HashCode>
+      <FileName>Key.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.Line" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIQAACMUVgAQCABAQQAAAgJEAA1IACQAAAAAEEAg=</HashCode>
+      <FileName>Line.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.PolyLine" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIAAICsAQgAQAAAAQQAAAgoAAAgIAAQAAAAABEAQ=</HashCode>
+      <FileName>PolyLine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.PrimArc" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAACAAAQAAAAAAAAAEAAAAAAAAAQAAA=</HashCode>
+      <FileName>PrimArc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.PrimEllipse" Collapsed="true">
+    <Position X="36" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PrimEllipse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.PrimRectangle" Collapsed="true">
+    <Position X="38.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PrimRectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.PrimTriangle" Collapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAIAAAAAAAQAAAAAAAAAAAAAAAAwAAQAAA=</HashCode>
+      <FileName>PrimTriangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.Rotate" Collapsed="true">
+    <Position X="13.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAEABAABAAACAACAQAAAgAAAAEAAAAAAAAAQAAA=</HashCode>
+      <FileName>Rotate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.WorkMetaFile" Collapsed="true">
+    <Position X="44.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAIAAAAQAAAABAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>StaticClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryElements.FormText" Collapsed="true">
+    <Position X="27" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAABIAQQAAAAAAQAgIAAAAQCACAAIA=</HashCode>
+      <FileName>Text.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.Transformator" Collapsed="true">
+    <Position X="31.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAQQAAAAEAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Transformators.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.Trunk" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQQEQAAEAAAIAgAAAEAAAAAAA=</HashCode>
+      <FileName>Trunk.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibraryElements.TrunkPoint" Collapsed="true">
+    <Position X="40.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAQAAAAAAAAAgIAAAAAAAAAAAA=</HashCode>
+      <FileName>TrunkPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="LibraryElements.ICalculationData" Collapsed="true">
+    <Position X="43" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Custom.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="LibraryElements.ITrunk" Collapsed="true">
+    <Position X="44.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAEAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Trunk.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
