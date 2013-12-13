@@ -446,7 +446,7 @@
             this.Column6.Name = "Column6";
             this.Column6.Width = 70;
             // 
-            // Form8
+            // ElementBehaviorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -460,7 +460,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form8";
+            this.Name = "ElementBehaviorForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
