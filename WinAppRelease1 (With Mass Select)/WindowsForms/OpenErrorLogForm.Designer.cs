@@ -1,6 +1,6 @@
 namespace WindowsForms
 {
-   partial class Form7
+   partial class OpenErrorLogForm
    {
       /// <summary>
       /// Required designer variable.

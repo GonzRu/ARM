@@ -120,11 +120,11 @@
     <Compile Include="SaveProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form7.cs">
+    <Compile Include="OpenErrorLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form7.Designer.cs">
-      <DependentUpon>Form7.cs</DependentUpon>
+    <Compile Include="OpenErrorLogForm.Designer.cs">
+      <DependentUpon>OpenErrorLogForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ElementBehaviorForm.cs">
       <SubType>Form</SubType>
@@ -192,9 +192,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>OpenProgressForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form7.resx">
+    <EmbeddedResource Include="OpenErrorLogForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Form7.cs</DependentUpon>
+      <DependentUpon>OpenErrorLogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ElementBehaviorForm.resx">
       <DependentUpon>ElementBehaviorForm.cs</DependentUpon>

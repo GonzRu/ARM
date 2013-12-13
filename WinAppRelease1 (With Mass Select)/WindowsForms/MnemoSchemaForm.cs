@@ -369,7 +369,7 @@ namespace WindowsForms
          int _winWidth = 640, _winHeight = 480;
          this.filename = _strname;
 
-         Form7 frmlog = new Form7();
+         OpenErrorLogForm frmlog = new OpenErrorLogForm();
          OpenProgressForm frm = new OpenProgressForm();
          frm.Show();
 

@@ -11,10 +11,10 @@ using Structure;
 
 namespace WindowsForms
 {
-   public partial class Form7 : Form, IErrorLog
+   public partial class OpenErrorLogForm : Form, IErrorLog
    {
       bool records;
-      public Form7()
+      public OpenErrorLogForm()
       {
          InitializeComponent();
          records = false;
