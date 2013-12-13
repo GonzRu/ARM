@@ -1030,7 +1030,7 @@ namespace WindowsForms
          
          if (selected_list[0] is Line)
          {
-            Form3 frm = new Form3(selected_list[0], this.windsize.Width, this.windsize.Height);
+            LinesPropertiesForm frm = new LinesPropertiesForm(selected_list[0], this.windsize.Width, this.windsize.Height);
             if (frm.ShowDialog() == DialogResult.OK)
                SetChange();
             this.Refresh();

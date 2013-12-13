@@ -11,7 +11,7 @@ using Structure;
 
 namespace WindowsForms
 {
-    public partial class Form3 : Form
+    public partial class LinesPropertiesForm : Form
     {
         #region Parameters
         private readonly Line line;
@@ -22,7 +22,7 @@ namespace WindowsForms
         #endregion
 
         #region Class Methods
-        public Form3( object obj, int frameMaxX, int frameMaxY )
+        public LinesPropertiesForm( object obj, int frameMaxX, int frameMaxY )
         {
             InitializeComponent();
             line = (Line)obj;

@@ -1,6 +1,6 @@
 namespace WindowsForms
 {
-   partial class Form3
+   partial class LinesPropertiesForm
    {
       /// <summary>
       /// Required designer variable.
