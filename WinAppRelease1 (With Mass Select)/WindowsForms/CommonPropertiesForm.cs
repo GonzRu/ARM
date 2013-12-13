@@ -10,14 +10,14 @@ using Structure;
 
 namespace WindowsForms
 {
-   public partial class Form4 : Form
+   public partial class CommonPropertiesForm : Form
    {
       protected readonly Figure SelectElement;
       private String imgpath;
       private Image img;
       private CalculationContext newContext;
 
-      public Form4(object elem, int frameMaxX, int frameMaxY)
+      public CommonPropertiesForm(object elem, int frameMaxX, int frameMaxY)
       {
          InitializeComponent();
          SelectElement = (Figure)elem;

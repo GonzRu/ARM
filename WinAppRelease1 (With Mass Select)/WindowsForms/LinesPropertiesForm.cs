@@ -110,12 +110,12 @@ namespace WindowsForms
         private void InitLine()
         {
             var tmpPnt = line.GetStartPoint();
-            this.numericUpDown1.Value = Form4.CheckValue( this.numericUpDown1, Convert.ToInt32( tmpPnt.X ) );
-            this.numericUpDown2.Value = Form4.CheckValue( this.numericUpDown2, Convert.ToInt32( tmpPnt.Y ) );
+            this.numericUpDown1.Value = CommonPropertiesForm.CheckValue( this.numericUpDown1, Convert.ToInt32( tmpPnt.X ) );
+            this.numericUpDown2.Value = CommonPropertiesForm.CheckValue( this.numericUpDown2, Convert.ToInt32( tmpPnt.Y ) );
 
             tmpPnt = line.GetFinishPoint();
-            this.numericUpDown3.Value = Form4.CheckValue( this.numericUpDown3, Convert.ToInt32( tmpPnt.X ) );
-            this.numericUpDown4.Value = Form4.CheckValue( this.numericUpDown4, Convert.ToInt32( tmpPnt.Y ) );
+            this.numericUpDown3.Value = CommonPropertiesForm.CheckValue( this.numericUpDown3, Convert.ToInt32( tmpPnt.X ) );
+            this.numericUpDown4.Value = CommonPropertiesForm.CheckValue( this.numericUpDown4, Convert.ToInt32( tmpPnt.Y ) );
 
             this.numericUpDown5.Value = line.Thickness;
             this.colorDialog1.Color = line.ElementColor;
@@ -199,10 +199,10 @@ namespace WindowsForms
 
             if ( !this.init )
                 this.ChangePoints();
-            this.numericUpDown6.Value = Form4.CheckValue( this.numericUpDown6, Convert.ToInt32( this.modList[i].Start.X ) );
-            this.numericUpDown7.Value = Form4.CheckValue( this.numericUpDown7, Convert.ToInt32( this.modList[i].Start.Y ) );
-            this.numericUpDown8.Value = Form4.CheckValue( this.numericUpDown8, Convert.ToInt32( this.modList[i].Finish.X ) );
-            this.numericUpDown9.Value = Form4.CheckValue( this.numericUpDown9, Convert.ToInt32( this.modList[i].Finish.Y ) );
+            this.numericUpDown6.Value = CommonPropertiesForm.CheckValue( this.numericUpDown6, Convert.ToInt32( this.modList[i].Start.X ) );
+            this.numericUpDown7.Value = CommonPropertiesForm.CheckValue( this.numericUpDown7, Convert.ToInt32( this.modList[i].Start.Y ) );
+            this.numericUpDown8.Value = CommonPropertiesForm.CheckValue( this.numericUpDown8, Convert.ToInt32( this.modList[i].Finish.X ) );
+            this.numericUpDown9.Value = CommonPropertiesForm.CheckValue( this.numericUpDown9, Convert.ToInt32( this.modList[i].Finish.Y ) );
             this.nowSel = i;
         }
         #endregion

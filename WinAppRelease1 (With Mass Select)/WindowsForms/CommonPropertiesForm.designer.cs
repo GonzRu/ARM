@@ -1,6 +1,6 @@
 namespace WindowsForms
 {
-   partial class Form4
+   partial class CommonPropertiesForm
    {
       /// <summary>
       /// Required designer variable.

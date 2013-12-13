@@ -1050,7 +1050,7 @@ namespace WindowsForms
          //      SetChange();
          //}
 
-         Form4 form = new Form4( selected_list[0], this.windsize.Width, this.windsize.Height );
+         CommonPropertiesForm form = new CommonPropertiesForm( selected_list[0], this.windsize.Width, this.windsize.Height );
          if ( form.ShowDialog() == DialogResult.OK )
              SetChange();        
       }

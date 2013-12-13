@@ -6,7 +6,7 @@ using LibraryElements;
 
 namespace WindowsForms
 {
-   public class Form4_mod : Form4
+   public class Form4_mod : CommonPropertiesForm
    {
       #region Properties
       ColorDialog clrdial1, clrdial2;
