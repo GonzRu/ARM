@@ -10,10 +10,10 @@ using Structure;
 
 namespace WindowsForms
 {
-   public partial class Form2 : Form
+   public partial class NewMnemoSchemaForm : Form
    {
       Sanction sanct;
-      public Form2()
+      public NewMnemoSchemaForm()
       {
          InitializeComponent();
          sanct = Sanction.Unknown;

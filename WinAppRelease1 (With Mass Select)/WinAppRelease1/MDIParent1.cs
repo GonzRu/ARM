@@ -80,7 +80,7 @@ namespace WinAppRelease1
       {
          ZeroingofIndex();
 
-         var frm = new Form2();
+         var frm = new NewMnemoSchemaForm();
          if (frm.ShowDialog() == DialogResult.OK)
          {
              var childForm = new Form1( tools, statbar ) { MdiParent = this }; // Create a new instance of the child form. Make it a child of this MDI form before showing it.

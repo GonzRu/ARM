@@ -1,6 +1,6 @@
 namespace WindowsForms
 {
-   partial class Form2
+   partial class NewMnemoSchemaForm
    {
       /// <summary>
       /// Required designer variable.
