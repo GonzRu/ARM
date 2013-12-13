@@ -11,13 +11,13 @@ using Structure;
 
 namespace WindowsForms
 {
-    public partial class Form8 : Form
+    public partial class ElementBehaviorForm : Form
     {
         private readonly bool isFullImagePath;
         private string openFile;
         private CalculationContext newCalculation;
 
-        public Form8()
+        public ElementBehaviorForm()
         {
             InitializeComponent();
 
@@ -30,7 +30,7 @@ namespace WindowsForms
             dataGridView1.CellClick += DataGridViewOnCellClick;
             dataGridView2.CellClick += DataGridViewOnCellClick;
         }
-        public Form8( ICalculationContext element )
+        public ElementBehaviorForm( ICalculationContext element )
         {
             InitializeComponent();
 

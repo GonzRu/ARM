@@ -307,7 +307,7 @@ namespace WinAppRelease1
       }
       private void ElementEditorToolStripMenuItemClick(object sender, EventArgs e)
       {
-          var form = new Form8 { Owner = this };
+          var form = new ElementBehaviorForm { Owner = this };
           form.Show( this );
       }      
       private void BuildToolStripMenuItemClick(object sender, EventArgs e)

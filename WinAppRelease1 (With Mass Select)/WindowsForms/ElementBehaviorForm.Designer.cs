@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms
 {
-    partial class Form8
+    partial class ElementBehaviorForm
     {
         /// <summary>
         /// Required designer variable.

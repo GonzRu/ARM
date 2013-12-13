@@ -51,7 +51,7 @@ namespace WindowsForms
         }
         private void button6_Click( object sender, EventArgs e )
         {
-            var form = new Form8( (ICalculationContext)this.line ) { Owner = this };
+            var form = new ElementBehaviorForm( (ICalculationContext)this.line ) { Owner = this };
             if ( form.ShowDialog() == DialogResult.OK )
                 newContext = form.GetNewCalculationContext();
         }

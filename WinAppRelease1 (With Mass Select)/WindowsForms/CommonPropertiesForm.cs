@@ -263,7 +263,7 @@ namespace WindowsForms
       }
       private void Button4Click( object sender, EventArgs e )
       {
-          var form = new Form8( (ICalculationContext)this.SelectElement ) { Owner = this };
+          var form = new ElementBehaviorForm( (ICalculationContext)this.SelectElement ) { Owner = this };
           if ( form.ShowDialog() == DialogResult.OK )
               newContext = form.GetNewCalculationContext();
       }
