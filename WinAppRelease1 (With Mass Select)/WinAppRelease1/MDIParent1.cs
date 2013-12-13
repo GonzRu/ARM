@@ -27,7 +27,7 @@ namespace WinAppRelease1
       /// <param name="sender">object</param>
       private void ChangeMessage(object sender, FormClosingEventArgs e)
       {
-          if (((Form1)sender).ExistChange)
+          if (((MnemoSchemaForm)sender).ExistChange)
          {
             var res = MessageBox.Show(Savequest, "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
@@ -83,7 +83,7 @@ namespace WinAppRelease1
          var frm = new NewMnemoSchemaForm();
          if (frm.ShowDialog() == DialogResult.OK)
          {
-             var childForm = new Form1( tools, statbar ) { MdiParent = this }; // Create a new instance of the child form. Make it a child of this MDI form before showing it.
+             var childForm = new MnemoSchemaForm( tools, statbar ) { MdiParent = this }; // Create a new instance of the child form. Make it a child of this MDI form before showing it.
              childForm.FormClosing += this.ChildFormFormClosing;
 
             switch (frm.WinSanction)
@@ -138,7 +138,7 @@ namespace WinAppRelease1
       /// </summary>
       private void OpenMethod(string strname)
       {
-          var childForm = new Form1( tools, statbar ) { MdiParent = this }; // Create a new instance of the child form. Make it a child of this MDI form before showing it.
+          var childForm = new MnemoSchemaForm( tools, statbar ) { MdiParent = this }; // Create a new instance of the child form. Make it a child of this MDI form before showing it.
           childForm.FormClosing += this.ChildFormFormClosing;
 
          childForm.OpenMethod(strname);
@@ -207,7 +207,7 @@ namespace WinAppRelease1
                var fname = saveFileDialog.FileName;               
                Refresh();
 
-               var frm = (Form1)ActiveMdiChild;
+               var frm = (MnemoSchemaForm)ActiveMdiChild;
                frm.SaveMethod(fname);
             }
             saveFileDialog.Dispose();
@@ -217,7 +217,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             if (frm.FileNameExist)
                frm.SaveMethod();
             else
@@ -231,7 +231,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.Close();
          }
          ZeroingofIndex();
@@ -244,7 +244,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.cutToolStripMenuItem_Click( sender, e );
          }
       }
@@ -252,7 +252,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.copyToolStripMenuItem_Click( sender, e );
          }
       }
@@ -260,7 +260,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.pasteToolStripMenuItem_Click( sender, e );
          }
       }
@@ -268,7 +268,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.deleteToolStripMenuItem_Click( sender, e );
          }
       }      
@@ -276,7 +276,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.SelectedAll();
          }
       }      
@@ -294,7 +294,7 @@ namespace WinAppRelease1
       }
       private void CloseAllToolStripMenuItemClick(object sender, EventArgs e)
       {
-         foreach (Form1 childForm in MdiChildren)
+         foreach (MnemoSchemaForm childForm in MdiChildren)
          {
             childForm.Close();
          }
@@ -319,7 +319,7 @@ namespace WinAppRelease1
 
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-               var frm = (Form1)ActiveMdiChild;
+               var frm = (MnemoSchemaForm)ActiveMdiChild;
                frm.BuildMethod(saveFileDialog.FileName);
             }
 
@@ -330,7 +330,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
              var cap_frm = new Form13 { Owner = this };
 
              if (frm.MnenoCaption != String.Empty)
@@ -349,7 +349,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.PreviewMethod();
          }
       }
@@ -358,7 +358,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.Convertto1024();
          }
       }
@@ -366,7 +366,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             frm.Convertto1280();
          }
       }
@@ -374,7 +374,7 @@ namespace WinAppRelease1
       {
           if ( MdiChildren.Length != 0 )
           {
-              var frm = (Form1)ActiveMdiChild;
+              var frm = (MnemoSchemaForm)ActiveMdiChild;
               frm.SaveSubStrateMethod(
                   string.Format( "{0}\\SubStrate_{1}.bmp", Environment.CurrentDirectory, frm.MnenoCaption ),
                   Color.FromArgb( 236, 233, 216 ) );
@@ -384,7 +384,7 @@ namespace WinAppRelease1
       {
           if ( MdiChildren.Length != 0 )
           {
-              var frm = (Form1)ActiveMdiChild;
+              var frm = (MnemoSchemaForm)ActiveMdiChild;
               frm.SaveSubStrateMethod( string.Format( "{0}\\SubStrate_{1}.bmp", Environment.CurrentDirectory, frm.MnenoCaption ) );
           }
       }
@@ -393,7 +393,7 @@ namespace WinAppRelease1
       {
          if (MdiChildren.Length != 0)
          {
-            var frm = (Form1)ActiveMdiChild;
+            var frm = (MnemoSchemaForm)ActiveMdiChild;
             if (frm.FileNameExist)
                frm.SaveMethod();
             else

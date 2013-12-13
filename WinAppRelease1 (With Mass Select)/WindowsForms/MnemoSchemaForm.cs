@@ -13,7 +13,7 @@ using FileManager;
 
 namespace WindowsForms
 {
-   public partial class Form1 : Form
+   public partial class MnemoSchemaForm : Form
    {
       #region Class Parameters
       const int shiftw = 35, shifth = 55; //смещение чтобы было видно красныю рамку
@@ -45,7 +45,7 @@ namespace WindowsForms
       #endregion
 
       #region Class Methods
-      public Form1(BarsMenu.ToolBar _orgtb, BarsMenu.StatusBar _orgsb)
+      public MnemoSchemaForm(BarsMenu.ToolBar _orgtb, BarsMenu.StatusBar _orgsb)
       {
          InitializeComponent();
          InitElements();
