@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms
 {
-   partial class Form13
+   partial class EditMnemoCaptionForm
    {
       /// <summary>
       /// Required designer variable.

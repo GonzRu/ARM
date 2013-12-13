@@ -331,7 +331,7 @@ namespace WinAppRelease1
          if (MdiChildren.Length != 0)
          {
             var frm = (MnemoSchemaForm)ActiveMdiChild;
-             var cap_frm = new Form13 { Owner = this };
+             var cap_frm = new EditMnemoCaptionForm { Owner = this };
 
              if (frm.MnenoCaption != String.Empty)
                cap_frm.MnenoCaption = frm.MnenoCaption;

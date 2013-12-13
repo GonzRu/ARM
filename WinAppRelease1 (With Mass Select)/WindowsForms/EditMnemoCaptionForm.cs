@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace WindowsForms
 {
-   public partial class Form13 : Form
+   public partial class EditMnemoCaptionForm : Form
    {
-      public Form13()
+      public EditMnemoCaptionForm()
       {
          InitializeComponent();
       }
