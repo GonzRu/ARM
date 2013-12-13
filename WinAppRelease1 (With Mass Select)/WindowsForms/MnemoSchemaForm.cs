@@ -319,7 +319,7 @@ namespace WindowsForms
       /// </summary>
       public void SaveMethod()
       {
-         Form6_mod frm = new Form6_mod();
+         SaveProgressForm frm = new SaveProgressForm();
          frm.Show();
 
          SchemasStream file = new SchemasStream();
@@ -342,7 +342,7 @@ namespace WindowsForms
       /// <param name="_strname">имя и путь файла</param>
       public void SaveMethod(string _strname)
       {
-         Form6_mod frm = new Form6_mod();
+         SaveProgressForm frm = new SaveProgressForm();
          frm.Show();
 
          SchemasStream file = new SchemasStream();
@@ -435,7 +435,7 @@ namespace WindowsForms
                  tmp.Parameters.ExternalDescription = false;
          }
 
-         frm = new Form6_mod();
+         frm = new SaveProgressForm();
          frm.Show();
          file = new SchemasStream();
          file.SetProcessForm(frm);
