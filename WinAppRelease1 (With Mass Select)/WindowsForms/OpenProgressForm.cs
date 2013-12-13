@@ -11,7 +11,7 @@ using Structure;
 
 namespace WindowsForms
 {
-   public partial class Form6 : Form, IProcess
+   public partial class OpenProgressForm : Form, IProcess
    {
       #region Parameters
       int error_elements, compleated_elements;
@@ -21,7 +21,7 @@ namespace WindowsForms
       #endregion
 
       #region Class Methods
-      public Form6()
+      public OpenProgressForm()
       {
          InitializeComponent();
          error_elements = compleated_elements = 0;

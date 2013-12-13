@@ -111,11 +111,11 @@
     <Compile Include="Form5.Designer.cs">
       <DependentUpon>Form5.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form6.cs">
+    <Compile Include="OpenProgressForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form6.Designer.cs">
-      <DependentUpon>Form6.cs</DependentUpon>
+    <Compile Include="OpenProgressForm.Designer.cs">
+      <DependentUpon>OpenProgressForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Form6_mod.cs">
       <SubType>Form</SubType>
@@ -188,9 +188,9 @@
       <DependentUpon>Form5.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form6.resx">
+    <EmbeddedResource Include="OpenProgressForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Form6.cs</DependentUpon>
+      <DependentUpon>OpenProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form7.resx">
       <SubType>Designer</SubType>

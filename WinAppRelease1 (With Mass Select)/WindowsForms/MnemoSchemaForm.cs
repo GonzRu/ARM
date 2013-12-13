@@ -370,7 +370,7 @@ namespace WindowsForms
          this.filename = _strname;
 
          Form7 frmlog = new Form7();
-         Form6 frm = new Form6();
+         OpenProgressForm frm = new OpenProgressForm();
          frm.Show();
 
          SchemasStream file = new SchemasStream();
@@ -416,7 +416,7 @@ namespace WindowsForms
 
          MessageBox.Show("Процесс собирания схемы займет какое-то время...");
 
-         Form6 frm = new Form6();
+         OpenProgressForm frm = new OpenProgressForm();
          frm.Show();
 
          List<Element> buildlst = new List<Element>();
@@ -461,7 +461,7 @@ namespace WindowsForms
          List<Element> tmplst = new List<Element>();
          string title;
 
-         Form6 frmload = new Form6();
+         OpenProgressForm frmload = new OpenProgressForm();
          frmload.Show();
 
          SchemasStream file = new SchemasStream();

@@ -11,7 +11,7 @@ using Structure;
 
 namespace WindowsForms
 {
-   class Form6_mod : Form6
+   class Form6_mod : OpenProgressForm
    {
       #region Parameters
       const string str_save = "Saving...";

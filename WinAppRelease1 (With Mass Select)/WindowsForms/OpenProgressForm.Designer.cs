@@ -1,6 +1,6 @@
 namespace WindowsForms
 {
-   partial class Form6
+   partial class OpenProgressForm
    {
       /// <summary>
       /// Required designer variable.
