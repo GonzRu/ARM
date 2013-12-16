@@ -792,6 +792,10 @@ namespace WindowsForms
                   }
                }
                #endregion
+
+                #region Вывод количества выделенных элементов
+                orgsb.CountOfSelectedelementsLabelText = selected_list.Count.ToString();
+                #endregion
             }//foreach
             Invalidate();
          }
