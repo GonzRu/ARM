@@ -134,7 +134,9 @@ namespace LibraryElements.CalculationBlocks
                 case "SiriusCalculation":
                     return new SiriusCalculation( );
                 case "EkraCalculation":
-                    return new  EkraCalculation();
+                    return new EkraCalculation();
+                case "BreslerCalculation":
+                    return new BreslerCalculation();
                 case "KeyCalculation":
                     return new KeyCalculation( );
                 case "BlockSignalCalculation":

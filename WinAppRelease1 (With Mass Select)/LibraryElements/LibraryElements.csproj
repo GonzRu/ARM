@@ -67,6 +67,7 @@
     <Compile Include="Blocks.cs" />
     <Compile Include="CalculationBlocks\BlockSignalCalculation.cs" />
     <Compile Include="CalculationBlocks\BmrzCalculation.cs" />
+    <Compile Include="CalculationBlocks\BreslerCalculation.cs" />
     <Compile Include="CalculationBlocks\CalculationContext.cs" />
     <Compile Include="CalculationBlocks\EkraCalculation.cs" />
     <Compile Include="CalculationBlocks\ElementCalculation.cs" />
