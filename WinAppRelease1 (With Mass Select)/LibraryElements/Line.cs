@@ -154,7 +154,7 @@ namespace LibraryElements
          param2 = Math.Round(((y - y1) / (y2 - y1)), 1);
          int tmp = param1.CompareTo(param2);
 
-         if (tmp == 0)
+         if (tmp == 0 && (((x >= x1) && (x2 >= x)) || ((x >= x2) && (x1 >= x))))
             return true;
          else
             return false;
