@@ -11,17 +11,17 @@ namespace BarsMenu
    public class StatusBar
    {
       #region Parameters
-      private const string str1 = "X: ";
-      private const string str2 = "Y: ";
-      private const string str3 = "Zoom: ";
-      private const string str4 = "Изменений нет";
-      private const string str5 = "Были внесены изменения";
+      private const string _XStr = "X: ";
+      private const string _YStr = "Y: ";
+      private const string _zoomStr = "Zoom: ";
+      private const string _changeStatusNoStr = "Изменений нет";
+      private const string _changeStatusYesStr = "Были внесены изменения";
       private StatusStrip sb_strip;
-      private ToolStripStatusLabel sb_label1;
-      private ToolStripStatusLabel sb_label2;
-      private ToolStripStatusLabel sb_label3;
-      private ToolStripStatusLabel sb_label4;
-      private ToolStripStatusLabel sb_label5;
+      private ToolStripStatusLabel sb_changeStatusLabel;
+      private ToolStripStatusLabel sb_ZoomLabel;
+      private ToolStripStatusLabel sb_ZoomValueLabel;
+      private ToolStripStatusLabel sb_CursorPositionXLabel;
+      private ToolStripStatusLabel sb_CursorPositionYLabel;
       #endregion
 
       #region Class Methods
@@ -33,56 +33,56 @@ namespace BarsMenu
       }
       public void SetLabel1TextDefault()
       {
-         if (this.sb_label1.Text != str4)
-            this.sb_label1.Text = str4;
+         if (this.sb_changeStatusLabel.Text != _changeStatusNoStr)
+            this.sb_changeStatusLabel.Text = _changeStatusNoStr;
       }
       public void SetLabel1Change()
       {
-         if(this.sb_label1.Text != str5)
-            this.sb_label1.Text = str5;
+         if(this.sb_changeStatusLabel.Text != _changeStatusYesStr)
+            this.sb_changeStatusLabel.Text = _changeStatusYesStr;
       }
       private void InitLabels()
       {
-         this.sb_label1 = new ToolStripStatusLabel();
-         this.sb_label1.AutoSize = false;
-         this.sb_label1.Name = "toolStripStatusLabel1";
-         this.sb_label1.Size = new System.Drawing.Size(200, 17);
-         this.sb_label1.Text = str4;
-         this.sb_label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+         this.sb_changeStatusLabel = new ToolStripStatusLabel();
+         this.sb_changeStatusLabel.AutoSize = false;
+         this.sb_changeStatusLabel.Name = "toolStripStatusLabel11";
+         this.sb_changeStatusLabel.Size = new System.Drawing.Size(200, 17);
+         this.sb_changeStatusLabel.Text = _changeStatusNoStr;
+         this.sb_changeStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
-         this.sb_label2 = new ToolStripStatusLabel();
-         this.sb_label2.Name = "toolStripStatusLabel2";
-         this.sb_label2.Size = new System.Drawing.Size(433, 17);
-         this.sb_label2.Spring = true;
+         this.sb_ZoomLabel = new ToolStripStatusLabel();
+         this.sb_ZoomLabel.Name = "toolStripStatusLabel2";
+         this.sb_ZoomLabel.Size = new System.Drawing.Size(433, 17);
+         this.sb_ZoomLabel.Spring = true;
 
-         this.sb_label3 = new ToolStripStatusLabel();
-         this.sb_label3.AutoSize = false;
-         this.sb_label3.Name = "toolStripStatusLabel3";
-         this.sb_label3.Size = new System.Drawing.Size(90, 17);
-         this.sb_label3.Text = str3 + "100%";
-         this.sb_label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+         this.sb_ZoomValueLabel = new ToolStripStatusLabel();
+         this.sb_ZoomValueLabel.AutoSize = false;
+         this.sb_ZoomValueLabel.Name = "toolStripStatusLabel3";
+         this.sb_ZoomValueLabel.Size = new System.Drawing.Size(90, 17);
+         this.sb_ZoomValueLabel.Text = _zoomStr + "100%";
+         this.sb_ZoomValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
-         this.sb_label4 = new ToolStripStatusLabel();
-         this.sb_label4.AutoSize = false;
-         this.sb_label4.Name = "toolStripStatusLabel4";
-         this.sb_label4.Size = new System.Drawing.Size(50, 17);
-         this.sb_label4.Text = str1;
-         this.sb_label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+         this.sb_CursorPositionXLabel = new ToolStripStatusLabel();
+         this.sb_CursorPositionXLabel.AutoSize = false;
+         this.sb_CursorPositionXLabel.Name = "toolStripStatusLabel4";
+         this.sb_CursorPositionXLabel.Size = new System.Drawing.Size(50, 17);
+         this.sb_CursorPositionXLabel.Text = _XStr;
+         this.sb_CursorPositionXLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
-         this.sb_label5 = new ToolStripStatusLabel();
-         this.sb_label5.AutoSize = false;
-         this.sb_label5.Name = "toolStripStatusLabel3";
-         this.sb_label5.Size = new System.Drawing.Size(50, 17);
-         this.sb_label5.Text = str2;
-         this.sb_label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+         this.sb_CursorPositionYLabel = new ToolStripStatusLabel();
+         this.sb_CursorPositionYLabel.AutoSize = false;
+         this.sb_CursorPositionYLabel.Name = "toolStripStatusLabel3";
+         this.sb_CursorPositionYLabel.Size = new System.Drawing.Size(50, 17);
+         this.sb_CursorPositionYLabel.Text = _YStr;
+         this.sb_CursorPositionYLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       }
       private void AddtoStrip()
       {
-         sb_strip.Items.Add(sb_label1);
-         sb_strip.Items.Add(sb_label2);
-         sb_strip.Items.Add(sb_label3);
-         sb_strip.Items.Add(sb_label4);
-         sb_strip.Items.Add(sb_label5);
+         sb_strip.Items.Add(sb_changeStatusLabel);
+         sb_strip.Items.Add(sb_ZoomLabel);
+         sb_strip.Items.Add(sb_ZoomValueLabel);
+         sb_strip.Items.Add(sb_CursorPositionXLabel);
+         sb_strip.Items.Add(sb_CursorPositionYLabel);
       }
       #endregion
 
@@ -90,34 +90,34 @@ namespace BarsMenu
       /// <summary>
       /// Получить или задать текст для "status"
       /// </summary>
-      public String Label1_Text
+      public String ChangeStatusLabelText
       {
-         get { return this.sb_label1.Text; }
-         set { this.sb_label1.Text = value; }
+         get { return this.sb_changeStatusLabel.Text; }
+         set { this.sb_changeStatusLabel.Text = value; }
       }
       /// <summary>
       /// Получить или задать текст для "Zoom"
       /// </summary>
-      public String Label3_Text
+      public String ZoomValueLabelText
       {
-         get { return this.sb_label3.Text; }
-         set { this.sb_label3.Text = str3 + value; }
+         get { return this.sb_ZoomValueLabel.Text; }
+         set { this.sb_ZoomValueLabel.Text = _zoomStr + value; }
       }
       /// <summary>
       /// Получить или задать текст для "X"
       /// </summary>
-      public String Label4_Text
+      public String CursorPositionXLabelText
       {
-         get { return this.sb_label4.Text; }
-         set { this.sb_label4.Text = str1 + value; }
+         get { return this.sb_CursorPositionXLabel.Text; }
+         set { this.sb_CursorPositionXLabel.Text = _XStr + value; }
       }
       /// <summary>
       /// Получить или задать текст для "Y"
       /// </summary>
-      public String Label5_Text
+      public String CursorPositionYLabelText
       {
-         get { return this.sb_label5.Text; }
-         set { this.sb_label5.Text = str2 + value; }
+         get { return this.sb_CursorPositionYLabel.Text; }
+         set { this.sb_CursorPositionYLabel.Text = _YStr + value; }
       }
       #endregion
    }

@@ -66,7 +66,7 @@ namespace WindowsForms
          else
             orgsb.SetLabel1TextDefault();
 
-         orgsb.Label3_Text = win_scale.ToString() + "%";
+         orgsb.ZoomValueLabelText = win_scale.ToString() + "%";
       }
       /// <summary>
       /// Отрисовка размера рабочей области
@@ -539,7 +539,7 @@ namespace WindowsForms
             _elem.ConverttoNewSize(_conv_scale_x, _conv_scale_y);
             _elem.Scale = new PointF(1.0f, 1.0f);
          }
-         this.orgsb.Label3_Text = "100%";
+         this.orgsb.ZoomValueLabelText = "100%";
          this.win_scale = 100;
       }
       /// <summary>
@@ -800,8 +800,8 @@ namespace WindowsForms
       protected override void OnMouseMove(MouseEventArgs e)
       {
          #region Parameters
-         orgsb.Label4_Text = e.X.ToString();
-         orgsb.Label5_Text = e.Y.ToString();
+         orgsb.CursorPositionXLabelText = e.X.ToString();
+         orgsb.CursorPositionYLabelText = e.Y.ToString();
          #endregion
 
          #region действие: установка конечной точки выделения
@@ -897,7 +897,7 @@ namespace WindowsForms
          }
          #endregion         
 
-         orgsb.Label3_Text = win_scale.ToString() + "%";
+         orgsb.ZoomValueLabelText = win_scale.ToString() + "%";
       }
       #endregion
 
