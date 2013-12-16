@@ -15,14 +15,10 @@ namespace LibraryElements.CalculationBlocks
         {
             Records.Add(new SignalMatchRecord("RPV"));
             Records.Add(new SignalMatchRecord("RPO"));
-            Records.Add(new SignalMatchRecord("Call"));
-            Records.Add(new SignalMatchRecord("Local"));
 
             Records.Add(new DataRecord("StateProtocol", DataRecord.RecordTypes.StateProtocol)
                             {Value = ProtocolStatus.Bad});
             Records.Add(new DataRecord("IsAdjustment", DataRecord.RecordTypes.Boolean) {Value = false});
-            Records.Add(new DataRecord("CallColor", DataRecord.RecordTypes.Color) {Value = Color.Aqua});
-            Records.Add(new DataRecord("LocalColor", DataRecord.RecordTypes.Color) {Value = Color.White});
             Records.Add(new DataRecord("SetSignalColor", DataRecord.RecordTypes.Color) {Value = Color.Red});
             Records.Add(new DataRecord("NoSignalColor", DataRecord.RecordTypes.Color) {Value = Color.Green});
             Records.Add(new DataRecord("UndefineBodySignalColor", DataRecord.RecordTypes.Color) {Value = Color.Yellow});
@@ -53,13 +49,6 @@ namespace LibraryElements.CalculationBlocks
             }
 
             var newRectangle = rectangle;
-            if (!GetRecord("Call").Value.Equals(0))
-                graphics.FillRectangle(new SolidBrush((Color) GetRecord("CallColor").Value), newRectangle);
-            if (!GetRecord("Local").Value.Equals(0))
-                graphics.FillRectangle(new SolidBrush((Color) GetRecord("LocalColor").Value), newRectangle);
-            if (!GetRecord("Call").Value.Equals(0) || !GetRecord("Local").Value.Equals(0))
-                newRectangle = new Rectangle(newRectangle.X + 3, newRectangle.Y + 3,
-                                             newRectangle.Width - 6, newRectangle.Height - 6);
 
             var defaultImageRecord = GetRecord("DefaultImage");
             if (defaultImageRecord.Value != null)
