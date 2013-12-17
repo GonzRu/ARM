@@ -29,6 +29,8 @@ namespace WindowsForms
             listBox1.DoubleClick += ListBox1OnDoubleClick;
             dataGridView1.CellClick += DataGridViewOnCellClick;
             dataGridView2.CellClick += DataGridViewOnCellClick;
+
+            this.CancelButton = button2;
         }
         public ElementBehaviorForm( ICalculationContext element )
         {
@@ -47,6 +49,8 @@ namespace WindowsForms
             listBox1.DoubleClick += ListBox1OnDoubleClick;
             dataGridView1.CellClick += DataGridViewOnCellClick;
             dataGridView2.CellClick += DataGridViewOnCellClick;
+
+            this.CancelButton = button2;
         }
         private void InitData()
         {

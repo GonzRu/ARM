@@ -48,6 +48,8 @@ namespace WindowsForms
                 this.tabControl1.Controls.Remove( this.tabPage4 );
                 InitLine();
             }
+
+            this.CancelButton = button2;
         }
         private void button6_Click( object sender, EventArgs e )
         {

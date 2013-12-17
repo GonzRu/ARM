@@ -56,6 +56,8 @@ namespace WindowsForms
             this.InitPage7();
          else
             this.tabControl1.Controls.Remove(this.tabPage7);
+
+         this.CancelButton = button1;
       }
       private void InitFileDialog()
       {
