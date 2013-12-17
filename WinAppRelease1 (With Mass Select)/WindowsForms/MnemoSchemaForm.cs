@@ -903,6 +903,87 @@ namespace WindowsForms
 
          orgsb.ZoomValueLabelText = win_scale.ToString() + "%";
       }
+
+      protected override void OnMouseDoubleClick(MouseEventArgs e)
+      {
+          base.OnMouseDoubleClick(e);
+
+          #region действие: отмена  выделения
+          if (select.Active)
+          {
+              select.Active = false;
+          }
+          #endregion
+
+          #region действие: установка начальной точки области выделения
+          if (!createlineflag)
+          {
+              select.SetMouseDown(e.Location);
+              select.Active = true;
+          }
+          else
+              select.Active = false;
+          #endregion
+
+          #region действие: выделение элементов
+          if (e.Button == MouseButtons.Left)
+          {
+              if (selected_list.Count > 0)
+                  selected_list.Clear();
+
+              foreach (Element _elem in list)
+              {
+                  #region действие: выбор элементов
+                  if (_elem.Collision(select.Area))
+                  {
+                      _elem.IsSelected = true;
+                      _elem.IsDragged = false;
+                      _elem.IsModify = false;
+                      selected_list.Add(_elem);
+                  }
+                  else
+                  {
+                      if (_elem.IsDragged)
+                      {
+                          _elem.IsDragged = false;
+                          _elem.IsModify = false;
+                          selected_list.Add(_elem);
+                      }
+                      else
+                      {
+                          _elem.IsSelected = false;
+                          _elem.IsDragged = false;
+                          _elem.IsModify = false;
+                      }
+                  }
+                  #endregion
+
+                  #region Вывод количества выделенных элементов
+                  orgsb.CountOfSelectedelementsLabelText = selected_list.Count.ToString();
+                  #endregion
+              }//foreach
+              Invalidate();
+          }
+          #endregion
+
+          #region Запуск формы свойств для выделенного объекта
+          if (selected_list.Count == 1)
+          {
+              if (selected_list[0] is Line)
+              {
+                  LinesPropertiesForm frm = new LinesPropertiesForm(selected_list[0], this.windsize.Width, this.windsize.Height);
+                  if (frm.ShowDialog() == DialogResult.OK)
+                      SetChange();
+                  this.Refresh();
+                  return;
+              }
+
+              CommonPropertiesForm form = new CommonPropertiesForm(selected_list[0], this.windsize.Width, this.windsize.Height);
+              if (form.ShowDialog() == DialogResult.OK)
+                  SetChange(); 
+          }
+          #endregion
+      }
       #endregion
 
       #region Properties
