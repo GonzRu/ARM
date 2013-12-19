@@ -338,7 +338,7 @@ namespace CommonUtils
         }
         public static FormulaEvalNds GetConnectionEvalNds( string typeBlock, uint dsGuid, uint devGuid, bool oldLink = false )
         {
-            if ( devGuid == 0 || string.IsNullOrEmpty( typeBlock ) ) return null;
+            if ( devGuid == 0) return null;
 
             if ( oldLink )
                 return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
@@ -355,9 +355,9 @@ namespace CommonUtils
                                            string.Format( "0({0}.{1}.130726656)", dsGuid, devGuid ),
                                            "Состояние протокола", "" );
 
-            return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
-                                       string.Format( "0({0}.{1}.30726656)", dsGuid, devGuid ),
-                                       "Состояние протокола", "" );
+            return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
+                                       string.Format("0(0.1000.{0})", devGuid),
+                                       "Состояние протокола", "");
         }
 
         /// <summary>

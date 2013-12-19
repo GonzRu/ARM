@@ -117,6 +117,9 @@ namespace HelperLibrary
                         }
                     }
                     break;
+                    case TypeOfTag.Discret:
+                        status = (Convert.ToSingle(value) == 0) ? ProtocolStatus.Bad : ProtocolStatus.Good;
+                        break;
             }
 
             if ( CalculationContext == null ) return false;
