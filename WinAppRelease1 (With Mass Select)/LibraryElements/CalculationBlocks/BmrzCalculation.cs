@@ -15,6 +15,7 @@ namespace LibraryElements.CalculationBlocks
             Records.Add( new SignalMatchRecord( "RPO" ) );
             Records.Add( new SignalMatchRecord( "Call" ) );
             Records.Add( new SignalMatchRecord( "Local" ) );
+            Records.Add( new SignalMatchRecord( "Failure" ) );
 
             Records.Add( new DataRecord( "StateProtocol", DataRecord.RecordTypes.StateProtocol ) { Value = ProtocolStatus.Bad } );
             Records.Add( new DataRecord( "IsAdjustment", DataRecord.RecordTypes.Boolean ) { Value = false } );
@@ -81,6 +82,11 @@ namespace LibraryElements.CalculationBlocks
                                    new SolidBrush( (Color)GetRecord( "UndefineBodySignalColor" ).Value ) );
                 DrawSimbolConnection( graphics, newRectangle,
                                       new SolidBrush( (Color)GetRecord( "UndefineSignalColor" ).Value ), '?' );
+            }
+
+            if (GetRecord("Failure").Value.Equals(1))
+            {
+                DrawFailureSignal(graphics, newRectangle);
             }
         }
         public override string ToString( ) { return "BmrzCalculation"; }
@@ -193,6 +199,20 @@ namespace LibraryElements.CalculationBlocks
             {
                 graphics.FillRectangle( bodyBrush, rectangle );
                 graphics.DrawRectangle( pen, rectangle );
+            }
+        }
+
+        internal static void DrawFailureSignal(Graphics graphics, Rectangle rectangle)
+        {
+            using (var pen = new Pen(Color.Black, 1f))
+            {
+                int upX = rectangle.X + rectangle.Width / 15;
+                int downX = rectangle.Right - rectangle.Width / 15;
+                int upY = rectangle.Y + rectangle.Height / 15;
+                int downY = rectangle.Bottom - rectangle.Height / 15;
+
+                graphics.DrawLine(pen, upX, upY, downX, downY);
+                graphics.DrawLine(pen, upX, downY, downX, upY);
             }
         }
     }
