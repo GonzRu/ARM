@@ -488,7 +488,7 @@ namespace HMI_MT
                 //pnl.Dock = DockStyle.Top;
                 //pnl.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
                 pnl.BorderStyle = BorderStyle.Fixed3D;
-                pnl.BackColor = Color.Aqua;
+                pnl.BackColor = Color.Black;
                 flpgbs.Controls.Add( pnl );
 
 
