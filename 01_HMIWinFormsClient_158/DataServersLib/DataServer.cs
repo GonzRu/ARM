@@ -513,7 +513,7 @@ namespace DataServersLib
                     (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
                 else
 			        provCust.OnByteArrayPacketAppearance += ParseData;
-			    provCust.OnDSCommunicationLoss += provCust_OnDSCommunicationLoss;
+			    provCust.OnDSCommunicationLoss += OnDSCommunicationLossHandler;
 
               /*
                * создаем формирователь пакетов через фабрику с тем, 
@@ -545,7 +545,7 @@ namespace DataServersLib
         /// реакция на событие потери связи с DS
         /// </summary>
         /// <param name="state"></param>
-        private void provCust_OnDSCommunicationLoss( bool state )
+        private void OnDSCommunicationLossHandler( bool state )
         {
 			try
 			{
