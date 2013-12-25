@@ -86,11 +86,13 @@ namespace RequsEtntryLib
 				}
 
                 if (isChangedTagsList)
+                {
                     PrepareAndSubscribeTags(htReqList);
 
-                // извечаем об изменении контекста подписки
-                if (OnChangeRequestTags != null)
-                    OnChangeRequestTags(lstTags.Count, htReqList);
+                    // извечаем об изменении контекста подписки
+                    if (OnChangeRequestTags != null)
+                        OnChangeRequestTags(lstTags.Count, htReqList);
+                }
 			}
 			catch(Exception ex)
 			{
@@ -126,11 +128,11 @@ namespace RequsEtntryLib
                     {
                         htReqList.Add(st, (uint) 1);
                         PrepareAndSubscribeTags(htReqList);
-                    }
 
-                // извечаем об изменении контекста подписки
+                        // извечаем об изменении контекста подписки
                         if (OnChangeRequestTags != null)
                             OnChangeRequestTags(1, htReqList);
+                    }
             }
             catch (Exception ex)
             {
@@ -145,6 +147,7 @@ namespace RequsEtntryLib
         public void UnSubscribeTags(List<ITag> lstTags)
 		{
 			uint count = 0;
+            var tagListToUnsubscribe = new List<string>();
 	
 			try
 			{
@@ -157,14 +160,22 @@ namespace RequsEtntryLib
 						count = (uint)htReqList[st];
                         count--;
 						htReqList[st] = count;
-						if (count == 0)
-							htReqList.Remove(st);
+                        if (count == 0)
+                        {
+                            htReqList.Remove(st);
+                            tagListToUnsubscribe.Add(st);
+                        }
 					}
 				}
+                
+                if (tagListToUnsubscribe.Count != 0)
+                {
+                    HMI_MT_Settings.HMI_Settings.WCFproxy.UnscribeRTUTags(tagListToUnsubscribe.ToArray());
 
-                // извечаем об изменении контекста подписки
-                if (OnChangeRequestTags != null)
-                    OnChangeRequestTags(-lstTags.Count, htReqList);
+                    // извечаем об изменении контекста подписки
+                    if (OnChangeRequestTags != null)
+                        OnChangeRequestTags(-lstTags.Count, htReqList);
+                }
 
 			}
 			catch(Exception ex)
@@ -178,7 +189,7 @@ namespace RequsEtntryLib
         /// <param name="?"></param>
         public void UnSubscribeTag(ITag tag)
         {
-            uint count = 0;
+            uint count = 0;            
 
             try
             {
@@ -190,12 +201,16 @@ namespace RequsEtntryLib
                             count--;
                             htReqList[st] = count;
                             if (count == 0)
+                            {
                                 htReqList.Remove(st);
-                        }
 
-                        // извечаем об изменении контекста подписки
-                        if (OnChangeRequestTags != null)
-                            OnChangeRequestTags(-1, htReqList);
+                                HMI_MT_Settings.HMI_Settings.WCFproxy.UnscribeRTUTags(new string[1] {st});
+
+                                // извечаем об изменении контекста подписки
+                                if (OnChangeRequestTags != null)
+                                    OnChangeRequestTags(-1, htReqList);
+                            }
+                        }
             }
             catch (Exception ex)
             {
