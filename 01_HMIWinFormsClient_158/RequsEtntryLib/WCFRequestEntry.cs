@@ -288,8 +288,14 @@ namespace RequsEtntryLib
                     else
                         byteArrTagValue = BitConverter.GetBytes(Single.Parse(strTagValue));
 
+                    // VarQualityNewDs
+                    string tagQualityStr = tag.Value.VarQuality.ToString();
+                    VarQualityNewDs tagQuality = tagQualityStr == "1"
+                                                     ? VarQualityNewDs.vqGood
+                                                     : VarQualityNewDs.vqUndefined;
+
                     if (OnTagValueChanged != null)
-                        OnTagValueChanged(dsGuid, devGuid, tagGuid, byteArrTagValue, DateTime.Now, VarQualityNewDs.vqGood);
+                        OnTagValueChanged(dsGuid, devGuid, tagGuid, byteArrTagValue, DateTime.Now, tagQuality);
                 }
                 catch
                 {
