@@ -22,7 +22,14 @@ namespace ProviderCustomerExchangeLib
 	    private readonly Timer timer = new Timer( 30000 );
 		#endregion
 
-		#region конструктор(ы)
+        #region Свойства
+        public CallbackHandler Callback
+        {
+            get { return handler; }
+        }
+        #endregion
+
+        #region конструктор(ы)
         public ClientServerOnWCF( XElement srcinfo )
 		{
             try
