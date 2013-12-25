@@ -503,16 +503,16 @@ namespace DataServersLib
             try
 			{
 			  var pcf = new ProviderCustomerFactory( );
-              //XElement srcinfo = HMI_Settings.XDoc4PathToConfigurationFile.Element("Project").Element("SourceDriver");    //xdoc_project.
-			  //IProviderCustomer provCust = pcf.CreateProviderConsumerChanel("tcp", srcinfo, Configuration);
 
               var xe_ds_access = (from d in dataServerXMLDescribe.Elements("DSAccessInfo") where d.Attribute("enable").Value.ToLower() == bool.TrueString.ToLower() select d).Single();
 
 			    var provCust = pcf.CreateProviderConsumerChanel( xe_ds_access.Attribute( "nameSourceDriver" ).Value,
 			                                                     xe_ds_access.Element( "CustomiseDriverInfo" ),
 			                                                     HMI_Settings.CONFIGURATION );
-			    provCust.OnByteArrayPacketAppearance += ParseData;
+                if (!(provCust is ClientServerOnWCF))
+			        provCust.OnByteArrayPacketAppearance += ParseData;
 			    provCust.OnDSCommunicationLoss += provCust_OnDSCommunicationLoss;
+
               /*
                * создаем формирователь пакетов через фабрику с тем, 
                * чтобы можно было реализовать разные алгоритмы формирования пакетов
@@ -527,7 +527,16 @@ namespace DataServersLib
                */
               var reqfact = new RequestFactory( );
 
-              reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
+              if (provCust is ClientServerOnWCF)
+              {
+                  reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
+
+                  var wcfRequestEntry = reqEntry as WCFRequestEntry;
+                  if (wcfRequestEntry != null)
+                      wcfRequestEntry.OnTagValueChanged += SetValueTag;
+              }
+              else
+                  reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
 			}
 			catch( Exception ex )
 			{
