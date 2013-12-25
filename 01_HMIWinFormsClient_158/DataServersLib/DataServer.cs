@@ -509,7 +509,9 @@ namespace DataServersLib
 			    var provCust = pcf.CreateProviderConsumerChanel( xe_ds_access.Attribute( "nameSourceDriver" ).Value,
 			                                                     xe_ds_access.Element( "CustomiseDriverInfo" ),
 			                                                     HMI_Settings.CONFIGURATION );
-                if (!(provCust is ClientServerOnWCF))
+                if (provCust is ClientServerOnWCF)
+                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
+                else
 			        provCust.OnByteArrayPacketAppearance += ParseData;
 			    provCust.OnDSCommunicationLoss += provCust_OnDSCommunicationLoss;
 
@@ -528,13 +530,7 @@ namespace DataServersLib
               var reqfact = new RequestFactory( );
 
               if (provCust is ClientServerOnWCF)
-              {
                   reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
-
-                  var wcfRequestEntry = reqEntry as WCFRequestEntry;
-                  if (wcfRequestEntry != null)
-                      wcfRequestEntry.OnTagValueChanged += SetValueTag;
-              }
               else
                   reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
 			}

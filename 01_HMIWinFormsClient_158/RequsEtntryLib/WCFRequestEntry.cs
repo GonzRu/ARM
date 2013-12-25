@@ -18,11 +18,6 @@ namespace RequsEtntryLib
         /// контекста тегов для подписки
         /// </summary>
         public event ChangeRequestTags OnChangeRequestTags;
-
-        /// <summary>
-        /// событие изменения значения тега
-        /// </summary>
-        public event Action<UInt16, UInt32, UInt32, byte [], DateTime, VarQualityNewDs> OnTagValueChanged; 
 		#endregion
 
 		#region private
@@ -44,8 +39,6 @@ namespace RequsEtntryLib
         public WCFRequestEntry(ClientServerOnWCF wcfProvider)
 		{
             _wcfProvider = wcfProvider;
-
-            _wcfProvider.Callback.OnNewTagValues += NewTagValueHandler;
 		}
         #endregion
 
@@ -250,59 +243,6 @@ namespace RequsEtntryLib
 
 			return rez;
 		}
-
-        /// <summary>
-        /// Обработчик события в Callback при появлении нового значения
-        /// </summary>
-        private void NewTagValueHandler(Dictionary<string, DSTagValue> tv)
-        {
-            /* 
-            Console.WriteLine("Порция данных");
-            foreach (KeyValuePair<string, DSRouter.DSTagValue> kvp in tv)
-                if (kvp.Value.VarValueAsObject == null)
-                    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
-                else
-                    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, kvp.Value.VarValueAsObject.ToString()));
-             */
-
-            foreach (var tag in tv)
-            {
-                string key = tag.Key.ToString();
-                var split = key.Split('.');
-
-                try
-                {
-                    UInt16 dsGuid = UInt16.Parse(split[0]);
-                    UInt32 devGuid = UInt32.Parse(split[1]);
-                    UInt32 tagGuid = UInt32.Parse(split[2]);
-
-                    // Перевод значения тега в byte []                    
-                    if (tag.Value.VarValueAsObject == null)
-                        continue;
-
-                    string strTagValue = tag.Value.VarValueAsObject.ToString();
-
-                    byte[] byteArrTagValue;
-                    if (strTagValue == "True" || strTagValue == "False")
-                        byteArrTagValue = BitConverter.GetBytes(Boolean.Parse(strTagValue));
-                    else
-                        byteArrTagValue = BitConverter.GetBytes(Single.Parse(strTagValue));
-
-                    // VarQualityNewDs
-                    string tagQualityStr = tag.Value.VarQuality.ToString();
-                    VarQualityNewDs tagQuality = tagQualityStr == "1"
-                                                     ? VarQualityNewDs.vqGood
-                                                     : VarQualityNewDs.vqUndefined;
-
-                    if (OnTagValueChanged != null)
-                        OnTagValueChanged(dsGuid, devGuid, tagGuid, byteArrTagValue, DateTime.Now, tagQuality);
-                }
-                catch
-                {
-                    Console.WriteLine("NewTagValueHandler: Ошибка при разборе нового значения тега: " + key);
-                }
-            }
-        }
 
         /// <summary>
         /// Создает массив строковых представлений тегов и вызывает метод wcf

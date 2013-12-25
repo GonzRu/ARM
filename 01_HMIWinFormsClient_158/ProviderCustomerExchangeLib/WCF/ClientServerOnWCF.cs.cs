@@ -6,13 +6,23 @@ using System.Timers;
 using System.Xml.Linq;
 
 using HMI_MT_Settings;
+using System.Collections.Generic;
+using DSRouter;
+using InterfaceLibrary;
 
 namespace ProviderCustomerExchangeLib
 {
 	public class ClientServerOnWCF : IProviderCustomer
-	{
-		#region private
-		/// <summary>
+    {
+        #region События
+        /// <summary>
+        /// событие изменения значения тега
+        /// </summary>
+        public event Action<UInt16, UInt32, UInt32, byte[], DateTime, VarQualityNewDs> OnTagValueChanged;
+        #endregion
+
+        #region private
+        /// <summary>
 		/// массив для входных пакетов
 		/// </summary>
 		readonly ArrayForExchange arrForReceiveData;
@@ -21,13 +31,6 @@ namespace ProviderCustomerExchangeLib
 
 	    private readonly Timer timer = new Timer( 30000 );
 		#endregion
-
-        #region Свойства
-        public CallbackHandler Callback
-        {
-            get { return handler; }
-        }
-        #endregion
 
         #region конструктор(ы)
         public ClientServerOnWCF( XElement srcinfo )
@@ -87,6 +90,9 @@ namespace ProviderCustomerExchangeLib
 
                 var endpointAddress = new EndpointAddress( endPointAddr );
                 HMI_Settings.WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
+
+                handler.OnNewError += NewErrorFromCallBackHandler;
+                handler.OnNewTagValues += NewTagValueHandler;
             }
             catch ( Exception ex )
             {
@@ -232,5 +238,66 @@ namespace ProviderCustomerExchangeLib
 			}
 		}
 		#endregion
-	}
+
+        #region Обработчики событий из CallBack'a wcf.
+        /// <summary>
+        /// Обработчик события в Callback при появлении нового значения
+        /// </summary>
+        private void NewTagValueHandler(Dictionary<string, DSTagValue> tv)
+        {
+            /* 
+            Console.WriteLine("Порция данных");
+            foreach (KeyValuePair<string, DSRouter.DSTagValue> kvp in tv)
+                if (kvp.Value.VarValueAsObject == null)
+                    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
+                else
+                    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, kvp.Value.VarValueAsObject.ToString()));
+             */
+
+            foreach (var tag in tv)
+            {
+                string key = tag.Key.ToString();
+                var split = key.Split('.');
+
+                try
+                {
+                    UInt16 dsGuid = UInt16.Parse(split[0]);
+                    UInt32 devGuid = UInt32.Parse(split[1]);
+                    UInt32 tagGuid = UInt32.Parse(split[2]);
+
+                    // Перевод значения тега в byte []                    
+                    if (tag.Value.VarValueAsObject == null)
+                        continue;
+
+                    string strTagValue = tag.Value.VarValueAsObject.ToString();
+
+                    byte[] byteArrTagValue;
+                    if (strTagValue == "True" || strTagValue == "False")
+                        byteArrTagValue = BitConverter.GetBytes(Boolean.Parse(strTagValue));
+                    else
+                        byteArrTagValue = BitConverter.GetBytes(Single.Parse(strTagValue));
+
+                    // VarQualityNewDs
+                    string tagQualityStr = tag.Value.VarQuality.ToString();
+                    VarQualityNewDs tagQuality = tagQualityStr == "1"
+                                                     ? VarQualityNewDs.vqGood
+                                                     : VarQualityNewDs.vqUndefined;
+
+                    if (OnTagValueChanged != null)
+                        OnTagValueChanged(dsGuid, devGuid, tagGuid, byteArrTagValue, DateTime.Now, tagQuality);
+                }
+                catch
+                {
+                    Console.WriteLine("NewTagValueHandler: Ошибка при разборе нового значения тега: " + key);
+                }
+            }
+        }
+
+
+        private void NewErrorFromCallBackHandler(string errorStr)
+        {
+            throw new NotImplementedException("NewErrorFromCallBackHandler");
+        }
+        #endregion
+    }
 }
