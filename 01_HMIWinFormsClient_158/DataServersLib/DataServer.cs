@@ -509,12 +509,9 @@ namespace DataServersLib
 			    var provCust = pcf.CreateProviderConsumerChanel( xe_ds_access.Attribute( "nameSourceDriver" ).Value,
 			                                                     xe_ds_access.Element( "CustomiseDriverInfo" ),
 			                                                     HMI_Settings.CONFIGURATION );
-                if (provCust is ClientServerOnWCF)
-                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
-                else
-			        provCust.OnByteArrayPacketAppearance += ParseData;
-			    provCust.OnDSCommunicationLoss += OnDSCommunicationLossHandler;
 
+                provCust.OnDSCommunicationLoss += OnDSCommunicationLossHandler;
+			   
               /*
                * создаем формирователь пакетов через фабрику с тем, 
                * чтобы можно было реализовать разные алгоритмы формирования пакетов
@@ -529,10 +526,29 @@ namespace DataServersLib
                */
               var reqfact = new RequestFactory( );
 
-              if (provCust is ClientServerOnWCF)
-                  reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
-              else
-                  reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
+
+              /* Эта добавлено для того, что бы
+               * была возможность через конфигурационный файл
+               * отключить обновление тегов по подписке
+               * и вернуться к старым запросам через определенный интервал времени.
+               * В секцию <DSAccessInfo> необходимо добавить атрибут WCFTagSubscribe="False"
+               */
+			    bool WCFTagSubscribe;
+                if (xe_ds_access.Attribute("WCFTagSubscribe") == null)
+                    WCFTagSubscribe = true;
+                else
+                    WCFTagSubscribe = xe_ds_access.Attribute("WCFTagSubscribe").Value.ToLower() == "true";
+
+                if (provCust is ClientServerOnWCF && WCFTagSubscribe)
+                {
+                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
+                    reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
+                }
+                else
+			    {
+			        reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
+                    provCust.OnByteArrayPacketAppearance += ParseData;
+			    }
 			}
 			catch( Exception ex )
 			{
