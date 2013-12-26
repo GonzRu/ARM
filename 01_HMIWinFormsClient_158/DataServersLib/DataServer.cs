@@ -242,14 +242,11 @@ namespace DataServersLib
 
                         while (lenfullrez > 0)
                         {
+                            // идентификатор DataServer
                             UInt16 UniDsGuid_out = brrez.ReadUInt16();
-                            //KeyValuePair<XElement, List<IDevice>> kvp = new KeyValuePair<XElement, List<IDevice>>(slUniDSObjects[(UInt32)UniDsGuid_out].Key, slUniDSObjects[(UInt32)UniDsGuid_out].Value);
 
                             // уник номер объекта в пределах конкретного DataServer
-                            UInt32 LocObjectGuid_out = brrez.ReadUInt32();
-                            //IDevice dev = (from d in kvp.Value where d.UniObjectGUID == LocObjectGuid_out select d).Single<IDevice>();
-                            IDevice dev = (from d in lstDev4ThisDS where d.UniObjectGUID == LocObjectGuid_out select d).Single<IDevice>();
-
+                            UInt32 LocObjectGuid_out = brrez.ReadUInt32();                       
 
                             // уник номер группы-подгруппы
                             UInt16 grGuid_out = brrez.ReadUInt16();
@@ -257,16 +254,13 @@ namespace DataServersLib
                             UInt32 tagGUID = brrez.ReadUInt32();
                             if (tagGUID == 0xffffffff)
                             {
-                                ParseGroupData(dev,brrez);
+                                ParseGroupData(UniDsGuid, LocObjectGuid_out, brrez);
                                 break;
                             }
 
-                            ITag tag = dev.GetTag(tagGUID);
-
                             // длина байтового массива отдельного тега
                             UInt16 lenByteArr4Tag = brrez.ReadUInt16();
-
-                                //throw new Exception(string.Format("(256) : DataServer.cs : ParseData() : Нулевая длина байтового массива тега TagGUID = {0}", tagGUID.ToString()));
+                            //throw new Exception(string.Format("(256) : DataServer.cs : ParseData() : Нулевая длина байтового массива тега TagGUID = {0}", tagGUID.ToString()));
 
                             byte[] arrtag = new byte[lenByteArr4Tag];
                             brrez.Read(arrtag, 0, lenByteArr4Tag);
@@ -291,13 +285,9 @@ namespace DataServersLib
                                 default:
                                     qualtag = VarQualityNewDs.vqUndefined;
                                     break;
-
                             }
 
-                            if (tag != null)
-                                tag.SetValue(arrtag, dttag, qualtag);
-
-                            //Console.WriteLine(string.Format("tagGUID = {0}; value = {1}; timestamp = {2}; qual = {3}", tagGUID, BitConverter.ToString(arrtag, 0), timestamp, qual));
+                            SetValueTag(UniDsGuid_out, LocObjectGuid_out, tagGUID, arrtag, dttag, qualtag);
 
                             lenfullrez -= lenByteArr4Tag;
                             lenfullrez -= 23;
@@ -396,16 +386,14 @@ namespace DataServersLib
             }
         }
 
-        private void ParseGroupData(IDevice dev, BinaryReader brrez)
+        private void ParseGroupData(UInt16 dsGuid, UInt32 devGuid, BinaryReader brrez)
         {
-            ITag tag = null;
             UInt16 lenByteArr4Tag = 0;
             try
 			{
                 while (brrez.BaseStream.Position < brrez.BaseStream.Length)
                 {
                     UInt32 tagGUID = brrez.ReadUInt32();
-                    tag = dev.GetTag(tagGUID);
 
                     // длина байтового массива отдельного тега
                     lenByteArr4Tag = brrez.ReadUInt16();
@@ -416,8 +404,7 @@ namespace DataServersLib
                     byte[] arrtag = new byte[lenByteArr4Tag];
                     brrez.Read(arrtag, 0, lenByteArr4Tag);
 
-                    if (tag != null)
-                        tag.SetValue(arrtag, DateTime.Now, VarQualityNewDs.vqGood);
+                    SetValueTag(dsGuid, devGuid, tagGUID, arrtag, DateTime.Now, VarQualityNewDs.vqGood);
 
                     // метка времени
                     long timestamp = brrez.ReadInt64();
@@ -516,16 +503,15 @@ namespace DataServersLib
             try
 			{
 			  var pcf = new ProviderCustomerFactory( );
-              //XElement srcinfo = HMI_Settings.XDoc4PathToConfigurationFile.Element("Project").Element("SourceDriver");    //xdoc_project.
-			  //IProviderCustomer provCust = pcf.CreateProviderConsumerChanel("tcp", srcinfo, Configuration);
 
               var xe_ds_access = (from d in dataServerXMLDescribe.Elements("DSAccessInfo") where d.Attribute("enable").Value.ToLower() == bool.TrueString.ToLower() select d).Single();
 
 			    var provCust = pcf.CreateProviderConsumerChanel( xe_ds_access.Attribute( "nameSourceDriver" ).Value,
 			                                                     xe_ds_access.Element( "CustomiseDriverInfo" ),
 			                                                     HMI_Settings.CONFIGURATION );
-			    provCust.OnByteArrayPacketAppearance += ParseData;
-			    provCust.OnDSCommunicationLoss += provCust_OnDSCommunicationLoss;
+
+                provCust.OnDSCommunicationLoss += OnDSCommunicationLossHandler;
+			   
               /*
                * создаем формирователь пакетов через фабрику с тем, 
                * чтобы можно было реализовать разные алгоритмы формирования пакетов
@@ -540,7 +526,29 @@ namespace DataServersLib
                */
               var reqfact = new RequestFactory( );
 
-              reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
+
+              /* Эта добавлено для того, что бы
+               * была возможность через конфигурационный файл
+               * отключить обновление тегов по подписке
+               * и вернуться к старым запросам через определенный интервал времени.
+               * В секцию <DSAccessInfo> необходимо добавить атрибут WCFTagSubscribe="False"
+               */
+			    bool WCFTagSubscribe;
+                if (xe_ds_access.Attribute("WCFTagSubscribe") == null)
+                    WCFTagSubscribe = true;
+                else
+                    WCFTagSubscribe = xe_ds_access.Attribute("WCFTagSubscribe").Value.ToLower() == "true";
+
+                if (provCust is ClientServerOnWCF && WCFTagSubscribe)
+                {
+                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
+                    reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
+                }
+                else
+			    {
+			        reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
+                    provCust.OnByteArrayPacketAppearance += ParseData;
+			    }
 			}
 			catch( Exception ex )
 			{
@@ -553,7 +561,7 @@ namespace DataServersLib
         /// реакция на событие потери связи с DS
         /// </summary>
         /// <param name="state"></param>
-        private void provCust_OnDSCommunicationLoss( bool state )
+        private void OnDSCommunicationLossHandler( bool state )
         {
 			try
 			{
@@ -578,6 +586,20 @@ namespace DataServersLib
 				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
 			}
         }
-		#endregion
+
+        /// <summary>
+        /// Задает новое значение тегу на основании
+        /// идентификатора DataServer, устройства и тега
+        /// </summary>
+        private void SetValueTag(UInt16 dsGuid, UInt32 devGuid, UInt32 tagGuid, byte [] tagValue, DateTime tagDateTime, VarQualityNewDs tagQuality)
+        {
+            IDevice dev = (from d in lstDev4ThisDS where d.UniObjectGUID == devGuid select d).Single<IDevice>();
+
+            ITag tag = dev.GetTag(tagGuid);
+
+            if (tag != null)
+                tag.SetValue(tagValue, tagDateTime, tagQuality);
+        }
+        #endregion
     }
 }

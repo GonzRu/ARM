@@ -3,17 +3,21 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace HMI_MT_Settings
 {
     public delegate void NewError( string strerror );
     public delegate void PingPongDelegate( bool state );
+    public delegate void NewTagValues(Dictionary<string, DSRouter.DSTagValue> tv);
 
     public class CallbackHandler : IDSRouterCallback
     {
         public event NewError OnNewError;
         public event PingPongDelegate OnPingPongEvent;
+        public event NewTagValues OnNewTagValues; 
 
+        #region NewErrorEvent
         public void NewErrorEvent( string codeDataTimeEvent )
         {
             try
@@ -52,7 +56,9 @@ namespace HMI_MT_Settings
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
-        
+        #endregion
+
+        #region Pong
         public void Pong( )
         {
             try
@@ -99,7 +105,9 @@ namespace HMI_MT_Settings
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
+        #endregion
 
+        #region NotifyCMDExecuted
         public void NotifyCMDExecuted( byte[] data )
         {
             try
@@ -166,8 +174,21 @@ namespace HMI_MT_Settings
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
-        
-        public void NotifyChangedTags( System.Collections.Generic.Dictionary<string, DSRouter.DSTagValue> uu ) { }
+        #endregion
+
+        #region Информирование об изменениях в тегах
+        public void NotifyChangedTags(Dictionary<string, DSRouter.DSTagValue> lstChangedTags)
+        {
+            try
+            {
+                if (OnNewTagValues != null)
+                    OnNewTagValues(lstChangedTags);
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
         public IAsyncResult BeginNotifyChangedTags(
             System.Collections.Generic.Dictionary<string, DSRouter.DSTagValue> rr, AsyncCallback tt, object yy )
         {
@@ -182,6 +203,17 @@ namespace HMI_MT_Settings
             }
             return rez;
         }
-        public void EndNotifyChangedTags( IAsyncResult gg ) { }
+        public void EndNotifyChangedTags( IAsyncResult gg )
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+        #endregion
     }
 }

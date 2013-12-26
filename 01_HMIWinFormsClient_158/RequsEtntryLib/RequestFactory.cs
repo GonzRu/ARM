@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using BlockDataComposer;
 using InterfaceLibrary;
+using ProviderCustomerExchangeLib;
 namespace RequsEtntryLib
 {
 	public class RequestFactory
@@ -48,5 +49,29 @@ namespace RequsEtntryLib
 				}
 				return reqentr;
 			}
+            public IRequestEntry CreateRequestEntry(string typereq, IProviderCustomer provider)
+            {
+                IRequestEntry reqentr = null;
+
+                try
+                {
+                    switch (typereq)
+                    {
+                        case "wcf":
+                            var wcfProvider = provider as ClientServerOnWCF;
+                            if (wcfProvider == null)
+                                throw new Exception(string.Format("Запрашиваемый тип компонента запросов {0} не соответствует фактическому", typereq));
+                            reqentr = new WCFRequestEntry(wcfProvider);
+                            break;
+                        default:
+                            throw new Exception(string.Format("Тип компонента запросов {0} не поддерживается", typereq));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+                }
+                return reqentr;
+            }
 		}
 	}

@@ -125,7 +125,7 @@ namespace ProviderCustomerExchangeLib
 		ArrayForExchange arrForSendData = new ArrayForExchange();
         #endregion
 
-		#region конструктор(ы)		
+		#region конструктор(ы)
 		/// <summary>
 		/// конструктор класса для обмена по tcp\ip
 		/// </summary>
@@ -138,7 +138,6 @@ namespace ProviderCustomerExchangeLib
 			arrForReceiveData.packetAppearance += new ByteArrayPacketAppearance(arrForReceiveData_packetAppearance);
 		}
 		#endregion
-
 
 		#region public-методы
 		#endregion

@@ -111,10 +111,6 @@ namespace SourceMOA
                 xESsectionDescribe = xeObj;
                 this.uniDS_GUID = uniDS_GUID;
 				uniObjectGUID = uint.Parse(xeObj.Attribute("objectGUID").Value);
-                if (uniObjectGUID == 1000)
-                {
-                    int i = 0;
-                }
 			    TypeName = xeObj.Attribute( "TypeName" ).Value;
                 Description = xeObj.Element( "DescDev" ).Element( "DescDev" ).Value;
                 // строки для представления в интерфейсе

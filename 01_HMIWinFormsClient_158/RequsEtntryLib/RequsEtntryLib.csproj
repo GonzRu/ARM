@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,7 @@
     <Compile Include="RequestDataFactory.cs" />
     <Compile Include="RequestEntry.cs" />
     <Compile Include="RequestFactory.cs" />
+    <Compile Include="WCFRequestEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
@@ -63,6 +65,10 @@
     <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
       <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
       <Name>InterfaceLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProviderCustomerExchangeLib\ProviderCustomerExchangeLib.csproj">
+      <Project>{9C42D88A-F77B-4C0A-9137-1FEDB83A7F0C}</Project>
+      <Name>ProviderCustomerExchangeLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\SourceMOA\SourceMOA.csproj">
       <Project>{67A89781-635D-4EA9-916E-A212FE4C82A3}</Project>
