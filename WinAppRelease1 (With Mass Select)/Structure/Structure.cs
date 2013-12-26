@@ -115,12 +115,12 @@ namespace Structure
    public static class ProgrammExtensions
    {
       const string Prefix = ".";
-      const string Strschema = "mnm";
-      const string Str1 = "jpg";
-      const string Str2 = "bmp";
-      const string Str3 = "png";
-      const string Str4 = "emf";
-      const string Str5 = "xml";
+      const string MnmExtensionStr = "mnm";
+      const string JpgExtensionStr = "jpg";
+      const string BmpExtensionStr = "bmp";
+      const string PngExtensionStr = "png";
+      const string EmfExtensionStr = "emf";
+      const string XmlExtensionStr = "xml";
       const string Any = "|Any files|*.*";
 
       /// <summary>
@@ -134,27 +134,27 @@ namespace Structure
       /// Фильтр графических файлов
       /// </summary>
       public static String GetImageFilter()
-      {  //Image files|*.jpg;*.bmp;*.png;*.wmf
+      {
          string str = "Image files";
-         str += "|*" + Prefix + Str1;
-         str += ";*" + Prefix + Str2;
-         str += ";*" + Prefix + Str3;
-         str += ";*" + Prefix + Str4;
+         str += "|*" + Prefix + JpgExtensionStr;
+         str += ";*" + Prefix + BmpExtensionStr;
+         str += ";*" + Prefix + PngExtensionStr;
+         str += ";*" + Prefix + EmfExtensionStr;
          return str;
       }
       /// <summary>
       /// Фильтр файла схемы
       /// </summary>
       public static String GetSchemaFilter()
-      {  //Schema files|*.mnm|Xml files|*.xml
-         return "Schema files|*" + Prefix + Strschema + "|Xml files|*" + Prefix + Str5;
+      {
+         return "Schema files|*" + Prefix + MnmExtensionStr + ";*" + Prefix + XmlExtensionStr;
       }
       /// <summary>
       /// Фильтр файла Xml
       /// </summary>
       public static String GetXmlFilter()
-      {  //Xml files|*.xml
-         return "Xml files|*" + Prefix + Str5;
+      {
+         return "Xml files|*" + Prefix + XmlExtensionStr;
       }
    }
    /// <summary>
