@@ -302,6 +302,8 @@ namespace HMI_MT
 
                 // соберем мусор после загрузки
                 GC.Collect();
+
+                Application.OpenForms[0].Activate();
 			}
 			catch(Exception ex)
 			{
@@ -767,6 +769,7 @@ namespace HMI_MT
           DebugStatistics.WindowStatistics.AddStatistic( "Подготовка к запросу логин\\пароля." );
 
           Form_ea = new frmAutorization(this, Target.EnterToSystem);
+          Form_ea.TopMost = false;
 
           if (HMI_Settings.isNeedLoginAndPassword)
           {

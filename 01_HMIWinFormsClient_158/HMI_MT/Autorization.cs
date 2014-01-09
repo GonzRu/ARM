@@ -198,7 +198,7 @@ namespace HMI_MT
                //DialogResult = DialogResult.No; // неуспешная инициализация существующего пользователя
                tbUser.Text = "";
                tbPassword.Text = "";
-               tbPassword.Focus();
+               tbUser.Focus();
            }
            else
            {
