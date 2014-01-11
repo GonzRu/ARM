@@ -537,7 +537,13 @@ namespace DataServersLib
                 if (xe_ds_access.Attribute("WCFTagSubscribe") == null)
                     WCFTagSubscribe = true;
                 else
-                    WCFTagSubscribe = xe_ds_access.Attribute("WCFTagSubscribe").Value.ToLower() == "true";
+                {
+                    if (!Boolean.TryParse(xe_ds_access.Attribute("WCFTagSubscribe").Value, out WCFTagSubscribe))
+                    {
+                        Console.WriteLine("\nDataServersLib.DataServer::CreateInterConnectComponentBySpecificProtocol: неверное значение у атрибута \"WCFTagSubscribe\". Используется значение по-умолчанию: true\n");
+                        WCFTagSubscribe = true;
+                    }
+                }
 
                 if (provCust is ClientServerOnWCF && WCFTagSubscribe)
                 {
