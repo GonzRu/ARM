@@ -34,11 +34,6 @@ namespace HMI_MT_Settings
     /// </summary>
     public static class HMI_Settings
     {
-        /// <summary>
-        /// Proxy для роутера
-        /// </summary>
-        //public static DSRouterClient WCFproxy;
-        public static IDSRouter WCFproxy;
 
         /// <summary>
         /// Конфигурация текущего проекта

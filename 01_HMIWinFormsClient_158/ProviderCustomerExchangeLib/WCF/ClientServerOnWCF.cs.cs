@@ -22,6 +22,12 @@ namespace ProviderCustomerExchangeLib
         #endregion
 
         #region private
+
+        /// <summary>
+        /// Proxy для роутера
+        /// </summary>        
+        private IDSRouter WCFproxy;
+
         /// <summary>
 		/// массив для входных пакетов
 		/// </summary>
@@ -51,10 +57,10 @@ namespace ProviderCustomerExchangeLib
                                      {
                                          try
                                          {
-                                             var idch = HMI_Settings.WCFproxy as IClientChannel;
+                                             var idch = WCFproxy as IClientChannel;
                                              if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
                                              {
-                                                 HMI_Settings.WCFproxy = null;
+                                                 WCFproxy = null;
                                                  this.CreateProxyFromCode( );
                                              }
                                          }
@@ -131,7 +137,7 @@ namespace ProviderCustomerExchangeLib
         {            
             try
             {
-                var rezz = HMI_Settings.WCFproxy.GetDSOscByIdInBD(0, pq);
+                var rezz = WCFproxy.GetDSOscByIdInBD(0, pq);
 
                 var rez = new MemoryStream(rezz);
 
@@ -177,7 +183,7 @@ namespace ProviderCustomerExchangeLib
         {
             try
             {
-                HMI_Settings.WCFproxy.SetReq2ArhivInfo(0, pq);               
+                WCFproxy.SetReq2ArhivInfo(0, pq);               
             }
             catch (Exception ex)
             {
@@ -194,7 +200,7 @@ namespace ProviderCustomerExchangeLib
         {
             try
             {
-               HMI_Settings.WCFproxy.RunCMDMOA(0, pq);
+               WCFproxy.RunCMDMOA(0, pq);
             }
             catch (Exception ex)
             {
@@ -206,7 +212,7 @@ namespace ProviderCustomerExchangeLib
         {
             try
             {
-                var rez = HMI_Settings.WCFproxy.GetDSValueAsByteBuffer( 0, e.Argument as byte[] );
+                var rez = WCFproxy.GetDSValueAsByteBuffer( 0, e.Argument as byte[] );
 
                 if ( rez != null && rez.Length != 0 )
                 {
