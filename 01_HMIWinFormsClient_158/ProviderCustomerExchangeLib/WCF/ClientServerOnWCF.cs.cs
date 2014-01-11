@@ -12,7 +12,7 @@ using InterfaceLibrary;
 
 namespace ProviderCustomerExchangeLib.WCF
 {
-	public class ClientServerOnWCF : IProviderCustomer
+	public class ClientServerOnWCF : IProviderCustomer, IWcfProvider
     {
         #region События
         /// <summary>
@@ -95,7 +95,7 @@ namespace ProviderCustomerExchangeLib.WCF
                 tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
 
                 var endpointAddress = new EndpointAddress( endPointAddr );
-                HMI_Settings.WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
+                WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
 
                 handler.OnNewError += NewErrorFromCallBackHandler;
                 handler.OnNewTagValues += NewTagValueHandler;
@@ -244,6 +244,32 @@ namespace ProviderCustomerExchangeLib.WCF
 			}
 		}
 		#endregion
+
+        #region Реализация методов интерфейса IWcfProvider
+        void IWcfProvider.SubscribeRTUTags(string[] tagsArray)
+        {
+            WCFproxy.SubscribeRTUTags(tagsArray);
+        }
+
+        void IWcfProvider.SubscribeRTUTag(string tag)
+        {
+            var tagsArray = new string[] { tag };
+
+            WCFproxy.SubscribeRTUTags(tagsArray);
+        }
+
+        void IWcfProvider.UnscribeRTUTags(string[] tagsArray)
+        {
+            WCFproxy.UnscribeRTUTags(tagsArray);
+        }
+
+        void IWcfProvider.UnscribeRTUTag(string tag)
+        {
+            var tagsArray = new string[] { tag };
+
+            WCFproxy.UnscribeRTUTags(tagsArray);
+        }
+        #endregion
 
         #region Обработчики событий из CallBack'a wcf.
         /// <summary>
