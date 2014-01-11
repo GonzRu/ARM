@@ -49,7 +49,7 @@ namespace SourceMOA
                 TimeStamp = dt;
                 DataQuality = vq;
 
-                var enco = Encoding.GetEncoding( ValueEncoding );
+                var enco = Encoding.GetEncoding( Tag.StringValueEncoding );
                 ValueAsString = enco.GetString( memX );
 
                 if ( this.BindindTag != null )
@@ -74,7 +74,7 @@ namespace SourceMOA
                 string defvalue = string.Empty;
                 this.ValueAsString = defvalue;
 
-                System.Text.Encoding enco = Encoding.GetEncoding(this.ValueEncoding);
+                System.Text.Encoding enco = Encoding.GetEncoding(Tag.StringValueEncoding);
 
                 byte[] memx = enco.GetBytes(defvalue);
 

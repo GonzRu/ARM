@@ -214,7 +214,7 @@ namespace SourceMOA
 	    /// <summary>
         /// код кодировки символов для строк
         /// </summary>
-        protected ushort ValueEncoding = 866;   // по умолчанию
+        static public ushort StringValueEncoding = 866;   // по умолчанию
         
         #region public-методы реализации интерфейса ...
 	    /// <summary>

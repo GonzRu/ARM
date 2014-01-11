@@ -74,6 +74,10 @@
       <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
       <Name>InterfaceLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SourceMOA\SourceMOA.csproj">
+      <Project>{67A89781-635D-4EA9-916E-A212FE4C82A3}</Project>
+      <Name>SourceMOA</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
