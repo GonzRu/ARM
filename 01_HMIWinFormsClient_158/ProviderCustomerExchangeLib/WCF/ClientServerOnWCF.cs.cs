@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using DSRouter;
 using InterfaceLibrary;
 
-namespace ProviderCustomerExchangeLib
+namespace ProviderCustomerExchangeLib.WCF
 {
 	public class ClientServerOnWCF : IProviderCustomer
     {
