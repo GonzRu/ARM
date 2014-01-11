@@ -18,12 +18,11 @@
  *#############################################################################*/
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BlockDataComposer;
 using InterfaceLibrary;
 using ProviderCustomerExchangeLib;
+using ProviderCustomerExchangeLib.WCF;
+
 namespace RequsEtntryLib
 {
 	public class RequestFactory
@@ -49,6 +48,7 @@ namespace RequsEtntryLib
 				}
 				return reqentr;
 			}
+
             public IRequestEntry CreateRequestEntry(string typereq, IProviderCustomer provider)
             {
                 IRequestEntry reqentr = null;
@@ -58,9 +58,10 @@ namespace RequsEtntryLib
                     switch (typereq)
                     {
                         case "wcf":
-                            var wcfProvider = provider as ClientServerOnWCF;
+                            var wcfProvider = provider as IWcfProvider;
                             if (wcfProvider == null)
                                 throw new Exception(string.Format("Запрашиваемый тип компонента запросов {0} не соответствует фактическому", typereq));
+
                             reqentr = new WCFRequestEntry(wcfProvider);
                             break;
                         default:

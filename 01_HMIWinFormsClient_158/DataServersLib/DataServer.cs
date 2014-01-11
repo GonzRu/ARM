@@ -31,6 +31,7 @@ using HMI_MT_Settings;
 using InterfaceLibrary;
 using System.Text;
 using ProviderCustomerExchangeLib;
+using ProviderCustomerExchangeLib.WCF;
 using RequsEtntryLib;
 using SourceConfigurationLib;
 
