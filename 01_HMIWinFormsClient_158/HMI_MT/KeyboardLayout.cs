@@ -39,8 +39,7 @@ namespace HMI_MT
                     MessageBox.Show("Неизвестная раскладка клавиатуры : " + curIL.Culture.EnglishName, "Предупреждение авторизации", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
-            #warning Принудительная установка английского языка по-умолчанию
-            cbCurLen.SelectedItem = "EN";
+
             cbCurLen.SelectedIndexChanged += new EventHandler(cbCurLen_SelectedIndexChanged);
         }
 
