@@ -23,52 +23,29 @@ using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlTypes;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
-using System.Drawing.Printing;
 using System.Collections.Specialized;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
-using System.Media;
-using Calculator;
-using System.Security.Principal;
 using System.Xml;
-using System.Management;
 using System.Diagnostics;
 using System.Reflection;
-using System.Xml.XPath;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
 using System.Xml.Linq;
-using System.Globalization;
-using System.ServiceModel;
-using System.Text.RegularExpressions;
 
 using Egida;
-using FileManager;
-using LibraryElements;
 
-using WindowsForms;
-using Structure;
-using LabelTextbox;
-using System.IO.Pipes;
 using System.Net.NetworkInformation;
 using TraceSourceLib;
-using fConnectionString;
 using InterfaceLibrary;
-using SourceMOA;
-using BlockDataComposer;
-using ProviderCustomerExchangeLib;
 using Configuration;
 using HMI_MT_Settings;
 using DataBaseLib;
@@ -1596,7 +1573,8 @@ namespace HMI_MT
             } 
         }
 
-	    /// <summary>
+        #region Ribbon metods
+        /// <summary>
         /// Schema
         /// </summary>
         private void RibbonButtonSchemaClick( object sender, EventArgs e )
@@ -1950,6 +1928,7 @@ namespace HMI_MT
         {
             Process.Start( HMI_Settings.AuraUrl );
         }
+        #endregion
 
 	    #region Запрос пароля на выполнение потенц опасных действий
       /// <summary>
