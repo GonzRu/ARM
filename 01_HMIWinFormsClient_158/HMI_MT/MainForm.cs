@@ -652,8 +652,7 @@ namespace HMI_MT
                   StartWithoutBD();
                   break;
               case DialogResult.Cancel:
-                  isFirsQuestionAboutExit = true;
-                  PrepareFormClosing();
+                  ExitWithoutAskDialog();
                   break;
               default:
                   break;
@@ -750,10 +749,9 @@ namespace HMI_MT
 
           if (HMI_Settings.isNeedLoginAndPassword)
           {
-              if ((DialogResult = Form_ea.ShowDialog()) != DialogResult.OK)
+              while ((DialogResult = Form_ea.ShowDialog()) != DialogResult.OK)
               {
-                  this.Close();   // выходим из приложения
-                  return;
+                  ExitWithAskDialog();
               }
           }
           else
@@ -1084,12 +1082,12 @@ namespace HMI_MT
       #endregion
       #endregion
 
-      #region выход из приложения
+        #region выход из приложения
+
         /// <summary>
-        /// флаг для предотвращения повторной инициации диалога о необходимости закрытия приложения
+        /// Show ask dialog for exit
         /// </summary>
-      bool isFirsQuestionAboutExit = false;
-        private bool ExitProgram( )
+        private bool askIsNeedExitProgram()
         {
             if (DialogResult.No == MessageBox.Show("Завершить работу?", "Подтверждение", MessageBoxButtons.YesNo))
                 return false;
@@ -1098,12 +1096,20 @@ namespace HMI_MT
         }
 
         /// <summary>
-        /// подготовка выхода из приложения
+        /// Main function for Exit with Ask Dialog
         /// </summary>
-        private void PrepareFormClosing()
+        private void ExitWithAskDialog()
         {
-            FormClosingEventArgs ee = new FormClosingEventArgs(CloseReason.UserClosing, true);
-            MainForm_FrmClosing(this, ee);
+            if (askIsNeedExitProgram())
+                DoExit();
+        }
+
+        /// <summary>
+        /// Main function for Exit without Ask Dialog
+        /// </summary>
+        private void ExitWithoutAskDialog()
+        {
+            DoExit();
         }
 
         /// <summary>
@@ -1113,7 +1119,7 @@ namespace HMI_MT
         /// <param Name="e"></param>
 		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            PrepareFormClosing();
+            ExitWithAskDialog();
         }
 
         /// <summary>
@@ -1123,55 +1129,8 @@ namespace HMI_MT
         /// <param Name="e"></param>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-			if (ExitProgram())
-			{
-				isFirsQuestionAboutExit = true;
-				PrepareFormClosing();
-			}
-
-			//if (!isFirsQuestionAboutExit)
-			//{
-			//    if (DialogResult.No == MessageBox.Show("Завершить работу?", "Подтверждение", MessageBoxButtons.YesNo))
-			//    {
-			//        if (e.CloseReason == CloseReason.UserClosing)
-			//        {
-			//            e.Cancel = true;
-
-			//            return;
-			//        }
-			//    }
-			//}
-
-			//if (e.CloseReason == CloseReason.UserClosing)
-			//    e.Cancel = true;
-
-			//DoExit();
+            ExitWithAskDialog();
         }
-		/// <summary>
-		/// общая функция закрытия (не системная)
-		/// </summary>
-		/// <param Name="sender"></param>
-		/// <param Name="e"></param>
-		private void MainForm_FrmClosing(object sender, FormClosingEventArgs e)
-		{
-			if (!isFirsQuestionAboutExit)
-			{
-				if (DialogResult.No == MessageBox.Show("Завершить работу?", "Подтверждение", MessageBoxButtons.YesNo))
-				{
-					if (e.CloseReason == CloseReason.UserClosing)
-					{
-						e.Cancel = true;
-
-						return;
-					}
-				}
-			}
-
-			if (e.CloseReason == CloseReason.UserClosing)
-				e.Cancel = true;
-
-			DoExit();
-		}
 
       private void CloseNetManager()
       {
@@ -1505,7 +1464,39 @@ namespace HMI_MT
             MessageBox.Show("Ping на адрес " + HMI_Settings.IPADDRES_CLIENT + " успешно.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
          else
             MessageBox.Show("Компьютер с адресом " + HMI_Settings.IPADDRES_CLIENT + " недоступен.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }      
+      }
+
+      /// <summary>
+      /// команда на рестарт сервера
+      /// </summary>
+      /// <param Name="sender"></param>
+      /// <param Name="e"></param>
+      private void ReconnectServer()
+      {
+          Trace.TraceInformation(DateTime.Now.ToString() + " :(3791) MainForm.cs : команда на рестарт сервера : ");
+          using (TcpClient client = new TcpClient())
+          {
+              try
+              {
+                  client.Connect(IPAddress.Parse(HMI_Settings.IPADDRES_SERVER), 9871);
+                  using (NetworkStream ns = client.GetStream())
+                  {
+                      BinaryWriter bw = new BinaryWriter(ns);
+                      BinaryReader br = new BinaryReader(ns);
+                      bw.Write("restart");
+                      bw.Flush();
+                      br.ReadString();
+                      Trace.TraceInformation(DateTime.Now.ToString() + " :(3802) MainForm.cs : команда на рестарт сервера : выполнено");
+                      //MessageBox.Show("Выполнено.", this.Text, MessageBonnssswwwxButtons.OK, MessageBoxIcon.Information);
+                  }
+              }
+              catch (Exception ex)
+              {
+                  Trace.TraceInformation(DateTime.Now.ToString() + " :(3861) MainForm.cs : восстановитьСвязьССерверомToolStripMenuItem_Click : " + ex.Message);
+                  TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 3854, "Не удалось установить связь с сервером.\nВозможная причины:\n1. Недоступен канал связи.\n2. ПО сервера не работает.");
+              }
+          }
+      }
       #endregion
 
     #region главная мнемосхема
@@ -1520,45 +1511,6 @@ namespace HMI_MT
 		    DebugStatistics.WindowStatistics.AddStatistic( "Подготовка и запуск мнемосхемы выполнен." );
 		}
     #endregion   
-
-        /// <summary>
-      /// команда на рестарт сервера
-      /// </summary>
-      /// <param Name="sender"></param>
-      /// <param Name="e"></param>
-      private void ReconnectServer()
-      {
-         Trace.TraceInformation(DateTime.Now.ToString() + " :(3791) MainForm.cs : команда на рестарт сервера : ");
-         using (TcpClient client = new TcpClient())
-         {
-            try
-            {
-               client.Connect(IPAddress.Parse(HMI_Settings.IPADDRES_SERVER), 9871);
-               using (NetworkStream ns = client.GetStream())
-               {
-                  BinaryWriter bw = new BinaryWriter(ns);
-				  BinaryReader br = new BinaryReader(ns);
-                  bw.Write("restart");
-                  bw.Flush();
-				  br.ReadString();
-                  Trace.TraceInformation(DateTime.Now.ToString() + " :(3802) MainForm.cs : команда на рестарт сервера : выполнено");
-                  //MessageBox.Show("Выполнено.", this.Text, MessageBonnssswwwxButtons.OK, MessageBoxIcon.Information);
-               }
-            }
-            catch (Exception ex)
-            {
-               Trace.TraceInformation(DateTime.Now.ToString() + " :(3861) MainForm.cs : восстановитьСвязьССерверомToolStripMenuItem_Click : " + ex.Message);
-               TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 3854, "Не удалось установить связь с сервером.\nВозможная причины:\n1. Недоступен канал связи.\n2. ПО сервера не работает.");               
-            }
-         }
-      }
-
-
-	  protected override void OnClosing(CancelEventArgs e)
-	  {
-		  if (e.Cancel )
-			   base.OnClosing(e);
-	  }
 
         /// <summary>
         /// Сброс протоколов состояния
@@ -1808,12 +1760,7 @@ namespace HMI_MT
 
             while ( ( DialogResult = Form_ea.ShowDialog() ) != DialogResult.OK )
             {
-                if ( ExitProgram() )
-                {
-                    isFirsQuestionAboutExit = true;
-                    PrepareFormClosing();
-                    return;
-                }
+                ExitWithAskDialog();
             }
             //CommonUtils.CommonUtils.TestUserMenuRights( menuStrip1, HMI_MT_Settings.HMI_Settings.arrlUserMenu );
             // создаем главную мнемосхему
@@ -1836,11 +1783,9 @@ namespace HMI_MT
 
             while ( ( DialogResult = Form_ea.ShowDialog() ) != DialogResult.OK )
             {
-                if ( ExitProgram() )
+                if ( askIsNeedExitProgram() )
                 {
-                    isFirsQuestionAboutExit = true;
-                    PrepareFormClosing();
-                    return;
+                    ExitWithAskDialog();
                 }
             }
             // документирование действия пользователя
@@ -1872,7 +1817,7 @@ namespace HMI_MT
         /// </summary>
         private void RibbonMenuButtonExitClick( object sender, EventArgs e )
         {
-            PrepareFormClosing();
+            ExitWithAskDialog();
         }
         /// <summary>
         /// Print
