@@ -192,9 +192,9 @@ namespace DataBaseFilesLibrary
                 }
                 catch
                 {
-                    AddStringToListBox( listBox1, string.Format( "Ошибка доступа к файлу {0} Файл будет пропущен.", name ) );
-                    // MessageBox.Show( string.Format( "Ошибка доступа к файлу {0}\nФайл будет пропущен.", name ), "Ошибка",
-                    //                  MessageBoxButtons.OK, MessageBoxIcon.Error );
+                    //AddStringToListBox( listBox1, string.Format( "Ошибка доступа к файлу {0} Файл будет пропущен.", name ) );
+                     MessageBox.Show( string.Format( "Ошибка доступа к файлу {0}\nФайл будет пропущен.", name ), "Ошибка",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Error );
                 }
             }
 
