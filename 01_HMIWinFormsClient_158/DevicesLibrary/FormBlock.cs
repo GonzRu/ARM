@@ -45,9 +45,11 @@ namespace DevicesLibrary
                 case "BMRZ_DZSH_02_11":
                 case "BMRZ_BRCN_100_A_01_250108":
                 case "BMRZ_BRCN_100_A_01_111110":
+                case "BMRZ_KL_09_33_12":
+                case "BMRZ_SV_44_12":
+                case "BMRZ_VV_43_13":                
                     {
-                        tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms ) );
-                        tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
+                        tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.TwoPanel) );
                     }
                     break;
                 case "Ekra_BE_2704V014_047":
@@ -61,8 +63,7 @@ namespace DevicesLibrary
                 case "Ekra_BE_2704V061_200":
                 case "Ekra_BE_2704V081_062":
                 case "Ekra_BE_2704V085_100":
-                case "Ovod_MD":
-                case "BMCS_10":
+                case "Ovod_MD":               
                 case "БРЧН_100_B_01_191110":
                 case "БМРЗ_104_TH_05_230511":
                 case "БРЧН_100_A_01_111110":
@@ -83,18 +84,14 @@ namespace DevicesLibrary
                 case "Sirius_T3_306":
                 case "Sirius_TN":
                 case "Sirius_UV_312":
-                    {
-                        tabControl.Controls.Add( new EventBlockTabPage( unidev ) );
+                    {                        
                         tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms ) );
                         tabControl.Controls.Add( new InformationTabPage( unidev ) );
-                        tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
                     }
                     break;
                 case "Sirius_CS_300":
                     {
-                        tabControl.Controls.Add( new EventBlockTabPage( unidev ) );
                         tabControl.Controls.Add( new InformationTabPage( unidev ) );
-                        tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
                     }
                     break;
                 case "ITDS_VirtualDevice":
@@ -108,10 +105,25 @@ namespace DevicesLibrary
                     //case "NOVAR_206":
                     //case "Sepam S4x":
                     //case "Sepam S8x":
-                default:
-                    tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
+                case "BMCS_10":
+                    {                     
+                       tabControl.Controls.Add( new InformationTabPage( unidev ) );
+                    }
+                    break;
+                case "2704V073_040":
+                case "2704V041_049":
+                case "2704V015_045":
+                case "2704V062_040":
+                case "2704V021_055":
+                case "2704V012_052":
+                    {
+                        tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms) );
+                    }
                     break;
             }
+
+            tabControl.Controls.Add( new EventBlockTabPage( unidev ) );
+            tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
         }
 
         /// <summary>
