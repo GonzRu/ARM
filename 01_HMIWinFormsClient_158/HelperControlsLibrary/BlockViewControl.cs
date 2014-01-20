@@ -178,8 +178,23 @@ namespace HelperControlsLibrary
         {
             var groupDescription = node.Tag as GroupDescription;
             if ( groupDescription != null )
-                foreach ( TreeNode subNode in node.Nodes )
-                    this.InsertToTable( subNode );
+               foreach( TreeNode subNode in node.Nodes )
+               {
+                  if( subNode.Tag is GroupDescription )
+                  {                     
+                     var cell = new DataGridViewTextBoxCell()
+                     {
+                        Value = subNode.Text,                        
+                     };
+
+                     var row = new DataGridViewRow();
+                     row.Cells.Add( cell );
+                     row.DefaultCellStyle = new DataGridViewCellStyle() { BackColor = System.Drawing.Color.Green };
+
+                     dataGridView1.Rows.Add( row );                     
+                  }
+                  this.InsertToTable( subNode );
+               }
 
             var tagDescription = node.Tag as TagDescription;
             if ( tagDescription == null || tagDescription.Source == null ) return;
@@ -271,6 +286,7 @@ namespace HelperControlsLibrary
             // отписались и обнулились
             HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.UnSubscribeAndClear );
             foreach ( DataGridViewRow row in this.dataGridView1.Rows )
+               if (row.Tag != null)
                 row.Cells[1].Value = DataGridRowClear( (TagDescription)row.Tag );            
         }
         /// <summary>
