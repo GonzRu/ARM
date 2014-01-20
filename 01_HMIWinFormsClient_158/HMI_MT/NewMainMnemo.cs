@@ -242,8 +242,8 @@ namespace HMI_MT
                     CommonUtils.CommonUtils.CreateContextMenu( region, xeDescDev, parent );
 
                     /* добавление элементам пункта меню панелей нормального режима */
-                    //if ( region.MenuStrip != null )
-                    //    region.MenuStrip.Items.Add( CreateNornalModeItem( ) );
+                    if ( region.MenuStrip != null )
+                        region.MenuStrip.Items.Add( CreateNornalModeItem( ) );
 
                     try
                     {

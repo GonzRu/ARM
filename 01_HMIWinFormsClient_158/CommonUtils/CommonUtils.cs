@@ -219,11 +219,11 @@ namespace CommonUtils
                 foreach (ToolStripItem tsi in cms.Items)
                 {
                     /* NormalModeLibrary - восстанавливаем меню для показа */
-                    //if (tsi.Tag.ToString() == "NML")
-                    //{
-                    //    tsi.Enabled = tsi.Visible = true;
-                    //    continue;
-                    //}
+                    if (state && tsi.Tag.ToString() == "NML")
+                    {
+                        tsi.Enabled = tsi.Visible = true;
+                        continue;
+                    }
                     
                     var content = (CommandContent<String>)tsi.Tag;
                     
