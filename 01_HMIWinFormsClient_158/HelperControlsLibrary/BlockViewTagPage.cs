@@ -155,7 +155,7 @@ namespace HelperControlsLibrary
                             this.tableLayoutPanel.Controls.Add( this.botomFlowLayoutPanel, 0, 1 );
                         }
 
-                        this.dBGridView.Rows.Clear( );
+                        //this.dBGridViewRows.Clear( );
                         this.selectControl.Visible = true;
                         this.readWriteUstavkyControl.Visible = false;
                         this.buttonLayoutPanel.Visible = false;
@@ -178,7 +178,7 @@ namespace HelperControlsLibrary
                             this.tableLayoutPanel.Controls.Add( this.botomFlowLayoutPanel, 0, 1 );
                         }
 
-                        this.dBGridView.Rows.Clear( );
+                        //this.dBGridView.Rows.Clear( );
                         this.selectControl.Visible = true;
                         this.readWriteUstavkyControl.Visible = true;
                         this.buttonLayoutPanel.Visible = false;
