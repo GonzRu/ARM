@@ -44,6 +44,7 @@
     <Compile Include="FormBlock.Designer.cs">
       <DependentUpon>FormBlock.cs</DependentUpon>
     </Compile>
+    <Compile Include="IDeviceForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormBlock.resx">
