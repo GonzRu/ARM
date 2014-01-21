@@ -51,6 +51,7 @@ using HMI_MT_Settings;
 using DataBaseLib;
 using PTKStateLib;
 using DebugStatisticLibrary;
+using HMI_MT.Properties;
 
 namespace HMI_MT
 {
@@ -281,7 +282,16 @@ namespace HMI_MT
                 GC.Collect();
 
                 Application.OpenForms[0].Activate();
-			}
+
+                
+                scDeviceObjectConfig.Width = Settings.Default.SpeedAccessTreeViewWidth;
+                scDeviceObjectConfig.Resize += (s, args) =>
+                                                   {
+                                                       Settings.Default.SpeedAccessTreeViewWidth = scDeviceObjectConfig.Width;
+                                                       Settings.Default.Save();
+                                                   };
+                 
+            }
 			catch(Exception ex)
 			{
 				TraceSourceDiagMes.WriteDiagnosticMSG(ex );
@@ -953,7 +963,7 @@ namespace HMI_MT
       #region пункты главного меню
       // старт формы быстрого доступа
       private void ShowSpeedAccess() 
-      {
+      {          
           scDeviceObjectConfig.Visible = true;
 
           Form[] arrF = MdiChildren;
