@@ -131,18 +131,10 @@ namespace HMI_MT
 
 		#region private
 	    BackgroundWorker bct;
-		string panelInfo = "";
-        // текущие и предыдущие значения памяти, выведенные в строку статуса
-        long currentWorkingSet64 = 0;
-        long currentVirtualMemorySize64 = 0;
-        long prevWorkingSet64 = 0;
-        long prevVirtualMemorySize64 = 0;
-		// синхронизация времени
-		int countSynhr = 5; // раз в десять секунд
-		int currCountSynhr = 0;
-        private frmLogs Form_ev;
-		//private frmCustomMesPTK Form_em;
-		 private frmAutorization Form_ea;
+
+	    private frmLogs Form_ev;
+	    private frmAutorization Form_ea;
+
 		/// <summary>
 		/// класс (Sinleton) - строка подключения к БД
 		/// </summary>
@@ -150,15 +142,6 @@ namespace HMI_MT
 
         bool bEnter;    // признак первоначального входа на главную форму
 	  
-		// режим отбражения даны/ времени
-		DataTimeFormat dtFormat = DataTimeFormat.ShowStorageStat;
-		// для измерения интервалов времени
-		double StartLong = DateTime.MinValue.Ticks;	//long
-		double EndLong = DateTime.MinValue.Ticks;	//long
-		/// <summary>
-		/// строка - день недели
-		/// </summary>
-		StringBuilder dayofw = new StringBuilder();
 		/// <summary>
 		/// ссылка на дерево логической конфигурации устройств
 		/// </summary>
@@ -1208,15 +1191,6 @@ namespace HMI_MT
       }
       #endregion
 
-      #region Таймеры
-      //private void AliveTimer_Tick( object sender, EventArgs e )
-      //{
-      //   CommonUtils.CommonUtils.WriteEventToLog( 31, Process.GetCurrentProcess( ).WorkingSet64.ToString( ) + " (ФП); " + Process.GetCurrentProcess( ).VirtualMemorySize64.ToString( ) + " (ВП); "
-      //      + Process.GetCurrentProcess( ).Threads.Count.ToString( ) + " - потоков; " + Process.GetCurrentProcess( ).HandleCount.ToString( ) + " - дескр.; "
-      //          + Process.GetCurrentProcess().UserProcessorTime.ToString() + " - проц. время; ", false);//, true, false );
-      //}
-      #endregion
-
       #region Строка статуса
       #region для потокобезопасного вызова процедуры (статусная строка)
       /*==========================================================================*
@@ -1522,6 +1496,7 @@ namespace HMI_MT
 		}
     #endregion   
 
+        #region Private-Metods
         /// <summary>
         /// Сброс протоколов состояния
         /// </summary>
@@ -1534,6 +1509,7 @@ namespace HMI_MT
                     win.ResetProtocol( );
             } 
         }
+        #endregion
 
         #region Ribbon metods
         /// <summary>
@@ -1884,27 +1860,5 @@ namespace HMI_MT
             Process.Start( HMI_Settings.AuraUrl );
         }
         #endregion
-
-	    #region Запрос пароля на выполнение потенц опасных действий
-      /// <summary>
-      /// public bool CanAction()
-      /// для временной реализации режима безопасности - перед выполнением каждого потенциально опасного 
-      /// действия запрашивается пароль текущего пользователя. Данная фунуция сверяет текущий и введенный пароли 
-      ///  и формирует логический результат на основании которого принимается разрешение на выполнение данного действия
-      /// </summary>
-      /// <param Name="UserName">имя пользователя</param>
-      /// <param Name="UserID">идентификатор пользователя</param>
-      /// <returns></returns>
-      //public  bool CanAction()
-      //{
-      //    // формируем диалог
-      //    dlgCanPassword dcp = new dlgCanPassword(HMI_MT_Settings.HMI_Settings.UserName, HMI_MT_Settings.HMI_Settings.UserID);
-      //    DialogResult dr = dcp.ShowDialog();
-      //    if (dr == DialogResult.Abort)
-      //        return false;
-      //    else
-      //        return true;
-      //}
-      #endregion
 	}
 }
