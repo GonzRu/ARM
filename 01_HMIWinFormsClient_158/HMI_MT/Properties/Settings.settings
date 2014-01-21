@@ -68,5 +68,8 @@
     <Setting Name="IsUDPSecondClient" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="SpeedAccessTreeViewWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">210</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
