@@ -15,6 +15,7 @@ namespace HelperControlsLibrary
     /// </summary>
     public partial class BlockViewControl : UserControl, ReportLibrary.IReport
     {
+        #region Class TreeNodeDescription
         /// <summary>
         /// Описание узла дерева
         /// </summary>
@@ -36,7 +37,9 @@ namespace HelperControlsLibrary
             /// </summary>
             public Category Category { get { return ( (BaseDescription)Tag ).Category; } }
         }
-        
+        #endregion
+
+        #region CategoryEvent
         /// <summary>
         /// Делегат выдачи категории
         /// </summary>
@@ -46,7 +49,9 @@ namespace HelperControlsLibrary
         /// Событие выдачи категории
         /// </summary>
         public event CategoryDelagete CategoryEvent;
+        #endregion
 
+        #region private
         /// <summary>
         /// Идентификатор
         /// </summary>
@@ -59,7 +64,9 @@ namespace HelperControlsLibrary
         /// Список тэгов выбраной ветви дерева
         /// </summary>
         private readonly List<ITag> subscribes = new List<ITag>( );
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Отображение данных блока
         /// </summary>
@@ -73,9 +80,12 @@ namespace HelperControlsLibrary
             this.uniDev = unidev;
             collector = new BlockViewCollector( unids, unidev );
         }
+        #endregion
+
+        #region Private-Metods
         private void DataGridRowCellEndEdit( object sender, DataGridViewCellEventArgs args )
         {
-            var gridRow = this.dataGridView1.Rows[args.RowIndex];
+            var gridRow = this.tagsTableDataGridView.Rows[args.RowIndex];
             var tagDesc = gridRow.Tag as TagDescription;
             if ( tagDesc == null || tagDesc.Source == null ) return;
 
@@ -161,7 +171,7 @@ namespace HelperControlsLibrary
                 
                 var nodes = CreateGroupNodes( collector.Groups );
                 if ( nodes != null )
-                    treeView1.Nodes.AddRange( nodes.ToArray( ) );
+                    groupsTreeView.Nodes.AddRange( nodes.ToArray( ) );
                 
                 DebugStatistics.WindowStatistics.AddStatistic( "Инициализация построения дерева данных завершена." );
             }
@@ -191,7 +201,7 @@ namespace HelperControlsLibrary
                      row.Cells.Add( cell );
                      row.DefaultCellStyle = new DataGridViewCellStyle() { BackColor = System.Drawing.Color.Green };
 
-                     dataGridView1.Rows.Add( row );                     
+                     tagsTableDataGridView.Rows.Add( row );                     
                   }
                   this.InsertToTable( subNode );
                }
@@ -199,8 +209,10 @@ namespace HelperControlsLibrary
             var tagDescription = node.Tag as TagDescription;
             if ( tagDescription == null || tagDescription.Source == null ) return;
 
-            this.dataGridView1.Rows.Add( CreateDataRow( tagDescription ) );
+            this.tagsTableDataGridView.Rows.Add( CreateDataRow( tagDescription ) );
             this.subscribes.Add( tagDescription.Source );
+
+            tagsTableDataGridView.ClearSelection();
         }
         /// <summary>
         /// Событие изменения значений данных тэга
@@ -211,7 +223,7 @@ namespace HelperControlsLibrary
         /// <returns>Признак изменения тэга</returns>
         private bool FormulaOnOnChange( string format, object value, TypeOfTag type )
         {
-            foreach ( DataGridViewRow row in this.dataGridView1.Rows )
+            foreach ( DataGridViewRow row in this.tagsTableDataGridView.Rows )
             {
                 var tag = (TagDescription)row.Tag;
                 if ( tag == null || !tag.Result.Equals( format ) || row.Cells[1].Value.Equals( value ) ) continue;
@@ -228,35 +240,51 @@ namespace HelperControlsLibrary
         {
             var tree = (TreeView)sender;
 
-            foreach ( DataGridViewRow row in this.dataGridView1.Rows )
+            ClearAndUnsubscribeTagsTable();
+
+            var treeNode = (TreeNodeDescription)tree.GetNodeAt( ( (MouseEventArgs)e ).Location );
+            this.InsertToTable( treeNode );
+            this.tagsTableDataGridView.Columns[1].ReadOnly = true;
+
+            SubscribeTagsInTagsTable();
+
+            var handlerCategory = CategoryEvent;
+            if ( handlerCategory != null )
+                handlerCategory( treeNode.Category );            
+        }
+
+        /// <summary>
+        /// Clear tagsTable and Unsubscribe tags
+        /// </summary>
+        private void ClearAndUnsubscribeTagsTable()
+        {
+            foreach (DataGridViewRow row in this.tagsTableDataGridView.Rows)
             {
                 var tag = row.Tag as TagDescription;
-                if ( tag != null && tag.Formula != null )
+                if (tag != null && tag.Formula != null)
                 {
                     tag.IsChange = false;
                     tag.Formula.OnChangeValFormTI -= this.FormulaOnOnChange;
                 }
             }
-            HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.UnSubscribe );
-            this.dataGridView1.Rows.Clear( );
-            this.subscribes.Clear( );
+            HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.UnSubscribe);
+            this.tagsTableDataGridView.Rows.Clear();
+            this.subscribes.Clear();
+        }
 
-            var treeNode = (TreeNodeDescription)tree.GetNodeAt( ( (MouseEventArgs)e ).Location );
-            this.InsertToTable( treeNode );
-            this.dataGridView1.Columns[1].ReadOnly = true;
-
-            foreach ( DataGridViewRow row in this.dataGridView1.Rows )
+        private void SubscribeTagsInTagsTable()
+        {
+            foreach (DataGridViewRow row in this.tagsTableDataGridView.Rows)
             {
                 var tag = row.Tag as TagDescription;
-                if ( tag != null && tag.Formula != null )
+                if (tag != null && tag.Formula != null)
                     tag.Formula.OnChangeValFormTI += this.FormulaOnOnChange;
             }
-            HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.Subscribe );
-
-            var handlerCategory = CategoryEvent;
-            if ( handlerCategory != null )
-                handlerCategory( treeNode.Category );
+            HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.Subscribe);
         }
+        #endregion
+
+        #region Public & Internal Metods
         /// <summary>
         /// Подписка тэгов на обновление
         /// </summary>
@@ -269,13 +297,13 @@ namespace HelperControlsLibrary
         /// </summary>
         internal void UnSubscribe( )
         {
-            foreach ( DataGridViewRow row in this.dataGridView1.Rows )
+            foreach ( DataGridViewRow row in this.tagsTableDataGridView.Rows )
             {
                 var tag = row.Tag as TagDescription;
                 if ( tag != null && tag.Formula != null )
                     tag.Formula.OnChangeValFormTI -= this.FormulaOnOnChange;
             }
-            this.dataGridView1.Rows.Clear( );
+            this.tagsTableDataGridView.Rows.Clear( );
             HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.UnSubscribe );            
         }
         /// <summary>
@@ -285,7 +313,7 @@ namespace HelperControlsLibrary
         {
             // отписались и обнулились
             HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.UnSubscribeAndClear );
-            foreach ( DataGridViewRow row in this.dataGridView1.Rows )
+            foreach ( DataGridViewRow row in this.tagsTableDataGridView.Rows )
                if (row.Tag != null)
                 row.Cells[1].Value = DataGridRowClear( (TagDescription)row.Tag );            
         }
@@ -298,12 +326,12 @@ namespace HelperControlsLibrary
             if ( @checked )
             {
                 HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.UnSubscribe );
-                this.dataGridView1.Columns[1].ReadOnly = false;
+                this.tagsTableDataGridView.Columns[1].ReadOnly = false;
             }
             else
             {
                 HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.Subscribe );
-                this.dataGridView1.Columns[1].ReadOnly = true;
+                this.tagsTableDataGridView.Columns[1].ReadOnly = true;
             }            
         }
         /// <summary>
@@ -312,7 +340,7 @@ namespace HelperControlsLibrary
         /// <returns>Список источноков</returns>
         internal List<ITag> GetChangedTags( )
         {
-            return ( from DataGridViewRow row in this.dataGridView1.Rows
+            return ( from DataGridViewRow row in this.tagsTableDataGridView.Rows
                      select row.Tag as TagDescription
                      into tag where tag != null && tag.Source != null && tag.IsChange select tag.Source ).ToList( );
         }
@@ -321,7 +349,7 @@ namespace HelperControlsLibrary
         /// </summary>
         internal void ResetStatusModify( )
         {
-            foreach ( DataGridViewRow row in this.dataGridView1.Rows )
+            foreach ( DataGridViewRow row in this.tagsTableDataGridView.Rows )
             {
                 var tagDesc = row.Tag as TagDescription;
                 if ( tagDesc != null ) tagDesc.IsChange = false;
@@ -332,7 +360,7 @@ namespace HelperControlsLibrary
         /// </summary>
         public void Print( )
         {
-            var node = treeView1.SelectedNode as TreeNodeDescription;
+            var node = groupsTreeView.SelectedNode as TreeNodeDescription;
             if ( node == null )
             {
                 MessageBox.Show( "Не выбрана группа.\nПечать не возможна", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error );
@@ -342,6 +370,39 @@ namespace HelperControlsLibrary
             collector.Print( (GroupDescription)node.Tag );
         }
 
+        /// <summary>
+        /// Show tags from Group with Category=groupCategory
+        /// </summary>
+        public void ActiveAndShowTreeGroupWithCategory(Category groupCategory)
+        {
+            //Поиск группы и раскрытие ее
+            TreeNode treeNode = null;
+            foreach (TreeNode node in groupsTreeView.Nodes)
+            {
+                var nodeDecription = (TreeNodeDescription)node;
+                if (nodeDecription.Category == groupCategory)
+                {
+                    treeNode = node;
+
+                    ClearAndUnsubscribeTagsTable();
+
+                    InsertToTable(treeNode);
+                    SubscribeTagsInTagsTable();
+
+                    groupsTreeView.CollapseAll();
+                    treeNode.Expand();
+
+                    var handlerCategory = CategoryEvent;
+                    if (handlerCategory != null)
+                        handlerCategory(nodeDecription.Category);
+
+                    return;
+                }
+            }
+        }
+        #endregion
+
+        #region Private-Static-Metods
         /// <summary>
         /// Задание значения по умолчанию тэгу при очистке
         /// </summary>
@@ -438,5 +499,6 @@ namespace HelperControlsLibrary
 
             return tagDescriptions.Select( tag => new TreeNodeDescription( tag, TagDescription.NodeTitle( tag ) ) ).ToList( );
         }
+        #endregion
     }
 }

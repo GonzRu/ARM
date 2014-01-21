@@ -126,13 +126,23 @@ namespace DevicesLibrary
             tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
         }
 
+        #region IDeviceForm
         /// <summary>
         /// Активировать определенную вкладку
         /// </summary>
         public void ActivateTabPage( string typetabpage )
         {
-            /*throw new NotImplementedException();*/
+           throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Активировать определенную группу устройства и показать ее значения
+        /// </summary>
+        public void ActivateAndShowTreeGroupWithCategory(Category groupCategory)
+        {
+            (tabControl.Controls[0] as BlockViewTagPage).ActiveAndShowTreeGroupWithCategory(groupCategory);
+        }
+
         /// <summary>
         /// Действия по завершению чтения аварии 
         /// </summary>
@@ -140,10 +150,13 @@ namespace DevicesLibrary
         {
             /*throw new NotImplementedException();*/
         }
+
         /// <summary>
         /// Идентификатор блока/устройства
         /// </summary>
         public UInt32 Guid { get; private set; }
+        #endregion
+
         /// <summary>
         /// Печать
         /// </summary>

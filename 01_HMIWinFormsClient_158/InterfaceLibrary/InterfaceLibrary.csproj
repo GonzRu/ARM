@@ -49,7 +49,6 @@
     <Compile Include="IDataServer.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="IDeviceCommand.cs" />
-    <Compile Include="IDeviceForm.cs" />
     <Compile Include="IECU.cs" />
     <Compile Include="IGroup.cs" />
     <Compile Include="IHMITagAccess.cs" />

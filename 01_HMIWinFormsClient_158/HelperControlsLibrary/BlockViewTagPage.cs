@@ -44,6 +44,14 @@ namespace HelperControlsLibrary
             this.InitializeComponent( );
         }
 
+        /// <summary>
+        /// Раскрывает вкладку и активирует вывод данных из нее
+        /// </summary>
+       public void ActiveAndShowTreeGroupWithCategory(Category groupCategory)
+       {
+          blockViewControl.ActiveAndShowTreeGroupWithCategory( groupCategory );
+       }
+
         private void InitializeComponent( )
         {
             this.dBGridView = new DataGridView
@@ -119,9 +127,11 @@ namespace HelperControlsLibrary
                 {
                     case Category.Crush:
                         HMI_Settings.CONFIGURATION.GetData( 0, this.uniDev, "ArhivAvariBlockData", arparam, idBlock );
+                        ActiveAndShowTreeGroupWithCategory(Category.Crush);
                         break;
                     case Category.Ustavki:
                         HMI_Settings.CONFIGURATION.GetData( 0, this.uniDev, "ArhivUstavkiBlockData", arparam, idBlock );
+                        ActiveAndShowTreeGroupWithCategory(Category.Ustavki);
                         break;
                 }
             }
@@ -155,7 +165,7 @@ namespace HelperControlsLibrary
                             this.tableLayoutPanel.Controls.Add( this.botomFlowLayoutPanel, 0, 1 );
                         }
 
-                        this.dBGridView.Rows.Clear( );
+                        //this.dBGridViewRows.Clear( );
                         this.selectControl.Visible = true;
                         this.readWriteUstavkyControl.Visible = false;
                         this.buttonLayoutPanel.Visible = false;
@@ -178,7 +188,7 @@ namespace HelperControlsLibrary
                             this.tableLayoutPanel.Controls.Add( this.botomFlowLayoutPanel, 0, 1 );
                         }
 
-                        this.dBGridView.Rows.Clear( );
+                        //this.dBGridView.Rows.Clear( );
                         this.selectControl.Visible = true;
                         this.readWriteUstavkyControl.Visible = true;
                         this.buttonLayoutPanel.Visible = false;
