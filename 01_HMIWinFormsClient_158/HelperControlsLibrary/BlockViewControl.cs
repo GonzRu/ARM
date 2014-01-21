@@ -389,8 +389,9 @@ namespace HelperControlsLibrary
                     InsertToTable(treeNode);
                     SubscribeTagsInTagsTable();
 
-                    groupsTreeView.CollapseAll();
-                    treeNode.Expand();
+                    if (!treeNode.IsExpanded)
+                        treeNode.Expand();
+                    groupsTreeView.SelectedNode = treeNode;
 
                     var handlerCategory = CategoryEvent;
                     if (handlerCategory != null)

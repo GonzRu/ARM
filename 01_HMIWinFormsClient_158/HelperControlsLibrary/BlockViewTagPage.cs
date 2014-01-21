@@ -27,6 +27,9 @@ namespace HelperControlsLibrary
         private TableLayoutPanel tableLayoutPanel;
         private Category currentCategory = Category.NaN;
 
+        private DataGridViewRow[] _crushDataGridViewRowArray = new DataGridViewRow[] {};
+        private DataGridViewRow[] _ustavkiDataGridViewRowArray = new DataGridViewRow[] {};
+
         /// <summary>
         /// Конструктор вкладки
         /// </summary>
@@ -146,8 +149,6 @@ namespace HelperControlsLibrary
         /// <param name="category">Категория группы</param>
         private void ActivateSelectComponents( Category category )
         {
-            this.currentCategory = category;
-
             switch ( category )
             {
                 case Category.Crush:
@@ -165,7 +166,11 @@ namespace HelperControlsLibrary
                             this.tableLayoutPanel.Controls.Add( this.botomFlowLayoutPanel, 0, 1 );
                         }
 
-                        //this.dBGridViewRows.Clear( );
+                        if (currentCategory != category)
+                        {
+                            this.dBGridView.Rows.Clear();
+                            this.dBGridView.Rows.AddRange(_crushDataGridViewRowArray);
+                        }
                         this.selectControl.Visible = true;
                         this.readWriteUstavkyControl.Visible = false;
                         this.buttonLayoutPanel.Visible = false;
@@ -188,7 +193,11 @@ namespace HelperControlsLibrary
                             this.tableLayoutPanel.Controls.Add( this.botomFlowLayoutPanel, 0, 1 );
                         }
 
-                        //this.dBGridView.Rows.Clear( );
+                        if (currentCategory != category)
+                        {
+                            this.dBGridView.Rows.Clear();
+                            this.dBGridView.Rows.AddRange(_ustavkiDataGridViewRowArray);
+                        }
                         this.selectControl.Visible = true;
                         this.readWriteUstavkyControl.Visible = true;
                         this.buttonLayoutPanel.Visible = false;
@@ -281,6 +290,8 @@ namespace HelperControlsLibrary
                     }
                     break;
             }
+
+            this.currentCategory = category;
         }
         /// <summary>
         /// Обновить таблицу из БД
@@ -309,6 +320,18 @@ namespace HelperControlsLibrary
                 this.dBGridView.Rows.Clear( );
                 foreach ( var row in list )
                     this.dBGridView.Rows.Add( row );
+
+                switch (this.currentCategory)
+                {
+                    case Category.Crush:
+                        _crushDataGridViewRowArray = new DataGridViewRow[dBGridView.Rows.Count];
+                        dBGridView.Rows.CopyTo(_crushDataGridViewRowArray, 0);                        
+                        break;
+                    case Category.Ustavki:
+                        _ustavkiDataGridViewRowArray = new DataGridViewRow[dBGridView.Rows.Count];
+                        dBGridView.Rows.CopyTo(_ustavkiDataGridViewRowArray, 0);
+                        break;
+                }
             }
         }
         /// <summary>
