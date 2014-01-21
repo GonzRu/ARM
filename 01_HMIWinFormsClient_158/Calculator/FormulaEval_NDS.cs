@@ -157,7 +157,11 @@ namespace Calculator
                 uint flDevice = uint.Parse( stidt[1] );
                 uint flTagGuid = uint.Parse( stidt[2] );
 
-                if ( !TagControlSet( configuration, flDS, flDevice, flTagGuid, aCaptionIE, aDimIE ) ) TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( TraceEventType.Error, 427, string.Format( "{0} : {1} : {2} : Запрос несуществующего тега :\n aTag = {3};\n aCaptionIE = {4}.\n", DateTime.Now.ToString( ), "FormulaEval_NDS.cs", "FormulaEvalNDS()", aTag, aCaptionIE ) );
+                if (flDevice == 0 && flTagGuid == 0)
+                    return;
+
+                if ( !TagControlSet( configuration, flDS, flDevice, flTagGuid, aCaptionIE, aDimIE ) ) 
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( TraceEventType.Error, 427, string.Format( "{0} : {1} : {2} : Запрос несуществующего тега :\n aTag = {3};\n aCaptionIE = {4}.\n", DateTime.Now.ToString( ), "FormulaEval_NDS.cs", "FormulaEvalNDS()", aTag, aCaptionIE ) );
             }
             catch ( Exception ex )
             {
