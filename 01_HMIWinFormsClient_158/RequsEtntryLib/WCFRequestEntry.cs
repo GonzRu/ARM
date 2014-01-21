@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DSRouter;
 using InterfaceLibrary;
 using System.Collections;
-using BlockDataComposer;
-using ProviderCustomerExchangeLib;
+using ProviderCustomerExchangeLib.WCF;
 
 namespace RequsEtntryLib
 {
@@ -26,17 +22,17 @@ namespace RequsEtntryLib
 		/// и счетчики их использования в элементах
 		/// интерфейса
 		/// </summary>
-		Hashtable htReqList = new Hashtable();
+		private Hashtable htReqList = new Hashtable();
 
 		/// <summary>
 		/// ссылка на callback,
 		/// wcf провайдера
 		/// </summary>
-        ClientServerOnWCF _wcfProvider;
+        private IWcfProvider _wcfProvider;
 		#endregion
 
 		#region конструктор(ы)
-        public WCFRequestEntry(ClientServerOnWCF wcfProvider)
+        public WCFRequestEntry(IWcfProvider wcfProvider)
 		{
             _wcfProvider = wcfProvider;
 		}
@@ -163,7 +159,7 @@ namespace RequsEtntryLib
                 
                 if (tagListToUnsubscribe.Count != 0)
                 {
-                    HMI_MT_Settings.HMI_Settings.WCFproxy.UnscribeRTUTags(tagListToUnsubscribe.ToArray());
+                    _wcfProvider.UnscribeRTUTags(tagListToUnsubscribe.ToArray());
 
                     // извечаем об изменении контекста подписки
                     if (OnChangeRequestTags != null)
@@ -197,7 +193,7 @@ namespace RequsEtntryLib
                             {
                                 htReqList.Remove(st);
 
-                                HMI_MT_Settings.HMI_Settings.WCFproxy.UnscribeRTUTags(new string[1] {st});
+                                _wcfProvider.UnscribeRTUTag(st);
 
                                 // извечаем об изменении контекста подписки
                                 if (OnChangeRequestTags != null)
@@ -254,7 +250,7 @@ namespace RequsEtntryLib
             foreach (var tag in tagsHashTable.Keys)
                 tagsList.Add(tag.ToString());
 
-            HMI_MT_Settings.HMI_Settings.WCFproxy.SubscribeRTUTags(tagsList.ToArray());
+            _wcfProvider.SubscribeRTUTags(tagsList.ToArray());
         }
         #endregion
 	}

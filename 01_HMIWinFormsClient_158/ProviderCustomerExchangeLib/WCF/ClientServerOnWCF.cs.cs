@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using DSRouter;
 using InterfaceLibrary;
 
-namespace ProviderCustomerExchangeLib
+namespace ProviderCustomerExchangeLib.WCF
 {
-	public class ClientServerOnWCF : IProviderCustomer
+	public class ClientServerOnWCF : IProviderCustomer, IWcfProvider
     {
         #region События
         /// <summary>
@@ -22,6 +22,12 @@ namespace ProviderCustomerExchangeLib
         #endregion
 
         #region private
+
+        /// <summary>
+        /// Proxy для роутера
+        /// </summary>        
+        private IDSRouter WCFproxy;
+
         /// <summary>
 		/// массив для входных пакетов
 		/// </summary>
@@ -51,10 +57,10 @@ namespace ProviderCustomerExchangeLib
                                      {
                                          try
                                          {
-                                             var idch = HMI_Settings.WCFproxy as IClientChannel;
+                                             var idch = WCFproxy as IClientChannel;
                                              if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
                                              {
-                                                 HMI_Settings.WCFproxy = null;
+                                                 WCFproxy = null;
                                                  this.CreateProxyFromCode( );
                                              }
                                          }
@@ -89,7 +95,7 @@ namespace ProviderCustomerExchangeLib
                 tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
 
                 var endpointAddress = new EndpointAddress( endPointAddr );
-                HMI_Settings.WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
+                WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
 
                 handler.OnNewError += NewErrorFromCallBackHandler;
                 handler.OnNewTagValues += NewTagValueHandler;
@@ -131,7 +137,7 @@ namespace ProviderCustomerExchangeLib
         {            
             try
             {
-                var rezz = HMI_Settings.WCFproxy.GetDSOscByIdInBD(0, pq);
+                var rezz = WCFproxy.GetDSOscByIdInBD(0, pq);
 
                 var rez = new MemoryStream(rezz);
 
@@ -177,7 +183,7 @@ namespace ProviderCustomerExchangeLib
         {
             try
             {
-                HMI_Settings.WCFproxy.SetReq2ArhivInfo(0, pq);               
+                WCFproxy.SetReq2ArhivInfo(0, pq);               
             }
             catch (Exception ex)
             {
@@ -194,7 +200,7 @@ namespace ProviderCustomerExchangeLib
         {
             try
             {
-               HMI_Settings.WCFproxy.RunCMDMOA(0, pq);
+               WCFproxy.RunCMDMOA(0, pq);
             }
             catch (Exception ex)
             {
@@ -206,7 +212,7 @@ namespace ProviderCustomerExchangeLib
         {
             try
             {
-                var rez = HMI_Settings.WCFproxy.GetDSValueAsByteBuffer( 0, e.Argument as byte[] );
+                var rez = WCFproxy.GetDSValueAsByteBuffer( 0, e.Argument as byte[] );
 
                 if ( rez != null && rez.Length != 0 )
                 {
@@ -238,6 +244,32 @@ namespace ProviderCustomerExchangeLib
 			}
 		}
 		#endregion
+
+        #region Реализация методов интерфейса IWcfProvider
+        void IWcfProvider.SubscribeRTUTags(string[] tagsArray)
+        {
+            WCFproxy.SubscribeRTUTags(tagsArray);
+        }
+
+        void IWcfProvider.SubscribeRTUTag(string tag)
+        {
+            var tagsArray = new string[] { tag };
+
+            WCFproxy.SubscribeRTUTags(tagsArray);
+        }
+
+        void IWcfProvider.UnscribeRTUTags(string[] tagsArray)
+        {
+            WCFproxy.UnscribeRTUTags(tagsArray);
+        }
+
+        void IWcfProvider.UnscribeRTUTag(string tag)
+        {
+            var tagsArray = new string[] { tag };
+
+            WCFproxy.UnscribeRTUTags(tagsArray);
+        }
+        #endregion
 
         #region Обработчики событий из CallBack'a wcf.
         /// <summary>

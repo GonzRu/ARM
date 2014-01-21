@@ -46,6 +46,7 @@
     <Compile Include="ClientServerDataExchange.cs" />
     <Compile Include="Pipe\ClientServerOnPipes.cs" />
     <Compile Include="TCPSocket\ClientServerOnTCPSockets.cs" />
+    <Compile Include="WCF\CallbackHandler.cs" />
     <Compile Include="WCF\ClientServerOnWCF.cs.cs" />
     <Compile Include="UDPSocket\ClientServerOn_MOA_UDPSockets.cs" />
     <Compile Include="IPacketParser.cs" />
@@ -56,6 +57,8 @@
     <Compile Include="Pipe\PipeClientInOut.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderCustomerFactory.cs" />
+    <Compile Include="WCF\IWcfProvider.cs" />
+    <Compile Include="WCF\Proxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
