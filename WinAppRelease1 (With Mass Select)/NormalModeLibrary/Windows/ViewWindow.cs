@@ -82,31 +82,40 @@ namespace NormalModeLibrary.Windows
         {
             NormalModeLibrary.Sources.OutOfRangeEventArgs orea = (NormalModeLibrary.Sources.OutOfRangeEventArgs)e;
 
-            if ( orea.OutOfRange )
+            if (orea.OutOfRange)
             {
-                this.Invoke( (CheckRangeDelegate)delegate { if ( !this.Visible ) this.Show(); } );
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(
+                    new System.Threading.ThreadStart(delegate
+                                                         {
+                                                             if (!this.Visible) this.Show();
+                                                         }));
 
                 try
                 {
-                    if ( SoundSystem.System.IsPlaying )
+                    if (SoundSystem.System.IsPlaying)
                         return;
                     SoundSystem.System.Play();
                 }
-                catch ( SoundSystemException ex )
+                catch (SoundSystemException ex)
                 {
-                    Console.WriteLine( "=================" );
-                    Console.WriteLine( ex.Message );
-                    Console.WriteLine( string.Format( "Load file: {0}; Sound location: {1}", ex.IsLoadCompleted, ex.SoundLocation ) );
-                    Console.WriteLine( string.Format( "Source: {0}", ex.Source ) );
-                    Console.WriteLine( "=================" );
+                    Console.WriteLine("=================");
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(string.Format("Load file: {0}; Sound location: {1}", ex.IsLoadCompleted, ex.SoundLocation));
+                    Console.WriteLine(string.Format("Source: {0}", ex.Source));
+                    Console.WriteLine("=================");
                 }
                 catch
                 {
                     throw;
                 }
             }
-            else if ( !Component.IsAutomaticaly )
-                SoundSystem.System.Stop();
+            else
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(
+                    new System.Threading.ThreadStart(delegate
+                                                         {
+                                                             if (!Component.IsAutomaticaly)
+                                                                 SoundSystem.System.Stop();
+                                                         }));
         }
         protected override void OnClosing( CancelEventArgs e )
         {
