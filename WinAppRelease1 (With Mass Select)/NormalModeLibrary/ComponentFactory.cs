@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Windows.Forms;
-
+using InterfaceLibrary;
 using NormalModeLibrary.Sources;
 using NormalModeLibrary.ViewModel;
 
@@ -88,12 +88,12 @@ namespace NormalModeLibrary
                 }
         }
 
-        public static void EditSignals( InterfaceLibrary.IDevice device, String login, Places place )
+        public static void EditSignals( IDevice device, String login, Places place )
         {
             var win = new Windows.SelectSignalsWindow();
             var user = GetUser( Factory.users, login );
             var config = GetConfig( user, place );
-            var panel = GetPanel( config, device.UniObjectGUID );
+            var panel = GetPanel( config, device );
 
             win.AddComponents( device, panel );
 
@@ -187,11 +187,11 @@ namespace NormalModeLibrary
 
             return configModel;
         }
-        private static PanelViewModel GetPanel( ConfigurationViewModel model, UInt32 guid )
+        private static PanelViewModel GetPanel( ConfigurationViewModel model, IDevice device )
         {
             PanelViewModel panel = null;
             foreach ( PanelViewModel panelModel in model.Collection )
-                if ( panelModel.ObjectGuid == guid )
+                if ( panelModel.ObjectGuid == device.UniObjectGUID )
                 {
                     panel = panelModel;
                     break;
@@ -199,7 +199,7 @@ namespace NormalModeLibrary
 
             if ( panel == null )
             {
-                var pnl = new Sources.Panel { ObjectGuid = guid, Type = Sources.Panel.LinkType.Named };
+                var pnl = new Sources.Panel { ObjectGuid = device.UniObjectGUID, Type = Sources.Panel.LinkType.Named, Caption = device.Description};
 
                 ( (Configuration)model.Core ).Collection.Add( pnl );
                 panel = new PanelViewModel( pnl );
