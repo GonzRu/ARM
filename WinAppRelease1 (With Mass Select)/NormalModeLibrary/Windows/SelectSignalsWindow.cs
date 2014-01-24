@@ -42,8 +42,9 @@ namespace NormalModeLibrary.Windows
             checkBox2.Checked = view.Component.IsVisible;
             checkBox3.Checked = view.Component.IsCaptionVisible;
 
-            foreach ( InterfaceLibrary.IGroup group in device.GetGroupHierarchy() )
-                treeView1.Nodes.Add( GetTreeNode( group ) );
+            foreach (InterfaceLibrary.IGroup group in device.GetGroupHierarchy())
+                if (group.IsEnable)
+                    treeView1.Nodes.Add(GetTreeNode(group));
             treeView1.ExpandAll();
         }
         public PanelViewModel GetWindowComponent()
@@ -54,9 +55,10 @@ namespace NormalModeLibrary.Windows
         {
             // построение групп
             TreeNode node = new TreeNode( group.NameGroup );
-            if ( group.SubGroupsList != null && group.SubGroupsList.Count != 0 )
-                foreach ( InterfaceLibrary.IGroup gr in group.SubGroupsList )
-                    node.Nodes.Add( GetTreeNode( gr ) );
+            if (group.SubGroupsList != null && group.SubGroupsList.Count != 0)
+                foreach (InterfaceLibrary.IGroup gr in group.SubGroupsList)
+                    if (group.IsEnable)
+                        node.Nodes.Add(GetTreeNode(gr));
             
             // построение тэгов
             if ( group.SubGroupTagsList != null && group.SubGroupTagsList.Count != 0 )
