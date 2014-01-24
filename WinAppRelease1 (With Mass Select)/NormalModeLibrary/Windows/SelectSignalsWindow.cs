@@ -65,6 +65,9 @@ namespace NormalModeLibrary.Windows
                     InterfaceLibrary.ITag tag = device.GetTag( Convert.ToUInt32( strTag ) );
                     if ( tag != null )
                     {
+                        if (tag.TagName == "")
+                            continue;
+
                         var subNode = CreateTagNode( tag, view.Component );
                         var signal = subNode.Tag as BaseSignalViewModel;
                         if (signal == null || !signal.IsSupported ) continue;
