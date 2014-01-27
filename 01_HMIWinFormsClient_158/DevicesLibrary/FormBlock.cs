@@ -50,6 +50,7 @@ namespace DevicesLibrary
                 case "BMRZ_VV_43_13":                
                     {
                         tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.TwoPanel) );
+                        tabControl.Controls.Add(new EventBlockTabPage(unidev));
                     }
                     break;
                 case "Ekra_BE_2704V014_047":
@@ -87,11 +88,13 @@ namespace DevicesLibrary
                     {                        
                         tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms ) );
                         tabControl.Controls.Add( new InformationTabPage( unidev ) );
+                        tabControl.Controls.Add(new EventBlockTabPage(unidev));
                     }
                     break;
                 case "Sirius_CS_300":
                     {
                         tabControl.Controls.Add( new InformationTabPage( unidev ) );
+                        tabControl.Controls.Add(new EventBlockTabPage(unidev));
                     }
                     break;
                 case "ITDS_VirtualDevice":
@@ -108,6 +111,7 @@ namespace DevicesLibrary
                 case "BMCS_10":
                     {                     
                        tabControl.Controls.Add( new InformationTabPage( unidev ) );
+                       tabControl.Controls.Add(new EventBlockTabPage(unidev));
                     }
                     break;
                 case "2704V073_040":
@@ -118,11 +122,16 @@ namespace DevicesLibrary
                 case "2704V012_052":
                     {
                         tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms) );
+                        tabControl.Controls.Add(new EventBlockTabPage(unidev));
                     }
                     break;
+                case "UTM":
+                    {
+                        tabControl.Controls.Add(new HelperControlsLibrary.TeleMechanica.TeleMechanicaCommandTabPage(unids, unidev));
+                        break;
+                    }
             }
-
-            tabControl.Controls.Add( new EventBlockTabPage( unidev ) );
+            
             tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
         }
 
