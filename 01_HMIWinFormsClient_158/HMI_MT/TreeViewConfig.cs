@@ -38,7 +38,6 @@ namespace HMI_MT
    public class TreeViewConfig : TreeView
    {
       TreeView tview;
-      ArrayList KB;
       /// <summary>
       /// TabControl для размещения дочерних TabControl устройств выбранных в дереве устройств и групп слева 
       /// на главной форме
