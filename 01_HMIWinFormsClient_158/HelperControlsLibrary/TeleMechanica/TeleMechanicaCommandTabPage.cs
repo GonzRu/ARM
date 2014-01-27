@@ -21,6 +21,7 @@ namespace HelperControlsLibrary.TeleMechanica
         {
             _dsGuid = dsGuid;
             _devGuid = devGuid;
+            this.Width = 500;
 
             TableLayoutPanel commonTableLayoutPanel = new TableLayoutPanel();
             commonTableLayoutPanel.RowCount = 2;
@@ -39,18 +40,18 @@ namespace HelperControlsLibrary.TeleMechanica
                     AllowUserToAddRows = false,
                     AllowUserToDeleteRows = false,
                     AllowUserToResizeRows = false,
-                    ReadOnly = true
+                    AutoSize = true,
+                    Width = 1000,
+                    Height = 1000
                 };
-            _commandsDataGridView.AutoSize = true;
             _commandsDataGridView.MultiSelect = false;
-            _commandsDataGridView.ReadOnly = false;
             _commandsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             _commandsDataGridView.CellClick += DataGridViewOnCellClickHandler;
-            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Название комманды" });
-            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Параметр комманды" });
-            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Выполнить" });
+            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Название комманды", Width = 500 });
+            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Параметр комманды", Width = 200 });
+            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Выполнить", Width = 150 });
+            _commandsDataGridView.Columns[0].ReadOnly = true;
             InitCommandsDataGridView(_dsGuid, _devGuid);
-            Console.WriteLine(this.Width);
             #endregion
 
             commonTableLayoutPanel.Controls.Add(_commandsDataGridView, 0, 1);

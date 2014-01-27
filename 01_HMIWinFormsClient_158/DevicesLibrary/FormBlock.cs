@@ -127,7 +127,7 @@ namespace DevicesLibrary
                     break;
                 case "UTM":
                     {
-                        tabControl.Controls.Add(new HelperControlsLibrary.TeleMechanica.TeleMechanicaCommandTabPage(unids, unidev));
+                        tabControl.Controls.Add(new HelperControlsLibrary.TeleMechanica.TeleMechanicaCommandTabPage(unids, unidev) { Dock = DockStyle.Fill });
                         break;
                     }
             }
