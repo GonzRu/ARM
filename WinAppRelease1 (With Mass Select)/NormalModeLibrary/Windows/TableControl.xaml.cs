@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using NormalModeLibrary.ViewModel;
 
 namespace NormalModeLibrary.Windows
 {
@@ -23,6 +24,19 @@ namespace NormalModeLibrary.Windows
         public TableControl()
         {
             InitializeComponent();
+        }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var lb = (ListBox)sender;
+            BaseSignalViewModel signalViewModel = lb.SelectedItem as BaseSignalViewModel;
+            if (signalViewModel == null)
+                return;
+
+            var signalWindow = new SignalWindow();
+            signalWindow.SetSignal(signalViewModel.BaseSignal);
+
+            signalWindow.ShowDialog();
         }
     }
 }

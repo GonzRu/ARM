@@ -137,6 +137,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Ок";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -147,6 +148,7 @@
             this.button2.TabIndex = 9;
             this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // comboBox1
             // 
@@ -238,6 +240,12 @@
             // 
             // numericUpDown4
             // 
+            this.numericUpDown4.DecimalPlaces = 3;
+            this.numericUpDown4.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
             this.numericUpDown4.Location = new System.Drawing.Point(120, 97);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(72, 20);
@@ -245,6 +253,12 @@
             // 
             // numericUpDown3
             // 
+            this.numericUpDown3.DecimalPlaces = 3;
+            this.numericUpDown3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
             this.numericUpDown3.Location = new System.Drawing.Point(120, 71);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(72, 20);
@@ -252,6 +266,12 @@
             // 
             // numericUpDown2
             // 
+            this.numericUpDown2.DecimalPlaces = 3;
+            this.numericUpDown2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
             this.numericUpDown2.Location = new System.Drawing.Point(120, 45);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(72, 20);
@@ -259,6 +279,12 @@
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.DecimalPlaces = 3;
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
             this.numericUpDown1.Location = new System.Drawing.Point(120, 19);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(72, 20);

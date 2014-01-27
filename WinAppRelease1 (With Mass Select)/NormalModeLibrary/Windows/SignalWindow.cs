@@ -40,25 +40,34 @@ namespace NormalModeLibrary.Windows
             switch ( signalType )
             {
                 case BaseSignal.SignalType.Analog:
-                    textBox1.Text = signal.Caption;
-                    textBox2.Text = signal.Dim;
-                    textBox3.Text = signal.Commentary;
-                    textBox4.Text = signal.Guid.ToString();
+                    comboBox1.SelectedIndex = 0;
+                    comboBox1.Enabled = false;
+
                     numericUpDown1.Value = (decimal)((AnalogSignal)signal).Range.RangeMinValue;
                     numericUpDown2.Value = (decimal)((AnalogSignal)signal).Range.RangeMaxValue;
                     numericUpDown3.Value = (decimal)((AnalogSignal)signal).Range.RangeMinHysteresis;
                     numericUpDown4.Value = (decimal)((AnalogSignal)signal).Range.RangeMaxHysteresis;
                     break;
                 case BaseSignal.SignalType.Discret:
-                    textBox1.Text = signal.Caption;
-                    textBox2.Text = signal.Dim;
-                    textBox3.Text = signal.Commentary;
-                    textBox4.Text = signal.Guid.ToString();
+                    comboBox1.SelectedIndex = 1;
+                    comboBox1.Enabled = false;
+
+                    textBox2.Enabled = false;
+
                     colorDialog1.Color = GetWinFormColor( ( (DigitalSignal)signal ).SignalOn );
                     colorDialog2.Color = GetWinFormColor( ( (DigitalSignal)signal ).SignalOff );
                     break;
-                default: break;
+                default:
+                    throw new NotImplementedException();
             }
+
+            textBox1.Text = signal.Caption;
+            textBox2.Text = signal.Dim;
+            textBox3.Text = signal.Commentary;
+            textBox4.Text = signal.Guid.ToString();
+
+            textBox4.Enabled = false;
+
         }
         public void ApplyData()
         {
@@ -103,8 +112,6 @@ namespace NormalModeLibrary.Windows
             return (BaseSignal)this.Tag;
         }
 
-        /* Автоматический режим работает исправно */
-        /* Было закоментированно по просьбе Дениса и Алексея */
         private void comboBox1_SelectedIndexChanged( object sender, EventArgs e )
         {
             string type = ( (ComboBox)sender ).SelectedItem.ToString();
@@ -148,6 +155,47 @@ namespace NormalModeLibrary.Windows
         private static System.Windows.Media.Color GetWPFFormColor( System.Drawing.Color color )
         {
             return System.Windows.Media.Color.FromRgb( color.R, color.G, color.B );
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BaseSignal signal = (BaseSignal)this.Tag;
+
+            signal.Caption = textBox1.Text;
+            signal.Dim = textBox2.Text;
+            signal.Commentary = textBox3.Text;
+
+            BaseSignal.SignalType signalType = BaseSignal.SignalType.Unknown;
+            if (signal is AnalogSignal)
+                signalType = BaseSignal.SignalType.Analog;
+            else if (signal is DigitalSignal)
+                signalType = BaseSignal.SignalType.Discret;
+
+            switch (signalType)
+            {
+                case BaseSignal.SignalType.Analog:
+                    var analogSignal = signal as AnalogSignal;
+
+                    analogSignal.Range.RangeMinValue = (double)numericUpDown1.Value;
+                    analogSignal.Range.RangeMaxValue = (double)numericUpDown2.Value;
+                    analogSignal.Range.RangeMinHysteresis = (double)numericUpDown3.Value;
+                    analogSignal.Range.RangeMaxHysteresis = (double)numericUpDown4.Value;
+                    break;
+                case BaseSignal.SignalType.Discret:
+                    var discretSignal = signal as DigitalSignal;
+
+                    discretSignal.SignalOn = GetWPFFormColor(colorDialog1.Color);
+                    discretSignal.SignalOff = GetWPFFormColor(colorDialog2.Color);
+                    break;
+            }
+
+            NormalModeLibrary.ComponentFactory.Factory.SaveXml();
+            Close();
         }
     }
 }
