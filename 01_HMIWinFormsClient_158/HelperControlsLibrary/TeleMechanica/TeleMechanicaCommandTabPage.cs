@@ -28,6 +28,9 @@ namespace HelperControlsLibrary.TeleMechanica
             commonTableLayoutPanel.AutoSize = true;
 
             #region commandsDataGridView
+            var dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+
             _commandsDataGridView = new DataGridView()
                 {
                     Dock = DockStyle.Fill,
@@ -38,14 +41,16 @@ namespace HelperControlsLibrary.TeleMechanica
                     AllowUserToResizeRows = false,
                     ReadOnly = true
                 };
-            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Название комманды" });
-            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Параметр комманды" });
-            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Выполнить" });
             _commandsDataGridView.AutoSize = true;
             _commandsDataGridView.MultiSelect = false;
             _commandsDataGridView.ReadOnly = false;
+            _commandsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             _commandsDataGridView.CellClick += DataGridViewOnCellClickHandler;
-            InitCommandsDataGridView(_dsGuid, _devGuid);            
+            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Название комманды" });
+            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Параметр комманды" });
+            _commandsDataGridView.Columns.Add(new DataGridViewColumn() { HeaderText = "Выполнить" });
+            InitCommandsDataGridView(_dsGuid, _devGuid);
+            Console.WriteLine(this.Width);
             #endregion
 
             commonTableLayoutPanel.Controls.Add(_commandsDataGridView, 0, 1);
