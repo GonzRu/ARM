@@ -56,8 +56,9 @@ namespace HelperControlsLibrary
        }
 
         private void InitializeComponent( )
-        {
-            this.dBGridView = new DataGridView
+       {
+           #region Grid for crush and ustavki
+           this.dBGridView = new DataGridView
                                   {
                                       Dock = DockStyle.Fill,
                                       SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -70,27 +71,36 @@ namespace HelperControlsLibrary
             this.dBGridView.Columns.Add( new DataGridViewTextBoxColumn { HeaderText = "Дата", Width = 190 } );
             this.dBGridView.Columns.Add( new DataGridViewTextBoxColumn { HeaderText = "Комментарий", Width = 100 } );
             this.dBGridView.DoubleClick += this.DbGridViewOnDoubleClick;
+           #endregion
 
+            #region SelectControl
             this.selectControl = new SelectControl( );
             this.selectControl.btnUpdate.Click += BtnUpdateOnClick;
+            #endregion
 
+            #region ReadWriteUstavkuControl
             this.readWriteUstavkyControl = new ReadWriteUstavkyControl( );
             this.readWriteUstavkyControl.btnReadUstFC.Click += BtnReadUstFcOnClick;
             this.readWriteUstavkyControl.btnWriteUst.Click += BtnWriteUstOnClick;
             this.readWriteUstavkyControl.btnResetValues.Click += BtnResetValuesOnClick;
             this.readWriteUstavkyControl.btnFix4Change.CheckedChanged += BtnFix4ChangeOnCheckedChanged;
+            #endregion
 
             this.buttonLayoutPanel = new FlowLayoutPanel { FlowDirection = FlowDirection.LeftToRight, Width = 800, Height = 150 };
             var buttons = CreateCommandButtons( (int)uniDev, this.parent );
             if ( buttons != null ) this.buttonLayoutPanel.Controls.AddRange( buttons );
 
+            #region StorageDeviceControl
             this.storageDeviceControl = new StorageDeviceControl( );
             this.storageDeviceControl.btnStorageRead.Click += BtnStorageReadClick;
             this.storageDeviceControl.btnStorageReset.Click += BtnStorageResetClick;
+            #endregion
 
+            #region MaxMeterControl
             this.maxMeterControl = new MaxMeterControl( );
             this.maxMeterControl.btnMaxmeterRead.Click += BtnMaxmeterReadClick;
             this.maxMeterControl.btnMaxmeterReset.Click += BtnMaxmeterResetClick;
+            #endregion
 
             this.blockViewControl = new BlockViewControl( this.uniDs, this.uniDev ) { Dock = DockStyle.Fill };
             this.blockViewControl.CategoryEvent += ActivateSelectComponents;
@@ -101,12 +111,14 @@ namespace HelperControlsLibrary
             this.tableLayoutPanel.Controls.Add( this.blockViewControl );
             Controls.Add( this.tableLayoutPanel );
 
+            #region LayoutPanel for SelectControl, ReadWriteUstavkiControl, MaxMeterControl, StorageDeviceControl
             this.botomFlowLayoutPanel = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true };
             this.botomFlowLayoutPanel.Controls.Add( this.selectControl );
             this.botomFlowLayoutPanel.Controls.Add( this.readWriteUstavkyControl );
             this.botomFlowLayoutPanel.Controls.Add( this.buttonLayoutPanel );
             this.botomFlowLayoutPanel.Controls.Add( this.storageDeviceControl );
             this.botomFlowLayoutPanel.Controls.Add( this.maxMeterControl );
+            #endregion
 
             this.parent.FormClosing += ( sender, args ) => blockViewControl.UnSubscribe( );
         }
