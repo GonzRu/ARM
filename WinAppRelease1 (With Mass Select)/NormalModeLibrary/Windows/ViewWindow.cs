@@ -13,19 +13,26 @@ namespace NormalModeLibrary.Windows
     {
         delegate void CheckRangeDelegate();
 
+        internal Boolean IsEditable { get; set; }
+        internal Places Place { get; set; }
+
+        #region Constructors
         public ViewWindow()
         {
             InitializeComponent();
             elementHost1.Child = new TableControl();
         }
-        //public Form CreateNewHandle()
-        //{
-            
-        //}
+        #endregion
+
+        #region Public Metods
         public void ActivatedComponent()
         {
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+
             if ( Component != null )
             {
+                bool needToShow = true;
+
                 this.Text = Component.Caption;
 
                 if ( IsEditable || Component.IsAutomaticaly )
@@ -39,33 +46,26 @@ namespace NormalModeLibrary.Windows
                     this.tableLayoutPanel1.RowStyles[1].Height = 0;
                 }
 
-                if ( IsEditable )
+                foreach (ViewModel.BaseSignalViewModel vmSignal in Component.Collection)
                 {
-                    FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-                    this.button1.Enabled = false;
+                    ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
+                    if (ioorh != null && !ioorh.IsOutOfRangeEvent)
+                        ioorh.OutOfRangeEvent += ViewWindow_OutOfRangeEvent;
                 }
-                else
-                {
-                    foreach ( ViewModel.BaseSignalViewModel vmSignal in Component.Collection )
-                    {
-                        ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
-                        if ( ioorh != null && !ioorh.IsOutOfRangeEvent )
-                            ioorh.OutOfRangeEvent += new EventHandler( ViewWindow_OutOfRangeEvent );
-                    }
 
-                    FormBorderStyle = ( Component.IsCaptionVisible ) ? System.Windows.Forms.FormBorderStyle.FixedSingle : System.Windows.Forms.FormBorderStyle.None;
-
-                    this.button1.Enabled = true;
+                this.HideButton.Enabled = true;
                     //this.Show(); //для создания дескриптора окна
 
-                    if ( !Component.IsVisible || Component.IsAutomaticaly )
-                        this.Hide(); //скрываем, после создания дескриптора
-                }
+                if (Component.IsAutomaticaly)
+                    needToShow = false;
 
                 this.Top = Component.Top;
                 this.Left = Component.Left;
                 this.Width = Component.Width;
                 this.Height = Component.Height;
+
+                if (needToShow)
+                    Show();
             }
         }
         public void DeactivatedComponent()
@@ -78,7 +78,45 @@ namespace NormalModeLibrary.Windows
                         ioorh.OutOfRangeEvent -= ViewWindow_OutOfRangeEvent;
                 }
         }
-        private void ViewWindow_OutOfRangeEvent( object sender, EventArgs e )
+
+        public void SetOnEditMode()
+        {
+            foreach (ViewModel.BaseSignalViewModel vmSignal in Component.Collection)
+            {
+                ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
+                if (ioorh != null && !ioorh.IsOutOfRangeEvent)
+                    ioorh.OutOfRangeEvent -= ViewWindow_OutOfRangeEvent;
+            }
+        }
+
+        public void SetOffEditMode()
+        {
+            foreach (ViewModel.BaseSignalViewModel vmSignal in Component.Collection)
+            {
+                ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
+                if (ioorh != null && !ioorh.IsOutOfRangeEvent)
+                    ioorh.OutOfRangeEvent += ViewWindow_OutOfRangeEvent;
+            }
+        }
+
+
+        internal ViewModel.PanelViewModel Component
+        {
+            get
+            {
+                TableControl tc = (TableControl)elementHost1.Child;
+                return (ViewModel.PanelViewModel)tc.DataContext;
+            }
+            set
+            {
+                TableControl tc = (TableControl)elementHost1.Child;
+                tc.DataContext = value;
+            }
+        }
+        #endregion
+
+        #region Private Metods
+        private void ViewWindow_OutOfRangeEvent(object sender, EventArgs e)
         {
             NormalModeLibrary.Sources.OutOfRangeEventArgs orea = (NormalModeLibrary.Sources.OutOfRangeEventArgs)e;
 
@@ -86,9 +124,11 @@ namespace NormalModeLibrary.Windows
             {
                 System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(
                     new System.Threading.ThreadStart(delegate
-                                                         {
-                                                             if (!this.Visible) this.Show();
-                                                         }));
+                    {
+                        if (!this.Visible) this.ShowDialog();
+                        this.tableLayoutPanel1.RowStyles[1].Height = 30;
+                        
+                    }));
 
                 try
                 {
@@ -112,42 +152,59 @@ namespace NormalModeLibrary.Windows
             else
                 System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(
                     new System.Threading.ThreadStart(delegate
-                                                         {
-                                                             if (!Component.IsAutomaticaly)
-                                                                 SoundSystem.System.Stop();
-                                                         }));
+                    {
+                        if (!Component.IsAutomaticaly)
+                            SoundSystem.System.Stop();
+                    }));
         }
-        protected override void OnClosing( CancelEventArgs e )
-        {
-            base.OnClosing( e );
-
-            SoundSystem.System.Stop();
-        }
-
-        internal ViewModel.PanelViewModel Component
-        {
-            get
-            {
-                TableControl tc = (TableControl)elementHost1.Child;
-                return (ViewModel.PanelViewModel)tc.DataContext;
-            }
-            set
-            {
-                TableControl tc = (TableControl)elementHost1.Child;
-                tc.DataContext = value;
-            }
-        }
-        internal Boolean IsEditable { get; set; }
-        internal Places Place { get; set; }
 
         private void ViewWindow_Shown( object sender, EventArgs e )
         {
-            ActivatedComponent();
+            //ActivatedComponent();
         }
+
         private void button1_Click( object sender, EventArgs e )
         {
             SoundSystem.System.Stop();
             this.Hide();
         }
+        #endregion
+
+        #region Override Metdods
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            SoundSystem.System.Stop();
+        }
+
+        protected override void OnResizeEnd(EventArgs e)
+        {
+            base.OnResizeEnd(e);
+
+            Component.Width = this.Width;
+            Component.Height = this.Height;
+            Component.Top = this.Top;
+            Component.Left = this.Left;
+
+            NormalModeLibrary.ComponentFactory.Factory.SaveXml();
+
+            Application.OpenForms[0].Activate();
+        }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+
+            this.Activate();
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+
+            Application.OpenForms[0].Activate();
+        }
+        #endregion
     }
 }

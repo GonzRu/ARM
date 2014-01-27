@@ -42,6 +42,12 @@ namespace NormalModeLibrary.ViewModel
             return new PanelViewModel( pnl );
         }
 
+        public Panel BasePanel
+        {
+            get { return panel; }
+            private set { panel = value; }
+        }
+
         public String Caption
         {
             get { return panel.Caption; }

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using InterfaceLibrary;
 using NormalModeLibrary.Sources;
 using NormalModeLibrary.ViewModel;
+using NormalModeLibrary.Windows;
 
 namespace NormalModeLibrary
 {
@@ -95,48 +96,49 @@ namespace NormalModeLibrary
 
         public static void EditSignals( IDevice device, String login, Places place )
         {
-            var win = new Windows.SelectSignalsWindow();
-            var user = GetUser( Factory.users, login );
-            var config = GetConfig( user, place );
-            var panel = GetPanel( config, device );
+            var win = new SelectSignalsWindow();
 
-            win.AddComponents( device, panel );
+            var user = GetUser(Factory.users, login);
+            var config = GetConfig(user, place);
+            var panel = GetPanel(config, device);
+
+            var view = Factory.activePanelForm.FirstOrDefault(apf => apf.Component == panel);
+            if (view == null)
+            {
+                view = new ViewWindow { Component = panel, Place = place };
+                switch (place)
+                {
+                    case Places.MainMnemo:
+                        view.Owner = Factory.mainMnemoHandle;
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
+                Factory.activePanelForm.Add(view);
+                view.ActivatedComponent();
+            }
+
+            win.AddComponents( device, view );
 
             if ( win.ShowDialog() == DialogResult.OK )
             {
-                var view = Factory.activePanelForm.FirstOrDefault( apf => apf.Component == panel );
-                if ( view == null && panel.Collection.Count > 0 )
-                {
-                    view = new Windows.ViewWindow { Component = panel, Place = place };
-                    Factory.activePanelForm.Add( view );
-                    view.Owner = Factory.mainMnemoHandle;
-                }
+                RemovePanelViewModelToConfigurationViewModel(config, win.GetOriginalWindowComponent());
 
-                if ( view != null )
+                if (view.Component.Collection.Count == 0)
                 {
-                    if ( panel.Collection.Count == 0 )
-                    {
-                        view.Close();
-                        Factory.activePanelForm.Remove( view );
-                        return;
-                    }
-
-                    //view.ActivatedComponent();
-                    try
-                    {
-                        //view.ActivatedComponent();
-                        view.Show();
-                    }
-                    catch ( Exception )
-                    {
-                        view.DeactivatedComponent();
-                        Factory.activePanelForm.Remove( view );
-                        var newView = new Windows.ViewWindow { Component = panel, Place = place };
-                        Factory.activePanelForm.Add( newView );
-                        newView.Owner = Factory.mainMnemoHandle;
-                        newView.Show();
-                    }
+                    view.Close();
+                    Factory.activePanelForm.Remove(view);
                 }
+                else
+                    AddPanelViewModelFromConfigurationViewModel(config, view.Component);
+
+                ComponentFactory.Factory.SaveXml();
+            }
+            else
+            {
+                #warning need to delete
+                if (view.Component.Collection.Count == 0)
+                    view.Hide();
             }
 
         }
@@ -217,6 +219,18 @@ namespace NormalModeLibrary
         public static ComponentFactory Factory
         {
             get { return factory ?? ( factory = new ComponentFactory( ) ); }
+        }
+
+        private static void AddPanelViewModelFromConfigurationViewModel(ConfigurationViewModel model, PanelViewModel p)
+        {
+            ((Configuration)model.Core).Collection.Add(p.BasePanel);
+            model.Collection.Add(p);
+        }
+
+        private static void RemovePanelViewModelToConfigurationViewModel(ConfigurationViewModel model, PanelViewModel p)
+        {
+            ((Configuration)model.Core).Collection.Remove(p.BasePanel);
+            model.Collection.Remove(p);
         }
     }
 }
