@@ -36,6 +36,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qualityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -96,7 +97,8 @@
             this.tagsTableDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
-            this.Column3});
+            this.Column3,
+            this.qualityColumn});
             this.tagsTableDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tagsTableDataGridView.Location = new System.Drawing.Point(0, 0);
             this.tagsTableDataGridView.Name = "tagsTableDataGridView";
@@ -122,6 +124,12 @@
             this.Column3.HeaderText = "Единица измерения";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            // 
+            // qualityColumn
+            // 
+            this.qualityColumn.HeaderText = "Качество";
+            this.qualityColumn.Name = "qualityColumn";
+            this.qualityColumn.ReadOnly = true;
             // 
             // BlockViewControl
             // 
@@ -150,5 +158,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qualityColumn;
     }
 }

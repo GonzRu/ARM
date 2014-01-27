@@ -462,6 +462,9 @@ namespace HelperControlsLibrary
                     newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Uom } );
                     break;
             }
+
+            newRow.Cells.Add(new DataGridViewTextBoxCell() { Value = tagDescription.Source.DataQuality });
+
             return newRow;
         }
         /// <summary>
