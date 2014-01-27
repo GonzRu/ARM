@@ -25,6 +25,26 @@ using System.Xml.Linq;
 
 namespace InterfaceLibrary
 {
+    #warning need to move to another file
+    public interface IParameter
+    {
+        /// <summary>
+        /// Parameter name
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Parameter value
+        /// </summary>
+        UInt32 Value { get; }
+
+        /// <summary>
+        /// Init Parameter from XML element
+        /// </summary>
+        /// <param name="xeinit"></param>
+        void Init(XElement xeinit);
+    }
+
     public interface IDeviceCommand
     {
         /// <summary>
@@ -44,5 +64,17 @@ namespace InterfaceLibrary
         /// </summary>
         /// <param name="xeinit"></param>
         void Init(XElement xeinit);
+
+        #region New parameters for telemechanica
+        /// <summary>
+        /// Command address
+        /// </summary>
+        string IECAddress { get; }
+
+        /// <summary>
+        /// Command parameters list
+        /// </summary>
+        List<IParameter> Parameters { get; }
+        #endregion
     }
 }

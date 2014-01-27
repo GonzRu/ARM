@@ -26,8 +26,37 @@ using System.Xml.Linq;
 
 namespace SourceMOA
 {
+    public class Parameter : IParameter
+    {
+        private string _name;
+        private UInt32 _value;
+
+        /// <summary>
+        /// Parameter name
+        /// </summary>
+        public string Name { get { return _name; } }
+
+        /// <summary>
+        /// Parameter value
+        /// </summary>
+        public UInt32 Value { get { return _value; } }
+
+        /// <summary>
+        /// Init Parameter from XML element
+        /// </summary>
+        /// <param name="xeinit"></param>
+        public void Init(XElement xeinit)
+        {
+            _name = xeinit.Attribute("name").Value;
+            _value = UInt32.Parse(xeinit.Attribute("value").Value);
+        }
+    }
+
     public class DeviceCommand : IDeviceCommand
     {
+        private string _IECAddress;
+        private List<IParameter> _parametersList;
+
         /// <summary>
         /// краткое имя команды
         /// </summary>
@@ -50,6 +79,35 @@ namespace SourceMOA
         {
             cmdName = xeinit.Attribute("name").Value;
             cmdDispatcherName = xeinit.Element("CMDDescription").Value;
+
+            var IECAddressXElement = xeinit.Element("IECAddress");
+            if (IECAddressXElement != null)
+                _IECAddress = IECAddressXElement.Value;
+
+            var parametersXElemet = xeinit.Element("Parameters");
+            if (parametersXElemet != null)
+            {
+                _parametersList = new List<IParameter>();
+                foreach (var parameter in parametersXElemet.Elements("Parameter"))
+                {
+                    Parameter p = new Parameter();
+                    p.Init(parameter);
+
+                    _parametersList.Add(p);
+                }
+            }
         }
+
+        #region New parameters for telemechanica
+        /// <summary>
+        /// Command address
+        /// </summary>
+        public string IECAddress { get { return _IECAddress; } }
+
+        /// <summary>
+        /// Command parameters list
+        /// </summary>
+        public List<IParameter> Parameters { get { return _parametersList; } }
+        #endregion
     }
 }
