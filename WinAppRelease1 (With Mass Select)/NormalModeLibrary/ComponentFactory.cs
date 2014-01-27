@@ -61,11 +61,16 @@ namespace NormalModeLibrary
 
             foreach ( var vmPanel in GetPanels( Places.MainMnemo ) )
             {
+                if (!vmPanel.IsVisible)
+                    continue;
+
                 var view = new Windows.ViewWindow { Component = vmPanel, Place = Places.MainMnemo };
                 activePanelForm.Add( view );
                 view.Owner = mainMnemoHandle;
-                //view.ActivatedComponent();
-                view.Show();
+                view.ActivatedComponent();
+                //view.Show();
+
+                Application.OpenForms[0].Activate();
             }
         }
         public void DeactivatedMainMnemoForms()
