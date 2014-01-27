@@ -139,6 +139,9 @@
     <Compile Include="StorageDeviceControl.Designer.cs">
       <DependentUpon>StorageDeviceControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TeleMechanica\TeleMechanicaCommandTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BlockViewControl.resx">
@@ -179,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StorageDeviceControl.resx">
       <DependentUpon>StorageDeviceControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeleMechanica\TeleMechanicaCommandTabPage.resx">
+      <DependentUpon>TeleMechanicaCommandTabPage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
