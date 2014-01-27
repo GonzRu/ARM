@@ -44,6 +44,7 @@ namespace HelperControlsLibrary.TeleMechanica
             _commandsDataGridView.AutoSize = true;
             _commandsDataGridView.MultiSelect = false;
             _commandsDataGridView.ReadOnly = false;
+            _commandsDataGridView.CellClick += DataGridViewOnCellClickHandler;
             InitCommandsDataGridView(_dsGuid, _devGuid);            
             #endregion
 
@@ -57,6 +58,11 @@ namespace HelperControlsLibrary.TeleMechanica
 
         #region Private Metods
         #region DataGrid's Metods
+        /// <summary>
+        /// Insert comands and parameters in DataGrid
+        /// </summary>
+        /// <param name="dsGuid"></param>
+        /// <param name="devGuid"></param>
         private void InitCommandsDataGridView(uint dsGuid, uint devGuid)
         {
             IDevice device = HMI_Settings.CONFIGURATION.GetLink2Device(dsGuid, devGuid);
@@ -69,19 +75,23 @@ namespace HelperControlsLibrary.TeleMechanica
             var commandsList = device.GetListDeviceCommands();
             foreach (var command in commandsList)
             {
-                _commandsDataGridView.Rows.Add(CreateCommandRDataGridow(command));
+                _commandsDataGridView.Rows.Add(CreateCommandDataGridRow(command));
             }
         }
 
-        private DataGridViewRow CreateCommandRDataGridow(IDeviceCommand command)
+        /// <summary>
+        /// Create DataGridRow from IDeviceCommand
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        private DataGridViewRow CreateCommandDataGridRow(IDeviceCommand command)
         {
             var commandNameDataGridViewCell = new DataGridViewTextBoxCell() { Value = command.CmdDispatcherName };
 
             var commandParametersDataGridViewCell = new DataGridViewComboBoxCell();
             if (command.Parameters != null)
                 foreach (var parameter in command.Parameters)
-                    commandParametersDataGridViewCell.Items.Add(parameter.Value.ToString() + parameter.Name);
-                    //commandParametersDataGridViewCell.Items.Add(parameter);
+                    commandParametersDataGridViewCell.Items.Add(parameter.Name);
             try
             {
                 commandParametersDataGridViewCell.Value = commandParametersDataGridViewCell.Items[0].ToString();
@@ -99,6 +109,27 @@ namespace HelperControlsLibrary.TeleMechanica
             commandDataGridViewRow.Cells.Add(executeCommandButtonDataGridViewCell);
 
             return commandDataGridViewRow;
+        }
+
+        /// <summary>
+        /// DataGridCell Mouse Click Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="eventArgs"></param>
+        private void DataGridViewOnCellClickHandler(object sender, DataGridViewCellEventArgs eventArgs)
+        {
+            if (eventArgs.ColumnIndex != 2 || eventArgs.RowIndex == -1)
+                return;
+
+            IDeviceCommand command = _commandsDataGridView.Rows[eventArgs.RowIndex].Tag as IDeviceCommand;
+            DataGridViewComboBoxCell comboBoxDataGridView = _commandsDataGridView[1, eventArgs.RowIndex] as DataGridViewComboBoxCell;
+
+            byte value = (byte)comboBoxDataGridView.Items.IndexOf(comboBoxDataGridView.Value);
+
+            string cmd = command.IECAddress;
+            byte[] param = new byte[1] { value };
+
+            HMI_Settings.CONFIGURATION.ExecuteCommand(_dsGuid, _devGuid, cmd, param, null);
         }
         #endregion
         #endregion
