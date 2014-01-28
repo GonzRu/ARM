@@ -851,7 +851,7 @@ namespace FileManager
                     var path = sturtupFolder + Path.DirectorySeparatorChar + iDynamic.Parameters.Type + Path.DirectorySeparatorChar + BuildFormula.FormulaBlock;
                     if ( !WorkFile.CheckExistFile( path ) )
                     {
-                        MessageError( "Не найден файл: " + path );
+                        MessageError( "Не найден файл описания поведения устройства: " + path );
                         return;
                     }
 

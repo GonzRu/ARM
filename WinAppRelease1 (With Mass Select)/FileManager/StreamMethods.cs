@@ -49,9 +49,10 @@ namespace FileManager
 
        return ns;
      }
-     protected void MessageError(String _massage)
+     protected void MessageError(String _message)
      {
-        //MessageBox.Show(_massage, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        #warning Need to use TraceSourceLib
+         Console.WriteLine(_message);
      }
      #endregion
 
