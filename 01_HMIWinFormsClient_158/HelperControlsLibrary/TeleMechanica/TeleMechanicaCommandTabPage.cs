@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using InterfaceLibrary;
 using HMI_MT_Settings;
+using CommonUtils;
 
 namespace HelperControlsLibrary.TeleMechanica
 {
@@ -40,9 +41,8 @@ namespace HelperControlsLibrary.TeleMechanica
                     AllowUserToAddRows = false,
                     AllowUserToDeleteRows = false,
                     AllowUserToResizeRows = false,
-                    AutoSize = true,
                     Width = 1000,
-                    Height = 1000
+                    Height = 1050
                 };
             _commandsDataGridView.MultiSelect = false;
             _commandsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -127,6 +127,16 @@ namespace HelperControlsLibrary.TeleMechanica
             if (eventArgs.ColumnIndex != 2 || eventArgs.RowIndex == -1)
                 return;
 
+            #region Ask password
+            if (CommonUtils.CommonUtils.IsUserActionBan(CommonUtils.CommonUtils.UserActionType.b00_Control_Switch, HMI_Settings.UserRight) || (HMI_Settings.isRegPass && !CommonUtils.CommonUtils.CanAction()))
+                return;
+
+            var dlg = MessageBox.Show("Выполнить команду?", "Подтверждение",
+                                       MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dlg != DialogResult.Yes)
+                return;
+            #endregion
+
             IDeviceCommand command = _commandsDataGridView.Rows[eventArgs.RowIndex].Tag as IDeviceCommand;
             DataGridViewComboBoxCell comboBoxDataGridView = _commandsDataGridView[1, eventArgs.RowIndex] as DataGridViewComboBoxCell;
 
@@ -135,6 +145,7 @@ namespace HelperControlsLibrary.TeleMechanica
             string cmd = command.IECAddress;
             byte[] param = new byte[1] { value };
 
+            CommonUtils.CommonUtils.WriteEventToLog(42, command.IECAddress, true);
             HMI_Settings.CONFIGURATION.ExecuteCommand(_dsGuid, _devGuid, cmd, param, null);
         }
         #endregion
