@@ -202,20 +202,6 @@ namespace NormalModeLibrary.Windows
 
             Application.OpenForms[0].Activate();
         }
-
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            base.OnMouseEnter(e);
-
-            this.Activate();
-        }
-
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            base.OnMouseLeave(e);
-
-            Application.OpenForms[0].Activate();
-        }
         #endregion
     }
 }
