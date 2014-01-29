@@ -99,6 +99,17 @@ namespace NormalModeLibrary.Windows
             }
         }
 
+        public void UpdateWorkMode()
+        {
+            if (Component.IsVisible)
+            {
+                if (Component.IsAutomaticaly)
+                    Hide();
+            }
+            else
+                Hide();
+        }
+
 
         internal ViewModel.PanelViewModel Component
         {

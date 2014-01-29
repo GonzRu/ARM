@@ -40,9 +40,9 @@ namespace NormalModeLibrary.Windows
             if (!view.Component.IsVisible)
                 workModeComboBox.SelectedIndex = 2;
             else if (view.Component.IsAutomaticaly)
-                workModeComboBox.SelectedIndex = 1;
-            else
                 workModeComboBox.SelectedIndex = 0;
+            else
+                workModeComboBox.SelectedIndex = 1;
 
 
             checkBox3.Checked = view.Component.IsCaptionVisible;
@@ -134,6 +134,7 @@ namespace NormalModeLibrary.Windows
         private void okButtonClickHandler(object sender, EventArgs e)
         {
             _view.Component.Caption = captionTextBox.Text;
+            _view.UpdateWorkMode();
         }  
 
         private void cancelButtonClickHandler(object sender, EventArgs e)
