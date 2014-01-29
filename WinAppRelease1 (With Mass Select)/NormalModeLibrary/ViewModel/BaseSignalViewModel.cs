@@ -63,6 +63,7 @@ namespace NormalModeLibrary.ViewModel
         public String Dim { get { return signal.Dim; } }
         public UInt32 Guid { get { return signal.Guid; } }
         public Object Value { get { return signal.Value; } }
+        public BaseSignal BaseSignal { get { return signal; } }
         internal Boolean IsSubscribe { get; private set; }
         internal Boolean IsChecked { get; set; }
         internal Boolean IsSupported { get { return ( BaseSignal.CheckSignalType( this.tag.Type ) ); } }

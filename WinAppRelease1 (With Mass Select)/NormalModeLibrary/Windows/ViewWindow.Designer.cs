@@ -32,6 +32,8 @@
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.HideButton = new System.Windows.Forms.Button();
+            this.ConfigButton = new System.Windows.Forms.Button();
+            this.AlarmButton = new System.Windows.Forms.Button();
             this.ControlGroupBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +86,24 @@
             this.HideButton.Text = "Скрыть";
             this.HideButton.UseVisualStyleBackColor = true;
             // 
+            // ConfigButton
+            // 
+            this.ConfigButton.Location = new System.Drawing.Point(9, 45);
+            this.ConfigButton.Name = "ConfigButton";
+            this.ConfigButton.Size = new System.Drawing.Size(236, 23);
+            this.ConfigButton.TabIndex = 4;
+            this.ConfigButton.Text = "Настроить";
+            this.ConfigButton.UseVisualStyleBackColor = true;
+            // 
+            // AlarmButton
+            // 
+            this.AlarmButton.Location = new System.Drawing.Point(9, 74);
+            this.AlarmButton.Name = "AlarmButton";
+            this.AlarmButton.Size = new System.Drawing.Size(236, 30);
+            this.AlarmButton.TabIndex = 5;
+            this.AlarmButton.Text = "Тревога принята";
+            this.AlarmButton.UseVisualStyleBackColor = true;
+            // 
             // ViewWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -111,5 +131,8 @@
         private System.Windows.Forms.Integration.ElementHost elementHost1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button HideButton;
+        private System.Windows.Forms.Button ConfigButton;
+        private System.Windows.Forms.Button AlarmButton;
+
     }
 }
