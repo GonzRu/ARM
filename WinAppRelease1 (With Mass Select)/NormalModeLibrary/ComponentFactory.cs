@@ -114,9 +114,9 @@ namespace NormalModeLibrary
                     default:
                         throw new NotImplementedException();
                 }
-                Factory.activePanelForm.Add(view);
-                view.ActivatedComponent();
+                Factory.activePanelForm.Add(view);                
             }
+            view.ActivatedComponent();
 
             win.AddComponents( device, view );
 
