@@ -96,14 +96,11 @@ namespace HelperControlsLibrary.TeleMechanica
 
             var commandParametersDataGridViewCell = new DataGridViewComboBoxCell();
             if (command.Parameters != null)
+            {
                 foreach (var parameter in command.Parameters)
                     commandParametersDataGridViewCell.Items.Add(parameter.Name);
-            try
-            {
+
                 commandParametersDataGridViewCell.Value = commandParametersDataGridViewCell.Items[0].ToString();
-            }
-            catch
-            {
             }
 
             var executeCommandButtonDataGridViewCell = new DataGridViewButtonCell() { Value = "Выполнить" };
@@ -111,8 +108,18 @@ namespace HelperControlsLibrary.TeleMechanica
             var commandDataGridViewRow = new DataGridViewRow();
             commandDataGridViewRow.Tag = command;
             commandDataGridViewRow.Cells.Add(commandNameDataGridViewCell);
-            commandDataGridViewRow.Cells.Add(commandParametersDataGridViewCell);
-            commandDataGridViewRow.Cells.Add(executeCommandButtonDataGridViewCell);
+            if (command.Parameters != null)
+            {
+                commandDataGridViewRow.Cells.Add(commandParametersDataGridViewCell);
+                commandDataGridViewRow.Cells.Add(executeCommandButtonDataGridViewCell);
+            }
+            else
+            {
+                commandDataGridViewRow.Cells.Add(new DataGridViewTextBoxCell());
+                commandDataGridViewRow.Cells[1].ReadOnly = true;
+                commandDataGridViewRow.Cells.Add(new DataGridViewTextBoxCell());
+                commandDataGridViewRow.Cells[2].ReadOnly = true;
+            }
 
             return commandDataGridViewRow;
         }
@@ -127,6 +134,10 @@ namespace HelperControlsLibrary.TeleMechanica
             if (eventArgs.ColumnIndex != 2 || eventArgs.RowIndex == -1)
                 return;
 
+            IDeviceCommand command = _commandsDataGridView.Rows[eventArgs.RowIndex].Tag as IDeviceCommand;
+            if (command.Parameters == null)
+                return;
+
             #region Ask password
             if (CommonUtils.CommonUtils.IsUserActionBan(CommonUtils.CommonUtils.UserActionType.b00_Control_Switch, HMI_Settings.UserRight) || (HMI_Settings.isRegPass && !CommonUtils.CommonUtils.CanAction()))
                 return;
@@ -137,7 +148,6 @@ namespace HelperControlsLibrary.TeleMechanica
                 return;
             #endregion
 
-            IDeviceCommand command = _commandsDataGridView.Rows[eventArgs.RowIndex].Tag as IDeviceCommand;
             DataGridViewComboBoxCell comboBoxDataGridView = _commandsDataGridView[1, eventArgs.RowIndex] as DataGridViewComboBoxCell;
 
             byte value = (byte)comboBoxDataGridView.Items.IndexOf(comboBoxDataGridView.Value);
