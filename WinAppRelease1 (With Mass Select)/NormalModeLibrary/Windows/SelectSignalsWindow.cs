@@ -91,44 +91,6 @@ namespace NormalModeLibrary.Windows
             return node;
         }
 
-        private void treeView1_AfterCheck( object sender, TreeViewEventArgs e )
-        {
-            ViewModel.BaseSignalViewModel signalModel = (ViewModel.BaseSignalViewModel)e.Node.Tag;
-
-            if ( signalModel != null )
-            {
-                signalModel.IsChecked = e.Node.Checked;
-
-                if ( e.Node.Checked )
-                {
-                    
-                    ( (Sources.BaseObjectCollection)_view.Component.Core ).Collection.Add( signalModel.Core );
-                    signalModel.Subscribe();
-                    _view.Component.Collection.Add(signalModel);
-                }
-                else
-                {
-                    ((Sources.BaseObjectCollection)_view.Component.Core).Collection.Remove(signalModel.Core);
-                    signalModel.UnSubscribe();
-                    _view.Component.Collection.Remove(signalModel);
-                }
-            }
-        }
-      
-        protected override void OnLoad( EventArgs e )
-        {
-            base.OnLoad( e );
-
-            _view.SetOnEditMode();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-
-            _view.SetOffEditMode();
-        }
-
         private static TreeNode CreateTagNode( ITag tag, PanelViewModel panel )
         {
             var node = new TreeNode( tag.TagName );
@@ -180,7 +142,6 @@ namespace NormalModeLibrary.Windows
         {
             _view.Text = ((TextBox)sender).Text;
         }
-        #endregion
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
@@ -197,5 +158,62 @@ namespace NormalModeLibrary.Windows
                 captionTextBox.Enabled = false;
             }
         }
+
+        private void workModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (workModeComboBox.SelectedIndex)
+            {
+                case 0:
+                    _view.Component.IsVisible = true;
+                    _view.Component.IsAutomaticaly = true;
+                    break;
+                case 1:
+                    _view.Component.IsVisible = true;
+                    _view.Component.IsAutomaticaly = false;
+                    break;
+                case 2:
+                    _view.Component.IsVisible = false;
+                    break;
+            }
+        }
+
+        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            ViewModel.BaseSignalViewModel signalModel = (ViewModel.BaseSignalViewModel)e.Node.Tag;
+
+            if (signalModel != null)
+            {
+                signalModel.IsChecked = e.Node.Checked;
+
+                if (e.Node.Checked)
+                {
+
+                    ((Sources.BaseObjectCollection)_view.Component.Core).Collection.Add(signalModel.Core);
+                    signalModel.Subscribe();
+                    _view.Component.Collection.Add(signalModel);
+                }
+                else
+                {
+                    ((Sources.BaseObjectCollection)_view.Component.Core).Collection.Remove(signalModel.Core);
+                    signalModel.UnSubscribe();
+                    _view.Component.Collection.Remove(signalModel);
+                }
+            }
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            _view.SetOnEditMode();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            _view.SetOffEditMode();
+        }
+        #endregion
     }
 }
