@@ -58,6 +58,8 @@ namespace NormalModeLibrary.Windows
             return originalPanel;
         }
 
+        #region PrivateMetods
+        #region Building TreeView with groups and tags
         private TreeNode GetTreeNode( IGroup group )
         {
             // построение групп
@@ -125,6 +127,8 @@ namespace NormalModeLibrary.Windows
 
             return node;
         }
+        #endregion
+        #endregion
 
         #region Handlers
         private void okButtonClickHandler(object sender, EventArgs e)

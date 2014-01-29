@@ -110,8 +110,9 @@
             "Не показывать"});
             this.workModeComboBox.Location = new System.Drawing.Point(158, 11);
             this.workModeComboBox.Name = "workModeComboBox";
-            this.workModeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.workModeComboBox.Size = new System.Drawing.Size(196, 21);
             this.workModeComboBox.TabIndex = 13;
+            this.workModeComboBox.SelectedIndexChanged += new System.EventHandler(this.workModeComboBox_SelectedIndexChanged);
             // 
             // checkBox3
             // 
@@ -128,7 +129,7 @@
             // 
             this.captionTextBox.Location = new System.Drawing.Point(158, 68);
             this.captionTextBox.Name = "captionTextBox";
-            this.captionTextBox.Size = new System.Drawing.Size(157, 20);
+            this.captionTextBox.Size = new System.Drawing.Size(196, 20);
             this.captionTextBox.TabIndex = 10;
             this.captionTextBox.TextChanged += new System.EventHandler(this.captionTextBoxTextChangedHandler);
             // 
