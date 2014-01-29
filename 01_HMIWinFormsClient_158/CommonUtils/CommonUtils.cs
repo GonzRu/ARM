@@ -219,9 +219,13 @@ namespace CommonUtils
                 foreach (ToolStripItem tsi in cms.Items)
                 {
                     /* NormalModeLibrary - восстанавливаем меню для показа */
-                    if (state && tsi.Tag.ToString() == "NML")
+                    if (tsi.Tag.ToString() == "NML")
                     {
-                        tsi.Enabled = tsi.Visible = true;
+                        if (state)
+                            tsi.Enabled = tsi.Visible = true;
+                        else
+                            tsi.Enabled = tsi.Visible = false;
+
                         continue;
                     }
                     
@@ -269,73 +273,158 @@ namespace CommonUtils
             if ( menu == null ) return;
 
             menu = menu.Element( "ContextMenu" );
-            if ( menu == null ) return;
-
-            region.MenuStrip = new ContextMenuStrip { Tag = form };
-            region.MenuStrip.Opening += ( sender, args ) =>
-                                                {
-                                                    var isp = ( (ContextMenuStrip)sender ).SourceControl as IBasePanel;
-                                                    if ( isp == null ) return;
-                                                    var idp = isp.Core as IDynamicParameters;
-                                                    if ( idp != null && idp.Parameters != null )
-                                                        CustomizeContextMenuItems( (ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid );
-                                                };
-
-            var xItems = menu.Elements( "MenuItem" );
-            foreach ( var item in xItems )
+            if (menu != null)
             {
-                var content = ContentHelper.CreateContextMenuContent( item );
-                if (content == null)
-                {
-                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( new Exception( "Ошибка в группе данных для команды контекстного меню" ) );
-                    continue;
-                }
+                #region Создание классического контекстного меню
+                region.MenuStrip = new ContextMenuStrip { Tag = form };
+                region.MenuStrip.Opening += (sender, args) =>
+                                                    {
+                                                        var isp = ((ContextMenuStrip)sender).SourceControl as IBasePanel;
+                                                        if (isp == null) return;
+                                                        var idp = isp.Core as IDynamicParameters;
+                                                        if (idp != null && idp.Parameters != null)
+                                                            CustomizeContextMenuItems((ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid);
+                                                    };
 
-                var menuItem = new ToolStripMenuItem( content.Context ) { Tag = content };
-                menuItem.Click += ( sender, args ) =>
+                var xItems = menu.Elements("MenuItem");
+                foreach (var item in xItems)
+                {
+                    var content = ContentHelper.CreateContextMenuContent(item);
+                    if (content == null)
+                    {
+                        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(new Exception("Ошибка в группе данных для команды контекстного меню"));
+                        continue;
+                    }
+
+                    var menuItem = new ToolStripMenuItem(content.Context) { Tag = content };
+                    menuItem.Click += (sender, args) =>
+                                          {
+                                              if (IsUserActionBan(UserActionType.b00_Control_Switch, HMI_Settings.UserRight) ||
+                                                  (HMI_Settings.isRegPass && !CanAction()))
+                                                  return;
+
+                                              var dlg = MessageBox.Show("Выполнить команду?", "Подтверждение",
+                                                                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                              if (dlg != DialogResult.Yes) return;
+
+                                              var tsi = (ToolStripMenuItem)sender;
+                                              if (tsi == null) return;
+                                              var cms = (ContextMenuStrip)tsi.Owner;
+                                              if (cms == null) return;
+                                              var idp = region as IDynamicParameters;
+                                              if (idp == null || idp.Parameters == null) return;
+
+                                              // правильная запись в журнал действий пользователя номер устройства с цчетом фк
+                                              var numdevfc = (int)idp.Parameters.DeviceGuid;
+
+                                              // выполняем действия по включению выключателя вначале определим устройство
+                                              TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(
+                                                  TraceEventType.Critical, 618, string.Format(
+                                                      "Поступила команда для устройства: {0}", numdevfc));
+
+                                              try
+                                              {
+                                                  WriteEventToLog((int)content.Code, numdevfc.ToString(CultureInfo.InvariantCulture), true);
+
+                                                  /*ICommand cmd = */
+                                                  HMI_Settings.CONFIGURATION.ExecuteCommand(0, content.Code, content.Command, new byte[] { }, (Form)cms.Tag);
+                                              }
+                                              catch
+                                              {
+                                                  TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(
+                                                      TraceEventType.Error, numdevfc,
+                                                      "Ошибка в группе данных для команды контекстного меню");
+                                                  MessageBox.Show("Выполнение команды прервано", "Ошибка описания команды",
+                                                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                              }
+                                          };
+                    region.MenuStrip.Items.Add(menuItem);
+                }
+                #endregion
+            }
+
+            #region Контексное меню для команд телемеханики
+            var dynamicRegion = region as IDynamicParameters;
+
+            if (dynamicRegion.Parameters.Cell == 0)
+                return;
+
+            uint dsGuid = dynamicRegion.Parameters.DsGuid;
+            uint devGuid = dynamicRegion.Parameters.DeviceGuid;
+            uint cmdGuid = dynamicRegion.Parameters.Cell;
+
+            IDevice device = HMI_Settings.CONFIGURATION.GetLink2Device(dsGuid, devGuid);
+
+            #region Поиск команды устройства по номеру команды
+            IDeviceCommand currentCommand = null;
+            foreach (var command in device.GetListDeviceCommands())
+            {
+                if (command.IECAddress == cmdGuid.ToString())
+                {
+                    currentCommand = command;
+                    break;
+                }
+            }
+
+            if (currentCommand == null)
+            {
+                Console.WriteLine("CreateContextMenu: команда {0} не найдена в описании устройства {1}", cmdGuid, devGuid);
+                return;
+            }
+            #endregion
+
+            #region Создание контекстного меню
+            if (region.MenuStrip == null)
+                region.MenuStrip = new ContextMenuStrip { Tag = form };
+
+            foreach (var parameter in currentCommand.Parameters)
+            {
+                CommandContent<string> contextMenuItemContent = new CommandContent<string>
+                {
+                    Command = currentCommand.IECAddress,
+                    Context = currentCommand.CmdDispatcherName + " - " + parameter.Name,
+                    Code = devGuid,
+                    Parameter = parameter.Value.ToString()
+                };
+
+                var contextMenuItem = new ToolStripMenuItem(contextMenuItemContent.Context) { Tag = contextMenuItemContent };
+                contextMenuItem.Click += (sender, args) =>
                                       {
-                                          if ( IsUserActionBan( UserActionType.b00_Control_Switch, HMI_Settings.UserRight ) ||
-                                              ( HMI_Settings.isRegPass && !CanAction() ) )
+                                          #region Проверка прав на выполнение команды
+                                          if (IsUserActionBan(UserActionType.b00_Control_Switch, HMI_Settings.UserRight) || (HMI_Settings.isRegPass && !CanAction()))
                                               return;
 
-                                          var dlg = MessageBox.Show( "Выполнить команду?", "Подтверждение",
-                                                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question );
-                                          if ( dlg != DialogResult.Yes ) return;
+                                          var dlg = MessageBox.Show("Выполнить команду?", "Подтверждение",
+                                                                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                          if (dlg != DialogResult.Yes) return;
+                                          #endregion
 
+                                          #region хз что такое
+                                            #warning проверить
                                           var tsi = (ToolStripMenuItem)sender;
-                                          if ( tsi == null ) return;
+                                          if (tsi == null) return;
                                           var cms = (ContextMenuStrip)tsi.Owner;
-                                          if ( cms == null ) return;
+                                          if (cms == null) return;
                                           var idp = region as IDynamicParameters;
-                                          if ( idp == null || idp.Parameters == null ) return;
+                                          if (idp == null || idp.Parameters == null) return;
+                                          #endregion
 
-                                          // правильная запись в журнал действий пользователя номер устройства с цчетом фк
-                                          var numdevfc = (int)idp.Parameters.DeviceGuid;
+                                          #region Выполнение команды
+                                          byte paramValue = byte.Parse(contextMenuItemContent.Parameter);
+                                          byte[] param = new byte[] { paramValue };
 
-                                          // выполняем действия по включению выключателя вначале определим устройство
-                                          TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(
-                                              TraceEventType.Critical, 618, string.Format(
-                                                  "Поступила команда для устройства: {0}", numdevfc ) );
+                                          WriteEventToLog(42, cmdGuid.ToString(), true);
 
-                                          try
-                                          {
-                                              WriteEventToLog( (int)content.Code, numdevfc.ToString( CultureInfo.InvariantCulture ), true );
-
-                                              /*ICommand cmd = */
-                                              HMI_Settings.CONFIGURATION.ExecuteCommand( 0, content.Code, content.Command, new byte[] { }, (Form)cms.Tag );
-                                          }
-                                          catch
-                                          {
-                                              TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(
-                                                  TraceEventType.Error, numdevfc,
-                                                  "Ошибка в группе данных для команды контекстного меню" );
-                                              MessageBox.Show( "Выполнение команды прервано", "Ошибка описания команды",
-                                                               MessageBoxButtons.OK, MessageBoxIcon.Error );
-                                          }
+                                          HMI_Settings.CONFIGURATION.ExecuteCommand(0, contextMenuItemContent.Code, contextMenuItemContent.Command, param, null);
+                                          #endregion
                                       };
-                region.MenuStrip.Items.Add( menuItem );
+
+                region.MenuStrip.Items.Add(contextMenuItem);
             }
+            #endregion
+            #endregion
         }
+
         public static FormulaEvalNds GetConnectionEvalNds( string typeBlock, uint dsGuid, uint devGuid, bool oldLink = false )
         {
             if ( devGuid == 0) return null;
@@ -354,6 +443,10 @@ namespace CommonUtils
                 return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
                                            string.Format( "0({0}.{1}.130726656)", dsGuid, devGuid ),
                                            "Состояние протокола", "" );
+            if (typeBlock.Contains("UTM"))
+                return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
+                           string.Format("0(0.1001.{0})", devGuid),
+                           "Состояние протокола", "");
 
             return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
                                        string.Format("0(0.1000.{0})", devGuid),
