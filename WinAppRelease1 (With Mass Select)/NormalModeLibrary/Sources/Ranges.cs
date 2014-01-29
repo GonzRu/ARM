@@ -26,11 +26,11 @@ namespace NormalModeLibrary.Sources
         /// <summary>
         /// Минимальное значение по умолчанию
         /// </summary>
-        public const double DefaultRangeMinValue = -100;
+        public const double DefaultRangeMinValue = 0;
         /// <summary>
         /// Максимальное значение по умолчанию
         /// </summary>
-        public const double DefaultRangeMaxValue = 100;
+        public const double DefaultRangeMaxValue = 0;
 
         public BaseRange()
         {
@@ -44,6 +44,9 @@ namespace NormalModeLibrary.Sources
         /// <returns>true - если значение вышло за диапозон</returns>
         public virtual bool OutOfRange( Double value )
         {
+            if (RangeMinValue == 0 && RangeMaxValue == 0)
+                return false;
+
             return ( value < RangeMinValue || value > RangeMaxValue ) ? true : false;
         }
 
@@ -64,11 +67,11 @@ namespace NormalModeLibrary.Sources
         /// <summary>
         /// Минимальное значение гистерезиса по умолчанию
         /// </summary>
-        public const double DefaultRangeMinHysteresis = -80;
+        public const double DefaultRangeMinHysteresis = 0;
         /// <summary>
         /// Максимальное значение гистерезиса по умолчанию
         /// </summary>        
-        public const double DefaultRangeMaxHysteresis = 80;
+        public const double DefaultRangeMaxHysteresis = 0;
         bool outRange = false; // Для запоминания промежуточного значения
         double rangeMinHysteresis = DefaultRangeMinHysteresis, rangeMaxHysteresis = DefaultRangeMaxHysteresis;
 
@@ -90,6 +93,9 @@ namespace NormalModeLibrary.Sources
             }
             else if ( inHystRange )
             {
+                if (RangeMaxValue == 0 && rangeMinHysteresis == 0)
+                    return false;
+
                 outRange = false;
                 return false;
             }
