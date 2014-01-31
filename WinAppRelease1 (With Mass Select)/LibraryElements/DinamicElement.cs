@@ -21,6 +21,12 @@ namespace LibraryElements
             DeviceGuid = original.DeviceGuid;
             Cell = original.Cell;
             ExternalDescription = original.ExternalDescription;
+
+            #region New parameters
+            DsGuidForCommandBinding = original.DsGuidForCommandBinding;
+            DeviceGuidForCommandBinding = original.DeviceGuidForCommandBinding;
+            CommandGuidForCommandBinding = original.CommandGuidForCommandBinding;
+            #endregion
         }
 
         /// <summary>
@@ -48,5 +54,24 @@ namespace LibraryElements
         /// Получить или задать признак описания поведения вне элемента
         /// </summary>
         public bool ExternalDescription { get; set; }
+
+        #region Новые параметры. Добавлены 31.01.2014
+        #region CommandBinding
+        /// <summary>
+        /// DS guid
+        /// </summary>
+        public uint DsGuidForCommandBinding { get; set; }
+
+        /// <summary>
+        /// Номер устройства, чья команда будет запускаться
+        /// </summary>
+        public uint DeviceGuidForCommandBinding { get; set; }
+
+        /// <summary>
+        /// Command guid
+        /// </summary>
+        public uint CommandGuidForCommandBinding { get; set; }
+        #endregion
+        #endregion
     }
 }
