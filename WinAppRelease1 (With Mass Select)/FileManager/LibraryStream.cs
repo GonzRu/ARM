@@ -800,6 +800,40 @@ namespace FileManager
                     osParams.DeviceGuid = fk * 256 + device;
                     osParams.Cell = cell;
                 }
+
+                #region command section
+                osParams.DsGuidForCommandBinding = 0;
+                osParams.DeviceGuidForCommandBinding = 0;
+                osParams.CommandGuidForCommandBinding = 0;
+
+                xElement = node.Element("command");
+                if (xElement != null)
+                {
+                    var xAttribute = xElement.Attribute("dsGuid");
+                    if (xAttribute != null)
+                    {
+                        uint ds;
+                        uint.TryParse(xAttribute.Value, out ds);
+                        osParams.DsGuidForCommandBinding = ds;
+                    }
+
+                    xAttribute = xElement.Attribute("devGuid");
+                    if (xAttribute != null)
+                    {
+                        uint dev;
+                        uint.TryParse(xAttribute.Value, out dev);
+                        osParams.DeviceGuidForCommandBinding = dev;
+                    }
+
+                    xAttribute = xElement.Attribute("commandGuid");
+                    if (xAttribute != null)
+                    {
+                        uint command;
+                        uint.TryParse(xAttribute.Value, out command);
+                        osParams.CommandGuidForCommandBinding = command;
+                    }
+                }
+                #endregion
             }
             if ( this.osElement is StaticElement )
             {
