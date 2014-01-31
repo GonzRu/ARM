@@ -109,6 +109,9 @@ namespace LibraryElements.CalculationBlocks
 
             if ( original is BmrzCalculation ) element = new BmrzCalculation( );
             if ( original is SiriusCalculation ) element = new SiriusCalculation( );
+            if ( original is EkraCalculation ) element = new EkraCalculation();
+            if ( original is BreslerCalculation ) element = new BreslerCalculation();
+            if ( original is TorCalculation ) element = new TorCalculation();
             if ( original is KeyCalculation ) element = new KeyCalculation( );
             if ( original is BlockSignalCalculation ) element = new BlockSignalCalculation( );
             if ( original is TransformatorCalculation ) element = new TransformatorCalculation( );
