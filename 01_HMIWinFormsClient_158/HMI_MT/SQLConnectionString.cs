@@ -55,7 +55,7 @@ namespace HMI_MT
                                        + ";pwd=" + pwd
                                        + "; " + Anything_else;
                // для контроля на консоль строка соединения
-			   TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 58, "(58) SQLConnectionString.cs : GetConnectStrFromPrjFile() : Windows Connection: " + rez);
+               //TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 58, "(58) SQLConnectionString.cs : GetConnectStrFromPrjFile() : Windows Connection: " + rez);
                break;
             case "SQL":
                string SQLData_Source = xdoc.Element("Project").Element("ConnectionString").Element("TypeConnection").Element("SQL").Element("Data_Source").Attribute("value").Value;
@@ -71,13 +71,13 @@ namespace HMI_MT
                                        + ";Password=" + Password
                                        + "; " + SQLAnything_else;
                // для контроля на консоль строка соединения
-			   TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 74, "(74) SQLConnectionString.cs : GetConnectStrFromPrjFile() : SQL Connection: " + rez);
+               //TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 74, "(74) SQLConnectionString.cs : GetConnectStrFromPrjFile() : SQL Connection: " + rez);
                break;
             case "Any":
                string AnythingCStr = xdoc.Element("Project").Element("ConnectionString").Element("TypeConnection").Element("Any").Attribute("value").Value;			   
                rez = AnythingCStr;
                // для контроля на консоль строка соединения
-			   TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 74, "(74) SQLConnectionString.cs : GetConnectStrFromPrjFile() : Any Connection: " + rez);
+               //TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 74, "(74) SQLConnectionString.cs : GetConnectStrFromPrjFile() : Any Connection: " + rez);
                break;
             default:
                string stre = xdoc.Element("Project").Element("ConnectionString").Element("TypeConnection").Attribute("TypeAuthentication").Value;
