@@ -137,6 +137,8 @@ namespace LibraryElements.CalculationBlocks
                     return new EkraCalculation();
                 case "BreslerCalculation":
                     return new BreslerCalculation();
+                case "TorCalculation":
+                    return new TorCalculation();
                 case "KeyCalculation":
                     return new KeyCalculation( );
                 case "BlockSignalCalculation":

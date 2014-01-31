@@ -306,6 +306,7 @@ namespace WindowsForms
                 list.Add( "Sirius данные" );
                 list.Add( "ЭКРА данные");
                 list.Add( "Бреслер данные");
+                list.Add( "ТОР данные");
                 list.Add( "Данные ключа" );
                 list.Add( "Данные трансформатора" );
                 list.Add( "Данные изображения" );
@@ -342,6 +343,7 @@ namespace WindowsForms
             if ( calculation is SiriusCalculation ) name = "Sirius данные";
             if ( calculation is EkraCalculation) name = "ЭКРА данные";
             if ( calculation is BreslerCalculation ) name = "Бреслер данные";
+            if ( calculation is TorCalculation) name = "ТОР данные";
             if ( calculation is KeyCalculation ) name = "Данные ключа";
             if ( calculation is BlockSignalCalculation ) name = "Данные сигнального блока";
             if ( calculation is TransformatorCalculation ) name = "Данные трансформатора";
@@ -364,6 +366,7 @@ namespace WindowsForms
                 case "Sirius данные": return "SiriusCalculation";
                 case "ЭКРА данные": return "EkraCalculation";
                 case "Бреслер данные": return "BreslerCalculation";
+                case "ТОР данные": return "TorCalculation";
                 case "Данные ключа": return "KeyCalculation";
                 case "Данные сигнального блока": return "BlockSignalCalculation";
                 case "Данные трансформатора": return "TransformatorCalculation";

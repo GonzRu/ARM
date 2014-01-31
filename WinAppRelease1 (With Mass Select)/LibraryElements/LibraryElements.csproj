@@ -80,6 +80,7 @@
     <Compile Include="CalculationBlocks\KeyCalculation.cs" />
     <Compile Include="CalculationBlocks\SiriusCalculation.cs" />
     <Compile Include="CalculationBlocks\TextSignalCalculation.cs" />
+    <Compile Include="CalculationBlocks\TorCalculation.cs" />
     <Compile Include="CalculationBlocks\TransformatorCalculation.cs" />
     <Compile Include="CalculationBlocks\TrunkCalculation.cs" />
     <Compile Include="CalculationBlocks\UsoSignalCalculation.cs" />
