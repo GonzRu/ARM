@@ -294,8 +294,22 @@ namespace FileManager
             if ( this.osElement is DynamicElement )
             {
                 xnode = this.CreateElementType( "Dinamic_Element", "dynamic" );
+
                 xnode2 = this.SaveFigureDynamicElements( ( (IDynamicParameters)this.osElement ).Parameters );
                 xnode.Add( xnode2 );
+
+                #warning refact
+                #region command section
+                var asParams = osElement as DynamicElement;
+                xnode2 = new XElement("command");
+
+                xnode2.Add(new XAttribute("dsGuid", asParams.Parameters.DsGuidForCommandBinding));
+                xnode2.Add(new XAttribute("devGuid", asParams.Parameters.DeviceGuidForCommandBinding));
+                xnode2.Add(new XAttribute("commandGuid", asParams.Parameters.CommandGuidForCommandBinding));
+
+                xnode.Add(xnode2);
+                #endregion
+
                 return xnode;
             }
             if ( this.osElement is Ground )
