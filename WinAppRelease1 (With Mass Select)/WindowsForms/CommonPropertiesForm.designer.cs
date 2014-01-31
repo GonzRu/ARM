@@ -95,9 +95,9 @@ namespace WindowsForms
           this.fontDialog1 = new System.Windows.Forms.FontDialog();
           this.CommandBindingGroupBox = new System.Windows.Forms.GroupBox();
           this.label7 = new System.Windows.Forms.Label();
-          this.dsGuidCommandBindingnumericUpDown = new System.Windows.Forms.NumericUpDown();
-          this.deviceGuidCommandBindingnumericUpDown = new System.Windows.Forms.NumericUpDown();
-          this.commandGuidCommandBindingnumericUpDown = new System.Windows.Forms.NumericUpDown();
+          this.dsGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
+          this.deviceGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
+          this.commandGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.label13 = new System.Windows.Forms.Label();
           this.label20 = new System.Windows.Forms.Label();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -131,9 +131,9 @@ namespace WindowsForms
           this.TextTabPage.SuspendLayout();
           this.groupBox15.SuspendLayout();
           this.CommandBindingGroupBox.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingnumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingnumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingnumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingNumericUpDown)).BeginInit();
           this.groupBox6.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.stateDSGuidNumericUpDown)).BeginInit();
           this.SuspendLayout();
@@ -787,10 +787,10 @@ namespace WindowsForms
           // 
           this.CommandBindingGroupBox.Controls.Add(this.label20);
           this.CommandBindingGroupBox.Controls.Add(this.label13);
-          this.CommandBindingGroupBox.Controls.Add(this.commandGuidCommandBindingnumericUpDown);
-          this.CommandBindingGroupBox.Controls.Add(this.deviceGuidCommandBindingnumericUpDown);
+          this.CommandBindingGroupBox.Controls.Add(this.commandGuidCommandBindingNumericUpDown);
+          this.CommandBindingGroupBox.Controls.Add(this.deviceGuidCommandBindingNumericUpDown);
           this.CommandBindingGroupBox.Controls.Add(this.label7);
-          this.CommandBindingGroupBox.Controls.Add(this.dsGuidCommandBindingnumericUpDown);
+          this.CommandBindingGroupBox.Controls.Add(this.dsGuidCommandBindingNumericUpDown);
           this.CommandBindingGroupBox.Location = new System.Drawing.Point(25, 247);
           this.CommandBindingGroupBox.Name = "CommandBindingGroupBox";
           this.CommandBindingGroupBox.Size = new System.Drawing.Size(229, 96);
@@ -807,41 +807,41 @@ namespace WindowsForms
           this.label7.TabIndex = 3;
           this.label7.Text = "DataServer номер:";
           // 
-          // dsGuidCommandBindingnumericUpDown
+          // dsGuidCommandBindingNumericUpDown
           // 
-          this.dsGuidCommandBindingnumericUpDown.Location = new System.Drawing.Point(123, 14);
-          this.dsGuidCommandBindingnumericUpDown.Maximum = new decimal(new int[] {
+          this.dsGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 14);
+          this.dsGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-          this.dsGuidCommandBindingnumericUpDown.Name = "dsGuidCommandBindingnumericUpDown";
-          this.dsGuidCommandBindingnumericUpDown.Size = new System.Drawing.Size(100, 20);
-          this.dsGuidCommandBindingnumericUpDown.TabIndex = 2;
+          this.dsGuidCommandBindingNumericUpDown.Name = "dsGuidCommandBindingNumericUpDown";
+          this.dsGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(100, 20);
+          this.dsGuidCommandBindingNumericUpDown.TabIndex = 2;
           // 
-          // deviceGuidCommandBindingnumericUpDown
+          // deviceGuidCommandBindingNumericUpDown
           // 
-          this.deviceGuidCommandBindingnumericUpDown.Location = new System.Drawing.Point(123, 40);
-          this.deviceGuidCommandBindingnumericUpDown.Maximum = new decimal(new int[] {
+          this.deviceGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 40);
+          this.deviceGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-          this.deviceGuidCommandBindingnumericUpDown.Name = "deviceGuidCommandBindingnumericUpDown";
-          this.deviceGuidCommandBindingnumericUpDown.Size = new System.Drawing.Size(100, 20);
-          this.deviceGuidCommandBindingnumericUpDown.TabIndex = 4;
+          this.deviceGuidCommandBindingNumericUpDown.Name = "deviceGuidCommandBindingNumericUpDown";
+          this.deviceGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(100, 20);
+          this.deviceGuidCommandBindingNumericUpDown.TabIndex = 4;
           // 
-          // commandGuidCommandBindingnumericUpDown
+          // commandGuidCommandBindingNumericUpDown
           // 
-          this.commandGuidCommandBindingnumericUpDown.Location = new System.Drawing.Point(123, 66);
-          this.commandGuidCommandBindingnumericUpDown.Maximum = new decimal(new int[] {
+          this.commandGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 66);
+          this.commandGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-          this.commandGuidCommandBindingnumericUpDown.Name = "commandGuidCommandBindingnumericUpDown";
-          this.commandGuidCommandBindingnumericUpDown.Size = new System.Drawing.Size(101, 20);
-          this.commandGuidCommandBindingnumericUpDown.TabIndex = 14;
+          this.commandGuidCommandBindingNumericUpDown.Name = "commandGuidCommandBindingNumericUpDown";
+          this.commandGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(101, 20);
+          this.commandGuidCommandBindingNumericUpDown.TabIndex = 14;
           // 
           // label13
           // 
@@ -953,9 +953,9 @@ namespace WindowsForms
           this.groupBox15.PerformLayout();
           this.CommandBindingGroupBox.ResumeLayout(false);
           this.CommandBindingGroupBox.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingnumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingnumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingnumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingNumericUpDown)).EndInit();
           this.groupBox6.ResumeLayout(false);
           this.groupBox6.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.stateDSGuidNumericUpDown)).EndInit();
@@ -1027,15 +1027,15 @@ namespace WindowsForms
       private System.Windows.Forms.GroupBox DeviceBindingGroupBox;
       private System.Windows.Forms.GroupBox CommandBindingGroupBox;
       private System.Windows.Forms.Label label7;
-      private System.Windows.Forms.NumericUpDown dsGuidCommandBindingnumericUpDown;
+      private System.Windows.Forms.NumericUpDown dsGuidCommandBindingNumericUpDown;
       private System.Windows.Forms.Label label9;
       private System.Windows.Forms.NumericUpDown stateDeviceGuidNumericUpDown;
       private System.Windows.Forms.CheckBox StateFromBindingDeviceCheckBox;
       private System.Windows.Forms.GroupBox StateGroupBox;
       private System.Windows.Forms.Label label20;
       private System.Windows.Forms.Label label13;
-      private System.Windows.Forms.NumericUpDown commandGuidCommandBindingnumericUpDown;
-      private System.Windows.Forms.NumericUpDown deviceGuidCommandBindingnumericUpDown;
+      private System.Windows.Forms.NumericUpDown commandGuidCommandBindingNumericUpDown;
+      private System.Windows.Forms.NumericUpDown deviceGuidCommandBindingNumericUpDown;
       private System.Windows.Forms.GroupBox groupBox6;
       private System.Windows.Forms.NumericUpDown stateDSGuidNumericUpDown;
       private System.Windows.Forms.Label label12;
