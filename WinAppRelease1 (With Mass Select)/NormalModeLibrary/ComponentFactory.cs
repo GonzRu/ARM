@@ -62,16 +62,13 @@ namespace NormalModeLibrary
 
             foreach ( var vmPanel in GetPanels( Places.MainMnemo ) )
             {
-                if (!vmPanel.IsVisible)
-                    continue;
-
                 var view = new Windows.ViewWindow { Component = vmPanel, Place = Places.MainMnemo };
                 activePanelForm.Add( view );
                 view.Owner = mainMnemoHandle;
-                view.ActivatedComponent();
-
-                Application.OpenForms[0].Activate();
+                view.ActivatedComponent();                
             }
+
+            Application.OpenForms[0].Activate();
         }
         public void DeactivatedMainMnemoForms()
         {
@@ -101,6 +98,7 @@ namespace NormalModeLibrary
             var config = GetConfig(user, place);
             var panel = GetPanel(config, device);
 
+            #region Find or create ViewWindow
             var view = Factory.activePanelForm.FirstOrDefault(apf => apf.Component == panel);
             if (view == null)
             {
@@ -116,7 +114,9 @@ namespace NormalModeLibrary
                 Factory.activePanelForm.Add(view);                
             }
             view.ActivatedComponent();
+            #endregion
 
+            #region SelectSignalWindow work
             win.AddComponents( device, view );
 
             if ( win.ShowDialog() == DialogResult.OK )
@@ -127,6 +127,7 @@ namespace NormalModeLibrary
 
                 ComponentFactory.Factory.SaveXml();
             }
+            #endregion
 
             if (view.Component.Collection.Count == 0)
             {
