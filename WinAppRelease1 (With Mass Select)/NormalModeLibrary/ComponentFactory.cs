@@ -69,7 +69,6 @@ namespace NormalModeLibrary
                 activePanelForm.Add( view );
                 view.Owner = mainMnemoHandle;
                 view.ActivatedComponent();
-                //view.Show();
 
                 Application.OpenForms[0].Activate();
             }
@@ -124,23 +123,16 @@ namespace NormalModeLibrary
             {
                 RemovePanelViewModelToConfigurationViewModel(config, win.GetOriginalWindowComponent());
 
-                if (view.Component.Collection.Count == 0)
-                {
-                    view.Close();
-                    Factory.activePanelForm.Remove(view);
-                }
-                else
-                    AddPanelViewModelFromConfigurationViewModel(config, view.Component);
+                AddPanelViewModelFromConfigurationViewModel(config, view.Component);
 
                 ComponentFactory.Factory.SaveXml();
             }
-            else
-            {
-                #warning need to delete
-                if (view.Component.Collection.Count == 0)
-                    view.Hide();
-            }
 
+            if (view.Component.Collection.Count == 0)
+            {
+                view.Close();
+                Factory.activePanelForm.Remove(view);
+            }
         }
         public static void EditUserWindows()
         {
