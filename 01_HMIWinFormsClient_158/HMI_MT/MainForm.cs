@@ -1751,6 +1751,12 @@ namespace HMI_MT
             //CommonUtils.CommonUtils.TestUserMenuRights( menuStrip1, HMI_MT_Settings.HMI_Settings.arrlUserMenu );
             // создаем главную мнемосхему
             CreateMainMnemo();
+
+            /********************************************************************************************************/
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима.");
+            NormalModeLibrary.ComponentFactory.Factory.ActivatedMainMnemoForms(Form_ez);
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима завершен.");
+            /********************************************************************************************************/
         }
         /// <summary>
         /// Block system
@@ -1781,6 +1787,12 @@ namespace HMI_MT
             arrF = this.MdiChildren;
             for ( int i = 0; i < arrF.Length; i++ )
                 arrF[i].WindowState = FormWindowState.Maximized;
+
+            /********************************************************************************************************/
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима.");
+            NormalModeLibrary.ComponentFactory.Factory.ActivatedMainMnemoForms(Form_ez);
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима завершен.");
+            /********************************************************************************************************/
         }
         /// <summary>
         /// User information

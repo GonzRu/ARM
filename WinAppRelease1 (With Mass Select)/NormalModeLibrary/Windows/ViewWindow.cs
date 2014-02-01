@@ -77,6 +77,8 @@ namespace NormalModeLibrary.Windows
                     if ( ioorh != null && ioorh.IsOutOfRangeEvent )
                         ioorh.OutOfRangeEvent -= ViewWindow_OutOfRangeEvent;
                 }
+
+            this.Close();
         }
 
         public void SetOnEditMode()
