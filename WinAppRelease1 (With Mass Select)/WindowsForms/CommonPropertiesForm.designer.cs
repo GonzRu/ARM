@@ -45,28 +45,38 @@ namespace WindowsForms
           this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
           this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
           this.BindingTtabPage = new System.Windows.Forms.TabPage();
-          this.checkBox2 = new System.Windows.Forms.CheckBox();
           this.richTextBox1 = new System.Windows.Forms.RichTextBox();
           this.DeviceBindingGroupBox = new System.Windows.Forms.GroupBox();
           this.label8 = new System.Windows.Forms.Label();
+          this.label10 = new System.Windows.Forms.Label();
           this.dsGuidDeviceBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.label11 = new System.Windows.Forms.Label();
+          this.cellDeviceBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.devGuidDeviceBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.textBox7 = new System.Windows.Forms.TextBox();
-          this.label10 = new System.Windows.Forms.Label();
           this.label6 = new System.Windows.Forms.Label();
+          this.CommandBindingGroupBox = new System.Windows.Forms.GroupBox();
+          this.label20 = new System.Windows.Forms.Label();
+          this.label13 = new System.Windows.Forms.Label();
+          this.commandGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
+          this.deviceGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
+          this.label7 = new System.Windows.Forms.Label();
+          this.dsGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.label5 = new System.Windows.Forms.Label();
-          this.cellDeviceBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.textBox1 = new System.Windows.Forms.TextBox();
           this.FormulaBindingTabPage = new System.Windows.Forms.TabPage();
           this.groupBox4 = new System.Windows.Forms.GroupBox();
+          this.groupBox6 = new System.Windows.Forms.GroupBox();
+          this.checkBox2 = new System.Windows.Forms.CheckBox();
+          this.button4 = new System.Windows.Forms.Button();
+          this.label19 = new System.Windows.Forms.Label();
+          this.label17 = new System.Windows.Forms.Label();
           this.StateGroupBox = new System.Windows.Forms.GroupBox();
+          this.stateDSGuidNumericUpDown = new System.Windows.Forms.NumericUpDown();
+          this.label12 = new System.Windows.Forms.Label();
           this.label9 = new System.Windows.Forms.Label();
           this.stateDeviceGuidNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.StateFromBindingDeviceCheckBox = new System.Windows.Forms.CheckBox();
-          this.label19 = new System.Windows.Forms.Label();
-          this.button4 = new System.Windows.Forms.Button();
-          this.label17 = new System.Windows.Forms.Label();
           this.ImageTabPage = new System.Windows.Forms.TabPage();
           this.groupBox3 = new System.Windows.Forms.GroupBox();
           this.label22 = new System.Windows.Forms.Label();
@@ -93,16 +103,6 @@ namespace WindowsForms
           this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
           this.colorDialog1 = new System.Windows.Forms.ColorDialog();
           this.fontDialog1 = new System.Windows.Forms.FontDialog();
-          this.CommandBindingGroupBox = new System.Windows.Forms.GroupBox();
-          this.label7 = new System.Windows.Forms.Label();
-          this.dsGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
-          this.deviceGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
-          this.commandGuidCommandBindingNumericUpDown = new System.Windows.Forms.NumericUpDown();
-          this.label13 = new System.Windows.Forms.Label();
-          this.label20 = new System.Windows.Forms.Label();
-          this.groupBox6 = new System.Windows.Forms.GroupBox();
-          this.label12 = new System.Windows.Forms.Label();
-          this.stateDSGuidNumericUpDown = new System.Windows.Forms.NumericUpDown();
           this.tabControl1.SuspendLayout();
           this.PaintTabPage.SuspendLayout();
           this.groupBox5.SuspendLayout();
@@ -115,11 +115,17 @@ namespace WindowsForms
           this.BindingTtabPage.SuspendLayout();
           this.DeviceBindingGroupBox.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dsGuidDeviceBindingNumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.devGuidDeviceBindingNumericUpDown)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.cellDeviceBindingNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.devGuidDeviceBindingNumericUpDown)).BeginInit();
+          this.CommandBindingGroupBox.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingNumericUpDown)).BeginInit();
           this.FormulaBindingTabPage.SuspendLayout();
           this.groupBox4.SuspendLayout();
+          this.groupBox6.SuspendLayout();
           this.StateGroupBox.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.stateDSGuidNumericUpDown)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.stateDeviceGuidNumericUpDown)).BeginInit();
           this.ImageTabPage.SuspendLayout();
           this.groupBox3.SuspendLayout();
@@ -130,12 +136,6 @@ namespace WindowsForms
           this.groupBox10.SuspendLayout();
           this.TextTabPage.SuspendLayout();
           this.groupBox15.SuspendLayout();
-          this.CommandBindingGroupBox.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingNumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingNumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingNumericUpDown)).BeginInit();
-          this.groupBox6.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.stateDSGuidNumericUpDown)).BeginInit();
           this.SuspendLayout();
           // 
           // button1
@@ -327,16 +327,6 @@ namespace WindowsForms
           this.BindingTtabPage.Text = "Привязка";
           this.BindingTtabPage.UseVisualStyleBackColor = true;
           // 
-          // checkBox2
-          // 
-          this.checkBox2.AutoSize = true;
-          this.checkBox2.Location = new System.Drawing.Point(6, 19);
-          this.checkBox2.Name = "checkBox2";
-          this.checkBox2.Size = new System.Drawing.Size(146, 30);
-          this.checkBox2.TabIndex = 8;
-          this.checkBox2.Text = "Вычисление данных из \r\nописания блока";
-          this.checkBox2.UseVisualStyleBackColor = true;
-          // 
           // richTextBox1
           // 
           this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -373,6 +363,15 @@ namespace WindowsForms
           this.label8.TabIndex = 3;
           this.label8.Text = "DataServer номер:";
           // 
+          // label10
+          // 
+          this.label10.AutoSize = true;
+          this.label10.Location = new System.Drawing.Point(6, 64);
+          this.label10.Name = "label10";
+          this.label10.Size = new System.Drawing.Size(82, 13);
+          this.label10.TabIndex = 3;
+          this.label10.Text = "Номер ячейки:";
+          // 
           // dsGuidDeviceBindingNumericUpDown
           // 
           this.dsGuidDeviceBindingNumericUpDown.Location = new System.Drawing.Point(165, 14);
@@ -384,6 +383,7 @@ namespace WindowsForms
           this.dsGuidDeviceBindingNumericUpDown.Name = "dsGuidDeviceBindingNumericUpDown";
           this.dsGuidDeviceBindingNumericUpDown.Size = new System.Drawing.Size(58, 20);
           this.dsGuidDeviceBindingNumericUpDown.TabIndex = 2;
+          this.dsGuidDeviceBindingNumericUpDown.ValueChanged += new System.EventHandler(this.dsGuidDeviceBindingNumericUpDown_ValueChanged);
           // 
           // label11
           // 
@@ -393,52 +393,6 @@ namespace WindowsForms
           this.label11.Size = new System.Drawing.Size(104, 13);
           this.label11.TabIndex = 3;
           this.label11.Text = "Номер устройства:";
-          // 
-          // devGuidDeviceBindingNumericUpDown
-          // 
-          this.devGuidDeviceBindingNumericUpDown.Location = new System.Drawing.Point(165, 40);
-          this.devGuidDeviceBindingNumericUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-          this.devGuidDeviceBindingNumericUpDown.Name = "devGuidDeviceBindingNumericUpDown";
-          this.devGuidDeviceBindingNumericUpDown.Size = new System.Drawing.Size(58, 20);
-          this.devGuidDeviceBindingNumericUpDown.TabIndex = 2;
-          // 
-          // textBox7
-          // 
-          this.textBox7.Location = new System.Drawing.Point(90, 6);
-          this.textBox7.Name = "textBox7";
-          this.textBox7.Size = new System.Drawing.Size(164, 20);
-          this.textBox7.TabIndex = 7;
-          // 
-          // label10
-          // 
-          this.label10.AutoSize = true;
-          this.label10.Location = new System.Drawing.Point(6, 64);
-          this.label10.Name = "label10";
-          this.label10.Size = new System.Drawing.Size(82, 13);
-          this.label10.TabIndex = 3;
-          this.label10.Text = "Номер ячейки:";
-          // 
-          // label6
-          // 
-          this.label6.AutoSize = true;
-          this.label6.Location = new System.Drawing.Point(22, 9);
-          this.label6.Name = "label6";
-          this.label6.Size = new System.Drawing.Size(62, 13);
-          this.label6.TabIndex = 3;
-          this.label6.Text = "Тип блока:";
-          // 
-          // label5
-          // 
-          this.label5.AutoSize = true;
-          this.label5.Location = new System.Drawing.Point(18, 35);
-          this.label5.Name = "label5";
-          this.label5.Size = new System.Drawing.Size(66, 13);
-          this.label5.TabIndex = 3;
-          this.label5.Text = "Подсказка:";
           // 
           // cellDeviceBindingNumericUpDown
           // 
@@ -451,6 +405,122 @@ namespace WindowsForms
           this.cellDeviceBindingNumericUpDown.Name = "cellDeviceBindingNumericUpDown";
           this.cellDeviceBindingNumericUpDown.Size = new System.Drawing.Size(58, 20);
           this.cellDeviceBindingNumericUpDown.TabIndex = 2;
+          // 
+          // devGuidDeviceBindingNumericUpDown
+          // 
+          this.devGuidDeviceBindingNumericUpDown.Location = new System.Drawing.Point(165, 40);
+          this.devGuidDeviceBindingNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+          this.devGuidDeviceBindingNumericUpDown.Name = "devGuidDeviceBindingNumericUpDown";
+          this.devGuidDeviceBindingNumericUpDown.Size = new System.Drawing.Size(58, 20);
+          this.devGuidDeviceBindingNumericUpDown.TabIndex = 2;
+          this.devGuidDeviceBindingNumericUpDown.ValueChanged += new System.EventHandler(this.devGuidDeviceBindingNumericUpDown_ValueChanged);
+          // 
+          // textBox7
+          // 
+          this.textBox7.Location = new System.Drawing.Point(90, 6);
+          this.textBox7.Name = "textBox7";
+          this.textBox7.Size = new System.Drawing.Size(164, 20);
+          this.textBox7.TabIndex = 7;
+          // 
+          // label6
+          // 
+          this.label6.AutoSize = true;
+          this.label6.Location = new System.Drawing.Point(22, 9);
+          this.label6.Name = "label6";
+          this.label6.Size = new System.Drawing.Size(62, 13);
+          this.label6.TabIndex = 3;
+          this.label6.Text = "Тип блока:";
+          // 
+          // CommandBindingGroupBox
+          // 
+          this.CommandBindingGroupBox.Controls.Add(this.label20);
+          this.CommandBindingGroupBox.Controls.Add(this.label13);
+          this.CommandBindingGroupBox.Controls.Add(this.commandGuidCommandBindingNumericUpDown);
+          this.CommandBindingGroupBox.Controls.Add(this.deviceGuidCommandBindingNumericUpDown);
+          this.CommandBindingGroupBox.Controls.Add(this.label7);
+          this.CommandBindingGroupBox.Controls.Add(this.dsGuidCommandBindingNumericUpDown);
+          this.CommandBindingGroupBox.Location = new System.Drawing.Point(25, 247);
+          this.CommandBindingGroupBox.Name = "CommandBindingGroupBox";
+          this.CommandBindingGroupBox.Size = new System.Drawing.Size(229, 96);
+          this.CommandBindingGroupBox.TabIndex = 10;
+          this.CommandBindingGroupBox.TabStop = false;
+          this.CommandBindingGroupBox.Text = "Привязка команд";
+          // 
+          // label20
+          // 
+          this.label20.AutoSize = true;
+          this.label20.Location = new System.Drawing.Point(6, 68);
+          this.label20.Name = "label20";
+          this.label20.Size = new System.Drawing.Size(93, 13);
+          this.label20.TabIndex = 16;
+          this.label20.Text = "Номер команды:";
+          // 
+          // label13
+          // 
+          this.label13.AutoSize = true;
+          this.label13.Location = new System.Drawing.Point(6, 42);
+          this.label13.Name = "label13";
+          this.label13.Size = new System.Drawing.Size(104, 13);
+          this.label13.TabIndex = 15;
+          this.label13.Text = "Номер устройства:";
+          // 
+          // commandGuidCommandBindingNumericUpDown
+          // 
+          this.commandGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 66);
+          this.commandGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+          this.commandGuidCommandBindingNumericUpDown.Name = "commandGuidCommandBindingNumericUpDown";
+          this.commandGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(101, 20);
+          this.commandGuidCommandBindingNumericUpDown.TabIndex = 14;
+          // 
+          // deviceGuidCommandBindingNumericUpDown
+          // 
+          this.deviceGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 40);
+          this.deviceGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+          this.deviceGuidCommandBindingNumericUpDown.Name = "deviceGuidCommandBindingNumericUpDown";
+          this.deviceGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(100, 20);
+          this.deviceGuidCommandBindingNumericUpDown.TabIndex = 4;
+          // 
+          // label7
+          // 
+          this.label7.AutoSize = true;
+          this.label7.Location = new System.Drawing.Point(6, 16);
+          this.label7.Name = "label7";
+          this.label7.Size = new System.Drawing.Size(99, 13);
+          this.label7.TabIndex = 3;
+          this.label7.Text = "DataServer номер:";
+          // 
+          // dsGuidCommandBindingNumericUpDown
+          // 
+          this.dsGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 14);
+          this.dsGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+          this.dsGuidCommandBindingNumericUpDown.Name = "dsGuidCommandBindingNumericUpDown";
+          this.dsGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(100, 20);
+          this.dsGuidCommandBindingNumericUpDown.TabIndex = 2;
+          // 
+          // label5
+          // 
+          this.label5.AutoSize = true;
+          this.label5.Location = new System.Drawing.Point(18, 35);
+          this.label5.Name = "label5";
+          this.label5.Size = new System.Drawing.Size(66, 13);
+          this.label5.TabIndex = 3;
+          this.label5.Text = "Подсказка:";
           // 
           // textBox1
           // 
@@ -481,6 +551,57 @@ namespace WindowsForms
           this.groupBox4.TabStop = false;
           this.groupBox4.Text = "Привязка данных:";
           // 
+          // groupBox6
+          // 
+          this.groupBox6.Controls.Add(this.checkBox2);
+          this.groupBox6.Controls.Add(this.button4);
+          this.groupBox6.Controls.Add(this.label19);
+          this.groupBox6.Controls.Add(this.label17);
+          this.groupBox6.Location = new System.Drawing.Point(25, 149);
+          this.groupBox6.Name = "groupBox6";
+          this.groupBox6.Size = new System.Drawing.Size(217, 142);
+          this.groupBox6.TabIndex = 14;
+          this.groupBox6.TabStop = false;
+          this.groupBox6.Text = "Формула";
+          // 
+          // checkBox2
+          // 
+          this.checkBox2.AutoSize = true;
+          this.checkBox2.Location = new System.Drawing.Point(6, 19);
+          this.checkBox2.Name = "checkBox2";
+          this.checkBox2.Size = new System.Drawing.Size(146, 30);
+          this.checkBox2.TabIndex = 8;
+          this.checkBox2.Text = "Вычисление данных из \r\nописания блока";
+          this.checkBox2.UseVisualStyleBackColor = true;
+          // 
+          // button4
+          // 
+          this.button4.Location = new System.Drawing.Point(73, 68);
+          this.button4.Name = "button4";
+          this.button4.Size = new System.Drawing.Size(79, 23);
+          this.button4.TabIndex = 6;
+          this.button4.Text = "Выбрать";
+          this.button4.UseVisualStyleBackColor = true;
+          this.button4.Click += new System.EventHandler(this.Button4Click);
+          // 
+          // label19
+          // 
+          this.label19.AutoSize = true;
+          this.label19.Location = new System.Drawing.Point(110, 114);
+          this.label19.Name = "label19";
+          this.label19.Size = new System.Drawing.Size(68, 13);
+          this.label19.TabIndex = 1;
+          this.label19.Text = "Неизвестно";
+          // 
+          // label17
+          // 
+          this.label17.AutoSize = true;
+          this.label17.Location = new System.Drawing.Point(27, 114);
+          this.label17.Name = "label17";
+          this.label17.Size = new System.Drawing.Size(51, 13);
+          this.label17.TabIndex = 0;
+          this.label17.Text = "Данные:";
+          // 
           // StateGroupBox
           // 
           this.StateGroupBox.Controls.Add(this.stateDSGuidNumericUpDown);
@@ -493,6 +614,27 @@ namespace WindowsForms
           this.StateGroupBox.TabIndex = 14;
           this.StateGroupBox.TabStop = false;
           this.StateGroupBox.Text = "Состояние";
+          // 
+          // stateDSGuidNumericUpDown
+          // 
+          this.stateDSGuidNumericUpDown.Location = new System.Drawing.Point(132, 19);
+          this.stateDSGuidNumericUpDown.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+          this.stateDSGuidNumericUpDown.Name = "stateDSGuidNumericUpDown";
+          this.stateDSGuidNumericUpDown.Size = new System.Drawing.Size(79, 20);
+          this.stateDSGuidNumericUpDown.TabIndex = 14;
+          // 
+          // label12
+          // 
+          this.label12.AutoSize = true;
+          this.label12.Location = new System.Drawing.Point(16, 21);
+          this.label12.Name = "label12";
+          this.label12.Size = new System.Drawing.Size(62, 13);
+          this.label12.TabIndex = 13;
+          this.label12.Text = "Номер DS:";
           // 
           // label9
           // 
@@ -526,34 +668,7 @@ namespace WindowsForms
           this.StateFromBindingDeviceCheckBox.TabIndex = 14;
           this.StateFromBindingDeviceCheckBox.Text = "Брать состояние от\r\nпривязанного устройства";
           this.StateFromBindingDeviceCheckBox.UseVisualStyleBackColor = true;
-          // 
-          // label19
-          // 
-          this.label19.AutoSize = true;
-          this.label19.Location = new System.Drawing.Point(110, 114);
-          this.label19.Name = "label19";
-          this.label19.Size = new System.Drawing.Size(68, 13);
-          this.label19.TabIndex = 1;
-          this.label19.Text = "Неизвестно";
-          // 
-          // button4
-          // 
-          this.button4.Location = new System.Drawing.Point(73, 68);
-          this.button4.Name = "button4";
-          this.button4.Size = new System.Drawing.Size(79, 23);
-          this.button4.TabIndex = 6;
-          this.button4.Text = "Выбрать";
-          this.button4.UseVisualStyleBackColor = true;
-          this.button4.Click += new System.EventHandler(this.Button4Click);
-          // 
-          // label17
-          // 
-          this.label17.AutoSize = true;
-          this.label17.Location = new System.Drawing.Point(27, 114);
-          this.label17.Name = "label17";
-          this.label17.Size = new System.Drawing.Size(51, 13);
-          this.label17.TabIndex = 0;
-          this.label17.Text = "Данные:";
+          this.StateFromBindingDeviceCheckBox.CheckedChanged += new System.EventHandler(this.StateFromBindingDeviceCheckBox_CheckedChanged);
           // 
           // ImageTabPage
           // 
@@ -783,118 +898,6 @@ namespace WindowsForms
           // 
           this.openFileDialog1.FileName = "openFileDialog1";
           // 
-          // CommandBindingGroupBox
-          // 
-          this.CommandBindingGroupBox.Controls.Add(this.label20);
-          this.CommandBindingGroupBox.Controls.Add(this.label13);
-          this.CommandBindingGroupBox.Controls.Add(this.commandGuidCommandBindingNumericUpDown);
-          this.CommandBindingGroupBox.Controls.Add(this.deviceGuidCommandBindingNumericUpDown);
-          this.CommandBindingGroupBox.Controls.Add(this.label7);
-          this.CommandBindingGroupBox.Controls.Add(this.dsGuidCommandBindingNumericUpDown);
-          this.CommandBindingGroupBox.Location = new System.Drawing.Point(25, 247);
-          this.CommandBindingGroupBox.Name = "CommandBindingGroupBox";
-          this.CommandBindingGroupBox.Size = new System.Drawing.Size(229, 96);
-          this.CommandBindingGroupBox.TabIndex = 10;
-          this.CommandBindingGroupBox.TabStop = false;
-          this.CommandBindingGroupBox.Text = "Привязка команд";
-          // 
-          // label7
-          // 
-          this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(6, 16);
-          this.label7.Name = "label7";
-          this.label7.Size = new System.Drawing.Size(99, 13);
-          this.label7.TabIndex = 3;
-          this.label7.Text = "DataServer номер:";
-          // 
-          // dsGuidCommandBindingNumericUpDown
-          // 
-          this.dsGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 14);
-          this.dsGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-          this.dsGuidCommandBindingNumericUpDown.Name = "dsGuidCommandBindingNumericUpDown";
-          this.dsGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(100, 20);
-          this.dsGuidCommandBindingNumericUpDown.TabIndex = 2;
-          // 
-          // deviceGuidCommandBindingNumericUpDown
-          // 
-          this.deviceGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 40);
-          this.deviceGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-          this.deviceGuidCommandBindingNumericUpDown.Name = "deviceGuidCommandBindingNumericUpDown";
-          this.deviceGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(100, 20);
-          this.deviceGuidCommandBindingNumericUpDown.TabIndex = 4;
-          // 
-          // commandGuidCommandBindingNumericUpDown
-          // 
-          this.commandGuidCommandBindingNumericUpDown.Location = new System.Drawing.Point(123, 66);
-          this.commandGuidCommandBindingNumericUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-          this.commandGuidCommandBindingNumericUpDown.Name = "commandGuidCommandBindingNumericUpDown";
-          this.commandGuidCommandBindingNumericUpDown.Size = new System.Drawing.Size(101, 20);
-          this.commandGuidCommandBindingNumericUpDown.TabIndex = 14;
-          // 
-          // label13
-          // 
-          this.label13.AutoSize = true;
-          this.label13.Location = new System.Drawing.Point(6, 42);
-          this.label13.Name = "label13";
-          this.label13.Size = new System.Drawing.Size(104, 13);
-          this.label13.TabIndex = 15;
-          this.label13.Text = "Номер устройства:";
-          // 
-          // label20
-          // 
-          this.label20.AutoSize = true;
-          this.label20.Location = new System.Drawing.Point(6, 68);
-          this.label20.Name = "label20";
-          this.label20.Size = new System.Drawing.Size(93, 13);
-          this.label20.TabIndex = 16;
-          this.label20.Text = "Номер команды:";
-          // 
-          // groupBox6
-          // 
-          this.groupBox6.Controls.Add(this.checkBox2);
-          this.groupBox6.Controls.Add(this.button4);
-          this.groupBox6.Controls.Add(this.label19);
-          this.groupBox6.Controls.Add(this.label17);
-          this.groupBox6.Location = new System.Drawing.Point(25, 149);
-          this.groupBox6.Name = "groupBox6";
-          this.groupBox6.Size = new System.Drawing.Size(217, 142);
-          this.groupBox6.TabIndex = 14;
-          this.groupBox6.TabStop = false;
-          this.groupBox6.Text = "Формула";
-          // 
-          // label12
-          // 
-          this.label12.AutoSize = true;
-          this.label12.Location = new System.Drawing.Point(16, 21);
-          this.label12.Name = "label12";
-          this.label12.Size = new System.Drawing.Size(62, 13);
-          this.label12.TabIndex = 13;
-          this.label12.Text = "Номер DS:";
-          // 
-          // stateDSGuidNumericUpDown
-          // 
-          this.stateDSGuidNumericUpDown.Location = new System.Drawing.Point(132, 19);
-          this.stateDSGuidNumericUpDown.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-          this.stateDSGuidNumericUpDown.Name = "stateDSGuidNumericUpDown";
-          this.stateDSGuidNumericUpDown.Size = new System.Drawing.Size(79, 20);
-          this.stateDSGuidNumericUpDown.TabIndex = 14;
-          // 
           // CommonPropertiesForm
           // 
           this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
@@ -928,13 +931,21 @@ namespace WindowsForms
           this.DeviceBindingGroupBox.ResumeLayout(false);
           this.DeviceBindingGroupBox.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dsGuidDeviceBindingNumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.devGuidDeviceBindingNumericUpDown)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.cellDeviceBindingNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.devGuidDeviceBindingNumericUpDown)).EndInit();
+          this.CommandBindingGroupBox.ResumeLayout(false);
+          this.CommandBindingGroupBox.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingNumericUpDown)).EndInit();
           this.FormulaBindingTabPage.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
+          this.groupBox6.ResumeLayout(false);
+          this.groupBox6.PerformLayout();
           this.StateGroupBox.ResumeLayout(false);
           this.StateGroupBox.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.stateDSGuidNumericUpDown)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.stateDeviceGuidNumericUpDown)).EndInit();
           this.ImageTabPage.ResumeLayout(false);
           this.groupBox3.ResumeLayout(false);
@@ -951,14 +962,6 @@ namespace WindowsForms
           this.TextTabPage.PerformLayout();
           this.groupBox15.ResumeLayout(false);
           this.groupBox15.PerformLayout();
-          this.CommandBindingGroupBox.ResumeLayout(false);
-          this.CommandBindingGroupBox.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dsGuidCommandBindingNumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.deviceGuidCommandBindingNumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.commandGuidCommandBindingNumericUpDown)).EndInit();
-          this.groupBox6.ResumeLayout(false);
-          this.groupBox6.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.stateDSGuidNumericUpDown)).EndInit();
           this.ResumeLayout(false);
 
       }

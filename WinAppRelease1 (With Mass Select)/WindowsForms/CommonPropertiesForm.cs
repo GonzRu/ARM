@@ -99,6 +99,23 @@ namespace WindowsForms
       private void InitPage3()
       {
           var calc = SelectElement as ICalculationContext;
+          var dynamicParam = SelectElement as IDynamicParameters;
+
+          if (calc.CalculationContext.StateDSGuid == dynamicParam.Parameters.DsGuid
+              && calc.CalculationContext.StateDeviecGuid == dynamicParam.Parameters.DeviceGuid)
+          {
+              StateFromBindingDeviceCheckBox.Checked = true;
+              StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+          }
+          else
+          {
+              StateFromBindingDeviceCheckBox.Checked = false;
+              StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+
+              stateDSGuidNumericUpDown.Value = calc.CalculationContext.StateDSGuid;
+              stateDeviceGuidNumericUpDown.Value = calc.CalculationContext.StateDeviecGuid; 
+          }
+
           if ( calc != null && calc.CalculationContext != null )
               label19.Text = "«агружено";
           else
@@ -197,6 +214,12 @@ namespace WindowsForms
               }
               else if (calc.CalculationContext == null && newContext != null)
                   calc.CalculationContext = newContext;
+
+              if (calc.CalculationContext != null)
+              {
+                  calc.CalculationContext.StateDSGuid = Convert.ToUInt32(this.stateDSGuidNumericUpDown.Value);
+                  calc.CalculationContext.StateDeviecGuid = Convert.ToUInt32(this.stateDeviceGuidNumericUpDown.Value);
+              }
           }
           
           var @params = SelectElement as IDynamicParameters;
@@ -238,6 +261,8 @@ namespace WindowsForms
               formText.VerticalView = this.checkBox6.Checked;
           }
       }
+
+      #region Handlers
       protected virtual void Button2Click(object sender, EventArgs e)
       {
          ToElement();
@@ -277,6 +302,35 @@ namespace WindowsForms
       {
           this.fontDialog1.ShowDialog();
       }
+
+      private void StateFromBindingDeviceCheckBox_CheckedChanged(object sender, EventArgs e)
+      {
+          var checkBox = (CheckBox)sender;
+
+          if (checkBox.Checked)
+          {
+              StateGroupBox.Enabled = false;
+              stateDSGuidNumericUpDown.Value = dsGuidDeviceBindingNumericUpDown.Value;
+              stateDeviceGuidNumericUpDown.Value = devGuidDeviceBindingNumericUpDown.Value;
+          }
+          else
+          {
+              StateGroupBox.Enabled = true;
+          }
+      }
+
+      private void dsGuidDeviceBindingNumericUpDown_ValueChanged(object sender, EventArgs e)
+      {
+          if (StateFromBindingDeviceCheckBox.Checked)
+              stateDSGuidNumericUpDown.Value = dsGuidDeviceBindingNumericUpDown.Value;
+      }
+
+      private void devGuidDeviceBindingNumericUpDown_ValueChanged(object sender, EventArgs e)
+      {
+          if (StateFromBindingDeviceCheckBox.Checked)
+              stateDeviceGuidNumericUpDown.Value = devGuidDeviceBindingNumericUpDown.Value;
+      }
+      #endregion
 
       /// <summary>
       /// ѕроверка присваимого значени€ на выход за границы значений контрола
