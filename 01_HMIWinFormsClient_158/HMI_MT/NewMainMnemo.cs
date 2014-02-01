@@ -249,9 +249,13 @@ namespace HMI_MT
                     try
                     {
                         // запоминаем подсказку элементу
-                        region.ToolTipMessage = string.IsNullOrEmpty(idp.Parameters.ToolTipMessage)
-                                                ? xeDescDev.Element("DescDev").Element("DescDev").Value
-                                                : idp.Parameters.ToolTipMessage;
+                        if (string.IsNullOrEmpty(idp.Parameters.ToolTipMessage))
+                        {
+                            if (xeDescDev != null)
+                                region.ToolTipMessage = xeDescDev.Element("DescDev").Element("DescDev").Value;
+                        }
+                        else
+                            region.ToolTipMessage = idp.Parameters.ToolTipMessage;
                     }
                     catch (Exception exx)
                     {
