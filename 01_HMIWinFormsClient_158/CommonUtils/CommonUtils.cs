@@ -448,7 +448,9 @@ namespace CommonUtils
                 return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
                                            string.Format( "0({0}.{1}.130726656)", dsGuid, devGuid ),
                                            "Состояние протокола", "" );
-            if (typeBlock.Contains("UTM"))
+            //if (typeBlock.Contains("UTM") || typeBlock.Contains("ТОР") || typeBlock.Contains("КЕДР"))
+            #warning Refact!!!
+            if (devGuid > 768)
                 return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
                            string.Format("0(0.1001.{0})", devGuid),
                            "Состояние протокола", "");
