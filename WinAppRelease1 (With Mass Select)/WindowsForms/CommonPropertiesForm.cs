@@ -95,6 +95,10 @@ namespace WindowsForms
           this.cellDeviceBindingNumericUpDown.Value = CheckValue(this.cellDeviceBindingNumericUpDown, (int)tmp.Cell);
           this.devGuidDeviceBindingNumericUpDown.Value = CheckValue(this.devGuidDeviceBindingNumericUpDown, (int)tmp.DeviceGuid);
           this.checkBox2.Checked = tmp.ExternalDescription;
+
+          this.dsGuidCommandBindingNumericUpDown.Value = CheckValue(this.dsGuidCommandBindingNumericUpDown, (int)tmp.DsGuidForCommandBinding);
+          this.deviceGuidCommandBindingNumericUpDown.Value = CheckValue(this.deviceGuidCommandBindingNumericUpDown, (int)tmp.DeviceGuidForCommandBinding);
+          this.commandGuidCommandBindingNumericUpDown.Value = CheckValue(this.commandGuidCommandBindingNumericUpDown, (int)tmp.CommandGuidForCommandBinding);
       }
       private void InitPage3()
       {
@@ -231,6 +235,10 @@ namespace WindowsForms
               @params.Parameters.Cell = Convert.ToUInt32( this.cellDeviceBindingNumericUpDown.Value );
               @params.Parameters.DeviceGuid = Convert.ToUInt32( this.devGuidDeviceBindingNumericUpDown.Value );
               @params.Parameters.ExternalDescription = this.checkBox2.Checked;
+
+              @params.Parameters.DsGuidForCommandBinding = Convert.ToUInt32(this.dsGuidCommandBindingNumericUpDown.Value);
+              @params.Parameters.DeviceGuidForCommandBinding = Convert.ToUInt32(this.deviceGuidCommandBindingNumericUpDown.Value);
+              @params.Parameters.CommandGuidForCommandBinding = Convert.ToUInt32(this.commandGuidCommandBindingNumericUpDown.Value);
           }
           
           var rotate = SelectElement as Rotate;
