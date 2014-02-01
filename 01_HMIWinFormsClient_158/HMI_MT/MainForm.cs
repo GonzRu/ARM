@@ -52,6 +52,7 @@ using DataBaseLib;
 using PTKStateLib;
 using DebugStatisticLibrary;
 using HMI_MT.Properties;
+using NormalModeLibrary.Windows;
 
 namespace HMI_MT
 {
@@ -937,8 +938,14 @@ namespace HMI_MT
          if( ( tabForms.SelectedTab != null ) && ( tabForms.SelectedTab.Tag != null ) )
          {
             ( tabForms.SelectedTab.Tag as Form ).Select();
-            foreach( Form frowned in ( tabForms.SelectedTab.Tag as Form ).OwnedForms )
-               frowned.Show();
+            foreach (Form frowned in (tabForms.SelectedTab.Tag as Form).OwnedForms)
+            {
+                var viewWindow = frowned as ViewWindow;
+                if (viewWindow != null)
+                    viewWindow.ShowIfNeed();
+                else
+                    frowned.Show();
+            }
          }
       }
       #endregion

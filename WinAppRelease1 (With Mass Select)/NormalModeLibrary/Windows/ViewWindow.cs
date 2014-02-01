@@ -16,6 +16,8 @@ namespace NormalModeLibrary.Windows
         internal Boolean IsEditable { get; set; }
         internal Places Place { get; set; }
 
+        private bool _isAlarmMode = false;
+
         #region Constructors
         public ViewWindow()
         {
@@ -114,6 +116,12 @@ namespace NormalModeLibrary.Windows
                 Hide();
         }
 
+        public void ShowIfNeed()
+        {
+            if (Component.IsVisible)
+                if (!Component.IsAutomaticaly || _isAlarmMode)
+                        Show();
+        }
 
         internal ViewModel.PanelViewModel Component
         {
