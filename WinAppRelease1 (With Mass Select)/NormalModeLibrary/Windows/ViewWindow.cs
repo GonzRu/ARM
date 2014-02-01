@@ -34,17 +34,19 @@ namespace NormalModeLibrary.Windows
                 bool needToShow = true;
 
                 this.Text = Component.Caption;
+                this.tableLayoutPanel1.RowStyles[1].Height = 0;
 
-                if ( IsEditable || Component.IsAutomaticaly )
-                {
-                    this.ControlBox = false;
-                    this.tableLayoutPanel1.RowStyles[1].Height = 30;
-                }
-                else
-                {
-                    this.ControlBox = true;
-                    this.tableLayoutPanel1.RowStyles[1].Height = 0;
-                }
+                //if ( IsEditable || Component.IsAutomaticaly )
+                //{
+                //    this.ControlBox = false;
+                //    this.tableLayoutPanel1.RowStyles[1].Height = 30;
+                //}
+                //else
+                //{
+                //    this.ControlBox = true;
+                //    this.tableLayoutPanel1.RowStyles[1].Height = 0;
+                //}
+                
 
                 foreach (ViewModel.BaseSignalViewModel vmSignal in Component.Collection)
                 {
