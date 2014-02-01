@@ -269,13 +269,13 @@ namespace CommonUtils
         /// <param name="form">Форма для привязки окна оповещения выполнения команды</param>
         public static void CreateContextMenu( BaseRegion region, XElement node, Form form )
         {
-            var menu = node.Element( "DescDev" );
-            if ( menu == null ) return;
-
-            menu = menu.Element( "ContextMenu" );
-            if (menu != null)
+            if (node != null)
+            if (node.Element( "DescDev" ) != null)
+            if (node.Element("DescDev").Element("ContextMenu") != null)
             {
                 #region Создание классического контекстного меню
+                var menu = node.Element("DescDev").Element("ContextMenu");
+
                 region.MenuStrip = new ContextMenuStrip { Tag = form };
                 region.MenuStrip.Opening += (sender, args) =>
                                                     {
@@ -346,14 +346,19 @@ namespace CommonUtils
             #region Контексное меню для команд телемеханики
             var dynamicRegion = region as IDynamicParameters;
 
-            if (dynamicRegion.Parameters.Cell == 0)
+            if (dynamicRegion.Parameters.CommandGuidForCommandBinding == 0)
                 return;
 
-            uint dsGuid = dynamicRegion.Parameters.DsGuid;
-            uint devGuid = dynamicRegion.Parameters.DeviceGuid;
-            uint cmdGuid = dynamicRegion.Parameters.Cell;
+            uint dsGuid = dynamicRegion.Parameters.DsGuidForCommandBinding;
+            uint devGuid = dynamicRegion.Parameters.DeviceGuidForCommandBinding;
+            uint cmdGuid = dynamicRegion.Parameters.CommandGuidForCommandBinding;
 
             IDevice device = HMI_Settings.CONFIGURATION.GetLink2Device(dsGuid, devGuid);
+            if (device == null)
+            {
+                Console.WriteLine("CreateContextMenu: при привязке команд неверно указано устройство - {0}.{1}", dsGuid, devGuid);
+                return;
+            }
 
             #region Поиск команды устройства по номеру команды
             IDeviceCommand currentCommand = null;

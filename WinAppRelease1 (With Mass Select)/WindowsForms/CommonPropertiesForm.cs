@@ -27,17 +27,17 @@ namespace WindowsForms
          if (elem is IDynamicParameters)
             InitPage2();
          else
-            this.tabControl1.Controls.Remove(this.tabPage2);
+            this.tabControl1.Controls.Remove(this.BindingTtabPage);
 
          if (elem is Rotate)
             InitPage5();
          else
-            this.tabControl1.Controls.Remove(this.tabPage5);
+            this.tabControl1.Controls.Remove(this.RotationTabPage);
 
          if (elem is StaticElement)
             InitPage4();
          else
-            this.tabControl1.Controls.Remove(this.tabPage4);
+            this.tabControl1.Controls.Remove(this.ImageTabPage);
 
          if (elem is BlockText)
          {
@@ -45,17 +45,17 @@ namespace WindowsForms
              if (elem is SchemaButton) groupBox11.Text = "Ссылка:";
          }
          else
-            this.tabControl1.Controls.Remove(this.tabPage6);
+            this.tabControl1.Controls.Remove(this.BlockTextTabPage);
 
          if (elem is ICalculationContext)
             this.InitPage3();
          else
-            this.tabControl1.Controls.Remove(this.tabPage3);
+            this.tabControl1.Controls.Remove(this.FormulaBindingTabPage);
          
          if ( elem is IFormText )
             this.InitPage7();
          else
-            this.tabControl1.Controls.Remove(this.tabPage7);
+            this.tabControl1.Controls.Remove(this.TextTabPage);
 
          this.CancelButton = button1;
       }
@@ -91,14 +91,35 @@ namespace WindowsForms
           var tmp = ( (IDynamicParameters)SelectElement ).Parameters;
           this.textBox1.Text = tmp.ToolTipMessage;
           this.textBox7.Text = tmp.Type;
-          this.numericUpDown5.Value = CheckValue(this.numericUpDown5, (int)tmp.DsGuid);
-          this.numericUpDown7.Value = CheckValue(this.numericUpDown7, (int)tmp.Cell);
-          this.numericUpDown8.Value = CheckValue(this.numericUpDown8, (int)tmp.DeviceGuid);
+          this.dsGuidDeviceBindingNumericUpDown.Value = CheckValue(this.dsGuidDeviceBindingNumericUpDown, (int)tmp.DsGuid);
+          this.cellDeviceBindingNumericUpDown.Value = CheckValue(this.cellDeviceBindingNumericUpDown, (int)tmp.Cell);
+          this.devGuidDeviceBindingNumericUpDown.Value = CheckValue(this.devGuidDeviceBindingNumericUpDown, (int)tmp.DeviceGuid);
           this.checkBox2.Checked = tmp.ExternalDescription;
+
+          this.dsGuidCommandBindingNumericUpDown.Value = CheckValue(this.dsGuidCommandBindingNumericUpDown, (int)tmp.DsGuidForCommandBinding);
+          this.deviceGuidCommandBindingNumericUpDown.Value = CheckValue(this.deviceGuidCommandBindingNumericUpDown, (int)tmp.DeviceGuidForCommandBinding);
+          this.commandGuidCommandBindingNumericUpDown.Value = CheckValue(this.commandGuidCommandBindingNumericUpDown, (int)tmp.CommandGuidForCommandBinding);
       }
       private void InitPage3()
       {
           var calc = SelectElement as ICalculationContext;
+          var dynamicParam = SelectElement as IDynamicParameters;
+
+          if (calc.CalculationContext.StateDSGuid == dynamicParam.Parameters.DsGuid
+              && calc.CalculationContext.StateDeviecGuid == dynamicParam.Parameters.DeviceGuid)
+          {
+              StateFromBindingDeviceCheckBox.Checked = true;
+              StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+          }
+          else
+          {
+              StateFromBindingDeviceCheckBox.Checked = false;
+              StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+
+              stateDSGuidNumericUpDown.Value = calc.CalculationContext.StateDSGuid;
+              stateDeviceGuidNumericUpDown.Value = calc.CalculationContext.StateDeviecGuid; 
+          }
+
           if ( calc != null && calc.CalculationContext != null )
               label19.Text = "Загружено";
           else
@@ -197,6 +218,12 @@ namespace WindowsForms
               }
               else if (calc.CalculationContext == null && newContext != null)
                   calc.CalculationContext = newContext;
+
+              if (calc.CalculationContext != null)
+              {
+                  calc.CalculationContext.StateDSGuid = Convert.ToUInt32(this.stateDSGuidNumericUpDown.Value);
+                  calc.CalculationContext.StateDeviecGuid = Convert.ToUInt32(this.stateDeviceGuidNumericUpDown.Value);
+              }
           }
           
           var @params = SelectElement as IDynamicParameters;
@@ -204,10 +231,14 @@ namespace WindowsForms
           {
               @params.Parameters.ToolTipMessage = this.textBox1.Text;
               @params.Parameters.Type = this.textBox7.Text;
-              @params.Parameters.DsGuid = Convert.ToUInt32( this.numericUpDown5.Value );
-              @params.Parameters.Cell = Convert.ToUInt32( this.numericUpDown7.Value );
-              @params.Parameters.DeviceGuid = Convert.ToUInt32( this.numericUpDown8.Value );
+              @params.Parameters.DsGuid = Convert.ToUInt32( this.dsGuidDeviceBindingNumericUpDown.Value );
+              @params.Parameters.Cell = Convert.ToUInt32( this.cellDeviceBindingNumericUpDown.Value );
+              @params.Parameters.DeviceGuid = Convert.ToUInt32( this.devGuidDeviceBindingNumericUpDown.Value );
               @params.Parameters.ExternalDescription = this.checkBox2.Checked;
+
+              @params.Parameters.DsGuidForCommandBinding = Convert.ToUInt32(this.dsGuidCommandBindingNumericUpDown.Value);
+              @params.Parameters.DeviceGuidForCommandBinding = Convert.ToUInt32(this.deviceGuidCommandBindingNumericUpDown.Value);
+              @params.Parameters.CommandGuidForCommandBinding = Convert.ToUInt32(this.commandGuidCommandBindingNumericUpDown.Value);
           }
           
           var rotate = SelectElement as Rotate;
@@ -238,6 +269,8 @@ namespace WindowsForms
               formText.VerticalView = this.checkBox6.Checked;
           }
       }
+
+      #region Handlers
       protected virtual void Button2Click(object sender, EventArgs e)
       {
          ToElement();
@@ -277,6 +310,35 @@ namespace WindowsForms
       {
           this.fontDialog1.ShowDialog();
       }
+
+      private void StateFromBindingDeviceCheckBox_CheckedChanged(object sender, EventArgs e)
+      {
+          var checkBox = (CheckBox)sender;
+
+          if (checkBox.Checked)
+          {
+              StateGroupBox.Enabled = false;
+              stateDSGuidNumericUpDown.Value = dsGuidDeviceBindingNumericUpDown.Value;
+              stateDeviceGuidNumericUpDown.Value = devGuidDeviceBindingNumericUpDown.Value;
+          }
+          else
+          {
+              StateGroupBox.Enabled = true;
+          }
+      }
+
+      private void dsGuidDeviceBindingNumericUpDown_ValueChanged(object sender, EventArgs e)
+      {
+          if (StateFromBindingDeviceCheckBox.Checked)
+              stateDSGuidNumericUpDown.Value = dsGuidDeviceBindingNumericUpDown.Value;
+      }
+
+      private void devGuidDeviceBindingNumericUpDown_ValueChanged(object sender, EventArgs e)
+      {
+          if (StateFromBindingDeviceCheckBox.Checked)
+              stateDeviceGuidNumericUpDown.Value = devGuidDeviceBindingNumericUpDown.Value;
+      }
+      #endregion
 
       /// <summary>
       /// Проверка присваимого значения на выход за границы значений контрола

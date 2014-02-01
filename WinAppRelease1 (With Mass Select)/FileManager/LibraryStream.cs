@@ -294,8 +294,22 @@ namespace FileManager
             if ( this.osElement is DynamicElement )
             {
                 xnode = this.CreateElementType( "Dinamic_Element", "dynamic" );
+
                 xnode2 = this.SaveFigureDynamicElements( ( (IDynamicParameters)this.osElement ).Parameters );
                 xnode.Add( xnode2 );
+
+                #warning refact
+                #region command section
+                var asParams = osElement as DynamicElement;
+                xnode2 = new XElement("command");
+
+                xnode2.Add(new XAttribute("dsGuid", asParams.Parameters.DsGuidForCommandBinding));
+                xnode2.Add(new XAttribute("devGuid", asParams.Parameters.DeviceGuidForCommandBinding));
+                xnode2.Add(new XAttribute("commandGuid", asParams.Parameters.CommandGuidForCommandBinding));
+
+                xnode.Add(xnode2);
+                #endregion
+
                 return xnode;
             }
             if ( this.osElement is Ground )
@@ -800,6 +814,40 @@ namespace FileManager
                     osParams.DeviceGuid = fk * 256 + device;
                     osParams.Cell = cell;
                 }
+
+                #region command section
+                osParams.DsGuidForCommandBinding = 0;
+                osParams.DeviceGuidForCommandBinding = 0;
+                osParams.CommandGuidForCommandBinding = 0;
+
+                xElement = node.Element("command");
+                if (xElement != null)
+                {
+                    var xAttribute = xElement.Attribute("dsGuid");
+                    if (xAttribute != null)
+                    {
+                        uint ds;
+                        uint.TryParse(xAttribute.Value, out ds);
+                        osParams.DsGuidForCommandBinding = ds;
+                    }
+
+                    xAttribute = xElement.Attribute("devGuid");
+                    if (xAttribute != null)
+                    {
+                        uint dev;
+                        uint.TryParse(xAttribute.Value, out dev);
+                        osParams.DeviceGuidForCommandBinding = dev;
+                    }
+
+                    xAttribute = xElement.Attribute("commandGuid");
+                    if (xAttribute != null)
+                    {
+                        uint command;
+                        uint.TryParse(xAttribute.Value, out command);
+                        osParams.CommandGuidForCommandBinding = command;
+                    }
+                }
+                #endregion
             }
             if ( this.osElement is StaticElement )
             {

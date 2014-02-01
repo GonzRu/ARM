@@ -6,8 +6,26 @@ namespace LibraryElements.CalculationBlocks
 {
     public class CalculationContext
     {
-        public CalculationContext( ElementCalculation calculation ) { this.Context = calculation; }
-        private CalculationContext( CalculationContext originalContext ) { this.Context = ElementCalculation.GetCopy( originalContext.Context ); }
+        public uint StateDSGuid { get; set; }
+        public uint StateDeviecGuid { get; set; }
+
+        public CalculationContext( ElementCalculation calculation )
+        {
+            this.Context = calculation;
+
+            var calc = calculation as ICalculationContext;
+            if (calc != null)
+            {
+                this.StateDSGuid = calc.CalculationContext.StateDSGuid;
+                this.StateDeviecGuid = calc.CalculationContext.StateDeviecGuid;
+            }
+        }
+        private CalculationContext( CalculationContext originalContext ) 
+        {
+            this.Context = ElementCalculation.GetCopy(originalContext.Context);
+            this.StateDSGuid = originalContext.StateDSGuid;
+            this.StateDeviecGuid = originalContext.StateDeviecGuid;
+        }
         public bool Execute( Element element, Graphics graphics )
         {
             var trunkCalculation = this.Context as IColorResult;

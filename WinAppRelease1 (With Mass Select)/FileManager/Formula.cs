@@ -7,6 +7,9 @@ namespace FileManager
 {
     public class BuildFormula : LinqStream
     {
+        private uint _stateDSGuid = 0;
+        private uint _stateDeviceGuid = 0;
+
         public const string FormulaBlock = "Behaviour of the block.xml";
         public const string BlockImage = "Device.bmp";
 
@@ -40,9 +43,33 @@ namespace FileManager
             if ( this.calculation == null )
                 return;
 
+            #region Parse StateDSGuid and StateDeviceGuid Attributes
+            try
+            {
+                var dsAttribute = data.Attribute("StateDSGuid");
+                if (dsAttribute != null)
+                    _stateDSGuid = UInt32.Parse(dsAttribute.Value);
+
+                var deviceAttribute = data.Attribute("StateDeviceGuid");
+                if (deviceAttribute != null)
+                    _stateDeviceGuid = UInt32.Parse(deviceAttribute.Value);
+            }
+            catch
+            {
+                Console.WriteLine(
+                    "Formula.cs::ParceDataFromNode: ошибка при разборе атрибутов StateDSGuid={0} и StateDeviceGuid={1}",
+                    data.Attribute("StateDSGuid").Value,
+                    data.Attribute("StateDeviceGuid").Value);
+            }
+            #endregion
+
+
             this.calculation.ReadXRecords( data );
         }
-        public CalculationContext GetData() { return ( calculation == null ) ? null : new CalculationContext( calculation ); }
+        public CalculationContext GetData() 
+        {
+            return (calculation == null) ? null : new CalculationContext(calculation) { StateDSGuid = _stateDSGuid, StateDeviecGuid = _stateDeviceGuid };
+        }
     }
     public class CreateFormula : LinqStream
     {
@@ -56,8 +83,13 @@ namespace FileManager
             var root = new XElement( "formulas" );
             root.Add( new XAttribute( "calculation", ( calculation == null ) ? "NaN" : calculation.Context.ToString() ) );
 
-            if ( calculation != null )
-                root.Add( calculation.Context.CreateXRecordsNode() );
+            if (calculation != null)
+            {
+                root.Add(new XAttribute("StateDSGuid", calculation.StateDSGuid));
+                root.Add(new XAttribute("StateDeviceGuid", calculation.StateDeviecGuid));
+
+                root.Add(calculation.Context.CreateXRecordsNode());
+            }
 
             return root;
         }
