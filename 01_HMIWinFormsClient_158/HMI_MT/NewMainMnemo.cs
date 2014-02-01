@@ -198,12 +198,13 @@ namespace HMI_MT
                             taglist.Add( ev.LinkVariableNewDs );
                         }
                     }
+
                     // привязка протокола состояния устройства
                     if ( idp != null && idp.Parameters != null )
                     {
                         ev = CommonUtils.CommonUtils.GetConnectionEvalNds( idp.Parameters.Type,
-                                                                           idp.Parameters.DsGuid,
-                                                                           idp.Parameters.DeviceGuid );
+                                                                           cr.CalculationContext.StateDSGuid,
+                                                                           cr.CalculationContext.StateDeviecGuid);
                         if ( ev != null && ev.LinkVariableNewDs != null )
                         {
                             ev.OnChangeValFormTI += cr.LinkSetTextStatusDev;
