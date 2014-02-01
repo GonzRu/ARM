@@ -238,28 +238,24 @@ namespace HMI_MT
                     // извлекаем описание из PrgDevCFG.cdp
                     var xeDescDev = HMI_Settings.CONFIGURATION.GetDeviceXMLDescription( 0, "MOA_ECU", (int)idp.Parameters.DeviceGuid );
 
-                    if ( xeDescDev == null ) continue;
-
                     CommonUtils.CommonUtils.CreateContextMenu( region, xeDescDev, parent );
 
                     /* добавление элементам пункта меню панелей нормального режима */
                     #region NormalModeContextMenu
-                    if (xeDescDev.Element( "DescDev" ) != null)
-                    if (xeDescDev.Element("DescDev").Element("ContextMenu") != null)
-                    if (region.MenuStrip != null)
+                    if (xeDescDev != null && region.MenuStrip != null)
                         region.MenuStrip.Items.Add(CreateNornalModeItem());
                     #endregion
 
                     try
                     {
                         // запоминаем подсказку элементу
-                        region.ToolTipMessage = string.IsNullOrEmpty( idp.Parameters.ToolTipMessage )
-                                                ? xeDescDev.Element( "DescDev" ).Element( "DescDev" ).Value
+                        region.ToolTipMessage = string.IsNullOrEmpty(idp.Parameters.ToolTipMessage)
+                                                ? xeDescDev.Element("DescDev").Element("DescDev").Value
                                                 : idp.Parameters.ToolTipMessage;
                     }
-                    catch ( Exception exx )
+                    catch (Exception exx)
                     {
-                        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( exx );
+                        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(exx);
                     }
                 }
             }
