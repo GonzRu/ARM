@@ -31,7 +31,7 @@ namespace DevicesLibrary
         /// <param name="unidev">Идентификатор устройства</param>
         private void InitComponents( String typeBlock, UInt32 unids, UInt32 unidev )
         {
-            tabControl.Controls.Add( new BlockViewTagPage( this, unids, unidev ) );
+            tabControl.Controls.Add(new BlockViewTagPage(this, unids, unidev) { Dock = DockStyle.Fill, Anchor = AnchorStyles.Bottom | AnchorStyles.Right });
 
             switch ( typeBlock )
             {

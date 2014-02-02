@@ -22,12 +22,11 @@ namespace HelperControlsLibrary.TeleMechanica
         {
             _dsGuid = dsGuid;
             _devGuid = devGuid;
-            this.Width = 500;
 
             TableLayoutPanel commonTableLayoutPanel = new TableLayoutPanel();
             commonTableLayoutPanel.RowCount = 2;
             commonTableLayoutPanel.ColumnCount = 1;
-            commonTableLayoutPanel.AutoSize = true;
+            commonTableLayoutPanel.Dock = DockStyle.Fill;
 
             #region commandsDataGridView
             var dataGridViewCellStyle1 = new DataGridViewCellStyle();
@@ -41,8 +40,6 @@ namespace HelperControlsLibrary.TeleMechanica
                     AllowUserToAddRows = false,
                     AllowUserToDeleteRows = false,
                     AllowUserToResizeRows = false,
-                    Width = 1000,
-                    Height = 1050
                 };
             _commandsDataGridView.MultiSelect = false;
             _commandsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
