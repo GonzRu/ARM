@@ -81,6 +81,9 @@ namespace LibraryElements
         {
             if ( CalculationContext != null )
                 CalculationContext.AdjustmentTags( CalculationContext.Context, Parameters.DsGuid, Parameters.DeviceGuid );
+
+            CalculationContext.StateDSGuid = Parameters.DsGuid;
+            CalculationContext.StateDeviecGuid = Parameters.DeviceGuid;
         }
         public override Element CopyElement( )
         {
