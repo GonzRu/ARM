@@ -156,11 +156,15 @@ namespace NormalModeLibrary.Windows
             {
                 label5.Enabled = true;
                 captionTextBox.Enabled = true;
+                _view.Component.IsCaptionVisible = true;
+                _view.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             }
             else
             {
                 label5.Enabled = false;
                 captionTextBox.Enabled = false;
+                _view.Component.IsCaptionVisible = false;
+                _view.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             }
         }
 
