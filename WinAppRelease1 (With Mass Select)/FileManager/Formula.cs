@@ -44,6 +44,8 @@ namespace FileManager
                 return;
 
             #region Parse StateDSGuid and StateDeviceGuid Attributes
+            _stateDSGuid = 0;
+            _stateDeviceGuid = 0;
             try
             {
                 var dsAttribute = data.Attribute("StateDSGuid");

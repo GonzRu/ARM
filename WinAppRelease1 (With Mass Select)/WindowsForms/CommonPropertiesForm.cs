@@ -105,6 +105,7 @@ namespace WindowsForms
           var calc = SelectElement as ICalculationContext;
           var dynamicParam = SelectElement as IDynamicParameters;
 
+          if (calc.CalculationContext != null)
           if (calc.CalculationContext.StateDSGuid == dynamicParam.Parameters.DsGuid
               && calc.CalculationContext.StateDeviecGuid == dynamicParam.Parameters.DeviceGuid)
           {
