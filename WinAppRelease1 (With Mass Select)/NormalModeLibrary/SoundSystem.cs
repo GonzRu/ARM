@@ -10,6 +10,7 @@ namespace NormalModeLibrary
     {
         static SoundSystem system;
         SoundPlayer player = new SoundPlayer();
+        private uint _countOfSoundRequest = 0;
 
         private SoundSystem()
         {
@@ -29,11 +30,17 @@ namespace NormalModeLibrary
             {
                 player.PlayLooping();
                 IsPlaying = true;
+                _countOfSoundRequest++;
             }
             catch ( Exception ex )
             {
                 IsPlaying = false;
-                throw new SoundSystemException( ex, player );
+
+                Console.WriteLine("=================");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(string.Format("Load file: {0}; Sound location: {1}", player.IsLoadCompleted, string.Format("Playback error: {0}", player.SoundLocation)));
+                Console.WriteLine(string.Format("Source: {0}", ex.Source));
+                Console.WriteLine("=================");
             }
         }
         /// <summary>
@@ -41,8 +48,13 @@ namespace NormalModeLibrary
         /// </summary>
         public void Stop()
         {
-            player.Stop();
-            IsPlaying = false;
+            _countOfSoundRequest--;
+
+            if (_countOfSoundRequest == 0)
+            {
+                player.Stop();
+                IsPlaying = false;
+            }
         }
 
         /// <summary>
