@@ -133,40 +133,22 @@ namespace NormalModeLibrary.Windows
 
             if (orea.OutOfRange)
             {
-                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(
-                    new System.Threading.ThreadStart(delegate
+                if (!_isAlarmMode)
+                {
+                    //System.Windows.Threading.Dispatcher.CurrentDispatcher.
+                    BeginInvoke(new System.Threading.ThreadStart(delegate
                     {
-                        if (!this.Visible) this.ShowDialog();
-                        this.tableLayoutPanel1.RowStyles[1].Height = 30;
-                        
+                        if (Component.IsAutomaticaly && !Visible)
+                            Hide();
                     }));
 
-                try
-                {
-                    if (SoundSystem.System.IsPlaying)
-                        return;
+                    _isAlarmMode = true;
+                    this.Height += 31;
+                    tableLayoutPanel1.RowStyles[1].Height = 31;
+
                     SoundSystem.System.Play();
                 }
-                catch (SoundSystemException ex)
-                {
-                    Console.WriteLine("=================");
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(string.Format("Load file: {0}; Sound location: {1}", ex.IsLoadCompleted, ex.SoundLocation));
-                    Console.WriteLine(string.Format("Source: {0}", ex.Source));
-                    Console.WriteLine("=================");
-                }
-                catch
-                {
-                    throw;
-                }
             }
-            else
-                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(
-                    new System.Threading.ThreadStart(delegate
-                    {
-                        if (!Component.IsAutomaticaly)
-                            SoundSystem.System.Stop();
-                    }));
         }
 
         private void ViewWindow_Shown( object sender, EventArgs e )
@@ -179,14 +161,27 @@ namespace NormalModeLibrary.Windows
             SoundSystem.System.Stop();
             this.Hide();
         }
+
+        private void AlarmButton_Click(object sender, EventArgs e)
+        {
+            this.Height -= 31;
+            tableLayoutPanel1.RowStyles[1].Height = 0;
+            SoundSystem.System.Stop();
+            _isAlarmMode = false;
+
+            if (Component.IsAutomaticaly)
+                Hide();
+        }
         #endregion
 
         #region Override Metdods
         protected override void OnClosing(CancelEventArgs e)
         {
-            base.OnClosing(e);
-
-            SoundSystem.System.Stop();
+            //if (!_isAlarmMode)
+            //{
+            //    Component.IsAutomaticaly = true;
+            //    Hide();
+            //}
         }
 
         protected override void OnResizeEnd(EventArgs e)
