@@ -46,7 +46,7 @@ namespace LibraryElements.CalculationBlocks
 
             var isVertical = Convert.ToBoolean( GetRecord( "IsVerticalView" ).Value );
             var @string = CreateFullString( GetRecord( "Text" ).Value.ToString( ),
-                                            GetRecord( "OnOff" ).Value.ToString( ),
+                                            ( StateProtocol == ProtocolStatus.Good ) ? GetRecord( "OnOff" ).Value.ToString( ) : "NA",
                                             GetRecord( "Uom" ).Value.ToString( ),
                                             isVertical );
 
