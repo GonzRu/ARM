@@ -327,7 +327,7 @@ namespace CommonUtils
                                                   WriteEventToLog((int)content.Code, numdevfc.ToString(CultureInfo.InvariantCulture), true);
 
                                                   /*ICommand cmd = */
-                                                  HMI_Settings.CONFIGURATION.ExecuteCommand(0, content.Code, content.Command, new byte[] { }, (Form)cms.Tag);
+                                                  HMI_Settings.CONFIGURATION.ExecuteCommand(0, idp.Parameters.DeviceGuid, content.Command, new byte[] { }, (Form)cms.Tag);
                                               }
                                               catch
                                               {
