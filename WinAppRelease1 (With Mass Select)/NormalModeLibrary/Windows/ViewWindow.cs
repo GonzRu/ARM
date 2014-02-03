@@ -120,7 +120,10 @@ namespace NormalModeLibrary.Windows
         {
             if (Component.IsVisible)
                 if (!Component.IsAutomaticaly || _isAlarmMode)
-                        Show();
+                {
+                    Show();
+                    Application.OpenForms[0].Activate();
+                }
         }
 
         internal ViewModel.PanelViewModel Component
