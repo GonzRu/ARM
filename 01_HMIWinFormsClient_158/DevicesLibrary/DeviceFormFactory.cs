@@ -53,7 +53,8 @@ namespace DevicesLibrary
                 ( deviceform as Form ).Text = CommonUtils.CommonUtils.GetDispCaptionForDevice( guid );
 
                 var isconnectState = false;
-                var connectState = PTKState.Iinstance.GetValueAsString( guid.ToString( CultureInfo.InvariantCulture ), "Связь" );
+                #warning need to use dsGuid
+                var connectState = PTKState.Iinstance.GetValueAsString(0, (uint) guid, "Связь");
 
                 if ( guid == 25855 ) connectState = "true";
 

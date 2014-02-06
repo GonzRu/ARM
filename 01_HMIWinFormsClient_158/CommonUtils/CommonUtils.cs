@@ -207,14 +207,14 @@ namespace CommonUtils
         /// </summary>
         /// <param name="cms">контекстное меню</param>
         /// <param name="compressnumdev">DevGUID устройства</param>
-        private static void CustomizeContextMenuItems( ContextMenuStrip cms, int compressnumdev )
+        private static void CustomizeContextMenuItems( ContextMenuStrip cms, uint dsGuid, uint devGuid )
         {
             try
             {
                 if (cms == null) return;
 
                 bool state;
-                bool.TryParse(PTKState.Iinstance.GetValueAsString(compressnumdev.ToString(CultureInfo.InvariantCulture), "Связь"), out state);
+                bool.TryParse(PTKState.Iinstance.GetValueAsString(dsGuid, devGuid, "Связь"), out state);
 
                 foreach (ToolStripItem tsi in cms.Items)
                 {
@@ -230,13 +230,13 @@ namespace CommonUtils
                     }
                     
                     var content = (CommandContent<String>)tsi.Tag;
-                    
-                    if ( !state || !PTKState.Iinstance.IsAdapterExist( compressnumdev.ToString( CultureInfo.InvariantCulture ),content.Command ) )
+
+                    if (!state || !PTKState.Iinstance.IsAdapterExist(dsGuid, devGuid, content.Command))
                         tsi.Enabled = tsi.Visible = false;
                     else
                     {
                         bool cmd;
-                        bool.TryParse( PTKState.Iinstance.GetValueAsString( compressnumdev.ToString( CultureInfo.InvariantCulture ), content.Command ), out cmd );
+                        bool.TryParse(PTKState.Iinstance.GetValueAsString(dsGuid, devGuid, content.Command), out cmd);
 
                         switch ( content.Parameter )
                         {
@@ -283,7 +283,7 @@ namespace CommonUtils
                                                         if (isp == null) return;
                                                         var idp = isp.Core as IDynamicParameters;
                                                         if (idp != null && idp.Parameters != null)
-                                                            CustomizeContextMenuItems((ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid);
+                                                            CustomizeContextMenuItems((ContextMenuStrip)sender, idp.Parameters.DsGuid, idp.Parameters.DeviceGuid);
                                                     };
 
                 var xItems = menu.Elements("MenuItem");
