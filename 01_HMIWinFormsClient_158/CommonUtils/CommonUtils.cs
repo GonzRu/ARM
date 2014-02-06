@@ -439,25 +439,7 @@ namespace CommonUtils
                                            string.Format( "0({0}.{1}.0.60013.0)", devGuid / 256, devGuid % 256 ), "0",
                                            "Состояние протокола", "" );
 
-            if ( typeBlock.Contains( "USO" ) && typeBlock.Contains( "MTR" ) || typeBlock.Contains( "ITDS" ) )
-                return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
-                                           string.Format( "0({0}.{1}.8)", dsGuid, devGuid ),
-                                           "Состояние протокола", "" );
-
-            if ( typeBlock.Contains( "BRCN_100" ) )
-                return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
-                                           string.Format( "0({0}.{1}.130726656)", dsGuid, devGuid ),
-                                           "Состояние протокола", "" );
-            //if (typeBlock.Contains("UTM") || typeBlock.Contains("ТОР") || typeBlock.Contains("КЕДР"))
-            #warning Refact!!!
-            if (devGuid > 768)
-                return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
-                           string.Format("0(0.1001.{0})", devGuid),
-                           "Состояние протокола", "");
-
-            return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
-                                       string.Format("0(0.1000.{0})", devGuid),
-                                       "Состояние протокола", "");
+            return PTKState.Iinstance.GetformulaEvalNdsForDeviceState(dsGuid, devGuid);
         }
 
         /// <summary>

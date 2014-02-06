@@ -25,7 +25,8 @@ using System.Xml.Linq;
 using System.Text;
 using System.IO;
 using AdapterLib;
-
+using Calculator;
+using HMI_MT_Settings;
 using DeviceTuple = System.Tuple<uint, uint>;
 
 namespace PTKStateLib
@@ -45,7 +46,14 @@ namespace PTKStateLib
         /// <summary>
         /// список <DevGuid, ссылка на список <Название сигнала, ссылка на адаптер для привязки к изменениям>>
         /// </summary>
-        Dictionary<DeviceTuple, Dictionary<string, AdapterBase>> listDevByDevGuid = new Dictionary<Tuple<uint, uint>, Dictionary<string, AdapterBase>>();
+        private Dictionary<DeviceTuple, Dictionary<string, AdapterBase>> listDevByDevGuid = new Dictionary<Tuple<uint, uint>, Dictionary<string, AdapterBase>>();
+
+        /// <summary>
+        /// List devices protocol state tag
+        /// </summary>
+        private Dictionary<DeviceTuple, string> listDeviceStateTag = new Dictionary<DeviceTuple, string>(); 
+
+        private static string DeviceStateTagName = "Связь";
         #endregion
 
         #region конструктор(ы)
@@ -87,10 +95,12 @@ namespace PTKStateLib
                 {
                     if (xedev.Attribute("enable").Value.ToLower() == "false") 
                         continue;
+                    
 
                     Dictionary<string, AdapterBase> listLinkToAdapters = new Dictionary<string, AdapterBase>();
 
                     IEnumerable<XElement> xeformulas = xedev.Elements("formula");
+                    #region Parsing dsGuid and DevGUID attributes
                     uint dsGuid;
                     uint devGuid;
 
@@ -102,7 +112,10 @@ namespace PTKStateLib
                     else
                         dsGuid = uint.Parse(xedev.Attribute("DsGuid").Value);
                     devGuid = (uint.Parse(xedev.Attribute("DevGUID").Value));
+                    DeviceTuple deviceTuple = new DeviceTuple(dsGuid, devGuid);
+                    #endregion
 
+                    #region Parsing formula sections
                     foreach (XElement xeformula in xeformulas)
                     {
                         AdapterBase abase = (AdapterBase)new AdapterFactoryImplementation().Make(xeformula.Attribute("typeadapter").Value);
@@ -113,9 +126,26 @@ namespace PTKStateLib
                             listLinkToAdapters.Add(xeformula.Attribute("name").Value, abase);
                         else
                             System.Windows.Forms.MessageBox.Show("Ошибка в конфигурации панели состояний - устройство : " + xeformula.Attribute("name").Value);
-                    }
 
-                    listDevByDevGuid.Add(new DeviceTuple(dsGuid, devGuid), listLinkToAdapters);
+                        #region Parsing device protocol state tag
+                        if (xeformula.Attribute("name").Value == DeviceStateTagName)
+                        {
+                            var deviceStateTagSection = xeformula.Element("value");
+                            if (deviceStateTagSection == null)
+                            {
+                                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 0, "Отсутствует запись с тегом состояния устройства в PanelState.xml");
+                                continue;
+                            }
+
+                            string tagStr = deviceStateTagSection.Attribute("tag").Value;
+
+                            listDeviceStateTag.Add(deviceTuple, tagStr);
+                        }
+                        #endregion
+                    }
+                    #endregion
+
+                    listDevByDevGuid.Add(deviceTuple, listLinkToAdapters);
                 }
             }
             catch (Exception ex)
@@ -166,6 +196,42 @@ namespace PTKStateLib
             }
 
             return false;
+        }
+
+        public FormulaEvalNds GetformulaEvalNdsForDeviceState(uint dsGuid, uint deviceGuid)
+        {
+            DeviceTuple deviceTuple = new DeviceTuple(dsGuid, deviceGuid);
+
+            if (listDeviceStateTag.ContainsKey(deviceTuple))
+            {
+                // tag = {DS.Device.Tag}
+                string tag = listDeviceStateTag[deviceTuple];
+
+                return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
+                                          string.Format("0({0})", tag),
+                                          "Состояние протокола", "");
+            }
+
+            return null;
+        }
+
+        public bool GetDeviceState(uint dsGuid, uint devGuid)
+        {
+            DeviceTuple deviceTuple = new DeviceTuple(dsGuid, devGuid);
+
+            if (listDevByDevGuid.ContainsKey(deviceTuple))
+            {
+                Dictionary<string, AdapterBase> listLinkToAdapters = listDevByDevGuid[deviceTuple];
+
+                if (listLinkToAdapters.ContainsKey(DeviceStateTagName))
+                {
+                    var adapterBase = listLinkToAdapters[DeviceStateTagName];
+
+                    return bool.Parse(adapterBase.ValueAsString);
+                }
+            }
+            
+            throw new Exception("Не задан тег состояния устройства" +  devGuid.ToString());
         }
     }
 }
