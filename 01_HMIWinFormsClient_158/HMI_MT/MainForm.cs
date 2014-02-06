@@ -261,6 +261,10 @@ namespace HMI_MT
                 NormalModeLibrary.ComponentFactory.Factory.LoadXml();
                 DebugStatistics.WindowStatistics.AddStatistic( "Загрузка параметров нормального режима завершена." );
 
+                DebugStatistics.WindowStatistics.AddStatistic("Загрузка PanelState.xml");
+                PTKState.Iinstance.InitPTKStateInfo();
+                DebugStatistics.WindowStatistics.AddStatistic("Загрузка PanelState.xml завершена.");
+
                 // соберем мусор после загрузки
                 GC.Collect();
 
@@ -619,10 +623,6 @@ namespace HMI_MT
             //GPS gpsInfo = GPS.Iinstance;
             //gpsInfo.InitGPSInfo( HMI_Settings.PathToPrgDevCFG_cdp,HMI_Settings.PathPanelState_xml, Configurator.KB);
             //gpsInfo.OnChangeGPSActive+=new ChangeGPSActive(gpsInfo_OnChangeGPSActive);
-
-		  // инициализация класса PTKState, содержащего состояния устройств ПТК
-            PTKState PtkState = PTKState.Iinstance;
-            PtkState.InitPTKStateInfo();
       }
 
       #region проверка возможности соединения с БД и старт ПТК в нормальном или ограниченном режиме
