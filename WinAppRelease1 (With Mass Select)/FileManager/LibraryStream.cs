@@ -31,14 +31,10 @@ namespace FileManager
 
         Rectangle elemrect;
 
-        readonly Dictionary<String, ImageData> defaultImages;
-
         #region Class Methods
         public SchemasStream()
         {
             sturtupFolder = Application.StartupPath + Path.DirectorySeparatorChar + "Project";
-            this.defaultImages = new Dictionary<String, ImageData>();
-            ReadAllDeviceImages();
         }
         /// <summary>
         /// Форма демонстрирующая процесс загрузки или сохранения
@@ -130,27 +126,6 @@ namespace FileManager
             foreach ( var selem in element.Elements() )
                 root.Nodes.Add( CreateNodeString( selem ) );
             this.errorLogForm.SetErrorRecord( root );
-        }
-        /// <summary>
-        /// Чтение всех изображений по умолчанию
-        /// </summary>
-        private void ReadAllDeviceImages()
-        {
-            foreach ( var dir in Directory.GetDirectories( sturtupFolder ) )
-            {
-                var fi = new FileInfo( dir + Path.DirectorySeparatorChar + BuildFormula.BlockImage );
-                if ( fi.Exists )
-                    try
-                    {
-                        var image = WorkFile.ReadImageFile( fi.FullName );
-                        this.defaultImages.Add( fi.Directory.Name, new ImageData( image, fi.FullName ) );
-                    }
-                    catch ( Exception )
-                    {
-                        MessageError( "Ошибка чтения графического файла: " + fi.FullName );
-                        throw;
-                    }
-            }
         }
         #endregion
 
