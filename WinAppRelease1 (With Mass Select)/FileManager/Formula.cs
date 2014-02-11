@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Xml.Linq;
 
 using LibraryElements.CalculationBlocks;
@@ -9,6 +10,7 @@ namespace FileManager
     {
         private uint _stateDSGuid = 0;
         private uint _stateDeviceGuid = 0;
+        private bool _isDeviceFromDeviceBinding = false;
 
         public const string FormulaBlock = "Behaviour of the block.xml";
         public const string BlockImage = "Device.bmp";
@@ -43,34 +45,53 @@ namespace FileManager
             if ( this.calculation == null )
                 return;
 
+            #region Parse IsDeviceFromDeviceBinding, StateDSGuid and StateDeviceGuid Attributes
+
+            #region Parse attribute IsDeviceFromDeviceBinding
+            bool isDeviceFromDeviceBindingTmp;
+            if (data.Attribute("IsDevicefromDeviceBinding") == null)
+                isDeviceFromDeviceBindingTmp = true;
+            else
+            {
+                if (!bool.TryParse(data.Attribute("IsDevicefromDeviceBinding").Value, out isDeviceFromDeviceBindingTmp))
+                {
+                    isDeviceFromDeviceBindingTmp = true;
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "Ошибка при разборе атрибута IsDevicefromDeviceBinding - неверное значение:" + data.Attribute("IsDevicefromDeviceBinding").Value);
+                }
+            }
+            _isDeviceFromDeviceBinding = isDeviceFromDeviceBindingTmp;
+            #endregion
+
             #region Parse StateDSGuid and StateDeviceGuid Attributes
             _stateDSGuid = 0;
             _stateDeviceGuid = 0;
-            try
+            if (!_isDeviceFromDeviceBinding)
             {
                 var dsAttribute = data.Attribute("StateDSGuid");
                 if (dsAttribute != null)
-                    _stateDSGuid = UInt32.Parse(dsAttribute.Value);
+                    if (!UInt32.TryParse(dsAttribute.Value, out _stateDSGuid))
+                        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "Ошибка при разборе атрибута StateDSGuid - неверное значение:" + dsAttribute.Value);
 
                 var deviceAttribute = data.Attribute("StateDeviceGuid");
                 if (deviceAttribute != null)
-                    _stateDeviceGuid = UInt32.Parse(deviceAttribute.Value);
-            }
-            catch
-            {
-                Console.WriteLine(
-                    "Formula.cs::ParceDataFromNode: ошибка при разборе атрибутов StateDSGuid={0} и StateDeviceGuid={1}",
-                    data.Attribute("StateDSGuid").Value,
-                    data.Attribute("StateDeviceGuid").Value);
+                    if (!UInt32.TryParse(deviceAttribute.Value, out _stateDeviceGuid))
+                        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "Ошибка при разборе атрибута StateDeviceGuid - неверное значение:" + deviceAttribute.Value);
             }
             #endregion
+            #endregion
 
-
-            this.calculation.ReadXRecords( data );
+            this.calculation.ReadXRecords(data);
         }
-        public CalculationContext GetData() 
+        public CalculationContext GetData()
         {
-            return (calculation == null) ? null : new CalculationContext(calculation) { StateDSGuid = _stateDSGuid, StateDeviecGuid = _stateDeviceGuid };
+            return (calculation == null)
+                       ? null
+                       : new CalculationContext(calculation)
+                             {
+                                 StateDSGuid = _stateDSGuid,
+                                 StateDeviecGuid = _stateDeviceGuid,
+                                 IsDeviceFromDeviceBinding = _isDeviceFromDeviceBinding
+                             };
         }
     }
     public class CreateFormula : LinqStream
