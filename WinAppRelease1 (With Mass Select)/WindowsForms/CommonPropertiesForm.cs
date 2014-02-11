@@ -106,19 +106,20 @@ namespace WindowsForms
           var dynamicParam = SelectElement as IDynamicParameters;
 
           if (calc.CalculationContext != null)
-          if (calc.CalculationContext.StateDSGuid == dynamicParam.Parameters.DsGuid
-              && calc.CalculationContext.StateDeviecGuid == dynamicParam.Parameters.DeviceGuid)
           {
-              StateFromBindingDeviceCheckBox.Checked = true;
-              StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
-          }
-          else
-          {
-              StateFromBindingDeviceCheckBox.Checked = false;
-              StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+              if (calc.CalculationContext.IsDeviceFromDeviceBinding)
+              {
+                  StateFromBindingDeviceCheckBox.Checked = true;
+                  StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+              }
+              else
+              {
+                  StateFromBindingDeviceCheckBox.Checked = false;
+                  StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
 
-              stateDSGuidNumericUpDown.Value = calc.CalculationContext.StateDSGuid;
-              stateDeviceGuidNumericUpDown.Value = calc.CalculationContext.StateDeviecGuid; 
+                  stateDSGuidNumericUpDown.Value = calc.CalculationContext.StateDSGuid;
+                  stateDeviceGuidNumericUpDown.Value = calc.CalculationContext.StateDeviecGuid; 
+              }
           }
 
           if ( calc != null && calc.CalculationContext != null )
@@ -222,6 +223,7 @@ namespace WindowsForms
 
               if (calc.CalculationContext != null)
               {
+                  calc.CalculationContext.IsDeviceFromDeviceBinding = StateFromBindingDeviceCheckBox.Checked;
                   calc.CalculationContext.StateDSGuid = Convert.ToUInt32(this.stateDSGuidNumericUpDown.Value);
                   calc.CalculationContext.StateDeviecGuid = Convert.ToUInt32(this.stateDeviceGuidNumericUpDown.Value);
               }
