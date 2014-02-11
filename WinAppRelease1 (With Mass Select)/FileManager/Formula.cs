@@ -108,6 +108,7 @@ namespace FileManager
 
             if (calculation != null)
             {
+                root.Add(new XAttribute("IsDeviceFromDeviceBinding", calculation.IsDeviceFromDeviceBinding));
                 root.Add(new XAttribute("StateDSGuid", calculation.StateDSGuid));
                 root.Add(new XAttribute("StateDeviceGuid", calculation.StateDeviecGuid));
 
