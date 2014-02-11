@@ -81,6 +81,10 @@
     <Compile Include="XmlCreater.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
+      <Project>{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}</Project>
+      <Name>TraceSourceLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibraryElements\LibraryElements.csproj">
       <Project>{33B9796A-C318-42B7-95D2-50A9CB4E8904}</Project>
       <Name>LibraryElements</Name>
