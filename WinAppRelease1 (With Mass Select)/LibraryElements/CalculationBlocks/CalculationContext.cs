@@ -8,6 +8,7 @@ namespace LibraryElements.CalculationBlocks
     {
         public uint StateDSGuid { get; set; }
         public uint StateDeviecGuid { get; set; }
+        public bool IsDeviceFromDeviceBinding { get; set; }
 
         public CalculationContext( ElementCalculation calculation )
         {
@@ -18,6 +19,7 @@ namespace LibraryElements.CalculationBlocks
             {
                 this.StateDSGuid = calc.CalculationContext.StateDSGuid;
                 this.StateDeviecGuid = calc.CalculationContext.StateDeviecGuid;
+                this.IsDeviceFromDeviceBinding = calc.CalculationContext.IsDeviceFromDeviceBinding;
             }
         }
         private CalculationContext( CalculationContext originalContext ) 
@@ -25,6 +27,7 @@ namespace LibraryElements.CalculationBlocks
             this.Context = ElementCalculation.GetCopy(originalContext.Context);
             this.StateDSGuid = originalContext.StateDSGuid;
             this.StateDeviecGuid = originalContext.StateDeviecGuid;
+            this.IsDeviceFromDeviceBinding = originalContext.IsDeviceFromDeviceBinding;
         }
         public bool Execute( Element element, Graphics graphics )
         {

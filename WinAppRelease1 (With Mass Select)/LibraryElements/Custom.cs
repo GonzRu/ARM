@@ -79,12 +79,15 @@ namespace LibraryElements
         /// </summary>
         public void AdjustmentTags( )
         {
-            if ( CalculationContext != null )
-                CalculationContext.AdjustmentTags( CalculationContext.Context, Parameters.DsGuid, Parameters.DeviceGuid );
-            if (CalculationContext.StateDSGuid == 0 && CalculationContext.StateDeviecGuid == 0)
+            if (CalculationContext != null)
             {
-                CalculationContext.StateDSGuid = Parameters.DsGuid;
-                CalculationContext.StateDeviecGuid = Parameters.DeviceGuid;
+                CalculationContext.AdjustmentTags(CalculationContext.Context, Parameters.DsGuid, Parameters.DeviceGuid);
+
+                if (CalculationContext.IsDeviceFromDeviceBinding)
+                {
+                    CalculationContext.StateDSGuid = Parameters.DsGuid;
+                    CalculationContext.StateDeviecGuid = Parameters.DeviceGuid;
+                }
             }
         }
         public override Element CopyElement( )
