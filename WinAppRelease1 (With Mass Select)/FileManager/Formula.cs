@@ -49,14 +49,14 @@ namespace FileManager
 
             #region Parse attribute IsDeviceFromDeviceBinding
             bool isDeviceFromDeviceBindingTmp;
-            if (data.Attribute("IsDevicefromDeviceBinding") == null)
+            if (data.Attribute("IsDeviceFromDeviceBinding") == null)
                 isDeviceFromDeviceBindingTmp = true;
             else
             {
-                if (!bool.TryParse(data.Attribute("IsDevicefromDeviceBinding").Value, out isDeviceFromDeviceBindingTmp))
+                if (!bool.TryParse(data.Attribute("IsDeviceFromDeviceBinding").Value, out isDeviceFromDeviceBindingTmp))
                 {
                     isDeviceFromDeviceBindingTmp = true;
-                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "Ошибка при разборе атрибута IsDevicefromDeviceBinding - неверное значение:" + data.Attribute("IsDevicefromDeviceBinding").Value);
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "Ошибка при разборе атрибута IsDevicefromDeviceBinding - неверное значение:" + data.Attribute("IsDeviceFromDeviceBinding").Value);
                 }
             }
             _isDeviceFromDeviceBinding = isDeviceFromDeviceBindingTmp;
