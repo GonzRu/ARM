@@ -410,8 +410,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOptionsFormEditor.resx">
       <SubType>Designer</SubType>
@@ -428,15 +428,15 @@
       <SubType>Designer</SubType>
       <DependentUpon>ViewSingleAvar.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -490,42 +490,6 @@
     <Compile Include="XmlCreater.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\Images\sysleave.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\alarm.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\clock.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\database.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\gears.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\mnemo_pict2.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\setup.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\sysenter.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\syslock.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\user.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\userinfo.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\Logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\toolstripLine.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -565,53 +529,8 @@
     <None Include="Resources\LIGHTON.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\Images\3007.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\9002.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\Images\btnAvarSoundEnable.bmp" />
-    <None Include="bin\Debug\Images\btnAvarSoundDisable.bmp" />
-    <None Include="bin\Debug\Images\btnWarnrSoundEnable.bmp" />
-    <None Include="bin\Debug\Images\btnWarnSoundDisable.bmp" />
-    <None Include="bin\Debug\Images\DRAW.ICO" />
-    <None Include="bin\Debug\Images\Xena Scroll.ico" />
-    <None Include="bin\Debug\Images\FONT02.ICO" />
-    <None Include="bin\Debug\Images\Printer.bmp" />
-    <None Include="bin\Debug\Images\MISC04.ICO" />
-    <None Include="bin\Debug\Images\LABELS.ICO" />
-    <None Include="bin\Debug\Images\MAIL20.ICO" />
-    <None Include="bin\Debug\Images\Shutdown.bmp" />
-    <None Include="bin\Debug\Images\script.ico" />
-    <None Include="bin\Debug\Images\Control Panel.bmp" />
-    <None Include="bin\Debug\Images\consumer.ico" />
-    <None Include="bin\Debug\Images\CLOCK03.ICO" />
-    <None Include="bin\Debug\Images\RULERS.ICO" />
-    <None Include="bin\Debug\Images\INFO.ICO" />
-    <None Include="bin\Debug\Images\keys.ico" />
-    <None Include="bin\Debug\Images\sound.ico" />
-    <None Include="bin\Debug\Images\MGXDES.ICO" />
-    <None Include="bin\Debug\Images\oh#0.ico" />
-    <None Include="bin\Debug\Images\OSA#15.ico" />
-    <None Include="bin\Debug\Images\SNDVOL32#4.jpg" />
-    <None Include="bin\Debug\Images\mtLogo.bmp" />
-    <None Include="bin\Debug\Images\mtLep.bmp" />
-    <None Include="bin\Debug\Images\DEPENDS#0.ico" />
-    <None Include="bin\Debug\Images\DEPENDS0.ico" />
     <None Include="HMI_MT_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
-    <None Include="bin\Debug\Images\rem17.ico" />
-    <None Include="bin\Debug\Images\CascadeWindowsHS.png" />
-    <None Include="bin\Debug\Images\Help.png" />
-    <None Include="bin\Debug\Images\SychronizeListHS.png" />
-    <None Include="bin\Debug\Images\параметры норм режима.bmp" />
-    <None Include="bin\Debug\Images\SymapImage.png" />
-    <None Include="bin\Debug\Images\SymapImagePNG.png" />
-    <None Include="bin\Debug\Images\MtRA.ico" />
-    <Content Include="CascadeWindowsHS.png" />
-    <Content Include="DRAW.bmp" />
-    <Content Include="Help.png" />
     <Content Include="Logo.ico" />
     <Content Include="MtRA.ico" />
     <None Include="Resources\About%2816p%29.png" />
@@ -633,6 +552,8 @@
     <None Include="Resources\Logo%2832p%29.png" />
     <None Include="Resources\Exit%2816p%29.png" />
     <None Include="Resources\Lock%2832p%29.png" />
+    <Content Include="Resources\CascadeWindowsHS.png" />
+    <Content Include="Resources\Help.png" />
     <Content Include="Resources\MtRA.ico" />
     <None Include="Resources\ResetAllCmd%2832p%29.png" />
     <None Include="Resources\Reconnect%2832p%29.png" />
@@ -641,8 +562,7 @@
     <None Include="Resources\ViewCmds%2832p%29.png" />
     <None Include="Resources\SwitchUser%2832p%29.png" />
     <None Include="Resources\UserInformation%2832p%29.png" />
-    <Content Include="SychronizeListHS.png" />
-    <Content Include="параметры норм режима.bmp" />
+    <Content Include="Resources\SychronizeListHS.png" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -778,6 +698,7 @@
       <Name>SourceMOA</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
