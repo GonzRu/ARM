@@ -251,6 +251,10 @@ namespace HMI_MT
                     }
                     #endregion
 
+                    // If ContextMenuStrip haven't menuItems - delete it
+                    if (region.MenuStrip.Items.Count == 0)
+                        region.MenuStrip = null;
+
                     try
                     {
                         // запоминаем подсказку элементу
