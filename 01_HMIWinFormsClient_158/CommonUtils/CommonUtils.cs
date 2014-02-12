@@ -237,7 +237,7 @@ namespace CommonUtils
                     if (int.TryParse(content.Parameter, out parameter))
                     {
                         bool deviceState = false;
-                        bool.TryParse(PTKState.Iinstance.GetValueAsString(0, content.Code, "Связь"), out deviceState);
+                        bool.TryParse(PTKState.Iinstance.GetValueAsString(content.DsGuid, content.DevGuid, "Связь"), out deviceState);
 
                         if (!deviceState)
                         {
@@ -245,19 +245,19 @@ namespace CommonUtils
                         }
                         else
                         {
-                            if (!PTKState.Iinstance.IsAdapterExist(0, content.Code, content.Command))
+                            if (!PTKState.Iinstance.IsAdapterExist(content.DsGuid, content.DevGuid, content.Command))
                             {
                                 tsi.Enabled = tsi.Visible = true;
                                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0,
                                                                                      "Нет привязки к комманде контекстного меню." +
-                                                                                     "DevGuid=" + content.Code +
+                                                                                     "DevGuid=" + content.DevGuid +
                                                                                      " commandGuid = " + content.Command);
 
                                 continue;
                             }
 
                             bool cmdState;
-                            bool.TryParse(PTKState.Iinstance.GetValueAsString(0, content.Code, content.Command), out cmdState);
+                            bool.TryParse(PTKState.Iinstance.GetValueAsString(content.DsGuid, content.DevGuid, content.Command), out cmdState);
 
                             if (parameter == 0 || parameter == 1)
                             {
@@ -446,7 +446,8 @@ namespace CommonUtils
                 {
                     Command = currentCommand.IECAddress,
                     Context = currentCommand.CmdDispatcherName + " - " + parameter.Name,
-                    Code = devGuid,
+                    DsGuid = dsGuid,
+                    DevGuid = devGuid,
                     Parameter = parameter.Value.ToString()
                 };
 
@@ -471,14 +472,16 @@ namespace CommonUtils
                                           var idp = region as IDynamicParameters;
                                           if (idp == null || idp.Parameters == null) return;
                                           #endregion
-
-                                          #region Выполнение команды
+                                          
+                                          #region Подготовка параметров
                                           byte paramValue = byte.Parse(contextMenuItemContent.Parameter);
                                           byte[] param = new byte[] { paramValue };
+                                          #endregion
 
+                                          #region Выполнение команды
                                           WriteEventToLog(42, cmdGuid.ToString(), true);
 
-                                          HMI_Settings.CONFIGURATION.ExecuteCommand(0, contextMenuItemContent.Code, contextMenuItemContent.Command, param, null);
+                                          HMI_Settings.CONFIGURATION.ExecuteCommand(contextMenuItemContent.DsGuid, contextMenuItemContent.DevGuid, contextMenuItemContent.Command, param, null);
                                           #endregion
                                       };
 

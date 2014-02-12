@@ -23,5 +23,15 @@ namespace HelperLibrary
         /// Дополнительные параметры
         /// </summary>
         public T Parameter { get; set; }
+
+        /// <summary>
+        /// DataServer Guid
+        /// </summary>
+        public uint DsGuid { get; set; }
+
+        /// <summary>
+        /// Device Guid
+        /// </summary>
+        public uint DevGuid { get; set; }
     }
 }
