@@ -1136,7 +1136,8 @@ namespace HMI_MT
             int numdevfc = Convert.ToInt32(GetDataGridViewCell("clmBlockId", e.RowIndex).Value.ToString());
             
             numdevfc = Convert.ToInt32(numdevfc);
-            IDeviceForm frm = DevicesLibrary.DeviceFormFactory.CreateForm( this, numdevfc, parent.arrFrm );
+            #warning DsGuid = 0
+            IDeviceForm frm = DevicesLibrary.DeviceFormFactory.CreateForm( this, 0, (uint)numdevfc, parent.arrFrm );
             frm.ActivateAndShowTreeGroupWithCategory(HelperControlsLibrary.Category.Crush);
 
             #region извлекаем данные по аварии в конфигурацию

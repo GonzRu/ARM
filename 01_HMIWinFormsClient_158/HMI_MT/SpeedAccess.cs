@@ -554,7 +554,7 @@ namespace HMI_MT
                 var idp = sender as IDynamicParameters;
 
                 if ( idp != null && idp.Parameters != null )
-                    DevicesLibrary.DeviceFormFactory.CreateForm( this, (int)idp.Parameters.DeviceGuid, parent.arrFrm );
+                    DevicesLibrary.DeviceFormFactory.CreateForm( this, idp.Parameters.DsGuid, idp.Parameters.DeviceGuid, parent.arrFrm );
             }
             catch ( Exception ex )
             {

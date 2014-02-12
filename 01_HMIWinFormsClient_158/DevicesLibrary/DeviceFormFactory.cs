@@ -13,16 +13,16 @@ namespace DevicesLibrary
 {
     public static class DeviceFormFactory
     {
-        public static IDeviceForm CreateForm(Form parent,int guid, ArrayList arrFrm)
+        public static IDeviceForm CreateForm(Form parent, uint dsGuid, uint devGuid, ArrayList arrFrm)
         {
             // извлекаем описание из PrgDevCFG.cdp
             try
             {
-                var xeDescDev = HMI_Settings.CONFIGURATION.GetDeviceXMLDescription(0, "MOA_ECU", guid);
+                var xeDescDev = HMI_Settings.CONFIGURATION.GetDeviceXMLDescription((int)dsGuid, "MOA_ECU", (int)devGuid);
 
                 if (xeDescDev == null)
                 {
-                    MessageBox.Show( string.Format( "Элемент не привязан к устройству (GUID = {0}) в текущей конфигурации.", guid ), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning );
+                    MessageBox.Show(string.Format("Элемент не привязан к устройству (GUID = {0}) в текущей конфигурации.", devGuid), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     throw new Exception( string.Format( "{0} : DeviceFormFactory : {1}", DateTime.Now, "Элемент не привязан к устройству в текущей конфигурации" ) );
                 }
 
@@ -50,13 +50,12 @@ namespace DevicesLibrary
                 
                 DebugStatistics.WindowStatistics.AddStatistic( "Создание и инициализация формы завершено." );
 
-                ( deviceform as Form ).Text = CommonUtils.CommonUtils.GetDispCaptionForDevice( guid );
+                ( deviceform as Form ).Text = CommonUtils.CommonUtils.GetDispCaptionForDevice( (int)devGuid );
 
                 var isconnectState = false;
-                #warning need to use dsGuid
-                var connectState = PTKState.Iinstance.GetValueAsString(0, (uint) guid, "Связь");
+                var connectState = PTKState.Iinstance.GetValueAsString(dsGuid, devGuid, "Связь");
 
-                if ( guid == 25855 ) connectState = "true";
+                if (devGuid == 25855) connectState = "true";
 
                 if ( connectState == string.Empty || bool.TryParse( connectState, out isconnectState ) )
                 {
