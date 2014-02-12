@@ -230,7 +230,64 @@ namespace CommonUtils
                     }
                     
                     var content = (CommandContent<String>)tsi.Tag;
-                    
+
+                    #region Check new command menuItem status
+
+                    int parameter;
+                    if (int.TryParse(content.Parameter, out parameter))
+                    {
+                        bool deviceState = false;
+                        bool.TryParse(PTKState.Iinstance.GetValueAsString(content.Code.ToString(CultureInfo.InvariantCulture), "—в€зь"), out deviceState);
+
+                        if (!deviceState)
+                        {
+                                tsi.Enabled = tsi.Visible = false;
+                        }
+                        else
+                        {
+                            if (!PTKState.Iinstance.IsAdapterExist(content.Code.ToString(CultureInfo.InvariantCulture), content.Command))
+                            {
+                                tsi.Enabled = tsi.Visible = true;
+                                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0,
+                                                                                     "Ќет прив€зки к комманде контекстного меню." +
+                                                                                     "DevGuid=" + content.Code +
+                                                                                     " commandGuid = " + content.Command);
+
+                                continue;
+                            }
+
+                            bool cmdState;
+                            bool.TryParse(PTKState.Iinstance.GetValueAsString(content.Code.ToString(CultureInfo.InvariantCulture), content.Command), out cmdState);
+
+                            if (parameter == 0 || parameter == 1)
+                            {
+                                /* ƒелаетс€ допущение, что значение
+                                 * parameter = 0 соответствует команде ¬кл, а
+                                 * parameter = 1 соответствует команде ¬ыкл.
+                                 * “аким образом, если тег, к которому прив€зана комманда
+                                 * равен True, то MenuItem соответствующий parameter = 1
+                                 * надо скрыть, а MenuItem соответствующий parameter = 0 - 
+                                 * показать. 
+                                 * if parameter == cmdState => Hide MenuItem
+                                 */
+                                bool isNeedEnableMenuItem = (parameter == 1) != cmdState;
+
+                                tsi.Enabled = isNeedEnableMenuItem;
+                                tsi.Visible = isNeedEnableMenuItem;
+                            }
+                            else
+                            {
+                                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error,
+                                    0,
+                                    "CommonUtils.cs::CustomizeContextMenuItems - не поддерживаютс€ комманды с параметрами, отличными от 0 и 1." +
+                                    "Ёлемент контекстного меню, соответствующий параметру этой команды будет показыватьс€ всегда");
+                            }
+
+                            continue;
+                        }
+                    }
+                    #endregion
+
                     if ( !state || !PTKState.Iinstance.IsAdapterExist( compressnumdev.ToString( CultureInfo.InvariantCulture ),content.Command ) )
                         tsi.Enabled = tsi.Visible = false;
                     else
@@ -269,22 +326,22 @@ namespace CommonUtils
         /// <param name="form">‘орма дл€ прив€зки окна оповещени€ выполнени€ команды</param>
         public static void CreateContextMenu( BaseRegion region, XElement node, Form form )
         {
+            region.MenuStrip = new ContextMenuStrip { Tag = form };
+            region.MenuStrip.Opening += (sender, args) =>
+            {
+                var isp = ((ContextMenuStrip)sender).SourceControl as IBasePanel;
+                if (isp == null) return;
+                var idp = isp.Core as IDynamicParameters;
+                if (idp != null && idp.Parameters != null)
+                    CustomizeContextMenuItems((ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid);
+            };
+
             if (node != null)
             if (node.Element( "DescDev" ) != null)
             if (node.Element("DescDev").Element("ContextMenu") != null)
             {
                 #region —оздание классического контекстного меню
                 var menu = node.Element("DescDev").Element("ContextMenu");
-
-                region.MenuStrip = new ContextMenuStrip { Tag = form };
-                region.MenuStrip.Opening += (sender, args) =>
-                                                    {
-                                                        var isp = ((ContextMenuStrip)sender).SourceControl as IBasePanel;
-                                                        if (isp == null) return;
-                                                        var idp = isp.Core as IDynamicParameters;
-                                                        if (idp != null && idp.Parameters != null)
-                                                            CustomizeContextMenuItems((ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid);
-                                                    };
 
                 var xItems = menu.Elements("MenuItem");
                 foreach (var item in xItems)
@@ -384,6 +441,7 @@ namespace CommonUtils
 
             foreach (var parameter in currentCommand.Parameters)
             {
+                // Creating CommandContent
                 CommandContent<string> contextMenuItemContent = new CommandContent<string>
                 {
                     Command = currentCommand.IECAddress,
