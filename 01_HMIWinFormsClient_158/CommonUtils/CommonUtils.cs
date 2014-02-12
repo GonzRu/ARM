@@ -269,22 +269,22 @@ namespace CommonUtils
         /// <param name="form">‘орма дл€ прив€зки окна оповещени€ выполнени€ команды</param>
         public static void CreateContextMenu( BaseRegion region, XElement node, Form form )
         {
+            region.MenuStrip = new ContextMenuStrip { Tag = form };
+            region.MenuStrip.Opening += (sender, args) =>
+            {
+                var isp = ((ContextMenuStrip)sender).SourceControl as IBasePanel;
+                if (isp == null) return;
+                var idp = isp.Core as IDynamicParameters;
+                if (idp != null && idp.Parameters != null)
+                    CustomizeContextMenuItems((ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid);
+            };
+
             if (node != null)
             if (node.Element( "DescDev" ) != null)
             if (node.Element("DescDev").Element("ContextMenu") != null)
             {
                 #region —оздание классического контекстного меню
                 var menu = node.Element("DescDev").Element("ContextMenu");
-
-                region.MenuStrip = new ContextMenuStrip { Tag = form };
-                region.MenuStrip.Opening += (sender, args) =>
-                                                    {
-                                                        var isp = ((ContextMenuStrip)sender).SourceControl as IBasePanel;
-                                                        if (isp == null) return;
-                                                        var idp = isp.Core as IDynamicParameters;
-                                                        if (idp != null && idp.Parameters != null)
-                                                            CustomizeContextMenuItems((ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid);
-                                                    };
 
                 var xItems = menu.Elements("MenuItem");
                 foreach (var item in xItems)
@@ -384,6 +384,7 @@ namespace CommonUtils
 
             foreach (var parameter in currentCommand.Parameters)
             {
+                // Creating CommandContent
                 CommandContent<string> contextMenuItemContent = new CommandContent<string>
                 {
                     Command = currentCommand.IECAddress,
