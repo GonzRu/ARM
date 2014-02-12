@@ -207,14 +207,14 @@ namespace CommonUtils
         /// </summary>
         /// <param name="cms">контекстное меню</param>
         /// <param name="compressnumdev">DevGUID устройства</param>
-        private static void CustomizeContextMenuItems( ContextMenuStrip cms, int compressnumdev )
+        private static void CustomizeContextMenuItems( ContextMenuStrip cms, uint dsGuid, uint devGuid )
         {
             try
             {
                 if (cms == null) return;
 
                 bool state;
-                bool.TryParse(PTKState.Iinstance.GetValueAsString(compressnumdev.ToString(CultureInfo.InvariantCulture), "Связь"), out state);
+                bool.TryParse(PTKState.Iinstance.GetValueAsString(dsGuid, devGuid, "Связь"), out state);
 
                 foreach (ToolStripItem tsi in cms.Items)
                 {
@@ -237,7 +237,7 @@ namespace CommonUtils
                     if (int.TryParse(content.Parameter, out parameter))
                     {
                         bool deviceState = false;
-                        bool.TryParse(PTKState.Iinstance.GetValueAsString(content.Code.ToString(CultureInfo.InvariantCulture), "Связь"), out deviceState);
+                        bool.TryParse(PTKState.Iinstance.GetValueAsString(0, content.Code, "Связь"), out deviceState);
 
                         if (!deviceState)
                         {
@@ -245,7 +245,7 @@ namespace CommonUtils
                         }
                         else
                         {
-                            if (!PTKState.Iinstance.IsAdapterExist(content.Code.ToString(CultureInfo.InvariantCulture), content.Command))
+                            if (!PTKState.Iinstance.IsAdapterExist(0, content.Code, content.Command))
                             {
                                 tsi.Enabled = tsi.Visible = true;
                                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0,
@@ -257,7 +257,7 @@ namespace CommonUtils
                             }
 
                             bool cmdState;
-                            bool.TryParse(PTKState.Iinstance.GetValueAsString(content.Code.ToString(CultureInfo.InvariantCulture), content.Command), out cmdState);
+                            bool.TryParse(PTKState.Iinstance.GetValueAsString(0, content.Code, content.Command), out cmdState);
 
                             if (parameter == 0 || parameter == 1)
                             {
@@ -288,12 +288,12 @@ namespace CommonUtils
                     }
                     #endregion
 
-                    if ( !state || !PTKState.Iinstance.IsAdapterExist( compressnumdev.ToString( CultureInfo.InvariantCulture ),content.Command ) )
+                    if (!state || !PTKState.Iinstance.IsAdapterExist(dsGuid, devGuid, content.Command))
                         tsi.Enabled = tsi.Visible = false;
                     else
                     {
                         bool cmd;
-                        bool.TryParse( PTKState.Iinstance.GetValueAsString( compressnumdev.ToString( CultureInfo.InvariantCulture ), content.Command ), out cmd );
+                        bool.TryParse(PTKState.Iinstance.GetValueAsString(dsGuid, devGuid, content.Command), out cmd);
 
                         switch ( content.Parameter )
                         {
@@ -333,7 +333,7 @@ namespace CommonUtils
                 if (isp == null) return;
                 var idp = isp.Core as IDynamicParameters;
                 if (idp != null && idp.Parameters != null)
-                    CustomizeContextMenuItems((ContextMenuStrip)sender, (int)idp.Parameters.DeviceGuid);
+                    CustomizeContextMenuItems((ContextMenuStrip)sender, idp.Parameters.DsGuid, idp.Parameters.DeviceGuid);
             };
 
             if (node != null)
@@ -497,25 +497,7 @@ namespace CommonUtils
                                            string.Format( "0({0}.{1}.0.60013.0)", devGuid / 256, devGuid % 256 ), "0",
                                            "Состояние протокола", "" );
 
-            if ( typeBlock.Contains( "USO" ) && typeBlock.Contains( "MTR" ) || typeBlock.Contains( "ITDS" ) )
-                return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
-                                           string.Format( "0({0}.{1}.8)", dsGuid, devGuid ),
-                                           "Состояние протокола", "" );
-
-            if ( typeBlock.Contains( "BRCN_100" ) )
-                return new FormulaEvalNds( HMI_Settings.CONFIGURATION,
-                                           string.Format( "0({0}.{1}.130726656)", dsGuid, devGuid ),
-                                           "Состояние протокола", "" );
-            //if (typeBlock.Contains("UTM") || typeBlock.Contains("ТОР") || typeBlock.Contains("КЕДР"))
-            #warning Refact!!!
-            if (devGuid > 768)
-                return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
-                           string.Format("0(0.1001.{0})", devGuid),
-                           "Состояние протокола", "");
-
-            return new FormulaEvalNds(HMI_Settings.CONFIGURATION,
-                                       string.Format("0(0.1000.{0})", devGuid),
-                                       "Состояние протокола", "");
+            return PTKState.Iinstance.GetformulaEvalNdsForDeviceState(dsGuid, devGuid);
         }
 
         /// <summary>

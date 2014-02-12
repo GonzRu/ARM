@@ -53,9 +53,17 @@
       <Project>{D2517AA2-9425-4A75-AE17-773E2D82669D}</Project>
       <Name>AdapterLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Calculator\Calculator.csproj">
+      <Project>{4E8A009D-B64C-418A-A334-DE7483545F8A}</Project>
+      <Name>Calculator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
       <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
       <Name>HMI_MT_Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
+      <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
+      <Name>InterfaceLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
