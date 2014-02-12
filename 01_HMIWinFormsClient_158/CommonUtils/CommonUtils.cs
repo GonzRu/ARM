@@ -230,7 +230,64 @@ namespace CommonUtils
                     }
                     
                     var content = (CommandContent<String>)tsi.Tag;
-                    
+
+                    #region Check new command menuItem status
+
+                    int parameter;
+                    if (int.TryParse(content.Parameter, out parameter))
+                    {
+                        bool deviceState = false;
+                        bool.TryParse(PTKState.Iinstance.GetValueAsString(content.Code.ToString(CultureInfo.InvariantCulture), "Связь"), out deviceState);
+
+                        if (!deviceState)
+                        {
+                                tsi.Enabled = tsi.Visible = false;
+                        }
+                        else
+                        {
+                            if (!PTKState.Iinstance.IsAdapterExist(content.Code.ToString(CultureInfo.InvariantCulture), content.Command))
+                            {
+                                tsi.Enabled = tsi.Visible = true;
+                                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0,
+                                                                                     "Нет привязки к комманде контекстного меню." +
+                                                                                     "DevGuid=" + content.Code +
+                                                                                     " commandGuid = " + content.Command);
+
+                                continue;
+                            }
+
+                            bool cmdState;
+                            bool.TryParse(PTKState.Iinstance.GetValueAsString(content.Code.ToString(CultureInfo.InvariantCulture), content.Command), out cmdState);
+
+                            if (parameter == 0 || parameter == 1)
+                            {
+                                /* Делается допущение, что значение
+                                 * parameter = 0 соответствует команде Вкл, а
+                                 * parameter = 1 соответствует команде Выкл.
+                                 * Таким образом, если тег, к которому привязана комманда
+                                 * равен True, то MenuItem соответствующий parameter = 1
+                                 * надо скрыть, а MenuItem соответствующий parameter = 0 - 
+                                 * показать. 
+                                 * if parameter == cmdState => Hide MenuItem
+                                 */
+                                bool isNeedEnableMenuItem = (parameter == 1) != cmdState;
+
+                                tsi.Enabled = isNeedEnableMenuItem;
+                                tsi.Visible = isNeedEnableMenuItem;
+                            }
+                            else
+                            {
+                                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error,
+                                    0,
+                                    "CommonUtils.cs::CustomizeContextMenuItems - не поддерживаются комманды с параметрами, отличными от 0 и 1." +
+                                    "Элемент контекстного меню, соответствующий параметру этой команды будет показываться всегда");
+                            }
+
+                            continue;
+                        }
+                    }
+                    #endregion
+
                     if ( !state || !PTKState.Iinstance.IsAdapterExist( compressnumdev.ToString( CultureInfo.InvariantCulture ),content.Command ) )
                         tsi.Enabled = tsi.Visible = false;
                     else
