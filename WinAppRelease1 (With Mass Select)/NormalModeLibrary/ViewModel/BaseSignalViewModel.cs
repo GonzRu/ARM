@@ -68,6 +68,12 @@ namespace NormalModeLibrary.ViewModel
         internal Boolean IsChecked { get; set; }
         internal Boolean IsSupported { get { return ( BaseSignal.CheckSignalType( this.tag.Type ) ); } }
 
+        public UInt16 FontSize
+        {
+            get { return signal.FontSize; }
+            set { signal.FontSize = value; OnPropertyChanged("FontSize");}
+        }
+
         internal static BaseSignalViewModel GetSignalViewModel( BaseSignal signal )
         {
             if ( signal is AnalogSignal )

@@ -72,6 +72,7 @@ namespace NormalModeLibrary.Sources
             copy.Range.RangeMaxHysteresis = Range.RangeMaxHysteresis;
             copy.type = type;
             copy.value = value;
+            copy.FontSize = FontSize;
             return copy;
         }
 

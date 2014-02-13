@@ -17,22 +17,16 @@
         <ListBox.Resources>
             <DataTemplate DataType="{x:Type my:AnalogViewModel}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="10,0,0,0" FontSize="14" Text="{Binding Path=Value, Mode=OneWay, Converter={StaticResource AnalogConvert}}"
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=Caption, Mode=OneWay}" />
+                    <TextBlock Margin="0,0,0,0" FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=Value, Mode=OneWay, Converter={StaticResource AnalogConvert}}"
                                Foreground="{Binding Path=IsOutOfRange, Mode=OneWay, Converter={StaticResource AnalogColorConvert}}" />
-                    <TextBlock FontSize="14" Margin="10,0,0,0">
-                        <TextBlock.Text>
-                            <MultiBinding Converter="{StaticResource AnalogCaptionConvert}" Mode="OneTime">
-                                <Binding Path="Caption" />
-                                <Binding Path="Dim" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=Dim, Mode=OneWay}" />
                 </StackPanel>
             </DataTemplate>
             <DataTemplate DataType="{x:Type my:DigitalViewModel}">
                 <StackPanel Orientation="Horizontal">
-                    <Rectangle Margin="10,0,0,0" Width="14" Height="14" Fill="{Binding Path=Value, Mode=OneWay}" Stroke="Black" />
-                    <TextBlock FontSize="14" Margin="10,0,0,0" Text="{Binding Path=Caption, Mode=OneTime}" />
+                    <Rectangle Margin="0,0,0,0" Width="14" Height="14" Fill="{Binding Path=Value, Mode=OneWay}" Stroke="Black" />
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Margin="0,0,0,0" Text="{Binding Path=Caption, Mode=OneTime}" />
                 </StackPanel>
             </DataTemplate>
         </ListBox.Resources>        

@@ -66,6 +66,7 @@ namespace NormalModeLibrary.Sources
             copy.SignalOn = SignalOn;
             copy.type = type;
             copy.value = value;
+            copy.FontSize = FontSize;
             return copy;
         }
 

@@ -24,12 +24,14 @@ namespace NormalModeLibrary.Sources
         protected BaseSignal()
         {
             Caption = Dim = Commentary = string.Empty;
+            FontSize = 10;
         }
         public override void ParseXml( System.Xml.Linq.XElement xnode )
         {
             Caption = xnode.Attribute( "caption" ).Value;
             Dim = xnode.Attribute( "dim" ).Value;
             Commentary = xnode.Attribute( "commentary" ).Value;
+            FontSize = UInt16.Parse(xnode.Attribute("FontSize").Value);
 
             if ( type == Panel.LinkType.Free )
             {
@@ -54,6 +56,7 @@ namespace NormalModeLibrary.Sources
             node.Add( new XAttribute( "caption", Caption ) );
             node.Add( new XAttribute( "dim", Dim ) );
             node.Add( new XAttribute( "commentary", Commentary ) );
+            node.Add( new XAttribute( "FontSize", FontSize ) );
             return node;
         }
         public abstract bool SetValue( object value, bool qualuty );
@@ -62,6 +65,7 @@ namespace NormalModeLibrary.Sources
         public String Dim { get; internal set; }
         public String Commentary { get; internal set; }
         public UInt32 Guid { get; internal set; }
+        public UInt16 FontSize { get; internal set; }
         public abstract Object Value { get; }
 
         internal static SignalType GetSignalType( String name )

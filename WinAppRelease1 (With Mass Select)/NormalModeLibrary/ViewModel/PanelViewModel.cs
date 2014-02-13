@@ -103,5 +103,23 @@ namespace NormalModeLibrary.ViewModel
             get { return panel.Height; }
             set { panel.Height = value; }
         }
+
+        public UInt16 FontSize
+        {
+            get
+            {
+                if (Collection == null || Collection.Count == 0)
+                    return 12;
+
+                return (Collection.First() as BaseSignalViewModel).FontSize;
+            }
+            set {
+                foreach (var signal in Collection)
+                {
+                    var baseSignalViewModel = signal as BaseSignalViewModel;
+                    baseSignalViewModel.FontSize = value;
+                }
+            }
+        }
     }
 }

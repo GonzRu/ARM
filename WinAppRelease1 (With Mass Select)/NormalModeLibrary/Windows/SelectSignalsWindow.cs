@@ -36,6 +36,7 @@ namespace NormalModeLibrary.Windows
 
             _originalCaption = view.Component.Caption;
             captionTextBox.Text = view.Component.Caption;
+            FontSizeNumericUpDown.Value = view.Component.FontSize;
 
             if (!view.Component.IsVisible)
                 workModeComboBox.SelectedIndex = 2;
@@ -198,6 +199,7 @@ namespace NormalModeLibrary.Windows
                 {
 
                     ((Sources.BaseObjectCollection)_view.Component.Core).Collection.Add(signalModel.Core);
+                    signalModel.FontSize = (UInt16)(FontSizeNumericUpDown.Value);
                     signalModel.Subscribe();
                     _view.Component.Collection.Add(signalModel);
                 }
@@ -222,6 +224,11 @@ namespace NormalModeLibrary.Windows
             base.OnClosed(e);
 
             _view.SetOffEditMode();
+        }
+
+        private void FontSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            _view.Component.FontSize = (UInt16)(FontSizeNumericUpDown.Value);
         }
         #endregion
     }
