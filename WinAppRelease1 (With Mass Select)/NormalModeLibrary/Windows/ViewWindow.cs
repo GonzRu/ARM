@@ -4,8 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Input;
+using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
 namespace NormalModeLibrary.Windows
 {
@@ -22,7 +25,8 @@ namespace NormalModeLibrary.Windows
         public ViewWindow()
         {
             InitializeComponent();
-            elementHost1.Child = new TableControl();
+            elementHost1.Child = new TableControl(this);
+            elementHost1.Child.MouseDown += ChildOnMouseDown;
         }
         #endregion
 
@@ -197,6 +201,15 @@ namespace NormalModeLibrary.Windows
 
             Application.OpenForms[0].Activate();
         }
+
+        public void ChildOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+        {
+            Capture = false;
+
+            Message msg = Message.Create(Handle, 0xA1, (IntPtr) 0x2, IntPtr.Zero);
+            base.WndProc(ref msg);
+        }
+
         #endregion
     }
 }

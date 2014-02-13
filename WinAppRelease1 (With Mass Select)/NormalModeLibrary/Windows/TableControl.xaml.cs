@@ -21,9 +21,13 @@ namespace NormalModeLibrary.Windows
     /// </summary>
     public partial class TableControl : UserControl
     {
-        public TableControl()
+        private ViewWindow _view = null;
+
+        public TableControl(ViewWindow view)
         {
             InitializeComponent();
+
+            _view = view;
         }
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -37,6 +41,11 @@ namespace NormalModeLibrary.Windows
             signalWindow.SetSignal(signalViewModel.BaseSignal);
 
             signalWindow.ShowDialog();
+        }
+
+        private void ListBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _view.ChildOnMouseDown(this, e);
         }
     }
 }
