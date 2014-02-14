@@ -35,6 +35,13 @@ namespace NormalModeLibrary.ViewModel
                     Collection.Add( signalModel );
                 }
             }
+
+            if (IsCaptionVisible)
+            {
+                CaptionViewModel captionViewModel = new CaptionViewModel(Caption);
+                captionViewModel.FontSize = Collection.First().FontSize;
+                Collection.Insert(0, captionViewModel);
+            }
         }
         internal override ViewModelBase Copy()
         {
