@@ -47,7 +47,7 @@ namespace NormalModeLibrary.Sources
             if (RangeMinValue == 0 && RangeMaxValue == 0)
                 return false;
 
-            return ( value < RangeMinValue || value > RangeMaxValue ) ? true : false;
+            return ( value < RangeMinValue || value > RangeMaxValue );
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace NormalModeLibrary.Sources
         /// Максимальное значение гистерезиса по умолчанию
         /// </summary>        
         public const double DefaultRangeMaxHysteresis = 0;
-        bool outRange = false; // Для запоминания промежуточного значения
+        private bool _isLastOutOfRange = false; // Для запоминания промежуточного значения
         double rangeMinHysteresis = DefaultRangeMinHysteresis, rangeMaxHysteresis = DefaultRangeMaxHysteresis;
 
         public HysteresisRange() { }
@@ -80,54 +80,45 @@ namespace NormalModeLibrary.Sources
         /// Проверка диапозона
         /// </summary>
         /// <param name="value">Значение</param>
+        /// <param name="isOutOfRangenow">Показывает прошлое состояние, от которого зависит текущее</param>
         /// <returns>true - если значение вышло за диапозон</returns>        
-        public override bool OutOfRange( Double value )
+        public override bool OutOfRange( Double value)
         {
-            bool outDefRange = base.OutOfRange( value );
-            bool inHystRange = ( value > RangeMinHysteresis && value < RangeMaxHysteresis ) ? true : false;
+            bool outDefRange = base.OutOfRange(value);         
 
             if ( outDefRange )
+                return (_isLastOutOfRange = true);
+            else
             {
-                outRange = true;
-                return true;
-            }
-            else if ( inHystRange )
-            {
-                if (RangeMaxValue == 0 && rangeMinHysteresis == 0)
-                    return false;
+                if (_isLastOutOfRange)
+                {
+                    bool inHystRange = (value > RangeMaxValue - RangeMaxHysteresis ||
+                                        value < RangeMinValue + RangeMinHysteresis);
 
-                outRange = false;
-                return false;
+                    _isLastOutOfRange = inHystRange;
+                    return inHystRange;
+                }
+                else
+                    return _isLastOutOfRange;
             }
-            else return outRange;
         }
+
         /// <summary>
         /// Получить или задать минимальное значение гистерезиса
         /// </summary>
         public double RangeMinHysteresis
         {
             get { return rangeMinHysteresis; }
-            set
-            {
-                rangeMinHysteresis = value;
-
-                if ( RangeMinValue > rangeMinHysteresis )
-                    RangeMinValue = rangeMinHysteresis;
-            }
+            set { rangeMinHysteresis = value; }
         }
+
         /// <summary>
         /// Получить или задать максимальное значение гистерезиса
         /// </summary>        
         public double RangeMaxHysteresis
         {
             get { return rangeMaxHysteresis; }
-            set
-            {
-                rangeMaxHysteresis = value;
-
-                if ( RangeMaxValue < rangeMaxHysteresis )
-                    RangeMaxValue = rangeMaxHysteresis;
-            }
+            set { rangeMaxHysteresis = value; }
         }
     }
 }
