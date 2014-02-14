@@ -17,7 +17,7 @@
         <ListBox.Resources>
             <DataTemplate DataType="{x:Type my:CaptionViewModel}">
                 <StackPanel Orientation="Horizontal" MouseDown="ListBox_MouseDown">
-                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=CaptionText, Mode=OneWay}" />
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=CaptionText, Mode=OneWay}" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center"/>
                 </StackPanel>
             </DataTemplate>
             <DataTemplate DataType="{x:Type my:AnalogViewModel}">
