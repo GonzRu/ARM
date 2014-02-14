@@ -33,7 +33,7 @@ namespace NormalModeLibrary.Windows
         #region Public Metods
         public void ActivatedComponent()
         {
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 
             if ( Component != null )
             {

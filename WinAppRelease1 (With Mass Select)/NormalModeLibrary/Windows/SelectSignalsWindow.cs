@@ -47,6 +47,7 @@ namespace NormalModeLibrary.Windows
 
 
             checkBox3.Checked = view.Component.IsCaptionVisible;
+            captionTextBox.Enabled = view.Component.IsCaptionVisible;
 
             foreach (IGroup group in device.GetGroupHierarchy())
                 if (group.IsEnable)
@@ -99,13 +100,17 @@ namespace NormalModeLibrary.Windows
             var node = new TreeNode( tag.TagName );
 
             // если есть сигнал в списке панели, возвращаем его
-            foreach ( BaseSignalViewModel bsModel in panel.Collection )
-                if ( bsModel.Guid == tag.TagGUID )
+            foreach ( var model in panel.Collection )
+            {
+                var bsModel = model as BaseSignalViewModel;
+                if (bsModel != null)
+                if (bsModel.Guid == tag.TagGUID)
                 {
                     node.Checked = bsModel.IsChecked;
                     node.Tag = bsModel;
                     return node;
                 }
+            }
 
             //если сигнала нет в списке панели, создаем сигнал и его представление
             Sources.BaseSignal signal = Sources.BaseSignal.CreateSignal( Sources.BaseSignal.GetSignalType( tag.Type ) );
@@ -146,7 +151,9 @@ namespace NormalModeLibrary.Windows
 
         private void captionTextBoxTextChangedHandler(object sender, EventArgs e)
         {
-            _view.Text = ((TextBox)sender).Text;
+            var captionViewModel = _view.Component.Collection.First() as CaptionViewModel;
+            if (captionViewModel != null)
+                captionViewModel.CaptionText = captionTextBox.Text;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -158,14 +165,22 @@ namespace NormalModeLibrary.Windows
                 label5.Enabled = true;
                 captionTextBox.Enabled = true;
                 _view.Component.IsCaptionVisible = true;
-                _view.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+
+                if (!(_view.Component.Collection.First() is CaptionViewModel))
+                {
+                    var captionViewModel = new CaptionViewModel(captionTextBox.Text);
+                    captionViewModel.FontSize = (UInt16) FontSizeNumericUpDown.Value;
+                    _view.Component.Collection.Insert(0, captionViewModel);
+                }
             }
             else
             {
                 label5.Enabled = false;
                 captionTextBox.Enabled = false;
                 _view.Component.IsCaptionVisible = false;
-                _view.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+
+                if (_view.Component.Collection.First() is CaptionViewModel)
+                    _view.Component.Collection.RemoveAt(0);
             }
         }
 

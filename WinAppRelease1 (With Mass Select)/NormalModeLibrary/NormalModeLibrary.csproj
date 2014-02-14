@@ -65,6 +65,7 @@
     <Compile Include="ViewModel\AnalogViewModel.cs" />
     <Compile Include="ViewModel\BaseCollectionViewModel.cs" />
     <Compile Include="ViewModel\BaseSignalViewModel.cs" />
+    <Compile Include="ViewModel\CaptionViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationViewModel.cs" />
     <Compile Include="ViewModel\DigitalViewModel.cs" />
     <Compile Include="ViewModel\IOutOfRangeHandler.cs" />

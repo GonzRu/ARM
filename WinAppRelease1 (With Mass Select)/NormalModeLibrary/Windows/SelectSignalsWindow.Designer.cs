@@ -146,9 +146,9 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(17, 43);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(138, 17);
+            this.checkBox3.Size = new System.Drawing.Size(139, 17);
             this.checkBox3.TabIndex = 12;
-            this.checkBox3.Text = "Видимость заголовка";
+            this.checkBox3.Text = "Показывть заголовок";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
