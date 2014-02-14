@@ -15,6 +15,11 @@
 
     <ListBox ItemsSource="{Binding Path=Collection}" MouseDoubleClick="ListBox_MouseDoubleClick">
         <ListBox.Resources>
+            <DataTemplate DataType="{x:Type my:CaptionViewModel}">
+                <StackPanel Orientation="Horizontal" MouseDown="ListBox_MouseDown">
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=CaptionText, Mode=OneWay}" />
+                </StackPanel>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type my:AnalogViewModel}">
                 <StackPanel Orientation="Horizontal" MouseDown="ListBox_MouseDown">
                     <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=Caption, Mode=OneWay}" />
