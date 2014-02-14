@@ -36,6 +36,10 @@ namespace NormalModeLibrary.ViewModel
             }
         }
         public bool IsOutOfRangeEvent { get; private set; }
-        public bool IsOutOfRange { get { return ( (AnalogSignal)Core ).Range.OutOfRange( (double)base.Value ); } }
+
+        public bool IsOutOfRange
+        {
+            get { return ((AnalogSignal) Core).Range.OutOfRange((double) base.Value); }
+        }
     }
 }
