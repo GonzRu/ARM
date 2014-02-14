@@ -42,13 +42,6 @@ namespace NormalModeLibrary.Windows
                 this.Text = Component.Caption;
                 this.tableLayoutPanel1.RowStyles[1].Height = 0;                
 
-                foreach (ViewModel.BaseSignalViewModel vmSignal in Component.Collection)
-                {
-                    ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
-                    if (ioorh != null && !ioorh.IsOutOfRangeEvent)
-                        ioorh.OutOfRangeEvent += ViewWindow_OutOfRangeEvent;
-                }
-
                 if (Component.IsAutomaticaly)
                     needToShow = false;
 
@@ -63,35 +56,15 @@ namespace NormalModeLibrary.Windows
         }
         public void DeactivatedComponent()
         {
-            if ( !IsEditable && Component != null )
-                foreach ( ViewModel.BaseSignalViewModel vmSignal in Component.Collection )
-                {
-                    ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
-                    if ( ioorh != null && ioorh.IsOutOfRangeEvent )
-                        ioorh.OutOfRangeEvent -= ViewWindow_OutOfRangeEvent;
-                }
-
             this.Close();
         }
 
         public void SetOnEditMode()
         {
-            foreach (ViewModel.BaseSignalViewModel vmSignal in Component.Collection)
-            {
-                ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
-                if (ioorh != null && !ioorh.IsOutOfRangeEvent)
-                    ioorh.OutOfRangeEvent -= ViewWindow_OutOfRangeEvent;
-            }
         }
 
         public void SetOffEditMode()
         {
-            foreach (ViewModel.BaseSignalViewModel vmSignal in Component.Collection)
-            {
-                ViewModel.IOutOfRangeHandler ioorh = vmSignal as ViewModel.IOutOfRangeHandler;
-                if (ioorh != null && !ioorh.IsOutOfRangeEvent)
-                    ioorh.OutOfRangeEvent += ViewWindow_OutOfRangeEvent;
-            }
         }
 
         public void UpdateWorkMode()
@@ -133,59 +106,16 @@ namespace NormalModeLibrary.Windows
         #region Private Metods
         private void ViewWindow_OutOfRangeEvent(object sender, EventArgs e)
         {
-            NormalModeLibrary.Sources.OutOfRangeEventArgs orea = (NormalModeLibrary.Sources.OutOfRangeEventArgs)e;
-
-            if (orea.OutOfRange)
-            {
-                if (!_isAlarmMode)
-                {
-                    //System.Windows.Threading.Dispatcher.CurrentDispatcher.
-                    BeginInvoke(new System.Threading.ThreadStart(delegate
-                    {
-                        if (Component.IsAutomaticaly && !Visible)
-                            Hide();
-                    }));
-
-                    _isAlarmMode = true;
-                    this.Height += 31;
-                    tableLayoutPanel1.RowStyles[1].Height = 31;
-
-                    SoundSystem.System.Play();
-                }
-            }
         }
 
         private void ViewWindow_Shown( object sender, EventArgs e )
         {
-            //ActivatedComponent();
-        }
-
-        private void button1_Click( object sender, EventArgs e )
-        {
-            SoundSystem.System.Stop();
-            this.Hide();
-        }
-
-        private void AlarmButton_Click(object sender, EventArgs e)
-        {
-            this.Height -= 31;
-            tableLayoutPanel1.RowStyles[1].Height = 0;
-            SoundSystem.System.Stop();
-            _isAlarmMode = false;
-
-            if (Component.IsAutomaticaly)
-                Hide();
         }
         #endregion
 
         #region Override Metdods
         protected override void OnClosing(CancelEventArgs e)
         {
-            //if (!_isAlarmMode)
-            //{
-            //    Component.IsAutomaticaly = true;
-            //    Hide();
-            //}
         }
 
         protected override void OnResizeEnd(EventArgs e)

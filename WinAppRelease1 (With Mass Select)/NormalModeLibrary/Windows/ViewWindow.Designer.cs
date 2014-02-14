@@ -28,29 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.AlarmButton = new System.Windows.Forms.Button();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // AlarmButton
-            // 
-            this.AlarmButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AlarmButton.Location = new System.Drawing.Point(3, 242);
-            this.AlarmButton.Name = "AlarmButton";
-            this.AlarmButton.Size = new System.Drawing.Size(261, 31);
-            this.AlarmButton.TabIndex = 5;
-            this.AlarmButton.Text = "Тревога принята";
-            this.AlarmButton.UseVisualStyleBackColor = true;
-            this.AlarmButton.Click += new System.EventHandler(this.AlarmButton_Click);
             // 
             // elementHost1
             // 
             this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.elementHost1.Location = new System.Drawing.Point(3, 3);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(261, 233);
+            this.elementHost1.Size = new System.Drawing.Size(261, 270);
             this.elementHost1.TabIndex = 0;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = null;
@@ -60,11 +48,10 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.elementHost1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.AlarmButton, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
@@ -96,7 +83,6 @@
 
         private System.Windows.Forms.Integration.ElementHost elementHost1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button AlarmButton;
 
     }
 }
