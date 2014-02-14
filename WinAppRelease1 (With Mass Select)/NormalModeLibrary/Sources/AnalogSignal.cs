@@ -46,8 +46,14 @@ namespace NormalModeLibrary.Sources
                 {
                     this.value = tmp;
 
-                    if ( OutOfRangeEvent != null )
-                        OutOfRangeEvent( this, new OutOfRangeEventArgs( Range.OutOfRange( this.value ) ) );
+                    //bool isOutORrangeNow = Range.OutOfRange(this.value);
+                    //if (_isOutOfRange != isOutORrangeNow)
+                    //{
+                    //    if ( OutOfRangeEvent != null )
+                    //        OutOfRangeEvent(this, new OutOfRangeEventArgs(isOutORrangeNow));
+
+                    //    _isOutOfRange = isOutORrangeNow;
+                    //}
                 }
                 else res = false;
             }
