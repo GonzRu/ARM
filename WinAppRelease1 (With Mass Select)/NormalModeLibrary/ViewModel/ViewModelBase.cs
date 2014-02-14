@@ -22,5 +22,7 @@ namespace NormalModeLibrary.ViewModel
         internal abstract ViewModelBase Copy();
         
         public BaseObject Core { get; protected set; }
+
+        virtual public UInt16 FontSize { get; set; }
     }
 }
