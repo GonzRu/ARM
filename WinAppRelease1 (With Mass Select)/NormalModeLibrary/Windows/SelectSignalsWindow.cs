@@ -99,13 +99,17 @@ namespace NormalModeLibrary.Windows
             var node = new TreeNode( tag.TagName );
 
             // если есть сигнал в списке панели, возвращаем его
-            foreach ( BaseSignalViewModel bsModel in panel.Collection )
-                if ( bsModel.Guid == tag.TagGUID )
+            foreach ( var model in panel.Collection )
+            {
+                var bsModel = model as BaseSignalViewModel;
+                if (bsModel != null)
+                if (bsModel.Guid == tag.TagGUID)
                 {
                     node.Checked = bsModel.IsChecked;
                     node.Tag = bsModel;
                     return node;
                 }
+            }
 
             //если сигнала нет в списке панели, создаем сигнал и его представление
             Sources.BaseSignal signal = Sources.BaseSignal.CreateSignal( Sources.BaseSignal.GetSignalType( tag.Type ) );

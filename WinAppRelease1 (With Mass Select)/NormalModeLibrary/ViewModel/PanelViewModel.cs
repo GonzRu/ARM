@@ -118,12 +118,12 @@ namespace NormalModeLibrary.ViewModel
                 if (Collection == null || Collection.Count == 0)
                     return 12;
 
-                return (Collection.First() as BaseSignalViewModel).FontSize;
+                return (Collection.First() as ViewModelBase).FontSize;
             }
             set {
                 foreach (var signal in Collection)
                 {
-                    var baseSignalViewModel = signal as BaseSignalViewModel;
+                    var baseSignalViewModel = signal as ViewModelBase;
                     baseSignalViewModel.FontSize = value;
                 }
             }
