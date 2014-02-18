@@ -68,27 +68,13 @@ namespace NormalModeLibrary
                 if (!vmPanel.IsVisible)
                     continue;
 
-                //var view = new Windows.ViewWindow { Component = vmPanel, Place = Places.MainMnemo };
-                //activePanelForm.Add( view );
-                //view.Owner = mainMnemoHandle;
-                //view.ActivatedComponent();
+                var panel = NormalModePanelFactory.CreatePanel("controlAndWinFormPanel");
+                panel.Component = vmPanel;
+                panel.Place = Places.MainMnemo;
+                panel.SetOwner(Factory.mainMnemoHandle);
+                panel.ActivatedComponent();
 
-                //ViewElementHost elementHost = new ViewElementHost();
-                //elementHost.Component = vmPanel;
-                //elementHost.Place = Places.MainMnemo;
-                //ControlMoverOrResizer.Init(elementHost, mainMnemoHandle.Controls[0]);
-                //activePanelControls.Add(elementHost);           
-                //elementHost.ActivatedComponent();
-
-                ViewUserControl elementHost = new ViewUserControl();
-                elementHost.Component = vmPanel;
-                elementHost.Place = Places.MainMnemo;
-                ControlMoverOrResizer.Init(elementHost);
-
-                activeNormalModePanels.Add(elementHost);
-                elementHost.ActivatedComponent();
-
-                mainMnemoHandle.Controls[0].Controls.Add(elementHost);
+                activeNormalModePanels.Add(panel);
             }
 
             Application.OpenForms[0].Activate();

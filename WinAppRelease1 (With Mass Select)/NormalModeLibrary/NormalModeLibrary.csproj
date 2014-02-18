@@ -79,6 +79,7 @@
     <Compile Include="Windows\ConfigurationWindow.Designer.cs">
       <DependentUpon>ConfigurationWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\NormalModePanels\NormalModePanelFactory.cs" />
     <Compile Include="Windows\NormalModePanels\INormalModePanel.cs" />
     <Compile Include="Windows\PanelWindow.cs">
       <SubType>Form</SubType>
