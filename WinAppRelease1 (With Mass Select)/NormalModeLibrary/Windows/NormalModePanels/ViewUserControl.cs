@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
@@ -13,10 +14,29 @@ namespace NormalModeLibrary.Windows
 {
     public class ViewUserControl : ListView, INormalModePanel
     {
+        #region private
+        private PanelViewModel _panelViewModel;
+        #endregion
+
         #region Properties
         public Places Place { get; set; }
 
-        public PanelViewModel Component { get; set; }
+        public PanelViewModel Component
+        {
+            get { return _panelViewModel; }
+            set
+            {
+                if (_panelViewModel != null)
+                {
+                    _panelViewModel.Collection.CollectionChanged -= CollectionOnCollectionChanged;
+                    Items.Clear();
+                }
+
+                _panelViewModel = value;
+                _panelViewModel.Collection.CollectionChanged += CollectionOnCollectionChanged;
+                ActivateListView();
+            }
+        }
 
         #endregion
 
@@ -30,6 +50,11 @@ namespace NormalModeLibrary.Windows
         #region Public metods
         public void ActivatedComponent()
         {
+            if (Items.Count != 0)
+            {
+                Items.Clear();
+            }
+
             if (Component != null)
             {
                 ActivateListView();
@@ -43,12 +68,34 @@ namespace NormalModeLibrary.Windows
 
                 if (Component.IsAutomaticaly)
                     Visible = false;
+
+                Component.Collection.CollectionChanged += CollectionOnCollectionChanged;
+            }
+        }
+
+        private void CollectionOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (ViewModelBase viewModel in notifyCollectionChangedEventArgs.OldItems)
+                        foreach (ListViewItem item in Items)
+                            if (item.Tag == viewModel)
+                                Items.Remove(item);
+                    break;
+                case NotifyCollectionChangedAction.Add:
+                    foreach (ViewModelBase viewModel in notifyCollectionChangedEventArgs.NewItems)
+                        if (viewModel is CaptionViewModel)
+                            Items.Insert(0, CreateListViewItem(viewModel));
+                        else
+                            Items.Add(CreateListViewItem(viewModel));
+                    break;
             }
         }
 
         public void DeactivatedComponent()
         {
-
+            Parent.Controls[0].Controls.Remove(this);
         }
 
         public void SetOnEditMode()
