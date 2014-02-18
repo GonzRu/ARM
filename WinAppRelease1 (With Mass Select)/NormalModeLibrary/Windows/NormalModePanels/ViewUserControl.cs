@@ -8,6 +8,7 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using NormalModeLibrary.Sources;
 using NormalModeLibrary.ViewModel;
 
 namespace NormalModeLibrary.Windows
@@ -72,8 +73,6 @@ namespace NormalModeLibrary.Windows
 
                 if (Component.IsAutomaticaly)
                     Visible = false;
-
-                Component.Collection.CollectionChanged += CollectionOnCollectionChanged;
             }
         }
 
@@ -200,6 +199,18 @@ namespace NormalModeLibrary.Windows
                     SetListViewItem(item, (ViewModelBase)sender);
                     return;
                 }
+        }
+        #endregion
+
+        #region Handlers
+        private void OnMove(object sender, EventArgs eventArgs)
+        {
+            Component.Width = this.Width;
+            Component.Height = this.Height;
+            Component.Top = this.Top;
+            Component.Left = this.Left;
+
+            NormalModeLibrary.ComponentFactory.Factory.SaveXml();
         }
         #endregion
     }

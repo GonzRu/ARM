@@ -42,9 +42,8 @@ namespace NormalModeLibrary.Windows
         {
             TableControl tc = new TableControl(this);
             Child = tc;
-            //tc.MouseDown += TcOnMouseDown;
-            //tc.MouseUp += TcOnMouseUp;
-            //tc.MouseMove += TcOnMouseMove;
+
+            ControlMoverOrResizer.Init(this);
         }
 
         #endregion
