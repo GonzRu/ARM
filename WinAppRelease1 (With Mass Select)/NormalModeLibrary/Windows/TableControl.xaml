@@ -13,7 +13,7 @@
         <conv:AnalogSignalColorValueConverter x:Key="AnalogColorConvert" />
     </UserControl.Resources>
 
-    <ListBox ItemsSource="{Binding Path=Collection}" MouseDoubleClick="ListBox_MouseDoubleClick">
+    <ListBox ItemsSource="{Binding Path=Collection}" MouseDoubleClick="ListBox_MouseDoubleClick"  Margin="0,0,15,15">
         <ListBox.Resources>
             <DataTemplate DataType="{x:Type my:CaptionViewModel}">
                 <StackPanel Orientation="Horizontal" MouseDown="ListBox_MouseDown">
