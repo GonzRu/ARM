@@ -15,7 +15,7 @@ namespace NormalModeLibrary.Windows
     public partial class SelectSignalsWindow : Form
     {
         IDevice device;
-        private ViewWindow _view;
+        private INormalModePanel _view;
         private string _originalCaption;
         PanelViewModel originalPanel;
 
@@ -26,7 +26,7 @@ namespace NormalModeLibrary.Windows
         {
             InitializeComponent();
         }
-        internal void AddComponents( IDevice device, ViewWindow view )
+        internal void AddComponents( IDevice device, INormalModePanel view )
         {
             this.device = device;
             this._view = view;
@@ -146,7 +146,7 @@ namespace NormalModeLibrary.Windows
         private void cancelButtonClickHandler(object sender, EventArgs e)
         {
             _view.Component = originalPanel;
-            _view.Text = _originalCaption;
+            //_view.Text = _originalCaption;
         }
 
         private void captionTextBoxTextChangedHandler(object sender, EventArgs e)

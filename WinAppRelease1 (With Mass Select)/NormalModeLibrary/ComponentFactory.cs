@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms.Integration;
 using System.Xml.Linq;
 using System.Windows.Forms;
 using InterfaceLibrary;
@@ -14,10 +15,12 @@ namespace NormalModeLibrary
     {
         static ComponentFactory factory;
         static readonly string FilePath = AppDomain.CurrentDomain.BaseDirectory + @"Project\CurrentModePanel.xml";
-        Form mainMnemoHandle;
+
+        private Form mainMnemoHandle;
+        private bool isLoad = false;
+
         readonly List<UserViewModel> users = new List<UserViewModel>();
-        readonly List<Windows.ViewWindow> activePanelForm = new List<Windows.ViewWindow>();
-        bool isLoad = false;
+        readonly  List<INormalModePanel> activeNormalModePanels = new List<INormalModePanel>(); 
 
         private ComponentFactory() { }
         private List<PanelViewModel> GetPanels( Places place )
@@ -55,7 +58,7 @@ namespace NormalModeLibrary
         }
         public void ActivatedMainMnemoForms( Form form )
         {
-            if ( activePanelForm.Count > 0 )
+            if (activeNormalModePanels.Count > 0)
                 DeactivatedMainMnemoForms();
            
             mainMnemoHandle = form;
@@ -65,32 +68,35 @@ namespace NormalModeLibrary
                 if (!vmPanel.IsVisible)
                     continue;
 
-                var view = new Windows.ViewWindow { Component = vmPanel, Place = Places.MainMnemo };
-                activePanelForm.Add( view );
-                view.Owner = mainMnemoHandle;
-                view.ActivatedComponent();                
+                var panel = NormalModePanelFactory.CreatePanel("controlAndWinFormPanel");
+                panel.Component = vmPanel;
+                panel.Place = Places.MainMnemo;
+                panel.SetOwner(Factory.mainMnemoHandle);
+                panel.ActivatedComponent();
+
+                activeNormalModePanels.Add(panel);
             }
 
             Application.OpenForms[0].Activate();
         }
         public void DeactivatedMainMnemoForms()
         {
-            if ( activePanelForm.Count > 0 )
-                foreach ( Windows.ViewWindow view in activePanelForm.ToArray() )
+            if (activeNormalModePanels.Count > 0)
+                foreach (INormalModePanel view in activeNormalModePanels.ToArray())
                     if ( view.Place == Places.MainMnemo )
                     {
                         view.DeactivatedComponent();
-                        activePanelForm.Remove( view );
+                        activeNormalModePanels.Remove(view);
                     }
         }
         public void SetStates( FormWindowState state )
         {
-            foreach ( Windows.ViewWindow view in activePanelForm )
-                switch ( state )
-                {
-                    case FormWindowState.Maximized: view.WindowState = FormWindowState.Normal; break;
-                    default: view.WindowState = state; break;
-                }
+            //foreach (ViewElementHost view in activePanelControls)
+            //    switch ( state )
+            //    {
+            //        case FormWindowState.Maximized: view.WindowState = FormWindowState.Normal; break;
+            //        default: view.WindowState = state; break;
+            //    }
         }
 
         public static void EditSignals( IDevice device, String login, Places place )
@@ -102,20 +108,16 @@ namespace NormalModeLibrary
             var panel = GetPanel(config, device);
 
             #region Find or create ViewWindow
-            var view = Factory.activePanelForm.FirstOrDefault(apf => apf.Component == panel);
+            var view = Factory.activeNormalModePanels.FirstOrDefault(apf => apf.Component == panel);
             if (view == null)
             {
-                view = new ViewWindow { Component = panel, Place = place };
-                switch (place)
-                {
-                    case Places.MainMnemo:
-                        view.Owner = Factory.mainMnemoHandle;
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
-                Factory.activePanelForm.Add(view);                
+                view = new ViewUserControl { Component = panel, Place = place, Parent = Factory.mainMnemoHandle};
+                ControlMoverOrResizer.Init((ViewUserControl)view);
+                Factory.mainMnemoHandle.Controls[0].Controls.Add((ViewUserControl)view);
+
+                Factory.activeNormalModePanels.Add(view);                
             }
+
             view.ActivatedComponent();
             #endregion
 
@@ -134,8 +136,8 @@ namespace NormalModeLibrary
 
             if (view.Component.Collection.Count == 0)
             {
-                view.Close();
-                Factory.activePanelForm.Remove(view);
+                view.DeactivatedComponent();
+                Factory.activeNormalModePanels.Remove(view);
             }
         }
         public static void EditUserWindows()
