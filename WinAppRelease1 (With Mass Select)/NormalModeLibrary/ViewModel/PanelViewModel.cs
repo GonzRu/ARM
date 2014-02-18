@@ -9,7 +9,8 @@ namespace NormalModeLibrary.ViewModel
 {
     public class PanelViewModel : BaseCollectionViewModel
     {
-        Panel panel;
+        private Panel panel;
+        private UInt16 _fontSize = 12;
 
         internal PanelViewModel( Panel panel )
         {
@@ -39,7 +40,7 @@ namespace NormalModeLibrary.ViewModel
             if (IsCaptionVisible)
             {
                 CaptionViewModel captionViewModel = new CaptionViewModel(Caption);
-                captionViewModel.FontSize = Collection.First().FontSize;
+                captionViewModel.FontSize = _fontSize;
                 Collection.Insert(0, captionViewModel);
             }
         }
@@ -113,14 +114,11 @@ namespace NormalModeLibrary.ViewModel
 
         public UInt16 FontSize
         {
-            get
+            get { return _fontSize; }
+            set
             {
-                if (Collection == null || Collection.Count == 0)
-                    return 12;
+                _fontSize = value;
 
-                return (Collection.First() as ViewModelBase).FontSize;
-            }
-            set {
                 foreach (var signal in Collection)
                 {
                     var baseSignalViewModel = signal as ViewModelBase;
