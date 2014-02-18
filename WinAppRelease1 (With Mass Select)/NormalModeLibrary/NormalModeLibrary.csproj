@@ -112,6 +112,7 @@
     <Compile Include="Windows\UserWindows.Designer.cs">
       <DependentUpon>UserWindows.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\NormalModePanels\ViewElementHost.cs" />
     <Compile Include="Windows\NormalModePanels\ViewWindow.cs">
       <SubType>Form</SubType>
     </Compile>
