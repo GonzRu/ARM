@@ -40,7 +40,7 @@ namespace NormalModeLibrary.Windows
         #region Constructors
         public ViewElementHost()
         {
-            TableControl tc = new TableControl(this);
+            TableControl tc = new TableControl();
             Child = tc;
 
             ControlMoverOrResizer.Init(this);
