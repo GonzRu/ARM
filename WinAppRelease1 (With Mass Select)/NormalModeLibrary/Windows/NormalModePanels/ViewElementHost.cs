@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using System.Windows.Input;
+using NormalModeLibrary.Sources;
 using NormalModeLibrary.ViewModel;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
@@ -96,6 +97,11 @@ namespace NormalModeLibrary.Windows
                 {
                     Visible = true;
                 }
+        }
+
+        public void SetOwner(Form owner)
+        {
+            owner.Controls[0].Controls.Add(this);
         }
         #endregion
     }

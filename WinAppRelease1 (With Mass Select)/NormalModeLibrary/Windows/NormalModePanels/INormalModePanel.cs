@@ -1,8 +1,9 @@
-﻿using NormalModeLibrary.ViewModel;
+﻿using System.Windows.Forms;
+using NormalModeLibrary.ViewModel;
 
 namespace NormalModeLibrary.Windows
 {
-    interface INormalModePanel
+    public interface INormalModePanel
     {
         /// <summary>
         /// Месторасположение панели
@@ -40,5 +41,11 @@ namespace NormalModeLibrary.Windows
         void UpdateWorkMode();
 
         void ShowIfNeed();
+
+        /// <summary>
+        /// Set panel's owner
+        /// </summary>
+        /// <param name="owner"></param>
+        void SetOwner(Form owner);
     }
 }

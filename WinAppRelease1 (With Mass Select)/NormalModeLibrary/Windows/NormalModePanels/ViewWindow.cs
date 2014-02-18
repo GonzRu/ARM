@@ -101,6 +101,11 @@ namespace NormalModeLibrary.Windows
                 tc.DataContext = value;
             }
         }
+
+        public void SetOwner(Form owner)
+        {
+            Owner = owner;
+        }
         #endregion
 
         #region Private Metods

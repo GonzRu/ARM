@@ -44,6 +44,10 @@ namespace NormalModeLibrary.Windows
         public ViewUserControl()
         {
             this.MultiSelect = false;
+
+            ControlMoverOrResizer.Init(this);
+
+            this.Move += OnMove;
         }
         #endregion
 
@@ -124,6 +128,11 @@ namespace NormalModeLibrary.Windows
                 {
                     Visible = true;
                 }
+        }
+
+        public void SetOwner(Form owner)
+        {
+            owner.Controls[0].Controls.Add(this);
         }
         #endregion
 
