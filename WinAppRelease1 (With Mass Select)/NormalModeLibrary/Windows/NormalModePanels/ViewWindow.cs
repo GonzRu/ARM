@@ -12,12 +12,12 @@ using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
 namespace NormalModeLibrary.Windows
 {
-    public partial class ViewWindow : Form
+    public partial class ViewWindow : Form, INormalModePanel
     {
         delegate void CheckRangeDelegate();
 
         internal Boolean IsEditable { get; set; }
-        internal Places Place { get; set; }
+        public Places Place { get; set; }
 
         private bool _isAlarmMode = false;
 
@@ -25,7 +25,7 @@ namespace NormalModeLibrary.Windows
         public ViewWindow()
         {
             InitializeComponent();
-            elementHost1.Child = new TableControl(this);
+            //elementHost1.Child = new TableControl(this);
             elementHost1.Child.MouseDown += ChildOnMouseDown;
         }
         #endregion
@@ -88,7 +88,7 @@ namespace NormalModeLibrary.Windows
                 }
         }
 
-        internal ViewModel.PanelViewModel Component
+        public ViewModel.PanelViewModel Component
         {
             get
             {

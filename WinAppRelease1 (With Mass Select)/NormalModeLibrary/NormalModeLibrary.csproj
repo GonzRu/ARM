@@ -112,10 +112,10 @@
     <Compile Include="Windows\UserWindows.Designer.cs">
       <DependentUpon>UserWindows.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ViewWindow.cs">
+    <Compile Include="Windows\NormalModePanels\ViewWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\ViewWindow.Designer.cs">
+    <Compile Include="Windows\NormalModePanels\ViewWindow.Designer.cs">
       <DependentUpon>ViewWindow.cs</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -138,7 +138,7 @@
     <EmbeddedResource Include="Windows\UserWindows.resx">
       <DependentUpon>UserWindows.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\ViewWindow.resx">
+    <EmbeddedResource Include="Windows\NormalModePanels\ViewWindow.resx">
       <DependentUpon>ViewWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
