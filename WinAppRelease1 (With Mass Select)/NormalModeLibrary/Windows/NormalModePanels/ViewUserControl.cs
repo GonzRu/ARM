@@ -157,6 +157,17 @@ namespace NormalModeLibrary.Windows
         {
             owner.Controls[0].Controls.Add(this);
         }
+
+        public bool IsEmpty()
+        {
+            if (Component.Collection.Count == 0)
+                return true;
+
+            if (Component.Collection.Count == 1)
+                return Component.Collection.First() is CaptionViewModel;
+
+            return false;
+        }
         #endregion
 
         #region Private Metods

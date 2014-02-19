@@ -138,7 +138,7 @@ namespace NormalModeLibrary
             }
             #endregion
 
-            if (view.Component.Collection.Count == 0)
+            if (view.IsEmpty())
             {
                 view.DeactivatedComponent();
                 Factory.activeNormalModePanels.Remove(view);

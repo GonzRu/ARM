@@ -47,5 +47,10 @@ namespace NormalModeLibrary.Windows
         /// </summary>
         /// <param name="owner"></param>
         void SetOwner(Form owner);
+
+        /// <summary>
+        /// Return true if collection is empty or have only one caption
+        /// </summary>
+        bool IsEmpty();
     }
 }
