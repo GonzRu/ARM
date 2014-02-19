@@ -66,10 +66,7 @@ namespace NormalModeLibrary.Windows
 
                 this.Text = Component.Caption;
 
-                this.Top = Component.Top;
-                this.Left = Component.Left;
-                this.Width = Component.Width;
-                this.Height = Component.Height;
+                this.SetBounds(Component.Left, Component.Top, Component.Width, Component.Height);
 
                 if (Component.IsAutomaticaly)
                     Visible = false;
