@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Input;
+using NormalModeLibrary.ViewModel;
 using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
 namespace NormalModeLibrary.Windows
@@ -25,7 +26,7 @@ namespace NormalModeLibrary.Windows
         public ViewWindow()
         {
             InitializeComponent();
-            //elementHost1.Child = new TableControl(this);
+            elementHost1.Child = new TableControl();
             elementHost1.Child.MouseDown += ChildOnMouseDown;
         }
         #endregion
@@ -61,10 +62,26 @@ namespace NormalModeLibrary.Windows
 
         public void SetOnEditMode()
         {
+            ((TableControl)elementHost1.Child).mainListBox.Background = System.Windows.Media.Brushes.Yellow;
+
+            foreach (var viewModel in Component.Collection)
+            {
+                var analogViewModel = viewModel as AnalogViewModel;
+                if (analogViewModel != null)
+                    analogViewModel.OutOfRangeEvent -= OutOfRangeEvent;
+            }
         }
 
         public void SetOffEditMode()
         {
+            ((TableControl)elementHost1.Child).mainListBox.Background = System.Windows.Media.Brushes.White;
+
+            foreach (var viewModel in Component.Collection)
+            {
+                var analogViewModel = viewModel as AnalogViewModel;
+                if (analogViewModel != null)
+                    analogViewModel.OutOfRangeEvent += OutOfRangeEvent;
+            }
         }
 
         public void UpdateWorkMode()

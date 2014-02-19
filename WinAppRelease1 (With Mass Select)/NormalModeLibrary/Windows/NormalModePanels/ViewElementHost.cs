@@ -67,15 +67,31 @@ namespace NormalModeLibrary.Windows
 
         public void DeactivatedComponent()
         {
-            
+            Parent.Controls[0].Controls.Remove(this);
         }
 
         public void SetOnEditMode()
         {
+            ((TableControl)Child).mainListBox.Background = System.Windows.Media.Brushes.Yellow;
+
+            foreach (var viewModel in Component.Collection)
+            {
+                var analogViewModel = viewModel as AnalogViewModel;
+                if (analogViewModel != null)
+                    analogViewModel.OutOfRangeEvent -= OutOfRangeEvent;
+            }
         }
 
         public void SetOffEditMode()
         {
+            ((TableControl) Child).mainListBox.Background = System.Windows.Media.Brushes.White;
+
+            foreach (var viewModel in Component.Collection)
+            {
+                var analogViewModel = viewModel as AnalogViewModel;
+                if (analogViewModel != null)
+                    analogViewModel.OutOfRangeEvent -= OutOfRangeEvent;
+            }
         }
 
         public void UpdateWorkMode()

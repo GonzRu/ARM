@@ -103,10 +103,26 @@ namespace NormalModeLibrary.Windows
 
         public void SetOnEditMode()
         {
+            BackColor = Color.Yellow;
+
+            foreach (ListViewItem item in Items)
+            {
+                var analogViewModel = item.Tag as AnalogViewModel;
+                if (analogViewModel != null)
+                    analogViewModel.OutOfRangeEvent += AnalogViewModelOnOutOfRangeEvent;
+            }
         }
 
         public void SetOffEditMode()
         {
+            BackColor = Color.White;
+
+            foreach (ListViewItem item in Items)
+            {
+                var analogViewModel = item.Tag as AnalogViewModel;
+                if (analogViewModel != null)
+                    analogViewModel.OutOfRangeEvent -= AnalogViewModelOnOutOfRangeEvent;
+            }
         }
 
         public void UpdateWorkMode()
