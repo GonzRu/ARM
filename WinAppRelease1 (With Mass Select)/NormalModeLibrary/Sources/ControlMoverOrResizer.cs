@@ -56,10 +56,10 @@ namespace NormalModeLibrary.Sources
             {
                 return;
             }
-            MouseIsInLeftEdge = Math.Abs(mouseLocationInControl.X) <= 2;
-            MouseIsInRightEdge = Math.Abs(mouseLocationInControl.X - control.Width) <= 2;
-            MouseIsInTopEdge = Math.Abs(mouseLocationInControl.Y ) <= 2;
-            MouseIsInBottomEdge = Math.Abs(mouseLocationInControl.Y - control.Height) <= 2;
+            MouseIsInLeftEdge = Math.Abs(mouseLocationInControl.X) <= 10;
+            MouseIsInRightEdge = Math.Abs(mouseLocationInControl.X - control.Width) <= 20;
+            MouseIsInTopEdge = Math.Abs(mouseLocationInControl.Y ) <= 10;
+            MouseIsInBottomEdge = Math.Abs(mouseLocationInControl.Y - control.Height) <= 20;
         }
 
         private static void UpdateMouseCursor(Control control)
