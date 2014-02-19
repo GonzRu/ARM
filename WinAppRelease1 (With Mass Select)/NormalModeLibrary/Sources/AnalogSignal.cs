@@ -8,6 +8,8 @@ namespace NormalModeLibrary.Sources
 {
     public class AnalogSignal : BaseSignal, IOutOfRangeHandler
     {
+        private bool _isOutOfRange = false;
+
         public event EventHandler OutOfRangeEvent;
         double value = 0;
         
@@ -46,14 +48,14 @@ namespace NormalModeLibrary.Sources
                 {
                     this.value = tmp;
 
-                    //bool isOutORrangeNow = Range.OutOfRange(this.value);
-                    //if (_isOutOfRange != isOutORrangeNow)
-                    //{
-                    //    if ( OutOfRangeEvent != null )
-                    //        OutOfRangeEvent(this, new OutOfRangeEventArgs(isOutORrangeNow));
+                    bool isOutORrangeNow = Range.OutOfRange(this.value);
+                    if (_isOutOfRange != isOutORrangeNow)
+                    {
+                        if (OutOfRangeEvent != null)
+                            OutOfRangeEvent(this, new OutOfRangeEventArgs(isOutORrangeNow));
 
-                    //    _isOutOfRange = isOutORrangeNow;
-                    //}
+                        _isOutOfRange = isOutORrangeNow;
+                    }
                 }
                 else res = false;
             }

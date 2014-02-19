@@ -60,6 +60,13 @@ namespace NormalModeLibrary.Windows
                 this.Width = Component.Width;
                 this.Height = Component.Height;
 
+                foreach (var viewModel in Component.Collection)
+                {
+                    var analogViewModel = viewModel as AnalogViewModel;
+                    if (analogViewModel != null)
+                        analogViewModel.OutOfRangeEvent += OutOfRangeEvent;
+                }
+
                 if (Component.IsAutomaticaly)
                     Visible = false;
             }
@@ -90,7 +97,7 @@ namespace NormalModeLibrary.Windows
             {
                 var analogViewModel = viewModel as AnalogViewModel;
                 if (analogViewModel != null)
-                    analogViewModel.OutOfRangeEvent -= OutOfRangeEvent;
+                    analogViewModel.OutOfRangeEvent += OutOfRangeEvent;
             }
         }
 
@@ -117,6 +124,13 @@ namespace NormalModeLibrary.Windows
         public void SetOwner(Form owner)
         {
             owner.Controls[0].Controls.Add(this);
+        }
+        #endregion
+
+        #region handlers
+        private void OutOfRangeEvent(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

@@ -51,6 +51,13 @@ namespace NormalModeLibrary.Windows
                 this.Width = Component.Width;
                 this.Height = Component.Height;
 
+                foreach (var viewModel in Component.Collection)
+                {
+                    var analogViewModel = viewModel as AnalogViewModel;
+                    if (analogViewModel != null)
+                        analogViewModel.OutOfRangeEvent += OutOfRangeEvent;
+                }
+
                 if (needToShow)
                     Show();
             }
@@ -126,8 +133,9 @@ namespace NormalModeLibrary.Windows
         #endregion
 
         #region Private Metods
-        private void ViewWindow_OutOfRangeEvent(object sender, EventArgs e)
+        private void OutOfRangeEvent(object sender, EventArgs e)
         {
+            throw new NotImplementedException();
         }
 
         private void ViewWindow_Shown( object sender, EventArgs e )

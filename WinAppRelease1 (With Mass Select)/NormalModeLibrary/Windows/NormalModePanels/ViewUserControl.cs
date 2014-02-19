@@ -17,6 +17,11 @@ namespace NormalModeLibrary.Windows
     {
         #region private
         private PanelViewModel _panelViewModel;
+
+        /// <summary>
+        /// Счеткик количества выходов за границу
+        /// </summary>
+        private uint _countOfOutOfRangeEvents = 0;
         #endregion
 
         #region Properties
@@ -55,18 +60,18 @@ namespace NormalModeLibrary.Windows
         #region Public metods
         public void ActivatedComponent()
         {
-            if (Items.Count != 0)
-            {
-                Items.Clear();
-            }
-
             if (Component != null)
             {
-                ActivateListView();
-
                 this.Text = Component.Caption;
 
                 this.SetBounds(Component.Left, Component.Top, Component.Width, Component.Height);
+
+                foreach (ListViewItem item in Items)
+                {
+                    var analogViewModel = item.Tag as AnalogViewModel;
+                    if (analogViewModel != null)
+                        analogViewModel.OutOfRangeEvent += AnalogViewModelOnOutOfRangeEvent;
+                }
 
                 if (Component.IsAutomaticaly)
                     Visible = false;
@@ -108,11 +113,17 @@ namespace NormalModeLibrary.Windows
                 if (analogViewModel != null)
                     analogViewModel.OutOfRangeEvent += AnalogViewModelOnOutOfRangeEvent;
             }
+
+            if (Component.IsAutomaticaly)
+                this.Show();
         }
 
         public void SetOffEditMode()
         {
             BackColor = Color.White;
+
+            if (Component.IsAutomaticaly)
+                this.Hide();
 
             foreach (ListViewItem item in Items)
             {
@@ -228,7 +239,23 @@ namespace NormalModeLibrary.Windows
 
         private void AnalogViewModelOnOutOfRangeEvent(object sender, EventArgs eventArgs)
         {
-            throw new NotImplementedException();
+            OutOfRangeEventArgs outOfRangeEventArgs = eventArgs as OutOfRangeEventArgs;
+
+            if (Component.IsVisible && Component.IsAutomaticaly)
+                if (outOfRangeEventArgs.OutOfRange)
+                    this.Show();
+                else
+                {
+                    foreach (var item in Component.Collection)
+                    {
+                        var analogViewModel = item as AnalogViewModel;
+                        if (analogViewModel != null)
+                            if (analogViewModel.IsOutOfRange)
+                                return;
+                    }
+
+                    Hide();
+                }
         }
         #endregion
 
