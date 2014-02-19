@@ -151,9 +151,12 @@ namespace NormalModeLibrary.Windows
 
         private void captionTextBoxTextChangedHandler(object sender, EventArgs e)
         {
-            var captionViewModel = _view.Component.Collection.First() as CaptionViewModel;
-            if (captionViewModel != null)
-                captionViewModel.CaptionText = captionTextBox.Text;
+            if (_view.Component.Collection.Count != 0)
+            {
+                var captionViewModel = _view.Component.Collection.First() as CaptionViewModel;
+                if (captionViewModel != null)
+                    captionViewModel.CaptionText = captionTextBox.Text;
+            }
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -165,8 +168,8 @@ namespace NormalModeLibrary.Windows
                 label5.Enabled = true;
                 captionTextBox.Enabled = true;
                 _view.Component.IsCaptionVisible = true;
-
-                if (!(_view.Component.Collection.First() is CaptionViewModel))
+                
+                if (_view.Component.Collection.Count == 0 || !(_view.Component.Collection.First() is CaptionViewModel))
                 {
                     var captionViewModel = new CaptionViewModel(captionTextBox.Text);
                     captionViewModel.FontSize = (UInt16) FontSizeNumericUpDown.Value;
