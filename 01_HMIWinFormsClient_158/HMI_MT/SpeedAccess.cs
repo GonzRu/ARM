@@ -40,7 +40,6 @@ namespace HMI_MT
         private MainForm parent;
         ArrayList aCS = new ArrayList();
         ArrayList aBut = new ArrayList();
-        dlgOptionsFormEditor fnm;
         ArrayList arrNormalModeForms = new ArrayList();	// массив форм панелей нормального режима
         IList<BaseRegion> panelRegions = new List<BaseRegion>();
 

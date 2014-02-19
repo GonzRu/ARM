@@ -52,6 +52,7 @@ using DataBaseLib;
 using PTKStateLib;
 using DebugStatisticLibrary;
 using HMI_MT.Properties;
+using NormalModeLibrary.Windows;
 
 namespace HMI_MT
 {
@@ -937,8 +938,14 @@ namespace HMI_MT
          if( ( tabForms.SelectedTab != null ) && ( tabForms.SelectedTab.Tag != null ) )
          {
             ( tabForms.SelectedTab.Tag as Form ).Select();
-            foreach( Form frowned in ( tabForms.SelectedTab.Tag as Form ).OwnedForms )
-               frowned.Show();
+            foreach (Form frowned in (tabForms.SelectedTab.Tag as Form).OwnedForms)
+            {
+                var viewWindow = frowned as ViewWindow;
+                if (viewWindow != null)
+                    viewWindow.ShowIfNeed();
+                else
+                    frowned.Show();
+            }
          }
       }
       #endregion
@@ -1751,6 +1758,12 @@ namespace HMI_MT
             //CommonUtils.CommonUtils.TestUserMenuRights( menuStrip1, HMI_MT_Settings.HMI_Settings.arrlUserMenu );
             // создаем главную мнемосхему
             CreateMainMnemo();
+
+            /********************************************************************************************************/
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима.");
+            NormalModeLibrary.ComponentFactory.Factory.ActivatedMainMnemoForms(Form_ez);
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима завершен.");
+            /********************************************************************************************************/
         }
         /// <summary>
         /// Block system
@@ -1781,6 +1794,12 @@ namespace HMI_MT
             arrF = this.MdiChildren;
             for ( int i = 0; i < arrF.Length; i++ )
                 arrF[i].WindowState = FormWindowState.Maximized;
+
+            /********************************************************************************************************/
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима.");
+            NormalModeLibrary.ComponentFactory.Factory.ActivatedMainMnemoForms(Form_ez);
+            DebugStatistics.WindowStatistics.AddStatistic("«апуск панелей нормального режима завершен.");
+            /********************************************************************************************************/
         }
         /// <summary>
         /// User information

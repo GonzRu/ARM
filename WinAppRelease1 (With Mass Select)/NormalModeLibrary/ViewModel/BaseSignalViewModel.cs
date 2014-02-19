@@ -58,14 +58,21 @@ namespace NormalModeLibrary.ViewModel
                 UpDateProperties();
         }
 
-        public String Caption { get { return signal.Caption; } }
+        public String Caption { get { return signal.Caption; } set { signal.Caption = value; OnPropertyChanged("Caption"); } }
         public String Commentary { get { return signal.Commentary; } }
-        public String Dim { get { return signal.Dim; } }
+        public String Dim { get { return signal.Dim; } set { signal.Dim = value; OnPropertyChanged("Dim"); } }
         public UInt32 Guid { get { return signal.Guid; } }
         public Object Value { get { return signal.Value; } }
+        public BaseSignal BaseSignal { get { return signal; } }
         internal Boolean IsSubscribe { get; private set; }
         internal Boolean IsChecked { get; set; }
         internal Boolean IsSupported { get { return ( BaseSignal.CheckSignalType( this.tag.Type ) ); } }
+
+        override public UInt16 FontSize
+        {
+            get { return signal.FontSize; }
+            set { signal.FontSize = value; OnPropertyChanged("FontSize");}
+        }
 
         internal static BaseSignalViewModel GetSignalViewModel( BaseSignal signal )
         {

@@ -26,11 +26,11 @@ namespace NormalModeLibrary.Sources
         /// <summary>
         /// Минимальное значение по умолчанию
         /// </summary>
-        public const double DefaultRangeMinValue = -100;
+        public const double DefaultRangeMinValue = 0;
         /// <summary>
         /// Максимальное значение по умолчанию
         /// </summary>
-        public const double DefaultRangeMaxValue = 100;
+        public const double DefaultRangeMaxValue = 0;
 
         public BaseRange()
         {
@@ -44,7 +44,10 @@ namespace NormalModeLibrary.Sources
         /// <returns>true - если значение вышло за диапозон</returns>
         public virtual bool OutOfRange( Double value )
         {
-            return ( value < RangeMinValue || value > RangeMaxValue ) ? true : false;
+            if (RangeMinValue == 0 && RangeMaxValue == 0)
+                return false;
+
+            return ( value < RangeMinValue || value > RangeMaxValue );
         }
 
         /// <summary>
@@ -64,12 +67,12 @@ namespace NormalModeLibrary.Sources
         /// <summary>
         /// Минимальное значение гистерезиса по умолчанию
         /// </summary>
-        public const double DefaultRangeMinHysteresis = -80;
+        public const double DefaultRangeMinHysteresis = 0;
         /// <summary>
         /// Максимальное значение гистерезиса по умолчанию
         /// </summary>        
-        public const double DefaultRangeMaxHysteresis = 80;
-        bool outRange = false; // Для запоминания промежуточного значения
+        public const double DefaultRangeMaxHysteresis = 0;
+        private bool _isLastOutOfRange = false; // Для запоминания промежуточного значения
         double rangeMinHysteresis = DefaultRangeMinHysteresis, rangeMaxHysteresis = DefaultRangeMaxHysteresis;
 
         public HysteresisRange() { }
@@ -77,51 +80,45 @@ namespace NormalModeLibrary.Sources
         /// Проверка диапозона
         /// </summary>
         /// <param name="value">Значение</param>
+        /// <param name="isOutOfRangenow">Показывает прошлое состояние, от которого зависит текущее</param>
         /// <returns>true - если значение вышло за диапозон</returns>        
-        public override bool OutOfRange( Double value )
+        public override bool OutOfRange( Double value)
         {
-            bool outDefRange = base.OutOfRange( value );
-            bool inHystRange = ( value > RangeMinHysteresis && value < RangeMaxHysteresis ) ? true : false;
+            bool outDefRange = base.OutOfRange(value);         
 
             if ( outDefRange )
+                return (_isLastOutOfRange = true);
+            else
             {
-                outRange = true;
-                return true;
+                if (_isLastOutOfRange)
+                {
+                    bool inHystRange = (value > RangeMaxValue - RangeMaxHysteresis ||
+                                        value < RangeMinValue + RangeMinHysteresis);
+
+                    _isLastOutOfRange = inHystRange;
+                    return inHystRange;
+                }
+                else
+                    return _isLastOutOfRange;
             }
-            else if ( inHystRange )
-            {
-                outRange = false;
-                return false;
-            }
-            else return outRange;
         }
+
         /// <summary>
         /// Получить или задать минимальное значение гистерезиса
         /// </summary>
         public double RangeMinHysteresis
         {
             get { return rangeMinHysteresis; }
-            set
-            {
-                rangeMinHysteresis = value;
-
-                if ( RangeMinValue > rangeMinHysteresis )
-                    RangeMinValue = rangeMinHysteresis;
-            }
+            set { rangeMinHysteresis = value; }
         }
+
         /// <summary>
         /// Получить или задать максимальное значение гистерезиса
         /// </summary>        
         public double RangeMaxHysteresis
         {
             get { return rangeMaxHysteresis; }
-            set
-            {
-                rangeMaxHysteresis = value;
-
-                if ( RangeMaxValue < rangeMaxHysteresis )
-                    RangeMaxValue = rangeMaxHysteresis;
-            }
+            set { rangeMaxHysteresis = value; }
         }
     }
 }

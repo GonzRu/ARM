@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms.Integration;
 using System.Xml.Linq;
 using System.Windows.Forms;
-
+using InterfaceLibrary;
 using NormalModeLibrary.Sources;
 using NormalModeLibrary.ViewModel;
+using NormalModeLibrary.Windows;
 
 namespace NormalModeLibrary
 {
@@ -13,10 +15,15 @@ namespace NormalModeLibrary
     {
         static ComponentFactory factory;
         static readonly string FilePath = AppDomain.CurrentDomain.BaseDirectory + @"Project\CurrentModePanel.xml";
-        Form mainMnemoHandle;
+        //private static readonly string PanelType = "windowAndWPFPanel";
+        //private static readonly string PanelType = "controlAndWPFPanel";
+        private static readonly string PanelType = "controlAndWinFormPanel";
+
+        private Form mainMnemoHandle;
+        private bool isLoad = false;
+
         readonly List<UserViewModel> users = new List<UserViewModel>();
-        readonly List<Windows.ViewWindow> activePanelForm = new List<Windows.ViewWindow>();
-        bool isLoad = false;
+        readonly  List<INormalModePanel> activeNormalModePanels = new List<INormalModePanel>(); 
 
         private ComponentFactory() { }
         private List<PanelViewModel> GetPanels( Places place )
@@ -54,86 +61,88 @@ namespace NormalModeLibrary
         }
         public void ActivatedMainMnemoForms( Form form )
         {
-            if ( activePanelForm.Count > 0 )
+            if (activeNormalModePanels.Count > 0)
                 DeactivatedMainMnemoForms();
            
             mainMnemoHandle = form;
 
             foreach ( var vmPanel in GetPanels( Places.MainMnemo ) )
             {
-                var view = new Windows.ViewWindow { Component = vmPanel, Place = Places.MainMnemo };
-                activePanelForm.Add( view );
-                view.Owner = mainMnemoHandle;
-                //view.ActivatedComponent();
-                view.Show();
+                if (!vmPanel.IsVisible)
+                    continue;
+
+                var panel = NormalModePanelFactory.CreatePanel(PanelType);
+                panel.Component = vmPanel;
+                panel.Place = Places.MainMnemo;
+                panel.SetOwner(Factory.mainMnemoHandle);
+                panel.ActivatedComponent();
+
+                activeNormalModePanels.Add(panel);
             }
+
+            Application.OpenForms[0].Activate();
         }
         public void DeactivatedMainMnemoForms()
         {
-            if ( activePanelForm.Count > 0 )
-                foreach ( Windows.ViewWindow view in activePanelForm.ToArray() )
+            if (activeNormalModePanels.Count > 0)
+                foreach (INormalModePanel view in activeNormalModePanels.ToArray())
                     if ( view.Place == Places.MainMnemo )
                     {
                         view.DeactivatedComponent();
-                        activePanelForm.Remove( view );
+                        activeNormalModePanels.Remove(view);
                     }
         }
         public void SetStates( FormWindowState state )
         {
-            foreach ( Windows.ViewWindow view in activePanelForm )
-                switch ( state )
-                {
-                    case FormWindowState.Maximized: view.WindowState = FormWindowState.Normal; break;
-                    default: view.WindowState = state; break;
-                }
+            //foreach (ViewElementHost view in activePanelControls)
+            //    switch ( state )
+            //    {
+            //        case FormWindowState.Maximized: view.WindowState = FormWindowState.Normal; break;
+            //        default: view.WindowState = state; break;
+            //    }
         }
 
-        public static void EditSignals( InterfaceLibrary.IDevice device, String login, Places place )
+        public static void EditSignals( IDevice device, String login, Places place )
         {
-            var win = new Windows.SelectSignalsWindow();
-            var user = GetUser( Factory.users, login );
-            var config = GetConfig( user, place );
-            var panel = GetPanel( config, device.UniObjectGUID );
+            var win = new SelectSignalsWindow();
 
-            win.AddComponents( device, panel );
+            var user = GetUser(Factory.users, login);
+            var config = GetConfig(user, place);
+            var panel = GetPanel(config, device);
+
+            #region Find or create ViewWindow
+            var view = Factory.activeNormalModePanels.FirstOrDefault(apf => apf.Component == panel);
+            if (view == null)
+            {
+                view = NormalModePanelFactory.CreatePanel(PanelType);
+                view.Component = panel;
+                view.Place = place;
+                view.SetOwner(Factory.mainMnemoHandle);
+
+                Factory.activeNormalModePanels.Add(view);                
+            }
+
+            view.ActivatedComponent();
+            #endregion
+
+            #region SelectSignalWindow work
+            win.AddComponents( device, view );
 
             if ( win.ShowDialog() == DialogResult.OK )
             {
-                var view = Factory.activePanelForm.FirstOrDefault( apf => apf.Component == panel );
-                if ( view == null && panel.Collection.Count > 0 )
-                {
-                    view = new Windows.ViewWindow { Component = panel, Place = place };
-                    Factory.activePanelForm.Add( view );
-                    view.Owner = Factory.mainMnemoHandle;
-                }
+                RemovePanelViewModelToConfigurationViewModel(config, win.GetOriginalWindowComponent());
 
-                if ( view != null )
-                {
-                    if ( panel.Collection.Count == 0 )
-                    {
-                        view.Close();
-                        Factory.activePanelForm.Remove( view );
-                        return;
-                    }
+                AddPanelViewModelFromConfigurationViewModel(config, view.Component);
 
-                    //view.ActivatedComponent();
-                    try
-                    {
-                        //view.ActivatedComponent();
-                        view.Show();
-                    }
-                    catch ( Exception )
-                    {
-                        view.DeactivatedComponent();
-                        Factory.activePanelForm.Remove( view );
-                        var newView = new Windows.ViewWindow { Component = panel, Place = place };
-                        Factory.activePanelForm.Add( newView );
-                        newView.Owner = Factory.mainMnemoHandle;
-                        newView.Show();
-                    }
-                }
+                ComponentFactory.Factory.SaveXml();
             }
+            #endregion
 
+            if (view.Component.Collection.Count == 0)
+            {
+                view.DeactivatedComponent();
+                Factory.activeNormalModePanels.Remove(view);
+            }
         }
         public static void EditUserWindows()
         {
@@ -187,11 +196,11 @@ namespace NormalModeLibrary
 
             return configModel;
         }
-        private static PanelViewModel GetPanel( ConfigurationViewModel model, UInt32 guid )
+        private static PanelViewModel GetPanel( ConfigurationViewModel model, IDevice device )
         {
             PanelViewModel panel = null;
             foreach ( PanelViewModel panelModel in model.Collection )
-                if ( panelModel.ObjectGuid == guid )
+                if ( panelModel.ObjectGuid == device.UniObjectGUID )
                 {
                     panel = panelModel;
                     break;
@@ -199,7 +208,7 @@ namespace NormalModeLibrary
 
             if ( panel == null )
             {
-                var pnl = new Sources.Panel { ObjectGuid = guid, Type = Sources.Panel.LinkType.Named };
+                var pnl = new Sources.Panel { ObjectGuid = device.UniObjectGUID, Type = Sources.Panel.LinkType.Named, Caption = device.Description};
 
                 ( (Configuration)model.Core ).Collection.Add( pnl );
                 panel = new PanelViewModel( pnl );
@@ -212,6 +221,18 @@ namespace NormalModeLibrary
         public static ComponentFactory Factory
         {
             get { return factory ?? ( factory = new ComponentFactory( ) ); }
+        }
+
+        private static void AddPanelViewModelFromConfigurationViewModel(ConfigurationViewModel model, PanelViewModel p)
+        {
+            ((Configuration)model.Core).Collection.Add(p.BasePanel);
+            model.Collection.Add(p);
+        }
+
+        private static void RemovePanelViewModelToConfigurationViewModel(ConfigurationViewModel model, PanelViewModel p)
+        {
+            ((Configuration)model.Core).Collection.Remove(p.BasePanel);
+            model.Collection.Remove(p);
         }
     }
 }

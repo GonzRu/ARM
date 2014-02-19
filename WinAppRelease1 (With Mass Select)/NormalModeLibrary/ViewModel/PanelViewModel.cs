@@ -9,7 +9,8 @@ namespace NormalModeLibrary.ViewModel
 {
     public class PanelViewModel : BaseCollectionViewModel
     {
-        Panel panel;
+        private Panel panel;
+        private UInt16 _fontSize = 12;
 
         internal PanelViewModel( Panel panel )
         {
@@ -35,11 +36,24 @@ namespace NormalModeLibrary.ViewModel
                     Collection.Add( signalModel );
                 }
             }
+
+            if (IsCaptionVisible)
+            {
+                CaptionViewModel captionViewModel = new CaptionViewModel(Caption);
+                captionViewModel.FontSize = _fontSize;
+                Collection.Insert(0, captionViewModel);
+            }
         }
         internal override ViewModelBase Copy()
         {
             Panel pnl = (Panel)panel.Copy();
             return new PanelViewModel( pnl );
+        }
+
+        public Panel BasePanel
+        {
+            get { return panel; }
+            private set { panel = value; }
         }
 
         public String Caption
@@ -96,6 +110,21 @@ namespace NormalModeLibrary.ViewModel
         {
             get { return panel.Height; }
             set { panel.Height = value; }
+        }
+
+        public UInt16 FontSize
+        {
+            get { return _fontSize; }
+            set
+            {
+                _fontSize = value;
+
+                foreach (var signal in Collection)
+                {
+                    var baseSignalViewModel = signal as ViewModelBase;
+                    baseSignalViewModel.FontSize = value;
+                }
+            }
         }
     }
 }

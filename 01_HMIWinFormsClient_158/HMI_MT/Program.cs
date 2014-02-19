@@ -51,7 +51,7 @@ namespace HMI_MT
                 HMI_Settings.PathToPrjFile = PathToPrjFile;
                 HMI_Settings.XDoc4PathToPrjFile = XDocument.Load( HMI_Settings.PathToPrjFile );
             }
-            catch ( Exception ex )
+            catch ( Exception )
             {
                 throw new Exception( string.Format( "(423) : MainForm.cs : SetNamesCfgPrgFiles() : Несуществующий файл = {0}", PathToPrjFile ) );
             }

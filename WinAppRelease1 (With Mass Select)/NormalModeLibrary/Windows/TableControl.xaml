@@ -12,29 +12,29 @@
         <conv:AnalogCaptionMultiValueConverter x:Key="AnalogCaptionConvert" />
         <conv:AnalogSignalColorValueConverter x:Key="AnalogColorConvert" />
     </UserControl.Resources>
-    
-    <ItemsControl ItemsSource="{Binding Path=Collection}">
-        <ItemsControl.Resources>
+
+    <ListBox x:Name="mainListBox" ItemsSource="{Binding Path=Collection}" MouseDoubleClick="ListBox_MouseDoubleClick">
+        <ListBox.Resources>
+            <DataTemplate DataType="{x:Type my:CaptionViewModel}">
+                <StackPanel Orientation="Horizontal" MouseDown="ListBox_MouseDown">
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=CaptionText, Mode=OneWay}" Foreground="Blue" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type my:AnalogViewModel}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="10,0,0,0" FontSize="14" Text="{Binding Path=Value, Mode=OneWay, Converter={StaticResource AnalogConvert}}"
+                <StackPanel Orientation="Horizontal" MouseDown="ListBox_MouseDown">
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=Caption, Mode=OneWay}" />
+                    <TextBlock Margin="0,0,0,0" FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=Value, Mode=OneWay, Converter={StaticResource AnalogConvert}}"
                                Foreground="{Binding Path=IsOutOfRange, Mode=OneWay, Converter={StaticResource AnalogColorConvert}}" />
-                    <TextBlock FontSize="14" Margin="10,0,0,0">
-                        <TextBlock.Text>
-                            <MultiBinding Converter="{StaticResource AnalogCaptionConvert}" Mode="OneTime">
-                                <Binding Path="Caption" />
-                                <Binding Path="Dim" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Text="{Binding Path=Dim, Mode=OneWay}" />
                 </StackPanel>
             </DataTemplate>
             <DataTemplate DataType="{x:Type my:DigitalViewModel}">
-                <StackPanel Orientation="Horizontal">
-                    <Rectangle Margin="10,0,0,0" Width="14" Height="14" Fill="{Binding Path=Value, Mode=OneWay}" Stroke="Black" />
-                    <TextBlock FontSize="14" Margin="10,0,0,0" Text="{Binding Path=Caption, Mode=OneTime}" />
+                <StackPanel Orientation="Horizontal" MouseDown="ListBox_MouseDown">
+                    <Rectangle Margin="0,0,0,0" Width="14" Height="14" Fill="{Binding Path=Value, Mode=OneWay}" Stroke="Black" />
+                    <TextBlock FontSize="{Binding Path=FontSize, Mode=OneWay}" Margin="0,0,0,0" Text="{Binding Path=Caption, Mode=OneTime}" />
                 </StackPanel>
             </DataTemplate>
-        </ItemsControl.Resources>        
-    </ItemsControl>
+        </ListBox.Resources>        
+    </ListBox>
+    
 </UserControl>
