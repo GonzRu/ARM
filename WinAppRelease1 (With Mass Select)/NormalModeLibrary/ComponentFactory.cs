@@ -15,6 +15,9 @@ namespace NormalModeLibrary
     {
         static ComponentFactory factory;
         static readonly string FilePath = AppDomain.CurrentDomain.BaseDirectory + @"Project\CurrentModePanel.xml";
+        private static readonly string PanelType = "windowAndWPFPanel";
+        //private static readonly string PanelType = "controlAndWPFPanel";
+        //private static readonly string PanelType = "controlAndWinFormPanel";
 
         private Form mainMnemoHandle;
         private bool isLoad = false;
@@ -68,7 +71,7 @@ namespace NormalModeLibrary
                 if (!vmPanel.IsVisible)
                     continue;
 
-                var panel = NormalModePanelFactory.CreatePanel("controlAndWinFormPanel");
+                var panel = NormalModePanelFactory.CreatePanel(PanelType);
                 panel.Component = vmPanel;
                 panel.Place = Places.MainMnemo;
                 panel.SetOwner(Factory.mainMnemoHandle);
@@ -111,9 +114,10 @@ namespace NormalModeLibrary
             var view = Factory.activeNormalModePanels.FirstOrDefault(apf => apf.Component == panel);
             if (view == null)
             {
-                view = new ViewUserControl { Component = panel, Place = place, Parent = Factory.mainMnemoHandle};
-                ControlMoverOrResizer.Init((ViewUserControl)view);
-                Factory.mainMnemoHandle.Controls[0].Controls.Add((ViewUserControl)view);
+                view = NormalModePanelFactory.CreatePanel(PanelType);
+                view.Component = panel;
+                view.Place = place;
+                view.SetOwner(Factory.mainMnemoHandle);
 
                 Factory.activeNormalModePanels.Add(view);                
             }
