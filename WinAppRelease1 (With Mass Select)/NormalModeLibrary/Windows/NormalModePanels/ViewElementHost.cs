@@ -74,7 +74,7 @@ namespace NormalModeLibrary.Windows
 
         public void DeactivatedComponent()
         {
-            Parent.Controls[0].Controls.Remove(this);
+            Parent.Controls.Remove(this);
         }
 
         public void SetOnEditMode()
