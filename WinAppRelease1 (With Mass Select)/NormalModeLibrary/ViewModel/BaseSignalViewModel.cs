@@ -58,9 +58,9 @@ namespace NormalModeLibrary.ViewModel
                 UpDateProperties();
         }
 
-        public String Caption { get { return signal.Caption; } }
+        public String Caption { get { return signal.Caption; } set { signal.Caption = value; OnPropertyChanged("Caption"); } }
         public String Commentary { get { return signal.Commentary; } }
-        public String Dim { get { return signal.Dim; } }
+        public String Dim { get { return signal.Dim; } set { signal.Dim = value; OnPropertyChanged("Dim"); } }
         public UInt32 Guid { get { return signal.Guid; } }
         public Object Value { get { return signal.Value; } }
         public BaseSignal BaseSignal { get { return signal; } }

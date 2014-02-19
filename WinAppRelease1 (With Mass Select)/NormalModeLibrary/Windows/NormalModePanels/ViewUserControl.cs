@@ -225,6 +225,41 @@ namespace NormalModeLibrary.Windows
 
             NormalModeLibrary.ComponentFactory.Factory.SaveXml();
         }
+
+        private void AnalogViewModelOnOutOfRangeEvent(object sender, EventArgs eventArgs)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Overrises
+        protected override void OnDoubleClick(EventArgs e)
+        {
+            base.OnDoubleClick(e);
+
+            var selecteditem = this.SelectedItems[0];
+            BaseSignalViewModel baseSignalViewModel = selecteditem.Tag as BaseSignalViewModel;
+            
+            if (baseSignalViewModel != null)
+            {
+                var signalWindow = new SignalWindow();
+                var baseSignal = baseSignalViewModel.BaseSignal;
+
+                // Жуткий костыль
+                string caption = baseSignal.Caption;
+                string dim = baseSignal.Dim;
+
+                signalWindow.SetSignal(baseSignal);
+
+                signalWindow.ShowDialog();
+
+                if (caption != baseSignalViewModel.Caption)
+                    baseSignalViewModel.Caption = baseSignal.Caption;
+
+                if (dim != baseSignalViewModel.Dim)
+                    baseSignalViewModel.Dim = baseSignal.Dim;
+            }
+        }
         #endregion
     }
 }
