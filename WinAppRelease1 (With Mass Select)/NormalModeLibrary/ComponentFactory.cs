@@ -15,9 +15,9 @@ namespace NormalModeLibrary
     {
         static ComponentFactory factory;
         static readonly string FilePath = AppDomain.CurrentDomain.BaseDirectory + @"Project\CurrentModePanel.xml";
-        private static readonly string PanelType = "windowAndWPFPanel";
+        //private static readonly string PanelType = "windowAndWPFPanel";
         //private static readonly string PanelType = "controlAndWPFPanel";
-        //private static readonly string PanelType = "controlAndWinFormPanel";
+        private static readonly string PanelType = "controlAndWinFormPanel";
 
         private Form mainMnemoHandle;
         private bool isLoad = false;
