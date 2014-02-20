@@ -823,6 +823,29 @@ namespace FileManager
                     }
                 }
                 #endregion
+
+                #region Exec external programm section
+                osParams.IsExecExternalProgram = false;
+                osParams.PathToExternalProgram = String.Empty;
+
+                xElement = node.Element("ExternalProgram");
+                if (xElement != null)
+                {
+                    var IsExecExternalProgramAttribute = xElement.Attribute("IsExecExternalProgram");
+                    if (IsExecExternalProgramAttribute != null)
+                    {
+                        bool IsExecExternalProgram;
+                        if (bool.TryParse(IsExecExternalProgramAttribute.Value, out IsExecExternalProgram))
+                            osParams.IsExecExternalProgram = IsExecExternalProgram;
+                    }
+
+                    var PathToExternalProgramAttribute = xElement.Attribute("PathToExternalProgram");
+                    if (PathToExternalProgramAttribute != null)
+                    {
+                        osParams.PathToExternalProgram = PathToExternalProgramAttribute.Value;
+                    }
+                }
+                #endregion
             }
             if ( this.osElement is StaticElement )
             {
