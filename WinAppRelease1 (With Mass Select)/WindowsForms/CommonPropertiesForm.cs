@@ -25,11 +25,17 @@ namespace WindowsForms
          InitPage1(frameMaxX, frameMaxY);
 
          if (elem is IDynamicParameters)
-            InitPage2();
+         {
+             InitPage2();
+             InitExternalProgramPage();
+         }
          else
-            this.tabControl1.Controls.Remove(this.BindingTtabPage);
+         {
+             this.tabControl1.Controls.Remove(this.BindingTtabPage);
+             this.tabControl1.Controls.Remove(this.externalProgramTabPage);
+         }
 
-         if (elem is Rotate)
+          if (elem is Rotate)
             InitPage5();
          else
             this.tabControl1.Controls.Remove(this.RotationTabPage);
@@ -176,6 +182,24 @@ namespace WindowsForms
           this.checkBox6.Checked = orgtext.VerticalView;
       }
 
+       private void InitExternalProgramPage()
+       {
+           var parameters = ((IDynamicParameters) SelectElement).Parameters;
+
+           if (parameters.IsExecExternalProgram)
+           {
+               IsExecExternalProgramCheckBox.Checked = true;
+               ExternalProgramParametersGroupBox.Enabled = true;
+               PathToExternalProgramTextBox.Text = parameters.PathToExternalProgram;
+           }
+           else
+           {
+               IsExecExternalProgramCheckBox.Checked = false;
+               ExternalProgramParametersGroupBox.Enabled = false;
+               PathToExternalProgramTextBox.Text = String.Empty;
+           }
+       }
+
       protected virtual void ToElement()
       {
          var x = Convert.ToInt32(numericUpDown1.Value);
@@ -242,6 +266,9 @@ namespace WindowsForms
               @params.Parameters.DsGuidForCommandBinding = Convert.ToUInt32(this.dsGuidCommandBindingNumericUpDown.Value);
               @params.Parameters.DeviceGuidForCommandBinding = Convert.ToUInt32(this.deviceGuidCommandBindingNumericUpDown.Value);
               @params.Parameters.CommandGuidForCommandBinding = Convert.ToUInt32(this.commandGuidCommandBindingNumericUpDown.Value);
+
+              @params.Parameters.IsExecExternalProgram = IsExecExternalProgramCheckBox.Checked;
+              @params.Parameters.PathToExternalProgram = PathToExternalProgramTextBox.Text;
           }
           
           var rotate = SelectElement as Rotate;
@@ -357,6 +384,14 @@ namespace WindowsForms
               return numeric.Minimum;
 
           return value;
+      }
+
+      private void IsExecExternalProgramCheckBox_CheckedChanged(object sender, EventArgs e)
+      {
+          if (IsExecExternalProgramCheckBox.Checked)
+              ExternalProgramParametersGroupBox.Enabled = true;
+          else
+              ExternalProgramParametersGroupBox.Enabled = false;
       }
    }
 }

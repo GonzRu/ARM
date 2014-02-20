@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
 
@@ -48,8 +49,27 @@ namespace HMI_MT
             {
                 var idp = sender as IDynamicParameters;
 
-                if ( idp != null && idp.Parameters != null )
-                    DevicesLibrary.DeviceFormFactory.CreateForm( this, idp.Parameters.DsGuid, idp.Parameters.DeviceGuid, parent.arrFrm );
+                if (idp != null && idp.Parameters != null)
+                {
+                    if (idp.Parameters.IsExecExternalProgram)
+                    {
+                        Process process = new Process();
+                        process.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory +
+                                                     idp.Parameters.PathToExternalProgram;
+                        try
+                        {
+                            process.Start();
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Не найдена программа: " + process.StartInfo.FileName);
+                        }                        
+                    }
+                    else
+                        DevicesLibrary.DeviceFormFactory.CreateForm(this, idp.Parameters.DsGuid,
+                                                                    idp.Parameters.DeviceGuid,
+                                                                    parent.arrFrm);
+                }
 
                 var buttonRegion = sender as ButtonRegion;
                 if ( buttonRegion != null )

@@ -239,17 +239,26 @@ namespace FileManager
         /// Запись динамических данных элемента
         /// </summary>
         /// <param name="parameters">Параметры элемента</param>
-        private XElement SaveFigureDynamicElements( DynamicParameters parameters )
+        private object[] SaveFigureDynamicElements( DynamicParameters parameters )
         {
-            var xnode = new XElement( "parameters" );
-            xnode.Add( new XAttribute( "dsGuid", parameters.DsGuid ) );
-            xnode.Add( new XAttribute( "devGuid", parameters.DeviceGuid ) );
-            xnode.Add( new XAttribute( "cell", parameters.Cell ) );
-            xnode.Add( new XAttribute( "type", parameters.Type ) );
-            xnode.Add( new XAttribute( "tooltip", parameters.ToolTipMessage ) );
-            xnode.Add( new XAttribute( "extern", parameters.ExternalDescription ) );
+            var ParamNode = new XElement( "parameters" );
+            ParamNode.Add( new XAttribute( "dsGuid", parameters.DsGuid ) );
+            ParamNode.Add( new XAttribute( "devGuid", parameters.DeviceGuid ) );
+            ParamNode.Add( new XAttribute( "cell", parameters.Cell ) );
+            ParamNode.Add( new XAttribute( "type", parameters.Type ) );
+            ParamNode.Add( new XAttribute( "tooltip", parameters.ToolTipMessage ) );
+            ParamNode.Add( new XAttribute( "extern", parameters.ExternalDescription ) );
 
-            return xnode;
+            var commandNode = new XElement("command",
+                                           new XAttribute("dsGuid", parameters.DsGuidForCommandBinding),
+                                           new XAttribute("devGuid", parameters.DeviceGuidForCommandBinding),
+                                           new XAttribute("commandGuid", parameters.CommandGuidForCommandBinding));
+
+            var externalProgramNode = new XElement("ExternalProgram",
+                                                   new XAttribute("IsExecExternalProgram", parameters.IsExecExternalProgram),
+                                                   new XAttribute("PathToExternalProgram", parameters.PathToExternalProgram));
+
+            return new object[] {ParamNode, commandNode, externalProgramNode};
         }
         /// <summary>
         /// Запись типа фигуры
@@ -270,20 +279,7 @@ namespace FileManager
             {
                 xnode = this.CreateElementType( "Dinamic_Element", "dynamic" );
 
-                xnode2 = this.SaveFigureDynamicElements( ( (IDynamicParameters)this.osElement ).Parameters );
-                xnode.Add( xnode2 );
-
-                #warning refact
-                #region command section
-                var asParams = osElement as DynamicElement;
-                xnode2 = new XElement("command");
-
-                xnode2.Add(new XAttribute("dsGuid", asParams.Parameters.DsGuidForCommandBinding));
-                xnode2.Add(new XAttribute("devGuid", asParams.Parameters.DeviceGuidForCommandBinding));
-                xnode2.Add(new XAttribute("commandGuid", asParams.Parameters.CommandGuidForCommandBinding));
-
-                xnode.Add(xnode2);
-                #endregion
+                xnode.Add(SaveFigureDynamicElements(((IDynamicParameters)this.osElement).Parameters));
 
                 return xnode;
             }
@@ -820,6 +816,29 @@ namespace FileManager
                         uint command;
                         uint.TryParse(xAttribute.Value, out command);
                         osParams.CommandGuidForCommandBinding = command;
+                    }
+                }
+                #endregion
+
+                #region Exec external programm section
+                osParams.IsExecExternalProgram = false;
+                osParams.PathToExternalProgram = String.Empty;
+
+                xElement = node.Element("ExternalProgram");
+                if (xElement != null)
+                {
+                    var IsExecExternalProgramAttribute = xElement.Attribute("IsExecExternalProgram");
+                    if (IsExecExternalProgramAttribute != null)
+                    {
+                        bool IsExecExternalProgram;
+                        if (bool.TryParse(IsExecExternalProgramAttribute.Value, out IsExecExternalProgram))
+                            osParams.IsExecExternalProgram = IsExecExternalProgram;
+                    }
+
+                    var PathToExternalProgramAttribute = xElement.Attribute("PathToExternalProgram");
+                    if (PathToExternalProgramAttribute != null)
+                    {
+                        osParams.PathToExternalProgram = PathToExternalProgramAttribute.Value;
                     }
                 }
                 #endregion

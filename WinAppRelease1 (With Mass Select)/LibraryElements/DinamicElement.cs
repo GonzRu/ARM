@@ -27,6 +27,9 @@ namespace LibraryElements
             DeviceGuidForCommandBinding = original.DeviceGuidForCommandBinding;
             CommandGuidForCommandBinding = original.CommandGuidForCommandBinding;
             #endregion
+
+            IsExecExternalProgram = original.IsExecExternalProgram;
+            PathToExternalProgram = original.PathToExternalProgram;
         }
 
         /// <summary>
@@ -72,6 +75,18 @@ namespace LibraryElements
         /// </summary>
         public uint CommandGuidForCommandBinding { get; set; }
         #endregion
+        #endregion
+
+        #region Вызов внешней программы 20.02.2014
+        /// <summary>
+        /// Флаг, показывающий надо ли вызывать внешнюю программу
+        /// </summary>
+        public bool IsExecExternalProgram { get; set; }
+
+        /// <summary>
+        /// Path to external programm
+        /// </summary>
+        public string PathToExternalProgram { get; set; }
         #endregion
     }
 }
