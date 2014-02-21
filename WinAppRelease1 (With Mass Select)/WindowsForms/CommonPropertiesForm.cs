@@ -116,16 +116,21 @@ namespace WindowsForms
               if (calc.CalculationContext.IsDeviceFromDeviceBinding)
               {
                   StateFromBindingDeviceCheckBox.Checked = true;
-                  StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+                  StateGroupBox.Enabled = false;
               }
               else
               {
                   StateFromBindingDeviceCheckBox.Checked = false;
-                  StateFromBindingDeviceCheckBox_CheckedChanged(StateFromBindingDeviceCheckBox, new EventArgs());
+                  StateGroupBox.Enabled = true;
 
                   stateDSGuidNumericUpDown.Value = calc.CalculationContext.StateDSGuid;
                   stateDeviceGuidNumericUpDown.Value = calc.CalculationContext.StateDeviecGuid; 
               }
+          }
+          else
+          {
+              StateFromBindingDeviceCheckBox.Checked = true;
+              StateGroupBox.Enabled = false;
           }
 
           if ( calc != null && calc.CalculationContext != null )
