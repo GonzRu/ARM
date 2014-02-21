@@ -74,7 +74,7 @@ namespace NormalModeLibrary.Windows
                 }
 
                 if (Component.IsAutomaticaly)
-                    Visible = false;
+                    Hide();
             }
         }
 
@@ -114,8 +114,7 @@ namespace NormalModeLibrary.Windows
                     analogViewModel.OutOfRangeEvent += AnalogViewModelOnOutOfRangeEvent;
             }
 
-            if (Component.IsAutomaticaly)
-                this.Show();
+            this.Show();
         }
 
         public void SetOffEditMode()
