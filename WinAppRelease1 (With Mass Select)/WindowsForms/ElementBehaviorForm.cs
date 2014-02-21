@@ -298,7 +298,7 @@ namespace WindowsForms
         /// <returns>Массив имен</returns>
         private static Object[] GetCalculationNames( ICalculationContext element )
         {
-            var list = new List<Object> { "Отсудствует" };
+            var list = new List<Object> { "Отсутствует" };
 
             if ( element is DynamicElement )
             {

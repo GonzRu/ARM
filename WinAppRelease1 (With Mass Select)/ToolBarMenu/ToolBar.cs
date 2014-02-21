@@ -89,7 +89,7 @@ namespace BarsMenu
          this.mi_elem_menu1 = new ToolStripMenuItem();
          this.mi_elem_menu1.Name = "menu1ToolStripMenuItem";
          this.mi_elem_menu1.Size = new System.Drawing.Size(211, 22);
-         this.mi_elem_menu1.Text = "Графические приметивы";
+         this.mi_elem_menu1.Text = "Графические примитивы";
 
          this.mi_elem_menu2 = new ToolStripMenuItem();
          this.mi_elem_menu2.Name = "menu2ToolStripMenuItem";
