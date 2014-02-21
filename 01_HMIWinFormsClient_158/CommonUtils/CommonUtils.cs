@@ -82,6 +82,7 @@ namespace CommonUtils
             try
             {
                 // извлекаем описание из PrgDevCFG.cdp
+                #warning DsGuid = 0
                 xeDescDev = HMI_MT_Settings.HMI_Settings.CONFIGURATION.GetDeviceXMLDescription( 0, "MOA_ECU", devguid );
 
             }
@@ -186,6 +187,7 @@ namespace CommonUtils
 
             try
             {
+                #warning DsGuid = 0
                 xe_dev = HMI_MT_Settings.HMI_Settings.CONFIGURATION.GetDeviceXMLDescription( 0, "MOA_ECU", uniDevGuid );
 
                 if ( xe_dev == null )
