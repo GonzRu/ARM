@@ -940,9 +940,9 @@ namespace WindowsForms
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(7, 20);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(152, 26);
+            this.label23.Size = new System.Drawing.Size(217, 26);
             this.label23.TabIndex = 1;
-            this.label23.Text = "Путь к программе \r\n(относительно папки Project)";
+            this.label23.Text = "Относительный путь к программе\r\n(начиная от папки, в которой лежит АРМ)";
             // 
             // PathToExternalProgramTextBox
             // 
