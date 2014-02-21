@@ -94,9 +94,6 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Other.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\FileManager\FileManager.csproj">
       <Project>{A3D8540F-865D-43B2-A07A-1D8B7A4A4938}</Project>
       <Name>FileManager</Name>
