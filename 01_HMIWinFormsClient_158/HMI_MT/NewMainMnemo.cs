@@ -262,7 +262,7 @@ namespace HMI_MT
 
                     /* добавление элементам пункта меню панелей нормального режима */
                     #region NormalModeContextMenu
-                    if (xeDescDev != null)
+                    if (xeDescDev != null && !(parent is FrmDiagPanel))
                     {
                         if (region.MenuStrip == null)
                             region.MenuStrip = new ContextMenuStrip() { Tag = parent };
