@@ -45,6 +45,11 @@
     <Compile Include="ArrayForExchange.cs" />
     <Compile Include="ClientServerDataExchange.cs" />
     <Compile Include="Pipe\ClientServerOnPipes.cs" />
+    <Compile Include="Service References\DSRouterService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="TCPSocket\ClientServerOnTCPSockets.cs" />
     <Compile Include="WCF\CallbackHandler.cs" />
     <Compile Include="WCF\ClientServerOnWCF.cs.cs" />
@@ -58,7 +63,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderCustomerFactory.cs" />
     <Compile Include="WCF\IWcfProvider.cs" />
-    <Compile Include="WCF\Proxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
@@ -81,6 +85,52 @@
       <Project>{67A89781-635D-4EA9-916E-A212FE4C82A3}</Project>
       <Name>SourceMOA</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\DSRouterService\DSRouterService.wsdl" />
+    <None Include="Service References\DSRouterService\DSRouterService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\DSRouterService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSTagValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.LstError.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DSRouterService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DSRouterService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DSRouterService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DSRouterService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

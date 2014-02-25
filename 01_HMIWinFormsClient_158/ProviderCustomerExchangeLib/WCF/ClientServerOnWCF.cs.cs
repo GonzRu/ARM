@@ -7,8 +7,8 @@ using System.Xml.Linq;
 
 using HMI_MT_Settings;
 using System.Collections.Generic;
-using DSRouter;
 using InterfaceLibrary;
+using ProviderCustomerExchangeLib.DSRouterService;
 
 namespace ProviderCustomerExchangeLib.WCF
 {
@@ -278,7 +278,7 @@ namespace ProviderCustomerExchangeLib.WCF
         private void NewTagValueHandler(Dictionary<string, DSTagValue> tv)
         {
             Console.WriteLine("Порция данных");
-            foreach (KeyValuePair<string, DSRouter.DSTagValue> kvp in tv)
+            foreach (KeyValuePair<string, DSTagValue> kvp in tv)
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
                 else
