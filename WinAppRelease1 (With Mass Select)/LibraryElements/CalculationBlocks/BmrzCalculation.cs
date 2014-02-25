@@ -84,17 +84,12 @@ namespace LibraryElements.CalculationBlocks
                                       new SolidBrush( (Color)GetRecord( "UndefineSignalColor" ).Value ), '?' );
             }
 
-            try
+            if (GetRecord("Failure") != null)
             {
-                if (GetRecord("Failure").Value.Equals(1))
-                {
-                    DrawFailureSignal(graphics, newRectangle);
-                }
+                DrawFailureSignal(graphics, newRectangle);
             }
-            catch (Exception)
-            {
+            else
                 Console.WriteLine("LibraryElements.BmrzCalculation.cs: в мнемосхеме у БМРЗ отсутствует Failure-запись");
-            }    
         }
         public override string ToString( ) { return "BmrzCalculation"; }
 
