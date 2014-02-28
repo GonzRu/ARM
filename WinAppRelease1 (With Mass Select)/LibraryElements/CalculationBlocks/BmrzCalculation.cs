@@ -85,11 +85,7 @@ namespace LibraryElements.CalculationBlocks
             }
 
             if (GetRecord("Failure") != null)
-            {
-                DrawFailureSignal(graphics, newRectangle);
-            }
-            else
-                Console.WriteLine("LibraryElements.BmrzCalculation.cs: в мнемосхеме у БМРЗ отсутствует Failure-запись");
+                DrawFailureSignal(graphics, newRectangle);                
         }
         public override string ToString( ) { return "BmrzCalculation"; }
 
