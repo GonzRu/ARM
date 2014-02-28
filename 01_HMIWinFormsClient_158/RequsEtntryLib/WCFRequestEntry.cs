@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Timers;
 using InterfaceLibrary;
 using System.Collections;
 using ProviderCustomerExchangeLib.WCF;
@@ -29,12 +30,20 @@ namespace RequsEtntryLib
 		/// wcf провайдера
 		/// </summary>
         private IWcfProvider _wcfProvider;
+
+        private Timer getTagsValuePeriodicTimer = new Timer();
 		#endregion
 
 		#region конструктор(ы)
         public WCFRequestEntry(IWcfProvider wcfProvider)
 		{
             _wcfProvider = wcfProvider;
+            _wcfProvider.OnProxyRecreated += WcfProviderOnOnProxyRecreated;
+            WcfProviderOnOnProxyRecreated();
+
+            getTagsValuePeriodicTimer.Elapsed += GetTagsValuePeriodicTimerOnElapsed;
+            getTagsValuePeriodicTimer.Interval = 1000;
+            getTagsValuePeriodicTimer.Stop();
 		}
         #endregion
 
@@ -56,8 +65,11 @@ namespace RequsEtntryLib
 			uint count;
 		    bool isChangedTagsList = false;
 
+            getTagsValuePeriodicTimer.Stop();
+
 			try
-			{
+			{               
+
 				foreach (ITag tag in lstTags)
 				{
 					string st = GetStIdByTag(tag);
@@ -76,7 +88,7 @@ namespace RequsEtntryLib
 
                 if (isChangedTagsList)
                 {
-                    PrepareAndSubscribeTags(htReqList);
+                    SubscribeToTags();
 
                     // извечаем об изменении контекста подписки
                     if (OnChangeRequestTags != null)
@@ -86,6 +98,10 @@ namespace RequsEtntryLib
 			catch(Exception ex)
 			{
 				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
+			}
+            finally
+			{
+                getTagsValuePeriodicTimer.Start();
 			}
 		}
         /// <summary>
@@ -104,6 +120,8 @@ namespace RequsEtntryLib
              */
             uint count = 0;
 
+            getTagsValuePeriodicTimer.Stop();
+
             try
             {
                     string st = GetStIdByTag(tag);
@@ -116,7 +134,7 @@ namespace RequsEtntryLib
                     else
                     {
                         htReqList.Add(st, (uint) 1);
-                        PrepareAndSubscribeTags(htReqList);
+                        SubscribeToTags();
 
                         // извечаем об изменении контекста подписки
                         if (OnChangeRequestTags != null)
@@ -126,6 +144,10 @@ namespace RequsEtntryLib
             catch (Exception ex)
             {
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+            finally
+            {
+                getTagsValuePeriodicTimer.Start();
             }
         }
 
@@ -137,6 +159,8 @@ namespace RequsEtntryLib
 		{
 			uint count = 0;
             var tagListToUnsubscribe = new List<string>();
+
+            getTagsValuePeriodicTimer.Stop();
 	
 			try
 			{
@@ -159,7 +183,7 @@ namespace RequsEtntryLib
                 
                 if (tagListToUnsubscribe.Count != 0)
                 {
-                    _wcfProvider.UnscribeRTUTags(tagListToUnsubscribe.ToArray());
+                    SubscribeToTags();
 
                     // извечаем об изменении контекста подписки
                     if (OnChangeRequestTags != null)
@@ -171,6 +195,10 @@ namespace RequsEtntryLib
 			{
 				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
 			}
+            finally
+			{
+                getTagsValuePeriodicTimer.Start();
+			}
 		}
         /// <summary>
         /// отписаться от обновления тега
@@ -178,7 +206,9 @@ namespace RequsEtntryLib
         /// <param name="?"></param>
         public void UnSubscribeTag(ITag tag)
         {
-            uint count = 0;            
+            uint count = 0;
+
+            getTagsValuePeriodicTimer.Stop();
 
             try
             {
@@ -193,7 +223,7 @@ namespace RequsEtntryLib
                             {
                                 htReqList.Remove(st);
 
-                                _wcfProvider.UnscribeRTUTag(st);
+                                SubscribeToTags();
 
                                 // извечаем об изменении контекста подписки
                                 if (OnChangeRequestTags != null)
@@ -204,6 +234,10 @@ namespace RequsEtntryLib
             catch (Exception ex)
             {
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+            finally
+            {
+                getTagsValuePeriodicTimer.Start();
             }
         }
 		/// <summary>
@@ -241,16 +275,49 @@ namespace RequsEtntryLib
 		}
 
         /// <summary>
-        /// Создает массив строковых представлений тегов и вызывает метод wcf
+        /// Convert HastTable to string array
         /// </summary>
-        private void PrepareAndSubscribeTags(Hashtable tagsHashTable)
+        private string[] HashTableToArray(Hashtable tagsHashTable)
         {
             var tagsList = new List<string>();
 
             foreach (var tag in tagsHashTable.Keys)
                 tagsList.Add(tag.ToString());
 
-            _wcfProvider.SubscribeRTUTags(tagsList.ToArray());
+            return tagsList.ToArray();
+        }
+
+        /// <summary>
+        /// Periodic request tags value
+        /// </summary>
+        private void GetTagsValuePeriodicTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            try
+            {
+                getTagsValuePeriodicTimer.Stop();
+
+                if (htReqList.Keys.Count != 0)
+                    _wcfProvider.GetTagsValuesUpdated();
+
+                getTagsValuePeriodicTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+
+        /// <summary>
+        /// В случае разрыва соединения - заново подписывается на нужные теги
+        /// </summary>
+        private void WcfProviderOnOnProxyRecreated()
+        {
+            SubscribeToTags();
+        }
+
+        private void SubscribeToTags()
+        {
+            _wcfProvider.GetTagsValue(HashTableToArray(htReqList));
         }
         #endregion
 	}
