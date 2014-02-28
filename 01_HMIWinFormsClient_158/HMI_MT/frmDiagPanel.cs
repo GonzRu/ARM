@@ -4,6 +4,8 @@ using System.Windows.Forms;
 
 using HMI_MT_Settings;
 using HelperLibrary;
+using LibraryElements;
+using LibraryElements.CalculationBlocks;
 using WindowsForms;
 using InterfaceLibrary;
 
@@ -36,6 +38,29 @@ namespace HMI_MT
                 iBPanel.Parent = this;
                 iBPanel.PanelClick += PanelClick;
                 Controls.Add( (Control)iBPanel );
+
+                foreach (var baseRegion in iBPanel.CalculationElements)
+                {
+                    var calculationRegion = baseRegion as CalculationRegion;
+                    if (calculationRegion != null && calculationRegion.CalculationContext != null)
+                    {
+                        var blockSignalCalculation = calculationRegion.CalculationContext.Context as BlockSignalCalculation;
+                        if (blockSignalCalculation != null)
+                        {
+                            if (blockSignalCalculation.Text != "Unknown")
+                                continue;
+
+                            uint dsGuid = (baseRegion as IDynamicParameters).Parameters.DsGuid;
+                            uint devGuid = (baseRegion as IDynamicParameters).Parameters.DeviceGuid;
+
+                            var device = HMI_Settings.CONFIGURATION.GetLink2Device(dsGuid, devGuid);
+                            if (device != null)
+                            {
+                                blockSignalCalculation.Text = device.Description;
+                            }
+                        }
+                    }
+                }
 
                 tags = NewMainMnemo.BindingLincks( iBPanel.CalculationElements );
                 NewMainMnemo.BindingContextMenu( iBPanel.CalculationElements, this );

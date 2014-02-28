@@ -129,5 +129,14 @@ namespace LibraryElements.CalculationBlocks
         /// Корректировка тэгов
         /// </summary>
         public Boolean IsAdjustment { get { return Convert.ToBoolean( GetRecord( "IsAdjustment" ).Value ); } set { GetRecord( "IsAdjustment" ).Value = value; } }
+
+        /// <summary>
+        /// Block text
+        /// </summary>
+        public string Text
+        {
+            get { return GetRecord("Text").Value.ToString(); }
+            set { GetRecord("Text").Value = value; }
+        }
     }
 }
