@@ -207,7 +207,7 @@ namespace NormalModeLibrary.Windows
             var discretViewModel = modelBase as DigitalViewModel;
             if (discretViewModel != null)
             {
-                item.Text = discretViewModel.Caption;
+                item.Text = discretViewModel.Caption + " - " + ((bool)discretViewModel.Value ? "1" : "0");
 
                 item.Font = new Font(new FontFamily(GenericFontFamilies.SansSerif), (float)discretViewModel.FontSize);
 

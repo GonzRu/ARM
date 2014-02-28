@@ -72,7 +72,9 @@ namespace NormalModeLibrary.Sources
 
         public Color SignalOn { get; internal set; }
         public Color SignalOff { get; internal set; }
-        public override Object Value { get { return new SolidColorBrush( value ); } }
+        #warning 123
+        //public override Object Value { get { return new SolidColorBrush( value ); } }
+        public override Object Value { get { return value == SignalOn; } }
 
         internal static Color GetDefaultColorOn()
         {
