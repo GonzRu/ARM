@@ -130,6 +130,18 @@ namespace DevicesLibrary
                         tabControl.Controls.Add(new HelperControlsLibrary.TeleMechanica.TeleMechanicaCommandTabPage(unids, unidev) { Dock = DockStyle.Fill });
                         break;
                     }
+
+                case "БМРЗ-ВВ-31-12":
+                case "БМРЗ-КЛ-33-12":
+                case "БМРЗ-Св-44-12":
+                case "БМРЗ-ТН-93-01":
+                case "ИМФ-1Р":
+                case "РНМ-1":
+                case "Сириус-2-Л-5А":
+                case "Сириус-ЦС":
+                    tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms) );
+                    tabControl.Controls.Add(new EventBlockTabPage(unidev));
+                    break;
             }
             
             tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
