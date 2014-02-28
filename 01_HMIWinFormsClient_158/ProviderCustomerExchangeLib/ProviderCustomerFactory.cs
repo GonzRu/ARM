@@ -39,20 +39,20 @@ namespace ProviderCustomerExchangeLib
 			try
 			{
 
-				switch (reqstr)
+				switch (reqstr.ToLower())
 				{
-                    case "WCF":
 					case "wcf":
+                    case "wcf-old":
                         provconsch = new ClientServerOnWCF(srcinfo);
 						break;
 					case "pipe":
 						provconsch = new ClientServerOnPipes();
 						break;
-                    case "TCPServer":
+                    case "tcpServer":
 					case "tcp":
 						provconsch = new ClientServerOnTCPSockets(srcinfo);
 						break;
-					case "udp_MOA":
+					case "udp_moa":
 						provconsch = new ClientServerOn_MOA_UDPSockets(srcinfo);
 						// создаем экземпляры классов очереди и разборщика пакетов
 						PacketQueque PQueque = new PacketQueque();
