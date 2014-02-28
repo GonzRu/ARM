@@ -85,7 +85,8 @@ namespace LibraryElements.CalculationBlocks
             }
 
             if (GetRecord("Failure") != null)
-                DrawFailureSignal(graphics, newRectangle);                
+                if (!GetRecord("Failure").Value.Equals(0))
+                    DrawFailureSignal(graphics, newRectangle);                
         }
         public override string ToString( ) { return "BmrzCalculation"; }
 
