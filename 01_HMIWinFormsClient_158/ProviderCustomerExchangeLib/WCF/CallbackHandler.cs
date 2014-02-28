@@ -4,12 +4,13 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using ProviderCustomerExchangeLib.DSRouterService;
 
 namespace HMI_MT_Settings
 {
     public delegate void NewError( string strerror );
     public delegate void PingPongDelegate( bool state );
-    public delegate void NewTagValues(Dictionary<string, DSRouter.DSTagValue> tv);
+    public delegate void NewTagValues(Dictionary<string, DSTagValue> tv);
 
     public class CallbackHandler : IDSRouterCallback
     {
@@ -177,7 +178,7 @@ namespace HMI_MT_Settings
         #endregion
 
         #region Информирование об изменениях в тегах
-        public void NotifyChangedTags(Dictionary<string, DSRouter.DSTagValue> lstChangedTags)
+        public void NotifyChangedTags(Dictionary<string, DSTagValue> lstChangedTags)
         {
             try
             {
@@ -190,7 +191,7 @@ namespace HMI_MT_Settings
             }
         }
         public IAsyncResult BeginNotifyChangedTags(
-            System.Collections.Generic.Dictionary<string, DSRouter.DSTagValue> rr, AsyncCallback tt, object yy )
+            System.Collections.Generic.Dictionary<string, DSTagValue> rr, AsyncCallback tt, object yy )
         {
             IAsyncResult rez = null;
             try

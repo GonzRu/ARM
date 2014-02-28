@@ -496,72 +496,57 @@ namespace DataServersLib
 
         void CreateInterConnectComponentBySpecificProtocol(XElement dataServerXMLDescribe)
         {
-              /*
-               * через фабрику инициализируем компонент взаимодействия 
-               * по конкретному протоколу 
-               * и передаем ссылку на него конкретной версии формирователя пакетов
-               */
+            /*
+             * через фабрику инициализируем компонент взаимодействия 
+             * по конкретному протоколу 
+             * и передаем ссылку на него конкретной версии формирователя пакетов
+             */
             try
-			{
-			  var pcf = new ProviderCustomerFactory( );
+            {
+                var pcf = new ProviderCustomerFactory();
 
-              var xe_ds_access = (from d in dataServerXMLDescribe.Elements("DSAccessInfo") where d.Attribute("enable").Value.ToLower() == bool.TrueString.ToLower() select d).Single();
+                var xeDsAcceessSection = (from d in dataServerXMLDescribe.Elements("DSAccessInfo")
+                                          where d.Attribute("enable").Value.ToLower() == bool.TrueString.ToLower()
+                                          select d).Single();
+                var exchangeProviderName = xeDsAcceessSection.Attribute("nameSourceDriver").Value;
 
-			    var provCust = pcf.CreateProviderConsumerChanel( xe_ds_access.Attribute( "nameSourceDriver" ).Value,
-			                                                     xe_ds_access.Element( "CustomiseDriverInfo" ),
-			                                                     HMI_Settings.CONFIGURATION );
+                var provCust = pcf.CreateProviderConsumerChanel(exchangeProviderName,
+                                                                xeDsAcceessSection.Element("CustomiseDriverInfo"),
+                                                                HMI_Settings.CONFIGURATION);
 
                 provCust.OnDSCommunicationLoss += OnDSCommunicationLossHandler;
-			   
-              /*
-               * создаем формирователь пакетов через фабрику с тем, 
-               * чтобы можно было реализовать разные алгоритмы формирования пакетов
-               */
-              var bdcf = new BlockDataComposerFactory( );
-              bdc = bdcf.CreateBlockDataComposer("ordinal", provCust);
 
-              /*
-               * инициализируем компонент запросов тегов к DS 
-               * и передаем ему ссылку на экземпляр 
-               * формирователя пакетов
-               */
-              var reqfact = new RequestFactory( );
+                /*
+                 * создаем формирователь пакетов через фабрику с тем, 
+                 * чтобы можно было реализовать разные алгоритмы формирования пакетов
+                 */
+                var bdcf = new BlockDataComposerFactory();
+                bdc = bdcf.CreateBlockDataComposer("ordinal", provCust);
+
+                /*
+                 * инициализируем компонент запросов тегов к DS 
+                 * и передаем ему ссылку на экземпляр 
+                 * формирователя пакетов
+                 */
+                var reqfact = new RequestFactory();
 
 
-              /* Эта добавлено для того, что бы
-               * была возможность через конфигурационный файл
-               * отключить обновление тегов по подписке
-               * и вернуться к старым запросам через определенный интервал времени.
-               * В секцию <DSAccessInfo> необходимо добавить атрибут WCFTagSubscribe="False"
-               */
-			    bool WCFTagSubscribe;
-                if (xe_ds_access.Attribute("WCFTagSubscribe") == null)
-                    WCFTagSubscribe = true;
-                else
+                if (exchangeProviderName.ToLower() == "wcf")
                 {
-                    if (!Boolean.TryParse(xe_ds_access.Attribute("WCFTagSubscribe").Value, out WCFTagSubscribe))
-                    {
-                        Console.WriteLine("\nDataServersLib.DataServer::CreateInterConnectComponentBySpecificProtocol: неверное значение у атрибута \"WCFTagSubscribe\". Используется значение по-умолчанию: true\n");
-                        WCFTagSubscribe = true;
-                    }
-                }
-
-                if (provCust is ClientServerOnWCF && WCFTagSubscribe)
-                {
-                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
                     reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
+                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
                 }
                 else
-			    {
-			        reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
+                {
+                    reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
                     provCust.OnByteArrayPacketAppearance += ParseData;
-			    }
-			}
-			catch( Exception ex )
-			{
-				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
                 throw ex;
-			}
+            }
         }
 
         /// <summary>

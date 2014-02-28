@@ -7,12 +7,19 @@ namespace ProviderCustomerExchangeLib.WCF
 {
     public interface IWcfProvider
     {
-        void SubscribeRTUTags(string[] tagsArray);
+        /// <summary>
+        /// События переподключения канала связи с роутером
+        /// </summary>
+        event Action OnProxyRecreated;
 
-        void SubscribeRTUTag(string tag);
+        /// <summary>
+        /// Запрос значений тегов
+        /// </summary>
+        void GetTagsValue(string[] tagsArrayToRequest);
 
-        void UnscribeRTUTags(string[] tagsArray);
-
-        void UnscribeRTUTag(string tag);
+        /// <summary>
+        /// Запрос значений тегов, чьи значения изменились
+        /// </summary>
+        void GetTagsValuesUpdated();
     }
 }

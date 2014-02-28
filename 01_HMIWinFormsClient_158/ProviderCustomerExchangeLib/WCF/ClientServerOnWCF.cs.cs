@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.ComponentModel;
 using System.ServiceModel;
@@ -7,8 +8,8 @@ using System.Xml.Linq;
 
 using HMI_MT_Settings;
 using System.Collections.Generic;
-using DSRouter;
 using InterfaceLibrary;
+using ProviderCustomerExchangeLib.DSRouterService;
 
 namespace ProviderCustomerExchangeLib.WCF
 {
@@ -18,7 +19,7 @@ namespace ProviderCustomerExchangeLib.WCF
         /// <summary>
         /// событие изменения значения тега
         /// </summary>
-        public event Action<UInt16, UInt32, UInt32, byte[], DateTime, VarQualityNewDs> OnTagValueChanged;
+        public event Action<UInt16, UInt32, UInt32, byte[], DateTime, VarQualityNewDs> OnTagValueChanged;	    
         #endregion
 
         #region private
@@ -61,7 +62,8 @@ namespace ProviderCustomerExchangeLib.WCF
                                              if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
                                              {
                                                  WCFproxy = null;
-                                                 this.CreateProxyFromCode( );
+                                                 if (this.CreateProxyFromCode() && OnProxyRecreated != null)
+                                                     OnProxyRecreated();
                                              }
                                          }
                                          catch ( Exception exception )
@@ -81,7 +83,7 @@ namespace ProviderCustomerExchangeLib.WCF
         /// <summary>
         /// создание прокси из кода
         /// </summary>
-        private void CreateProxyFromCode( )
+        private bool CreateProxyFromCode( )
         {
             try
             {
@@ -98,12 +100,14 @@ namespace ProviderCustomerExchangeLib.WCF
                 WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
 
                 handler.OnNewError += NewErrorFromCallBackHandler;
-                handler.OnNewTagValues += NewTagValueHandler;
             }
             catch ( Exception ex )
             {
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
+                return false;
             }
+
+            return true;
         }
 
 		#region public-методы реализации интерфейса IProviderCustomer
@@ -246,28 +250,16 @@ namespace ProviderCustomerExchangeLib.WCF
 		#endregion
 
         #region Реализация методов интерфейса IWcfProvider
-        void IWcfProvider.SubscribeRTUTags(string[] tagsArray)
+        public event Action OnProxyRecreated;
+
+        public void GetTagsValue(string[] tagsArrayToRequest)
         {
-            WCFproxy.SubscribeRTUTags(tagsArray);
+            NewTagValueHandler(WCFproxy.GetTagsValue(tagsArrayToRequest));
         }
 
-        void IWcfProvider.SubscribeRTUTag(string tag)
+        public void GetTagsValuesUpdated()
         {
-            var tagsArray = new string[] { tag };
-
-            WCFproxy.SubscribeRTUTags(tagsArray);
-        }
-
-        void IWcfProvider.UnscribeRTUTags(string[] tagsArray)
-        {
-            WCFproxy.UnscribeRTUTags(tagsArray);
-        }
-
-        void IWcfProvider.UnscribeRTUTag(string tag)
-        {
-            var tagsArray = new string[] { tag };
-
-            WCFproxy.UnscribeRTUTags(tagsArray);
+            NewTagValueHandler(WCFproxy.GetTagsValuesUpdated());
         }
         #endregion
 
@@ -277,8 +269,14 @@ namespace ProviderCustomerExchangeLib.WCF
         /// </summary>
         private void NewTagValueHandler(Dictionary<string, DSTagValue> tv)
         {
+            if (tv.Count == 0)
+            {
+                Console.WriteLine("Обновлений для тегов нет.");
+                return;
+            }
+
             Console.WriteLine("Порция данных");
-            foreach (KeyValuePair<string, DSRouter.DSTagValue> kvp in tv)
+            foreach (KeyValuePair<string, DSTagValue> kvp in tv)
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
                 else
@@ -323,7 +321,10 @@ namespace ProviderCustomerExchangeLib.WCF
                 }
                 catch
                 {
-                    Console.WriteLine("ProviderCustomerExchange.ClientServerOnWCF::NewTagValueHandler: Ошибка при разборе нового значения тега: " + key);
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 0,
+                                                                         String.Format(
+                                                                             "ProviderCustomerExchange.ClientServerOnWCF::NewTagValueHandler: Ошибка при разборе нового значения тега: {0}",
+                                                                             key));
                 }
             }
         }
