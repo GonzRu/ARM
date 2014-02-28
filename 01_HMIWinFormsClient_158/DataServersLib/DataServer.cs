@@ -531,18 +531,9 @@ namespace DataServersLib
                 var reqfact = new RequestFactory();
 
 
-                if (provCust is ClientServerOnWCF)
+                if (exchangeProviderName.ToLower() == "wcf")
                 {
-                    switch (exchangeProviderName.ToLower())
-                    {
-                        case "wcf":
-                            reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
-                            break;
-                        case "wcf-old":
-                            reqEntry = reqfact.CreateRequestEntry("ordinal", bdc);
-                            break;
-                    }
-
+                    reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
                     (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
                 }
                 else

@@ -100,7 +100,6 @@ namespace ProviderCustomerExchangeLib.WCF
                 WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
 
                 handler.OnNewError += NewErrorFromCallBackHandler;
-                //handler.OnNewTagValues += NewTagValueHandler;
             }
             catch ( Exception ex )
             {
