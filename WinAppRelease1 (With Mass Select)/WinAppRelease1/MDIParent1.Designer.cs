@@ -395,14 +395,14 @@ namespace WinAppRelease1
             // witchBackgroundToolStripMenuItem
             // 
             this.witchBackgroundToolStripMenuItem.Name = "witchBackgroundToolStripMenuItem";
-            this.witchBackgroundToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.witchBackgroundToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.witchBackgroundToolStripMenuItem.Text = "С фоном";
             this.witchBackgroundToolStripMenuItem.Click += new System.EventHandler(this.WitchBackgroundToolStripMenuItemClick);
             // 
             // withoutBackgroundToolStripMenuItem
             // 
             this.withoutBackgroundToolStripMenuItem.Name = "withoutBackgroundToolStripMenuItem";
-            this.withoutBackgroundToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.withoutBackgroundToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.withoutBackgroundToolStripMenuItem.Text = "Без фона";
             this.withoutBackgroundToolStripMenuItem.Click += new System.EventHandler(this.WithoutBackgroundToolStripMenuItemClick);
             // 
@@ -418,14 +418,14 @@ namespace WinAppRelease1
             // schemaToolStripMenuItem
             // 
             this.schemaToolStripMenuItem.Name = "schemaToolStripMenuItem";
-            this.schemaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.schemaToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.schemaToolStripMenuItem.Text = "Schema";
             this.schemaToolStripMenuItem.Click += new System.EventHandler(this.ConvertSchemaToolStripMenuItemClick);
             // 
             // behavoirToolStripMenuItem
             // 
             this.behavoirToolStripMenuItem.Name = "behavoirToolStripMenuItem";
-            this.behavoirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.behavoirToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.behavoirToolStripMenuItem.Text = "Behavoir";
             this.behavoirToolStripMenuItem.Click += new System.EventHandler(this.ConvertBehavoirToolStripMenuItemClick);
             // 
@@ -443,28 +443,28 @@ namespace WinAppRelease1
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.cascadeToolStripMenuItem.Text = "&Расположить каскадом";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.CascadeToolStripMenuItemClick);
             // 
             // tileVerticalToolStripMenuItem
             // 
             this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.tileVerticalToolStripMenuItem.Text = "Расположить вертикально";
             this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.TileVerticleToolStripMenuItemClick);
             // 
             // tileHorizontalToolStripMenuItem
             // 
             this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.tileHorizontalToolStripMenuItem.Text = "Расположить коризонтально";
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.tileHorizontalToolStripMenuItem.Text = "Расположить горизонтально";
             this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.TileHorizontalToolStripMenuItemClick);
             // 
             // closeAllToolStripMenuItem
             // 
             this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
-            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.closeAllToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.closeAllToolStripMenuItem.Text = "Закрыть все окна";
             this.closeAllToolStripMenuItem.Click += new System.EventHandler(this.CloseAllToolStripMenuItemClick);
             // 

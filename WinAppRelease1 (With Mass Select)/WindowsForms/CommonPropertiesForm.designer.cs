@@ -918,9 +918,9 @@ namespace WindowsForms
             this.IsExecExternalProgramCheckBox.AutoSize = true;
             this.IsExecExternalProgramCheckBox.Location = new System.Drawing.Point(16, 24);
             this.IsExecExternalProgramCheckBox.Name = "IsExecExternalProgramCheckBox";
-            this.IsExecExternalProgramCheckBox.Size = new System.Drawing.Size(250, 17);
+            this.IsExecExternalProgramCheckBox.Size = new System.Drawing.Size(252, 17);
             this.IsExecExternalProgramCheckBox.TabIndex = 1;
-            this.IsExecExternalProgramCheckBox.Text = "Запускать по нажатия внешнюю программу";
+            this.IsExecExternalProgramCheckBox.Text = "Запускать по нажатию внешнюю программу";
             this.IsExecExternalProgramCheckBox.UseVisualStyleBackColor = true;
             this.IsExecExternalProgramCheckBox.CheckedChanged += new System.EventHandler(this.IsExecExternalProgramCheckBox_CheckedChanged);
             // 
