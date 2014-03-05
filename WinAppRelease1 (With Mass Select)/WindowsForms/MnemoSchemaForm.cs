@@ -564,7 +564,12 @@ namespace WindowsForms
 
           graphics.Flush();
 
-          bitmap.Save( strName );
+          var frm = new SaveFileDialog();
+          frm.Filter = "Графический файл (*.BMP)|*.bmp";
+          if (frm.ShowDialog() == DialogResult.OK)
+          {
+              bitmap.Save(frm.FileName);
+          }
       }
       /// <summary>
       /// Сохранение схемы как подложки, без активных элементов
