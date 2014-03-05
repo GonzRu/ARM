@@ -56,19 +56,14 @@ namespace WinAppRelease1
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.elementEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu31ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnenoCaptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subStrateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.witchBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.withoutBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.convertSchemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.schemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.behavoirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -321,23 +316,13 @@ namespace WinAppRelease1
             // toolsMenu
             // 
             this.toolsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.elementEditorToolStripMenuItem,
             this.convertToolStripMenuItem,
-            this.buildToolStripMenuItem,
             this.mnenoCaptionToolStripMenuItem,
             this.PreviewToolStripMenuItem,
-            this.subStrateToolStripMenuItem,
-            this.convertSchemaToolStripMenuItem});
+            this.subStrateToolStripMenuItem});
             this.toolsMenu.Name = "toolsMenu";
             this.toolsMenu.Size = new System.Drawing.Size(107, 20);
             this.toolsMenu.Text = "&Дополнительно";
-            // 
-            // elementEditorToolStripMenuItem
-            // 
-            this.elementEditorToolStripMenuItem.Name = "elementEditorToolStripMenuItem";
-            this.elementEditorToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.elementEditorToolStripMenuItem.Text = "Редактор расчетных данных";
-            this.elementEditorToolStripMenuItem.Click += new System.EventHandler(this.ElementEditorToolStripMenuItemClick);
             // 
             // convertToolStripMenuItem
             // 
@@ -361,13 +346,6 @@ namespace WinAppRelease1
             this.menu32ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.menu32ToolStripMenuItem.Text = "1280x1024";
             this.menu32ToolStripMenuItem.Click += new System.EventHandler(this.Menu32ToolStripMenuItemClick);
-            // 
-            // buildToolStripMenuItem
-            // 
-            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.buildToolStripMenuItem.Text = "Создать полную схему";
-            this.buildToolStripMenuItem.Click += new System.EventHandler(this.BuildToolStripMenuItemClick);
             // 
             // mnenoCaptionToolStripMenuItem
             // 
@@ -405,29 +383,6 @@ namespace WinAppRelease1
             this.withoutBackgroundToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.withoutBackgroundToolStripMenuItem.Text = "Без фона";
             this.withoutBackgroundToolStripMenuItem.Click += new System.EventHandler(this.WithoutBackgroundToolStripMenuItemClick);
-            // 
-            // convertSchemaToolStripMenuItem
-            // 
-            this.convertSchemaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.schemaToolStripMenuItem,
-            this.behavoirToolStripMenuItem});
-            this.convertSchemaToolStripMenuItem.Name = "convertSchemaToolStripMenuItem";
-            this.convertSchemaToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.convertSchemaToolStripMenuItem.Text = "Convert";
-            // 
-            // schemaToolStripMenuItem
-            // 
-            this.schemaToolStripMenuItem.Name = "schemaToolStripMenuItem";
-            this.schemaToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.schemaToolStripMenuItem.Text = "Schema";
-            this.schemaToolStripMenuItem.Click += new System.EventHandler(this.ConvertSchemaToolStripMenuItemClick);
-            // 
-            // behavoirToolStripMenuItem
-            // 
-            this.behavoirToolStripMenuItem.Name = "behavoirToolStripMenuItem";
-            this.behavoirToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.behavoirToolStripMenuItem.Text = "Behavoir";
-            this.behavoirToolStripMenuItem.Click += new System.EventHandler(this.ConvertBehavoirToolStripMenuItemClick);
             // 
             // windowsMenu
             // 
@@ -600,16 +555,11 @@ namespace WinAppRelease1
       private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-      private System.Windows.Forms.ToolStripMenuItem elementEditorToolStripMenuItem;
-      private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem mnenoCaptionToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem PreviewToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem subStrateToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem witchBackgroundToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem withoutBackgroundToolStripMenuItem;
-      private System.Windows.Forms.ToolStripMenuItem convertSchemaToolStripMenuItem;
-      private System.Windows.Forms.ToolStripMenuItem schemaToolStripMenuItem;
-      private System.Windows.Forms.ToolStripMenuItem behavoirToolStripMenuItem;
    }
 }
 
