@@ -91,6 +91,9 @@ namespace NormalModeLibrary
                         view.DeactivatedComponent();
                         activeNormalModePanels.Remove(view);
                     }
+
+            users.Clear();
+            isLoad = false;
         }
         public void SetStates( FormWindowState state )
         {
