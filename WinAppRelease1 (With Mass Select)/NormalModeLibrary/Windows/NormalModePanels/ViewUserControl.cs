@@ -8,6 +8,7 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using HMI_MT_Settings;
 using NormalModeLibrary.Sources;
 using NormalModeLibrary.ViewModel;
 
@@ -54,6 +55,19 @@ namespace NormalModeLibrary.Windows
             ControlMoverOrResizer.Init(this);
 
             this.Move += OnMove;
+
+            ContextMenu = new ContextMenu();
+            ContextMenu.MenuItems.Add("Редактировать панель", delegate(object sender, EventArgs args)
+                                                                  {
+                                                                      var idevice =
+                                                                          HMI_Settings.CONFIGURATION.GetLink2Device(
+                                                                              _panelViewModel.DsGuid,
+                                                                              _panelViewModel.ObjectGuid);
+
+                                                                      ComponentFactory.EditSignals(idevice,
+                                                                                                   HMI_Settings.UserName,
+                                                                                                   Places.MainMnemo);
+                                                                  });
         }
         #endregion
 
