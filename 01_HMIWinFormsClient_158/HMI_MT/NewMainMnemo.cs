@@ -175,7 +175,7 @@ namespace HMI_MT
                 var idp = ibpc.Core as IDynamicParameters;
                 if ( idp != null && idp.Parameters != null )
                 {
-                    var idevice = HMI_Settings.CONFIGURATION.GetLink2Device( 0, idp.Parameters.DeviceGuid );
+                    var idevice = HMI_Settings.CONFIGURATION.GetLink2Device( idp.Parameters.DsGuid, idp.Parameters.DeviceGuid );
                     NormalModeLibrary.ComponentFactory.EditSignals( idevice, HMI_Settings.UserName, NormalModeLibrary.Places.MainMnemo );
                 }
             };
