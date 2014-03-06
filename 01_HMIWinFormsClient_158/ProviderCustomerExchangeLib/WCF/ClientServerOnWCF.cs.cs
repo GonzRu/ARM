@@ -97,9 +97,13 @@ namespace ProviderCustomerExchangeLib.WCF
                 tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
 
                 var endpointAddress = new EndpointAddress( endPointAddr );
-                WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
+                //WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
+                WCFproxy = new DSRouterClient(new InstanceContext(handler), tcpBinding, endpointAddress);
 
                 handler.OnNewError += NewErrorFromCallBackHandler;
+
+                (WCFproxy as DSRouterClient).GetTagsValueCompleted += OnGetTagsValueCompleted;
+                (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted += OnGetTagsValuesUpdatedCompleted;
             }
             catch ( Exception ex )
             {
@@ -110,8 +114,8 @@ namespace ProviderCustomerExchangeLib.WCF
             return true;
         }
 
-		#region public-методы реализации интерфейса IProviderCustomer
-	    public PacketQueque NetPackQ { get; set; }
+        #region public-методы реализации интерфейса IProviderCustomer
+        public PacketQueque NetPackQ { get; set; }
 
 	    /// <summary>
 		/// событие появления данных на входе клиента(потребителя)
@@ -254,13 +258,65 @@ namespace ProviderCustomerExchangeLib.WCF
 
         public void GetTagsValue(string[] tagsArrayToRequest)
         {
-            NewTagValueHandler(WCFproxy.GetTagsValue(tagsArrayToRequest));
+            //NewTagValueHandler(WCFproxy.GetTagsValue(tagsArrayToRequest));
+            (WCFproxy as DSRouterClient).GetTagsValueAsync(tagsArrayToRequest);
         }
 
         public void GetTagsValuesUpdated()
         {
-            NewTagValueHandler(WCFproxy.GetTagsValuesUpdated());
+            //NewTagValueHandler(WCFproxy.GetTagsValuesUpdated());
+            (WCFproxy as DSRouterClient).GetTagsValuesUpdatedAsync();
         }
+
+        #region DSRouterClient Async Metods Handlers
+        private void OnGetTagsValuesUpdatedCompleted(object sender, GetTagsValuesUpdatedCompletedEventArgs getTagsValuesUpdatedCompletedEventArgs)
+        {
+            try
+            {
+                if (getTagsValuesUpdatedCompletedEventArgs.Error == null)
+                {
+                    if (getTagsValuesUpdatedCompletedEventArgs.Result.Count > 0)
+                    {
+                        NewTagValueHandler(getTagsValuesUpdatedCompletedEventArgs.Result);
+                    }
+                    else
+                        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Verbose, 0, "Обновлений не пришло");
+                }
+                else
+                {
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "При выполнении GetTagsValuesUpdatedAsync произошла ошабка.");
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+
+        private void OnGetTagsValueCompleted(object sender, GetTagsValueCompletedEventArgs getTagsValueCompletedEventArgs)
+        {
+            try
+            {
+                if (getTagsValueCompletedEventArgs.Error == null)
+                {
+                    if (getTagsValueCompletedEventArgs.Result.Count > 0)
+                    {
+                        NewTagValueHandler(getTagsValueCompletedEventArgs.Result);
+                    }
+                    return;
+                }
+                else
+                {
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "При выполнении GetTagsValueAsync произошла ошабка.");
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Обработчики событий из CallBack'a wcf.

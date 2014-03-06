@@ -39,7 +39,6 @@ namespace RequsEtntryLib
 		{
             _wcfProvider = wcfProvider;
             _wcfProvider.OnProxyRecreated += WcfProviderOnOnProxyRecreated;
-            WcfProviderOnOnProxyRecreated();
 
             getTagsValuePeriodicTimer.Elapsed += GetTagsValuePeriodicTimerOnElapsed;
             getTagsValuePeriodicTimer.Interval = 1000;
