@@ -16,26 +16,20 @@ namespace NormalModeLibrary.Windows
         public PanelWindow()
         {
             InitializeComponent();
-            numericUpDown1.Maximum = numericUpDown2.Maximum = numericUpDown3.Maximum =
-                numericUpDown4.Maximum = numericUpDown5.Maximum = decimal.MaxValue;
         }
         public void SetPanel( NMLS.Panel panel )
         {
             this.Tag = panel;
             textBox1.Text = panel.Caption;
-            checkBox1.Checked = panel.IsVisible;
-            switch ( panel.Type )
-            {
-                case NMLS.Panel.LinkType.Free: radioButton1.Checked = true; break;
-                case NMLS.Panel.LinkType.Named: radioButton2.Checked = true; break;
-                default: break;
-            }
-            numericUpDown5.Value = panel.ObjectGuid;
             checkBox2.Checked = panel.IsCaptionVisible;
-            numericUpDown3.Value = panel.Width;
-            numericUpDown4.Value = panel.Height;
-            numericUpDown1.Value = panel.Left;
-            numericUpDown2.Value = panel.Top;
+
+            if (panel.IsVisible)
+                if (panel.IsAutomaticaly)
+                    workModeComboBox.SelectedIndex = 0;
+                else
+                    workModeComboBox.SelectedIndex = 1;
+            else
+                workModeComboBox.SelectedIndex = 2;
         }
         public void ApplyData()
         {
@@ -44,14 +38,15 @@ namespace NormalModeLibrary.Windows
 
             NMLS.Panel panel = (NMLS.Panel)this.Tag;
             panel.Caption = textBox1.Text;
-            panel.IsVisible = checkBox1.Checked;
-            panel.Type = ( radioButton1.Checked ) ? NMLS.Panel.LinkType.Free : NMLS.Panel.LinkType.Named;
-            panel.ObjectGuid = (uint)numericUpDown5.Value;
             panel.IsCaptionVisible = checkBox2.Checked;
-            panel.Width = (int)numericUpDown3.Value;
-            panel.Height = (int)numericUpDown4.Value;
-            panel.Left = (int)numericUpDown1.Value;
-            panel.Top = (int)numericUpDown2.Value;
+
+            if (workModeComboBox.SelectedIndex == 2)
+                panel.IsVisible = false;
+            else
+            {
+                panel.IsVisible = true;
+                panel.IsAutomaticaly = (workModeComboBox.SelectedIndex == 0) ? true : false;
+            }
         }
         public NMLS.Panel GetPanel()
         {
