@@ -144,9 +144,9 @@ namespace NormalModeLibrary
                 Factory.activeNormalModePanels.Remove(view);
             }
         }
-        public static void EditUserWindows()
+        public static void EditUserWindows(string currentUserName)
         {
-            var win = new Windows.UserWindows( Factory.users ) { Owner = Factory.mainMnemoHandle };
+            var win = new UserWindows(Factory.users, currentUserName) { Owner = Factory.mainMnemoHandle };
             win.Show();
         }
 

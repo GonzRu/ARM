@@ -1579,7 +1579,7 @@ namespace HMI_MT
         /// </summary>
         private void RibbonButtonCurrentModeClick( object sender, EventArgs e )
         {
-            NormalModeLibrary.ComponentFactory.EditUserWindows();
+            NormalModeLibrary.ComponentFactory.EditUserWindows(HMI_Settings.UserName);
         }
         /// <summary>
         /// Clock
