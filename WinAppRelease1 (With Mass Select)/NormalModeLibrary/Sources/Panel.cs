@@ -79,8 +79,7 @@ namespace NormalModeLibrary.Sources
         }
         internal override string GetTreeNodeText()
         {
-            string type = ( this.Type == LinkType.Free ) ? "Свободная" : "Именованая";
-            return string.Format( "Панель: {0} (Тип привязки: {1})", Caption, type );
+            return string.Format( "Панель: {0}", Caption);
         }
         internal override BaseObject Copy()
         {

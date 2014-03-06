@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-
+using NormalModeLibrary.Sources;
 using NMS = NormalModeLibrary.Sources;
 using NMVM = NormalModeLibrary.ViewModel;
 
@@ -14,121 +9,47 @@ namespace NormalModeLibrary.Windows
 {
     public partial class UserWindows : Form
     {
-        bool isChange = false;
-        internal UserWindows( List<NMVM.UserViewModel> users )
+        #region Private Fields
+        private bool isChange = false;
+
+        private List<NMVM.UserViewModel> _copyUserViewModels;
+
+        // Первая конфигурация пользователя
+        private NMVM.BaseCollectionViewModel _userFirstConfiguration;
+
+        private string _userNmae;
+        #endregion Private Fields
+
+        #region Constructor
+        internal UserWindows( List<NMVM.UserViewModel> users, string currentUserName )
         {
             InitializeComponent();
 
+            _copyUserViewModels = users;
+            _userNmae = currentUserName;
+
             foreach ( NMVM.UserViewModel vmUser in users )
             {
-                NMVM.ViewModelBase vmBaseCopy = vmUser.Copy();
-                UnSubscribeAll( vmBaseCopy );
-                TreeNode userNode = CreateNode( vmBaseCopy );
-                treeView1.Nodes.Add( userNode );
-            }
-        }
-        /// <summary>
-        /// Загрузка окна
-        /// </summary>
-        private void UserWindows_Load( object sender, EventArgs e )
-        {
-            treeView1_AfterSelect( treeView1, null );
-        }
-        /// <summary>
-        /// Выбор элемента
-        /// </summary>
-        private void treeView1_AfterSelect( object sender, TreeViewEventArgs e )
-        {
-            if ( treeView1.SelectedNode == null ||
-                treeView1.SelectedNode.Tag is NMVM.DigitalViewModel ||
-                treeView1.SelectedNode.Tag is NMVM.AnalogViewModel )
-            {
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                return;
-            }
-            if ( treeView1.SelectedNode.Tag is NMVM.UserViewModel )
-            {
-                button2.Enabled = true;
-                button3.Enabled = false;
-                button4.Enabled = false;
-            }
-            if ( treeView1.SelectedNode.Tag is NMVM.ConfigurationViewModel )
-            {
-                button2.Enabled = false;
-                button3.Enabled = true;
-                button4.Enabled = false;
-            }
-            if ( treeView1.SelectedNode.Tag is NMVM.PanelViewModel )
-            {
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = true;
-            }
-        }
-        /// <summary>
-        /// Создание пользователя
-        /// </summary>
-        private void button1_Click( object sender, EventArgs e )
-        {
-            UserWindow win = new UserWindow();
-            win.Owner = this;
-            if ( win.ShowDialog() == System.Windows.Forms.DialogResult.OK )
-            {
-                isChange = true;
-                NMS.User user = win.GetUser();
-                treeView1.Nodes.Add( CreateNode( user, new NMVM.UserViewModel( user ) ) );
-            }
-        }
-        /// <summary>
-        /// Создание конфигурации
-        /// </summary>
-        private void button2_Click( object sender, EventArgs e )
-        {
-            if ( treeView1.SelectedNode == null ) return;
+                if (vmUser.Login == currentUserName)
+                {
+                    //UnSubscribeAll(vmBaseCopy);
 
-            ConfigurationWindow win = new ConfigurationWindow();
-            win.Owner = this;
-            if ( win.ShowDialog() == System.Windows.Forms.DialogResult.OK )
-            {
-                isChange = true;
-                NMS.Configuration config = win.GetConfiguration();
-                treeView1.SelectedNode.Nodes.Add( CreateNode( config, new NMVM.ConfigurationViewModel( config ) ) );
-            }
-        }
-        /// <summary>
-        /// Создание панели компонентов
-        /// </summary>
-        private void button3_Click( object sender, EventArgs e )
-        {
-            if ( treeView1.SelectedNode == null ) return;
+                    // Берем только первую конфигурацию, так как фактически конфигурации не работают и все панели добавляются в первую и единственную.
+                    _userFirstConfiguration = ((vmUser as NMVM.UserViewModel).Collection[0] as NMVM.BaseCollectionViewModel);
 
-            PanelWindow win = new PanelWindow();
-            win.Owner = this;
-            if ( win.ShowDialog() == System.Windows.Forms.DialogResult.OK )
-            {
-                isChange = true;
-                NMS.Panel panel = win.GetPanel();
-                treeView1.SelectedNode.Nodes.Add( CreateNode( panel, new NMVM.PanelViewModel( panel ) ) );
-            }
-        }
-        /// <summary>
-        /// Создание компонентов
-        /// </summary>
-        private void button4_Click( object sender, EventArgs e )
-        {
-            if ( treeView1.SelectedNode == null ) return;
+                    foreach (var panelViewModel in _userFirstConfiguration.Collection)
+                    {
+                        TreeNode userNode = CreateNode(panelViewModel);
+                        treeView1.Nodes.Add(userNode);
+                    }
 
-            SignalWindow win = new SignalWindow();
-            win.Owner = this;
-            if ( win.ShowDialog() == System.Windows.Forms.DialogResult.OK )
-            {
-                isChange = true;
-                Sources.BaseSignal signal = win.GetSignal();
-                treeView1.SelectedNode.Nodes.Add( CreateNode( signal, NMVM.BaseSignalViewModel.GetSignalViewModel( signal ) ) );
+                    return;
+                }
             }
         }
+        #endregion Constructor
+
+        #region Handlers
         /// <summary>
         /// Редакторование компанента
         /// </summary>
@@ -136,35 +57,7 @@ namespace NormalModeLibrary.Windows
         {
             if ( treeView1.SelectedNode == null ) return;
 
-            if ( treeView1.SelectedNode.Tag is NMVM.UserViewModel )
-            {
-                NMVM.UserViewModel vmUser = (NMVM.UserViewModel)treeView1.SelectedNode.Tag;
-                UserWindow win = new UserWindow();
-                win.Owner = this;
-                win.SetUser( (NMS.User)vmUser.Core );
-                
-                if ( win.ShowDialog() == System.Windows.Forms.DialogResult.OK )
-                {
-                    isChange = true;
-                    win.ApplyData();
-                    treeView1.SelectedNode.Text = vmUser.Core.GetTreeNodeText();
-                }
-            }
-            else if ( treeView1.SelectedNode.Tag is NMVM.ConfigurationViewModel )
-            {
-                NMVM.ConfigurationViewModel vmConfig = (NMVM.ConfigurationViewModel)treeView1.SelectedNode.Tag;
-                ConfigurationWindow win = new ConfigurationWindow();
-                win.Owner = this;
-                win.SetConfiguration( (NMS.Configuration)vmConfig.Core );
-                
-                if ( win.ShowDialog() == System.Windows.Forms.DialogResult.OK )
-                {
-                    isChange = true;
-                    win.ApplyData();
-                    treeView1.SelectedNode.Text = vmConfig.Core.GetTreeNodeText();
-                }
-            }
-            else if ( treeView1.SelectedNode.Tag is NMVM.PanelViewModel )
+            if ( treeView1.SelectedNode.Tag is NMVM.PanelViewModel )
             {
                 NMVM.PanelViewModel vmPanel = (NMVM.PanelViewModel)treeView1.SelectedNode.Tag;
                 PanelWindow win = new PanelWindow();
@@ -193,6 +86,7 @@ namespace NormalModeLibrary.Windows
                 }
             }
         }
+
         /// <summary>
         /// Удаление компанента
         /// </summary>
@@ -206,32 +100,40 @@ namespace NormalModeLibrary.Windows
                 isChange = true;
                 TreeNode parentNode = treeView1.SelectedNode.Parent as TreeNode;
 
-                if ( parentNode == null )
-                    treeView1.Nodes.Remove( treeView1.SelectedNode );
+                if (parentNode == null)
+                {
+                    ((Configuration)_userFirstConfiguration.Core).Collection.Remove((treeView1.SelectedNode.Tag as NMVM.PanelViewModel).BasePanel);
+                    treeView1.Nodes.Remove(treeView1.SelectedNode);
+                }
                 else
-                    parentNode.Nodes.Remove( treeView1.SelectedNode );
+                    parentNode.Nodes.Remove(treeView1.SelectedNode);
             }
         }
+
         /// <summary>
         /// Закрытие формы
         /// </summary>
         private void UserWindows_FormClosing( object sender, FormClosingEventArgs e )
         {
-            if ( isChange &&
-                MessageBox.Show( this, "Внесены изменения, принять?", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question ) ==
-                System.Windows.Forms.DialogResult.Yes )
-            {
-                //сохранение
-                List<NMVM.UserViewModel> list = new List<NMVM.UserViewModel>();
-                foreach ( TreeNode node in treeView1.Nodes )
-                    list.Add( (NMVM.UserViewModel)GetViewModel( node ) );
-
-                if ( ComponentFactory.SaveXml( list ) )
-                    MessageBox.Show( this, "Конфигурация панелей пересохранена.\nПерезагрузите клиент.", "Информация",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information );
-            }
+            Save();
         }
 
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            Save();
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            if (isChange)
+                ReloadNormalModePanels();
+
+            Close();
+        }
+        #endregion Handlers
+
+        #region Private Metods
         private static TreeNode CreateNode( NMS.BaseObject baseObject, NMVM.ViewModelBase vmBase )
         {
             TreeNode node = new TreeNode( baseObject.GetTreeNodeText() );
@@ -244,8 +146,13 @@ namespace NormalModeLibrary.Windows
             NMVM.BaseCollectionViewModel vmBaseColl = vmBase as NMVM.BaseCollectionViewModel;
 
             if ( vmBaseColl != null )
-                foreach ( NMVM.ViewModelBase model in vmBaseColl.Collection )
-                    node.Nodes.Add( CreateNode( model ) );
+                foreach (NMVM.ViewModelBase model in vmBaseColl.Collection)
+                {
+                    if (model is NMVM.CaptionViewModel)
+                        continue;
+
+                    node.Nodes.Add(CreateNode(model));
+                }
 
             return node;
         }
@@ -280,5 +187,37 @@ namespace NormalModeLibrary.Windows
             if ( vmSignal != null && vmSignal.IsSubscribe )
                 vmSignal.UnSubscribe();
         }
+
+        private void Save()
+        {
+            if (isChange &&
+                MessageBox.Show(this, "Внесены изменения, принять?", "Вопрос", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                //сохранение
+                List<NMVM.UserViewModel> list = new List<NMVM.UserViewModel>();
+
+
+                _userFirstConfiguration.Collection.Clear();
+
+                foreach (TreeNode node in treeView1.Nodes)
+                    _userFirstConfiguration.Collection.Add((NMVM.PanelViewModel) GetViewModel(node));
+
+                ComponentFactory.SaveXml(_copyUserViewModels);
+
+                ReloadNormalModePanels();
+
+                isChange = false;
+            }            
+        }
+
+        private void ReloadNormalModePanels()
+        {
+            ComponentFactory.Factory.DeactivatedMainMnemoForms();
+            ComponentFactory.Factory.LoadXml();
+            ComponentFactory.Factory.ActivatedMainMnemoForms(Owner);
+        }
+        #endregion Private Metods
     }
 }
+

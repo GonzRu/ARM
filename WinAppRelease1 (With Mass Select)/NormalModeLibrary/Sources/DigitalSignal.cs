@@ -51,7 +51,7 @@ namespace NormalModeLibrary.Sources
         }
         internal override string GetTreeNodeText()
         {
-            return string.Format( "Дискретный сигнал: {0} (Guid: {1})", Caption, Guid );
+            return string.Format( "Дискретный сигнал: {0}", Caption );
         }
         internal override BaseObject Copy()
         {
