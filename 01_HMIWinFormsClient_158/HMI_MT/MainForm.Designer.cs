@@ -306,7 +306,6 @@ namespace HMI_MT
             this.userWindowsToolStripMenuItem.Name = "userWindowsToolStripMenuItem";
             this.userWindowsToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.userWindowsToolStripMenuItem.Text = "Структура окон текущего режима";
-            this.userWindowsToolStripMenuItem.Visible = false;
             this.userWindowsToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonCurrentModeClick);
             // 
             // clockToolStripMenuItem
