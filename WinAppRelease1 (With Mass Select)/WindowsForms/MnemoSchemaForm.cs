@@ -876,35 +876,35 @@ namespace WindowsForms
       }
       protected override void OnKeyDown(KeyEventArgs e)
       {
-         #region действие: Увеличить
-         if (e.KeyCode == Keys.PageUp && list.Count != 0 && !createlineflag)
-         {
-            if (win_scale == 250) return;   //ограничение на максимальное увеличение
+         //#region действие: Увеличить
+         //if (e.KeyCode == Keys.PageUp && list.Count != 0 && !createlineflag)
+         //{
+         //   if (win_scale == 250) return;   //ограничение на максимальное увеличение
 
-            foreach (Element _elem in list)
-            {
-               PointF pnt = _elem.Scale;
-               _elem.Scale = new PointF(pnt.X + 0.1f, pnt.Y + 0.1f);
-            }
-            win_scale += 10;
-            this.Refresh();
-         }
-         #endregion
+         //   foreach (Element _elem in list)
+         //   {
+         //      PointF pnt = _elem.Scale;
+         //      _elem.Scale = new PointF(pnt.X + 0.1f, pnt.Y + 0.1f);
+         //   }
+         //   win_scale += 10;
+         //   this.Refresh();
+         //}
+         //#endregion
 
-         #region действие: Уменьшить
-         if (e.KeyCode == Keys.PageDown && list.Count != 0 && !createlineflag)
-         {
-            if (win_scale == 40) return;    //ограничение на максимальное уменьшение
+         //#region действие: Уменьшить
+         //if (e.KeyCode == Keys.PageDown && list.Count != 0 && !createlineflag)
+         //{
+         //   if (win_scale == 40) return;    //ограничение на максимальное уменьшение
 
-            foreach (Element _elem in list)
-            {
-               PointF pnt = _elem.Scale;
-               _elem.Scale = new PointF(pnt.X - 0.1f, pnt.Y - 0.1f);
-            }
-            win_scale -= 10;
-            this.Refresh();
-         }
-         #endregion         
+         //   foreach (Element _elem in list)
+         //   {
+         //      PointF pnt = _elem.Scale;
+         //      _elem.Scale = new PointF(pnt.X - 0.1f, pnt.Y - 0.1f);
+         //   }
+         //   win_scale -= 10;
+         //   this.Refresh();
+         //}
+         //#endregion         
 
          orgsb.ZoomValueLabelText = win_scale.ToString() + "%";
       }

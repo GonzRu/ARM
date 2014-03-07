@@ -61,7 +61,7 @@ namespace BarsMenu
          this.sb_ZoomValueLabel.AutoSize = false;
          this.sb_ZoomValueLabel.Name = "toolStripStatusLabel3";
          this.sb_ZoomValueLabel.Size = new System.Drawing.Size(90, 17);
-         this.sb_ZoomValueLabel.Text = _zoomStr + "100%";
+         this.sb_ZoomValueLabel.Text = "";
          this.sb_ZoomValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
          this.sb_CursorPositionXLabel = new ToolStripStatusLabel();
@@ -112,7 +112,7 @@ namespace BarsMenu
       public String ZoomValueLabelText
       {
          get { return this.sb_ZoomValueLabel.Text; }
-         set { this.sb_ZoomValueLabel.Text = _zoomStr + value; }
+         set { this.sb_ZoomValueLabel.Text = ""; }
       }
       /// <summary>
       /// Получить или задать текст для "X"
