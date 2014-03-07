@@ -29,10 +29,10 @@ namespace NormalModeLibrary.Sources
         public override XElement CreateXml()
         {
             XElement node = base.CreateXml();
-            node.Add( new XAttribute( "rangeMinValue", Range.RangeMinValue ) );
-            node.Add( new XAttribute( "rangeMaxValue", Range.RangeMaxValue ) );
-            node.Add( new XAttribute( "rangeMinHysteresis", Range.RangeMinHysteresis ) );
-            node.Add( new XAttribute( "rangeMaxHysteresis", Range.RangeMaxHysteresis ) );
+            node.Add( new XAttribute( "rangeMinValue", Range.RangeMinValue.ToString() ) );
+            node.Add( new XAttribute( "rangeMaxValue", Range.RangeMaxValue.ToString() ) );
+            node.Add( new XAttribute( "rangeMinHysteresis", Range.RangeMinHysteresis.ToString() ) );
+            node.Add( new XAttribute( "rangeMaxHysteresis", Range.RangeMaxHysteresis.ToString() ) );
             return node;
         }
         public override bool SetValue( object value, bool quality )
