@@ -672,9 +672,9 @@ namespace WindowsForms
             this.StateFromBindingDeviceCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.StateFromBindingDeviceCheckBox.Location = new System.Drawing.Point(25, 19);
             this.StateFromBindingDeviceCheckBox.Name = "StateFromBindingDeviceCheckBox";
-            this.StateFromBindingDeviceCheckBox.Size = new System.Drawing.Size(157, 30);
+            this.StateFromBindingDeviceCheckBox.Size = new System.Drawing.Size(159, 30);
             this.StateFromBindingDeviceCheckBox.TabIndex = 14;
-            this.StateFromBindingDeviceCheckBox.Text = "Брать состояние от\r\nпривязанного устройства";
+            this.StateFromBindingDeviceCheckBox.Text = "Брать состояние связи от\r\nпривязанного устройства";
             this.StateFromBindingDeviceCheckBox.UseVisualStyleBackColor = true;
             this.StateFromBindingDeviceCheckBox.CheckedChanged += new System.EventHandler(this.StateFromBindingDeviceCheckBox_CheckedChanged);
             // 
