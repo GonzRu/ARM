@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms.Integration;
 using System.Xml.Linq;
@@ -42,6 +43,9 @@ namespace NormalModeLibrary
         {
             if ( !isLoad )
             {
+                if (!File.Exists(FilePath))
+                    return;
+
                 var xdoc = XDocument.Load( FilePath );
                 var nodes = xdoc.Element( "MTRA" ).Elements( "User" );
 
