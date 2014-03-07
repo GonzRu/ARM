@@ -357,7 +357,7 @@ namespace WindowsForms
             this.DeviceBindingGroupBox.Controls.Add(this.devGuidDeviceBindingNumericUpDown);
             this.DeviceBindingGroupBox.Location = new System.Drawing.Point(25, 135);
             this.DeviceBindingGroupBox.Name = "DeviceBindingGroupBox";
-            this.DeviceBindingGroupBox.Size = new System.Drawing.Size(229, 93);
+            this.DeviceBindingGroupBox.Size = new System.Drawing.Size(229, 65);
             this.DeviceBindingGroupBox.TabIndex = 9;
             this.DeviceBindingGroupBox.TabStop = false;
             this.DeviceBindingGroupBox.Text = "Привязка устройства";
@@ -379,6 +379,7 @@ namespace WindowsForms
             this.label10.Size = new System.Drawing.Size(82, 13);
             this.label10.TabIndex = 3;
             this.label10.Text = "Номер ячейки:";
+            this.label10.Visible = false;
             // 
             // dsGuidDeviceBindingNumericUpDown
             // 
@@ -413,6 +414,7 @@ namespace WindowsForms
             this.cellDeviceBindingNumericUpDown.Name = "cellDeviceBindingNumericUpDown";
             this.cellDeviceBindingNumericUpDown.Size = new System.Drawing.Size(58, 20);
             this.cellDeviceBindingNumericUpDown.TabIndex = 2;
+            this.cellDeviceBindingNumericUpDown.Visible = false;
             // 
             // devGuidDeviceBindingNumericUpDown
             // 
@@ -451,7 +453,7 @@ namespace WindowsForms
             this.CommandBindingGroupBox.Controls.Add(this.deviceGuidCommandBindingNumericUpDown);
             this.CommandBindingGroupBox.Controls.Add(this.label7);
             this.CommandBindingGroupBox.Controls.Add(this.dsGuidCommandBindingNumericUpDown);
-            this.CommandBindingGroupBox.Location = new System.Drawing.Point(25, 247);
+            this.CommandBindingGroupBox.Location = new System.Drawing.Point(25, 223);
             this.CommandBindingGroupBox.Name = "CommandBindingGroupBox";
             this.CommandBindingGroupBox.Size = new System.Drawing.Size(229, 96);
             this.CommandBindingGroupBox.TabIndex = 10;
