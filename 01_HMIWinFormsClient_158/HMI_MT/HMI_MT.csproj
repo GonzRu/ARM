@@ -677,6 +677,10 @@
       <Project>{812A9E1D-FDA6-430C-8B75-5FB0CDAC3664}</Project>
       <Name>LabelTextbox</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MessagePanel\MessagePanel.csproj">
+      <Project>{F2E099BD-FECA-401E-9FD4-E0D7C00317FD}</Project>
+      <Name>MessagePanel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OscillogramsLib\OscillogramsLib.csproj">
       <Project>{8BBCE97B-B7D1-4F2A-9707-C5E1587F864D}</Project>
       <Name>OscillogramsLib</Name>
