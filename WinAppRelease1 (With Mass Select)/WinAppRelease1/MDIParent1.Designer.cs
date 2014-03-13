@@ -330,7 +330,7 @@ namespace WinAppRelease1
             this.menu31ToolStripMenuItem,
             this.menu32ToolStripMenuItem});
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
-            this.convertToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.convertToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.convertToolStripMenuItem.Text = "Конвертировать схему в";
             // 
             // menu31ToolStripMenuItem
@@ -350,14 +350,14 @@ namespace WinAppRelease1
             // mnenoCaptionToolStripMenuItem
             // 
             this.mnenoCaptionToolStripMenuItem.Name = "mnenoCaptionToolStripMenuItem";
-            this.mnenoCaptionToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.mnenoCaptionToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.mnenoCaptionToolStripMenuItem.Text = "MnenoCaption";
             this.mnenoCaptionToolStripMenuItem.Click += new System.EventHandler(this.MnenoCaptionToolStripMenuItemClick);
             // 
             // PreviewToolStripMenuItem
             // 
             this.PreviewToolStripMenuItem.Name = "PreviewToolStripMenuItem";
-            this.PreviewToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.PreviewToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.PreviewToolStripMenuItem.Text = "Предпросмотр";
             this.PreviewToolStripMenuItem.Click += new System.EventHandler(this.PreviewToolStripMenuItemClick);
             // 
@@ -367,7 +367,7 @@ namespace WinAppRelease1
             this.witchBackgroundToolStripMenuItem,
             this.withoutBackgroundToolStripMenuItem});
             this.subStrateToolStripMenuItem.Name = "subStrateToolStripMenuItem";
-            this.subStrateToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.subStrateToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.subStrateToolStripMenuItem.Text = "Сохранить как подложку";
             // 
             // witchBackgroundToolStripMenuItem
@@ -501,7 +501,7 @@ namespace WinAppRelease1
             this.MinimumSize = new System.Drawing.Size(640, 480);
             this.Name = "MDIParent1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "The Editor Mneno-Circuits";
+            this.Text = "Редактор мнемосхем";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);
