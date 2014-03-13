@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Editor program")]
-[assembly: AssemblyDescription("Developed by Плющенко В.В.")]
+[assembly: AssemblyTitle("Редактор мнемосхем")]
+[assembly: AssemblyDescription("Разработано: ООО \"Механотроника РА\"")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("The Editor Mneno-Circuits")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyProduct("Редактор мнемосхем")]
+[assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
