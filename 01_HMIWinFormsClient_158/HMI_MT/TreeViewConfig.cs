@@ -105,7 +105,7 @@ namespace HMI_MT
 
                             foreach( IDevice devInEcu in devsecu )
                             {
-                                TreeNode tnnn = new TreeNode(devInEcu.StrDescriptionAsPhysicalDevice);//, 1, 1);
+                                TreeNode tnnn = new TreeNode(devInEcu.StrDescriptionAsPhysicalDevice + "    (" + devInEcu.Description + ")");//, 1, 1);
                                 tnnn.Tag = devInEcu;
                                 tnn.Nodes.Add(tnnn);
                             }
