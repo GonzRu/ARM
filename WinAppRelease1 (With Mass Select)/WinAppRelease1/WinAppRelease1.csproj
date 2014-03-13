@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WinAppRelease1</RootNamespace>
-    <AssemblyName>WinAppRelease1</AssemblyName>
+    <AssemblyName>Редактор мнемосхем</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
