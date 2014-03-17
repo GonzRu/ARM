@@ -280,7 +280,10 @@ namespace ProviderCustomerExchangeLib.WCF
                         NewTagValueHandler(getTagsValuesUpdatedCompletedEventArgs.Result);
                     }
                     else
+                    {
+                        Console.WriteLine("Обновлений не пришло");
                         TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Verbose, 0, "Обновлений не пришло");
+                    }
                 }
                 else
                 {
