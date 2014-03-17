@@ -53,13 +53,14 @@ namespace LibraryElements.CalculationBlocks
             //02h - "не исправен" - желтый
             //06h - "обрыв ВОД" - желтый с перекрестием
             //08h - "отключен" - серый
-            switch ( Convert.ToInt32( GetRecord( "AnalogSignal").Value ) )
+            switch ((int)Double.Parse(GetRecord("AnalogSignal").Value.ToString()))
             {
-                case 0: return (Color)GetRecord( "NoSignalColor" ).Value;
-                case 1: return (Color)GetRecord( "SetSignalColor" ).Value;
-                case 2: case 6: return (Color)GetRecord( "UnknownSignalColor" ).Value;
-                default: return (Color)GetRecord( "LostSignalColor" ).Value;
-            }
+                case 0: return (Color)GetRecord("NoSignalColor").Value;
+                case 1: return (Color)GetRecord("SetSignalColor").Value;
+                case 2:
+                case 6: return (Color)GetRecord("UnknownSignalColor").Value;
+                default: return (Color)GetRecord("LostSignalColor").Value;
+            }            
         }
 
         /// <summary>
