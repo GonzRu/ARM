@@ -142,6 +142,23 @@ namespace DevicesLibrary
                     tabControl.Controls.Add( new OscDiagTabPage( unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms) );
                     tabControl.Controls.Add(new EventBlockTabPage(unidev));
                     break;
+                case "TOR_200_P63":
+                case "TOR_200_Lx2":
+                case "TOR_200_Vx2":
+                case "TOR_200_Cx2":
+                case "TOR_200_Hx3":
+                    tabControl.Controls.Add(new OscDiagTabPage(unidev, OscDiagTabPage.OscDiagPanelVisible.Oscilograms));
+                    tabControl.Controls.Add(new EventBlockTabPage(unidev));
+                    break;
+                case "EKRA_2502V601":
+                case "EKRA_2502V602":
+                case "EKRA_2502V603":
+                case "EKRA_2502V604":
+                case "TOR200_BCS01":
+                case "SHUOT_M_2405":
+                case "ACUTIME_NMEA":
+                    tabControl.Controls.Add(new EventBlockTabPage(unidev));
+                    break;
             }
             
             tabControl.Controls.Add( new DataBaseFilesLibrary.TabPageDbFile( unidev ) );
