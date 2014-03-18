@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +44,57 @@
   <ItemGroup>
     <Compile Include="IMessageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\MessagePanelService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\MessagePanelService\MessagePanel.MessagePanelService.AsyncGeneralRequest.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MessagePanelService\MessagePanel.MessagePanelService.CountRows.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MessagePanelService\MessagePanel.MessagePanelService.TableAutorization.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MessagePanelService\NetworkLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessagePanelService\service.wsdl" />
+    <None Include="Service References\MessagePanelService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessagePanelService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessagePanelService\WpfConnSQL.CellDatas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessagePanelService\WpfConnSQL.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MessagePanelService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MessagePanelService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MessagePanelService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MessagePanelService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

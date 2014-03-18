@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WpfConnSQL.CellDatas" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WpfConnSQL.CellDatas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="TableAutorization">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Access" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Right" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TableAutorization" nillable="true" type="tns:TableAutorization" />
+  <xs:complexType name="TableEventLogAlarm">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BlockCell">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AdditionalID" type="xs:int" />
+          <xs:element minOccurs="0" name="CheckStatus" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ID" type="xs:int" />
+          <xs:element minOccurs="0" name="ReceiptComment" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Type" type="tns:CellType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TableEventLogAlarm" nillable="true" type="tns:TableEventLogAlarm" />
+  <xs:complexType name="BlockCell">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCell">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BlockID" type="xs:int" />
+          <xs:element minOccurs="0" name="BlockName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BlockCell" nillable="true" type="tns:BlockCell" />
+  <xs:complexType name="BaseCell">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseCell" nillable="true" type="tns:BaseCell" />
+  <xs:complexType name="TableUnionLog">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseCell">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Source" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TableUnionLog" nillable="true" type="tns:TableUnionLog" />
+  <xs:complexType name="TableUsersLog">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BlockCell">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Action" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ArmName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ServerTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TableUsersLog" nillable="true" type="tns:TableUsersLog" />
+  <xs:complexType name="TableEventLog">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BlockCell">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TableReceipt" nillable="true" type="tns:TableWhoReceipt" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TableEventLog" nillable="true" type="tns:TableEventLog" />
+  <xs:complexType name="TableWhoReceipt">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserLogin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserTime" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TableWhoReceipt" nillable="true" type="tns:TableWhoReceipt" />
+  <xs:simpleType name="CellType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Failure" />
+      <xs:enumeration value="Warning" />
+      <xs:enumeration value="Information">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CellType" nillable="true" type="tns:CellType" />
+  <xs:complexType name="ArrayOfTableEventLogAlarm">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TableEventLogAlarm" nillable="true" type="tns:TableEventLogAlarm" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTableEventLogAlarm" nillable="true" type="tns:ArrayOfTableEventLogAlarm" />
+</xs:schema>

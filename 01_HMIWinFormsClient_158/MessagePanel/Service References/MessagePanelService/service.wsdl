@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="ServicePoint1_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WpfConnSQL.CellDatas" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/WpfConnSQL" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/NetworkLibrary" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataChannel_Join_InputMessage">
+    <wsdl:part name="parameters" element="tns:Join" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_Leave_InputMessage">
+    <wsdl:part name="parameters" element="tns:Leave" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_Autarization_InputMessage">
+    <wsdl:part name="parameters" element="tns:Autarization" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_Autarization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AutarizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_NeedUpDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:NeedUpDate" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_NeedUpDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NeedUpDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_CountRowsData_InputMessage">
+    <wsdl:part name="parameters" element="tns:CountRowsData" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_CountRowsData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CountRowsDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_Kvoting_InputMessage">
+    <wsdl:part name="parameters" element="tns:Kvoting" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_Kvoting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KvotingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_AllKvoting_InputMessage">
+    <wsdl:part name="parameters" element="tns:AllKvoting" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_AllKvoting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AllKvotingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_KvotingEventTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:KvotingEventTime" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_KvotingEventTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KvotingEventTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_KvotingEventDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:KvotingEventDevice" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_KvotingEventDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KvotingEventDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_GetEventLogAlarm_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventLogAlarm" />
+  </wsdl:message>
+  <wsdl:message name="IDataChannel_GetEventLogAlarm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventLogAlarmResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDataChannel">
+    <wsdl:operation name="Join">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClient/Join" message="tns:IDataChannel_Join_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Leave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClient/Leave" message="tns:IDataChannel_Leave_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Autarization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataChannel/Autarization" message="tns:IDataChannel_Autarization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataChannel/AutarizationResponse" message="tns:IDataChannel_Autarization_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NeedUpDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataChannel/NeedUpDate" message="tns:IDataChannel_NeedUpDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataChannel/NeedUpDateResponse" message="tns:IDataChannel_NeedUpDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CountRowsData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataChannel/CountRowsData" message="tns:IDataChannel_CountRowsData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataChannel/CountRowsDataResponse" message="tns:IDataChannel_CountRowsData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Kvoting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataChannel/Kvoting" message="tns:IDataChannel_Kvoting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataChannel/KvotingResponse" message="tns:IDataChannel_Kvoting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AllKvoting">
+      <wsdl:input wsaw:Action="SetAllKvoting" message="tns:IDataChannel_AllKvoting_InputMessage" />
+      <wsdl:output wsaw:Action="ReplySetAllKvoting" message="tns:IDataChannel_AllKvoting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="KvotingEventTime">
+      <wsdl:input wsaw:Action="SetKvotingEventTime" message="tns:IDataChannel_KvotingEventTime_InputMessage" />
+      <wsdl:output wsaw:Action="ReplySetKvotingEventTime" message="tns:IDataChannel_KvotingEventTime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="KvotingEventDevice">
+      <wsdl:input wsaw:Action="SetKvotingEventDevice" message="tns:IDataChannel_KvotingEventDevice_InputMessage" />
+      <wsdl:output wsaw:Action="ReplySetKvotingEventDevice" message="tns:IDataChannel_KvotingEventDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventLogAlarm">
+      <wsdl:input wsaw:Action="EventLogAlarm" message="tns:IDataChannel_GetEventLogAlarm_InputMessage" />
+      <wsdl:output wsaw:Action="ReplyEventLogAlarm" message="tns:IDataChannel_GetEventLogAlarm_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicePoint1" type="tns:IDataChannel">
+    <wsp:PolicyReference URI="#ServicePoint1_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Join">
+      <soap12:operation soapAction="http://tempuri.org/IClient/Join" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Leave">
+      <soap12:operation soapAction="http://tempuri.org/IClient/Leave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Autarization">
+      <soap12:operation soapAction="http://tempuri.org/IDataChannel/Autarization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NeedUpDate">
+      <soap12:operation soapAction="http://tempuri.org/IDataChannel/NeedUpDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountRowsData">
+      <soap12:operation soapAction="http://tempuri.org/IDataChannel/CountRowsData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Kvoting">
+      <soap12:operation soapAction="http://tempuri.org/IDataChannel/Kvoting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllKvoting">
+      <soap12:operation soapAction="SetAllKvoting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KvotingEventTime">
+      <soap12:operation soapAction="SetKvotingEventTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KvotingEventDevice">
+      <soap12:operation soapAction="SetKvotingEventDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventLogAlarm">
+      <soap12:operation soapAction="EventLogAlarm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="ServicePoint1" binding="tns:ServicePoint1">
+      <soap12:address location="net.tcp://localhost:15100/Services" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:15100/Services</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
