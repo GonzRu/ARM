@@ -256,7 +256,7 @@ namespace HMI_MT
                 if ( idp != null && idp.Parameters != null )
                 {
                     // извлекаем описание из PrgDevCFG.cdp
-                    var xeDescDev = HMI_Settings.CONFIGURATION.GetDeviceXMLDescription( 0, "MOA_ECU", (int)idp.Parameters.DeviceGuid );
+                    var xeDescDev = HMI_Settings.CONFIGURATION.GetDeviceXMLDescription( (int)idp.Parameters.DsGuid, "MOA_ECU", (int)idp.Parameters.DeviceGuid );
 
                     CommonUtils.CommonUtils.CreateContextMenu( region, xeDescDev, parent );
 
