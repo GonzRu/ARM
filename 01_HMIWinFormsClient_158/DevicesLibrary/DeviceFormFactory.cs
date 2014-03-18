@@ -37,7 +37,7 @@ namespace DevicesLibrary
 
                 if (!File.Exists(FrmTagsDescript))
                 {
-                    MessageBox.Show(string.Format("Файл описания формы не существует ({0})", FrmTagsDescript), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //MessageBox.Show(string.Format("Файл описания формы не существует ({0})", FrmTagsDescript), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     throw new Exception(
                         string.Format( "{0} : DeviceFormFactory : {1}", DateTime.Now, "Элемент не привязан к устройству в текущей конфигурации" ) );
                 }
