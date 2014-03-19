@@ -122,7 +122,7 @@ namespace MessagePanel
         /// </summary>
         public bool KvotMessagesInTimePeriod(DateTime startDate, DateTime endDate, string comment)
         {
-            return _messagePanelServerProvider.KvotingEventTime(comment, _userID, KVOT_ALL, startDate, endDate);
+            return _messagePanelServerProvider.KvotingEventTime(comment, _userID, KVOT_DATE, startDate, endDate);
         }
         #endregion
 
