@@ -111,6 +111,7 @@ namespace HMI_MT
             this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.autoUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.updateButton = new System.Windows.Forms.Button();
             this.kvitirovanieGroupBox = new System.Windows.Forms.GroupBox();
@@ -118,7 +119,7 @@ namespace HMI_MT
             this.kvitByDeviceTypeButton = new System.Windows.Forms.Button();
             this.DeviceTypesComboBox = new System.Windows.Forms.ComboBox();
             this.kvitAllButton = new System.Windows.Forms.Button();
-            this.kvitOneButton = new System.Windows.Forms.Button();
+            this.kvitSelectMsgButton = new System.Windows.Forms.Button();
             this.frmLogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmLogsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
@@ -143,6 +144,7 @@ namespace HMI_MT
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.kvitirovanieGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).BeginInit();
@@ -213,17 +215,17 @@ namespace HMI_MT
             // 
             this.columnHeaderSource.Text = "Источник";
             this.columnHeaderSource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeaderSource.Width = 160;
+            this.columnHeaderSource.Width = 300;
             // 
             // columnHeaderText
             // 
             this.columnHeaderText.Text = "Текст сообщения";
-            this.columnHeaderText.Width = 160;
+            this.columnHeaderText.Width = 300;
             // 
             // columnHeaderComment
             // 
             this.columnHeaderComment.Text = "Комментарий";
-            this.columnHeaderComment.Width = 160;
+            this.columnHeaderComment.Width = 313;
             // 
             // tpLogEventOKU_RZA
             // 
@@ -871,8 +873,7 @@ namespace HMI_MT
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightCoral;
-            this.panel1.Controls.Add(this.autoUpdateCheckBox);
-            this.panel1.Controls.Add(this.updateButton);
+            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.kvitirovanieGroupBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 631);
@@ -880,33 +881,46 @@ namespace HMI_MT
             this.panel1.Size = new System.Drawing.Size(1010, 100);
             this.panel1.TabIndex = 2;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.autoUpdateCheckBox);
+            this.groupBox2.Controls.Add(this.updateButton);
+            this.groupBox2.Location = new System.Drawing.Point(801, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 80);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Обновление";
+            // 
             // autoUpdateCheckBox
             // 
             this.autoUpdateCheckBox.AutoSize = true;
-            this.autoUpdateCheckBox.Location = new System.Drawing.Point(688, 22);
+            this.autoUpdateCheckBox.Location = new System.Drawing.Point(6, 21);
             this.autoUpdateCheckBox.Name = "autoUpdateCheckBox";
             this.autoUpdateCheckBox.Size = new System.Drawing.Size(160, 17);
             this.autoUpdateCheckBox.TabIndex = 2;
             this.autoUpdateCheckBox.Text = "Автоматически обновлять";
             this.autoUpdateCheckBox.UseVisualStyleBackColor = true;
+            this.autoUpdateCheckBox.CheckedChanged += new System.EventHandler(this.autoUpdateCheckBox_CheckedChanged);
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(688, 60);
+            this.updateButton.Location = new System.Drawing.Point(11, 44);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(160, 23);
             this.updateButton.TabIndex = 1;
             this.updateButton.Text = "Обновить";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // kvitirovanieGroupBox
             // 
             this.kvitirovanieGroupBox.Controls.Add(this.groupBox1);
             this.kvitirovanieGroupBox.Controls.Add(this.kvitAllButton);
-            this.kvitirovanieGroupBox.Controls.Add(this.kvitOneButton);
+            this.kvitirovanieGroupBox.Controls.Add(this.kvitSelectMsgButton);
             this.kvitirovanieGroupBox.Location = new System.Drawing.Point(9, 3);
             this.kvitirovanieGroupBox.Name = "kvitirovanieGroupBox";
-            this.kvitirovanieGroupBox.Size = new System.Drawing.Size(658, 80);
+            this.kvitirovanieGroupBox.Size = new System.Drawing.Size(769, 80);
             this.kvitirovanieGroupBox.TabIndex = 0;
             this.kvitirovanieGroupBox.TabStop = false;
             this.kvitirovanieGroupBox.Text = "Квитирование";
@@ -917,7 +931,7 @@ namespace HMI_MT
             this.groupBox1.Controls.Add(this.DeviceTypesComboBox);
             this.groupBox1.Location = new System.Drawing.Point(376, 19);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(268, 51);
+            this.groupBox1.Size = new System.Drawing.Size(387, 51);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Квитирование по устройствам";
@@ -925,19 +939,20 @@ namespace HMI_MT
             // kvitByDeviceTypeButton
             // 
             this.kvitByDeviceTypeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kvitByDeviceTypeButton.Location = new System.Drawing.Point(175, 17);
+            this.kvitByDeviceTypeButton.Location = new System.Drawing.Point(294, 17);
             this.kvitByDeviceTypeButton.Name = "kvitByDeviceTypeButton";
             this.kvitByDeviceTypeButton.Size = new System.Drawing.Size(87, 23);
             this.kvitByDeviceTypeButton.TabIndex = 1;
             this.kvitByDeviceTypeButton.Text = "Квитировать";
             this.kvitByDeviceTypeButton.UseVisualStyleBackColor = true;
+            this.kvitByDeviceTypeButton.Click += new System.EventHandler(this.kvitByDeviceTypeButton_Click);
             // 
             // DeviceTypesComboBox
             // 
             this.DeviceTypesComboBox.FormattingEnabled = true;
             this.DeviceTypesComboBox.Location = new System.Drawing.Point(6, 19);
             this.DeviceTypesComboBox.Name = "DeviceTypesComboBox";
-            this.DeviceTypesComboBox.Size = new System.Drawing.Size(121, 21);
+            this.DeviceTypesComboBox.Size = new System.Drawing.Size(282, 21);
             this.DeviceTypesComboBox.TabIndex = 0;
             // 
             // kvitAllButton
@@ -948,15 +963,17 @@ namespace HMI_MT
             this.kvitAllButton.TabIndex = 1;
             this.kvitAllButton.Text = "Квитировать всё";
             this.kvitAllButton.UseVisualStyleBackColor = true;
+            this.kvitAllButton.Click += new System.EventHandler(this.kvitAllButton_Click);
             // 
-            // kvitOneButton
+            // kvitSelectMsgButton
             // 
-            this.kvitOneButton.Location = new System.Drawing.Point(20, 33);
-            this.kvitOneButton.Name = "kvitOneButton";
-            this.kvitOneButton.Size = new System.Drawing.Size(217, 23);
-            this.kvitOneButton.TabIndex = 0;
-            this.kvitOneButton.Text = "Квитировать выделенное сообщение";
-            this.kvitOneButton.UseVisualStyleBackColor = true;
+            this.kvitSelectMsgButton.Location = new System.Drawing.Point(20, 33);
+            this.kvitSelectMsgButton.Name = "kvitSelectMsgButton";
+            this.kvitSelectMsgButton.Size = new System.Drawing.Size(217, 23);
+            this.kvitSelectMsgButton.TabIndex = 0;
+            this.kvitSelectMsgButton.Text = "Квитировать выделенные сообщения";
+            this.kvitSelectMsgButton.UseVisualStyleBackColor = true;
+            this.kvitSelectMsgButton.Click += new System.EventHandler(this.kvitSelectMsgButton_Click);
             // 
             // frmLogsBindingSource
             // 
@@ -1005,7 +1022,8 @@ namespace HMI_MT
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.kvitirovanieGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).EndInit();
@@ -1103,8 +1121,9 @@ namespace HMI_MT
        private System.Windows.Forms.Button kvitByDeviceTypeButton;
        private System.Windows.Forms.ComboBox DeviceTypesComboBox;
        private System.Windows.Forms.Button kvitAllButton;
-       private System.Windows.Forms.Button kvitOneButton;
+       private System.Windows.Forms.Button kvitSelectMsgButton;
        private System.Windows.Forms.CheckBox autoUpdateCheckBox;
        private System.Windows.Forms.Button updateButton;
+       private System.Windows.Forms.GroupBox groupBox2;
     }
 }
