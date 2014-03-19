@@ -1,25 +1,17 @@
 using System;
-using System.Xml;
-using System.Diagnostics;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Collections;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Data.OleDb;
-using System.Configuration;
-using System.IO;
-using System.Data.SqlTypes;
-using CommonUtils;
-using System.Linq;
 using System.Xml.Linq;
-using OscillogramsLib;
+using CommonUtils;
 using HMI_MT_Settings;
 using InterfaceLibrary;
+using OscillogramsLib;
 
 namespace HMI_MT
 {
@@ -108,10 +100,46 @@ namespace HMI_MT
             dtpStartData.Value = dtpStartData.Value - ts;
             dtpStartTime.Value = DateTime.Now;
 
-            // выводим результаты первоначального запроса
-            //EventBD();
             timer1.Stop();
+
+            #region messagesTab
+            HMI_Settings.MessageProvider.MessagesUpdated += MessagesUpdatedhandler;
+
+            DisplayMessages();
+            #endregion
         }
+
+        #region MessagesTab metods
+        private void MessagesUpdatedhandler()
+        {
+            DisplayMessages();
+        }
+
+        private void DisplayMessages()
+        {
+            int i = 1;
+            var messages = HMI_Settings.MessageProvider.GetMessages();
+
+            messagesListView.Items.Clear();
+
+            List<ListViewItem> listViewItems = new List<ListViewItem>();
+            foreach (var message in messages)
+            {
+                ListViewItem listViewItem = new ListViewItem();
+                listViewItem.SubItems.Add(i.ToString());
+                listViewItem.SubItems.Add(message.LocalTime.ToString());
+                listViewItem.SubItems.Add(message.BlockName);
+                listViewItem.SubItems.Add(message.Text);
+                listViewItem.SubItems.Add(message.Comment);
+
+                listViewItems.Add(listViewItem);
+                i++;
+            }
+
+            messagesListView.Items.AddRange(listViewItems.ToArray());
+            CommonUtils.CommonUtils.DrawAsZebra(messagesListView);
+        }
+        #endregion MessagesTab
 
         /// <summary>
         /// private void EventBD( )

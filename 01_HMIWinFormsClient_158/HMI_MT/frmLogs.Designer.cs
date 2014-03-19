@@ -33,6 +33,14 @@ namespace HMI_MT
         {
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tpMessages = new System.Windows.Forms.TabPage();
+            this.messagesListView = new System.Windows.Forms.ListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderSource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderText = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderComment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpLogEventOKU_RZA = new System.Windows.Forms.TabPage();
             this.lstvEvent = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -105,6 +113,7 @@ namespace HMI_MT
             this.frmLogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmLogsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
+            this.tpMessages.SuspendLayout();
             this.tpLogEventOKU_RZA.SuspendLayout();
             this.tpLogActionUsers.SuspendLayout();
             this.tpLogSummaryAvarOsc.SuspendLayout();
@@ -130,6 +139,7 @@ namespace HMI_MT
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tpMessages);
             this.tabControl1.Controls.Add(this.tpLogEventOKU_RZA);
             this.tabControl1.Controls.Add(this.tpLogActionUsers);
             this.tabControl1.Controls.Add(this.tpLogSummaryAvarOsc);
@@ -141,6 +151,66 @@ namespace HMI_MT
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1010, 614);
             this.tabControl1.TabIndex = 0;
+            // 
+            // tpMessages
+            // 
+            this.tpMessages.Controls.Add(this.messagesListView);
+            this.tpMessages.Location = new System.Drawing.Point(4, 22);
+            this.tpMessages.Name = "tpMessages";
+            this.tpMessages.Size = new System.Drawing.Size(1002, 588);
+            this.tpMessages.TabIndex = 4;
+            this.tpMessages.Text = "Сообщения";
+            this.tpMessages.UseVisualStyleBackColor = true;
+            // 
+            // messagesListView
+            // 
+            this.messagesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeaderNumber,
+            this.columnHeaderDate,
+            this.columnHeaderSource,
+            this.columnHeaderText,
+            this.columnHeaderComment});
+            this.messagesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.messagesListView.FullRowSelect = true;
+            this.messagesListView.GridLines = true;
+            this.messagesListView.Location = new System.Drawing.Point(0, 0);
+            this.messagesListView.Name = "messagesListView";
+            this.messagesListView.Size = new System.Drawing.Size(1002, 588);
+            this.messagesListView.TabIndex = 0;
+            this.messagesListView.UseCompatibleStateImageBehavior = false;
+            this.messagesListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Width = 1;
+            // 
+            // columnHeaderNumber
+            // 
+            this.columnHeaderNumber.Text = "№";
+            this.columnHeaderNumber.Width = 30;
+            // 
+            // columnHeaderDate
+            // 
+            this.columnHeaderDate.Text = "Дата и Время";
+            this.columnHeaderDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeaderDate.Width = 160;
+            // 
+            // columnHeaderSource
+            // 
+            this.columnHeaderSource.Text = "Источник";
+            this.columnHeaderSource.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeaderSource.Width = 160;
+            // 
+            // columnHeaderText
+            // 
+            this.columnHeaderText.Text = "Текст сообщения";
+            this.columnHeaderText.Width = 160;
+            // 
+            // columnHeaderComment
+            // 
+            this.columnHeaderComment.Text = "Комментарий";
+            this.columnHeaderComment.Width = 160;
             // 
             // tpLogEventOKU_RZA
             // 
@@ -221,7 +291,7 @@ namespace HMI_MT
             this.tpLogActionUsers.Location = new System.Drawing.Point(4, 22);
             this.tpLogActionUsers.Name = "tpLogActionUsers";
             this.tpLogActionUsers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogActionUsers.Size = new System.Drawing.Size(1002, 586);
+            this.tpLogActionUsers.Size = new System.Drawing.Size(1002, 588);
             this.tpLogActionUsers.TabIndex = 1;
             this.tpLogActionUsers.Text = "Действия пользователей";
             this.tpLogActionUsers.Enter += new System.EventHandler(this.tpLogActionUsers_Enter);
@@ -243,7 +313,7 @@ namespace HMI_MT
             this.lstvUserAction.Location = new System.Drawing.Point(3, 3);
             this.lstvUserAction.MultiSelect = false;
             this.lstvUserAction.Name = "lstvUserAction";
-            this.lstvUserAction.Size = new System.Drawing.Size(996, 580);
+            this.lstvUserAction.Size = new System.Drawing.Size(996, 582);
             this.lstvUserAction.TabIndex = 0;
             this.lstvUserAction.UseCompatibleStateImageBehavior = false;
             this.lstvUserAction.View = System.Windows.Forms.View.Details;
@@ -300,7 +370,7 @@ namespace HMI_MT
             this.tpLogSummaryAvarOsc.Location = new System.Drawing.Point(4, 22);
             this.tpLogSummaryAvarOsc.Name = "tpLogSummaryAvarOsc";
             this.tpLogSummaryAvarOsc.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogSummaryAvarOsc.Size = new System.Drawing.Size(1002, 586);
+            this.tpLogSummaryAvarOsc.Size = new System.Drawing.Size(1002, 588);
             this.tpLogSummaryAvarOsc.TabIndex = 2;
             this.tpLogSummaryAvarOsc.Text = "Сводный список аварий и осциллограмм";
             this.tpLogSummaryAvarOsc.Enter += new System.EventHandler(this.tpLogSummaryAvarOsc_Enter);
@@ -318,7 +388,7 @@ namespace HMI_MT
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gbOscill);
-            this.splitContainer1.Size = new System.Drawing.Size(996, 580);
+            this.splitContainer1.Size = new System.Drawing.Size(996, 582);
             this.splitContainer1.SplitterDistance = 504;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -328,7 +398,7 @@ namespace HMI_MT
             this.gbAvar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAvar.Location = new System.Drawing.Point(0, 0);
             this.gbAvar.Name = "gbAvar";
-            this.gbAvar.Size = new System.Drawing.Size(504, 580);
+            this.gbAvar.Size = new System.Drawing.Size(504, 582);
             this.gbAvar.TabIndex = 1;
             this.gbAvar.TabStop = false;
             this.gbAvar.Text = "Аварии";
@@ -356,7 +426,7 @@ namespace HMI_MT
             this.dgvAvar.Name = "dgvAvar";
             this.dgvAvar.ReadOnly = true;
             this.dgvAvar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAvar.Size = new System.Drawing.Size(498, 561);
+            this.dgvAvar.Size = new System.Drawing.Size(498, 563);
             this.dgvAvar.TabIndex = 0;
             this.dgvAvar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvar_CellContentClick);
             // 
@@ -417,7 +487,7 @@ namespace HMI_MT
             this.gbOscill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbOscill.Location = new System.Drawing.Point(0, 0);
             this.gbOscill.Name = "gbOscill";
-            this.gbOscill.Size = new System.Drawing.Size(488, 580);
+            this.gbOscill.Size = new System.Drawing.Size(488, 582);
             this.gbOscill.TabIndex = 2;
             this.gbOscill.TabStop = false;
             this.gbOscill.Text = "Осциллограммы и диаграммы";
@@ -444,7 +514,7 @@ namespace HMI_MT
             this.dgvOscill.Name = "dgvOscill";
             this.dgvOscill.ReadOnly = true;
             this.dgvOscill.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOscill.Size = new System.Drawing.Size(482, 561);
+            this.dgvOscill.Size = new System.Drawing.Size(482, 563);
             this.dgvOscill.TabIndex = 0;
             this.dgvOscill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOscill_CellContentClick);
             // 
@@ -505,7 +575,7 @@ namespace HMI_MT
             this.tpLogSystemFull.Location = new System.Drawing.Point(4, 22);
             this.tpLogSystemFull.Name = "tpLogSystemFull";
             this.tpLogSystemFull.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogSystemFull.Size = new System.Drawing.Size(1002, 586);
+            this.tpLogSystemFull.Size = new System.Drawing.Size(1002, 588);
             this.tpLogSystemFull.TabIndex = 3;
             this.tpLogSystemFull.Text = "Сводный системный журнал";
             this.tpLogSystemFull.Enter += new System.EventHandler(this.tpLogSystemFull_Enter);
@@ -523,7 +593,7 @@ namespace HMI_MT
             this.lstvLogSystemFull.GridLines = true;
             this.lstvLogSystemFull.Location = new System.Drawing.Point(3, 3);
             this.lstvLogSystemFull.Name = "lstvLogSystemFull";
-            this.lstvLogSystemFull.Size = new System.Drawing.Size(996, 580);
+            this.lstvLogSystemFull.Size = new System.Drawing.Size(996, 582);
             this.lstvLogSystemFull.TabIndex = 0;
             this.lstvLogSystemFull.UseCompatibleStateImageBehavior = false;
             this.lstvLogSystemFull.View = System.Windows.Forms.View.Details;
@@ -812,6 +882,7 @@ namespace HMI_MT
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogs_FormClosing);
             this.Load += new System.EventHandler(this.frmLogs_Load);
             this.tabControl1.ResumeLayout(false);
+            this.tpMessages.ResumeLayout(false);
             this.tpLogEventOKU_RZA.ResumeLayout(false);
             this.tpLogActionUsers.ResumeLayout(false);
             this.tpLogSummaryAvarOsc.ResumeLayout(false);
@@ -914,5 +985,13 @@ namespace HMI_MT
        private System.Windows.Forms.DataGridViewTextBoxColumn clmIDAvar;
        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdFcBlock;
        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+       private System.Windows.Forms.TabPage tpMessages;
+       private System.Windows.Forms.ListView messagesListView;
+       private System.Windows.Forms.ColumnHeader columnHeaderNumber;
+       private System.Windows.Forms.ColumnHeader columnHeaderDate;
+       private System.Windows.Forms.ColumnHeader columnHeaderSource;
+       private System.Windows.Forms.ColumnHeader columnHeaderText;
+       private System.Windows.Forms.ColumnHeader columnHeaderComment;
+       private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
