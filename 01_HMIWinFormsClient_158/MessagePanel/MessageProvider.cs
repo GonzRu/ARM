@@ -16,6 +16,14 @@ namespace MessagePanel
         /// Число, отправляемое сервису, но которое похоже ни на что не влияет
         /// </summary>
         private const int MAGIC_CONST = 7;
+
+        /// <summary>
+        /// Константы необходимые методам сервиса
+        /// </summary>
+        private const int KVOT_ONE = 0;
+        private const int KVOT_DEVICE = 1;
+        private const int KVOT_DATE = 2;
+        private const int KVOT_ALL = 3;
         #endregion
 
         #region Private Fields
@@ -83,6 +91,41 @@ namespace MessagePanel
         {
             return _messages;
         }
+
+        #region Квитирование
+        /// <summary>
+        /// Квитирование одного сообщения
+        /// </summary>
+        public bool KvotMessage(TableEventLogAlarm msg, string comment)
+        {
+            return _messagePanelServerProvider.Kvoting(msg, comment, _userID, KVOT_ONE);
+        }
+
+        /// <summary>
+        /// Квитирование всех сообщений
+        /// </summary>
+        public bool KvotAllMessages(string comment)
+        {
+            return _messagePanelServerProvider.AllKvoting(comment, _userID, KVOT_ALL);
+        }
+
+        /// <summary>
+        /// Квитирование всех сообщений устройства
+        /// </summary>
+        public bool KvotDeviceMessages(UInt32 deviceGuid, string comment)
+        {
+            return _messagePanelServerProvider.KvotingEventDevice(comment, _userID, KVOT_DEVICE, (int)deviceGuid);
+        }
+
+        /// <summary>
+        /// Квитирование всех сообщений в период между startDate и endDate
+        /// </summary>
+        public bool KvotMessagesInTimePeriod(DateTime startDate, DateTime endDate, string comment)
+        {
+            return _messagePanelServerProvider.KvotingEventTime(comment, _userID, KVOT_ALL, startDate, endDate);
+        }
+        #endregion
+
         #endregion
 
         #region Properties

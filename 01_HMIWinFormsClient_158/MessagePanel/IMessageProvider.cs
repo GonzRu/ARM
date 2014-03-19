@@ -29,6 +29,31 @@ namespace MessagePanel
         /// Получить список сообщений
         /// </summary>
         List<TableEventLogAlarm> GetMessages();
+
+        #region Квитирование
+
+        /// <summary>
+        /// Квитирование одного сообщения
+        /// </summary>
+        bool KvotMessage(TableEventLogAlarm msg, string comment);
+
+        /// <summary>
+        /// Квитирование всех сообщений
+        /// </summary>
+        bool KvotAllMessages(string comment);
+
+        /// <summary>
+        /// Квитирование всех сообщений устройства
+        /// </summary>
+        bool KvotDeviceMessages(UInt32 deviceGuid, string comment);
+        
+        /// <summary>
+        /// Квитирование всех сообщений в период между startDate и endDate
+        /// </summary>
+        bool KvotMessagesInTimePeriod(DateTime startDate, DateTime endDate, string comment);
+
+        #endregion
+
         #endregion
 
         #region Properties
