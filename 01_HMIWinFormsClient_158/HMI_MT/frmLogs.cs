@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using CommonUtils;
 using HMI_MT_Settings;
 using InterfaceLibrary;
+using MessagePanel.MessagePanelService;
 using OscillogramsLib;
 
 namespace HMI_MT
@@ -83,9 +84,7 @@ namespace HMI_MT
 
             timer1.Stop();
 
-            #region messagesTab
-            HMI_Settings.MessageProvider.MessagesUpdated += MessagesUpdatedhandler;
-
+            #region messagesTab          
             DisplayMessages();
 
             tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
@@ -102,13 +101,16 @@ namespace HMI_MT
         }
 
         private void DisplayMessages()
-        {
-            int i = 1;
+        {            
             var messages = HMI_Settings.MessageProvider.GetMessages();
+            if (messages == null)
+                return;
 
             messagesListView.Items.Clear();
 
+            int i = 1;
             List<ListViewItem> listViewItems = new List<ListViewItem>();
+            List<int> devices = new List<int>();
             foreach (var message in messages)
             {
                 ListViewItem listViewItem = new ListViewItem();
@@ -117,15 +119,88 @@ namespace HMI_MT
                 listViewItem.SubItems.Add(message.BlockName);
                 listViewItem.SubItems.Add(message.Text);
                 listViewItem.SubItems.Add(message.Comment);
+                listViewItem.Tag = message;
 
-                listViewItems.Add(listViewItem);
+                // —бор номеров устройств, от которых есть сообщени€
+                if (!devices.Contains(message.AdditionalID))
+                    devices.Add(message.AdditionalID);
+
                 i++;
+                listViewItems.Add(listViewItem);                
             }
 
             messagesListView.Items.AddRange(listViewItems.ToArray());
-            CommonUtils.CommonUtils.DrawAsZebra(messagesListView);
+            messagesListView.ContextMenu = new ContextMenu();
+            messagesListView.ContextMenu.MenuItems.Add(" витировать",
+                                                       (sender, args) =>
+                                                           {
+                                                               KvitSelectedMessages();
+                                                               DisplayMessages();
+                                                           });
+
+            // ѕостроение содержимого ComboBox на основе устройств, от которых есть сообщени€
+            foreach (var device in devices)
+            {
+                var dev = HMI_Settings.CONFIGURATION.GetLink2Device(0, (uint) device);
+
+                if (dev != null)
+                    DeviceTypesComboBox.Items.Add(new Tuple<string, uint>(String.Format("{0} {1}@{2}", dev.Description, dev.UniObjectGUID, dev.TypeName), (uint)device));
+                                                      //{
+                                                      //    Text = String.Format("{0} {1}@{2}", dev.Description, dev.UniObjectGUID, dev.TypeName),
+                                                      //    Value = device
+                                                      //});
+            }
+
+            DeviceTypesComboBox.DisplayMember = "Item1";
+            DeviceTypesComboBox.ValueMember = "Item2";
         }
 
+        private void KvitSelectedMessages()
+        {
+            string comment = null;
+
+            foreach (var item in messagesListView.SelectedItems)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment == true && comment == null)
+                {
+                    comment = "comment";
+                }
+
+                HMI_Settings.MessageProvider.KvotMessage(message, comment);
+            }
+        }
+
+        private void KvitAllMessages()
+        {
+            string comment = null;
+
+            foreach (var item in messagesListView.Items)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment == true && comment == null)
+                {
+                    comment = "comment";
+                }
+
+                HMI_Settings.MessageProvider.KvotMessage(message, comment);
+            }
+        }
+
+        private void KvitMessagesByDeviceGuid()
+        {
+            if (DeviceTypesComboBox.SelectedItem == null)
+                return;
+
+            uint deviceGuid = ((Tuple<string, uint>)DeviceTypesComboBox.SelectedItem).Item2;
+            string comment = "";
+
+            HMI_Settings.MessageProvider.KvotDeviceMessages(deviceGuid, comment);
+        }
+
+        #region Handlers
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             TabControl tabControl = sender as TabControl;
@@ -146,6 +221,47 @@ namespace HMI_MT
                     tableLayoutPanel1.RowStyles[2].Height = 0;
                 }
         }
+
+        private void kvitSelectMsgButton_Click(object sender, EventArgs e)
+        {
+            KvitSelectedMessages();
+
+            DisplayMessages();
+        }
+
+        private void kvitAllButton_Click(object sender, EventArgs e)
+        {
+            KvitAllMessages();
+
+            DisplayMessages();
+        }
+
+        private void kvitByDeviceTypeButton_Click(object sender, EventArgs e)
+        {
+            KvitMessagesByDeviceGuid();
+            DisplayMessages();
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            DisplayMessages();
+        }
+
+        private void autoUpdateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autoUpdateCheckBox.Checked)
+            {
+                HMI_Settings.MessageProvider.MessagesUpdated += MessagesUpdatedhandler;
+                updateButton.Enabled = false;
+            }
+            else
+            {
+                HMI_Settings.MessageProvider.MessagesUpdated -= MessagesUpdatedhandler;
+                updateButton.Enabled = true;
+            }
+        }
+        #endregion
+
         #endregion MessagesTab
 
         /// <summary>
