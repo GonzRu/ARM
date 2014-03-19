@@ -110,6 +110,15 @@ namespace HMI_MT
             this.mnuPrintPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.kvitirovanieGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.kvitByDeviceTypeButton = new System.Windows.Forms.Button();
+            this.DeviceTypesComboBox = new System.Windows.Forms.ComboBox();
+            this.kvitAllButton = new System.Windows.Forms.Button();
+            this.kvitOneButton = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.autoUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.frmLogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmLogsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
@@ -133,6 +142,9 @@ namespace HMI_MT
             this.gbStartTime.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.kvitirovanieGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -149,7 +161,7 @@ namespace HMI_MT
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1010, 614);
+            this.tabControl1.Size = new System.Drawing.Size(1010, 508);
             this.tabControl1.TabIndex = 0;
             // 
             // tpMessages
@@ -157,7 +169,7 @@ namespace HMI_MT
             this.tpMessages.Controls.Add(this.messagesListView);
             this.tpMessages.Location = new System.Drawing.Point(4, 22);
             this.tpMessages.Name = "tpMessages";
-            this.tpMessages.Size = new System.Drawing.Size(1002, 588);
+            this.tpMessages.Size = new System.Drawing.Size(1002, 482);
             this.tpMessages.TabIndex = 4;
             this.tpMessages.Text = "Сообщения";
             this.tpMessages.UseVisualStyleBackColor = true;
@@ -176,7 +188,7 @@ namespace HMI_MT
             this.messagesListView.GridLines = true;
             this.messagesListView.Location = new System.Drawing.Point(0, 0);
             this.messagesListView.Name = "messagesListView";
-            this.messagesListView.Size = new System.Drawing.Size(1002, 588);
+            this.messagesListView.Size = new System.Drawing.Size(1002, 482);
             this.messagesListView.TabIndex = 0;
             this.messagesListView.UseCompatibleStateImageBehavior = false;
             this.messagesListView.View = System.Windows.Forms.View.Details;
@@ -219,7 +231,7 @@ namespace HMI_MT
             this.tpLogEventOKU_RZA.Location = new System.Drawing.Point(4, 22);
             this.tpLogEventOKU_RZA.Name = "tpLogEventOKU_RZA";
             this.tpLogEventOKU_RZA.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogEventOKU_RZA.Size = new System.Drawing.Size(1002, 588);
+            this.tpLogEventOKU_RZA.Size = new System.Drawing.Size(1002, 482);
             this.tpLogEventOKU_RZA.TabIndex = 0;
             this.tpLogEventOKU_RZA.Text = "События ОКУ и РЗА";
             this.tpLogEventOKU_RZA.Enter += new System.EventHandler(this.tpLogEventOKU_RZA_Enter);
@@ -239,7 +251,7 @@ namespace HMI_MT
             this.lstvEvent.HideSelection = false;
             this.lstvEvent.Location = new System.Drawing.Point(3, 3);
             this.lstvEvent.Name = "lstvEvent";
-            this.lstvEvent.Size = new System.Drawing.Size(996, 582);
+            this.lstvEvent.Size = new System.Drawing.Size(996, 476);
             this.lstvEvent.TabIndex = 0;
             this.lstvEvent.UseCompatibleStateImageBehavior = false;
             this.lstvEvent.View = System.Windows.Forms.View.Details;
@@ -291,7 +303,7 @@ namespace HMI_MT
             this.tpLogActionUsers.Location = new System.Drawing.Point(4, 22);
             this.tpLogActionUsers.Name = "tpLogActionUsers";
             this.tpLogActionUsers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogActionUsers.Size = new System.Drawing.Size(1002, 588);
+            this.tpLogActionUsers.Size = new System.Drawing.Size(1002, 482);
             this.tpLogActionUsers.TabIndex = 1;
             this.tpLogActionUsers.Text = "Действия пользователей";
             this.tpLogActionUsers.Enter += new System.EventHandler(this.tpLogActionUsers_Enter);
@@ -313,7 +325,7 @@ namespace HMI_MT
             this.lstvUserAction.Location = new System.Drawing.Point(3, 3);
             this.lstvUserAction.MultiSelect = false;
             this.lstvUserAction.Name = "lstvUserAction";
-            this.lstvUserAction.Size = new System.Drawing.Size(996, 582);
+            this.lstvUserAction.Size = new System.Drawing.Size(996, 476);
             this.lstvUserAction.TabIndex = 0;
             this.lstvUserAction.UseCompatibleStateImageBehavior = false;
             this.lstvUserAction.View = System.Windows.Forms.View.Details;
@@ -370,7 +382,7 @@ namespace HMI_MT
             this.tpLogSummaryAvarOsc.Location = new System.Drawing.Point(4, 22);
             this.tpLogSummaryAvarOsc.Name = "tpLogSummaryAvarOsc";
             this.tpLogSummaryAvarOsc.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogSummaryAvarOsc.Size = new System.Drawing.Size(1002, 588);
+            this.tpLogSummaryAvarOsc.Size = new System.Drawing.Size(1002, 482);
             this.tpLogSummaryAvarOsc.TabIndex = 2;
             this.tpLogSummaryAvarOsc.Text = "Сводный список аварий и осциллограмм";
             this.tpLogSummaryAvarOsc.Enter += new System.EventHandler(this.tpLogSummaryAvarOsc_Enter);
@@ -388,7 +400,7 @@ namespace HMI_MT
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gbOscill);
-            this.splitContainer1.Size = new System.Drawing.Size(996, 582);
+            this.splitContainer1.Size = new System.Drawing.Size(996, 476);
             this.splitContainer1.SplitterDistance = 504;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -398,7 +410,7 @@ namespace HMI_MT
             this.gbAvar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAvar.Location = new System.Drawing.Point(0, 0);
             this.gbAvar.Name = "gbAvar";
-            this.gbAvar.Size = new System.Drawing.Size(504, 582);
+            this.gbAvar.Size = new System.Drawing.Size(504, 476);
             this.gbAvar.TabIndex = 1;
             this.gbAvar.TabStop = false;
             this.gbAvar.Text = "Аварии";
@@ -426,7 +438,7 @@ namespace HMI_MT
             this.dgvAvar.Name = "dgvAvar";
             this.dgvAvar.ReadOnly = true;
             this.dgvAvar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAvar.Size = new System.Drawing.Size(498, 563);
+            this.dgvAvar.Size = new System.Drawing.Size(498, 457);
             this.dgvAvar.TabIndex = 0;
             this.dgvAvar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvar_CellContentClick);
             // 
@@ -487,7 +499,7 @@ namespace HMI_MT
             this.gbOscill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbOscill.Location = new System.Drawing.Point(0, 0);
             this.gbOscill.Name = "gbOscill";
-            this.gbOscill.Size = new System.Drawing.Size(488, 582);
+            this.gbOscill.Size = new System.Drawing.Size(488, 476);
             this.gbOscill.TabIndex = 2;
             this.gbOscill.TabStop = false;
             this.gbOscill.Text = "Осциллограммы и диаграммы";
@@ -514,7 +526,7 @@ namespace HMI_MT
             this.dgvOscill.Name = "dgvOscill";
             this.dgvOscill.ReadOnly = true;
             this.dgvOscill.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOscill.Size = new System.Drawing.Size(482, 563);
+            this.dgvOscill.Size = new System.Drawing.Size(482, 457);
             this.dgvOscill.TabIndex = 0;
             this.dgvOscill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOscill_CellContentClick);
             // 
@@ -575,7 +587,7 @@ namespace HMI_MT
             this.tpLogSystemFull.Location = new System.Drawing.Point(4, 22);
             this.tpLogSystemFull.Name = "tpLogSystemFull";
             this.tpLogSystemFull.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogSystemFull.Size = new System.Drawing.Size(1002, 588);
+            this.tpLogSystemFull.Size = new System.Drawing.Size(1002, 482);
             this.tpLogSystemFull.TabIndex = 3;
             this.tpLogSystemFull.Text = "Сводный системный журнал";
             this.tpLogSystemFull.Enter += new System.EventHandler(this.tpLogSystemFull_Enter);
@@ -593,7 +605,7 @@ namespace HMI_MT
             this.lstvLogSystemFull.GridLines = true;
             this.lstvLogSystemFull.Location = new System.Drawing.Point(3, 3);
             this.lstvLogSystemFull.Name = "lstvLogSystemFull";
-            this.lstvLogSystemFull.Size = new System.Drawing.Size(996, 582);
+            this.lstvLogSystemFull.Size = new System.Drawing.Size(996, 476);
             this.lstvLogSystemFull.TabIndex = 0;
             this.lstvLogSystemFull.UseCompatibleStateImageBehavior = false;
             this.lstvLogSystemFull.View = System.Windows.Forms.View.Details;
@@ -647,7 +659,7 @@ namespace HMI_MT
             this.pnlSelect.Controls.Add(this.gbEndTime);
             this.pnlSelect.Controls.Add(this.gbStartTime);
             this.pnlSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSelect.Location = new System.Drawing.Point(3, 627);
+            this.pnlSelect.Location = new System.Drawing.Point(3, 521);
             this.pnlSelect.Name = "pnlSelect";
             this.pnlSelect.Size = new System.Drawing.Size(1010, 104);
             this.pnlSelect.TabIndex = 1;
@@ -848,15 +860,106 @@ namespace HMI_MT
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlSelect, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1016, 734);
             this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.LightCoral;
+            this.panel1.Controls.Add(this.autoUpdateCheckBox);
+            this.panel1.Controls.Add(this.updateButton);
+            this.panel1.Controls.Add(this.kvitirovanieGroupBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 631);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1010, 100);
+            this.panel1.TabIndex = 2;
+            // 
+            // kvitirovanieGroupBox
+            // 
+            this.kvitirovanieGroupBox.Controls.Add(this.groupBox1);
+            this.kvitirovanieGroupBox.Controls.Add(this.kvitAllButton);
+            this.kvitirovanieGroupBox.Controls.Add(this.kvitOneButton);
+            this.kvitirovanieGroupBox.Location = new System.Drawing.Point(9, 3);
+            this.kvitirovanieGroupBox.Name = "kvitirovanieGroupBox";
+            this.kvitirovanieGroupBox.Size = new System.Drawing.Size(658, 80);
+            this.kvitirovanieGroupBox.TabIndex = 0;
+            this.kvitirovanieGroupBox.TabStop = false;
+            this.kvitirovanieGroupBox.Text = "Квитирование";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.kvitByDeviceTypeButton);
+            this.groupBox1.Controls.Add(this.DeviceTypesComboBox);
+            this.groupBox1.Location = new System.Drawing.Point(376, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(268, 51);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Квитирование по устройствам";
+            // 
+            // kvitByDeviceTypeButton
+            // 
+            this.kvitByDeviceTypeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.kvitByDeviceTypeButton.Location = new System.Drawing.Point(175, 17);
+            this.kvitByDeviceTypeButton.Name = "kvitByDeviceTypeButton";
+            this.kvitByDeviceTypeButton.Size = new System.Drawing.Size(87, 23);
+            this.kvitByDeviceTypeButton.TabIndex = 1;
+            this.kvitByDeviceTypeButton.Text = "Квитировать";
+            this.kvitByDeviceTypeButton.UseVisualStyleBackColor = true;
+            // 
+            // DeviceTypesComboBox
+            // 
+            this.DeviceTypesComboBox.FormattingEnabled = true;
+            this.DeviceTypesComboBox.Location = new System.Drawing.Point(6, 19);
+            this.DeviceTypesComboBox.Name = "DeviceTypesComboBox";
+            this.DeviceTypesComboBox.Size = new System.Drawing.Size(121, 21);
+            this.DeviceTypesComboBox.TabIndex = 0;
+            // 
+            // kvitAllButton
+            // 
+            this.kvitAllButton.Location = new System.Drawing.Point(258, 33);
+            this.kvitAllButton.Name = "kvitAllButton";
+            this.kvitAllButton.Size = new System.Drawing.Size(101, 23);
+            this.kvitAllButton.TabIndex = 1;
+            this.kvitAllButton.Text = "Квитировать всё";
+            this.kvitAllButton.UseVisualStyleBackColor = true;
+            // 
+            // kvitOneButton
+            // 
+            this.kvitOneButton.Location = new System.Drawing.Point(20, 33);
+            this.kvitOneButton.Name = "kvitOneButton";
+            this.kvitOneButton.Size = new System.Drawing.Size(217, 23);
+            this.kvitOneButton.TabIndex = 0;
+            this.kvitOneButton.Text = "Квитировать выделенное сообщение";
+            this.kvitOneButton.UseVisualStyleBackColor = true;
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(688, 60);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(160, 23);
+            this.updateButton.TabIndex = 1;
+            this.updateButton.Text = "Обновить";
+            this.updateButton.UseVisualStyleBackColor = true;
+            // 
+            // autoUpdateCheckBox
+            // 
+            this.autoUpdateCheckBox.AutoSize = true;
+            this.autoUpdateCheckBox.Location = new System.Drawing.Point(688, 22);
+            this.autoUpdateCheckBox.Name = "autoUpdateCheckBox";
+            this.autoUpdateCheckBox.Size = new System.Drawing.Size(160, 17);
+            this.autoUpdateCheckBox.TabIndex = 2;
+            this.autoUpdateCheckBox.Text = "Автоматически обновлять";
+            this.autoUpdateCheckBox.UseVisualStyleBackColor = true;
             // 
             // frmLogsBindingSource
             // 
@@ -904,6 +1007,10 @@ namespace HMI_MT
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.kvitirovanieGroupBox.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -993,5 +1100,14 @@ namespace HMI_MT
        private System.Windows.Forms.ColumnHeader columnHeaderText;
        private System.Windows.Forms.ColumnHeader columnHeaderComment;
        private System.Windows.Forms.ColumnHeader columnHeader4;
+       private System.Windows.Forms.Panel panel1;
+       private System.Windows.Forms.GroupBox kvitirovanieGroupBox;
+       private System.Windows.Forms.GroupBox groupBox1;
+       private System.Windows.Forms.Button kvitByDeviceTypeButton;
+       private System.Windows.Forms.ComboBox DeviceTypesComboBox;
+       private System.Windows.Forms.Button kvitAllButton;
+       private System.Windows.Forms.Button kvitOneButton;
+       private System.Windows.Forms.CheckBox autoUpdateCheckBox;
+       private System.Windows.Forms.Button updateButton;
     }
 }
