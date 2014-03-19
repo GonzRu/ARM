@@ -18,21 +18,6 @@ namespace HMI_MT
     public partial class frmLogs : Form
     {
 
-       #region Свойства
-       //// Имя устройства
-       //private string fDeviceName;
-       //public string DeviceName
-       //{
-       //   get
-       //   {
-       //      return FDeviceName;
-       //   }
-       //   set
-       //   {
-       //      FDeviceName = value;
-       //   }
-       //}
-       #endregion
        #region private-члены класса
          private MainForm parent;
          private int sortColumn = -1;	// для сортировки в ListView
@@ -47,10 +32,6 @@ namespace HMI_MT
          DataTable dtLSF;   // таблица со сводными событиями
          XDocument xdoc;
          XDocument xdoc_Dev;
-       #endregion
-
-       #region protected-члены класса
-       //protected ArrayList FMemDev;
        #endregion
 
        #region Конструкторы
@@ -106,6 +87,11 @@ namespace HMI_MT
             HMI_Settings.MessageProvider.MessagesUpdated += MessagesUpdatedhandler;
 
             DisplayMessages();
+
+            tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
+            tableLayoutPanel1.RowStyles[1].Height = 0;
+
+            tableLayoutPanel1.RowStyles[2].SizeType = SizeType.AutoSize;
             #endregion
         }
 
@@ -138,6 +124,27 @@ namespace HMI_MT
 
             messagesListView.Items.AddRange(listViewItems.ToArray());
             CommonUtils.CommonUtils.DrawAsZebra(messagesListView);
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabControl tabControl = sender as TabControl;
+
+            if (tabControl.SelectedTab != null)
+                if (tabControl.SelectedTab.Text == "Сообщения")
+                {
+                    tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
+                    tableLayoutPanel1.RowStyles[1].Height = 0;
+
+                    tableLayoutPanel1.RowStyles[2].SizeType = SizeType.AutoSize;
+                }
+                else
+                {
+                    tableLayoutPanel1.RowStyles[1].SizeType = SizeType.AutoSize;
+
+                    tableLayoutPanel1.RowStyles[2].SizeType = SizeType.Absolute;
+                    tableLayoutPanel1.RowStyles[2].Height = 0;
+                }
         }
         #endregion MessagesTab
 
@@ -318,30 +325,7 @@ namespace HMI_MT
                     lstvEvent.Items.Clear();
             }
         }
-        /// <summary>
-        /// static void PrintDataSet( DataSet ds )
-        /// </summary>
-        static void PrintDataSet( DataSet ds )
-        {
-            // метод выполняет цикл по всем DataTable данного DataSet
-            Console.WriteLine( "Таблицы в DataSet '{0}'. \n ", ds.DataSetName );
-            foreach( DataTable dt in ds.Tables )
-            {
-                Console.WriteLine( "Таблица '{0}'. \n ", dt.TableName );
-                // вывод имен столбцов
-                for( int curCol = 0; curCol < dt.Columns.Count; curCol++ )
-                    Console.Write( dt.Columns[curCol].ColumnName.Trim() + "\t" );
-                Console.WriteLine( "\n-----------------------------------------------" );
 
-                // вывод DataTable
-                for( int curRow = 0; curRow < dt.Rows.Count; curRow++ )
-                {
-                    for( int curCol = 0; curCol < dt.Columns.Count; curCol++ )
-                        Console.Write( dt.Rows[curRow][curCol].ToString() + "\t" );
-                    Console.WriteLine();
-                }
-            }
-        }
 
         /// <summary>
         /// private void checkBox1_CheckedChanged( object sender, EventArgs e )
@@ -389,37 +373,17 @@ namespace HMI_MT
             //UserBD();
             lstvCurrent = lstvUserAction;
         }
+
         #region Вход на вкладку с суммарными авариями и осциллограммами
         /// <summary>
         /// private void tpLogSummaryAvarOsc_Enter( object sender, EventArgs e )
         /// </summary>
         private void tpLogSummaryAvarOsc_Enter( object sender, EventArgs e )
         {
-            //cbEvent.Enabled = false;
-            //lblEvent.Enabled = false;
             tpLogSummaryAvarOsc.Width = tabControl1.Width;
             gbAvar.Width = tpLogSummaryAvarOsc.Width / 2;
-            // запрашиваем данные по авариям и осциллограммам
-            //dgvOscill.Rows.Clear();
-            //AvarBD();
-            //OscBD();
-            //DiagBD();
         }
         #endregion 
-        private void dtpStartData_ValueChanged( object sender, EventArgs e )
-        {
-            //// выводим результаты запроса
-            //dgvOscill.Rows.Clear();
-            //lstvEvent.Items.Clear();
-            //lstvUserAction.Items.Clear();
-
-            //EventBD();
-            //AvarBD();
-            //OscBD();
-            //DiagBD();
-            //UserBD();
-            //LogSystemFullBD();
-        }
 
         private void timer1_Tick( object sender, EventArgs e )
         {
@@ -473,10 +437,6 @@ namespace HMI_MT
               lta.Stop();
            }
         }
-
-        //void bgwBackGround_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //}
 
         private void печатьToolStripMenuItem1_Click( object sender, EventArgs e )
         {

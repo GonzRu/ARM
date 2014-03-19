@@ -111,14 +111,14 @@ namespace HMI_MT
             this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.autoUpdateCheckBox = new System.Windows.Forms.CheckBox();
+            this.updateButton = new System.Windows.Forms.Button();
             this.kvitirovanieGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.kvitByDeviceTypeButton = new System.Windows.Forms.Button();
             this.DeviceTypesComboBox = new System.Windows.Forms.ComboBox();
             this.kvitAllButton = new System.Windows.Forms.Button();
             this.kvitOneButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
-            this.autoUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.frmLogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmLogsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
@@ -163,6 +163,7 @@ namespace HMI_MT
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1010, 508);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tpMessages
             // 
@@ -761,7 +762,6 @@ namespace HMI_MT
             this.dtpEndTime.ShowUpDown = true;
             this.dtpEndTime.Size = new System.Drawing.Size(70, 20);
             this.dtpEndTime.TabIndex = 1;
-            this.dtpEndTime.ValueChanged += new System.EventHandler(this.dtpStartData_ValueChanged);
             // 
             // dtpEndData
             // 
@@ -769,7 +769,6 @@ namespace HMI_MT
             this.dtpEndData.Name = "dtpEndData";
             this.dtpEndData.Size = new System.Drawing.Size(130, 20);
             this.dtpEndData.TabIndex = 0;
-            this.dtpEndData.ValueChanged += new System.EventHandler(this.dtpStartData_ValueChanged);
             // 
             // gbStartTime
             // 
@@ -790,7 +789,6 @@ namespace HMI_MT
             this.dtpStartTime.ShowUpDown = true;
             this.dtpStartTime.Size = new System.Drawing.Size(70, 20);
             this.dtpStartTime.TabIndex = 1;
-            this.dtpStartTime.ValueChanged += new System.EventHandler(this.dtpStartData_ValueChanged);
             // 
             // dtpStartData
             // 
@@ -798,7 +796,6 @@ namespace HMI_MT
             this.dtpStartData.Name = "dtpStartData";
             this.dtpStartData.Size = new System.Drawing.Size(130, 20);
             this.dtpStartData.TabIndex = 0;
-            this.dtpStartData.ValueChanged += new System.EventHandler(this.dtpStartData_ValueChanged);
             // 
             // timer1
             // 
@@ -883,6 +880,25 @@ namespace HMI_MT
             this.panel1.Size = new System.Drawing.Size(1010, 100);
             this.panel1.TabIndex = 2;
             // 
+            // autoUpdateCheckBox
+            // 
+            this.autoUpdateCheckBox.AutoSize = true;
+            this.autoUpdateCheckBox.Location = new System.Drawing.Point(688, 22);
+            this.autoUpdateCheckBox.Name = "autoUpdateCheckBox";
+            this.autoUpdateCheckBox.Size = new System.Drawing.Size(160, 17);
+            this.autoUpdateCheckBox.TabIndex = 2;
+            this.autoUpdateCheckBox.Text = "Автоматически обновлять";
+            this.autoUpdateCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // updateButton
+            // 
+            this.updateButton.Location = new System.Drawing.Point(688, 60);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(160, 23);
+            this.updateButton.TabIndex = 1;
+            this.updateButton.Text = "Обновить";
+            this.updateButton.UseVisualStyleBackColor = true;
+            // 
             // kvitirovanieGroupBox
             // 
             this.kvitirovanieGroupBox.Controls.Add(this.groupBox1);
@@ -941,25 +957,6 @@ namespace HMI_MT
             this.kvitOneButton.TabIndex = 0;
             this.kvitOneButton.Text = "Квитировать выделенное сообщение";
             this.kvitOneButton.UseVisualStyleBackColor = true;
-            // 
-            // updateButton
-            // 
-            this.updateButton.Location = new System.Drawing.Point(688, 60);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(160, 23);
-            this.updateButton.TabIndex = 1;
-            this.updateButton.Text = "Обновить";
-            this.updateButton.UseVisualStyleBackColor = true;
-            // 
-            // autoUpdateCheckBox
-            // 
-            this.autoUpdateCheckBox.AutoSize = true;
-            this.autoUpdateCheckBox.Location = new System.Drawing.Point(688, 22);
-            this.autoUpdateCheckBox.Name = "autoUpdateCheckBox";
-            this.autoUpdateCheckBox.Size = new System.Drawing.Size(160, 17);
-            this.autoUpdateCheckBox.TabIndex = 2;
-            this.autoUpdateCheckBox.Text = "Автоматически обновлять";
-            this.autoUpdateCheckBox.UseVisualStyleBackColor = true;
             // 
             // frmLogsBindingSource
             // 
