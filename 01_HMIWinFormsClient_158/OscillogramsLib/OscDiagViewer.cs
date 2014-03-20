@@ -461,7 +461,7 @@ namespace OscillogramsLib
          switch(it)
          {
             case 4:  // Осциллограмма БМРЗ
-               ifa += ".osc";
+               ifa += ".zosc";
                break;
             case 5:  // Диаграмма БМРЗ
                ifa += ".dgm";
