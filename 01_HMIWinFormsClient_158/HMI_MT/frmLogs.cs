@@ -84,14 +84,17 @@ namespace HMI_MT
 
             timer1.Stop();
 
-            #region messagesTab          
-            DisplayMessages();
-
+            #region messagesTab
             tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
             tableLayoutPanel1.RowStyles[1].Height = 0;
 
             tableLayoutPanel1.RowStyles[2].SizeType = SizeType.AutoSize;
             #endregion
+        }
+
+        private void frmLogs_Activated(object sender, EventArgs e)
+        {
+            DisplayMessages();
         }
 
         #region MessagesTab metods
@@ -101,12 +104,18 @@ namespace HMI_MT
         }
 
         private void DisplayMessages()
-        {            
+        {
+            messagesListView.Items.Clear();
+
             var messages = HMI_Settings.MessageProvider.GetMessages();
             if (messages == null)
+            {
+                MessageBox.Show("Не удалось получить данные...", "Ошибка", MessageBoxButtons.OK);
                 return;
+            }            
 
-            messagesListView.Items.Clear();
+            lta = new LongTimeAction();
+            lta.Start(this);
 
             int i = 1;
             List<ListViewItem> listViewItems = new List<ListViewItem>();
@@ -129,6 +138,7 @@ namespace HMI_MT
                 listViewItems.Add(listViewItem);                
             }
 
+            // Построение контекстного меню
             messagesListView.Items.AddRange(listViewItems.ToArray());
             messagesListView.ContextMenu = new ContextMenu();
             messagesListView.ContextMenu.MenuItems.Add("Квитировать",
@@ -145,19 +155,18 @@ namespace HMI_MT
 
                 if (dev != null)
                     DeviceTypesComboBox.Items.Add(new Tuple<string, uint>(String.Format("{0} {1}@{2}", dev.Description, dev.UniObjectGUID, dev.TypeName), (uint)device));
-                                                      //{
-                                                      //    Text = String.Format("{0} {1}@{2}", dev.Description, dev.UniObjectGUID, dev.TypeName),
-                                                      //    Value = device
-                                                      //});
             }
 
             DeviceTypesComboBox.DisplayMember = "Item1";
             DeviceTypesComboBox.ValueMember = "Item2";
+
+            lta.Stop();
         }
 
         private void KvitSelectedMessages()
         {
             string comment = null;
+            List<TableEventLogAlarm> messages = new List<TableEventLogAlarm>();
 
             foreach (var item in messagesListView.SelectedItems)
             {
@@ -168,13 +177,16 @@ namespace HMI_MT
                     comment = "comment";
                 }
 
-                HMI_Settings.MessageProvider.KvotMessage(message, comment);
+                messages.Add(message);
             }
+
+            new KvitWindow(messages, comment).ShowDialog();
         }
 
         private void KvitAllMessages()
         {
             string comment = null;
+            List<TableEventLogAlarm> messages = new List<TableEventLogAlarm>();
 
             foreach (var item in messagesListView.Items)
             {
@@ -185,8 +197,10 @@ namespace HMI_MT
                     comment = "comment";
                 }
 
-                HMI_Settings.MessageProvider.KvotMessage(message, comment);
+                messages.Add(message);
             }
+
+            new KvitWindow(messages, comment).ShowDialog();
         }
 
         private void KvitMessagesByDeviceGuid()
@@ -195,9 +209,25 @@ namespace HMI_MT
                 return;
 
             uint deviceGuid = ((Tuple<string, uint>)DeviceTypesComboBox.SelectedItem).Item2;
-            string comment = "";
 
-            HMI_Settings.MessageProvider.KvotDeviceMessages(deviceGuid, comment);
+
+            string comment = null;
+            List<TableEventLogAlarm> messages = new List<TableEventLogAlarm>();
+
+            foreach (var item in messagesListView.Items)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment == true && comment == null)
+                {
+                    comment = "comment";
+                }
+
+                if (message.AdditionalID == deviceGuid)
+                    messages.Add(message);
+            }
+
+            new KvitWindow(messages, comment).ShowDialog();
         }
 
         #region Handlers
@@ -226,7 +256,7 @@ namespace HMI_MT
         {
             KvitSelectedMessages();
 
-            DisplayMessages();
+            DisplayMessages();            
         }
 
         private void kvitAllButton_Click(object sender, EventArgs e)
@@ -239,6 +269,7 @@ namespace HMI_MT
         private void kvitByDeviceTypeButton_Click(object sender, EventArgs e)
         {
             KvitMessagesByDeviceGuid();
+
             DisplayMessages();
         }
 

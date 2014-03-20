@@ -996,6 +996,7 @@ namespace HMI_MT
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ведомости и журналы";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.frmLogs_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogs_FormClosing);
             this.Load += new System.EventHandler(this.frmLogs_Load);
             this.tabControl1.ResumeLayout(false);
