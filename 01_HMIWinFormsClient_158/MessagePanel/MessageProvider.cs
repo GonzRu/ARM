@@ -98,7 +98,24 @@ namespace MessagePanel
         /// </summary>
         public bool KvotMessage(TableEventLogAlarm msg, string comment)
         {
-            return _messagePanelServerProvider.Kvoting(msg, comment, _userID, KVOT_ONE);
+            bool result = false;
+
+            _periodicUpdateMessagesTimer.Stop();
+
+            try
+            {
+                result = _messagePanelServerProvider.Kvoting(msg, comment, _userID, KVOT_ONE);
+
+                GetMessagesFromServer();
+            }
+            catch
+            {
+                RestoreConnection();
+            }
+
+            _periodicUpdateMessagesTimer.Start();
+
+            return result;
         }
 
         /// <summary>
@@ -106,7 +123,24 @@ namespace MessagePanel
         /// </summary>
         public bool KvotAllMessages(string comment)
         {
-            return _messagePanelServerProvider.AllKvoting(comment, _userID, KVOT_ALL);
+            bool result = false;
+
+            _periodicUpdateMessagesTimer.Stop();
+
+            try
+            {
+                result = _messagePanelServerProvider.AllKvoting(comment, _userID, KVOT_ALL);
+
+                GetMessagesFromServer();
+            }
+            catch
+            {
+                RestoreConnection();
+            }
+
+            _periodicUpdateMessagesTimer.Start();
+
+            return result;
         }
 
         /// <summary>
@@ -114,7 +148,24 @@ namespace MessagePanel
         /// </summary>
         public bool KvotDeviceMessages(UInt32 deviceGuid, string comment)
         {
-            return _messagePanelServerProvider.KvotingEventDevice(comment, _userID, KVOT_DEVICE, (int)deviceGuid);
+            bool result = false;
+
+            _periodicUpdateMessagesTimer.Stop();
+
+            try
+            {
+                result = _messagePanelServerProvider.KvotingEventDevice(comment, _userID, KVOT_DEVICE, (int) deviceGuid);
+
+                GetMessagesFromServer();
+            }
+            catch
+            {
+                RestoreConnection();
+            }
+
+            _periodicUpdateMessagesTimer.Start();
+
+            return result;
         }
 
         /// <summary>
@@ -122,9 +173,26 @@ namespace MessagePanel
         /// </summary>
         public bool KvotMessagesInTimePeriod(DateTime startDate, DateTime endDate, string comment)
         {
-            return _messagePanelServerProvider.KvotingEventTime(comment, _userID, KVOT_DATE, startDate, endDate);
+            bool result = false;
+
+            _periodicUpdateMessagesTimer.Stop();
+
+            try
+            {
+                result = _messagePanelServerProvider.KvotingEventTime(comment, _userID, KVOT_DATE, startDate, endDate);
+
+                GetMessagesFromServer();
+            }
+            catch
+            {
+                RestoreConnection();
+            }
+
+            _periodicUpdateMessagesTimer.Start();
+
+            return result;
         }
-        #endregion
+        #endregion Квитирование
 
         #endregion
 
@@ -138,33 +206,41 @@ namespace MessagePanel
         #endregion
 
         #region Private Metods
+        /// <summary>
+        /// Устанавливает соединение с сервисом
+        /// </summary>
         private void InitMessagePanelServerProvider()
         {
-            //_messagePanelServerProvider = new DataChannelClient("ServicePoint1");
-
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Mode = SecurityMode.None;
 
-            _messagePanelServerProvider = new DataChannelClient(binding, new EndpointAddress("net.tcp://192.168.240.35:15100/Services"));
+            try
+            {
+                _messagePanelServerProvider = new DataChannelClient(binding, new EndpointAddress("net.tcp://192.168.240.35:15100/Services"));
+                _messagePanelServerProvider.Open();
+            }
+            catch (Exception)
+            {
+            }
         }
 
+        /// <summary>
+        /// Иницилизирует таймеры
+        /// </summary>
         private void InitTimers()
         {
             _periodicUpdateMessagesTimer.Elapsed += PeriodicUpdateMessagesTimerOnElapsed;
             _periodicUpdateMessagesTimer.Interval = 5000;
         }
-        #endregion
 
-        #region Handlers
-        private void PeriodicUpdateMessagesTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        /// <summary>
+        /// Получает сообщения
+        /// </summary>
+        private void GetMessagesFromServer()
         {
-            _periodicUpdateMessagesTimer.Stop();
-
-            if (_messagePanelServerProvider.State == CommunicationState.Opened || _messagePanelServerProvider.State == CommunicationState.Created || _messagePanelServerProvider.State == CommunicationState.Opening)
-            if (_messagePanelServerProvider.NeedUpDate(_messages == null ? 0 : _messages.Count))
+            try
             {
-
-                try
+                if (_messagePanelServerProvider.NeedUpDate(_messages == null ? 0 : _messages.Count))
                 {
                     var a = _messagePanelServerProvider.GetEventLogAlarm(MessageCount, _userID, MAGIC_CONST);
                     _messages = new List<TableEventLogAlarm>(a.Tela);
@@ -175,10 +251,29 @@ namespace MessagePanel
                     if (AlarmMessagesAppeared != null)
                         AlarmMessagesAppeared();
                 }
-                catch (TimeoutException ex)
-                {
-                }
             }
+            catch (Exception)
+            {
+                _messages = null;
+                RestoreConnection();
+            }
+        }
+
+        /// <summary>
+        /// Восстанавливает соединение с сервисом
+        /// </summary>
+        private void RestoreConnection()
+        {
+            InitMessagePanelServerProvider();
+        }
+        #endregion
+
+        #region Handlers
+        private void PeriodicUpdateMessagesTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            _periodicUpdateMessagesTimer.Stop();
+
+            GetMessagesFromServer();
 
             _periodicUpdateMessagesTimer.Start();
         }
