@@ -272,6 +272,12 @@
     <Compile Include="KeyboardLayout.Designer.cs">
       <DependentUpon>KeyboardLayout.cs</DependentUpon>
     </Compile>
+    <Compile Include="KvitWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KvitWindow.Designer.cs">
+      <DependentUpon>KvitWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KeyboardLayout.resx">
       <DependentUpon>KeyboardLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KvitWindow.resx">
+      <DependentUpon>KvitWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
