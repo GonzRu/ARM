@@ -46,6 +46,11 @@ namespace MessagePanel
         /// Идентификатор пользователя
         /// </summary>
         private int _userID;
+
+        /// <summary>
+        /// Общее количество сообщений
+        /// </summary>
+        private int _totalMessageCount;
         #endregion
 
         #region Constructor
@@ -240,8 +245,13 @@ namespace MessagePanel
         {
             try
             {
-                if (_messagePanelServerProvider.NeedUpDate(_messages == null ? 0 : _messages.Count))
+                if (_messagePanelServerProvider.NeedUpDate(_messages == null ? 0 : _totalMessageCount))
                 {
+                    // Получение количества сообщений
+                    var countRows = _messagePanelServerProvider.CountRowsData();
+                    _totalMessageCount = countRows.Failure + countRows.Info + countRows.Undefined + countRows.Warning;
+
+                    // Получений необходимого количества сообщений
                     var a = _messagePanelServerProvider.GetEventLogAlarm(MessageCount, _userID, MAGIC_CONST);
                     _messages = new List<TableEventLogAlarm>(a.Tela);
 
