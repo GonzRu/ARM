@@ -1907,9 +1907,10 @@ namespace HMI_MT
 	        TabControl tabControl = sender as TabControl;
 
             if (tabControl.SelectedTab != null && tabControl.SelectedTab.Text == "Ведомости и журналы")
+            {
                 StopJournalAlarmTimer();
-            else
-                StartJournalAlarmTimer();
+                _isJournalMenuItemAlarmed = false;
+            }
 	    }
 
 	    private void MessageProviderOnMessagesUpdated()
