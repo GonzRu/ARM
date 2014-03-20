@@ -176,6 +176,7 @@ namespace SourceMOA
                 sdv.SetValueByName( xe_TypeOfBlock.Attribute( "type" ).Value,
                                     xe_TypeOfBlock.Attribute( "value" ).Value );
 
+            if (xElement.Element("Ustavki") != null)
             if ( xElement.Element( "Ustavki" ).Elements( "BlockAddresses" ).Count() != 0 )
                 if (
                     xElement.Element( "Ustavki" ).Elements( "BlockAddresses" ).Elements( "BlockAddress" ).Count() != 0 )
