@@ -174,7 +174,14 @@ namespace HMI_MT
 
                 if (message.ReceiptComment == true && comment == null)
                 {
-                    comment = "comment";
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
                 }
 
                 messages.Add(message);
@@ -194,7 +201,14 @@ namespace HMI_MT
 
                 if (message.ReceiptComment == true && comment == null)
                 {
-                    comment = "comment";
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
                 }
 
                 messages.Add(message);
@@ -220,7 +234,14 @@ namespace HMI_MT
 
                 if (message.ReceiptComment == true && comment == null)
                 {
-                    comment = "comment";
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
                 }
 
                 if (message.AdditionalID == deviceGuid)
