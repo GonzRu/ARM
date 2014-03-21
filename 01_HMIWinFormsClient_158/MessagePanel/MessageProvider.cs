@@ -24,6 +24,16 @@ namespace MessagePanel
         private const int KVOT_DEVICE = 1;
         private const int KVOT_DATE = 2;
         private const int KVOT_ALL = 3;
+
+        /// <summary>
+        /// Количество запрашиваемых сообщений по-умолчанию
+        /// </summary>
+        private const int DEFAULT_MESSAGES_COUNT = 100;
+
+        /// <summary>
+        /// Интервал срабатывания таймера по-умолчанию
+        /// </summary>
+        private const int DEFAULT_TIMER_INTERVAL = 5000;
         #endregion
 
         #region Private Fields
@@ -62,7 +72,7 @@ namespace MessagePanel
 
             InitTimers();
 
-            MessageCount = 100;
+            MessageCount = DEFAULT_MESSAGES_COUNT;
         }
         #endregion
 
@@ -87,8 +97,11 @@ namespace MessagePanel
         /// </summary>
         public void StartWork(int userId)
         {
-            _periodicUpdateMessagesTimer.Start();
+            _messages = null;
+            _periodicUpdateMessagesTimer.Stop();
+
             _userID = userId;
+            _periodicUpdateMessagesTimer.Start();           
         }
 
         /// <summary>
@@ -245,7 +258,7 @@ namespace MessagePanel
         private void InitTimers()
         {
             _periodicUpdateMessagesTimer.Elapsed += PeriodicUpdateMessagesTimerOnElapsed;
-            _periodicUpdateMessagesTimer.Interval = 5000;
+            _periodicUpdateMessagesTimer.Interval = DEFAULT_TIMER_INTERVAL;
         }
 
         /// <summary>
