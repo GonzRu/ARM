@@ -51,6 +51,8 @@ namespace MessagePanel
         /// Общее количество сообщений
         /// </summary>
         private int _totalMessageCount;
+
+        private bool _isFirstReconectFault = true;
         #endregion
 
         #region Constructor
@@ -223,9 +225,17 @@ namespace MessagePanel
             {
                 _messagePanelServerProvider = new DataChannelClient(binding, new EndpointAddress("net.tcp://192.168.240.35:15100/Services"));
                 _messagePanelServerProvider.Open();
+
+                Console.WriteLine("MessagePanel: Установлено соединение с сервером сообщений.");
+                _isFirstReconectFault = true;
             }
             catch (Exception)
             {
+                if (_isFirstReconectFault)
+                {
+                    Console.WriteLine("MessagePanel: Не удалось установить соединение с сервером сообщений.");
+                    _isFirstReconectFault = false;
+                }
             }
         }
 
