@@ -1883,7 +1883,6 @@ namespace HMI_MT
 
         #region MessagePanelProvider и индикаци€ ведомостей и журналов
         private System.Timers.Timer _journalAlarmTimer = new System.Timers.Timer();
-	    private bool _isJournalMenuItemAlarmed = false;
 
         private void InitMessagePanelProvider()
         {
@@ -1909,17 +1908,15 @@ namespace HMI_MT
             if (tabControl.SelectedTab != null && tabControl.SelectedTab.Text == "¬едомости и журналы")
             {
                 StopJournalAlarmTimer();
-                _isJournalMenuItemAlarmed = false;
             }
 	    }
 
 	    private void MessageProviderOnMessagesUpdated()
         {
-            if (!_isJournalMenuItemAlarmed)
-            {
-                _isJournalMenuItemAlarmed = true;
-                StartJournalAlarmTimer();
-            }
+                if (tabForms.SelectedTab != null && tabForms.SelectedTab.Text != "¬едомости и журналы")
+                {
+                    StartJournalAlarmTimer();
+                }
         }
 
 	    private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
