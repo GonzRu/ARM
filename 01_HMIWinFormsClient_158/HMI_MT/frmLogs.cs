@@ -94,9 +94,7 @@ namespace HMI_MT
 
         private void frmLogs_Activated(object sender, EventArgs e)
         {
-            DisplayMessages();
-
-            ShowMessagesCountNumericUpDown.Value = HMI_Settings.MessageProvider.MessageCount;
+            ShowMessagesCountNumericUpDown.Value = HMI_Settings.MessageProvider.MessageCount; // ֲûחמגוע DisplayMessages();
         }
 
         #region MessagesTab metods
