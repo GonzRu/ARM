@@ -208,12 +208,6 @@
     <Compile Include="Windows\MainWindow\Tabs\NewMainMnemo.Designer.cs">
       <DependentUpon>NewMainMnemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="OscDiagPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OscDiagPanelControl.Designer.cs">
-      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\MainWindow\PrintHMI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,9 +264,6 @@
     <EmbeddedResource Include="Windows\MainWindow\Tabs\NewMainMnemo.resx">
       <DependentUpon>NewMainMnemo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OscDiagPanelControl.resx">
-      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\PrintHMI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PrintHMI.cs</DependentUpon>
@@ -307,7 +298,7 @@
     </Compile>
     <Compile Include="SQLConnectionString.cs" />
     <Compile Include="Windows\MainWindow\StatusBarLabel.cs" />
-    <Compile Include="TextBoxEx.cs">
+    <Compile Include="Windows\MainWindow\Tabs\TextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TreeViewConfig.cs">
@@ -315,15 +306,6 @@
     </Compile>
     <Compile Include="TreeViewLogicalConfig.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TreeViewPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Trend.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Trend.Designer.cs">
-      <DependentUpon>Trend.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
