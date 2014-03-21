@@ -271,7 +271,6 @@
       <DependentUpon>Hmi_MT.settings</DependentUpon>
     </Compile>
     <Compile Include="IMainForm.cs" />
-    <Compile Include="ITimeServer.cs" />
     <Compile Include="Windows\Authorisation\KeyboardLayout.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -483,7 +482,6 @@
     <Compile Include="TextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TimeServer.cs" />
     <Compile Include="TreeViewConfig.cs">
       <SubType>Component</SubType>
     </Compile>
