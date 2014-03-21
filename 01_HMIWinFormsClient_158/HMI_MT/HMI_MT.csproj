@@ -257,6 +257,12 @@
     <Compile Include="frmUserRights.Designer.cs">
       <DependentUpon>frmUserRights.cs</DependentUpon>
     </Compile>
+    <Compile Include="GetCommentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetCommentWindow.Designer.cs">
+      <DependentUpon>GetCommentWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="HMIStruct.cs" />
     <Compile Include="Hmi_MT.cs" />
     <Compile Include="Hmi_MT.Designer.cs">
@@ -271,6 +277,12 @@
     </Compile>
     <Compile Include="KeyboardLayout.Designer.cs">
       <DependentUpon>KeyboardLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KvitWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KvitWindow.Designer.cs">
+      <DependentUpon>KvitWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -385,8 +397,14 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmUserRights.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GetCommentWindow.resx">
+      <DependentUpon>GetCommentWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="KeyboardLayout.resx">
       <DependentUpon>KeyboardLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KvitWindow.resx">
+      <DependentUpon>KvitWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -676,6 +694,10 @@
     <ProjectReference Include="..\LabelTextbox\LabelTextbox.csproj">
       <Project>{812A9E1D-FDA6-430C-8B75-5FB0CDAC3664}</Project>
       <Name>LabelTextbox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessagePanel\MessagePanel.csproj">
+      <Project>{F2E099BD-FECA-401E-9FD4-E0D7C00317FD}</Project>
+      <Name>MessagePanel</Name>
     </ProjectReference>
     <ProjectReference Include="..\OscillogramsLib\OscillogramsLib.csproj">
       <Project>{8BBCE97B-B7D1-4F2A-9707-C5E1587F864D}</Project>

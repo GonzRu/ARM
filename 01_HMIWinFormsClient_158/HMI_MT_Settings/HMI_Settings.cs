@@ -26,6 +26,7 @@ using System.Xml.Linq;
 using InterfaceLibrary;
 using System.Windows.Forms;
 using DebugStatisticLibrary;
+using MessagePanel;
 
 namespace HMI_MT_Settings
 {
@@ -34,6 +35,10 @@ namespace HMI_MT_Settings
     /// </summary>
     public static class HMI_Settings
     {
+        /// <summary>
+        /// Класс работы с сервером сообщений
+        /// </summary>
+        public static IMessageProvider MessageProvider;
 
         /// <summary>
         /// Конфигурация текущего проекта

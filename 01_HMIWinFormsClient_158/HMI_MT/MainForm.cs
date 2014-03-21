@@ -28,6 +28,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Timers;
 using System.Windows.Forms;
 using System.Collections;
 using System.Collections.Specialized;
@@ -44,6 +45,7 @@ using System.Xml.Linq;
 using Egida;
 
 using System.Net.NetworkInformation;
+using MessagePanel;
 using TraceSourceLib;
 using InterfaceLibrary;
 using Configuration;
@@ -219,6 +221,8 @@ namespace HMI_MT
                 // иницилизировать конфигурацию
                 InitConfiguration();
                 DebugStatistics.WindowStatistics.AddStatistic( "Построение конфигурации завершено." );
+
+                HMI_Settings.MessageProvider = new MessageProvider(HMI_Settings.IPADDRES_SERVER);
 
                 DebugStatistics.WindowStatistics.AddStatistic( "Инициализация базы данных." );
                 // инициализировать настройки на базу данных (из файла Project.cfg)
@@ -754,21 +758,8 @@ namespace HMI_MT
               HMI_MT_Settings.HMI_Settings.UserPassword = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("IsNeedLoginAndPassword").Attribute("passDefault").Value;
               Form_ea.DoEnterWithoutPassword(HMI_MT_Settings.HMI_Settings.UserName, HMI_MT_Settings.HMI_Settings.UserPassword);
           }
-      }
 
-      /// <summary>
-      /// загрузка профайла пользователя
-      /// </summary>
-      private void LoadUserProfile()
-      {
-          //загружаем профайл пользователя - смотрим есть ли соответсвующий файл UserProfile_имя_пользователя.upf
-          if (File.Exists(Application.StartupPath + Path.DirectorySeparatorChar + "UserProfile_" + HMI_MT_Settings.HMI_Settings.UserName + ".upf"))
-          {
-              // загружаем профайл пользователя
-              //DSProfile.ReadXml(Application.StartupPath + Path.DirectorySeparatorChar + "UserProfile_" + UserName + ".upf");
-              // теперь можно извлекать нужные таблицы из DataSet, например
-              //DTPribors = DSProfile.Tables[ "Pribors" ];
-          }
+          NewUserLoged();
       }
 
       /// <summary>
@@ -1759,11 +1750,7 @@ namespace HMI_MT
             // создаем главную мнемосхему
             CreateMainMnemo();
 
-            /********************************************************************************************************/
-            DebugStatistics.WindowStatistics.AddStatistic("Запуск панелей нормального режима.");
-            NormalModeLibrary.ComponentFactory.Factory.ActivatedMainMnemoForms(Form_ez);
-            DebugStatistics.WindowStatistics.AddStatistic("Запуск панелей нормального режима завершен.");
-            /********************************************************************************************************/
+            NewUserLoged();
         }
         /// <summary>
         /// Block system
@@ -1795,11 +1782,7 @@ namespace HMI_MT
             for ( int i = 0; i < arrF.Length; i++ )
                 arrF[i].WindowState = FormWindowState.Maximized;
 
-            /********************************************************************************************************/
-            DebugStatistics.WindowStatistics.AddStatistic("Запуск панелей нормального режима.");
-            NormalModeLibrary.ComponentFactory.Factory.ActivatedMainMnemoForms(Form_ez);
-            DebugStatistics.WindowStatistics.AddStatistic("Запуск панелей нормального режима завершен.");
-            /********************************************************************************************************/
+            NewUserLoged();
         }
         /// <summary>
         /// User information
@@ -1879,5 +1862,85 @@ namespace HMI_MT
             Process.Start( HMI_Settings.AuraUrl );
         }
         #endregion
-	}
+
+        #region NewUserLoged
+        private void NewUserLoged()
+        {
+            InitMessagePanelProvider();
+
+            InitNormalModePanels();
+        }
+        #endregion
+
+        #region NormalMode
+        private void InitNormalModePanels()
+        {
+            /********************************************************************************************************/
+            DebugStatistics.WindowStatistics.AddStatistic("Запуск панелей нормального режима.");
+            NormalModeLibrary.ComponentFactory.Factory.ActivatedMainMnemoForms(Form_ez);
+            DebugStatistics.WindowStatistics.AddStatistic("Запуск панелей нормального режима завершен.");
+            /********************************************************************************************************/
+        }
+        #endregion
+
+        #region MessagePanelProvider и индикация ведомостей и журналов
+        private System.Timers.Timer _journalAlarmTimer = new System.Timers.Timer();
+
+        private void InitMessagePanelProvider()
+        {
+            HMI_Settings.MessageProvider.StartWork(HMI_Settings.UserID);
+
+            InitJournalMenuItemHandlers();
+        }
+
+        private void InitJournalMenuItemHandlers()
+        {
+            HMI_Settings.MessageProvider.AlarmMessagesAppeared += MessageProviderOnMessagesUpdated;
+
+            _journalAlarmTimer.Interval = 1000;
+            _journalAlarmTimer.Elapsed += TimerOnElapsed;
+
+            tabForms.SelectedIndexChanged += TabFormsOnSelectedIndexChanged;
+        }
+
+	    private void TabFormsOnSelectedIndexChanged(object sender, EventArgs eventArgs)
+	    {
+	        TabControl tabControl = sender as TabControl;
+
+            if (tabControl.SelectedTab != null && tabControl.SelectedTab.Text == "Ведомости и журналы")
+            {
+                StopJournalAlarmTimer();
+            }
+	    }
+
+	    private void MessageProviderOnMessagesUpdated()
+        {
+                if (tabForms.SelectedTab != null && tabForms.SelectedTab.Text != "Ведомости и журналы")
+                {
+                    StartJournalAlarmTimer();
+                }
+        }
+
+	    private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            if (ведомостиИЖурналыToolStripMenuItem.BackColor == Color.Yellow)
+                ведомостиИЖурналыToolStripMenuItem.BackColor = SystemColors.Control;
+            else
+                ведомостиИЖурналыToolStripMenuItem.BackColor = Color.Yellow;
+        }
+
+        private void StartJournalAlarmTimer()
+        {
+           _journalAlarmTimer.Start(); 
+        }
+
+        private void StopJournalAlarmTimer()
+        {
+            _journalAlarmTimer.Stop();
+            ведомостиИЖурналыToolStripMenuItem.BackColor = SystemColors.Control;
+        }
+
+        
+	    #endregion
+   }
 }

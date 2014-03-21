@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bc73a11a-dc58-44c2-bb12-b3a0e96be4b4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://192.168.240.35:15100/Services/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4d1a3478-19a4-41b0-b2cb-5cbca036c25b" SourceId="1" SourceUrl="net.tcp://192.168.240.35:15100/Services/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="6a1e05d2-4e48-4b8c-b681-81d8ed466df2" SourceId="1" SourceUrl="net.tcp://192.168.240.35:15100/Services/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="da88e2ac-c715-4b9a-b2cb-f213c56bf85b" SourceId="1" SourceUrl="net.tcp://192.168.240.35:15100/Services/mex" />
+    <MetadataFile FileName="WpfConnSQL.CellDatas.xsd" MetadataType="Schema" ID="01427a94-f793-47f7-bcb0-009b484b0385" SourceId="1" SourceUrl="net.tcp://192.168.240.35:15100/Services/mex" />
+    <MetadataFile FileName="WpfConnSQL.xsd" MetadataType="Schema" ID="20056f1b-6a1f-4e33-b736-2569b913e3b6" SourceId="1" SourceUrl="net.tcp://192.168.240.35:15100/Services/mex" />
+    <MetadataFile FileName="NetworkLibrary.xsd" MetadataType="Schema" ID="2dc24f0b-34c1-445e-86b4-792a5876549b" SourceId="1" SourceUrl="net.tcp://192.168.240.35:15100/Services/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

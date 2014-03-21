@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/WpfConnSQL.CellDatas" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/WpfConnSQL" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/NetworkLibrary" />
+  <xs:element name="Join">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Leave">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Autarization">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AutarizationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WpfConnSQL.CellDatas" minOccurs="0" name="AutarizationResult" nillable="true" type="q1:TableAutorization" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NeedUpDate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_number" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NeedUpDateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NeedUpDateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountRowsData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CountRowsDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WpfConnSQL" minOccurs="0" name="CountRowsDataResult" nillable="true" type="q2:CountRows" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Kvoting">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WpfConnSQL.CellDatas" minOccurs="0" name="_tela" nillable="true" type="q3:TableEventLogAlarm" />
+        <xs:element minOccurs="0" name="_comment" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_userID" type="xs:int" />
+        <xs:element minOccurs="0" name="_number_of_type" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="KvotingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="KvotingResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AllKvoting">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_comment" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_userID" type="xs:int" />
+        <xs:element minOccurs="0" name="_number_of_type" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AllKvotingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AllKvotingResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="KvotingEventTime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_comment" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_userID" type="xs:int" />
+        <xs:element minOccurs="0" name="_number_of_type" type="xs:int" />
+        <xs:element minOccurs="0" name="_mindate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="_maxdate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="KvotingEventTimeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="KvotingEventTimeResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="KvotingEventDevice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_comment" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="_userID" type="xs:int" />
+        <xs:element minOccurs="0" name="_number_of_type" type="xs:int" />
+        <xs:element minOccurs="0" name="_device_id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="KvotingEventDeviceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="KvotingEventDeviceResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEventLogAlarm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_count" type="xs:int" />
+        <xs:element minOccurs="0" name="_userID" type="xs:int" />
+        <xs:element minOccurs="0" name="_type_code" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEventLogAlarmResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetworkLibrary" minOccurs="0" name="GetEventLogAlarmResult" nillable="true" type="q4:AsyncGeneralRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

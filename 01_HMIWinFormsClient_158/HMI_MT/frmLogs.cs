@@ -1,46 +1,24 @@
 using System;
-using System.Xml;
-using System.Diagnostics;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Collections;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Data.OleDb;
-using System.Configuration;
-using System.IO;
-using System.Data.SqlTypes;
-using CommonUtils;
-using System.Linq;
 using System.Xml.Linq;
-using OscillogramsLib;
+using CommonUtils;
 using HMI_MT_Settings;
 using InterfaceLibrary;
+using MessagePanel.MessagePanelService;
+using OscillogramsLib;
 
 namespace HMI_MT
 {
     public partial class frmLogs : Form
     {
 
-       #region Свойства
-       //// Имя устройства
-       //private string fDeviceName;
-       //public string DeviceName
-       //{
-       //   get
-       //   {
-       //      return FDeviceName;
-       //   }
-       //   set
-       //   {
-       //      FDeviceName = value;
-       //   }
-       //}
-       #endregion
        #region private-члены класса
          private MainForm parent;
          private int sortColumn = -1;	// для сортировки в ListView
@@ -55,10 +33,6 @@ namespace HMI_MT
          DataTable dtLSF;   // таблица со сводными событиями
          XDocument xdoc;
          XDocument xdoc_Dev;
-       #endregion
-
-       #region protected-члены класса
-       //protected ArrayList FMemDev;
        #endregion
 
        #region Конструкторы
@@ -108,10 +82,250 @@ namespace HMI_MT
             dtpStartData.Value = dtpStartData.Value - ts;
             dtpStartTime.Value = DateTime.Now;
 
-            // выводим результаты первоначального запроса
-            //EventBD();
             timer1.Stop();
+
+            #region messagesTab
+            tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
+            tableLayoutPanel1.RowStyles[1].Height = 0;
+
+            tableLayoutPanel1.RowStyles[2].SizeType = SizeType.AutoSize;
+            #endregion
         }
+
+        private void frmLogs_Activated(object sender, EventArgs e)
+        {
+            ShowMessagesCountNumericUpDown.Value = HMI_Settings.MessageProvider.MessageCount; // Вызовет DisplayMessages();
+        }
+
+        #region MessagesTab metods
+        private void MessagesUpdatedhandler()
+        {
+            DisplayMessages();
+        }
+
+        private void DisplayMessages()
+        {
+            messagesListView.Items.Clear();
+
+            var messages = HMI_Settings.MessageProvider.GetMessages();
+            if (messages == null)
+            {
+                MessagesCountLabel.Text = "не доступно";
+                MessageBox.Show("Не удалось получить данные...", "Ошибка", MessageBoxButtons.OK);
+                return;
+            }            
+
+            lta = new LongTimeAction();
+            lta.Start(this);
+
+            int i = 1;
+            List<ListViewItem> listViewItems = new List<ListViewItem>();
+            List<int> devices = new List<int>();
+            foreach (var message in messages)
+            {
+                ListViewItem listViewItem = new ListViewItem();
+                listViewItem.SubItems.Add(i.ToString());
+                listViewItem.SubItems.Add(message.LocalTime.ToString());
+                listViewItem.SubItems.Add(message.BlockName);
+                listViewItem.SubItems.Add(message.Text);
+                listViewItem.SubItems.Add(message.Comment);
+                listViewItem.Tag = message;
+
+                // Сбор номеров устройств, от которых есть сообщения
+                if (!devices.Contains(message.AdditionalID))
+                    devices.Add(message.AdditionalID);
+
+                i++;
+                listViewItems.Add(listViewItem);                
+            }
+
+            // Построение контекстного меню
+            messagesListView.Items.AddRange(listViewItems.ToArray());
+            messagesListView.ContextMenu = new ContextMenu();
+            messagesListView.ContextMenu.MenuItems.Add("Квитировать",
+                                                       (sender, args) =>
+                                                           {
+                                                               KvitSelectedMessages();
+                                                               DisplayMessages();
+                                                           });
+
+            // Построение содержимого ComboBox на основе устройств, от которых есть сообщения
+            foreach (var device in devices)
+            {
+                var dev = HMI_Settings.CONFIGURATION.GetLink2Device(0, (uint) device);
+
+                if (dev != null)
+                    DeviceTypesComboBox.Items.Add(new Tuple<string, uint>(String.Format("{0} {1}@{2}", dev.Description, dev.UniObjectGUID, dev.TypeName), (uint)device));
+            }
+
+            DeviceTypesComboBox.DisplayMember = "Item1";
+            DeviceTypesComboBox.ValueMember = "Item2";
+
+            MessagesCountLabel.Text = HMI_Settings.MessageProvider.TotalMessagesCount.ToString();
+
+            lta.Stop();
+        }
+
+        private void KvitSelectedMessages()
+        {
+            string comment = null;
+            List<TableEventLogAlarm> messages = new List<TableEventLogAlarm>();
+
+            foreach (var item in messagesListView.SelectedItems)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment == true && comment == null)
+                {
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
+                }
+
+                messages.Add(message);
+            }
+
+            new KvitWindow(messages, comment).ShowDialog();
+        }
+
+        private void KvitAllMessages()
+        {
+            string comment = null;
+            List<TableEventLogAlarm> messages = new List<TableEventLogAlarm>();
+
+            foreach (var item in messagesListView.Items)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment == true && comment == null)
+                {
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
+                }
+
+                messages.Add(message);
+            }
+
+            new KvitWindow(messages, comment).ShowDialog();
+        }
+
+        private void KvitMessagesByDeviceGuid()
+        {
+            if (DeviceTypesComboBox.SelectedItem == null)
+                return;
+
+            uint deviceGuid = ((Tuple<string, uint>)DeviceTypesComboBox.SelectedItem).Item2;
+
+
+            string comment = null;
+            List<TableEventLogAlarm> messages = new List<TableEventLogAlarm>();
+
+            foreach (var item in messagesListView.Items)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment == true && comment == null)
+                {
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
+                }
+
+                if (message.AdditionalID == deviceGuid)
+                    messages.Add(message);
+            }
+
+            new KvitWindow(messages, comment).ShowDialog();
+        }
+
+        #region Handlers
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabControl tabControl = sender as TabControl;
+
+            if (tabControl.SelectedTab != null)
+                if (tabControl.SelectedTab.Text == "Сообщения")
+                {
+                    tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Absolute;
+                    tableLayoutPanel1.RowStyles[1].Height = 0;
+
+                    tableLayoutPanel1.RowStyles[2].SizeType = SizeType.AutoSize;
+                }
+                else
+                {
+                    tableLayoutPanel1.RowStyles[1].SizeType = SizeType.AutoSize;
+
+                    tableLayoutPanel1.RowStyles[2].SizeType = SizeType.Absolute;
+                    tableLayoutPanel1.RowStyles[2].Height = 0;
+                }
+        }
+
+        private void kvitSelectMsgButton_Click(object sender, EventArgs e)
+        {
+            KvitSelectedMessages();
+
+            DisplayMessages();            
+        }
+
+        private void kvitAllButton_Click(object sender, EventArgs e)
+        {
+            KvitAllMessages();
+
+            DisplayMessages();
+        }
+
+        private void kvitByDeviceTypeButton_Click(object sender, EventArgs e)
+        {
+            KvitMessagesByDeviceGuid();
+
+            DisplayMessages();
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            DisplayMessages();
+        }
+
+        private void autoUpdateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (autoUpdateCheckBox.Checked)
+            {
+                HMI_Settings.MessageProvider.MessagesUpdated += MessagesUpdatedhandler;
+                updateButton.Enabled = false;
+            }
+            else
+            {
+                HMI_Settings.MessageProvider.MessagesUpdated -= MessagesUpdatedhandler;
+                updateButton.Enabled = true;
+            }
+        }
+
+
+        private void ShowMessagesCountNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            HMI_Settings.MessageProvider.MessageCount = (int)ShowMessagesCountNumericUpDown.Value;
+
+            DisplayMessages();
+        }
+        #endregion
+
+        #endregion MessagesTab
 
         /// <summary>
         /// private void EventBD( )
@@ -290,30 +504,7 @@ namespace HMI_MT
                     lstvEvent.Items.Clear();
             }
         }
-        /// <summary>
-        /// static void PrintDataSet( DataSet ds )
-        /// </summary>
-        static void PrintDataSet( DataSet ds )
-        {
-            // метод выполняет цикл по всем DataTable данного DataSet
-            Console.WriteLine( "Таблицы в DataSet '{0}'. \n ", ds.DataSetName );
-            foreach( DataTable dt in ds.Tables )
-            {
-                Console.WriteLine( "Таблица '{0}'. \n ", dt.TableName );
-                // вывод имен столбцов
-                for( int curCol = 0; curCol < dt.Columns.Count; curCol++ )
-                    Console.Write( dt.Columns[curCol].ColumnName.Trim() + "\t" );
-                Console.WriteLine( "\n-----------------------------------------------" );
 
-                // вывод DataTable
-                for( int curRow = 0; curRow < dt.Rows.Count; curRow++ )
-                {
-                    for( int curCol = 0; curCol < dt.Columns.Count; curCol++ )
-                        Console.Write( dt.Rows[curRow][curCol].ToString() + "\t" );
-                    Console.WriteLine();
-                }
-            }
-        }
 
         /// <summary>
         /// private void checkBox1_CheckedChanged( object sender, EventArgs e )
@@ -361,37 +552,17 @@ namespace HMI_MT
             //UserBD();
             lstvCurrent = lstvUserAction;
         }
+
         #region Вход на вкладку с суммарными авариями и осциллограммами
         /// <summary>
         /// private void tpLogSummaryAvarOsc_Enter( object sender, EventArgs e )
         /// </summary>
         private void tpLogSummaryAvarOsc_Enter( object sender, EventArgs e )
         {
-            //cbEvent.Enabled = false;
-            //lblEvent.Enabled = false;
             tpLogSummaryAvarOsc.Width = tabControl1.Width;
             gbAvar.Width = tpLogSummaryAvarOsc.Width / 2;
-            // запрашиваем данные по авариям и осциллограммам
-            //dgvOscill.Rows.Clear();
-            //AvarBD();
-            //OscBD();
-            //DiagBD();
         }
         #endregion 
-        private void dtpStartData_ValueChanged( object sender, EventArgs e )
-        {
-            //// выводим результаты запроса
-            //dgvOscill.Rows.Clear();
-            //lstvEvent.Items.Clear();
-            //lstvUserAction.Items.Clear();
-
-            //EventBD();
-            //AvarBD();
-            //OscBD();
-            //DiagBD();
-            //UserBD();
-            //LogSystemFullBD();
-        }
 
         private void timer1_Tick( object sender, EventArgs e )
         {
@@ -445,10 +616,6 @@ namespace HMI_MT
               lta.Stop();
            }
         }
-
-        //void bgwBackGround_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //}
 
         private void печатьToolStripMenuItem1_Click( object sender, EventArgs e )
         {
