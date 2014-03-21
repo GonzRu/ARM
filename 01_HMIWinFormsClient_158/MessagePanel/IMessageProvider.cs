@@ -61,6 +61,11 @@ namespace MessagePanel
         /// Получить или задать максимальное количество запрашиваемых сообщений
         /// </summary>
         int MessageCount { get; set; }
+
+        /// <summary>
+        /// Общее количество сообщений
+        /// </summary>
+        int TotalMessagesCount { get; }
         #endregion
     }
 }

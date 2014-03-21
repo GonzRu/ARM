@@ -58,11 +58,14 @@ namespace MessagePanel
         private int _userID;
 
         /// <summary>
-        /// Общее количество сообщений
+        /// Флаг, показывающий были ли уже попытки соединиться с сервером
         /// </summary>
-        private int _totalMessageCount;
-
         private bool _isFirstReconectFault = true;
+
+        /// <summary>
+        /// Количество запрашиваемых сообщений
+        /// </summary>
+        private int _shownMessagesCoount;
         #endregion
 
         #region Constructor
@@ -220,7 +223,21 @@ namespace MessagePanel
         /// <summary>
         /// Получить или задать максимальное количество запрашиваемых сообщений
         /// </summary>
-        public int MessageCount { get; set; }
+        public int MessageCount
+        {
+            get { return _shownMessagesCoount; }
+            set
+            {
+                _shownMessagesCoount = value;
+                _messages = null;
+                GetMessagesFromServer();
+            }
+        }
+
+        /// <summary>
+        /// Общее количество сообщений
+        /// </summary>
+        public int TotalMessagesCount { get; private set; }
         #endregion
 
         #endregion
@@ -268,11 +285,11 @@ namespace MessagePanel
         {
             try
             {
-                if (_messagePanelServerProvider.NeedUpDate(_messages == null ? 0 : _totalMessageCount))
+                if (_messagePanelServerProvider.NeedUpDate(_messages == null ? 0 : TotalMessagesCount))
                 {
                     // Получение количества сообщений
                     var countRows = _messagePanelServerProvider.CountRowsData();
-                    _totalMessageCount = countRows.Failure + countRows.Info + countRows.Undefined + countRows.Warning;
+                    TotalMessagesCount = countRows.Failure + countRows.Info + countRows.Undefined + countRows.Warning;
 
                     // Получений необходимого количества сообщений
                     var a = _messagePanelServerProvider.GetEventLogAlarm(MessageCount, _userID, MAGIC_CONST);
