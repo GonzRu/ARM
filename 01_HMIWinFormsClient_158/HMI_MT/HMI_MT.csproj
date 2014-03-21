@@ -115,12 +115,6 @@
     <Compile Include="Windows\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActUserCurrentMess.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ActUserCurrentMess.Designer.cs">
-      <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Authorisation\Autorization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,18 +140,6 @@
     <Compile Include="Windows\MainWindow\Tabs\frmDiagPanel.Designer.cs">
       <DependentUpon>frmDiagPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmHelp.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmHelp.Designer.cs">
-      <DependentUpon>frmHelp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmLoadProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLoadProgress.Designer.cs">
-      <DependentUpon>frmLoadProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\MainWindow\frmLogLocal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,12 +158,6 @@
     <Compile Include="frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSplashScreen.Designer.cs">
-      <DependentUpon>frmSplashScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\frmUserGroupRights.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,7 +170,7 @@
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.Designer.cs">
       <DependentUpon>GetCommentWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="HMIStruct.cs" />
+    <Compile Include="Windows\MainWindow\HMIStruct.cs" />
     <Compile Include="Hmi_MT.cs" />
     <Compile Include="Hmi_MT.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -238,16 +214,10 @@
     <Compile Include="OscDiagPanelControl.Designer.cs">
       <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="OscPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OscPanelControl.Designer.cs">
-      <DependentUpon>OscPanelControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PrintHMI.cs">
+    <Compile Include="Windows\MainWindow\PrintHMI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintHMI.Designer.cs">
+    <Compile Include="Windows\MainWindow\PrintHMI.Designer.cs">
       <DependentUpon>PrintHMI.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -255,10 +225,6 @@
     <EmbeddedResource Include="Windows\AboutForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ActUserCurrentMess.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Authorisation\Autorization.resx">
       <SubType>Designer</SubType>
@@ -274,20 +240,12 @@
     <EmbeddedResource Include="Windows\MainWindow\Tabs\frmDiagPanel.resx">
       <DependentUpon>frmDiagPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHelp.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmHelp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\frmLogLocal.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmLogLocal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.resx">
       <DependentUpon>frmLogs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmSplashScreen.resx">
-      <DependentUpon>frmSplashScreen.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\frmUserGroupRights.resx">
       <SubType>Designer</SubType>
@@ -315,10 +273,7 @@
     <EmbeddedResource Include="OscDiagPanelControl.resx">
       <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OscPanelControl.resx">
-      <DependentUpon>OscPanelControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PrintHMI.resx">
+    <EmbeddedResource Include="Windows\MainWindow\PrintHMI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PrintHMI.cs</DependentUpon>
     </EmbeddedResource>
@@ -329,14 +284,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\SpeedAccess.resx">
       <DependentUpon>SpeedAccess.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SrabatPanelControl.resx">
-      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewSingleAvar.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ViewSingleAvar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -359,13 +306,7 @@
       <DependentUpon>SpeedAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLConnectionString.cs" />
-    <Compile Include="SrabatPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SrabatPanelControl.Designer.cs">
-      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StatusBarLabel.cs" />
+    <Compile Include="Windows\MainWindow\StatusBarLabel.cs" />
     <Compile Include="TextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -383,12 +324,6 @@
     </Compile>
     <Compile Include="Trend.Designer.cs">
       <DependentUpon>Trend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewSingleAvar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewSingleAvar.Designer.cs">
-      <DependentUpon>ViewSingleAvar.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -465,10 +400,6 @@
     <None Include="Resources\SwitchUser%2832p%29.png" />
     <None Include="Resources\UserInformation%2832p%29.png" />
     <Content Include="Resources\SychronizeListHS.png" />
-    <EmbeddedResource Include="frmLoadProgress.resx">
-      <DependentUpon>frmLoadProgress.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="Resources\clock01.bmp" />
   </ItemGroup>
   <ItemGroup>
