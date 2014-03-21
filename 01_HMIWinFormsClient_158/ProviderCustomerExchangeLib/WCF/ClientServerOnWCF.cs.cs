@@ -287,6 +287,8 @@ namespace ProviderCustomerExchangeLib.WCF
                 }
                 else
                 {
+                    if (OnDSCommunicationLoss != null)
+                        OnDSCommunicationLoss(true);
                     TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "При выполнении GetTagsValuesUpdatedAsync произошла ошабка.");
                 }
             }
