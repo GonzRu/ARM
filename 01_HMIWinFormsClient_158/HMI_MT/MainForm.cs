@@ -222,6 +222,8 @@ namespace HMI_MT
                 InitConfiguration();
                 DebugStatistics.WindowStatistics.AddStatistic( "Построение конфигурации завершено." );
 
+                HMI_Settings.MessageProvider = new MessageProvider(HMI_Settings.IPADDRES_SERVER);
+
                 DebugStatistics.WindowStatistics.AddStatistic( "Инициализация базы данных." );
                 // инициализировать настройки на базу данных (из файла Project.cfg)
                 InitSettingsToBD();

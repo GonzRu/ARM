@@ -38,7 +38,7 @@ namespace HMI_MT_Settings
         /// <summary>
         /// Класс работы с сервером сообщений
         /// </summary>
-        public static IMessageProvider MessageProvider = new MessageProvider();
+        public static IMessageProvider MessageProvider;
 
         /// <summary>
         /// Конфигурация текущего проекта

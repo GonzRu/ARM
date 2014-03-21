@@ -66,11 +66,18 @@ namespace MessagePanel
         /// Количество запрашиваемых сообщений
         /// </summary>
         private int _shownMessagesCoount;
+
+        /// <summary>
+        /// IP-адрес сервера
+        /// </summary>
+        private string _serverIP;
         #endregion
 
         #region Constructor
-        public MessageProvider()
+        public MessageProvider(string serverIP)
         {
+            _serverIP = serverIP;
+
             InitMessagePanelServerProvider();
 
             InitTimers();
@@ -253,7 +260,7 @@ namespace MessagePanel
 
             try
             {
-                _messagePanelServerProvider = new DataChannelClient(binding, new EndpointAddress("net.tcp://192.168.240.35:15100/Services"));
+                _messagePanelServerProvider = new DataChannelClient(binding, new EndpointAddress(String.Format("net.tcp://{0}:15100/Services", _serverIP)));
                 _messagePanelServerProvider.Open();
 
                 Console.WriteLine("MessagePanel: Установлено соединение с сервером сообщений.");
