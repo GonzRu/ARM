@@ -122,6 +122,11 @@ namespace HMI_MT
             this.kvitSelectMsgButton = new System.Windows.Forms.Button();
             this.frmLogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmLogsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.MessagesCountLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ShowMessagesCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tpMessages.SuspendLayout();
             this.tpLogEventOKU_RZA.SuspendLayout();
@@ -149,6 +154,8 @@ namespace HMI_MT
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource1)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowMessagesCountNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -163,7 +170,7 @@ namespace HMI_MT
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1010, 508);
+            this.tabControl1.Size = new System.Drawing.Size(1472, 565);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -172,7 +179,7 @@ namespace HMI_MT
             this.tpMessages.Controls.Add(this.messagesListView);
             this.tpMessages.Location = new System.Drawing.Point(4, 22);
             this.tpMessages.Name = "tpMessages";
-            this.tpMessages.Size = new System.Drawing.Size(1002, 482);
+            this.tpMessages.Size = new System.Drawing.Size(1464, 539);
             this.tpMessages.TabIndex = 4;
             this.tpMessages.Text = "Сообщения";
             this.tpMessages.UseVisualStyleBackColor = true;
@@ -191,7 +198,7 @@ namespace HMI_MT
             this.messagesListView.GridLines = true;
             this.messagesListView.Location = new System.Drawing.Point(0, 0);
             this.messagesListView.Name = "messagesListView";
-            this.messagesListView.Size = new System.Drawing.Size(1002, 482);
+            this.messagesListView.Size = new System.Drawing.Size(1464, 539);
             this.messagesListView.TabIndex = 0;
             this.messagesListView.UseCompatibleStateImageBehavior = false;
             this.messagesListView.View = System.Windows.Forms.View.Details;
@@ -662,9 +669,9 @@ namespace HMI_MT
             this.pnlSelect.Controls.Add(this.gbEndTime);
             this.pnlSelect.Controls.Add(this.gbStartTime);
             this.pnlSelect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSelect.Location = new System.Drawing.Point(3, 521);
+            this.pnlSelect.Location = new System.Drawing.Point(3, 578);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(1010, 104);
+            this.pnlSelect.Size = new System.Drawing.Size(1472, 104);
             this.pnlSelect.TabIndex = 1;
             // 
             // btnListView2File
@@ -867,18 +874,19 @@ namespace HMI_MT
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1016, 734);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1478, 791);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightCoral;
+            this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.kvitirovanieGroupBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 631);
+            this.panel1.Location = new System.Drawing.Point(3, 688);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1010, 100);
+            this.panel1.Size = new System.Drawing.Size(1472, 100);
             this.panel1.TabIndex = 2;
             // 
             // groupBox2
@@ -983,11 +991,74 @@ namespace HMI_MT
             // 
             this.frmLogsBindingSource1.DataSource = typeof(HMI_MT.frmLogs);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.ShowMessagesCountNumericUpDown);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.MessagesCountLabel);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Location = new System.Drawing.Point(1025, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(328, 80);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Количество сообщений";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Всего сообщений:";
+            // 
+            // MessagesCountLabel
+            // 
+            this.MessagesCountLabel.AutoSize = true;
+            this.MessagesCountLabel.Location = new System.Drawing.Point(176, 21);
+            this.MessagesCountLabel.Name = "MessagesCountLabel";
+            this.MessagesCountLabel.Size = new System.Drawing.Size(29, 13);
+            this.MessagesCountLabel.TabIndex = 1;
+            this.MessagesCountLabel.Text = "NaN";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(133, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Показывать сообщений:";
+            // 
+            // ShowMessagesCountNumericUpDown
+            // 
+            this.ShowMessagesCountNumericUpDown.Location = new System.Drawing.Point(179, 46);
+            this.ShowMessagesCountNumericUpDown.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.ShowMessagesCountNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ShowMessagesCountNumericUpDown.Name = "ShowMessagesCountNumericUpDown";
+            this.ShowMessagesCountNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.ShowMessagesCountNumericUpDown.TabIndex = 4;
+            this.ShowMessagesCountNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ShowMessagesCountNumericUpDown.ValueChanged += new System.EventHandler(this.ShowMessagesCountNumericUpDown_ValueChanged);
+            // 
             // frmLogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 734);
+            this.ClientSize = new System.Drawing.Size(1478, 791);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1029,6 +1100,9 @@ namespace HMI_MT
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowMessagesCountNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1126,5 +1200,10 @@ namespace HMI_MT
        private System.Windows.Forms.CheckBox autoUpdateCheckBox;
        private System.Windows.Forms.Button updateButton;
        private System.Windows.Forms.GroupBox groupBox2;
+       private System.Windows.Forms.GroupBox groupBox3;
+       private System.Windows.Forms.Label label3;
+       private System.Windows.Forms.Label MessagesCountLabel;
+       private System.Windows.Forms.Label label1;
+       private System.Windows.Forms.NumericUpDown ShowMessagesCountNumericUpDown;
     }
 }

@@ -95,6 +95,8 @@ namespace HMI_MT
         private void frmLogs_Activated(object sender, EventArgs e)
         {
             DisplayMessages();
+
+            ShowMessagesCountNumericUpDown.Value = HMI_Settings.MessageProvider.MessageCount;
         }
 
         #region MessagesTab metods
@@ -110,6 +112,7 @@ namespace HMI_MT
             var messages = HMI_Settings.MessageProvider.GetMessages();
             if (messages == null)
             {
+                MessagesCountLabel.Text = "не доступно";
                 MessageBox.Show("Не удалось получить данные...", "Ошибка", MessageBoxButtons.OK);
                 return;
             }            
@@ -159,6 +162,8 @@ namespace HMI_MT
 
             DeviceTypesComboBox.DisplayMember = "Item1";
             DeviceTypesComboBox.ValueMember = "Item2";
+
+            MessagesCountLabel.Text = HMI_Settings.MessageProvider.TotalMessagesCount.ToString();
 
             lta.Stop();
         }
@@ -311,6 +316,14 @@ namespace HMI_MT
                 HMI_Settings.MessageProvider.MessagesUpdated -= MessagesUpdatedhandler;
                 updateButton.Enabled = true;
             }
+        }
+
+
+        private void ShowMessagesCountNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            HMI_Settings.MessageProvider.MessageCount = (int)ShowMessagesCountNumericUpDown.Value;
+
+            DisplayMessages();
         }
         #endregion
 
