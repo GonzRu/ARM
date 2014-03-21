@@ -301,10 +301,10 @@
     <Compile Include="Windows\MainWindow\Tabs\TextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TreeViewConfig.cs">
+    <Compile Include="Windows\MainWindow\TreeViewConfig.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TreeViewLogicalConfig.cs">
+    <Compile Include="Windows\MainWindow\TreeViewLogicalConfig.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -348,10 +348,8 @@
     <None Include="Resources\LIGHTON.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="HMI_MT_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <Content Include="Logo.ico" />
-    <Content Include="MtRA.ico" />
     <None Include="Resources\About%2816p%29.png" />
     <Content Include="Resources\alarm1.wav" />
     <EmbeddedResource Include="frmSplash.resx">
