@@ -115,98 +115,35 @@
     <Compile Include="Windows\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ActUserCurrentMess.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ActUserCurrentMess.Designer.cs">
-      <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ArrayForExchange.cs" />
     <Compile Include="Windows\Authorisation\Autorization.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\Authorisation\Autorization.Designer.cs">
       <DependentUpon>Autorization.cs</DependentUpon>
     </Compile>
-    <Compile Include="CMPFormula.cs" />
-    <Compile Include="ConfigPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ConfigPanelControl.Designer.cs">
-      <DependentUpon>ConfigPanelControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ConfirmCommand.cs">
+    <Compile Include="Windows\dlgSetSystemTime.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfirmCommand.Designer.cs">
-      <DependentUpon>ConfirmCommand.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CurrentModePanels.cs" />
-    <Compile Include="CurrentPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CurrentPanelControl.Designer.cs">
-      <DependentUpon>CurrentPanelControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCreateEditCalculatedTag.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgCreateEditCalculatedTag.Designer.cs">
-      <DependentUpon>dlgCreateEditCalculatedTag.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dlgDeleteTagsFromCMP.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgDeleteTagsFromCMP.Designer.cs">
-      <DependentUpon>dlgDeleteTagsFromCMP.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dlgSetSystemTime.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgSetSystemTime.Designer.cs">
+    <Compile Include="Windows\dlgSetSystemTime.Designer.cs">
       <DependentUpon>dlgSetSystemTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="dlgViewReqestData.cs">
+    <Compile Include="Windows\dlgViewReqestData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgViewReqestData.Designer.cs">
+    <Compile Include="Windows\dlgViewReqestData.Designer.cs">
       <DependentUpon>dlgViewReqestData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormForDeviceByType.cs" />
-    <Compile Include="Frm2mnemopanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm2mnemopanel.Designer.cs">
-      <DependentUpon>Frm2mnemopanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\MainWindow\Tabs\frmDiagPanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\MainWindow\Tabs\frmDiagPanel.Designer.cs">
       <DependentUpon>frmDiagPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmHelp.cs">
+    <Compile Include="Windows\MainWindow\frmLogLocal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHelp.Designer.cs">
-      <DependentUpon>frmHelp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmLoadProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLoadProgress.Designer.cs">
-      <DependentUpon>frmLoadProgress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmLogLocal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLogLocal.Designer.cs">
+    <Compile Include="Windows\MainWindow\frmLogLocal.Designer.cs">
       <DependentUpon>frmLogLocal.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.cs">
@@ -215,47 +152,17 @@
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.Designer.cs">
       <DependentUpon>frmLogs.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNormalMode.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmNormalMode.Designer.cs">
-      <DependentUpon>frmNormalMode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmSmartPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSmartPanel.designer.cs">
-      <DependentUpon>frmSmartPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSplashScreen.cs">
+    <Compile Include="Windows\frmUserGroupRights.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSplashScreen.Designer.cs">
-      <DependentUpon>frmSplashScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmTreeViewSelectDev.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmTreeViewSelectDev.Designer.cs">
-      <DependentUpon>frmTreeViewSelectDev.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmUserGroupRights.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmUserGroupRights.Designer.cs">
+    <Compile Include="Windows\frmUserGroupRights.Designer.cs">
       <DependentUpon>frmUserGroupRights.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmUserRights.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmUserRights.Designer.cs">
-      <DependentUpon>frmUserRights.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.cs">
       <SubType>Form</SubType>
@@ -263,7 +170,7 @@
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.Designer.cs">
       <DependentUpon>GetCommentWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="HMIStruct.cs" />
+    <Compile Include="Windows\MainWindow\HMIStruct.cs" />
     <Compile Include="Hmi_MT.cs" />
     <Compile Include="Hmi_MT.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -271,7 +178,6 @@
       <DependentUpon>Hmi_MT.settings</DependentUpon>
     </Compile>
     <Compile Include="IMainForm.cs" />
-    <Compile Include="ITimeServer.cs" />
     <Compile Include="Windows\Authorisation\KeyboardLayout.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -290,10 +196,10 @@
     <Compile Include="Windows\MainWindow\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuItemNewFielDlg.cs">
+    <Compile Include="Windows\MenuItemNewFielDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuItemNewFielDlg.Designer.cs">
+    <Compile Include="Windows\MenuItemNewFielDlg.Designer.cs">
       <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow\Tabs\NewMainMnemo.cs">
@@ -302,22 +208,10 @@
     <Compile Include="Windows\MainWindow\Tabs\NewMainMnemo.Designer.cs">
       <DependentUpon>NewMainMnemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="OscDiagPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OscDiagPanelControl.Designer.cs">
-      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OscPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OscPanelControl.Designer.cs">
-      <DependentUpon>OscPanelControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PrintHMI.cs">
+    <Compile Include="Windows\MainWindow\PrintHMI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PrintHMI.Designer.cs">
+    <Compile Include="Windows\MainWindow\PrintHMI.Designer.cs">
       <DependentUpon>PrintHMI.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -326,76 +220,30 @@
       <SubType>Designer</SubType>
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ActUserCurrentMess.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Windows\Authorisation\Autorization.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Autorization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigPanelControl.resx">
-      <DependentUpon>ConfigPanelControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ConfirmCommand.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ConfirmCommand.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CurrentPanelControl.resx">
-      <DependentUpon>CurrentPanelControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCreateEditCalculatedTag.resx">
-      <DependentUpon>dlgCreateEditCalculatedTag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteTagsFromCMP.resx">
-      <DependentUpon>dlgDeleteTagsFromCMP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSetSystemTime.resx">
+    <EmbeddedResource Include="Windows\dlgSetSystemTime.resx">
       <SubType>Designer</SubType>
       <DependentUpon>dlgSetSystemTime.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewReqestData.resx">
+    <EmbeddedResource Include="Windows\dlgViewReqestData.resx">
       <DependentUpon>dlgViewReqestData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm2mnemopanel.resx">
-      <DependentUpon>Frm2mnemopanel.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\frmDiagPanel.resx">
       <DependentUpon>frmDiagPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHelp.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmHelp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLogLocal.resx">
+    <EmbeddedResource Include="Windows\MainWindow\frmLogLocal.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmLogLocal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.resx">
       <DependentUpon>frmLogs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNormalMode.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmNormalMode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmSplashScreen.resx">
-      <DependentUpon>frmSplashScreen.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmTreeViewSelectDev.resx">
-      <DependentUpon>frmTreeViewSelectDev.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUserGroupRights.resx">
+    <EmbeddedResource Include="Windows\frmUserGroupRights.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmUserGroupRights.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUserRights.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmUserRights.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.resx">
       <DependentUpon>GetCommentWindow.cs</DependentUpon>
@@ -409,20 +257,14 @@
     <EmbeddedResource Include="Windows\MainWindow\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuItemNewFielDlg.resx">
+    <EmbeddedResource Include="Windows\MenuItemNewFielDlg.resx">
       <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\NewMainMnemo.resx">
       <DependentUpon>NewMainMnemo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OscDiagPanelControl.resx">
-      <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OscPanelControl.resx">
-      <DependentUpon>OscPanelControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PrintHMI.resx">
+    <EmbeddedResource Include="Windows\MainWindow\PrintHMI.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PrintHMI.cs</DependentUpon>
     </EmbeddedResource>
@@ -431,20 +273,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgOptionsFormEditor.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>dlgOptionsFormEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\SpeedAccess.resx">
       <DependentUpon>SpeedAccess.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SrabatPanelControl.resx">
-      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewSingleAvar.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ViewSingleAvar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -460,12 +290,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="dlgOptionsFormEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgOptionsFormEditor.Designer.cs">
-      <DependentUpon>dlgOptionsFormEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\MainWindow\Tabs\SpeedAccess.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -473,39 +297,16 @@
       <DependentUpon>SpeedAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLConnectionString.cs" />
-    <Compile Include="SrabatPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SrabatPanelControl.Designer.cs">
-      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StatusBarLabel.cs" />
-    <Compile Include="TextBoxEx.cs">
+    <Compile Include="Windows\MainWindow\StatusBarLabel.cs" />
+    <Compile Include="Windows\MainWindow\Tabs\TextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TimeServer.cs" />
-    <Compile Include="TreeViewConfig.cs">
+    <Compile Include="Windows\MainWindow\TreeViewConfig.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TreeViewLogicalConfig.cs">
+    <Compile Include="Windows\MainWindow\TreeViewLogicalConfig.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TreeViewPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Trend.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Trend.Designer.cs">
-      <DependentUpon>Trend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewSingleAvar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewSingleAvar.Designer.cs">
-      <DependentUpon>ViewSingleAvar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="XmlCreater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\toolstripLine.ico" />
@@ -547,10 +348,8 @@
     <None Include="Resources\LIGHTON.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="HMI_MT_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <Content Include="Logo.ico" />
-    <Content Include="MtRA.ico" />
     <None Include="Resources\About%2816p%29.png" />
     <Content Include="Resources\alarm1.wav" />
     <EmbeddedResource Include="frmSplash.resx">
@@ -581,18 +380,6 @@
     <None Include="Resources\SwitchUser%2832p%29.png" />
     <None Include="Resources\UserInformation%2832p%29.png" />
     <Content Include="Resources\SychronizeListHS.png" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLoadProgress.resx">
-      <DependentUpon>frmLoadProgress.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmSmartPanel.resx">
-      <DependentUpon>frmSmartPanel.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="Resources\clock01.bmp" />
   </ItemGroup>
   <ItemGroup>
