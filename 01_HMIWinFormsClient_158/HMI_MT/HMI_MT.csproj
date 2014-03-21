@@ -109,10 +109,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
+    <Compile Include="Windows\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutForm.Designer.cs">
+    <Compile Include="Windows\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ActUserCurrentMess.cs">
@@ -122,10 +122,10 @@
       <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
     </Compile>
     <Compile Include="ArrayForExchange.cs" />
-    <Compile Include="Autorization.cs">
+    <Compile Include="Windows\Authorisation\Autorization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Autorization.Designer.cs">
+    <Compile Include="Windows\Authorisation\Autorization.Designer.cs">
       <DependentUpon>Autorization.cs</DependentUpon>
     </Compile>
     <Compile Include="CMPFormula.cs" />
@@ -185,10 +185,10 @@
     <Compile Include="Frm2mnemopanel.Designer.cs">
       <DependentUpon>Frm2mnemopanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDiagPanel.cs">
+    <Compile Include="Windows\MainWindow\Tabs\frmDiagPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDiagPanel.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\frmDiagPanel.Designer.cs">
       <DependentUpon>frmDiagPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="frmHelp.cs">
@@ -209,10 +209,10 @@
     <Compile Include="frmLogLocal.Designer.cs">
       <DependentUpon>frmLogLocal.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogs.cs">
+    <Compile Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogs.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.Designer.cs">
       <DependentUpon>frmLogs.cs</DependentUpon>
     </Compile>
     <Compile Include="frmNormalMode.cs">
@@ -257,10 +257,10 @@
     <Compile Include="frmUserRights.Designer.cs">
       <DependentUpon>frmUserRights.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetCommentWindow.cs">
+    <Compile Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GetCommentWindow.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.Designer.cs">
       <DependentUpon>GetCommentWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="HMIStruct.cs" />
@@ -272,22 +272,22 @@
     </Compile>
     <Compile Include="IMainForm.cs" />
     <Compile Include="ITimeServer.cs" />
-    <Compile Include="KeyboardLayout.cs">
+    <Compile Include="Windows\Authorisation\KeyboardLayout.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="KeyboardLayout.Designer.cs">
+    <Compile Include="Windows\Authorisation\KeyboardLayout.Designer.cs">
       <DependentUpon>KeyboardLayout.cs</DependentUpon>
     </Compile>
-    <Compile Include="KvitWindow.cs">
+    <Compile Include="Windows\MainWindow\Tabs\JournalTab\KvitWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KvitWindow.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\JournalTab\KvitWindow.Designer.cs">
       <DependentUpon>KvitWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Windows\MainWindow\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Windows\MainWindow\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuItemNewFielDlg.cs">
@@ -296,10 +296,10 @@
     <Compile Include="MenuItemNewFielDlg.Designer.cs">
       <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewMainMnemo.cs">
+    <Compile Include="Windows\MainWindow\Tabs\NewMainMnemo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewMainMnemo.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\NewMainMnemo.Designer.cs">
       <DependentUpon>NewMainMnemo.cs</DependentUpon>
     </Compile>
     <Compile Include="OscDiagPanelControl.cs">
@@ -322,7 +322,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutForm.resx">
+    <EmbeddedResource Include="Windows\AboutForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -330,7 +330,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>ActUserCurrentMess.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Autorization.resx">
+    <EmbeddedResource Include="Windows\Authorisation\Autorization.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Autorization.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,7 +363,7 @@
       <DependentUpon>Frm2mnemopanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDiagPanel.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\frmDiagPanel.resx">
       <DependentUpon>frmDiagPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHelp.resx">
@@ -374,7 +374,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmLogLocal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogs.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.resx">
       <DependentUpon>frmLogs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNormalMode.resx">
@@ -397,23 +397,23 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmUserRights.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GetCommentWindow.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.resx">
       <DependentUpon>GetCommentWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeyboardLayout.resx">
+    <EmbeddedResource Include="Windows\Authorisation\KeyboardLayout.resx">
       <DependentUpon>KeyboardLayout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KvitWindow.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\KvitWindow.resx">
       <DependentUpon>KvitWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Windows\MainWindow\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuItemNewFielDlg.resx">
       <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewMainMnemo.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\NewMainMnemo.resx">
       <DependentUpon>NewMainMnemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OscDiagPanelControl.resx">
@@ -435,7 +435,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>dlgOptionsFormEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SpeedAccess.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\SpeedAccess.resx">
       <DependentUpon>SpeedAccess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SrabatPanelControl.resx">
@@ -466,10 +466,10 @@
     <Compile Include="dlgOptionsFormEditor.Designer.cs">
       <DependentUpon>dlgOptionsFormEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="SpeedAccess.cs">
+    <Compile Include="Windows\MainWindow\Tabs\SpeedAccess.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SpeedAccess.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\SpeedAccess.Designer.cs">
       <DependentUpon>SpeedAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLConnectionString.cs" />
