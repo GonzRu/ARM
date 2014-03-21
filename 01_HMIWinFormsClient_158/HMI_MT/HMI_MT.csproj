@@ -503,7 +503,6 @@
     <Compile Include="ViewSingleAvar.Designer.cs">
       <DependentUpon>ViewSingleAvar.cs</DependentUpon>
     </Compile>
-    <Compile Include="XmlCreater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\toolstripLine.ico" />
