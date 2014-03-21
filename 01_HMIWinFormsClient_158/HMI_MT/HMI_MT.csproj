@@ -233,23 +233,11 @@
     <Compile Include="frmSplashScreen.Designer.cs">
       <DependentUpon>frmSplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTreeViewSelectDev.cs">
+    <Compile Include="Windows\frmUserGroupRights.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTreeViewSelectDev.Designer.cs">
-      <DependentUpon>frmTreeViewSelectDev.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmUserGroupRights.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmUserGroupRights.Designer.cs">
+    <Compile Include="Windows\frmUserGroupRights.Designer.cs">
       <DependentUpon>frmUserGroupRights.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmUserRights.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmUserRights.Designer.cs">
-      <DependentUpon>frmUserRights.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.cs">
       <SubType>Form</SubType>
@@ -374,17 +362,9 @@
       <DependentUpon>frmSplashScreen.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTreeViewSelectDev.resx">
-      <DependentUpon>frmTreeViewSelectDev.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUserGroupRights.resx">
+    <EmbeddedResource Include="Windows\frmUserGroupRights.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmUserGroupRights.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUserRights.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmUserRights.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.resx">
       <DependentUpon>GetCommentWindow.cs</DependentUpon>
