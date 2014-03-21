@@ -257,6 +257,12 @@
     <Compile Include="frmUserRights.Designer.cs">
       <DependentUpon>frmUserRights.cs</DependentUpon>
     </Compile>
+    <Compile Include="GetCommentWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetCommentWindow.Designer.cs">
+      <DependentUpon>GetCommentWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="HMIStruct.cs" />
     <Compile Include="Hmi_MT.cs" />
     <Compile Include="Hmi_MT.Designer.cs">
@@ -390,6 +396,9 @@
     <EmbeddedResource Include="frmUserRights.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmUserRights.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetCommentWindow.resx">
+      <DependentUpon>GetCommentWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyboardLayout.resx">
       <DependentUpon>KeyboardLayout.cs</DependentUpon>
