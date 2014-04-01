@@ -36,7 +36,7 @@
             // 
             // btnResetValues
             // 
-            this.btnResetValues.Location = new System.Drawing.Point(149, 33);
+            this.btnResetValues.Location = new System.Drawing.Point(186, 33);
             this.btnResetValues.Name = "btnResetValues";
             this.btnResetValues.Size = new System.Drawing.Size(140, 23);
             this.btnResetValues.TabIndex = 16;
@@ -50,9 +50,9 @@
             this.btnFix4Change.AutoSize = true;
             this.btnFix4Change.Location = new System.Drawing.Point(3, 33);
             this.btnFix4Change.Name = "btnFix4Change";
-            this.btnFix4Change.Size = new System.Drawing.Size(140, 23);
+            this.btnFix4Change.Size = new System.Drawing.Size(164, 23);
             this.btnFix4Change.TabIndex = 5;
-            this.btnFix4Change.Text = "Режим задания уставок";
+            this.btnFix4Change.Text = "Вкл. режим задания уставок";
             this.btnFix4Change.UseVisualStyleBackColor = true;
             this.btnFix4Change.CheckedChanged += new System.EventHandler(this.BtnFix4ChangeCheckedChanged);
             // 
@@ -60,7 +60,7 @@
             // 
             this.btnWriteUst.AutoSize = true;
             this.btnWriteUst.Enabled = false;
-            this.btnWriteUst.Location = new System.Drawing.Point(149, 3);
+            this.btnWriteUst.Location = new System.Drawing.Point(186, 3);
             this.btnWriteUst.Name = "btnWriteUst";
             this.btnWriteUst.Size = new System.Drawing.Size(140, 24);
             this.btnWriteUst.TabIndex = 2;
@@ -73,7 +73,7 @@
             this.btnReadUstFC.AutoSize = true;
             this.btnReadUstFC.Location = new System.Drawing.Point(3, 3);
             this.btnReadUstFC.Name = "btnReadUstFC";
-            this.btnReadUstFC.Size = new System.Drawing.Size(140, 24);
+            this.btnReadUstFC.Size = new System.Drawing.Size(164, 24);
             this.btnReadUstFC.TabIndex = 0;
             this.btnReadUstFC.Text = "Чтение уставок";
             this.btnReadUstFC.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@
             this.Controls.Add(this.btnFix4Change);
             this.Controls.Add(this.btnReadUstFC);
             this.Name = "ReadWriteUstavkyControl";
-            this.Size = new System.Drawing.Size(293, 60);
+            this.Size = new System.Drawing.Size(329, 60);
             this.ResumeLayout(false);
             this.PerformLayout();
 
