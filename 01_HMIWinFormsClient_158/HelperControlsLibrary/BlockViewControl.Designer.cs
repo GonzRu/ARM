@@ -36,7 +36,6 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qualityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -72,7 +71,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tagsTableDataGridView);
             this.splitContainer1.Size = new System.Drawing.Size(880, 500);
-            this.splitContainer1.SplitterDistance = 443;
+            this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 0;
             // 
             // groupsTreeView
@@ -81,7 +80,7 @@
             this.groupsTreeView.HideSelection = false;
             this.groupsTreeView.Location = new System.Drawing.Point(0, 0);
             this.groupsTreeView.Name = "groupsTreeView";
-            this.groupsTreeView.Size = new System.Drawing.Size(443, 500);
+            this.groupsTreeView.Size = new System.Drawing.Size(250, 500);
             this.groupsTreeView.TabIndex = 0;
             this.groupsTreeView.Click += new System.EventHandler(this.TreeView1Click);
             // 
@@ -97,14 +96,13 @@
             this.tagsTableDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
-            this.Column3,
-            this.qualityColumn});
+            this.Column3});
             this.tagsTableDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tagsTableDataGridView.Location = new System.Drawing.Point(0, 0);
             this.tagsTableDataGridView.Name = "tagsTableDataGridView";
             this.tagsTableDataGridView.RowHeadersVisible = false;
             this.tagsTableDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tagsTableDataGridView.Size = new System.Drawing.Size(433, 500);
+            this.tagsTableDataGridView.Size = new System.Drawing.Size(626, 500);
             this.tagsTableDataGridView.TabIndex = 0;
             this.tagsTableDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridRowCellEndEdit);
             // 
@@ -124,12 +122,6 @@
             this.Column3.HeaderText = "Единица измерения";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            // 
-            // qualityColumn
-            // 
-            this.qualityColumn.HeaderText = "Качество";
-            this.qualityColumn.Name = "qualityColumn";
-            this.qualityColumn.ReadOnly = true;
             // 
             // BlockViewControl
             // 
@@ -158,6 +150,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qualityColumn;
     }
 }

@@ -232,8 +232,7 @@ namespace HelperControlsLibrary
                 if ( tag == null || !tag.Result.Equals( format ) || row.Cells[1].Value.Equals( value ) ) continue;
 
                 row.Cells[1].Value = value.ToString();
-                //row.Cells[1].Value = tag.Source.ValueAsString;
-                row.Cells[3].Value = tag.Source.DataQuality.ToString();
+
                 return true;
             }
             return false;
@@ -467,8 +466,6 @@ namespace HelperControlsLibrary
                     newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Uom } );
                     break;
             }
-
-            newRow.Cells.Add(new DataGridViewTextBoxCell() { Value = tagDescription.Source.DataQuality });
 
             return newRow;
         }
