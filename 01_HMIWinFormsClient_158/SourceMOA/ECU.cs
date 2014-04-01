@@ -252,6 +252,38 @@ namespace SourceMOA
             return dc;
         }
 
+        #region Представление устройства в пользовательском интерфейсе
+        /// <summary>
+        /// Показывать ли группы и теги устройства
+        /// </summary>
+        public bool ShowGroupsAndTags { get; private set; }
+
+        /// <summary>
+        /// Показывать ли осцилограммы устройства
+        /// </summary>
+        public bool ShowOscilograms { get; private set; }
+
+        /// <summary>
+        /// Показывать ли диаграммы устройства
+        /// </summary>
+        public bool ShowDiagrams { get; private set; }
+
+        /// <summary>
+        /// Показывать ли события устройства
+        /// </summary>
+        public bool ShowEvents { get; private set; }
+
+        /// <summary>
+        /// Показывать ли пользовательские файлы
+        /// </summary>
+        public bool ShowUserFiles { get; private set; }
+
+        /// <summary>
+        /// Показывать ли команды устройства
+        /// </summary>
+        public bool ShowCommands { get; private set; }
+        #endregion Представление устройства в пользовательском интерфейсе
+
 		#endregion
 		
 		#region private-методы
