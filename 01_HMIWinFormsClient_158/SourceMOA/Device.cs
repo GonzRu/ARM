@@ -31,9 +31,16 @@ using HMI_MT_Settings;
 namespace SourceMOA
 {
 	public class Device : IDevice
-	{
-		#region Свойства
-	    /// <summary>
+    {
+        #region Const
+        /// <summary>
+        /// Имя файла, в котором хранится информация, специфичная для всех устройств одного типа
+        /// </summary>
+	    private const string DEVICE_TYPE_FILE_INFO_NAME = "DeviceTypeInfo.xml";
+        #endregion
+
+        #region Свойства
+        /// <summary>
 	    /// строка описания для представления устройства в HMI
 	    /// с точки зрения физич. расположения
 	    /// </summary>
@@ -149,6 +156,52 @@ namespace SourceMOA
                 if (xdoc_dev.CommandsSectionExist())
                     //lstDeviceCommand = CreateCmdList(xdoc_dev.Element("Device").Element("Commands"));
                     lstDeviceCommand = CreateCmdList(xdoc_dev.GetCommandsSection());
+
+                #region Считывание информации о том, какие компоненты устройства отображать
+
+			    string pathToProject = AppDomain.CurrentDomain.BaseDirectory + "Project";
+			    string pathToDeviceTypeInfoFile = pathToProject + @"\" + TypeName + @"\" + DEVICE_TYPE_FILE_INFO_NAME;
+
+                if (!File.Exists(pathToDeviceTypeInfoFile))
+                {
+                    Console.WriteLine(String.Format("Для типа {0} не найден файл {1}.", TypeName, DEVICE_TYPE_FILE_INFO_NAME));
+
+                    ShowGroupsAndTags = true;
+                    ShowOscilograms = false;
+                    ShowDiagrams = false;
+                    ShowEvents = false;
+                    ShowUserFiles = true;
+                    ShowCommands = false;
+
+                    return;
+                }
+
+			    try
+			    {
+                    XDocument deviceTypeInfoXDocument = XDocument.Load(pathToDeviceTypeInfoFile);
+
+			        XElement deviceGuiInfoXElement = deviceTypeInfoXDocument.Element("DeviceTypeInfo").Element("Device_GUI");
+
+			        ShowGroupsAndTags = bool.Parse(deviceGuiInfoXElement.Element("ShowGroupsAndTags").Value);
+                    ShowOscilograms = bool.Parse(deviceGuiInfoXElement.Element("ShowOscilograms").Value);
+                    ShowDiagrams = bool.Parse(deviceGuiInfoXElement.Element("ShowDiagrams").Value);
+                    ShowEvents = bool.Parse(deviceGuiInfoXElement.Element("ShowEvents").Value);
+                    ShowUserFiles = bool.Parse(deviceGuiInfoXElement.Element("ShowUserFiles").Value);
+                    ShowCommands = bool.Parse(deviceGuiInfoXElement.Element("ShowCommands").Value);
+			    }
+			    catch (Exception)
+			    {
+                    Console.WriteLine(String.Format("Для типа {0} - ошибка в файле {1}.", TypeName, DEVICE_TYPE_FILE_INFO_NAME));
+
+			        ShowGroupsAndTags = true;
+			        ShowOscilograms = false;
+			        ShowDiagrams = false;
+			        ShowEvents = false;
+			        ShowUserFiles = true;
+			        ShowCommands = false;
+			    }			    
+
+			    #endregion Считывание информации о том, какие компоненты устройства отображать
 			}
 			catch (Exception ex)
 			{
@@ -269,6 +322,39 @@ namespace SourceMOA
                         dc = idc;
             return dc;
         }
+
+        #region Представление устройства в пользовательском интерфейсе
+        /// <summary>
+        /// Показывать ли группы и теги устройства
+        /// </summary>
+        public bool ShowGroupsAndTags { get; private set; }
+
+        /// <summary>
+        /// Показывать ли осцилограммы устройства
+        /// </summary>
+        public bool ShowOscilograms { get; private set; }
+
+        /// <summary>
+        /// Показывать ли диаграммы устройства
+        /// </summary>
+        public bool ShowDiagrams { get; private set; }
+
+        /// <summary>
+        /// Показывать ли события устройства
+        /// </summary>
+        public bool ShowEvents { get; private set; }
+
+        /// <summary>
+        /// Показывать ли пользовательские файлы
+        /// </summary>
+        public bool ShowUserFiles { get; private set; }
+
+        /// <summary>
+        /// Показывать ли команды устройства
+        /// </summary>
+        public bool ShowCommands { get; private set; }
+        #endregion Представление устройства в пользовательском интерфейсе
+
 		#endregion
 			
 		#region private-методы

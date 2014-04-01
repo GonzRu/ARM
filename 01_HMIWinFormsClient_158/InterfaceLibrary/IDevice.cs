@@ -118,6 +118,38 @@ namespace InterfaceLibrary
         /// приоритетный режим отображения тегов -
         /// в первичных значениях, вторичных и т.п.
         /// </summary>
-        TypeViewTag TypeTagPriorityView {get;set;}
+        TypeViewTag TypeTagPriorityView {get;set; }
+
+        #region Представление устройства в пользовательском интерфейсе
+        /// <summary>
+        /// Показывать ли группы и теги устройства
+        /// </summary>
+        bool ShowGroupsAndTags { get; }
+
+        /// <summary>
+        /// Показывать ли осцилограммы устройства
+        /// </summary>
+        bool ShowOscilograms { get; }
+
+        /// <summary>
+        /// Показывать ли диаграммы устройства
+        /// </summary>
+        bool ShowDiagrams { get; }
+
+        /// <summary>
+        /// Показывать ли события устройства
+        /// </summary>
+        bool ShowEvents { get; }
+
+        /// <summary>
+        /// Показывать ли пользовательские файлы
+        /// </summary>
+        bool ShowUserFiles { get; }
+
+        /// <summary>
+        /// Показывать ли команды устройства
+        /// </summary>
+        bool ShowCommands { get; }
+        #endregion Представление устройства в пользовательском интерфейсе
     }
 }
