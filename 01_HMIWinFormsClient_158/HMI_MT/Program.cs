@@ -43,8 +43,17 @@ namespace HMI_MT
             // проверяем существование файла конфигурации  проекта Project.cfg и файла конфигурации устройств проекта
             string PathToPrjFile = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + "Project.cfg";
 
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Project"))
+            {
+                MessageBox.Show("Не найдена папка проекта.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if ( !File.Exists( PathToPrjFile ) )
-                throw new Exception( "Файл проекта отсутствует: " + PathToPrjFile );
+            {
+                MessageBox.Show("Не найден файл Project.cfg", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             try
             {
