@@ -206,11 +206,14 @@ namespace HelperControlsLibrary
                   this.InsertToTable( subNode );
                }
 
-            var tagDescription = node.Tag as TagDescription;
-            if ( tagDescription == null || tagDescription.Source == null ) return;
+            var tagDescriptions = groupDescription.Tags;
+            if ( tagDescriptions == null) return;
 
-            this.tagsTableDataGridView.Rows.Add( CreateDataRow( tagDescription ) );
-            this.subscribes.Add( tagDescription.Source );
+            foreach (var tagDescription in tagDescriptions)
+            {
+                this.tagsTableDataGridView.Rows.Add(CreateDataRow(tagDescription));
+                this.subscribes.Add(tagDescription.Source);
+            }
 
             tagsTableDataGridView.ClearSelection();
         }
@@ -485,9 +488,6 @@ namespace HelperControlsLibrary
                 
                 var subNodes = CreateGroupNodes( groupDescription.Groups );
                 if ( subNodes != null ) node.Nodes.AddRange( subNodes.ToArray( ) );
-                
-                var tags = CreateTagNodes( groupDescription.Tags );
-                if ( tags != null ) node.Nodes.AddRange( tags.ToArray( ) );
 
                 nodeList.Add( node );
             }
