@@ -273,9 +273,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\MainWindow\Tabs\SpeedAccess.resx">
-      <DependentUpon>SpeedAccess.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -289,12 +286,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Windows\MainWindow\Tabs\SpeedAccess.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\MainWindow\Tabs\SpeedAccess.Designer.cs">
-      <DependentUpon>SpeedAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLConnectionString.cs" />
     <Compile Include="Windows\MainWindow\StatusBarLabel.cs" />

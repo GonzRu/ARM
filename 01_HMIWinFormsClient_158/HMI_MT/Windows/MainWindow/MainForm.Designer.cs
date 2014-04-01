@@ -45,7 +45,6 @@ namespace HMI_MT
             this.íàâèãàöèÿToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ìíåìîñõåìàToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.áûñòğûéÄîñòóïToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ïàíåëüToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.äåğåâîToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.îòêğûòüToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ñêğûòüToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -257,19 +256,11 @@ namespace HMI_MT
             // áûñòğûéÄîñòóïToolStripMenuItem
             // 
             this.áûñòğûéÄîñòóïToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ïàíåëüToolStripMenuItem,
             this.äåğåâîToolStripMenuItem});
             this.áûñòğûéÄîñòóïToolStripMenuItem.Image = global::HMI_MT.Properties.Resources.OSA15;
             this.áûñòğûéÄîñòóïToolStripMenuItem.Name = "áûñòğûéÄîñòóïToolStripMenuItem";
             this.áûñòğûéÄîñòóïToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.áûñòğûéÄîñòóïToolStripMenuItem.Text = "Áûñòğûé äîñòóï";
-            // 
-            // ïàíåëüToolStripMenuItem
-            // 
-            this.ïàíåëüToolStripMenuItem.Name = "ïàíåëüToolStripMenuItem";
-            this.ïàíåëüToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.ïàíåëüToolStripMenuItem.Text = "Ïàíåëü";
-            this.ïàíåëüToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonFastAccessClick);
             // 
             // äåğåâîToolStripMenuItem
             // 
@@ -277,20 +268,20 @@ namespace HMI_MT
             this.îòêğûòüToolStripMenuItem,
             this.ñêğûòüToolStripMenuItem});
             this.äåğåâîToolStripMenuItem.Name = "äåğåâîToolStripMenuItem";
-            this.äåğåâîToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.äåğåâîToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.äåğåâîToolStripMenuItem.Text = "Äåğåâî";
             // 
             // îòêğûòüToolStripMenuItem
             // 
             this.îòêğûòüToolStripMenuItem.Name = "îòêğûòüToolStripMenuItem";
-            this.îòêğûòüToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.îòêğûòüToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.îòêğûòüToolStripMenuItem.Text = "Îòêğûòü";
             this.îòêğûòüToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonOpenTreeClick);
             // 
             // ñêğûòüToolStripMenuItem
             // 
             this.ñêğûòüToolStripMenuItem.Name = "ñêğûòüToolStripMenuItem";
-            this.ñêğûòüToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.ñêğûòüToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ñêğûòüToolStripMenuItem.Text = "Ñêğûòü";
             this.ñêğûòüToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonCloseTreeClick);
             // 
@@ -770,7 +761,6 @@ namespace HMI_MT
       private System.Windows.Forms.ToolStripMenuItem ñáğîñèòüÂñåÊîìàíäûToolStripMenuItem1;
       private System.Windows.Forms.ToolStripMenuItem âîññòàíîâèòüÑâÿçüÑÑåğâåğîìÄàííûõToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem tsmiPanelState;
-      private System.Windows.Forms.ToolStripMenuItem ïàíåëüToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem äåğåâîToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem îòêğûòüToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem ñêğûòüToolStripMenuItem;

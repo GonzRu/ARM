@@ -942,28 +942,6 @@ namespace HMI_MT
       #endregion
 
       #region пункты главного меню
-      // старт формы быстрого доступа
-      private void ShowSpeedAccess() 
-      {          
-          scDeviceObjectConfig.Visible = true;
-
-          Form[] arrF = MdiChildren;
-          for (int i = 0; i < arrF.Length; i++)
-              if (arrF[i].Name == "SpeedAccess")
-              {
-                  arrF[i].Focus();
-                  return;
-              }
-          // выводим форму быстрого доступа
-          var sa = new SpeedAccess( this ) { MdiParent = this };
-
-          if (tvlc == null)
-              tvlc = new TreeViewLogicalConfig(tvLogicalObjectsConfig, this);
-
-          tvlc.OnChangeTabpage += sa.tvlc_OnChangeTabpage;
-          sa.Show();
-      }
-
       #region Печать
       private void printDocument1_PrintPage( object sender, System.Drawing.Printing.PrintPageEventArgs e )
       {
@@ -1529,13 +1507,7 @@ namespace HMI_MT
             // выводим главную мнемосхему
             CreateMainMnemo( );
         }
-        /// <summary>
-        /// Fast access panel
-        /// </summary>
-        private void RibbonButtonFastAccessClick( object sender, EventArgs e )
-        {
-            ShowSpeedAccess();
-        }
+
         /// <summary>
         /// Open tree
         /// </summary>
