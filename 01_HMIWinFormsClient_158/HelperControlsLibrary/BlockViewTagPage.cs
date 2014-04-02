@@ -303,6 +303,8 @@ namespace HelperControlsLibrary
                     break;
             }
 
+            this.readWriteUstavkyControl.btnFix4Change.Checked = false;
+
             this.currentCategory = category;
         }
         /// <summary>
