@@ -98,7 +98,7 @@ namespace HelperControlsLibrary
                     case TypeOfTag.Combo:
                         {
                             var cbCell =
-                                gridRow.Cells[1] as DataGridViewComboBoxCell;
+                                gridRow.Cells[3] as DataGridViewComboBoxCell;
                             if ( cbCell == null )
                                 throw new NullReferenceException( "ComboBox Cell is Null" );
 
@@ -113,15 +113,24 @@ namespace HelperControlsLibrary
                         break;
                     case TypeOfTag.Analog:
                         {
-                            var memX = BitConverter.GetBytes( Convert.ToSingle( gridRow.Cells[1].Value ) );
+                            var memX = BitConverter.GetBytes( Convert.ToSingle( gridRow.Cells[3].Value ) );
                             tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
                         }
                         break;
                     case TypeOfTag.Discret:
                         {
-                            var value = string.Empty;
-                            if ( gridRow.Cells[1].Value.Equals( "1" ) ) value = "true";
-                            if ( gridRow.Cells[1].Value.Equals( "0" ) ) value = "false";
+                            Boolean? value = null;
+                            if ( gridRow.Cells[3].Value.Equals( "1" ) ) value = true;
+                            if ( gridRow.Cells[3].Value.Equals( "0" ) ) value = false;
+
+                            if (value == null)
+                            {
+                                gridRow.Cells[3].Value = gridRow.Cells[1].Value;
+                                MessageBox.Show("Неверное значение для данного сигнала.", "Ошибка!",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                return;
+                            }
 
                             var memX = BitConverter.GetBytes( Convert.ToBoolean( value ) );
                             tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
@@ -130,13 +139,13 @@ namespace HelperControlsLibrary
                     case TypeOfTag.DateTime:
                         {
 
-                            var memX = BitConverter.GetBytes( Convert.ToInt64( DateTime.Parse( gridRow.Cells[1].Value.ToString( ) ) ) );
+                            var memX = BitConverter.GetBytes( Convert.ToInt64( DateTime.Parse( gridRow.Cells[3].Value.ToString( ) ) ) );
                             tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
                         }
                         break;
                     default:
                         {
-                            var memX = System.Text.Encoding.Default.GetBytes( gridRow.Cells[1].Value.ToString( ) );
+                            var memX = System.Text.Encoding.Default.GetBytes( gridRow.Cells[3].Value.ToString( ) );
                             tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
                         }
                         break;
@@ -252,6 +261,8 @@ namespace HelperControlsLibrary
 
             SubscribeTagsInTagsTable();
 
+            tagsTableDataGridView.Columns[3].Visible = false;
+
             var handlerCategory = CategoryEvent;
             if ( handlerCategory != null )
                 handlerCategory( treeNode.Category );            
@@ -329,13 +340,28 @@ namespace HelperControlsLibrary
         {
             if ( @checked )
             {
-                HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.UnSubscribe );
-                this.tagsTableDataGridView.Columns[1].ReadOnly = false;
+
+                foreach (var row in tagsTableDataGridView.Rows)
+                {
+                    var dataGridRow = row as DataGridViewRow;
+
+                    var c = dataGridRow.Cells[1];
+
+                    if (c.Value == null)
+                        continue;
+
+                    var newCell = c.Clone() as DataGridViewCell;
+                    newCell.Style = new DataGridViewCellStyle() { BackColor = System.Drawing.Color.LightGreen };
+                    newCell.Value = c.Value;
+
+                    dataGridRow.Cells[3] = newCell;
+                }
+
+                this.tagsTableDataGridView.Columns[3].Visible = true;
             }
             else
             {
-                HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.Subscribe );
-                this.tagsTableDataGridView.Columns[1].ReadOnly = true;
+                this.tagsTableDataGridView.Columns[3].Visible = false;
             }            
         }
         /// <summary>
@@ -438,28 +464,36 @@ namespace HelperControlsLibrary
             {
                 case TypeOfTag.Combo:
                     var cell = new DataGridViewComboBoxCell( );
+
                     newRow.Cells.Add( cell );
-                    foreach ( var value in tagDescription.Source.SlEnumsParty )
-                        cell.Items.Add( value.Value );
+                    foreach (var value in tagDescription.Source.SlEnumsParty)
+                        cell.Items.Add(value.Value);
+
                     cell.Value = tagDescription.Source.ValueAsString;
-                    newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Uom } );
+
+                    newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Uom } );                    
+
                     break;
                 case TypeOfTag.Analog:
                 case TypeOfTag.Discret:
-                    newRow.Cells.Add( new DataGridViewTextBoxCell
-                    {
-                        Value = ( string.IsNullOrEmpty( tagDescription.Source.ValueAsString ) ) ? "0" : tagDescription.Source.ValueAsString
-                    } );
+                    var analogCell = new DataGridViewTextBoxCell();
+                    analogCell.Value = (string.IsNullOrEmpty(tagDescription.Source.ValueAsString))
+                                           ? "0"
+                                           : tagDescription.Source.ValueAsString;
+                    newRow.Cells.Add(analogCell);
+
                     newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Uom } );
+
                     break;
                 case TypeOfTag.DateTime:
-                    newRow.Cells.Add( new DataGridViewTextBoxCell
-                    {
-                        Value = ( string.IsNullOrEmpty( tagDescription.Source.ValueAsString ) )
-                                    ? DateTime.MinValue.ToString( CultureInfo.InvariantCulture )
-                                    : tagDescription.Source.ValueAsString
-                    } );
+                    var dateCell = new DataGridViewTextBoxCell();
+                    dateCell.Value = (string.IsNullOrEmpty(tagDescription.Source.ValueAsString))
+                                                 ? DateTime.MinValue.ToString(CultureInfo.InvariantCulture)
+                                                 : tagDescription.Source.ValueAsString;
+                    newRow.Cells.Add(dateCell);
+
                     newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Uom } );
+
                     break;
                 default:
                     newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Source.ValueAsString } );
