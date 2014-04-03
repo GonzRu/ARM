@@ -860,8 +860,11 @@ namespace HMI_MT
                 string tmpTs = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(tmpT);
                 dgvAvar["clmBlockTime", i].Value = tmpTs;
                 
+                // ID аварии
                 dgvAvar["clmIDAvar", i].Value = dtA.Rows[curRow]["ID"];
-                
+
+                // Guid блока
+                dgvAvar["clmBlockId", i].Value = dtA.Rows[curRow]["BlockID"];
             }
 				aSDA.Dispose();
 				aDS.Dispose();
@@ -1194,6 +1197,9 @@ namespace HMI_MT
         /// 
         private void dgvOscill_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex != 3)
+                return;
+
            string ifa = String.Empty;         // имя файла
            DataGridViewCell de;
            char[] sep = { ' ' };
@@ -1212,9 +1218,6 @@ namespace HMI_MT
               System.Diagnostics.Trace.TraceInformation("\n" + DateTime.Now.ToString() + "исключение в : frmLogs : dgvOscill_CellContentClick() ");
               return;
            }
-
-           if (e.ColumnIndex != 5)
-              return;
 
            /*
             * первый аргумент номер DS,
@@ -1291,27 +1294,32 @@ namespace HMI_MT
             }
         }
 
-       private DataGridViewCell GetDataGridViewCell(string nameColumn, int rowindex) {
-          DataGridViewCell de = null;
-         try {
-            de = dgvAvar[nameColumn, rowindex];
-         }
+        private DataGridViewCell GetDataGridViewCell(string nameColumn, int rowindex)
+        {
+            DataGridViewCell de = null;
+            try
+            {
+                de = dgvAvar[nameColumn, rowindex];
+            }
             catch (Exception ex)
             {
-                throw new Exception(string.Format(@"(1103) : {0} : X:\Projects\40_Tumen_GPP09\Client\HMI_MT\frmLogs.cs : GetDataGridViewCell() : ОШИБКА : {1}", DateTime.Now.ToString(), ex.Message));
-               //System.Diagnostics.Trace.TraceInformation( "\n" + DateTime.Now.ToString( ) + "исключение в : frmLogs : dgvAvar_CellContentClick() : " + ex.Message);
+                throw new Exception(
+                    string.Format(
+                        @"(1103) : {0} : X:\Projects\40_Tumen_GPP09\Client\HMI_MT\frmLogs.cs : GetDataGridViewCell() : ОШИБКА : {1}",
+                        DateTime.Now.ToString(), ex.Message));
+                //System.Diagnostics.Trace.TraceInformation( "\n" + DateTime.Now.ToString( ) + "исключение в : frmLogs : dgvAvar_CellContentClick() : " + ex.Message);
             }
-         return de;
-       }
+            return de;
+        }
 
-       /// <summary>
+        /// <summary>
        /// выбор конкретной аварии некоторого блока для просмотра
        /// </summary>
        /// <param Name="sender"></param>
        /// <param Name="e"></param> 
        private void dgvAvar_CellContentClick( object sender, DataGridViewCellEventArgs e )
         {
-            if (e.ColumnIndex != 4) return;
+            if (e.ColumnIndex != 3) return;
             
             // номер устройства с цчетом фк
 

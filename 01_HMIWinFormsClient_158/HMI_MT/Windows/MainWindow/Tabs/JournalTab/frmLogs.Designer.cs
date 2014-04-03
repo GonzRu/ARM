@@ -66,6 +66,11 @@ namespace HMI_MT
             this.dgvAvar = new System.Windows.Forms.DataGridView();
             this.gbOscill = new System.Windows.Forms.GroupBox();
             this.dgvOscill = new System.Windows.Forms.DataGridView();
+            this.clmBlockNameOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmCommentOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmBlockTimeOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmViewOsc = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.clmID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpLogSystemFull = new System.Windows.Forms.TabPage();
             this.lstvLogSystemFull = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -111,11 +116,6 @@ namespace HMI_MT
             this.DeviceTypesComboBox = new System.Windows.Forms.ComboBox();
             this.kvitAllButton = new System.Windows.Forms.Button();
             this.kvitSelectMsgButton = new System.Windows.Forms.Button();
-            this.clmBlockNameOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmCommentOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmBlockTimeOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmViewOsc = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.clmID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.frmLogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmLogsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.clmBlockName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,6 +124,7 @@ namespace HMI_MT
             this.clmJumpAvarForm = new System.Windows.Forms.DataGridViewButtonColumn();
             this.clmIDAvar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmIdFcBlock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmBlockId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tpMessages.SuspendLayout();
             this.tpLogEventOKU_RZA.SuspendLayout();
@@ -437,7 +438,8 @@ namespace HMI_MT
             this.clmBlockTime,
             this.clmJumpAvarForm,
             this.clmIDAvar,
-            this.clmIdFcBlock});
+            this.clmIdFcBlock,
+            this.clmBlockId});
             this.dgvAvar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAvar.Location = new System.Drawing.Point(3, 16);
             this.dgvAvar.MultiSelect = false;
@@ -482,6 +484,46 @@ namespace HMI_MT
             this.dgvOscill.Size = new System.Drawing.Size(711, 514);
             this.dgvOscill.TabIndex = 0;
             this.dgvOscill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOscill_CellContentClick);
+            // 
+            // clmBlockNameOsc
+            // 
+            this.clmBlockNameOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clmBlockNameOsc.HeaderText = "Тип блока";
+            this.clmBlockNameOsc.Name = "clmBlockNameOsc";
+            this.clmBlockNameOsc.ReadOnly = true;
+            this.clmBlockNameOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmBlockNameOsc.Width = 65;
+            // 
+            // clmCommentOsc
+            // 
+            this.clmCommentOsc.HeaderText = "Присоединение";
+            this.clmCommentOsc.Name = "clmCommentOsc";
+            this.clmCommentOsc.ReadOnly = true;
+            this.clmCommentOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clmBlockTimeOsc
+            // 
+            this.clmBlockTimeOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clmBlockTimeOsc.HeaderText = "Время блока";
+            this.clmBlockTimeOsc.Name = "clmBlockTimeOsc";
+            this.clmBlockTimeOsc.ReadOnly = true;
+            this.clmBlockTimeOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmBlockTimeOsc.Width = 79;
+            // 
+            // clmViewOsc
+            // 
+            this.clmViewOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.clmViewOsc.HeaderText = "Просмотр";
+            this.clmViewOsc.Name = "clmViewOsc";
+            this.clmViewOsc.ReadOnly = true;
+            // 
+            // clmID
+            // 
+            this.clmID.HeaderText = "Идентификатор";
+            this.clmID.Name = "clmID";
+            this.clmID.ReadOnly = true;
+            this.clmID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmID.Visible = false;
             // 
             // tpLogSystemFull
             // 
@@ -939,46 +981,6 @@ namespace HMI_MT
             this.kvitSelectMsgButton.UseVisualStyleBackColor = true;
             this.kvitSelectMsgButton.Click += new System.EventHandler(this.kvitSelectMsgButton_Click);
             // 
-            // clmBlockNameOsc
-            // 
-            this.clmBlockNameOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.clmBlockNameOsc.HeaderText = "Тип блока";
-            this.clmBlockNameOsc.Name = "clmBlockNameOsc";
-            this.clmBlockNameOsc.ReadOnly = true;
-            this.clmBlockNameOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clmBlockNameOsc.Width = 65;
-            // 
-            // clmCommentOsc
-            // 
-            this.clmCommentOsc.HeaderText = "Присоединение";
-            this.clmCommentOsc.Name = "clmCommentOsc";
-            this.clmCommentOsc.ReadOnly = true;
-            this.clmCommentOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmBlockTimeOsc
-            // 
-            this.clmBlockTimeOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.clmBlockTimeOsc.HeaderText = "Время блока";
-            this.clmBlockTimeOsc.Name = "clmBlockTimeOsc";
-            this.clmBlockTimeOsc.ReadOnly = true;
-            this.clmBlockTimeOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clmBlockTimeOsc.Width = 79;
-            // 
-            // clmViewOsc
-            // 
-            this.clmViewOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.clmViewOsc.HeaderText = "Просмотр";
-            this.clmViewOsc.Name = "clmViewOsc";
-            this.clmViewOsc.ReadOnly = true;
-            // 
-            // clmID
-            // 
-            this.clmID.HeaderText = "Идентификатор";
-            this.clmID.Name = "clmID";
-            this.clmID.ReadOnly = true;
-            this.clmID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clmID.Visible = false;
-            // 
             // frmLogsBindingSource
             // 
             this.frmLogsBindingSource.DataSource = typeof(HMI_MT.frmLogs);
@@ -1028,17 +1030,22 @@ namespace HMI_MT
             // 
             // clmIDAvar
             // 
-            this.clmIDAvar.HeaderText = "";
             this.clmIDAvar.Name = "clmIDAvar";
             this.clmIDAvar.ReadOnly = true;
             this.clmIDAvar.Visible = false;
             // 
             // clmIdFcBlock
             // 
-            this.clmIdFcBlock.HeaderText = "";
             this.clmIdFcBlock.Name = "clmIdFcBlock";
             this.clmIdFcBlock.ReadOnly = true;
             this.clmIdFcBlock.Visible = false;
+            // 
+            // clmBlockId
+            // 
+            this.clmBlockId.HeaderText = "clmBlockId";
+            this.clmBlockId.Name = "clmBlockId";
+            this.clmBlockId.ReadOnly = true;
+            this.clmBlockId.Visible = false;
             // 
             // frmLogs
             // 
@@ -1188,5 +1195,6 @@ namespace HMI_MT
        private System.Windows.Forms.DataGridViewButtonColumn clmJumpAvarForm;
        private System.Windows.Forms.DataGridViewTextBoxColumn clmIDAvar;
        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdFcBlock;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockId;
     }
 }
