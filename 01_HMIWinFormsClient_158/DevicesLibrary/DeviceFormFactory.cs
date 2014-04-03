@@ -45,12 +45,19 @@ namespace DevicesLibrary
                 //var folderDevDescript = string.Format("{0}\\Project\\{1}\\", AppDomain.CurrentDomain.BaseDirectory, xeDescDev.Element( "nameR" ).Value);
 
                 DebugStatistics.WindowStatistics.AddStatistic( "Создание и инициализация формы." );
-                
-                IDeviceForm deviceform = new FormBlock( strTypeBlock, 0, uint.Parse( objGuid ) );
+
+                IDeviceForm deviceform = new FormBlock(strTypeBlock, dsGuid, devGuid);
                 
                 DebugStatistics.WindowStatistics.AddStatistic( "Создание и инициализация формы завершено." );
 
-                ( deviceform as Form ).Text = CommonUtils.CommonUtils.GetDispCaptionForDevice( (int)devGuid );
+                if (HMI_Settings.IsDebugMode)
+                {
+                    var device = HMI_Settings.CONFIGURATION.GetLink2Device(dsGuid, devGuid);
+
+                    (deviceform as Form).Text = String.Format("({0}) {1} ({2})", devGuid, device.Description, device.TypeName);
+                }
+                else
+                    (deviceform as Form).Text = CommonUtils.CommonUtils.GetDispCaptionForDevice((int)devGuid);
 
                 var isconnectState = false;
                 var connectState = PTKState.Iinstance.GetValueAsString(dsGuid, devGuid, "Связь");

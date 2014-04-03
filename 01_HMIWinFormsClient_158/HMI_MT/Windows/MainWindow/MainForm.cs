@@ -404,6 +404,10 @@ namespace HMI_MT
                 HMI_Settings.DiagnosticSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("DiagnosticSchema").Value;
                 HMI_Settings.MainMnenoSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("MainMnenoSchema").Value;
 
+                var DebugModeXElement = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("DebugMode");
+                if (DebugModeXElement != null)
+                    HMI_Settings.IsDebugMode = Boolean.Parse(DebugModeXElement.Attribute("enable").Value);
+
 			    var res = HMI_Settings.XDoc4PathToPrjFile.Element( "Project" ).Element( "SchemaTransform" ).Attribute( "x" ).Value;
 			    HMI_Settings.SchemaSize.X = float.Parse( res.Replace( '.', ',' ) );
 			    res = HMI_Settings.XDoc4PathToPrjFile.Element( "Project" ).Element( "SchemaTransform" ).Attribute( "y" ).Value;

@@ -41,6 +41,11 @@ namespace HMI_MT_Settings
         public static IMessageProvider MessageProvider;
 
         /// <summary>
+        /// Флаг режима вывода повышенной информативности
+        /// </summary>
+        public static Boolean IsDebugMode = false;
+
+        /// <summary>
         /// Конфигурация текущего проекта
         /// </summary>
         public static IConfiguration CONFIGURATION;

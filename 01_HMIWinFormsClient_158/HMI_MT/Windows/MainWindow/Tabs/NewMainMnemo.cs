@@ -281,7 +281,10 @@ namespace HMI_MT
                         if (string.IsNullOrEmpty(idp.Parameters.ToolTipMessage))
                         {
                             if (xeDescDev != null)
-                                region.ToolTipMessage = xeDescDev.Element("DescDev").Element("DescDev").Value;
+                                if (HMI_Settings.IsDebugMode)
+                                    region.ToolTipMessage = String.Format("({0}) {1} ({2})", idp.Parameters.DeviceGuid, xeDescDev.Element("DescDev").Element("DescDev").Value, xeDescDev.Attribute("TypeName").Value);
+                                else
+                                    region.ToolTipMessage = xeDescDev.Element("DescDev").Element("DescDev").Value;
                         }
                         else
                             region.ToolTipMessage = idp.Parameters.ToolTipMessage;
