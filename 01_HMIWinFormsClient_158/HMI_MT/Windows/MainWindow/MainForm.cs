@@ -21,8 +21,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
@@ -39,19 +37,15 @@ using System.IO;
 using System.Xml;
 using System.Diagnostics;
 using System.Reflection;
-using System.Linq;
 using System.Xml.Linq;
 
 using Egida;
 
 using System.Net.NetworkInformation;
-using MessagePanel;
 using TraceSourceLib;
 using InterfaceLibrary;
-using Configuration;
 using HMI_MT_Settings;
 using DataBaseLib;
-using PTKStateLib;
 using DebugStatisticLibrary;
 using HMI_MT.Properties;
 using NormalModeLibrary.Windows;
@@ -120,13 +114,6 @@ namespace HMI_MT
         public DataSet aDS;
 		#endregion
 
-		#region Удаленное взаимодействие
-		public bool isTCPServer = false;
-		public bool isTCPClient = false;
-		public static byte[] servbuffer = new byte[4];
-		public static byte[] buffer = new byte[2000];
-		#endregion
-
 		#region private
 
 	    private frmLogs Form_ev;
@@ -180,7 +167,7 @@ namespace HMI_MT
             }
 			catch(Exception ex)
 			{
-				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+				TraceSourceDiagMes.WriteDiagnosticMSG(ex);
 			}
         }
         #endregion
@@ -231,15 +218,11 @@ namespace HMI_MT
 			}
         }
 
-
-
         /// <summary>
         /// реакция на потерю связи с DS
         /// </summary>
-        /// <param name="state"></param>
       void CONFIGURATION_OnConfigDSCommunicationLoss4Client(bool state)
       {
-          ///* 
           // * информация о связи с фк поступает от сервера как пакет типа 8, 
           // * при его обработке устанавливаются признаки в классе фк для верхнего уровня
           // * и мы ими здесь пользуемся для отображения, кроме этого эти признаки используются 
@@ -365,10 +348,6 @@ namespace HMI_MT
       /// <summary>
       /// Действия при активизации формы
       /// </summary>
-      /// <param Name="sender"></param>
-      ///
-      /// <param Name="e"></param>
-      //private void MainForm_Activated( object sender, EventArgs e )
       private void MainFormActivate()
       {
          if( bEnter )
@@ -376,9 +355,9 @@ namespace HMI_MT
 
          bEnter = true;  // значение при запуске
 
-         HMI_MT_Settings.HMI_Settings.CurrentDateTime = DateTime.Now;
+         HMI_Settings.CurrentDateTime = DateTime.Now;
 
-         tsdt = HMI_MT_Settings.HMI_Settings.CurrentDateTime.GetDateTimeFormats();
+         tsdt = HMI_Settings.CurrentDateTime.GetDateTimeFormats();
 
          aDS = new DataSet("ptk"); // инициашизация DataSet
 
@@ -961,104 +940,7 @@ namespace HMI_MT
         #endregion
       #endregion
 
-      #region Журналы
-		/// <summary>
-		/// разрешаем MAC-адрес
-		/// </summary>
-		/// <param Name="ipadr"></param>
-		/// <returns></returns>
-		  private string GetMACOnIP(IPAddress ipadr)
-		  {
-			  byte[] ab = new byte[6];
-			  int len = ab.Length;
-			  int r = SendARP(BitConverter.ToInt32(ipadr.GetAddressBytes(), 0), 0, ab, ref len); //( int ) TempA.Address
-
-			  return BitConverter.ToString(ab, 0, 6);
-		  }
-
-      private void просмотрЛокальногоЖурналаToolStripMenuItem_Click( object sender, EventArgs e )
-        {
-			  frmLogLocal fll = new frmLogLocal();
-			  fll.Show();
-        }
-      #endregion
-
-      #region Конфигурация и ФК
-      #region проверка связи с ФК
-      private void timerTestFCConnect_Tick( object sender, EventArgs e )
-      {
-         ///* 
-         // * информация о связи с фк поступает от сервера как пакет типа 8, 
-         // * при его обработке устанавливаются признаки в классе фк для верхнего уровня
-         // * и мы ими здесь пользуемся для отображения, кроме этого эти признаки используются 
-         // * в функции Configurator.ReceivePacketInThread()
-         // */
-         //if ( KB == null )
-         //   return;
-
-         //bool noConnect = false;  // общий признак отсутсвия связи с каким-то фк
-
-         //// контролируем связь с ФК, заодно контроллируем связь с БД
-         //foreach( DataSource aFC in KB )
-         //{
-         //   if( aFC.isLostConnection )
-         //         noConnect = true;
-         //}
-
-         //StringBuilder sbm_noConnection = new StringBuilder( );
-
-         //// формируем итоговое сообщение в строке статуса о состоянии фк    
-         //if( noConnect )
-         //{
-         //   sbm_noConnection.Append( "Нет связи с ФК № " );
-
-         //   foreach( DataSource aFC in KB )
-         //      if( aFC.isLostConnection )
-         //         sbm_noConnection.Append( aFC.NumFC.ToString() + ';' );
-
-         //   LinkSetTextISB( sbConnectFC, sbm_noConnection.ToString( ), Color.Yellow );
-         //}
-         //else
-         //{
-         //   LinkSetTextISB( sbConnectFC, "Есть связь с ФК", toolStripStatusLabelClock.BackColor ); // для восстановления цвета взяли чужой фон
-         //}
-      }
-      #endregion
-
-      #region периодический опрос нижнего уровня для обновления информации верхнего уровня
-      private void timer1_Tick( object sender, EventArgs e )
-      {
-         //newKB.ReceivePacket( );
-      }
-      #endregion
-      #endregion
-
       #region удаленное взаимодействие
-      /// <summary>
-      /// проверить доступность клиента
-      /// </summary>
-      /// <param Name="sender"></param>
-      /// <param Name="e"></param>
-      private void tsmiIsClientExist_Click(object sender, EventArgs e)
-      {
-         Ping ping2Client = new Ping();
-         PingOptions pingoptions = new PingOptions();
-
-         pingoptions.DontFragment = true;
-
-         // буфер 32 байта
-         string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-         byte[] buffer = Encoding.ASCII.GetBytes(data);
-         int timeout = 3000;
-
-         PingReply pr = ping2Client.Send(HMI_Settings.IPADDRES_CLIENT, timeout, buffer, pingoptions);
-
-         if (pr.Status == IPStatus.Success)
-            MessageBox.Show("Ping на адрес " + HMI_Settings.IPADDRES_CLIENT + " успешно.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-         else
-            MessageBox.Show("Компьютер с адресом " + HMI_Settings.IPADDRES_CLIENT + " недоступен.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-
       /// <summary>
       /// команда на рестарт сервера
       /// </summary>
