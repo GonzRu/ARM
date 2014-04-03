@@ -64,22 +64,8 @@ namespace HMI_MT
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gbAvar = new System.Windows.Forms.GroupBox();
             this.dgvAvar = new System.Windows.Forms.DataGridView();
-            this.clmBlockTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmBlockName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmBlockId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmJumpAvarForm = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.clmIDAvar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmIdFcBlock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbOscill = new System.Windows.Forms.GroupBox();
             this.dgvOscill = new System.Windows.Forms.DataGridView();
-            this.clmBlockNameOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmBlockIdOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmCommentOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmBlockTimeOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmTimeFCOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmViewOsc = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.clmID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tpLogSystemFull = new System.Windows.Forms.TabPage();
             this.lstvLogSystemFull = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -111,6 +97,11 @@ namespace HMI_MT
             this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ShowMessagesCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.MessagesCountLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.autoUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.updateButton = new System.Windows.Forms.Button();
@@ -120,13 +111,19 @@ namespace HMI_MT
             this.DeviceTypesComboBox = new System.Windows.Forms.ComboBox();
             this.kvitAllButton = new System.Windows.Forms.Button();
             this.kvitSelectMsgButton = new System.Windows.Forms.Button();
+            this.clmBlockNameOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmCommentOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmBlockTimeOsc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmViewOsc = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.clmID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.frmLogsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmLogsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.MessagesCountLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ShowMessagesCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.clmBlockName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmBlockTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmJumpAvarForm = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.clmIDAvar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmIdFcBlock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tpMessages.SuspendLayout();
             this.tpLogEventOKU_RZA.SuspendLayout();
@@ -149,13 +146,13 @@ namespace HMI_MT
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowMessagesCountNumericUpDown)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.kvitirovanieGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource1)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShowMessagesCountNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -241,7 +238,7 @@ namespace HMI_MT
             this.tpLogEventOKU_RZA.Location = new System.Drawing.Point(4, 22);
             this.tpLogEventOKU_RZA.Name = "tpLogEventOKU_RZA";
             this.tpLogEventOKU_RZA.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogEventOKU_RZA.Size = new System.Drawing.Size(1002, 482);
+            this.tpLogEventOKU_RZA.Size = new System.Drawing.Size(1464, 539);
             this.tpLogEventOKU_RZA.TabIndex = 0;
             this.tpLogEventOKU_RZA.Text = "События ОКУ и РЗА";
             this.tpLogEventOKU_RZA.Enter += new System.EventHandler(this.tpLogEventOKU_RZA_Enter);
@@ -261,7 +258,7 @@ namespace HMI_MT
             this.lstvEvent.HideSelection = false;
             this.lstvEvent.Location = new System.Drawing.Point(3, 3);
             this.lstvEvent.Name = "lstvEvent";
-            this.lstvEvent.Size = new System.Drawing.Size(996, 476);
+            this.lstvEvent.Size = new System.Drawing.Size(1458, 533);
             this.lstvEvent.TabIndex = 0;
             this.lstvEvent.UseCompatibleStateImageBehavior = false;
             this.lstvEvent.View = System.Windows.Forms.View.Details;
@@ -313,7 +310,7 @@ namespace HMI_MT
             this.tpLogActionUsers.Location = new System.Drawing.Point(4, 22);
             this.tpLogActionUsers.Name = "tpLogActionUsers";
             this.tpLogActionUsers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogActionUsers.Size = new System.Drawing.Size(1002, 482);
+            this.tpLogActionUsers.Size = new System.Drawing.Size(1464, 539);
             this.tpLogActionUsers.TabIndex = 1;
             this.tpLogActionUsers.Text = "Действия пользователей";
             this.tpLogActionUsers.Enter += new System.EventHandler(this.tpLogActionUsers_Enter);
@@ -335,7 +332,7 @@ namespace HMI_MT
             this.lstvUserAction.Location = new System.Drawing.Point(3, 3);
             this.lstvUserAction.MultiSelect = false;
             this.lstvUserAction.Name = "lstvUserAction";
-            this.lstvUserAction.Size = new System.Drawing.Size(996, 476);
+            this.lstvUserAction.Size = new System.Drawing.Size(1458, 533);
             this.lstvUserAction.TabIndex = 0;
             this.lstvUserAction.UseCompatibleStateImageBehavior = false;
             this.lstvUserAction.View = System.Windows.Forms.View.Details;
@@ -392,7 +389,7 @@ namespace HMI_MT
             this.tpLogSummaryAvarOsc.Location = new System.Drawing.Point(4, 22);
             this.tpLogSummaryAvarOsc.Name = "tpLogSummaryAvarOsc";
             this.tpLogSummaryAvarOsc.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogSummaryAvarOsc.Size = new System.Drawing.Size(1002, 482);
+            this.tpLogSummaryAvarOsc.Size = new System.Drawing.Size(1464, 539);
             this.tpLogSummaryAvarOsc.TabIndex = 2;
             this.tpLogSummaryAvarOsc.Text = "Сводный список аварий и осциллограмм";
             this.tpLogSummaryAvarOsc.Enter += new System.EventHandler(this.tpLogSummaryAvarOsc_Enter);
@@ -410,8 +407,8 @@ namespace HMI_MT
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gbOscill);
-            this.splitContainer1.Size = new System.Drawing.Size(996, 476);
-            this.splitContainer1.SplitterDistance = 504;
+            this.splitContainer1.Size = new System.Drawing.Size(1458, 533);
+            this.splitContainer1.SplitterDistance = 737;
             this.splitContainer1.TabIndex = 1;
             // 
             // gbAvar
@@ -420,7 +417,7 @@ namespace HMI_MT
             this.gbAvar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAvar.Location = new System.Drawing.Point(0, 0);
             this.gbAvar.Name = "gbAvar";
-            this.gbAvar.Size = new System.Drawing.Size(504, 476);
+            this.gbAvar.Size = new System.Drawing.Size(737, 533);
             this.gbAvar.TabIndex = 1;
             this.gbAvar.TabStop = false;
             this.gbAvar.Text = "Аварии";
@@ -435,10 +432,9 @@ namespace HMI_MT
             this.dgvAvar.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvAvar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAvar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmBlockTime,
-            this.clmComment,
             this.clmBlockName,
-            this.clmBlockId,
+            this.clmComment,
+            this.clmBlockTime,
             this.clmJumpAvarForm,
             this.clmIDAvar,
             this.clmIdFcBlock});
@@ -448,60 +444,9 @@ namespace HMI_MT
             this.dgvAvar.Name = "dgvAvar";
             this.dgvAvar.ReadOnly = true;
             this.dgvAvar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAvar.Size = new System.Drawing.Size(498, 457);
+            this.dgvAvar.Size = new System.Drawing.Size(731, 514);
             this.dgvAvar.TabIndex = 0;
             this.dgvAvar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAvar_CellContentClick);
-            // 
-            // clmBlockTime
-            // 
-            this.clmBlockTime.HeaderText = "Время блока";
-            this.clmBlockTime.Name = "clmBlockTime";
-            this.clmBlockTime.ReadOnly = true;
-            this.clmBlockTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmComment
-            // 
-            this.clmComment.HeaderText = "Комментарий к блоку";
-            this.clmComment.Name = "clmComment";
-            this.clmComment.ReadOnly = true;
-            this.clmComment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmBlockName
-            // 
-            this.clmBlockName.HeaderText = "Имя блока";
-            this.clmBlockName.Name = "clmBlockName";
-            this.clmBlockName.ReadOnly = true;
-            this.clmBlockName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmBlockId
-            // 
-            this.clmBlockId.HeaderText = "Комментарий";
-            this.clmBlockId.MinimumWidth = 2;
-            this.clmBlockId.Name = "clmBlockId";
-            this.clmBlockId.ReadOnly = true;
-            this.clmBlockId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmJumpAvarForm
-            // 
-            this.clmJumpAvarForm.HeaderText = "Просмотр данных аварии";
-            this.clmJumpAvarForm.Name = "clmJumpAvarForm";
-            this.clmJumpAvarForm.ReadOnly = true;
-            this.clmJumpAvarForm.Text = "Просмотр";
-            this.clmJumpAvarForm.UseColumnTextForButtonValue = true;
-            // 
-            // clmIDAvar
-            // 
-            this.clmIDAvar.HeaderText = "";
-            this.clmIDAvar.Name = "clmIDAvar";
-            this.clmIDAvar.ReadOnly = true;
-            this.clmIDAvar.Visible = false;
-            // 
-            // clmIdFcBlock
-            // 
-            this.clmIdFcBlock.HeaderText = "";
-            this.clmIdFcBlock.Name = "clmIdFcBlock";
-            this.clmIdFcBlock.ReadOnly = true;
-            this.clmIdFcBlock.Visible = false;
             // 
             // gbOscill
             // 
@@ -509,7 +454,7 @@ namespace HMI_MT
             this.gbOscill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbOscill.Location = new System.Drawing.Point(0, 0);
             this.gbOscill.Name = "gbOscill";
-            this.gbOscill.Size = new System.Drawing.Size(488, 476);
+            this.gbOscill.Size = new System.Drawing.Size(717, 533);
             this.gbOscill.TabIndex = 2;
             this.gbOscill.TabStop = false;
             this.gbOscill.Text = "Осциллограммы и диаграммы";
@@ -524,10 +469,8 @@ namespace HMI_MT
             this.dgvOscill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOscill.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmBlockNameOsc,
-            this.clmBlockIdOsc,
             this.clmCommentOsc,
             this.clmBlockTimeOsc,
-            this.clmTimeFCOsc,
             this.clmViewOsc,
             this.clmID});
             this.dgvOscill.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -536,59 +479,9 @@ namespace HMI_MT
             this.dgvOscill.Name = "dgvOscill";
             this.dgvOscill.ReadOnly = true;
             this.dgvOscill.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOscill.Size = new System.Drawing.Size(482, 457);
+            this.dgvOscill.Size = new System.Drawing.Size(711, 514);
             this.dgvOscill.TabIndex = 0;
             this.dgvOscill.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOscill_CellContentClick);
-            // 
-            // clmBlockNameOsc
-            // 
-            this.clmBlockNameOsc.HeaderText = "Имя блока";
-            this.clmBlockNameOsc.Name = "clmBlockNameOsc";
-            this.clmBlockNameOsc.ReadOnly = true;
-            this.clmBlockNameOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmBlockIdOsc
-            // 
-            this.clmBlockIdOsc.HeaderText = "Идентификатор блока";
-            this.clmBlockIdOsc.MinimumWidth = 2;
-            this.clmBlockIdOsc.Name = "clmBlockIdOsc";
-            this.clmBlockIdOsc.ReadOnly = true;
-            this.clmBlockIdOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmCommentOsc
-            // 
-            this.clmCommentOsc.HeaderText = "Комментарий";
-            this.clmCommentOsc.Name = "clmCommentOsc";
-            this.clmCommentOsc.ReadOnly = true;
-            this.clmCommentOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmBlockTimeOsc
-            // 
-            this.clmBlockTimeOsc.HeaderText = "Время блока";
-            this.clmBlockTimeOsc.Name = "clmBlockTimeOsc";
-            this.clmBlockTimeOsc.ReadOnly = true;
-            this.clmBlockTimeOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmTimeFCOsc
-            // 
-            this.clmTimeFCOsc.HeaderText = "Время Сервера";
-            this.clmTimeFCOsc.Name = "clmTimeFCOsc";
-            this.clmTimeFCOsc.ReadOnly = true;
-            this.clmTimeFCOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // clmViewOsc
-            // 
-            this.clmViewOsc.HeaderText = "Просмотр";
-            this.clmViewOsc.Name = "clmViewOsc";
-            this.clmViewOsc.ReadOnly = true;
-            // 
-            // clmID
-            // 
-            this.clmID.HeaderText = "Идентификатор";
-            this.clmID.Name = "clmID";
-            this.clmID.ReadOnly = true;
-            this.clmID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clmID.Visible = false;
             // 
             // tpLogSystemFull
             // 
@@ -597,7 +490,7 @@ namespace HMI_MT
             this.tpLogSystemFull.Location = new System.Drawing.Point(4, 22);
             this.tpLogSystemFull.Name = "tpLogSystemFull";
             this.tpLogSystemFull.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLogSystemFull.Size = new System.Drawing.Size(1002, 482);
+            this.tpLogSystemFull.Size = new System.Drawing.Size(1464, 539);
             this.tpLogSystemFull.TabIndex = 3;
             this.tpLogSystemFull.Text = "Сводный системный журнал";
             this.tpLogSystemFull.Enter += new System.EventHandler(this.tpLogSystemFull_Enter);
@@ -615,7 +508,7 @@ namespace HMI_MT
             this.lstvLogSystemFull.GridLines = true;
             this.lstvLogSystemFull.Location = new System.Drawing.Point(3, 3);
             this.lstvLogSystemFull.Name = "lstvLogSystemFull";
-            this.lstvLogSystemFull.Size = new System.Drawing.Size(996, 476);
+            this.lstvLogSystemFull.Size = new System.Drawing.Size(1458, 533);
             this.lstvLogSystemFull.TabIndex = 0;
             this.lstvLogSystemFull.UseCompatibleStateImageBehavior = false;
             this.lstvLogSystemFull.View = System.Windows.Forms.View.Details;
@@ -889,6 +782,69 @@ namespace HMI_MT
             this.panel1.Size = new System.Drawing.Size(1472, 100);
             this.panel1.TabIndex = 2;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.ShowMessagesCountNumericUpDown);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.MessagesCountLabel);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Location = new System.Drawing.Point(1025, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(328, 80);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Количество сообщений";
+            // 
+            // ShowMessagesCountNumericUpDown
+            // 
+            this.ShowMessagesCountNumericUpDown.Location = new System.Drawing.Point(179, 46);
+            this.ShowMessagesCountNumericUpDown.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.ShowMessagesCountNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ShowMessagesCountNumericUpDown.Name = "ShowMessagesCountNumericUpDown";
+            this.ShowMessagesCountNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.ShowMessagesCountNumericUpDown.TabIndex = 4;
+            this.ShowMessagesCountNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ShowMessagesCountNumericUpDown.ValueChanged += new System.EventHandler(this.ShowMessagesCountNumericUpDown_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(133, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Показывать сообщений:";
+            // 
+            // MessagesCountLabel
+            // 
+            this.MessagesCountLabel.AutoSize = true;
+            this.MessagesCountLabel.Location = new System.Drawing.Point(176, 21);
+            this.MessagesCountLabel.Name = "MessagesCountLabel";
+            this.MessagesCountLabel.Size = new System.Drawing.Size(29, 13);
+            this.MessagesCountLabel.TabIndex = 1;
+            this.MessagesCountLabel.Text = "NaN";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Всего сообщений:";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.autoUpdateCheckBox);
@@ -983,6 +939,46 @@ namespace HMI_MT
             this.kvitSelectMsgButton.UseVisualStyleBackColor = true;
             this.kvitSelectMsgButton.Click += new System.EventHandler(this.kvitSelectMsgButton_Click);
             // 
+            // clmBlockNameOsc
+            // 
+            this.clmBlockNameOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clmBlockNameOsc.HeaderText = "Тип блока";
+            this.clmBlockNameOsc.Name = "clmBlockNameOsc";
+            this.clmBlockNameOsc.ReadOnly = true;
+            this.clmBlockNameOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmBlockNameOsc.Width = 65;
+            // 
+            // clmCommentOsc
+            // 
+            this.clmCommentOsc.HeaderText = "Присоединение";
+            this.clmCommentOsc.Name = "clmCommentOsc";
+            this.clmCommentOsc.ReadOnly = true;
+            this.clmCommentOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // clmBlockTimeOsc
+            // 
+            this.clmBlockTimeOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clmBlockTimeOsc.HeaderText = "Время блока";
+            this.clmBlockTimeOsc.Name = "clmBlockTimeOsc";
+            this.clmBlockTimeOsc.ReadOnly = true;
+            this.clmBlockTimeOsc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmBlockTimeOsc.Width = 79;
+            // 
+            // clmViewOsc
+            // 
+            this.clmViewOsc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.clmViewOsc.HeaderText = "Просмотр";
+            this.clmViewOsc.Name = "clmViewOsc";
+            this.clmViewOsc.ReadOnly = true;
+            // 
+            // clmID
+            // 
+            this.clmID.HeaderText = "Идентификатор";
+            this.clmID.Name = "clmID";
+            this.clmID.ReadOnly = true;
+            this.clmID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmID.Visible = false;
+            // 
             // frmLogsBindingSource
             // 
             this.frmLogsBindingSource.DataSource = typeof(HMI_MT.frmLogs);
@@ -991,68 +987,58 @@ namespace HMI_MT
             // 
             this.frmLogsBindingSource1.DataSource = typeof(HMI_MT.frmLogs);
             // 
-            // groupBox3
+            // clmBlockName
             // 
-            this.groupBox3.Controls.Add(this.ShowMessagesCountNumericUpDown);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.MessagesCountLabel);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Location = new System.Drawing.Point(1025, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(328, 80);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Количество сообщений";
+            this.clmBlockName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clmBlockName.FillWeight = 181.2614F;
+            this.clmBlockName.HeaderText = "Тип блока";
+            this.clmBlockName.Name = "clmBlockName";
+            this.clmBlockName.ReadOnly = true;
+            this.clmBlockName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmBlockName.Width = 65;
             // 
-            // label1
+            // clmComment
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Всего сообщений:";
+            this.clmComment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.clmComment.FillWeight = 11.05808F;
+            this.clmComment.HeaderText = "Присоединение";
+            this.clmComment.Name = "clmComment";
+            this.clmComment.ReadOnly = true;
+            this.clmComment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // MessagesCountLabel
+            // clmBlockTime
             // 
-            this.MessagesCountLabel.AutoSize = true;
-            this.MessagesCountLabel.Location = new System.Drawing.Point(176, 21);
-            this.MessagesCountLabel.Name = "MessagesCountLabel";
-            this.MessagesCountLabel.Size = new System.Drawing.Size(29, 13);
-            this.MessagesCountLabel.TabIndex = 1;
-            this.MessagesCountLabel.Text = "NaN";
+            this.clmBlockTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clmBlockTime.FillWeight = 101.5228F;
+            this.clmBlockTime.HeaderText = "Время блока";
+            this.clmBlockTime.Name = "clmBlockTime";
+            this.clmBlockTime.ReadOnly = true;
+            this.clmBlockTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clmBlockTime.Width = 79;
             // 
-            // label3
+            // clmJumpAvarForm
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Показывать сообщений:";
+            this.clmJumpAvarForm.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.clmJumpAvarForm.FillWeight = 106.1577F;
+            this.clmJumpAvarForm.HeaderText = "Просмотр";
+            this.clmJumpAvarForm.Name = "clmJumpAvarForm";
+            this.clmJumpAvarForm.ReadOnly = true;
+            this.clmJumpAvarForm.Text = "Просмотр";
+            this.clmJumpAvarForm.UseColumnTextForButtonValue = true;
             // 
-            // ShowMessagesCountNumericUpDown
+            // clmIDAvar
             // 
-            this.ShowMessagesCountNumericUpDown.Location = new System.Drawing.Point(179, 46);
-            this.ShowMessagesCountNumericUpDown.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.ShowMessagesCountNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.ShowMessagesCountNumericUpDown.Name = "ShowMessagesCountNumericUpDown";
-            this.ShowMessagesCountNumericUpDown.Size = new System.Drawing.Size(120, 20);
-            this.ShowMessagesCountNumericUpDown.TabIndex = 4;
-            this.ShowMessagesCountNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.ShowMessagesCountNumericUpDown.ValueChanged += new System.EventHandler(this.ShowMessagesCountNumericUpDown_ValueChanged);
+            this.clmIDAvar.HeaderText = "";
+            this.clmIDAvar.Name = "clmIDAvar";
+            this.clmIDAvar.ReadOnly = true;
+            this.clmIDAvar.Visible = false;
+            // 
+            // clmIdFcBlock
+            // 
+            this.clmIdFcBlock.HeaderText = "";
+            this.clmIdFcBlock.Name = "clmIdFcBlock";
+            this.clmIdFcBlock.ReadOnly = true;
+            this.clmIdFcBlock.Visible = false;
             // 
             // frmLogs
             // 
@@ -1094,15 +1080,15 @@ namespace HMI_MT
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowMessagesCountNumericUpDown)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.kvitirovanieGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource1)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShowMessagesCountNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1167,20 +1153,6 @@ namespace HMI_MT
        private System.Windows.Forms.DataGridView dgvAvar;
        private System.Windows.Forms.GroupBox gbOscill;
        private System.Windows.Forms.DataGridView dgvOscill;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockNameOsc;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockIdOsc;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmCommentOsc;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockTimeOsc;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmTimeFCOsc;
-       private System.Windows.Forms.DataGridViewButtonColumn clmViewOsc;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmID;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockTime;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmComment;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockName;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockId;
-       private System.Windows.Forms.DataGridViewButtonColumn clmJumpAvarForm;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmIDAvar;
-       private System.Windows.Forms.DataGridViewTextBoxColumn clmIdFcBlock;
        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
        private System.Windows.Forms.TabPage tpMessages;
        private System.Windows.Forms.ListView messagesListView;
@@ -1205,5 +1177,16 @@ namespace HMI_MT
        private System.Windows.Forms.Label MessagesCountLabel;
        private System.Windows.Forms.Label label1;
        private System.Windows.Forms.NumericUpDown ShowMessagesCountNumericUpDown;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockNameOsc;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmCommentOsc;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockTimeOsc;
+       private System.Windows.Forms.DataGridViewButtonColumn clmViewOsc;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmID;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockName;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmComment;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockTime;
+       private System.Windows.Forms.DataGridViewButtonColumn clmJumpAvarForm;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmIDAvar;
+       private System.Windows.Forms.DataGridViewTextBoxColumn clmIdFcBlock;
     }
 }

@@ -842,16 +842,25 @@ namespace HMI_MT
             for( int curRow = 0; curRow < dtA.Rows.Count; curRow++ )
             {
                 int i = dgvAvar.Rows.Add();   // номер строки
-                DateTime tmpT = ( DateTime ) dtA.Rows[curRow]["TimeBlock"];
-                //string tmpTs = tmpT.ToString() + ":" + tmpT.Millisecond.ToString();
-                string tmpTs = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(tmpT);
-                //dgvAvar["clmBlockTime", i].Value = dtA.Rows[curRow]["TimeBlock"];
-                dgvAvar["clmBlockTime", i].Value = tmpTs;
-                dgvAvar["clmBlockId", i].Value = dtA.Rows[curRow]["BlockID"]; //dtA.Rows[curRow]["Arg1"];
-                dgvAvar["clmComment", i].Value = dtA.Rows[curRow]["Comment"];
+
+                var devGuid = uint.Parse(dtA.Rows[curRow]["BlockID"].ToString());
+                var device = HMI_Settings.CONFIGURATION.GetLink2Device(0, devGuid);
+
+                // Тип блока
                 dgvAvar["clmBlockName", i].Value = dtA.Rows[curRow]["BlockName"];
+
+                // Присоединение
+                if (HMI_Settings.IsDebugMode)
+                    dgvAvar["clmComment", i].Value = String.Format("({0}) {1} ({2})", devGuid, device.Description, device.TypeName);
+                else
+                    dgvAvar["clmComment", i].Value = device.Description;
+
+                // Время блока
+                DateTime tmpT = ( DateTime ) dtA.Rows[curRow]["TimeBlock"];
+                string tmpTs = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(tmpT);
+                dgvAvar["clmBlockTime", i].Value = tmpTs;
+                
                 dgvAvar["clmIDAvar", i].Value = dtA.Rows[curRow]["ID"];
-                //dgvAvar["clmIdFcBlock", i].Value = dtA.Rows[curRow]["Arg1"]; //dtA.Rows[curRow]["BlockID"];
                 
             }
 				aSDA.Dispose();
@@ -932,19 +941,25 @@ namespace HMI_MT
             for (int curRow = 0; curRow < dtog.Rows.Count; curRow++)
             {
                 int i = dgvOscill.Rows.Add();   // номер строки
-                dgvOscill["clmBlockNameOsc", i].Value = dtog.Rows[curRow]["BlockName"];
-                dgvOscill["clmBlockIdOsc", i].Value = dtog.Rows[curRow]["BlockID"];
 
+                var devGuid = uint.Parse(dtA.Rows[curRow]["BlockID"].ToString());
+                var device = HMI_Settings.CONFIGURATION.GetLink2Device(0, devGuid);
+
+                // Тип блока
+                dgvOscill["clmBlockNameOsc", i].Value = dtog.Rows[curRow]["BlockName"];
+
+                // Присоединение
+                if (HMI_Settings.IsDebugMode)
+                    dgvOscill["clmCommentOsc", i].Value = String.Format("({0}) {1} ({2})", devGuid, device.Description, device.TypeName);
+                else
+                    dgvOscill["clmCommentOsc", i].Value = device.Description;
+
+                // Время блока
                 DateTime tmpT = (DateTime)dtog.Rows[curRow]["TimeBlock"];
                 string tmpTs = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(tmpT);
                 dgvOscill["clmBlockTimeOsc", i].Value = tmpTs;
 
-                tmpT = (DateTime)dtog.Rows[curRow]["TimeFC"];
-                DateTime tmpTsLocal = tmpT.ToLocalTime();
-                tmpTs = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(tmpTsLocal);
-                dgvOscill["clmTimeFCOsc", i].Value = tmpTs;
-
-                dgvOscill["clmCommentOsc", i].Value = dtog.Rows[curRow]["Comment"];
+                // Идентификатор осциллограммы
                 dgvOscill["clmID", i].Value = dtog.Rows[curRow]["ID"];
 
                 //dgvOscill["clmViewOsc", i].Value = ; //"Осциллограмма";
