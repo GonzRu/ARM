@@ -942,7 +942,7 @@ namespace HMI_MT
             {
                 int i = dgvOscill.Rows.Add();   // номер строки
 
-                var devGuid = uint.Parse(dtA.Rows[curRow]["BlockID"].ToString());
+                var devGuid = uint.Parse(dtog.Rows[curRow]["BlockID"].ToString());
                 var device = HMI_Settings.CONFIGURATION.GetLink2Device(0, devGuid);
 
                 // Тип блока
