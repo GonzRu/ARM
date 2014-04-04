@@ -1026,6 +1026,7 @@ namespace HMI_MT
         {
             scDeviceObjectConfig.Visible = true;
         }
+
         /// <summary>
         /// Close tree
         /// </summary>
@@ -1033,6 +1034,15 @@ namespace HMI_MT
         {
             scDeviceObjectConfig.Visible = false;
         }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (scDeviceObjectConfig.Visible)
+                scDeviceObjectConfig.Visible = false;
+            else
+                scDeviceObjectConfig.Visible = true;
+        }
+
         /// <summary>
         /// Diagnostic panel
         /// </summary>
