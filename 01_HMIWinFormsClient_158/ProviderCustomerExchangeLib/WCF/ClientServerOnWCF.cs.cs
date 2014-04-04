@@ -58,19 +58,32 @@ namespace ProviderCustomerExchangeLib.WCF
                                      {
                                          try
                                          {
-                                             var idch = WCFproxy as IClientChannel;
+                                             timer.Stop();
+
+                                             var idch = WCFproxy as DSRouterClient;
                                              if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
                                              {
                                                  WCFproxy = null;
-                                                 if (this.CreateProxyFromCode() && OnProxyRecreated != null)
-                                                     OnProxyRecreated();
+                                                 if (this.CreateProxyFromCode())
+                                                 {
+                                                     if (OnProxyRecreated != null)
+                                                         OnProxyRecreated();
+
+                                                     if (OnDSCommunicationLoss != null)
+                                                         OnDSCommunicationLoss(false);
+                                                 }
                                              }
                                          }
                                          catch ( Exception exception )
                                          {
                                              TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( exception );
                                          }
+                                         finally
+                                         {
+                                             timer.Start();
+                                         }
                                      };
+                timer.Interval = 3000;
                 timer.Start( );
             }
             catch (Exception ex)
