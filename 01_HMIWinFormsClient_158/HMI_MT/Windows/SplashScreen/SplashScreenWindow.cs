@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Configuration;
-using DebugStatisticLibrary;
 using HMI_MT_Settings;
 using MessagePanel;
 using PTKStateLib;
@@ -41,6 +36,7 @@ namespace HMI_MT.Windows.SplashScreen
         {
             label1.Text = message;
             Application.DoEvents();
+            System.Threading.Thread.Sleep(400);
         }
 
         private void LoadConfiguration()
