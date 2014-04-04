@@ -41,7 +41,6 @@ using System.Xml.Linq;
 
 using Egida;
 
-using System.Net.NetworkInformation;
 using TraceSourceLib;
 using InterfaceLibrary;
 using HMI_MT_Settings;
@@ -57,9 +56,6 @@ namespace HMI_MT
 	/// </summary>
 	public partial class MainForm : Form
    {
-        [DllImport( "iphlpapi.dll", ExactSpelling = true )]
-        public static extern int SendARP( int DestIP, int SrcIP, [Out] byte[] pMacAddr, ref int PhyAddrLen );
-
 		#region public
 
 		public Form Form_ez;
