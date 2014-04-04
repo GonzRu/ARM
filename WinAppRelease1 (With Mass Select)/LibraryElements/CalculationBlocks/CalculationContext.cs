@@ -63,8 +63,11 @@ namespace LibraryElements.CalculationBlocks
 
             foreach ( SignalMatchRecord tag in calculation.GetTags( ) )
             {
-                tag.DsGuid = dsGuid;
-                tag.DevGuid = devGuid;
+                if (tag.DsGuid == 0 && tag.DevGuid == 0)
+                {
+                    tag.DsGuid = dsGuid;
+                    tag.DevGuid = devGuid;
+                }
             }
         }
 
