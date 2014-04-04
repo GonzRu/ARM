@@ -69,7 +69,6 @@ namespace HMI_MT
             this.sbMesIE = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbConnectBD = new System.Windows.Forms.ToolStripStatusLabel();
             this.sbConnectFC = new System.Windows.Forms.ToolStripStatusLabel();
-            this.timerDataTimeUpdate = new System.Windows.Forms.Timer(this.components);
             this.òåêóùååÂğåìÿToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -268,20 +267,20 @@ namespace HMI_MT
             this.îòêğûòüToolStripMenuItem,
             this.ñêğûòüToolStripMenuItem});
             this.äåğåâîToolStripMenuItem.Name = "äåğåâîToolStripMenuItem";
-            this.äåğåâîToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.äåğåâîToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.äåğåâîToolStripMenuItem.Text = "Äåğåâî";
             // 
             // îòêğûòüToolStripMenuItem
             // 
             this.îòêğûòüToolStripMenuItem.Name = "îòêğûòüToolStripMenuItem";
-            this.îòêğûòüToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.îòêğûòüToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.îòêğûòüToolStripMenuItem.Text = "Îòêğûòü";
             this.îòêğûòüToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonOpenTreeClick);
             // 
             // ñêğûòüToolStripMenuItem
             // 
             this.ñêğûòüToolStripMenuItem.Name = "ñêğûòüToolStripMenuItem";
-            this.ñêğûòüToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ñêğûòüToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.ñêğûòüToolStripMenuItem.Text = "Ñêğûòü";
             this.ñêğûòüToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonCloseTreeClick);
             // 
@@ -465,11 +464,6 @@ namespace HMI_MT
             this.sbConnectFC.Spring = true;
             this.sbConnectFC.Text = "Ñâÿçü ñ Ñåğâåğîì äàííûõ";
             this.sbConnectFC.ToolTipText = "dfsfsfsd";
-            // 
-            // timerDataTimeUpdate
-            // 
-            this.timerDataTimeUpdate.Interval = 1000;
-            this.timerDataTimeUpdate.Tick += new System.EventHandler(this.timerDataTimeUpdate_Tick);
             // 
             // òåêóùååÂğåìÿToolStripMenuItem
             // 
@@ -724,8 +718,7 @@ namespace HMI_MT
 		private System.Windows.Forms.ToolStripStatusLabel sbConnectBD;
         private System.Windows.Forms.ToolStripStatusLabel sbConnectFC;
 		private System.Windows.Forms.ToolStripMenuItem miToolStrip_currentData;
-		private System.Windows.Forms.ToolStripMenuItem òåêóùååÂğåìÿToolStripMenuItem;
-        private System.Windows.Forms.Timer timerDataTimeUpdate;
+        private System.Windows.Forms.ToolStripMenuItem òåêóùååÂğåìÿToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmTools;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuPrint;

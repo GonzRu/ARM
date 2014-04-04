@@ -21,8 +21,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
@@ -39,19 +37,15 @@ using System.IO;
 using System.Xml;
 using System.Diagnostics;
 using System.Reflection;
-using System.Linq;
 using System.Xml.Linq;
 
 using Egida;
 
 using System.Net.NetworkInformation;
-using MessagePanel;
 using TraceSourceLib;
 using InterfaceLibrary;
-using Configuration;
 using HMI_MT_Settings;
 using DataBaseLib;
-using PTKStateLib;
 using DebugStatisticLibrary;
 using HMI_MT.Properties;
 using NormalModeLibrary.Windows;
@@ -68,56 +62,51 @@ namespace HMI_MT
 
 		#region public
 
-		#region Для работы с новым DataServer
-        ///// <summary>
-        ///// компонент запросов к DS
-        ///// </summary>
-        //public IRequestEntry reqentry;
-        #endregion
+		public Form Form_ez;
 
-		public /*MainMnemo*/Form Form_ez;
 		/// <summary>
 		/// признак текущей связи с БД
 		/// </summary>
 		public bool isBDConnection = true;
+
 		/// <summary>
 		/// признак текущей связи с БД
 		/// </summary>
 		public bool isFCConnection = true;
+
 		/// <summary>
 		/// признак входа в систему без БД
 		/// </summary>
 		public bool loginToArmWOBD = false;
-		/// <summary>
-		/// путь к файлу конфиг. проекта Project.cfg
-		/// </summary>
-		public string PathToPrjFile = String.Empty;
+
 		/// <summary>
 		/// признак записи в БД изменения состояния работы Logger'а
 		/// 0 - логгер работает в обычном режиме;
 		/// 1 - логгер прекратил работу - производим запись в журналы
 		/// 2 - логгер возобновил работу -  производим запись в журналы
 		/// </summary>
-		public int isWriteMesLoggerAliveToBD = 0;	
+		public int isWriteMesLoggerAliveToBD = 0;
+
 		/// <summary>
 		/// массив форм для предотвращения повторного открытия
 		/// </summary>
 		public ArrayList arrFrm = new ArrayList();
-		// конфигурация
-		//public ArrayList KB;
-		//public Configurator newKB;
+
 		/// <summary>
 		/// времена и даты в разных форматах
 		/// </summary>
 		public string[] tsdt;
+
 		/// <summary>
 		/// файл журнала
 		/// </summary>
 		public string strLogFilename;
+
 		/// <summary>
 		/// класс для изменения элемента в статусной строке    
 		/// </summary>
 		public StatusBarLabel StatusBLabel;
+
     	public SYSTEMTIME systemTime;
 		/// <summary>
 		/// DataSet для перечня событий пользователя
@@ -125,15 +114,7 @@ namespace HMI_MT
         public DataSet aDS;
 		#endregion
 
-		#region Удаленное взаимодействие
-		public bool isTCPServer = false;
-		public bool isTCPClient = false;
-		public static byte[] servbuffer = new byte[4];
-		public static byte[] buffer = new byte[2000];
-		#endregion
-
 		#region private
-	    BackgroundWorker bct;
 
 	    private frmLogs Form_ev;
 	    private frmAutorization Form_ea;
@@ -151,9 +132,6 @@ namespace HMI_MT
         TreeViewLogicalConfig tvlc;
         
 		StringDictionary strDictionary = new StringDictionary(); // создание словаря для хранения перечня действий пользователя из БД;
-
-		Color oldColor;     // старый цвет для элементов строки статуса состояния связи с БД
-		Color oldColorFC;   // старый цвет для элементов строки статуса состояния связи с ФК
 
 	    private Form formClock;
 		#endregion
@@ -189,7 +167,7 @@ namespace HMI_MT
             }
 			catch(Exception ex)
 			{
-				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+				TraceSourceDiagMes.WriteDiagnosticMSG(ex);
 			}
         }
         #endregion
@@ -198,36 +176,16 @@ namespace HMI_MT
         private void MainForm_Load(object sender, EventArgs e)
         {
 			try
-			{
-                DebugStatistics.WindowStatistics.AddStatistic( "Запуск главной формы окна." );
-               
-                Application.DoEvents();
+            {
+                HMI_Settings.Link2MainForm = this;
 
-                DebugStatistics.WindowStatistics.AddStatistic( "Сбор путей к файлам конфигурации." );
-                // Сформировать имена конфигурац файлов проекта
-                SetNamesCfgPrgFiles();
-                DebugStatistics.WindowStatistics.AddStatistic( "Сбор путей к файлам конфигурации завершено." );
+                // подписка на потерю связи с DS
+                HMI_Settings.CONFIGURATION.OnConfigDSCommunicationLoss4Client += CONFIGURATION_OnConfigDSCommunicationLoss4Client;
 
-                DebugStatistics.WindowStatistics.AddStatistic( "Чтение конфигурации." );
-                GetAppSettings();
-                DebugStatistics.WindowStatistics.AddStatistic( "Чтение конфигурации завершено." );
+                ControlBox = MaximizeBox = MinimizeBox = Convert.ToBoolean(HMI_Settings.ViewBtn4MainWindow);
 
-                DebugStatistics.WindowStatistics.AddStatistic( "Сбор путей к файлам конфигурации." );
-                // применить некоторые настройки для данного этапа загрузки системы
-                ApplySomeAppSettings();
-                DebugStatistics.WindowStatistics.AddStatistic( "Сбор путей к файлам конфигурации завершено." );
-
-                DebugStatistics.WindowStatistics.AddStatistic( "Построение конфигурации." );
-                // иницилизировать конфигурацию
-                InitConfiguration();
-                DebugStatistics.WindowStatistics.AddStatistic( "Построение конфигурации завершено." );
-
-                HMI_Settings.MessageProvider = new MessageProvider(HMI_Settings.IPADDRES_SERVER);
-
-                DebugStatistics.WindowStatistics.AddStatistic( "Инициализация базы данных." );
                 // инициализировать настройки на базу данных (из файла Project.cfg)
                 InitSettingsToBD();
-                DebugStatistics.WindowStatistics.AddStatistic( "Инициализация базы данных завершено." );
 
                 #region к печати
                 //Определяем номер страницы, с которой следует начать печать
@@ -236,46 +194,16 @@ namespace HMI_MT
                 printDialog1.PrinterSettings.ToPage = printDialog1.PrinterSettings.MaximumPage;
                 #endregion
 
-                // фоновый поток для отслеживания времени
-                bct = new BackgroundWorker();
-                bct.DoWork += timerDataTimeUpdateInThread;
-
                 SetTitleMainWindowByPrgName();
 
                 sbMesIE.Text = SetAssemblyVertion();
-
-                CollectInfoAboutMenuToArray();
 
                 SetPositionAndSizeForMainForm();
 
                 bEnter = false;
 
-                oldColor = sbConnectBD.BackColor;
-                oldColorFC = sbConnectFC.BackColor;
-
-                //frmSpScr.Close();
-                Cursor.Show();
-
-                //DebugStatistics.WindowStatistics.AddStatistic( "Загрузка экранных часов." );
-                //// загрузка экранных часов
-                //this.RibbonButtonClockClick( sender, e );
-                //DebugStatistics.WindowStatistics.AddStatistic( "Загрузка экранных часов завершена." );
-
-                DebugStatistics.WindowStatistics.AddStatistic( "Загрузка параметров нормального режима." );
-                // загрузка данных панелей NormalMode
-                NormalModeLibrary.ComponentFactory.Factory.LoadXml();
-                DebugStatistics.WindowStatistics.AddStatistic( "Загрузка параметров нормального режима завершена." );
-
-                DebugStatistics.WindowStatistics.AddStatistic("Загрузка PanelState.xml");
-                PTKState.Iinstance.InitPTKStateInfo();
-                DebugStatistics.WindowStatistics.AddStatistic("Загрузка PanelState.xml завершена.");
-
-                // соберем мусор после загрузки
-                GC.Collect();
-
                 Application.OpenForms[0].Activate();
 
-                
                 scDeviceObjectConfig.Width = Settings.Default.SpeedAccessTreeViewWidth;
                 scDeviceObjectConfig.Resize += (s, args) =>
                                                    {
@@ -291,191 +219,10 @@ namespace HMI_MT
         }
 
         /// <summary>
-        /// Сформировать имена конфигурац файлов проекта
-        /// </summary>
-        private void SetNamesCfgPrgFiles()
-        {
-        	try
-			{
-                // проверяем существование файла конфигурации  проекта Project.cfg и файла конфигурации устройств проекта
-                PathToPrjFile = AppDomain.CurrentDomain.BaseDirectory + /*Path.DirectorySeparatorChar +*/ "Project" + Path.DirectorySeparatorChar + "Project.cfg";
-
-                if (!File.Exists(PathToPrjFile))
-                    throw new Exception("Файл проекта отсутствует: " + PathToPrjFile);
-
-                try
-                {
-                      PathToPrjFile = AppDomain.CurrentDomain.BaseDirectory + /*Path.DirectorySeparatorChar +*/ "Project" + Path.DirectorySeparatorChar + "Project.cfg";
-                      HMI_Settings.PathToPrjFile = PathToPrjFile;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(string.Format("(423) : MainForm.cs : SetNamesCfgPrgFiles() : Несуществующий файл = {0}", PathToPrjFile));
-                }
-
-                // проверяем существование файла конфигурации устройств проекта Configuration.cfg 
-                string PathToConfigurationFile = AppDomain.CurrentDomain.BaseDirectory + /*Path.DirectorySeparatorChar +*/ "Project" + Path.DirectorySeparatorChar + "Configuration.cfg";
-
-                if (!File.Exists(PathToConfigurationFile))
-                    throw new Exception("Файл конфигурации устройств проекта Configuration.cfg отсутствует: " + PathToConfigurationFile);
-
-                try
-                {
-                    HMI_Settings.PathToConfigurationFile = PathToConfigurationFile;
-                    HMI_Settings.XDoc4PathToConfigurationFile = XDocument.Load(HMI_Settings.PathToConfigurationFile);
-                }
-                catch
-                {
-                    throw new Exception(string.Format("(391) : MainForm.cs : SetNamesCfgPrgFiles() : Несуществующий файл = {0}", PathToConfigurationFile));
-                }
-
-                // смотрим существование папки для осциллограмм и диаграмм
-                CreateFolderForOscAndDiagram();
-
-                // проверяем существование файла с адаптерами для описания состояния ПТК
-                string PathToPanelStateFile = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + "PanelState.xml";
-
-                if ( File.Exists( PathToPanelStateFile ) )
-                {
-                    HMI_Settings.PathPanelState_xml = PathToPanelStateFile;
-                    HMI_Settings.XDoc4PathPanelState_xml = XDocument.Load(HMI_Settings.PathPanelState_xml);
-                }
-			    else
-                {
-                    //tsmiPanelState.Visible = false;
-                    TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 546, DateTime.Now.ToString() +
-                        " : (546)MainForm.cs : SetNamesCfgPrgFiles() : Файл описания панели состояния устройств проекта не найден" + PathToPanelStateFile);
-                }
-			}
-			catch(Exception ex)
-			{
-				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
-			}
-        }
-
-        /// <summary>
-        /// создать отдельную папку для хранения осциллограмм и диаграмм
-        /// </summary>
-        private void CreateFolderForOscAndDiagram()
-        {
-            try
-            {
-                if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms"))
-                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms");
-            }
-            catch (Exception ex)
-            {
-                TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-            }
-        }
-
-        #region инициализация настроек программы
-        /// <summary>
-        /// инициализировать статический класс с настройками для приложения
-        /// </summary>
-        private void GetAppSettings()
-        {
-            try
-			{
-                HMI_Settings.Link2MainForm = this;
-
-                // ip-адрес сервера для перезапуска
-                var xe_tcp = ( from t in HMI_Settings.XDoc4PathToConfigurationFile.Element( "Project" ).Element( "Configuration" ).Element( "Object" ).Elements( "DSAccessInfo" )
-                               where t.Attribute( "enable" ).Value.ToLower() == "true"
-                               select t ).Single();
-
-                HMI_Settings.IPADDRES_SERVER = xe_tcp.Element( "CustomiseDriverInfo").Element( "IPAddress" ).Attribute( "value" ).Value;
-
-                HMI_Settings.isRegPass = Convert.ToBoolean(HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("IsReqPassword").Value);
-                HMI_Settings.isNeedLoginAndPassword = bool.Parse(HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("IsNeedLoginAndPassword").Attribute("value").Value);
-                HMI_Settings.pathLogEvent_pnl4 = Properties.Settings.Default.PathToLogFile;
-                HMI_Settings.sizeLog_pnl4 = Properties.Settings.Default.LogFileMaxSize;
-                HMI_Settings.whatToDoLog_pnl4 = Properties.Settings.Default.WhatToDoLogFileMaxSize;
-                HMI_Settings.IsShowToolTip = Properties.Settings.Default.IsToolTipShow;
-                HMI_Settings.IsToolTipRefDesign = Properties.Settings.Default.IsToolTipRefDesign;
-                HMI_Settings.IsShowTabForms = Properties.Settings.Default.IsShowTabForms;
-                HMI_Settings.Precision = Properties.Settings.Default.Precision;
-                HMI_Settings.LogOnlyDisk = Properties.Settings.Default.LogOnlyDisk;
-                HMI_Settings.IPPointForSerializeMesPan = Properties.Settings.Default.IPPointForSerializeMesPan;
-                HMI_Settings.PortPointForSerializeMesPan = Properties.Settings.Default.PortPointForSerializeMesPan;
-                HMI_Settings.ViewBtn4MainWindow = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("ViewBtn4MainWindow").Value;
-                HMI_Settings.HideWindowLineStatus = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("HideWindowLineStatus").Value;
-                HMI_Settings.AuraUrl = HMI_Settings.XDoc4PathToPrjFile.Element( "Project" ).Element( "Aura" ).Attribute( "url" ).Value;
-                HMI_Settings.DiagnosticSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("DiagnosticSchema").Value;
-                HMI_Settings.MainMnenoSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("MainMnenoSchema").Value;
-
-                var DebugModeXElement = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("DebugMode");
-                if (DebugModeXElement != null)
-                    HMI_Settings.IsDebugMode = Boolean.Parse(DebugModeXElement.Attribute("enable").Value);
-
-			    var res = HMI_Settings.XDoc4PathToPrjFile.Element( "Project" ).Element( "SchemaTransform" ).Attribute( "x" ).Value;
-			    HMI_Settings.SchemaSize.X = float.Parse( res.Replace( '.', ',' ) );
-			    res = HMI_Settings.XDoc4PathToPrjFile.Element( "Project" ).Element( "SchemaTransform" ).Attribute( "y" ).Value;
-                HMI_Settings.SchemaSize.Y = float.Parse( res.Replace( '.', ',' ) );
-			}
-			catch(Exception ex)
-			{
-				TraceSourceDiagMes.WriteDiagnosticMSG(ex );
-			}
-        }
-        #endregion
-
-        private void ApplySomeAppSettings() { ControlBox = MaximizeBox = MinimizeBox = Convert.ToBoolean( HMI_Settings.ViewBtn4MainWindow ); }
-
-      /// <summary>
-      /// инициализировать конфигурацию
-      /// </summary>
-	  private void InitConfiguration()
-	  {
-		  try
-		  {
-              // инициализируем компонент конфигурации
-              ConfigurationFactory cf = new ConfigurationFactory();
-              HMI_Settings.CONFIGURATION = cf.CreateConfiguration("OnlyMOACfg", HMI_Settings.PathToConfigurationFile);
-              // подписка на потерю связи с DS
-              HMI_Settings.CONFIGURATION.OnConfigDSCommunicationLoss4Client += CONFIGURATION_OnConfigDSCommunicationLoss4Client;
-              if (HMI_Settings.CONFIGURATION == null)
-                throw new Exception(@"(502) : X:\Projects\40_Tumen_GPP09\Client\HMI_MT\MainForm.cs : InitConfiguration() : некорректная конфигурация");
-              /*
-               * для нового варианта ПТК NewDS<->OldHMIClient
-               */
-              // формируем список доступных типов блоков архивной информации                
-              IEnumerable<XElement> xetypebloks = HMI_Settings.XDoc4PathToConfigurationFile.Element("Project").Element("TypeBlockData").Elements("Type");
-
-              foreach (XElement xetypeblok in xetypebloks)
-                  HMI_Settings.CONFIGURATION.SetTypeBlockArchivData(xetypeblok.Attribute("name").Value, xetypeblok.Attribute("value").Value);
-
-			  #region представление иерархии данных в виде дерева
-              //tvsd = new TreeViewSourceData();
-              //string path2Cfg = AppDomain.CurrentDomain.BaseDirectory + System.IO.Path.DirectorySeparatorChar + "Project" + System.IO.Path.DirectorySeparatorChar;
-              //tvsd.FillTreeView(path2Cfg, Configuration);
-              //frame1.Content = tvsd;
-              //tvsd.MouseDoubleClick += new MouseButtonEventHandler(tvsd_MouseDoubleClick);
-			  #endregion
-
-			  #region иницализация таймера обновления
-			  //tmrRenewInfo = new System.Timers.Timer();
-
-			  //tmrRenewInfo.Interval = 100;
-
-			  //tmrRenewInfo.Elapsed += new System.Timers.ElapsedEventHandler(tmrRenewInfo_Elapsed);
-			  //tmrRenewInfo.Stop();
-			  #endregion
-		  }
-		  catch (Exception ex)
-		  {
-			  TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-              throw ex;
-		  }
-	  }
-        
-        /// <summary>
         /// реакция на потерю связи с DS
         /// </summary>
-        /// <param name="state"></param>
       void CONFIGURATION_OnConfigDSCommunicationLoss4Client(bool state)
       {
-          ///* 
           // * информация о связи с фк поступает от сервера как пакет типа 8, 
           // * при его обработке устанавливаются признаки в классе фк для верхнего уровня
           // * и мы ими здесь пользуемся для отображения, кроме этого эти признаки используются 
@@ -497,6 +244,7 @@ namespace HMI_MT
           }
       }
 
+      #region Настройка БД
       /// <summary>
       /// формируем настройки на базу данных (из файла Project.cfg)
       /// </summary>
@@ -539,8 +287,9 @@ namespace HMI_MT
           }
           else
               LinkSetTextISB(sbConnectBD, "Есть связь с Базой данных", sbMesIE.BackColor); // для восстановления цвета взяли чужой фон
-
       }
+      #endregion Настройка БД
+
 
       /// <summary>
       /// инициализировать название главного окна именем проекта
@@ -580,15 +329,6 @@ namespace HMI_MT
       }
 
       /// <summary>
-      /// собрать информацию о меню в массив
-      /// </summary>
-      private void CollectInfoAboutMenuToArray(){
-          HMI_MT_Settings.HMI_Settings.alMenu = new ArrayList();
-          //HMI_MT_Settings.HMI_Settings.alMenu.Add(menuStrip1);
-          //HMI_MT_Settings.HMI_Settings.alMenu.Add(contextMenuStrip1);
-      }
-
-      /// <summary>
       /// установить размер и позицию главной формы
       /// </summary>
       private void SetPositionAndSizeForMainForm()
@@ -608,10 +348,6 @@ namespace HMI_MT
       /// <summary>
       /// Действия при активизации формы
       /// </summary>
-      /// <param Name="sender"></param>
-      ///
-      /// <param Name="e"></param>
-      //private void MainForm_Activated( object sender, EventArgs e )
       private void MainFormActivate()
       {
          if( bEnter )
@@ -619,9 +355,9 @@ namespace HMI_MT
 
          bEnter = true;  // значение при запуске
 
-         HMI_MT_Settings.HMI_Settings.CurrentDateTime = DateTime.Now;
+         HMI_Settings.CurrentDateTime = DateTime.Now;
 
-         tsdt = HMI_MT_Settings.HMI_Settings.CurrentDateTime.GetDateTimeFormats();
+         tsdt = HMI_Settings.CurrentDateTime.GetDateTimeFormats();
 
          aDS = new DataSet("ptk"); // инициашизация DataSet
 
@@ -773,20 +509,11 @@ namespace HMI_MT
       {
           DebugStatistics.WindowStatistics.AddStatistic( "Старт системы." );
 
-          // Установить всем тегам хорошее качество
-          //SetGoodQuality4AllTags();
-
           // читаем перечень событий пользователя
           GetUserAction();
 
           // запрашиваем логин
           GetLogin();
-
-          // настраиваем меню главной формы
-          //CommonUtils.CommonUtils.TestUserMenuRights(menuStrip1, HMI_MT_Settings.HMI_Settings.arrlUserMenu);
-
-          //загружаем профайл пользователя
-          //LoadUserProfile();
 
           // создаем главную мнемосхему
           //AddOwnedForm(frmSpScr);
@@ -812,22 +539,16 @@ namespace HMI_MT
           DebugStatistics.WindowStatistics.AddStatistic( "Старт системы с ограничениями." );
 
           isBDConnection = false;
-          oldColor = sbConnectBD.BackColor;
 
           LinkSetTextISB(sbConnectBD, "Нет связи с БД", Color.Yellow);
-          //LinkSetLV( null, true );    // очищаем ListView для обновления  
 
           // событие начала работы без БД
-          CommonUtils.CommonUtils.WriteEventToLog(1, "Вход в систему без БД",  false);//, true, false );
+          CommonUtils.CommonUtils.WriteEventToLog(1, "Вход в систему без БД",  false);
 
           loginToArmWOBD = true;	// устанавливаем признак входа в систему без БД
 
           // права
           HMI_Settings.UserRight = "11111111111111111111111111111111";
-          
-          //DeviceFormLib.DebugStatistics.WindowStatistics.AddStatistic( "Подготовка к запуску мнемосхемы." );
-          // создаем главную мнемосхему
-          //CreateMainMnemo(); //Отключено по причине того, что при загрузке без соединения схема мало нужна
       }
       #endregion
 
@@ -1219,217 +940,7 @@ namespace HMI_MT
         #endregion
       #endregion
 
-      #region Журналы
-		/// <summary>
-		/// разрешаем MAC-адрес
-		/// </summary>
-		/// <param Name="ipadr"></param>
-		/// <returns></returns>
-		  private string GetMACOnIP(IPAddress ipadr)
-		  {
-			  byte[] ab = new byte[6];
-			  int len = ab.Length;
-			  int r = SendARP(BitConverter.ToInt32(ipadr.GetAddressBytes(), 0), 0, ab, ref len); //( int ) TempA.Address
-
-			  return BitConverter.ToString(ab, 0, 6);
-		  }
-
-      private void просмотрЛокальногоЖурналаToolStripMenuItem_Click( object sender, EventArgs e )
-        {
-			  frmLogLocal fll = new frmLogLocal();
-			  fll.Show();
-        }
-      #endregion
-
-      #region Конфигурация и ФК
-      #region проверка связи с ФК
-      private void timerTestFCConnect_Tick( object sender, EventArgs e )
-      {
-         ///* 
-         // * информация о связи с фк поступает от сервера как пакет типа 8, 
-         // * при его обработке устанавливаются признаки в классе фк для верхнего уровня
-         // * и мы ими здесь пользуемся для отображения, кроме этого эти признаки используются 
-         // * в функции Configurator.ReceivePacketInThread()
-         // */
-         //if ( KB == null )
-         //   return;
-
-         //bool noConnect = false;  // общий признак отсутсвия связи с каким-то фк
-
-         //// контролируем связь с ФК, заодно контроллируем связь с БД
-         //foreach( DataSource aFC in KB )
-         //{
-         //   if( aFC.isLostConnection )
-         //         noConnect = true;
-         //}
-
-         //StringBuilder sbm_noConnection = new StringBuilder( );
-
-         //// формируем итоговое сообщение в строке статуса о состоянии фк    
-         //if( noConnect )
-         //{
-         //   sbm_noConnection.Append( "Нет связи с ФК № " );
-
-         //   foreach( DataSource aFC in KB )
-         //      if( aFC.isLostConnection )
-         //         sbm_noConnection.Append( aFC.NumFC.ToString() + ';' );
-
-         //   LinkSetTextISB( sbConnectFC, sbm_noConnection.ToString( ), Color.Yellow );
-         //}
-         //else
-         //{
-         //   LinkSetTextISB( sbConnectFC, "Есть связь с ФК", toolStripStatusLabelClock.BackColor ); // для восстановления цвета взяли чужой фон
-         //}
-      }
-      #endregion
-
-      #region синхронизация и обновление времени
-      /// <summary>
-      /// private void timerDataTimeUpdate_Tick()
-      ///     тик таймера - обновление времени в статусной строке
-      /// </summary>
-      private void timerDataTimeUpdate_Tick( object sender, EventArgs e )
-      {
-         if (!bct.IsBusy)
-            bct.RunWorkerAsync( );
-      }
-
-      private void timerDataTimeUpdateInThread( object sender, DoWorkEventArgs e )
-      {
-      //    // пока для Тихвина закомментировал
-      //    //if ( HMI_Settings.IsTCPClient )
-      //    //{
-      //    //    newKB.CRZATimeFC = remoteObj.GetServerTime();
-
-
-      //    //    try
-      //    //    {
-      //    //        remoteSecClientObj.SetTime(newKB.CRZATimeFC);
-
-      //    //    }
-      //    //    catch (Exception er)
-
-      //    //    {
-      //    //        MessageBox.Show(er.Message, this.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-      //    //    }
-      //    //}
-
-      //   // если нужно синхронизируем время с ФК
-      //   if (currCountSynhr >= countSynhr) // количество попыток чтения времени 
-      //   {
-      //      currCountSynhr = 0;
-
-      //      if (newKB.CRZATimeFC == DateTime.MinValue || newKB.CRZATimeFC.Year == 1970 || !isFCConnection)
-      //         return;
-
-      //      systemTime.wYear = ( ushort )newKB.CRZATimeFC.Year;
-      //      systemTime.wMonth = ( ushort )newKB.CRZATimeFC.Month;
-      //      systemTime.wDayOfWeek = ( ushort )newKB.CRZATimeFC.DayOfWeek;
-      //      systemTime.wDay = ( ushort )newKB.CRZATimeFC.Day;
-      //      systemTime.wHour = ( ushort )newKB.CRZATimeFC.Hour;
-      //      systemTime.wMinute = ( ushort )newKB.CRZATimeFC.Minute;
-      //      systemTime.wSecond = ( ushort )newKB.CRZATimeFC.Second;
-      //      systemTime.wMilliseconds = ( ushort )newKB.CRZATimeFC.Millisecond;
-
-      //      SetSystemTime( ref systemTime );
-      //   }
-
-      //   currCountSynhr++;
-
-      //   // создание текущего формата
-
-      //   if (dtFormat == DataTimeFormat.ShowClock)
-      //      panelInfo = DateTime.Now.ToLongTimeString( );
-      //   else if (dtFormat == DataTimeFormat.ShowDay)
-      //      panelInfo = DateTime.Now.ToShortDateString( );
-      //   else if (dtFormat == DataTimeFormat.ShowStorageStat)
-      //      panelInfo = newKB.netman.NumPacketsInNetPackQ.ToString( );
-
-      //   // времена и даты в разных форматах
-      //   CurrentDateTime = DateTime.Now;	// устанавливаем текущее время компьютера
-      //   tsdt = CurrentDateTime.GetDateTimeFormats( );
-
-      //   #region день недели
-      //   dayofw.Length = 0;
-      //   switch (CurrentDateTime.DayOfWeek.ToString())
-      //   {
-      //      case "Monday":
-      //         dayofw.Append("=понедельник=");
-      //         break;
-      //      case "Tuesday":
-      //         dayofw.Append("=вторник=");
-      //         break;
-      //      case "Wednesday":
-      //         dayofw.Append("=среда=");
-      //         break;
-      //      case "Thursday":
-      //         dayofw.Append("=четверг=");
-      //         break;
-      //      case "Friday":
-      //         dayofw.Append("=пятница=");
-      //         break;
-      //      case "Saturday":
-      //         dayofw.Append("=суббота=");
-      //         break;
-      //      case "Sunday":
-      //         dayofw.Append("=воскресенье=");
-      //         break;
-      //   }
-
-      //   #endregion
-
-      //   StatusBLabel.ShowStr("1_ShowDay", DateTime.Now.ToShortDateString(), Color.Black);
-      //   StatusBLabel.ShowStr("2_ShowDayOfWeek", dayofw.ToString(), Color.Blue);
-      //   StatusBLabel.ShowStr("3_ShowClock", DateTime.Now.ToLongTimeString(), Color.Black);
-         
-      //   panelInfo = (Process.GetCurrentProcess().WorkingSet64 / 1024).ToString() + "/" + (Process.GetCurrentProcess().VirtualMemorySize64 / 1024).ToString();
-      //   currentWorkingSet64 = Process.GetCurrentProcess().WorkingSet64;
-      //   currentVirtualMemorySize64 = Process.GetCurrentProcess().VirtualMemorySize64;
-
-      //   if (prevWorkingSet64 < currentWorkingSet64 || prevVirtualMemorySize64 < currentVirtualMemorySize64)
-      //      StatusBLabel.ShowStr("4_ShowStorageStat", panelInfo, Color.Red);
-      //   else
-      //      StatusBLabel.ShowStr("4_ShowStorageStat", panelInfo, Color.Black);
-
-      }
-      #endregion
-
-      #region периодический опрос нижнего уровня для обновления информации верхнего уровня
-      private void timer1_Tick( object sender, EventArgs e )
-      {
-         //newKB.ReceivePacket( );
-      }
-      #endregion
-      #endregion
-
       #region удаленное взаимодействие
-      /// <summary>
-      /// проверить доступность клиента
-      /// </summary>
-      /// <param Name="sender"></param>
-      /// <param Name="e"></param>
-      private void tsmiIsClientExist_Click(object sender, EventArgs e)
-      {
-         Ping ping2Client = new Ping();
-         PingOptions pingoptions = new PingOptions();
-
-         pingoptions.DontFragment = true;
-
-         // буфер 32 байта
-         string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-         byte[] buffer = Encoding.ASCII.GetBytes(data);
-         int timeout = 3000;
-
-         PingReply pr = ping2Client.Send(HMI_Settings.IPADDRES_CLIENT, timeout, buffer, pingoptions);
-
-         if (pr.Status == IPStatus.Success)
-            MessageBox.Show("Ping на адрес " + HMI_Settings.IPADDRES_CLIENT + " успешно.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-         else
-            MessageBox.Show("Компьютер с адресом " + HMI_Settings.IPADDRES_CLIENT + " недоступен.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-
       /// <summary>
       /// команда на рестарт сервера
       /// </summary>

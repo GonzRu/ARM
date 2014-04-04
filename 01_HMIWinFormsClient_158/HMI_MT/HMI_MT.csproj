@@ -216,6 +216,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Windows\SplashScreen\SplashScreenWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SplashScreen\SplashScreenWindow.Designer.cs">
+      <DependentUpon>SplashScreenWindow.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Windows\AboutForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutForm.cs</DependentUpon>
@@ -272,6 +278,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SplashScreen\SplashScreenWindow.resx">
+      <DependentUpon>SplashScreenWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -370,6 +379,7 @@
     <None Include="Resources\ViewCmds%2832p%29.png" />
     <None Include="Resources\SwitchUser%2832p%29.png" />
     <None Include="Resources\UserInformation%2832p%29.png" />
+    <None Include="Resources\SplashScreen.png" />
     <Content Include="Resources\SychronizeListHS.png" />
     <None Include="Resources\clock01.bmp" />
   </ItemGroup>
