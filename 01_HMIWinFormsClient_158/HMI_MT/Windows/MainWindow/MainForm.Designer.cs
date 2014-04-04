@@ -37,9 +37,6 @@ namespace HMI_MT
             this.блокировкаСистемыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.информацияОПользователеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuPageSetup = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPrintPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFontPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,9 +135,6 @@ namespace HMI_MT
             this.блокировкаСистемыToolStripMenuItem,
             this.информацияОПользователеToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.mnuPageSetup,
-            this.mnuPrintPreview,
-            this.mnuFontPrint,
             this.mnuPrint,
             this.toolStripSeparator2,
             this.выходToolStripMenuItem});
@@ -180,39 +174,6 @@ namespace HMI_MT
             this.toolStripMenuItem1.MergeIndex = 1;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(233, 6);
-            // 
-            // mnuPageSetup
-            // 
-            this.mnuPageSetup.Enabled = false;
-            this.mnuPageSetup.Image = global::HMI_MT.Properties.Resources.DRAW;
-            this.mnuPageSetup.MergeAction = System.Windows.Forms.MergeAction.Replace;
-            this.mnuPageSetup.MergeIndex = 1;
-            this.mnuPageSetup.Name = "mnuPageSetup";
-            this.mnuPageSetup.Size = new System.Drawing.Size(236, 22);
-            this.mnuPageSetup.Text = "Параметры страницы";
-            this.mnuPageSetup.Click += new System.EventHandler(this.RibbonMenuButtonPageSetupClick);
-            // 
-            // mnuPrintPreview
-            // 
-            this.mnuPrintPreview.Enabled = false;
-            this.mnuPrintPreview.Image = global::HMI_MT.Properties.Resources.Xena_Scroll;
-            this.mnuPrintPreview.MergeAction = System.Windows.Forms.MergeAction.Replace;
-            this.mnuPrintPreview.MergeIndex = 1;
-            this.mnuPrintPreview.Name = "mnuPrintPreview";
-            this.mnuPrintPreview.Size = new System.Drawing.Size(236, 22);
-            this.mnuPrintPreview.Text = "Предварительный просмотр";
-            this.mnuPrintPreview.Click += new System.EventHandler(this.RibbonMenuButtonPreviewPageClick);
-            // 
-            // mnuFontPrint
-            // 
-            this.mnuFontPrint.Enabled = false;
-            this.mnuFontPrint.Image = global::HMI_MT.Properties.Resources.FONT02;
-            this.mnuFontPrint.MergeAction = System.Windows.Forms.MergeAction.Replace;
-            this.mnuFontPrint.MergeIndex = 1;
-            this.mnuFontPrint.Name = "mnuFontPrint";
-            this.mnuFontPrint.Size = new System.Drawing.Size(236, 22);
-            this.mnuFontPrint.Text = "Шрифт для печати";
-            this.mnuFontPrint.Click += new System.EventHandler(this.RibbonMenuButtonPageFontClick);
             // 
             // mnuPrint
             // 
@@ -722,13 +683,10 @@ namespace HMI_MT
         private System.Windows.Forms.ToolStripMenuItem tsmTools;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuPrint;
-        private System.Windows.Forms.ToolStripMenuItem mnuPageSetup;
-        private System.Windows.Forms.ToolStripMenuItem mnuPrintPreview;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.PrintDialog printDialog1;
-        private System.Windows.Forms.ToolStripMenuItem mnuFontPrint;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Timer timerSynhrTime;

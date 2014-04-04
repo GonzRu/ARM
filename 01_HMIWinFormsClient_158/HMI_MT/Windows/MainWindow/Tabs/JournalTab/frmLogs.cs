@@ -673,7 +673,6 @@ namespace HMI_MT
 
         private void mnuPageSetup_Click( object sender, EventArgs e )
         {
-            parent.RibbonMenuButtonPageSetupClick( sender, e );
         }
 
         private void mnuPrintPreview_Click( object sender, EventArgs e )
@@ -738,7 +737,6 @@ namespace HMI_MT
                 default:
                     return;
             }
-            parent.RibbonMenuButtonPreviewPageClick( sender,  e );
         }
         /// <summary>
         /// private void EventBD( )

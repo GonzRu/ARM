@@ -1315,38 +1315,7 @@ namespace HMI_MT
 
             form.Print( );
         }
-        /// <summary>
-        /// Page setup
-        /// </summary>
-        internal void RibbonMenuButtonPageSetupClick( object sender, EventArgs e )
-        {
-            ////Показываем диалог
-            //pageSetupDialog1.ShowDialog();
-        }
-        /// <summary>
-        /// Preview page
-        /// </summary>
-        internal void RibbonMenuButtonPreviewPageClick( object sender, EventArgs e )
-        {
-            ////Инициализируем переменные
-            //printDocument1.DocumentName = Text;
-            //stringPrintText = prt.rtbText.Text;
-            //StartPage = 1;
-            //NumPages = printDialog1.PrinterSettings.MaximumPage;
-            //PageNumber = 1;
-            ////Показываем диалог
-            //printPreviewDialog1.ShowDialog();
-            //prt.rtbText.Clear();
-        }
-        /// <summary>
-        /// Page font
-        /// </summary>
-        private void RibbonMenuButtonPageFontClick( object sender, EventArgs e )
-        {
-            //fontDialog1.Font = font;
-            //if ( fontDialog1.ShowDialog() == DialogResult.OK )
-            //    font = fontDialog1.Font;
-        }
+
         /// <summary>
         /// РАПС Аура
         /// </summary>
