@@ -63,9 +63,8 @@ namespace HMI_MT.Windows.SplashScreen
             ShowProgressMessage("Загрузка привязки состояний...");
             PTKState.Iinstance.InitPTKStateInfo();
 
+            ShowProgressMessage("Подсоединение к серверу данных...");
             HMI_Settings.MessageProvider = new MessageProvider(HMI_Settings.IPADDRES_SERVER);
-
-
         }
 
         /// <summary>
