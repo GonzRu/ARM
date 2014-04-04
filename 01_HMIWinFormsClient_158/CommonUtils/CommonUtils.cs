@@ -290,14 +290,19 @@ namespace CommonUtils
                     }
                     #endregion
 
-                    if (!state || !PTKState.Iinstance.IsAdapterExist(dsGuid, devGuid, content.Command))
+                    if (!PTKState.Iinstance.IsAdapterExist(dsGuid, devGuid, content.Command))
+                        if (!state)
+                            tsi.Enabled = tsi.Visible = false;
+                        else
+                            tsi.Enabled = tsi.Visible = true;
+                    else if (!state)
                         tsi.Enabled = tsi.Visible = false;
                     else
                     {
                         bool cmd;
                         bool.TryParse(PTKState.Iinstance.GetValueAsString(dsGuid, devGuid, content.Command), out cmd);
 
-                        switch ( content.Parameter )
+                        switch (content.Parameter)
                         {
                             case "normal":
                                 tsi.Enabled = cmd;
