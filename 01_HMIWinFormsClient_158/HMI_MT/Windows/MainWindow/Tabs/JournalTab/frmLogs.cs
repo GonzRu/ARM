@@ -92,8 +92,12 @@ namespace HMI_MT
             #endregion
         }
 
-        private void frmLogs_Activated(object sender, EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
+            base.OnShown(e);
+
+            Application.DoEvents();
+
             ShowMessagesCountNumericUpDown.Value = HMI_Settings.MessageProvider.MessageCount; // ֲûחמגוע DisplayMessages();
         }
 
