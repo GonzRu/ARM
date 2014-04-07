@@ -883,7 +883,7 @@ namespace CommonUtils
                 SqlParameter ptimeEvent = new SqlParameter();
                 ptimeEvent.ParameterName = "@Time";
                 ptimeEvent.SqlDbType = SqlDbType.DateTime;
-                ptimeEvent.Value = HMI_MT_Settings.HMI_Settings.CurrentDateTime;
+                ptimeEvent.Value = DateTime.Now;
                 ptimeEvent.Direction = ParameterDirection.Input;
                 cmd.Parameters.Add( ptimeEvent );
                 // 4. ip адрес компьютера
