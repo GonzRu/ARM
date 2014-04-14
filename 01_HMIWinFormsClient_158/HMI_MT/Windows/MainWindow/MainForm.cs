@@ -150,6 +150,7 @@ namespace HMI_MT
         public MainForm()
         {
             InitializeComponent();
+
             try
 			{
                 this.DoubleBuffered = true;
@@ -159,7 +160,10 @@ namespace HMI_MT
                 BackColor = Color.LightCyan;
                 Cursor = Cursors.Default;//.Hand;
                 CheckForIllegalCrossThreadCalls = false;
-            }
+
+			    if (String.IsNullOrEmpty(HMI_Settings.AuraUrl))
+			        ðÀÏÑÀóðàToolStripMenuItem.Visible = false;
+			}
 			catch(Exception ex)
 			{
 				TraceSourceDiagMes.WriteDiagnosticMSG(ex);

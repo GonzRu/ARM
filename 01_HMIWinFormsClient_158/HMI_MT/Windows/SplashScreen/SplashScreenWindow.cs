@@ -199,14 +199,20 @@ namespace HMI_MT.Windows.SplashScreen
                 HMI_Settings.IPPointForSerializeMesPan = Properties.Settings.Default.IPPointForSerializeMesPan;
                 HMI_Settings.PortPointForSerializeMesPan = Properties.Settings.Default.PortPointForSerializeMesPan;
                 HMI_Settings.ViewBtn4MainWindow = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("ViewBtn4MainWindow").Value;
-                HMI_Settings.HideWindowLineStatus = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("HideWindowLineStatus").Value;
-                HMI_Settings.AuraUrl = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("Aura").Attribute("url").Value;
+                HMI_Settings.HideWindowLineStatus = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("HideWindowLineStatus").Value;                
                 HMI_Settings.DiagnosticSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("DiagnosticSchema").Value;
                 HMI_Settings.MainMnenoSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("MainMnenoSchema").Value;
 
+                // Debug Mode
                 var DebugModeXElement = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("DebugMode");
                 if (DebugModeXElement != null)
                     HMI_Settings.IsDebugMode = Boolean.Parse(DebugModeXElement.Attribute("enable").Value);
+
+                // AURA
+                if (HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("Aura") != null)
+                    HMI_Settings.AuraUrl = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("Aura").Attribute("url").Value;
+                else
+                    HMI_Settings.AuraUrl = String.Empty;
 
                 var res = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("SchemaTransform").Attribute("x").Value;
                 HMI_Settings.SchemaSize.X = float.Parse(res.Replace('.', ','));
