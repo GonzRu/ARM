@@ -209,10 +209,7 @@ namespace HMI_MT.Windows.SplashScreen
                     HMI_Settings.IsDebugMode = Boolean.Parse(DebugModeXElement.Attribute("enable").Value);
 
                 // AURA
-                if (HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("Aura") != null)
-                    HMI_Settings.AuraUrl = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("Aura").Attribute("url").Value;
-                else
-                    HMI_Settings.AuraUrl = String.Empty;
+                InitAura(HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("Aura"));
 
                 var res = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("SchemaTransform").Attribute("x").Value;
                 HMI_Settings.SchemaSize.X = float.Parse(res.Replace('.', ','));
@@ -272,6 +269,32 @@ namespace HMI_MT.Windows.SplashScreen
             {
                 TraceSourceDiagMes.WriteDiagnosticMSG(ex);
             }
+        }
+
+        void InitAura(XElement auraXElement)
+        {
+            // AURA
+            if (auraXElement != null)
+            {
+                try
+                {
+                    XAttribute auraEnableAttribute = auraXElement.Attribute("enable");
+                    if (auraEnableAttribute != null)
+                        if (Boolean.Parse(auraEnableAttribute.Value))
+                            HMI_Settings.AuraUrl = auraXElement.Attribute("url").Value;
+                        else HMI_Settings.AuraUrl = null;
+                    else
+                        HMI_Settings.AuraUrl = auraXElement.Attribute("url").Value;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Ошибка в секции настройки АУРы в файле Project.cfg");
+
+                    HMI_Settings.AuraUrl = null;
+                }
+            }
+            else
+                HMI_Settings.AuraUrl = null;
         }
         #endregion Private Metods
     }
