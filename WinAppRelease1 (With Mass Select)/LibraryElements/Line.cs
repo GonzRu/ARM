@@ -70,7 +70,7 @@ namespace LibraryElements
       /// <returns>true если точка лежит в диапозоне на линии</returns>
       private bool CheckVerticalPoints(Point _pnt, PointF _stpnt, PointF _fnpnt)
       {
-         int shift = 10;
+         int shift = 5;
          double x, y, x1, y1, x2, y2;
          x = _pnt.X;
          y = _pnt.Y;
@@ -100,7 +100,7 @@ namespace LibraryElements
       /// <returns>true если точка лежит в диапозоне на линии</returns>
       private bool CheckHorisontalPoints(Point _pnt, PointF _stpnt, PointF _fnpnt)
       {
-         int shift = 10;
+         int shift = 5;
          double x, y, x1, y1, x2, y2;
          x = _pnt.X;
          y = _pnt.Y;
