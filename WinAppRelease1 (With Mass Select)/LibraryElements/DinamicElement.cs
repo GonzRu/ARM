@@ -7,7 +7,7 @@ namespace LibraryElements
     /// </summary>
     public class DynamicParameters
     {
-        public DynamicParameters() { ToolTipMessage = Type = String.Empty; }
+        public DynamicParameters() { ToolTipMessage = Type = PathToExternalProgram = String.Empty; }
 
         /// <summary>
         /// Копирование элемента
