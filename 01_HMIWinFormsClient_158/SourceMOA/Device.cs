@@ -132,8 +132,14 @@ namespace SourceMOA
                     throw new Exception( string.Format( "(77) : Device.cs : Device() : Ошибка открытия файла {0}", path2f ) );
 
                 var xdoc_dev = new DeviceXDocument( path2f );
-                Name = xdoc_dev.GetDescriptInfo().Element( "DeviceType" ).Value;
-			    Version = xdoc_dev.GetDescriptInfo().Element( "DeviceVersion" ).Value;
+
+			    if (xdoc_dev.GetDescriptInfo() != null)
+			    {
+			        Name = xdoc_dev.GetDescriptInfo().Element("DeviceType").Value;
+			        Version = xdoc_dev.GetDescriptInfo().Element("DeviceVersion").Value;
+			    }
+			    else
+                    Console.WriteLine(String.Format("В файле описания устройства {0} отсутствует секция DescriptInfo.", UniObjectGUID));
 
 			    try
 			    {
@@ -205,7 +211,7 @@ namespace SourceMOA
 			}
 			catch (Exception ex)
 			{
-				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 0, "Произошла ошибка при иницилизации устройства № " + uniDS_GUID.ToString() + ". Текст ошибки: " + ex.Message);
 			}
 		}
         /// <summary>
