@@ -472,6 +472,9 @@ namespace OscillogramsLib
             case 10:  // Осциллограмма Экра
                ifa += ".dfr";
                break;
+             case 11:
+                 ifa += ".zbrs";
+                 break;
             default:
                System.Windows.Forms.MessageBox.Show("Осциллограмма/диаграмма типа " + it.ToString() + " не поддерживается.", "Просмотр осциллограмм/диаграмм", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                break;
