@@ -203,6 +203,7 @@ namespace HMI_MT
 
                 Application.OpenForms[0].Activate();
 
+                // Загрузка и сохранение ширины панели быстрого доступа
                 scDeviceObjectConfig.Width = Settings.Default.SpeedAccessTreeViewWidth;
                 scDeviceObjectConfig.Resize += (s, args) =>
                                                    {
