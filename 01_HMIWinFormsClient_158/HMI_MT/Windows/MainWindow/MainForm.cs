@@ -1059,6 +1059,14 @@ namespace HMI_MT
                 return;
             }
 
+            Form[] arrF = this.MdiChildren;
+            for (int i = 0; i < arrF.Length; i++)
+                if (arrF[i].Name == "FrmDiagPanel")
+                {
+                    arrF[i].Focus();
+                    return;
+                }
+
             var diagPanel = new FrmDiagPanel( this ) { MdiParent = this };
             diagPanel.Show( );
         }
