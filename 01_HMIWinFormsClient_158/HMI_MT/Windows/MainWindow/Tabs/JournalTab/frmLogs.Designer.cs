@@ -102,11 +102,6 @@ namespace HMI_MT
             this.dtpStartTime = new System.Windows.Forms.DateTimePicker();
             this.dtpStartData = new System.Windows.Forms.DateTimePicker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ñèñòåìàToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPageSetup = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPrintPreview = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -144,7 +139,6 @@ namespace HMI_MT
             ((System.ComponentModel.ISupportInitialize)(this.nudSec)).BeginInit();
             this.gbEndTime.SuspendLayout();
             this.gbStartTime.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -803,56 +797,6 @@ namespace HMI_MT
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ñèñòåìàToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1016, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.Visible = false;
-            // 
-            // ñèñòåìàToolStripMenuItem
-            // 
-            this.ñèñòåìàToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuPageSetup,
-            this.mnuPrintPreview,
-            this.mnuPrint});
-            this.ñèñòåìàToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
-            this.ñèñòåìàToolStripMenuItem.MergeIndex = 1;
-            this.ñèñòåìàToolStripMenuItem.Name = "ñèñòåìàToolStripMenuItem";
-            this.ñèñòåìàToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.ñèñòåìàToolStripMenuItem.Text = "Ñèñòåìà";
-            // 
-            // mnuPageSetup
-            // 
-            this.mnuPageSetup.MergeAction = System.Windows.Forms.MergeAction.Replace;
-            this.mnuPageSetup.MergeIndex = 1;
-            this.mnuPageSetup.Name = "mnuPageSetup";
-            this.mnuPageSetup.Size = new System.Drawing.Size(233, 22);
-            this.mnuPageSetup.Text = "Ïàðàìåòðû ñòðàíèöû";
-            this.mnuPageSetup.Click += new System.EventHandler(this.mnuPageSetup_Click);
-            // 
-            // mnuPrintPreview
-            // 
-            this.mnuPrintPreview.MergeAction = System.Windows.Forms.MergeAction.Replace;
-            this.mnuPrintPreview.MergeIndex = 1;
-            this.mnuPrintPreview.Name = "mnuPrintPreview";
-            this.mnuPrintPreview.Size = new System.Drawing.Size(233, 22);
-            this.mnuPrintPreview.Text = "Ïðåäâàðèòåëüíûé ïðîñìîòð";
-            this.mnuPrintPreview.Click += new System.EventHandler(this.mnuPrintPreview_Click);
-            // 
-            // mnuPrint
-            // 
-            this.mnuPrint.MergeAction = System.Windows.Forms.MergeAction.Replace;
-            this.mnuPrint.MergeIndex = 1;
-            this.mnuPrint.Name = "mnuPrint";
-            this.mnuPrint.Size = new System.Drawing.Size(233, 22);
-            this.mnuPrint.Text = "Ïå÷àòü";
-            this.mnuPrint.Click += new System.EventHandler(this.ïå÷àòüToolStripMenuItem1_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -1053,9 +997,7 @@ namespace HMI_MT
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1478, 791);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmLogs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Âåäîìîñòè è æóðíàëû";
@@ -1082,8 +1024,6 @@ namespace HMI_MT
             ((System.ComponentModel.ISupportInitialize)(this.nudSec)).EndInit();
             this.gbEndTime.ResumeLayout(false);
             this.gbStartTime.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -1096,7 +1036,6 @@ namespace HMI_MT
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmLogsBindingSource1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1129,11 +1068,6 @@ namespace HMI_MT
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ñèñòåìàToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuPrint;
-        private System.Windows.Forms.ToolStripMenuItem mnuPageSetup;
-        private System.Windows.Forms.ToolStripMenuItem mnuPrintPreview;
         private System.Windows.Forms.BindingSource frmLogsBindingSource;
         private System.Windows.Forms.ListView lstvUserAction;
         private System.Windows.Forms.ColumnHeader columnHeader2;
