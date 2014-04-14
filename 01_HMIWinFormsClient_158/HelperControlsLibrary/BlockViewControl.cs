@@ -358,10 +358,14 @@ namespace HelperControlsLibrary
                 }
 
                 this.tagsTableDataGridView.Columns[3].Visible = true;
+
+                HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.UnSubscribe);
             }
             else
             {
                 this.tagsTableDataGridView.Columns[3].Visible = false;
+
+                HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.Subscribe);
             }            
         }
         /// <summary>
