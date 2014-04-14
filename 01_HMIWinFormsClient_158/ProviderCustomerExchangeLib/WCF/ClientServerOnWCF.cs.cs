@@ -61,7 +61,7 @@ namespace ProviderCustomerExchangeLib.WCF
                                              timer.Stop();
 
                                              var idch = WCFproxy as DSRouterClient;
-                                             if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
+                                                if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
                                              {
                                                  WCFproxy = null;
                                                  if (this.CreateProxyFromCode())
@@ -117,10 +117,16 @@ namespace ProviderCustomerExchangeLib.WCF
 
                 (WCFproxy as DSRouterClient).GetTagsValueCompleted += OnGetTagsValueCompleted;
                 (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted += OnGetTagsValuesUpdatedCompleted;
+
+                (WCFproxy as DSRouterClient).Open();
             }
             catch ( Exception ex )
             {
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
+
+                if (OnDSCommunicationLoss != null)
+                    OnDSCommunicationLoss(true);
+
                 return false;
             }
 
@@ -380,11 +386,23 @@ namespace ProviderCustomerExchangeLib.WCF
                         byteArrTagValue = BitConverter.GetBytes(((DateTime)varValueAsObject).Ticks);
                     else if (tag.Value.VarValueAsObject is Single)
                         byteArrTagValue = BitConverter.GetBytes((Single)varValueAsObject);
+                    else if (tag.Value.VarValueAsObject is Int32)
+                    {
+                        Int32 v = (Int32) varValueAsObject;
+                        Single s = (Single) v;
+                        byteArrTagValue = BitConverter.GetBytes(s);
+                    }
                     else if (tag.Value.VarValueAsObject is String)
                     {
                         var encoder = System.Text.Encoding.GetEncoding(SourceMOA.Tag.StringValueEncoding);
 
                         byteArrTagValue = encoder.GetBytes(tag.Value.VarValueAsObject.ToString());
+                    }
+
+                    if (byteArrTagValue == null)
+                    {
+                        Console.WriteLine("Значение тега не было разобрано - " + tag.Value.VarValueAsObject.GetType().ToString());
+                        continue;
                     }
 
                     // VarQualityNewDs
