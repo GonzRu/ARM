@@ -135,12 +135,6 @@
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.Designer.cs">
       <DependentUpon>frmLogs.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSplash.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSplash.Designer.cs">
-      <DependentUpon>frmSplash.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\frmUserGroupRights.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,10 +328,6 @@
     <Content Include="Logo.ico" />
     <None Include="Resources\About%2816p%29.png" />
     <Content Include="Resources\alarm1.wav" />
-    <EmbeddedResource Include="frmSplash.resx">
-      <DependentUpon>frmSplash.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Свирь-Тимбер-4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
