@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -277,7 +278,7 @@ namespace HMI_MT.Windows.SplashScreen
             }
         }
 
-        void InitAura(XElement auraXElement)
+        private void InitAura(XElement auraXElement)
         {
             // AURA
             if (auraXElement != null)
@@ -321,6 +322,36 @@ namespace HMI_MT.Windows.SplashScreen
 
             // записываем изменения настроек на базу данных
             config.Save(ConfigurationSaveMode.Modified);
+
+            CheckBlockNameTable();
+        }
+
+        private void CheckBlockNameTable()
+        {
+            string sqlCommandString = 
+                @"SELECT *
+                FROM BlockName
+                WHERE Id=1000";
+
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(HMI_Settings.ProviderPtkSql);
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(sqlCommandString, sqlConnection);
+
+                using (SqlDataReader dr = sqlCommand.ExecuteReader())
+                {
+                    if (!dr.HasRows)
+                        MessageBox.Show(
+                            "В таблице BlockName базы данных отсутствует запись с Id = 1000. Это приведет к тому, что пользовательские события не будут отображаться в АРМ'е.",
+                            "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
         }
         #endregion Private Metods
     }
