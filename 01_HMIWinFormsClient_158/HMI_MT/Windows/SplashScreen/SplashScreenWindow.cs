@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -59,6 +60,9 @@ namespace HMI_MT.Windows.SplashScreen
 
             ShowProgressMessage("Загрузка привязки состояний...");
             PTKState.Iinstance.InitPTKStateInfo();
+
+            ShowProgressMessage("Загрузка привязки состояний...");
+            InitDB();
 
             ShowProgressMessage("Подсоединение к серверу данных...");
             HMI_Settings.MessageProvider = new MessageProvider(HMI_Settings.IPADDRES_SERVER);
@@ -297,6 +301,26 @@ namespace HMI_MT.Windows.SplashScreen
             }
             else
                 HMI_Settings.AuraUrl = null;
+        }
+
+        private void InitDB()
+        {
+            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            SQLConnectionString scs = SQLConnectionString.Iinstance;
+
+            /* 
+            * формируем строку подключения к базе в 
+            * зависимости от типа подключения - Windows-идентификация или 
+            * SQL-идентификация
+            */
+            HMI_Settings.ProviderPtkSql = scs.GetConnectStrFromPrjFile(HMI_Settings.XDoc4PathToPrjFile);
+
+            ConnectionStringsSection csSection = config.ConnectionStrings;
+
+            csSection.ConnectionStrings["SqlProviderPTK"].ConnectionString = HMI_Settings.ProviderPtkSql;
+
+            // записываем изменения настроек на базу данных
+            config.Save(ConfigurationSaveMode.Modified);
         }
         #endregion Private Metods
     }

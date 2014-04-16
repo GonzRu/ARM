@@ -21,7 +21,6 @@
 
 using System;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -113,11 +112,6 @@ namespace HMI_MT
 
 	    private frmLogs Form_ev;
 	    private frmAutorization Form_ea;
-
-		/// <summary>
-		/// класс (Sinleton) - строка подключения к БД
-		/// </summary>
-		SQLConnectionString scs;
 
         bool bEnter;    // признак первоначального входа на главную форму
 	  
@@ -250,23 +244,6 @@ namespace HMI_MT
       /// </summary>
       private void InitSettingsToBD()
       {
-         System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-         scs = SQLConnectionString.Iinstance;
-
-         /* 
-          * формируем строку подключения к базе в 
-          * зависимости от типа подключения - Windows-идентификация или 
-          * SQL-идентификация
-          */
-         HMI_Settings.ProviderPtkSql = scs.GetConnectStrFromPrjFile(HMI_Settings.XDoc4PathToPrjFile);
-
-         ConnectionStringsSection csSection = config.ConnectionStrings;
-
-         csSection.ConnectionStrings["SqlProviderPTK"].ConnectionString = HMI_Settings.ProviderPtkSql;
-
-         // записываем изменения настроек на базу данных
-         config.Save(ConfigurationSaveMode.Modified);
-
          // подпишемся на изменение состояния связи с БД
          DBConnectionControl dbcc = new DBConnectionControl(HMI_Settings.ProviderPtkSql);
          dbcc.OnBDConnection += new BDConnection(dbcc_OnBDConnection);
@@ -276,14 +253,10 @@ namespace HMI_MT
 
       void dbcc_OnBDConnection(bool state)
       {
-          StringBuilder sbm_noConnection = new StringBuilder();
-
           // формируем итоговое сообщение в строке статуса о состоянии фк    
           if (!state)
           {
-              sbm_noConnection.Append("Нет связи с Базой данных ");
-
-              LinkSetTextISB(sbConnectBD, sbm_noConnection.ToString(), Color.Yellow);
+              LinkSetTextISB(sbConnectBD, "Нет связи с Базой данных ", Color.Yellow);
           }
           else
               LinkSetTextISB(sbConnectBD, "Есть связь с Базой данных", sbMesIE.BackColor); // для восстановления цвета взяли чужой фон
