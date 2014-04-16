@@ -91,6 +91,7 @@ namespace HMI_MT
             this.tvDevConfig = new System.Windows.Forms.TreeView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tabForms = new System.Windows.Forms.TabControl();
+            this.режим–асширенного¬ывода»нформацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.pnlWOBD.SuspendLayout();
@@ -234,14 +235,14 @@ namespace HMI_MT
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.открытьToolStripMenuItem.Text = "ќткрыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonOpenTreeClick);
             // 
             // скрытьToolStripMenuItem
             // 
             this.скрытьToolStripMenuItem.Name = "скрытьToolStripMenuItem";
-            this.скрытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.скрытьToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.скрытьToolStripMenuItem.Text = "—крыть";
             this.скрытьToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonCloseTreeClick);
             // 
@@ -302,7 +303,8 @@ namespace HMI_MT
             // tsmTools
             // 
             this.tsmTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.восстановить—в€зь——ерверомƒанныхToolStripMenuItem});
+            this.восстановить—в€зь——ерверомƒанныхToolStripMenuItem,
+            this.режим–асширенного¬ывода»нформацииToolStripMenuItem});
             this.tsmTools.Image = global::HMI_MT.Properties.Resources.oh_0;
             this.tsmTools.Name = "tsmTools";
             this.tsmTools.Size = new System.Drawing.Size(111, 20);
@@ -311,7 +313,7 @@ namespace HMI_MT
             // восстановить—в€зь——ерверомƒанныхToolStripMenuItem
             // 
             this.восстановить—в€зь——ерверомƒанныхToolStripMenuItem.Name = "восстановить—в€зь——ерверомƒанныхToolStripMenuItem";
-            this.восстановить—в€зь——ерверомƒанныхToolStripMenuItem.Size = new System.Drawing.Size(290, 22);
+            this.восстановить—в€зь——ерверомƒанныхToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.восстановить—в€зь——ерверомƒанныхToolStripMenuItem.Text = "¬осстановить св€зь с сервером данных";
             this.восстановить—в€зь——ерверомƒанныхToolStripMenuItem.Click += new System.EventHandler(this.RibbonButtonReconnectClick);
             // 
@@ -614,6 +616,14 @@ namespace HMI_MT
             this.tabForms.TabIndex = 13;
             this.tabForms.SelectedIndexChanged += new System.EventHandler(this.tabForms_SelectedIndexChanged);
             // 
+            // режим–асширенного¬ывода»нформацииToolStripMenuItem
+            // 
+            this.режим–асширенного¬ывода»нформацииToolStripMenuItem.CheckOnClick = true;
+            this.режим–асширенного¬ывода»нформацииToolStripMenuItem.Name = "режим–асширенного¬ывода»нформацииToolStripMenuItem";
+            this.режим–асширенного¬ывода»нформацииToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
+            this.режим–асширенного¬ывода»нформацииToolStripMenuItem.Text = "–ежим расширенного вывода информации";
+            this.режим–асширенного¬ывода»нформацииToolStripMenuItem.Click += new System.EventHandler(this.режим–асширенного¬ывода»нформацииToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,6 +729,7 @@ namespace HMI_MT
       private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
       private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem скрытьToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem режим–асширенного¬ывода»нформацииToolStripMenuItem;
 	}
 }
 

@@ -157,6 +157,8 @@ namespace HMI_MT
 
 			    if (String.IsNullOrEmpty(HMI_Settings.AuraUrl))
 			        рАПСАураToolStripMenuItem.Visible = false;
+
+			    режимРасширенногоВыводаИнформацииToolStripMenuItem.Checked = HMI_Settings.IsDebugMode;
 			}
 			catch(Exception ex)
 			{
@@ -1307,6 +1309,14 @@ namespace HMI_MT
         private void RibbonMenuButtonAuraClick( object sender, EventArgs e )
         {
             Process.Start( HMI_Settings.AuraUrl );
+        }
+
+        private void режимРасширенногоВыводаИнформацииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (режимРасширенногоВыводаИнформацииToolStripMenuItem.Checked)
+                HMI_Settings.IsDebugMode = true;
+            else
+                HMI_Settings.IsDebugMode = false;
         }
         #endregion
 
