@@ -39,7 +39,7 @@ namespace HMI_MT.Windows.SplashScreen
         {
             label1.Text = message;
             Application.DoEvents();
-            System.Threading.Thread.Sleep(400);
+            //System.Threading.Thread.Sleep(400);
         }
 
         private void LoadConfiguration()
