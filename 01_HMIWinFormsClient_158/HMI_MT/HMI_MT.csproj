@@ -171,7 +171,6 @@
       <DependentUpon>GetCommentWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow\HMIStruct.cs" />
-    <Compile Include="Hmi_MT.cs" />
     <Compile Include="Hmi_MT.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
