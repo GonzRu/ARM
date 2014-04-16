@@ -32,6 +32,12 @@ namespace Egida
             {
                 loc = new System.Drawing.Point( 100, 50 );
             }
+
+            if (Screen.PrimaryScreen.Bounds.Width - 224 < loc.X)
+                loc.X = 0;
+
+            if (Screen.PrimaryScreen.Bounds.Height - 46 < loc.Y)
+                loc.Y = 0;
         }
 
         private void ClockFormShown( object sender, EventArgs e ) { Location = loc; }
