@@ -71,16 +71,9 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataBaseLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DataBaseLib\bin\Debug\DataBaseLib.dll</HintPath>
-    </Reference>
     <Reference Include="fConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\fConnectionString\bin\Debug\fConnectionString.dll</HintPath>
-    </Reference>
-    <Reference Include="InterfaceLibrary">
-      <HintPath>..\InterfaceLibrary\bin\Debug\InterfaceLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -88,19 +81,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web.Extensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -410,13 +393,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataBaseLib\DataBaseLib.csproj">
+      <Project>{53cc22f8-9153-47a8-9654-b9172a2fd551}</Project>
+      <Name>DataBaseLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
       <Project>{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}</Project>
       <Name>TraceSourceLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\FileManager\FileManager.csproj">
-      <Project>{A3D8540F-865D-43B2-A07A-1D8B7A4A4938}</Project>
-      <Name>FileManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\LibraryElements\LibraryElements.csproj">
       <Project>{33B9796A-C318-42B7-95D2-50A9CB4E8904}</Project>
@@ -426,21 +409,9 @@
       <Project>{C4311573-8C37-4634-A5D4-6FFDFB52A2F7}</Project>
       <Name>NormalModeLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\Structure\Structure.csproj">
-      <Project>{95D1591D-378A-42C4-82AE-CAAC7CE8838E}</Project>
-      <Name>Structure</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\WindowsForms\WindowsForms.csproj">
       <Project>{93F2274D-3199-4DD4-BDBC-2A7792204EB5}</Project>
       <Name>WindowsForms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AdapterLib\AdapterLib.csproj">
-      <Project>{D2517AA2-9425-4A75-AE17-773E2D82669D}</Project>
-      <Name>AdapterLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlockDataComposer\BlockDataComposer.csproj">
-      <Project>{74835D67-DB0D-4956-8328-7E2B9182DA80}</Project>
-      <Name>BlockDataComposer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Calculator\Calculator.csproj">
       <Project>{4E8A009D-B64C-418A-A334-DE7483545F8A}</Project>
@@ -478,9 +449,9 @@
       <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
       <Name>HMI_MT_Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LabelTextbox\LabelTextbox.csproj">
-      <Project>{812A9E1D-FDA6-430C-8B75-5FB0CDAC3664}</Project>
-      <Name>LabelTextbox</Name>
+    <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
+      <Project>{110e34f6-a97b-4693-9252-95529b4ba9bb}</Project>
+      <Name>InterfaceLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\MessagePanel\MessagePanel.csproj">
       <Project>{F2E099BD-FECA-401E-9FD4-E0D7C00317FD}</Project>
@@ -490,21 +461,9 @@
       <Project>{8BBCE97B-B7D1-4F2A-9707-C5E1587F864D}</Project>
       <Name>OscillogramsLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProviderCustomerExchangeLib\ProviderCustomerExchangeLib.csproj">
-      <Project>{9C42D88A-F77B-4C0A-9137-1FEDB83A7F0C}</Project>
-      <Name>ProviderCustomerExchangeLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PTKState\PTKStateLib.csproj">
       <Project>{CE4F69AE-A00B-4639-ADE9-60994E426921}</Project>
       <Name>PTKStateLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RibbonSource0.4 + GlobalHook_BugsFix\System.Windows.Forms.Ribbon.csproj">
-      <Project>{46A18A55-5AE8-49CE-91CD-C7421B642E7E}</Project>
-      <Name>System.Windows.Forms.Ribbon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SourceMOA\SourceMOA.csproj">
-      <Project>{67A89781-635D-4EA9-916E-A212FE4C82A3}</Project>
-      <Name>SourceMOA</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
