@@ -83,6 +83,10 @@ namespace HelperControlsLibrary
         #endregion
 
         #region Private-Metods
+
+        /// <summary>
+        /// Редактирование ячейки в режиме задания уставок
+        /// </summary>
         private void DataGridRowCellEndEdit( object sender, DataGridViewCellEventArgs args )
         {
             var gridRow = this.tagsTableDataGridView.Rows[args.RowIndex];
@@ -156,6 +160,7 @@ namespace HelperControlsLibrary
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( exception );
             }
         }
+
         /// <summary>
         /// Загрузка контрола
         /// </summary>
@@ -189,6 +194,7 @@ namespace HelperControlsLibrary
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
+
         /// <summary>
         /// Наполнение таблицы данными
         /// </summary>
@@ -226,6 +232,7 @@ namespace HelperControlsLibrary
 
             tagsTableDataGridView.ClearSelection();
         }
+
         /// <summary>
         /// Событие изменения значений данных тэга
         /// </summary>
@@ -246,6 +253,7 @@ namespace HelperControlsLibrary
             }
             return false;
         }
+
         /// <summary>
         /// Событие выбора узла дерева
         /// </summary>
@@ -269,7 +277,7 @@ namespace HelperControlsLibrary
         }
 
         /// <summary>
-        /// Clear tagsTable and Unsubscribe tags
+        /// Отписывается от обновления таблицы и получения обновлений от роутера + очистка таблицы
         /// </summary>
         private void ClearAndUnsubscribeTagsTable()
         {
@@ -287,6 +295,9 @@ namespace HelperControlsLibrary
             this.subscribes.Clear();
         }
 
+        /// <summary>
+        /// Подписываеися на получение обновлений от роутера + обновление таблицы
+        /// </summary>
         private void SubscribeTagsInTagsTable()
         {
             foreach (DataGridViewRow row in this.tagsTableDataGridView.Rows)
@@ -296,6 +307,36 @@ namespace HelperControlsLibrary
                     tag.Formula.OnChangeValFormTI += this.FormulaOnOnChange;
             }
             HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.Subscribe);
+        }
+
+        /// <summary>
+        /// Подписываемся на события для обновления значений таблицы
+        /// </summary>
+        private void SubscribeToUpdateGrid()
+        {
+            foreach (DataGridViewRow row in this.tagsTableDataGridView.Rows)
+            {
+                var tag = row.Tag as TagDescription;
+                if (tag != null && tag.Formula != null)
+                    tag.Formula.OnChangeValFormTI += this.FormulaOnOnChange;
+            }
+        }
+
+
+        /// <summary>
+        /// Отписываемя от обновления таблицы
+        /// </summary>
+        private void UnsubscribeFromUpdateGrid()
+        {
+            foreach (DataGridViewRow row in this.tagsTableDataGridView.Rows)
+            {
+                var tag = row.Tag as TagDescription;
+                if (tag != null && tag.Formula != null)
+                {
+                    tag.IsChange = false;
+                    tag.Formula.OnChangeValFormTI -= this.FormulaOnOnChange;
+                }
+            }
         }
         #endregion
 
@@ -359,13 +400,13 @@ namespace HelperControlsLibrary
 
                 this.tagsTableDataGridView.Columns[3].Visible = true;
 
-                HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.UnSubscribe);
+                UnsubscribeFromUpdateGrid();
             }
             else
             {
                 this.tagsTableDataGridView.Columns[3].Visible = false;
 
-                HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.Subscribe);
+                SubscribeToUpdateGrid();
             }            
         }
         /// <summary>
