@@ -84,145 +84,74 @@ namespace HelperControlsLibrary
 
         #region Private-Metods
 
-        /// <summary>
-        /// Редактирование ячейки в режиме задания уставок
-        /// </summary>
-        private void DataGridRowCellEndEdit( object sender, DataGridViewCellEventArgs args )
-        {
-            var gridRow = this.tagsTableDataGridView.Rows[args.RowIndex];
-            var tagDesc = gridRow.Tag as TagDescription;
-            if ( tagDesc == null || tagDesc.Source == null ) return;
-
-            tagDesc.IsChange = true;
-
-            try
-            {
-                switch ( tagDesc.Source.TypeOfTagHMI )
-                {
-                    case TypeOfTag.Combo:
-                        {
-                            var cbCell =
-                                gridRow.Cells[3] as DataGridViewComboBoxCell;
-                            if ( cbCell == null )
-                                throw new NullReferenceException( "ComboBox Cell is Null" );
-
-                            foreach ( var part in tagDesc.Source.SlEnumsParty )
-                                if ( part.Value.Equals( cbCell.Value ) )
-                                {
-                                    var memX = BitConverter.GetBytes( Convert.ToSingle( part.Key ) );
-                                    tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
-                                    break;
-                                }
-                        }
-                        break;
-                    case TypeOfTag.Analog:
-                        {
-                            var memX = BitConverter.GetBytes( Convert.ToSingle( gridRow.Cells[3].Value ) );
-                            tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
-                        }
-                        break;
-                    case TypeOfTag.Discret:
-                        {
-                            Boolean? value = null;
-                            if ( gridRow.Cells[3].Value.Equals( "1" ) ) value = true;
-                            if ( gridRow.Cells[3].Value.Equals( "0" ) ) value = false;
-
-                            if (value == null)
-                            {
-                                gridRow.Cells[3].Value = gridRow.Cells[1].Value;
-                                MessageBox.Show("Неверное значение для данного сигнала.", "Ошибка!",
-                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                                return;
-                            }
-
-                            var memX = BitConverter.GetBytes( Convert.ToBoolean( value ) );
-                            tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
-                        }
-                        break;
-                    case TypeOfTag.DateTime:
-                        {
-
-                            var memX = BitConverter.GetBytes( Convert.ToInt64( DateTime.Parse( gridRow.Cells[3].Value.ToString( ) ) ) );
-                            tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
-                        }
-                        break;
-                    default:
-                        {
-                            var memX = System.Text.Encoding.Default.GetBytes( gridRow.Cells[3].Value.ToString( ) );
-                            tagDesc.Source.SetValue( memX, DateTime.Now, VarQualityNewDs.vqGood );
-                        }
-                        break;
-                }
-            }
-            catch ( Exception exception )
-            {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( exception );
-            }
-        }
+        #region Методы иницилизации контрола
 
         /// <summary>
         /// Загрузка контрола
         /// </summary>
-        private void BlockViewControlLoad( object sender, EventArgs e )
+        private void BlockViewControlLoad(object sender, EventArgs e)
         {
             try
             {
-                DebugStatistics.WindowStatistics.AddStatistic( "Инициализация сбора данных блока." );
+                DebugStatistics.WindowStatistics.AddStatistic("Инициализация сбора данных блока.");
 
-                var device = HMI_Settings.CONFIGURATION.GetLink2Device( this.uniDs, this.uniDev );
-                if ( device == null )
+                var device = HMI_Settings.CONFIGURATION.GetLink2Device(this.uniDs, this.uniDev);
+                if (device == null)
                     throw new Exception(
-                        string.Format( "FrmEngine: Нет связанного устройства с данной формой unids = {0}; unidev = {1}",
-                                       this.uniDs.ToString( CultureInfo.InvariantCulture ),
-                                       this.uniDev.ToString( CultureInfo.InvariantCulture ) ) );
+                        string.Format("FrmEngine: Нет связанного устройства с данной формой unids = {0}; unidev = {1}",
+                                       this.uniDs.ToString(CultureInfo.InvariantCulture),
+                                       this.uniDev.ToString(CultureInfo.InvariantCulture)));
 
-                collector.Collect( device.GetGroupHierarchy( ) );
+                collector.Collect(device.GetGroupHierarchy());
 
-                DebugStatistics.WindowStatistics.AddStatistic( "Инициализация сбора данных блока завершена." );
+                DebugStatistics.WindowStatistics.AddStatistic("Инициализация сбора данных блока завершена.");
 
-                DebugStatistics.WindowStatistics.AddStatistic( "Инициализация построения дерева данных." );
-                
-                var nodes = CreateGroupNodes( collector.Groups );
-                if ( nodes != null )
-                    groupsTreeView.Nodes.AddRange( nodes.ToArray( ) );
-                
-                DebugStatistics.WindowStatistics.AddStatistic( "Инициализация построения дерева данных завершена." );
+                DebugStatistics.WindowStatistics.AddStatistic("Инициализация построения дерева данных.");
+
+                var nodes = CreateGroupNodes(collector.Groups);
+                if (nodes != null)
+                    groupsTreeView.Nodes.AddRange(nodes.ToArray());
+
+                DebugStatistics.WindowStatistics.AddStatistic("Инициализация построения дерева данных завершена.");
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
             }
         }
+
+        #endregion
+
+        #region Методы работы с таблицей
 
         /// <summary>
         /// Наполнение таблицы данными
         /// </summary>
         /// <param name="node">Узел дерева</param>
-        private void InsertToTable( TreeNode node )
+        private void InsertToTable(TreeNode node)
         {
             var groupDescription = node.Tag as GroupDescription;
-            if ( groupDescription != null )
-               foreach( TreeNode subNode in node.Nodes )
-               {
-                  if( subNode.Tag is GroupDescription )
-                  {                     
-                     var cell = new DataGridViewTextBoxCell()
-                     {
-                        Value = subNode.Text,                        
-                     };
+            if (groupDescription != null)
+                foreach (TreeNode subNode in node.Nodes)
+                {
+                    if (subNode.Tag is GroupDescription)
+                    {
+                        var cell = new DataGridViewTextBoxCell()
+                        {
+                            Value = subNode.Text,
+                        };
 
-                     var row = new DataGridViewRow();
-                     row.Cells.Add( cell );
-                     row.DefaultCellStyle = new DataGridViewCellStyle() { BackColor = System.Drawing.Color.Green };
+                        var row = new DataGridViewRow();
+                        row.Cells.Add(cell);
+                        row.DefaultCellStyle = new DataGridViewCellStyle() { BackColor = System.Drawing.Color.Green };
 
-                     tagsTableDataGridView.Rows.Add( row );                     
-                  }
-                  this.InsertToTable( subNode );
-               }
+                        tagsTableDataGridView.Rows.Add(row);
+                    }
+                    this.InsertToTable(subNode);
+                }
 
             var tagDescriptions = groupDescription.Tags;
-            if ( tagDescriptions == null) return;
+            if (tagDescriptions == null) return;
 
             foreach (var tagDescription in tagDescriptions)
             {
@@ -234,18 +163,126 @@ namespace HelperControlsLibrary
         }
 
         /// <summary>
+        /// Событие выбора узла дерева
+        /// </summary>
+        private void TreeView1Click(object sender, EventArgs e)
+        {
+            var tree = (TreeView)sender;
+
+            ClearAndUnsubscribeTagsTable();
+
+            var treeNode = (TreeNodeDescription)tree.GetNodeAt(((MouseEventArgs)e).Location);
+            this.InsertToTable(treeNode);
+            this.tagsTableDataGridView.Columns[1].ReadOnly = true;
+
+            SubscribeTagsInTagsTable();
+
+            tagsTableDataGridView.Columns[3].Visible = false;
+
+            var handlerCategory = CategoryEvent;
+            if (handlerCategory != null)
+                handlerCategory(treeNode.Category);
+        }
+
+        /// <summary>
+        /// Редактирование ячейки в режиме задания уставок
+        /// </summary>
+        private void DataGridRowCellEndEdit(object sender, DataGridViewCellEventArgs args)
+        {
+            var gridRow = this.tagsTableDataGridView.Rows[args.RowIndex];
+            var tagDesc = gridRow.Tag as TagDescription;
+            if (tagDesc == null || tagDesc.Source == null) return;
+
+            try
+            {
+                switch (tagDesc.Source.TypeOfTagHMI)
+                {
+                    case TypeOfTag.Combo:
+                        {
+                            var cbCell =
+                                gridRow.Cells[3] as DataGridViewComboBoxCell;
+                            if (cbCell == null)
+                                throw new NullReferenceException("ComboBox Cell is Null");
+
+                            foreach (var part in tagDesc.Source.SlEnumsParty)
+                                if (part.Value.Equals(cbCell.Value))
+                                {
+                                    var memX = BitConverter.GetBytes(Convert.ToSingle(part.Key));
+                                    tagDesc.Source.SetValue(memX, DateTime.Now, VarQualityNewDs.vqGood);
+                                    break;
+                                }
+                        }
+                        break;
+                    case TypeOfTag.Analog:
+                        {
+                            try
+                            {
+                                var memX = BitConverter.GetBytes(Convert.ToSingle(gridRow.Cells[3].Value));
+                                tagDesc.Source.SetValue(memX, DateTime.Now, VarQualityNewDs.vqGood);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Введенное значение некорректно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                gridRow.Cells[3].Value = gridRow.Cells[1].Value;
+                                return;
+                            }                                                        
+                        }
+                        break;
+                    case TypeOfTag.Discret:
+                        {
+                            Boolean? value = null;
+                            if (gridRow.Cells[3].Value.Equals("1")) value = true;
+                            if (gridRow.Cells[3].Value.Equals("0")) value = false;
+
+                            if (value == null)
+                            {
+                                gridRow.Cells[3].Value = gridRow.Cells[1].Value;
+                                MessageBox.Show("Неверное значение для данного сигнала.", "Ошибка!",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                return;
+                            }
+
+                            var memX = BitConverter.GetBytes(Convert.ToBoolean(value));
+                            tagDesc.Source.SetValue(memX, DateTime.Now, VarQualityNewDs.vqGood);
+                        }
+                        break;
+                    case TypeOfTag.DateTime:
+                        {
+
+                            var memX = BitConverter.GetBytes(Convert.ToInt64(DateTime.Parse(gridRow.Cells[3].Value.ToString())));
+                            tagDesc.Source.SetValue(memX, DateTime.Now, VarQualityNewDs.vqGood);
+                        }
+                        break;
+                    default:
+                        {
+                            var memX = System.Text.Encoding.Default.GetBytes(gridRow.Cells[3].Value.ToString());
+                            tagDesc.Source.SetValue(memX, DateTime.Now, VarQualityNewDs.vqGood);
+                        }
+                        break;
+                }
+
+                tagDesc.IsChange = true;
+            }
+            catch (Exception exception)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(exception);
+            }
+        }
+
+        /// <summary>
         /// Событие изменения значений данных тэга
         /// </summary>
         /// <param name="format">Полная строка представления тэга</param>
         /// <param name="value">Значение</param>
         /// <param name="type">Тип тэга</param>
         /// <returns>Признак изменения тэга</returns>
-        private bool FormulaOnOnChange( string format, object value, TypeOfTag type )
+        private bool FormulaOnOnChange(string format, object value, TypeOfTag type)
         {
-            foreach ( DataGridViewRow row in this.tagsTableDataGridView.Rows )
+            foreach (DataGridViewRow row in this.tagsTableDataGridView.Rows)
             {
                 var tag = (TagDescription)row.Tag;
-                if ( tag == null || !tag.Result.Equals( format ) || row.Cells[1].Value.Equals( value ) ) continue;
+                if (tag == null || !tag.Result.Equals(format) || row.Cells[1].Value.Equals(value)) continue;
 
                 row.Cells[1].Value = value.ToString();
 
@@ -254,27 +291,9 @@ namespace HelperControlsLibrary
             return false;
         }
 
-        /// <summary>
-        /// Событие выбора узла дерева
-        /// </summary>
-        private void TreeView1Click( object sender, EventArgs e )
-        {
-            var tree = (TreeView)sender;
+        #endregion
 
-            ClearAndUnsubscribeTagsTable();
-
-            var treeNode = (TreeNodeDescription)tree.GetNodeAt( ( (MouseEventArgs)e ).Location );
-            this.InsertToTable( treeNode );
-            this.tagsTableDataGridView.Columns[1].ReadOnly = true;
-
-            SubscribeTagsInTagsTable();
-
-            tagsTableDataGridView.Columns[3].Visible = false;
-
-            var handlerCategory = CategoryEvent;
-            if ( handlerCategory != null )
-                handlerCategory( treeNode.Category );            
-        }
+        #region Методы отписки/подписки
 
         /// <summary>
         /// Отписывается от обновления таблицы и получения обновлений от роутера + очистка таблицы
@@ -338,9 +357,13 @@ namespace HelperControlsLibrary
                 }
             }
         }
+
+        #endregion
+
         #endregion
 
         #region Public & Internal Metods
+
         /// <summary>
         /// Подписка тэгов на обновление
         /// </summary>
@@ -348,6 +371,7 @@ namespace HelperControlsLibrary
         {
             HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.Subscribe );
         }
+
         /// <summary>
         /// Отписка тэгов от обновления
         /// </summary>
@@ -362,6 +386,7 @@ namespace HelperControlsLibrary
             this.tagsTableDataGridView.Rows.Clear( );
             HMI_Settings.HmiTagsSubScribes( subscribes, HMI_Settings.SubscribeAction.UnSubscribe );            
         }
+
         /// <summary>
         /// Отписка тэгов от обновлления и очистка данных
         /// </summary>
@@ -373,6 +398,9 @@ namespace HelperControlsLibrary
                if (row.Tag != null)
                 row.Cells[1].Value = DataGridRowClear( (TagDescription)row.Tag );            
         }
+
+        #region Методы для работы с записью уставок
+
         /// <summary>
         /// Переход в режим задания значений тэгам
         /// </summary>
@@ -401,14 +429,17 @@ namespace HelperControlsLibrary
                 this.tagsTableDataGridView.Columns[3].Visible = true;
 
                 UnsubscribeFromUpdateGrid();
+                HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.UnSubscribe);
             }
             else
             {
                 this.tagsTableDataGridView.Columns[3].Visible = false;
 
                 SubscribeToUpdateGrid();
+                HMI_Settings.HmiTagsSubScribes(subscribes, HMI_Settings.SubscribeAction.Subscribe);
             }            
         }
+
         /// <summary>
         /// Получение источников измененных тэгов преставления
         /// </summary>
@@ -419,6 +450,9 @@ namespace HelperControlsLibrary
                      select row.Tag as TagDescription
                      into tag where tag != null && tag.Source != null && tag.IsChange select tag.Source ).ToList( );
         }
+
+        #endregion
+
         /// <summary>
         /// Сброс модификаторов ручного изменения значений
         /// </summary>

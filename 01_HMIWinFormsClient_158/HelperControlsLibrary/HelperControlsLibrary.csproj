@@ -49,75 +49,54 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockViewCollector.cs" />
-    <Compile Include="BlockViewControl.cs">
+    <Compile Include="GroupsAndTagsTab\BlockViewCollector.cs" />
+    <Compile Include="GroupsAndTagsTab\BlockViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BlockViewControl.Designer.cs">
+    <Compile Include="GroupsAndTagsTab\BlockViewControl.Designer.cs">
       <DependentUpon>BlockViewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="BlockViewTagPage.cs">
+    <Compile Include="GroupsAndTagsTab\BlockViewTagPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="IndicatorControl.cs">
+    <Compile Include="EventBlock\EventBlockControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="IndicatorControl.Designer.cs">
-      <DependentUpon>IndicatorControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EventBlockControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="EventBlockControl.Designer.cs">
+    <Compile Include="EventBlock\EventBlockControl.Designer.cs">
       <DependentUpon>EventBlockControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="EventBlockTabPage.cs">
+    <Compile Include="EventBlock\EventBlockTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="InformationControl.cs">
+    <Compile Include="GroupsAndTagsTab\MaxMeterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InformationControl.Designer.cs">
-      <DependentUpon>InformationControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InformationTabPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MaxMeterControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MaxMeterControl.Designer.cs">
+    <Compile Include="GroupsAndTagsTab\MaxMeterControl.Designer.cs">
       <DependentUpon>MaxMeterControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperationalControl.cs">
+    <Compile Include="OscTab\OscDiagControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OperationalControl.Designer.cs">
-      <DependentUpon>OperationalControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OscDiagControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="OscDiagControl.Designer.cs">
+    <Compile Include="OscTab\OscDiagControl.Designer.cs">
       <DependentUpon>OscDiagControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="OscDiagPanelControl.cs">
+    <Compile Include="OscTab\OscDiagPanelControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OscDiagPanelControl.Designer.cs">
+    <Compile Include="OscTab\OscDiagPanelControl.Designer.cs">
       <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="OscDiagTabPage.cs">
+    <Compile Include="OscTab\OscDiagTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PanelBottomEventBlock.cs">
+    <Compile Include="EventBlock\PanelBottomEventBlock.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadWriteUstavkyControl.cs">
+    <Compile Include="GroupsAndTagsTab\ReadWriteUstavkyControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ReadWriteUstavkyControl.Designer.cs">
+    <Compile Include="GroupsAndTagsTab\ReadWriteUstavkyControl.Designer.cs">
       <DependentUpon>ReadWriteUstavkyControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportLibrary\ReportHelper.cs" />
@@ -133,10 +112,10 @@
     <Compile Include="SrabatPanelControl.Designer.cs">
       <DependentUpon>SrabatPanelControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="StorageDeviceControl.cs">
+    <Compile Include="GroupsAndTagsTab\StorageDeviceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StorageDeviceControl.Designer.cs">
+    <Compile Include="GroupsAndTagsTab\StorageDeviceControl.Designer.cs">
       <DependentUpon>StorageDeviceControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TeleMechanica\TeleMechanicaCommandTabPage.cs">
@@ -144,34 +123,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BlockViewControl.resx">
+    <EmbeddedResource Include="GroupsAndTagsTab\BlockViewControl.resx">
       <DependentUpon>BlockViewControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EventBlockControl.resx">
+    <EmbeddedResource Include="EventBlock\EventBlockControl.resx">
       <DependentUpon>EventBlockControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EventBlockTabPage.resx">
+    <EmbeddedResource Include="EventBlock\EventBlockTabPage.resx">
       <DependentUpon>EventBlockTabPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IndicatorControl.resx">
-      <DependentUpon>IndicatorControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InformationControl.resx">
-      <DependentUpon>InformationControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MaxMeterControl.resx">
+    <EmbeddedResource Include="GroupsAndTagsTab\MaxMeterControl.resx">
       <DependentUpon>MaxMeterControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OperationalControl.resx">
-      <DependentUpon>OperationalControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OscDiagControl.resx">
+    <EmbeddedResource Include="OscTab\OscDiagControl.resx">
       <DependentUpon>OscDiagControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OscDiagPanelControl.resx">
+    <EmbeddedResource Include="OscTab\OscDiagPanelControl.resx">
       <DependentUpon>OscDiagPanelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReadWriteUstavkyControl.resx">
+    <EmbeddedResource Include="GroupsAndTagsTab\ReadWriteUstavkyControl.resx">
       <DependentUpon>ReadWriteUstavkyControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectControl.resx">
@@ -180,7 +150,7 @@
     <EmbeddedResource Include="SrabatPanelControl.resx">
       <DependentUpon>SrabatPanelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StorageDeviceControl.resx">
+    <EmbeddedResource Include="GroupsAndTagsTab\StorageDeviceControl.resx">
       <DependentUpon>StorageDeviceControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeleMechanica\TeleMechanicaCommandTabPage.resx">
