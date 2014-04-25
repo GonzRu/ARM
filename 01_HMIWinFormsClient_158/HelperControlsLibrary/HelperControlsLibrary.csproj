@@ -106,12 +106,6 @@
     <Compile Include="SelectControl.Designer.cs">
       <DependentUpon>SelectControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="SrabatPanelControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SrabatPanelControl.Designer.cs">
-      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="GroupsAndTagsTab\StorageDeviceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -146,9 +140,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectControl.resx">
       <DependentUpon>SelectControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SrabatPanelControl.resx">
-      <DependentUpon>SrabatPanelControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GroupsAndTagsTab\StorageDeviceControl.resx">
       <DependentUpon>StorageDeviceControl.cs</DependentUpon>
