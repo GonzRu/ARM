@@ -414,6 +414,16 @@ namespace HelperControlsLibrary
                 {
                     var dataGridRow = row as DataGridViewRow;
 
+                    if (dataGridRow.Tag != null)
+                    {
+                        TagDescription tagDescription = dataGridRow.Tag as TagDescription;
+                        if (tagDescription.Source.AccessToValue == "r")
+                        {
+                            dataGridRow.Cells[3].ReadOnly = true;
+                            continue;
+                        }
+                    }
+
                     var c = dataGridRow.Cells[1];
 
                     if (c.Value == null)
