@@ -30,8 +30,13 @@ namespace HelperControlsLibrary
         /// <param name="uniDevId">Guid устройства</param>
         /// <param name="panelVisible">Отображаемая панель</param>
         /// <param name="text">Имя вкладки</param>
-        public OscDiagTabPage( uint uniDevId, OscDiagPanelVisible panelVisible = OscDiagPanelVisible.TwoPanel, string text = "Осцилограммы и диаграммы" ) : base( text )
+        public OscDiagTabPage( uint uniDevId, OscDiagPanelVisible panelVisible = OscDiagPanelVisible.TwoPanel, string text = "Осциллограммы и диаграммы" ) : base( text )
         {
+            if (panelVisible == OscDiagPanelVisible.Oscilograms)
+                this.Text = "Осциллограммы";
+            else if (panelVisible == OscDiagPanelVisible.Diagrams)
+                this.Text = "Диаграммы";
+
             SetPanelVisible( panelVisible );
             oscDiagControl.UniDevId = uniDevId;
             oscDiagControl.Dock = DockStyle.Fill;
