@@ -18,6 +18,15 @@ namespace HMI_MT
 {
     public partial class frmLogs : Form
     {
+        #region CONST
+
+        /// <summary>
+        /// Максимальное количество отображаемых событий в таблице
+        /// </summary>
+        private const Int32 MAX_EVENTS_COUNT = 1000;
+
+        #endregion
+
         #region private-члены класса
         private MainForm parent;
         private int sortColumn = -1;	// для сортировки в ListView
@@ -433,6 +442,9 @@ namespace HMI_MT
             StringBuilder ts = new StringBuilder();
             for (int curRow = 0; curRow < dt.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 ListViewItem li = new ListViewItem();
                 li.SubItems.Clear();
                 DateTime t = (DateTime)dt.Rows[curRow]["LocalTime"];
@@ -507,6 +519,9 @@ namespace HMI_MT
             StringBuilder ts = new StringBuilder();
             for (int curRow = 0; curRow < dt.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 ListViewItem li = new ListViewItem();
                 li.SubItems.Clear();
 
@@ -670,6 +685,9 @@ namespace HMI_MT
             dtA = aDS.Tables["TbAlarm"];
             for (int curRow = 0; curRow < dtA.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 int i = dgvAvar.Rows.Add();   // номер строки
 
                 var devGuid = uint.Parse(dtA.Rows[curRow]["BlockID"].ToString());
@@ -796,6 +814,9 @@ namespace HMI_MT
 
             for (int curRow = 0; curRow < dtog.Rows.Count; curRow++)
             {
+                if (dgvOscill.Rows.Count == MAX_EVENTS_COUNT)
+                    break;
+
                 int i = dgvOscill.Rows.Add();   // номер строки
 
                 var devGuid = uint.Parse(dtog.Rows[curRow]["BlockID"].ToString());
@@ -976,6 +997,9 @@ namespace HMI_MT
             StringBuilder ts = new StringBuilder();
             for (int curRow = 0; curRow < dtLSF.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 ListViewItem li = new ListViewItem();
                 li.SubItems.Clear();
 
