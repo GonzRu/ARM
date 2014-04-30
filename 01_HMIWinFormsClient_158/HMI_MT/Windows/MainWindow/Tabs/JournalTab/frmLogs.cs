@@ -355,7 +355,7 @@ namespace HMI_MT
         /// <summary>
         /// Запрос терминальных событий
         /// </summary>
-        private void EventBD()
+        private void GetTerminalEvents()
         {
             // получение строк соединения и поставщика данных из файла *.config
             SqlConnection asqlconnect = new SqlConnection(HMI_Settings.ProviderPtkSql);
@@ -498,7 +498,7 @@ namespace HMI_MT
         /// <summary>
         /// Запрос списка пользовательских событий
         /// </summary>
-        private void UserBD()
+        private void GetUserEvents()
         {
             dt = new DataTable();
             // 1. начальное время
@@ -588,7 +588,7 @@ namespace HMI_MT
         /// <summary>
         /// Запрос списка аварий и осциллограмм/диаграмм 
         /// </summary>
-        private void AvarBD()
+        private void GetAlarmEvents()
         {
             dgvAvar.Rows.Clear();
             // получение строк соединения и поставщика данных из файла *.config
@@ -758,7 +758,7 @@ namespace HMI_MT
         /// и диаграмм для различных типов блоков - 
         /// каких именно - определено в конфиг файле Project.cfg
         /// </summary>
-        private void OscBD()
+        private void GetOscEvents()
         {
             XDocument xdoc_Project_cfg = XDocument.Load(HMI_Settings.PathToPrjFile);
             IEnumerable<XElement> xes = xdoc_Project_cfg.Element("Project").Element("OscDiagInSummaryLog").Elements();
@@ -927,7 +927,7 @@ namespace HMI_MT
         /// <summary>
         /// Запрос всех событий
         /// </summary>
-        private void LogSystemFullBD()
+        private void GetUnionEvents()
         {
             // получение строк соединения и поставщика данных из файла *.config
             //string cnStr = ConfigurationManager.ConnectionStrings["SqlProviderPTK"].ConnectionString;
@@ -1063,23 +1063,21 @@ namespace HMI_MT
                 {
                     case "События ОКУ и РЗА":
                         lstvEvent.Items.Clear();
-                        EventBD();
+                        GetTerminalEvents();
                         break;
                     case "Действия пользователей":
                         lstvUserAction.Items.Clear();
-                        UserBD();
+                        GetUserEvents();
                         break;
                     case "Сводный список аварий и осциллограмм":
                         dgvOscill.Rows.Clear();
                         dgvAvar.Rows.Clear();
-                        AvarBD();
-                        OscBD();
-                        //OscBD10();
-                        //DiagBD();
+                        GetAlarmEvents();
+                        GetOscEvents();
                         break;
                     case "Сводный системный журнал":
                         lstvLogSystemFull.Items.Clear();
-                        LogSystemFullBD();
+                        GetUnionEvents();
                         break;
                 }
             }
@@ -1135,7 +1133,7 @@ namespace HMI_MT
         private void timer1_Tick(object sender, EventArgs e)
         {
             // обновляем
-            EventBD();
+            GetTerminalEvents();
         }
 
         /// <summary>
