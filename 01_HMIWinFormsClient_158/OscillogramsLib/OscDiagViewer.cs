@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Data.SqlTypes;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Data.OleDb;
-using System.Data;
-using System.IO;
-using System.Diagnostics;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using HMI_MT_Settings;
 using InterfaceLibrary;
 
 namespace OscillogramsLib
@@ -377,16 +376,8 @@ namespace OscillogramsLib
       {
           tmrOscevent.Stop();
 
-          //OnOSCReadyEvent();
-
           ClientDataForExchange_OSCReadyEvent(ms_arrosc4copy.ToArray());
       }
-
-      //public void OnOSCReadyEvent()
-      //{
-      //    if (OSCReadyEvent != null)
-      //        OSCReadyEvent();
-      //}
 
       /// <summary>
       /// 
@@ -453,33 +444,23 @@ namespace OscillogramsLib
       /// соответствии с типом блока 
       /// и типом данных (осциллограмма или диаграмма)
       /// </summary>
-      /// <param Name="dt"></param>
-      /// <param Name="?"></param>
       private void AddExtended(DataRow dr, ref string ifa)
       {
-         int it = (int)dr["TypeID"];
-         switch(it)
-         {
-            case 4:  // Осциллограмма БМРЗ
-               ifa += ".osc";
-               break;
-            case 5:  // Диаграмма БМРЗ
-               ifa += ".dgm";
-               break;
-            case 8:  // Осциллограмма Сириус
-               ifa += ".trd";
-               break;
-            case 10:  // Осциллограмма Экра
-               ifa += ".dfr";
-               break;
-             case 11:
-                 ifa += ".zbrs";
-                 break;
-            default:
-               System.Windows.Forms.MessageBox.Show("Осциллограмма/диаграмма типа " + it.ToString() + " не поддерживается.", "Просмотр осциллограмм/диаграмм", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-               break;
-         }
+          int it = (int) dr["TypeID"];
+          XDocument projectCfgXDocument = XDocument.Load(HMI_Settings.PathToPrjFile);
+          var oscInfoXElements = projectCfgXDocument.Element("Project").Element("OscDiagInSummaryLog").Elements();
+
+          foreach (var oscInfoXElement in oscInfoXElements)
+          {
+              if (Boolean.Parse(oscInfoXElement.Attribute("isenable").Value))
+                  if (Int32.Parse(oscInfoXElement.Attribute("value").Value) == it)
+                  {
+                      ifa += "." + oscInfoXElement.Attribute("fileExtension").Value;
+                      break;
+                  }
+          }
       }
+
       ArrayList asb = new ArrayList();
 
       void ClientDataForExchange_OSCReadyEvent(byte[] arrosc)
