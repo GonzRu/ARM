@@ -18,24 +18,35 @@ namespace HMI_MT
 {
     public partial class frmLogs : Form
     {
+        #region CONST
 
-       #region private-члены класса
-         private MainForm parent;
-         private int sortColumn = -1;	// для сортировки в ListView
-         private ListView lstvCurrent;
-         OscDiagViewer oscdg;
-         DataTable dtO;  // таблица с осциллограммами
-         DataTable dtO_100;  // таблица с осциллограммами бмрз-100
-         DataTable dtOE;  // таблица с осциллограммами экр
-         DataTable dtG;  // таблица с диаграммами
-         DataTable dtA;   // таблица с авариями
-         DataTable dt;   
-         DataTable dtLSF;   // таблица со сводными событиями
-         XDocument xdoc;
-         XDocument xdoc_Dev;
+        /// <summary>
+        /// Максимальное количество отображаемых событий в таблице
+        /// </summary>
+        private const Int32 MAX_EVENTS_COUNT = 1000;
 
-         CommonUtils.LongTimeAction lta;
-       #endregion
+        #endregion
+
+        #region private-члены класса
+        private MainForm parent;
+        private int sortColumn = -1;	// для сортировки в ListView
+        private ListView lstvCurrent;
+        OscDiagViewer oscdg;
+
+        private DataTable dataTableForOscBmrz;  // таблица с осциллограммами
+        private DataTable dataTableForOscBmrz100;  // таблица с осциллограммами бмрз-100
+        private DataTable dataTableForOscEkra;  // таблица с осциллограммами экр
+        private DataTable dataTableForDiag;  // таблица с диаграммами
+        private DataTable dataTableForOscBresler; // таблица для осциллограмм бреслера
+
+        DataTable dtA;   // таблица с авариями
+        DataTable dt;   
+        DataTable dtLSF;   // таблица со сводными событиями
+        XDocument xdoc;
+        XDocument xdoc_Dev;
+
+        CommonUtils.LongTimeAction lta;
+        #endregion
 
        #region Конструкторы
         /// <summary>
@@ -344,7 +355,7 @@ namespace HMI_MT
         /// <summary>
         /// Запрос терминальных событий
         /// </summary>
-        private void EventBD()
+        private void GetTerminalEvents()
         {
             // получение строк соединения и поставщика данных из файла *.config
             SqlConnection asqlconnect = new SqlConnection(HMI_Settings.ProviderPtkSql);
@@ -431,6 +442,9 @@ namespace HMI_MT
             StringBuilder ts = new StringBuilder();
             for (int curRow = 0; curRow < dt.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 ListViewItem li = new ListViewItem();
                 li.SubItems.Clear();
                 DateTime t = (DateTime)dt.Rows[curRow]["LocalTime"];
@@ -484,7 +498,7 @@ namespace HMI_MT
         /// <summary>
         /// Запрос списка пользовательских событий
         /// </summary>
-        private void UserBD()
+        private void GetUserEvents()
         {
             dt = new DataTable();
             // 1. начальное время
@@ -505,6 +519,9 @@ namespace HMI_MT
             StringBuilder ts = new StringBuilder();
             for (int curRow = 0; curRow < dt.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 ListViewItem li = new ListViewItem();
                 li.SubItems.Clear();
 
@@ -569,9 +586,9 @@ namespace HMI_MT
         #region OscAndAlarmTab metods
 
         /// <summary>
-        /// Запрос списка аварий 
+        /// Запрос списка аварий и осциллограмм/диаграмм 
         /// </summary>
-        private void AvarBD()
+        private void GetAlarmEvents()
         {
             dgvAvar.Rows.Clear();
             // получение строк соединения и поставщика данных из файла *.config
@@ -668,6 +685,9 @@ namespace HMI_MT
             dtA = aDS.Tables["TbAlarm"];
             for (int curRow = 0; curRow < dtA.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 int i = dgvAvar.Rows.Add();   // номер строки
 
                 var devGuid = uint.Parse(dtA.Rows[curRow]["BlockID"].ToString());
@@ -738,7 +758,7 @@ namespace HMI_MT
         /// и диаграмм для различных типов блоков - 
         /// каких именно - определено в конфиг файле Project.cfg
         /// </summary>
-        private void OscBD()
+        private void GetOscEvents()
         {
             XDocument xdoc_Project_cfg = XDocument.Load(HMI_Settings.PathToPrjFile);
             IEnumerable<XElement> xes = xdoc_Project_cfg.Element("Project").Element("OscDiagInSummaryLog").Elements();
@@ -748,33 +768,25 @@ namespace HMI_MT
                 if (xe.Attribute("isenable").Value.ToLower() == "false")
                     continue;
 
-                //TypeBlockData tbd;
-                //int tbd;
                 switch (xe.Attribute("type").Value)
                 {
                     case "OscBMRZ":
-                        //tbd = TypeBlockData.TypeBlockData_OscBMRZ;
-                        GetOscDiagList(4, out dtO);
+                        GetOscDiagList(4, out dataTableForOscBmrz);
                         break;
                     case "OscBMRZ_100":
-                        //tbd = TypeBlockData.TypeBlockData_OscBMRZ;
-                        GetOscDiagList(8, out dtO_100);
+                        GetOscDiagList(8, out dataTableForOscBmrz100);
                         break;
                     case "OscSirius":
-                        //tbd = TypeBlockData.TypeBlockData_OscSirius;
                         //GetOscDiagList(8, out dtO);
                         break;
                     case "OscEkra":
-                        //tbd = TypeBlockData.TypeBlockData_OscEkra;
-                        GetOscDiagList(10, out dtOE);
+                        GetOscDiagList(10, out dataTableForOscEkra);
                         break;
                     case "OscBresler":
-                        //tbd = TypeBlockData.TypeBlockData_OscBresler;
-                        GetOscDiagList(11, out dtO);
+                        GetOscDiagList(11, out dataTableForOscBresler);
                         break;
                     case "Diagramm":
-                        //tbd = TypeBlockData.TypeBlockData_Diagramm;
-                        GetOscDiagList(5, out dtG);
+                        GetOscDiagList(5, out dataTableForDiag);
                         break;
                     default:
                         throw new Exception("Осциллограммы данного типа устройства не поддерживаются");
@@ -783,7 +795,7 @@ namespace HMI_MT
         }
 
         /// <summary>
-        /// Заполняет DataTable осциллограммами определенного типа
+        /// Заполняет DataTable осциллограммами определенного типа и выводит на экран их
         /// </summary>
         /// <param Name="tbd"></param>
         void GetOscDiagList(int tbd, out DataTable dtog)
@@ -802,6 +814,9 @@ namespace HMI_MT
 
             for (int curRow = 0; curRow < dtog.Rows.Count; curRow++)
             {
+                if (dgvOscill.Rows.Count == MAX_EVENTS_COUNT)
+                    break;
+
                 int i = dgvOscill.Rows.Add();   // номер строки
 
                 var devGuid = uint.Parse(dtog.Rows[curRow]["BlockID"].ToString());
@@ -867,10 +882,11 @@ namespace HMI_MT
              * будет известен реальный номер DS
              */
             // пока можно только осциллограммы старых БМРЗ (dtO)
-            oscdg.ShowOSCDg(0, dtO, ide);
-            oscdg.ShowOSCDg(0, dtO_100, ide);
-            oscdg.ShowOSCDg(0, dtOE, ide);
-            oscdg.ShowOSCDg(0, dtG, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscBmrz, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscBmrz100, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscEkra, ide);
+            oscdg.ShowOSCDg(0, dataTableForDiag, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscBresler, ide);
             #region MyRegion
             // по ide найти запись в dto, извлечь блок с осциллограммой (диаграммой), записать в файл, запустить fastview
 
@@ -911,7 +927,7 @@ namespace HMI_MT
         /// <summary>
         /// Запрос всех событий
         /// </summary>
-        private void LogSystemFullBD()
+        private void GetUnionEvents()
         {
             // получение строк соединения и поставщика данных из файла *.config
             //string cnStr = ConfigurationManager.ConnectionStrings["SqlProviderPTK"].ConnectionString;
@@ -981,6 +997,9 @@ namespace HMI_MT
             StringBuilder ts = new StringBuilder();
             for (int curRow = 0; curRow < dtLSF.Rows.Count; curRow++)
             {
+                if (curRow == MAX_EVENTS_COUNT)
+                    break;
+
                 ListViewItem li = new ListViewItem();
                 li.SubItems.Clear();
 
@@ -1044,23 +1063,21 @@ namespace HMI_MT
                 {
                     case "События ОКУ и РЗА":
                         lstvEvent.Items.Clear();
-                        EventBD();
+                        GetTerminalEvents();
                         break;
                     case "Действия пользователей":
                         lstvUserAction.Items.Clear();
-                        UserBD();
+                        GetUserEvents();
                         break;
                     case "Сводный список аварий и осциллограмм":
                         dgvOscill.Rows.Clear();
                         dgvAvar.Rows.Clear();
-                        AvarBD();
-                        OscBD();
-                        //OscBD10();
-                        //DiagBD();
+                        GetAlarmEvents();
+                        GetOscEvents();
                         break;
                     case "Сводный системный журнал":
                         lstvLogSystemFull.Items.Clear();
-                        LogSystemFullBD();
+                        GetUnionEvents();
                         break;
                 }
             }
@@ -1115,8 +1132,43 @@ namespace HMI_MT
         /// </summary>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // обновляем
-            EventBD();
+            lta = new LongTimeAction();
+            lta.Start(this);
+
+            // выводим результаты запроса
+            try
+            {
+                switch (tabControl1.SelectedTab.Text)
+                {
+                    case "События ОКУ и РЗА":
+                        lstvEvent.Items.Clear();
+                        GetTerminalEvents();
+                        break;
+                    case "Действия пользователей":
+                        lstvUserAction.Items.Clear();
+                        GetUserEvents();
+                        break;
+                    case "Сводный список аварий и осциллограмм":
+                        dgvOscill.Rows.Clear();
+                        dgvAvar.Rows.Clear();
+                        GetAlarmEvents();
+                        GetOscEvents();
+                        break;
+                    case "Сводный системный журнал":
+                        lstvLogSystemFull.Items.Clear();
+                        GetUnionEvents();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 443, DateTime.Now.ToString() + " (443) : frmLogs.cs : bgwBackGround_DoWork() :  ошибка при формировании таблиц: " + ex.Message);
+                //this.Close();
+            }
+            finally
+            {
+                lta.Stop();
+            }
         }
 
         /// <summary>
