@@ -18,24 +18,26 @@ namespace HMI_MT
 {
     public partial class frmLogs : Form
     {
+        #region private-члены класса
+        private MainForm parent;
+        private int sortColumn = -1;	// для сортировки в ListView
+        private ListView lstvCurrent;
+        OscDiagViewer oscdg;
 
-       #region private-члены класса
-         private MainForm parent;
-         private int sortColumn = -1;	// для сортировки в ListView
-         private ListView lstvCurrent;
-         OscDiagViewer oscdg;
-         DataTable dtO;  // таблица с осциллограммами
-         DataTable dtO_100;  // таблица с осциллограммами бмрз-100
-         DataTable dtOE;  // таблица с осциллограммами экр
-         DataTable dtG;  // таблица с диаграммами
-         DataTable dtA;   // таблица с авариями
-         DataTable dt;   
-         DataTable dtLSF;   // таблица со сводными событиями
-         XDocument xdoc;
-         XDocument xdoc_Dev;
+        private DataTable dataTableForOscBmrz;  // таблица с осциллограммами
+        private DataTable dataTableForOscBmrz100;  // таблица с осциллограммами бмрз-100
+        private DataTable dataTableForOscEkra;  // таблица с осциллограммами экр
+        private DataTable dataTableForDiag;  // таблица с диаграммами
+        private DataTable dataTableForOscBresler; // таблица для осциллограмм бреслера
 
-         CommonUtils.LongTimeAction lta;
-       #endregion
+        DataTable dtA;   // таблица с авариями
+        DataTable dt;   
+        DataTable dtLSF;   // таблица со сводными событиями
+        XDocument xdoc;
+        XDocument xdoc_Dev;
+
+        CommonUtils.LongTimeAction lta;
+        #endregion
 
        #region Конструкторы
         /// <summary>
@@ -569,7 +571,7 @@ namespace HMI_MT
         #region OscAndAlarmTab metods
 
         /// <summary>
-        /// Запрос списка аварий 
+        /// Запрос списка аварий и осциллограмм/диаграмм 
         /// </summary>
         private void AvarBD()
         {
@@ -748,33 +750,25 @@ namespace HMI_MT
                 if (xe.Attribute("isenable").Value.ToLower() == "false")
                     continue;
 
-                //TypeBlockData tbd;
-                //int tbd;
                 switch (xe.Attribute("type").Value)
                 {
                     case "OscBMRZ":
-                        //tbd = TypeBlockData.TypeBlockData_OscBMRZ;
-                        GetOscDiagList(4, out dtO);
+                        GetOscDiagList(4, out dataTableForOscBmrz);
                         break;
                     case "OscBMRZ_100":
-                        //tbd = TypeBlockData.TypeBlockData_OscBMRZ;
-                        GetOscDiagList(8, out dtO_100);
+                        GetOscDiagList(8, out dataTableForOscBmrz100);
                         break;
                     case "OscSirius":
-                        //tbd = TypeBlockData.TypeBlockData_OscSirius;
                         //GetOscDiagList(8, out dtO);
                         break;
                     case "OscEkra":
-                        //tbd = TypeBlockData.TypeBlockData_OscEkra;
-                        GetOscDiagList(10, out dtOE);
+                        GetOscDiagList(10, out dataTableForOscEkra);
                         break;
                     case "OscBresler":
-                        //tbd = TypeBlockData.TypeBlockData_OscBresler;
-                        GetOscDiagList(11, out dtO);
+                        GetOscDiagList(11, out dataTableForOscBresler);
                         break;
                     case "Diagramm":
-                        //tbd = TypeBlockData.TypeBlockData_Diagramm;
-                        GetOscDiagList(5, out dtG);
+                        GetOscDiagList(5, out dataTableForDiag);
                         break;
                     default:
                         throw new Exception("Осциллограммы данного типа устройства не поддерживаются");
@@ -783,7 +777,7 @@ namespace HMI_MT
         }
 
         /// <summary>
-        /// Заполняет DataTable осциллограммами определенного типа
+        /// Заполняет DataTable осциллограммами определенного типа и выводит на экран их
         /// </summary>
         /// <param Name="tbd"></param>
         void GetOscDiagList(int tbd, out DataTable dtog)
@@ -867,10 +861,11 @@ namespace HMI_MT
              * будет известен реальный номер DS
              */
             // пока можно только осциллограммы старых БМРЗ (dtO)
-            oscdg.ShowOSCDg(0, dtO, ide);
-            oscdg.ShowOSCDg(0, dtO_100, ide);
-            oscdg.ShowOSCDg(0, dtOE, ide);
-            oscdg.ShowOSCDg(0, dtG, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscBmrz, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscBmrz100, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscEkra, ide);
+            oscdg.ShowOSCDg(0, dataTableForDiag, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscBresler, ide);
             #region MyRegion
             // по ide найти запись в dto, извлечь блок с осциллограммой (диаграммой), записать в файл, запустить fastview
 
