@@ -1132,8 +1132,43 @@ namespace HMI_MT
         /// </summary>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // обновляем
-            GetTerminalEvents();
+            lta = new LongTimeAction();
+            lta.Start(this);
+
+            // выводим результаты запроса
+            try
+            {
+                switch (tabControl1.SelectedTab.Text)
+                {
+                    case "События ОКУ и РЗА":
+                        lstvEvent.Items.Clear();
+                        GetTerminalEvents();
+                        break;
+                    case "Действия пользователей":
+                        lstvUserAction.Items.Clear();
+                        GetUserEvents();
+                        break;
+                    case "Сводный список аварий и осциллограмм":
+                        dgvOscill.Rows.Clear();
+                        dgvAvar.Rows.Clear();
+                        GetAlarmEvents();
+                        GetOscEvents();
+                        break;
+                    case "Сводный системный журнал":
+                        lstvLogSystemFull.Items.Clear();
+                        GetUnionEvents();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 443, DateTime.Now.ToString() + " (443) : frmLogs.cs : bgwBackGround_DoWork() :  ошибка при формировании таблиц: " + ex.Message);
+                //this.Close();
+            }
+            finally
+            {
+                lta.Stop();
+            }
         }
 
         /// <summary>
