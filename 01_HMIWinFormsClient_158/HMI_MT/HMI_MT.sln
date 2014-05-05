@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMI_MT", "HMI_MT.csproj", "{8EC6681F-7A76-457A-8A00-591D35291B7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceLibrary", "..\InterfaceLibrary\InterfaceLibrary.csproj", "{110E34F6-A97B-4693-9252-95529B4BA9BB}"
@@ -72,8 +72,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceSourceLib", "..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj", "{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevicesLibrary", "..\DevicesLibrary\DevicesLibrary.csproj", "{C92EBDA9-9A82-4D5A-9EB1-74DF213F7676}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSDecoy", "..\DSDecoy\DSDecoy.csproj", "{A7518611-C086-4328-B56B-7DEB78EBA99F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperLibrary", "..\HelperLibrary\HelperLibrary.csproj", "{C68C58BC-7108-4FCA-A951-90CD60BEAC74}"
 EndProject
@@ -431,16 +429,6 @@ Global
 		{C92EBDA9-9A82-4D5A-9EB1-74DF213F7676}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C92EBDA9-9A82-4D5A-9EB1-74DF213F7676}.Release|x86.ActiveCfg = Release|x86
 		{C92EBDA9-9A82-4D5A-9EB1-74DF213F7676}.Release|x86.Build.0 = Release|x86
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A7518611-C086-4328-B56B-7DEB78EBA99F}.Release|x86.ActiveCfg = Release|Any CPU
 		{C68C58BC-7108-4FCA-A951-90CD60BEAC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C68C58BC-7108-4FCA-A951-90CD60BEAC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C68C58BC-7108-4FCA-A951-90CD60BEAC74}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

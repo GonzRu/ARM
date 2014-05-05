@@ -69,10 +69,6 @@
       <Project>{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}</Project>
       <Name>TraceSourceLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DSDecoy\DSDecoy.csproj">
-      <Project>{A7518611-C086-4328-B56B-7DEB78EBA99F}</Project>
-      <Name>DSDecoy</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
       <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
       <Name>HMI_MT_Settings</Name>
