@@ -59,8 +59,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscretClock", "..\DiscretC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseLib", "..\..\DataBaseLib\DataBaseLib.csproj", "{53CC22F8-9153-47A8-9654-B9172A2FD551}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNet", "..\TestNet\TestNet.csproj", "{A551A970-84A2-4595-848B-D265A4DC2278}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository Blocks", "Repository Blocks", "{D58396F2-A97E-4954-93FE-62BF38750AFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperControlsLibrary", "..\HelperControlsLibrary\HelperControlsLibrary.csproj", "{64E89B33-C72B-45D6-B6EC-7FBBC027BC95}"
@@ -367,17 +365,6 @@ Global
 		{53CC22F8-9153-47A8-9654-B9172A2FD551}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{53CC22F8-9153-47A8-9654-B9172A2FD551}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{53CC22F8-9153-47A8-9654-B9172A2FD551}.Release|x86.ActiveCfg = Release|Any CPU
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Debug|Any CPU.Build.0 = Debug|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Debug|x86.ActiveCfg = Debug|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Debug|x86.Build.0 = Debug|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Release|Any CPU.ActiveCfg = Release|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Release|Mixed Platforms.Build.0 = Release|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Release|x86.ActiveCfg = Release|x86
-		{A551A970-84A2-4595-848B-D265A4DC2278}.Release|x86.Build.0 = Release|x86
 		{64E89B33-C72B-45D6-B6EC-7FBBC027BC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64E89B33-C72B-45D6-B6EC-7FBBC027BC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64E89B33-C72B-45D6-B6EC-7FBBC027BC95}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
