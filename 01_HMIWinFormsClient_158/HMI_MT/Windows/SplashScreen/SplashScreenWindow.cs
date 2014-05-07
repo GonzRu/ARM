@@ -205,7 +205,6 @@ namespace HMI_MT.Windows.SplashScreen
                 HMI_Settings.IPPointForSerializeMesPan = Properties.Settings.Default.IPPointForSerializeMesPan;
                 HMI_Settings.PortPointForSerializeMesPan = Properties.Settings.Default.PortPointForSerializeMesPan;
                 HMI_Settings.ViewBtn4MainWindow = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("ViewBtn4MainWindow").Value;
-                HMI_Settings.HideWindowLineStatus = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("HideWindowLineStatus").Value;                
                 HMI_Settings.DiagnosticSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("DiagnosticSchema").Value;
                 HMI_Settings.MainMnenoSchema = AppDomain.CurrentDomain.BaseDirectory + "Project" + Path.DirectorySeparatorChar + HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("MainMnenoSchema").Value;
                 HMI_Settings.alMenu = new ArrayList();

@@ -318,10 +318,6 @@ namespace HMI_MT_Settings
         /// </summary>      
         public static string ViewBtn4MainWindow;
         /// <summary>
-        /// Скрывать строку статуса Windows?
-        /// </summary>      
-        public static string HideWindowLineStatus;
-        /// <summary>
         /// Факт наличия активной антенны GPS
         /// </summary>
         public static bool IsGPSActive;
