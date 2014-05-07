@@ -84,10 +84,6 @@
       <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
       <Name>InterfaceLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LabelTextbox\LabelTextbox.csproj">
-      <Project>{812A9E1D-FDA6-430C-8B75-5FB0CDAC3664}</Project>
-      <Name>LabelTextbox</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PTKState\PTKStateLib.csproj">
       <Project>{CE4F69AE-A00B-4639-ADE9-60994E426921}</Project>
       <Name>PTKStateLib</Name>
