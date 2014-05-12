@@ -75,8 +75,12 @@ namespace HMI_MT
                 if ( buttonRegion != null )
                 {
                     var file = AppDomain.CurrentDomain.BaseDirectory + @"Project\MnemoSchemas\" + buttonRegion.Group;
-                    var formEz = new NewMainMnemo( file, parent, true ) { MdiParent = parent };
-                    formEz.Show();
+
+                    if (File.Exists(file))
+                    {
+                        var formEz = new NewMainMnemo(file, parent, true) {MdiParent = parent};
+                        formEz.Show();
+                    }
                 }
             }
             catch ( Exception ex )
