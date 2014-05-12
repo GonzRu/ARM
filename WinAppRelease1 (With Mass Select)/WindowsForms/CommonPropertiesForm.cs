@@ -63,7 +63,8 @@ namespace WindowsForms
          else
             this.tabControl1.Controls.Remove(this.TextTabPage);
 
-         this.CancelButton = button1;
+          this.CancelButton = button1;
+          this.AcceptButton = button2;
       }
       private void InitFileDialog()
       {
@@ -336,6 +337,8 @@ namespace WindowsForms
           var form = new ElementBehaviorForm( (ICalculationContext)this.SelectElement ) { Owner = this };
           if ( form.ShowDialog() == DialogResult.OK )
               newContext = form.GetNewCalculationContext();
+
+          this.button2.Focus();
       }
       private void Button6Click( object sender, EventArgs e )
       {
