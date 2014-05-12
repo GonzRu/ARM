@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 using HMI_MT_Settings;
@@ -16,12 +17,27 @@ namespace HMI_MT
         private readonly MainForm parent;
         private List<ITag> tags;
         private IBasePanelCollection iBPanel;
+        private string _pathToDiagnosticPanelfile;
 
+        /// <summary>
+        /// Конструктор для запуска панелид диагностики по-умолчанию
+        /// </summary>
         public FrmDiagPanel( MainForm linkMainForm )
         {
             InitializeComponent( );
             this.parent = linkMainForm;
+
+            _pathToDiagnosticPanelfile = HMI_Settings.DiagnosticSchema;
         }
+
+        public FrmDiagPanel(MainForm linkMainForm, string pathToDiagnosticPanelFile)
+        {
+            InitializeComponent();
+            this.parent = linkMainForm;
+
+            _pathToDiagnosticPanelfile = pathToDiagnosticPanelFile;
+        }
+
         public void ResetProtocol( )
         {
             if ( !iBPanel.ErrorLoading )
@@ -29,7 +45,7 @@ namespace HMI_MT
         }
         private void FrmDiagPanelLoad( object sender, EventArgs e )
         {
-            iBPanel = new BlockPanel( HMI_Settings.DiagnosticSchema, HMI_Settings.SchemaSize );
+            iBPanel = new BlockPanel(_pathToDiagnosticPanelfile, HMI_Settings.SchemaSize);
 
             if ( !iBPanel.ErrorLoading )
             {
@@ -73,9 +89,20 @@ namespace HMI_MT
             try
             {
                 var idp = sender as LibraryElements.IDynamicParameters;
-
                 if ( idp != null && idp.Parameters != null )
                     DevicesLibrary.DeviceFormFactory.CreateForm( this, idp.Parameters.DsGuid, idp.Parameters.DeviceGuid, parent.arrFrm );
+
+                var buttonRegion = sender as ButtonRegion;
+                if (buttonRegion != null)
+                {
+                    var file = AppDomain.CurrentDomain.BaseDirectory + @"Project\MnemoSchemas\" + buttonRegion.Group;
+
+                    if (File.Exists(file))
+                    {
+                        var formEz = new FrmDiagPanel(parent, file) { MdiParent = parent };
+                        formEz.Show();
+                    }
+                }
             }
             catch ( Exception ex )
             {
