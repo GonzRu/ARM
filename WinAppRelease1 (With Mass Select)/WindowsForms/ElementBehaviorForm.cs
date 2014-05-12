@@ -31,6 +31,10 @@ namespace WindowsForms
             dataGridView2.CellClick += DataGridViewOnCellClick;
 
             this.CancelButton = button2;
+            this.dataGridView1.CellEndEdit += (sender, args) =>
+            {
+                button1.Focus();
+            };
         }
         public ElementBehaviorForm( ICalculationContext element )
         {
@@ -51,6 +55,10 @@ namespace WindowsForms
             dataGridView2.CellClick += DataGridViewOnCellClick;
 
             this.CancelButton = button2;
+            this.dataGridView1.CellEndEdit += (sender, args) =>
+            {
+                button1.Focus();
+            };
         }
         private void InitData()
         {
