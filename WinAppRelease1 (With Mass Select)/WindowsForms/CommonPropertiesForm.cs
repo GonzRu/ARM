@@ -17,6 +17,8 @@ namespace WindowsForms
       private Image img;
       private CalculationContext newContext;
 
+      #region Constructor
+
       public CommonPropertiesForm(object elem, int frameMaxX, int frameMaxY)
       {
          InitializeComponent();
@@ -65,7 +67,13 @@ namespace WindowsForms
 
           this.CancelButton = button1;
           this.AcceptButton = button2;
+
+          if (tabControl1.Contains(BindingTtabPage))
+              tabControl1.SelectTab(BindingTtabPage);
       }
+
+      #endregion
+
       private void InitFileDialog()
       {
          openFileDialog1.InitialDirectory = Environment.CurrentDirectory;
