@@ -108,10 +108,10 @@
     <Compile Include="Windows\dlgSetSystemTime.Designer.cs">
       <DependentUpon>dlgSetSystemTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\dlgViewReqestData.cs">
+    <Compile Include="Windows\MainWindow\Tabs\dlgViewReqestData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\dlgViewReqestData.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\dlgViewReqestData.Designer.cs">
       <DependentUpon>dlgViewReqestData.cs</DependentUpon>
     </Compile>
     <Compile Include="FormForDeviceByType.cs" />
@@ -133,10 +133,10 @@
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.Designer.cs">
       <DependentUpon>frmLogs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\frmUserGroupRights.cs">
+    <Compile Include="Windows\MainWindow\Tabs\frmUserGroupRights.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\frmUserGroupRights.Designer.cs">
+    <Compile Include="Windows\MainWindow\Tabs\frmUserGroupRights.Designer.cs">
       <DependentUpon>frmUserGroupRights.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow\Tabs\JournalTab\GetCommentWindow.cs">
@@ -170,12 +170,6 @@
     <Compile Include="Windows\MainWindow\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MenuItemNewFielDlg.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\MenuItemNewFielDlg.Designer.cs">
-      <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\MainWindow\Tabs\NewMainMnemo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,7 +202,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>dlgSetSystemTime.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\dlgViewReqestData.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\dlgViewReqestData.resx">
       <DependentUpon>dlgViewReqestData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\frmDiagPanel.resx">
@@ -221,7 +215,7 @@
     <EmbeddedResource Include="Windows\MainWindow\Tabs\JournalTab\frmLogs.resx">
       <DependentUpon>frmLogs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\frmUserGroupRights.resx">
+    <EmbeddedResource Include="Windows\MainWindow\Tabs\frmUserGroupRights.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmUserGroupRights.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,10 +230,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\MenuItemNewFielDlg.resx">
-      <DependentUpon>MenuItemNewFielDlg.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainWindow\Tabs\NewMainMnemo.resx">
       <DependentUpon>NewMainMnemo.cs</DependentUpon>
