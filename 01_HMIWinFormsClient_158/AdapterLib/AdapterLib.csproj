@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CRZADevices">
-      <HintPath>..\crza\CRZADevices\CRZADevices\bin\Debug\CRZADevices.dll</HintPath>
+      <HintPath>DLL\CRZADevices.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
