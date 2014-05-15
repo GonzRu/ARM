@@ -35,7 +35,6 @@ using System.Windows.Forms;
 using OscillogramsLib;
 using System.Threading;
 using System.ComponentModel;
-using CommonUtils;
 
 namespace Configuration
 {

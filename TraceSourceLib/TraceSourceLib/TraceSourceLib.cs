@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using Microsoft.VisualBasic.Logging;
 using System.IO;
 
 namespace TraceSourceLib

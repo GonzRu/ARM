@@ -52,10 +52,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
-      <Project>{248134C6-B5A0-4C36-AABA-85B5AB0D04BA}</Project>
-      <Name>TraceSourceLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CommonUtils\CommonUtils.csproj">
       <Project>{B389D78D-0E11-4A7A-A770-B06AC4828E27}</Project>
       <Name>CommonUtils</Name>
@@ -72,10 +68,6 @@
       <Project>{64E89B33-C72B-45D6-B6EC-7FBBC027BC95}</Project>
       <Name>HelperControlsLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HelperLibrary\HelperLibrary.csproj">
-      <Project>{C68C58BC-7108-4FCA-A951-90CD60BEAC74}</Project>
-      <Name>HelperLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
       <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
       <Name>HMI_MT_Settings</Name>
@@ -88,19 +80,11 @@
       <Project>{CE4F69AE-A00B-4639-ADE9-60994E426921}</Project>
       <Name>PTKStateLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WinAppRelease1 %28With Mass Select%29\NormalModeLibrary\NormalModeLibrary.csproj">
-      <Project>{C4311573-8C37-4634-A5D4-6FFDFB52A2F7}</Project>
-      <Name>NormalModeLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.XML" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

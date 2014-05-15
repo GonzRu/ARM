@@ -37,8 +37,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -57,21 +55,9 @@
       <Project>{95D1591D-378A-42C4-82AE-CAAC7CE8838E}</Project>
       <Name>Structure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DebugStatisticLibrary\DebugStatisticLibrary.csproj">
-      <Project>{5102CEC9-B71D-407C-8F7C-F1EFB227A854}</Project>
-      <Name>DebugStatisticLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HMI_MT_Settings\HMI_MT_Settings.csproj">
-      <Project>{A569CBD7-BCB5-4DE3-B3A8-E2370E9C94DA}</Project>
-      <Name>HMI_MT_Settings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\InterfaceLibrary\InterfaceLibrary.csproj">
       <Project>{110E34F6-A97B-4693-9252-95529B4BA9BB}</Project>
       <Name>InterfaceLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PTKState\PTKStateLib.csproj">
-      <Project>{CE4F69AE-A00B-4639-ADE9-60994E426921}</Project>
-      <Name>PTKStateLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

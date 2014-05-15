@@ -38,9 +38,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -57,10 +54,6 @@
       <Project>{7BBBF32A-7BF6-4A07-A1E8-8964EBAE80D4}</Project>
       <Name>CommandLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CommonUtils\CommonUtils.csproj">
-      <Project>{B389D78D-0E11-4A7A-A770-B06AC4828E27}</Project>
-      <Name>CommonUtils</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataServersLib\DataServersLib.csproj">
       <Project>{4FA0EB0D-7A70-4F60-967B-B6D6D39B78CD}</Project>
       <Name>DataServersLib</Name>
@@ -72,10 +65,6 @@
     <ProjectReference Include="..\RequsEtntryLib\RequsEtntryLib.csproj">
       <Project>{3A681CCB-6981-434E-AC2D-0CF01C270F7F}</Project>
       <Name>RequsEtntryLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SourceMOA\SourceMOA.csproj">
-      <Project>{67A89781-635D-4EA9-916E-A212FE4C82A3}</Project>
-      <Name>SourceMOA</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -57,10 +57,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContxtMenu.cs">
@@ -76,10 +74,6 @@
     <Compile Include="ToolBar.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileManager\FileManager.csproj">
-      <Project>{A3D8540F-865D-43B2-A07A-1D8B7A4A4938}</Project>
-      <Name>FileManager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Structure\Structure.csproj">
       <Project>{95D1591D-378A-42C4-82AE-CAAC7CE8838E}</Project>
       <Name>Structure</Name>

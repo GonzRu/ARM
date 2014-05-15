@@ -31,22 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CRZADevices">
-      <HintPath>..\AdapterLib\bin\Debug\CRZADevices.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TraceSourceLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\TraceSourceLib\TraceSourceLib\bin\Debug\TraceSourceLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GroupsAndTagsTab\BlockViewCollector.cs" />
@@ -152,6 +144,10 @@
     <ProjectReference Include="..\..\DataBaseLib\DataBaseLib.csproj">
       <Project>{53CC22F8-9153-47A8-9654-B9172A2FD551}</Project>
       <Name>DataBaseLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TraceSourceLib\TraceSourceLib\TraceSourceLib.csproj">
+      <Project>{248134c6-b5a0-4c36-aaba-85b5ab0d04ba}</Project>
+      <Name>TraceSourceLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\Calculator\Calculator.csproj">
       <Project>{4E8A009D-B64C-418A-A334-DE7483545F8A}</Project>
