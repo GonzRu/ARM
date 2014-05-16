@@ -321,6 +321,7 @@ namespace WindowsForms
                 list.Add( "Данные сигнального блока" );
                 list.Add( "Данные Uso блока" );
                 list.Add( "Данные текстового сигнала" );
+                list.Add( "Плата дискретных входов: 2 сигнала" );
             }
             if ( element is Trunk )
                 list.Add( "Данные ключа цвета" );
@@ -359,6 +360,7 @@ namespace WindowsForms
             if ( calculation is ImageCalculation ) name = "Данные изображения";
             if ( calculation is UsoSignalCalculation ) name = "Данные Uso блока";
             if ( calculation is TextSignalCalculation ) name = "Данные текстового сигнала";
+            if ( calculation is DiscretPlata2signalsCalculation ) name = "Плата дискретных входов: 2 сигнала";
             return name;
         }
         /// <summary>
@@ -382,6 +384,7 @@ namespace WindowsForms
                 case "Данные изображения": return "ImageCalculation";
                 case "Данные Uso блока": return "UsoSignalCalculation";
                 case "Данные текстового сигнала": return "TextSignalCalculation";
+                case "Плата дискретных входов: 2 сигнала": return "DiscretPlataInput2signals";
                 default: return viewName;
             }
         }

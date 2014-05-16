@@ -68,6 +68,7 @@
     <Compile Include="CalculationBlocks\BmrzCalculation.cs" />
     <Compile Include="CalculationBlocks\BreslerCalculation.cs" />
     <Compile Include="CalculationBlocks\CalculationContext.cs" />
+    <Compile Include="CalculationBlocks\DiscretPlata2signalsCalculation.cs" />
     <Compile Include="CalculationBlocks\EkraCalculation.cs" />
     <Compile Include="CalculationBlocks\ElementCalculation.cs" />
     <Compile Include="CalculationBlocks\IAdjustment.cs" />
