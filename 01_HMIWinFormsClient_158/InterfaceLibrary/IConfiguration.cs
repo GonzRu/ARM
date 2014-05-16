@@ -79,54 +79,6 @@ namespace InterfaceLibrary
         TypeBlockData_LogEventBlock = 5,
     }
 
-    ///// <summary>
-    ///// типы записей в базе для запроса 
-    ///// по типам блоков
-    ///// </summary>
-    //public enum TypeBlockData
-    //{
-    //    /// <summary>
-    //    /// неизвестный тип записи
-    //    /// </summary>
-    //    TypeBlockData_Unknown = 0,
-    //    /// <summary>
-    //    /// ид типа записи уставок
-    //    /// </summary>
-    //    TypeBlockData_Ustavki = 1,
-
-    //    /// <summary>
-    //    /// ид типа записи аварий
-    //    /// </summary>
-    //    TypeBlockData_Srabat = 2,
-
-    //    /// <summary>
-    //    /// ид типа записи осциллограмм БМРЗ (ид = 4, расширение .osc)
-    //    /// </summary>
-    //    TypeBlockData_OscBMRZ = 4,
-
-    //    /// <summary>
-    //    /// ид типа записи диаграмм (ид = 5, расширение .dgm)
-    //    /// </summary>
-    //    TypeBlockData_Diagramm = 5,
-
-    //    /// <summary>
-    //    /// ид типа записи осциллограммы сириус (ид = 8, расширение .trd)
-    //    /// </summary>
-    //    TypeBlockData_OscSirius = 8,
-    //    /// <summary>
-    //    /// ид типа записи журнала событий блока
-    //    /// </summary>
-    //    TypeBlockData_LogEventBlock = 9,
-    //    /// <summary>
-    //    /// ид типа записи осциллограммы экра (ид = 10, расширение .dfr)
-    //    /// </summary>
-    //    TypeBlockData_OscEkra = 10,
-    //    /// <summary>
-    //    /// ид типа записи осциллограммы Бреслера (ид = 11, расширение .brs)
-    //    /// </summary>
-    //    TypeBlockData_OscBresler = 11,
-    //}
-
     /// <summary>
     /// интерфейс доступа к конфигурации
     /// </summary>
