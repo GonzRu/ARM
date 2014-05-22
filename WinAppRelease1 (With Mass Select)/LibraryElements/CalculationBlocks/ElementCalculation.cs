@@ -120,6 +120,7 @@ namespace LibraryElements.CalculationBlocks
             if ( original is UsoSignalCalculation ) element = new UsoSignalCalculation( );
             if ( original is TextSignalCalculation ) element = new TextSignalCalculation( );
             if (original is DiscretPlata2signalsCalculation) element = new DiscretPlata2signalsCalculation();
+            if (original is UsoDiscretSignalCalculation) element = new UsoDiscretSignalCalculation();
             
             if ( element != null ) element.Copy( original );
             return element;
@@ -159,6 +160,8 @@ namespace LibraryElements.CalculationBlocks
                     return new TextSignalCalculation( );
                 case "DiscretPlataInput2signals":
                     return new DiscretPlata2signalsCalculation();
+                case "UsoDiscretSignalCalculation":
+                    return new UsoDiscretSignalCalculation();
                 default:
                     return null;
             }

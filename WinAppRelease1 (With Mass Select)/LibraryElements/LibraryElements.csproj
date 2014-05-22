@@ -83,6 +83,7 @@
     <Compile Include="CalculationBlocks\TorCalculation.cs" />
     <Compile Include="CalculationBlocks\TransformatorCalculation.cs" />
     <Compile Include="CalculationBlocks\TrunkCalculation.cs" />
+    <Compile Include="CalculationBlocks\UsoDiscretSignalCalculation.cs" />
     <Compile Include="CalculationBlocks\UsoSignalCalculation.cs" />
     <Compile Include="Custom.cs" />
     <Compile Include="DinamicElement.cs" />

@@ -55,10 +55,10 @@ namespace WindowsForms
             dataGridView2.CellClick += DataGridViewOnCellClick;
 
             this.CancelButton = button2;
-            this.dataGridView1.CellEndEdit += (sender, args) =>
-            {
-                button1.Focus();
-            };
+            //this.dataGridView1.CellEndEdit += (sender, args) =>
+            //{
+            //    button1.Focus();
+            //};
         }
         private void InitData()
         {
@@ -322,6 +322,7 @@ namespace WindowsForms
                 list.Add( "Данные Uso блока" );
                 list.Add( "Данные текстового сигнала" );
                 list.Add( "Плата дискретных входов: 2 сигнала" );
+                list.Add( "Данные USO блока - дискреты на входе" );
             }
             if ( element is Trunk )
                 list.Add( "Данные ключа цвета" );
@@ -361,6 +362,7 @@ namespace WindowsForms
             if ( calculation is UsoSignalCalculation ) name = "Данные Uso блока";
             if ( calculation is TextSignalCalculation ) name = "Данные текстового сигнала";
             if ( calculation is DiscretPlata2signalsCalculation ) name = "Плата дискретных входов: 2 сигнала";
+            if ( calculation is UsoDiscretSignalCalculation ) name = "Данные USO блока - дискреты на входе";
             return name;
         }
         /// <summary>
@@ -385,6 +387,7 @@ namespace WindowsForms
                 case "Данные Uso блока": return "UsoSignalCalculation";
                 case "Данные текстового сигнала": return "TextSignalCalculation";
                 case "Плата дискретных входов: 2 сигнала": return "DiscretPlataInput2signals";
+                case "Данные USO блока - дискреты на входе": return "UsoDiscretSignalCalculation";
                 default: return viewName;
             }
         }
