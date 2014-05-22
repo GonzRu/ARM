@@ -62,7 +62,7 @@ namespace HMI_MT.Windows.SplashScreen
             ShowProgressMessage("Загрузка привязки состояний...");
             PTKState.Iinstance.InitPTKStateInfo();
 
-            ShowProgressMessage("Загрузка привязки состояний...");
+            ShowProgressMessage("Проверка подключения к БД...");
             InitDB();
 
             ShowProgressMessage("Подсоединение к серверу данных...");
