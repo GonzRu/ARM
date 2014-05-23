@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using LibraryElements.Sources;
 using Structure;
 
@@ -16,12 +17,12 @@ namespace LibraryElements.CalculationBlocks
 
             Records.Add(new DataRecord("StateProtocol", DataRecord.RecordTypes.StateProtocol) { Value = ProtocolStatus.Bad });
             Records.Add(new DataRecord("IsAdjustment", DataRecord.RecordTypes.Boolean) {Value = false});
-            Records.Add(new DataRecord("Исправен", DataRecord.RecordTypes.Color) {Value = Color.Green});
-            Records.Add(new DataRecord("Срабатывание", DataRecord.RecordTypes.Color) {Value = Color.Red});
-            Records.Add(new DataRecord("Не исправен", DataRecord.RecordTypes.Color) {Value = Color.Yellow});
-            Records.Add(new DataRecord("Обрыв ВОД", DataRecord.RecordTypes.Color) {Value = Color.Yellow});
-            Records.Add(new DataRecord("Отключен", DataRecord.RecordTypes.Color) { Value = Color.Gray });
-            Records.Add(new DataRecord("Неизвестное состояние", DataRecord.RecordTypes.Color) { Value = Color.DarkGray });
+            Records.Add(new DataRecord("Цвет состояния \"Исправен\"", DataRecord.RecordTypes.Color) {Value = Color.Green});
+            Records.Add(new DataRecord("Цвет состояния \"Срабатывание\"", DataRecord.RecordTypes.Color) { Value = Color.Red });
+            Records.Add(new DataRecord("Цвет состояния \"Не исправен\"", DataRecord.RecordTypes.Color) { Value = Color.Yellow });
+            Records.Add(new DataRecord("Цвет состояния \"Обрыв ВОД\"", DataRecord.RecordTypes.Color) { Value = Color.Yellow });
+            Records.Add(new DataRecord("Цвет состояния \"Отключен\"", DataRecord.RecordTypes.Color) { Value = Color.Gray });
+            Records.Add(new DataRecord("Цвет неизвестного состояния", DataRecord.RecordTypes.Color) { Value = Color.DarkGray });
             Records.Add(new DataRecord("Нет связи", DataRecord.RecordTypes.Color) { Value = Color.Gainsboro });
         }
 
@@ -57,16 +58,17 @@ namespace LibraryElements.CalculationBlocks
         {
             /*
              * Данный способ перечеркивает весь прямоугольник, а не эллипс
-            Point leftUpPoint = new Point(rectangle.Left, rectangle.Top);
-            Point leftDownPoint = new Point(rectangle.Left, rectangle.Bottom);
-            Point rightUpPoint = new Point(rectangle.Right, rectangle.Top);
-            Point rightDownPoint = new Point(rectangle.Right, rectangle.Bottom);
-
-            Pen pen = new Pen(Color.Black);
-
-            graphics.DrawLine(pen, leftUpPoint, rightDownPoint);
-            graphics.DrawLine(pen, leftDownPoint, rightUpPoint);
              */
+            //Point leftPoint = new Point(rectangle.Left, rectangle.Top + rectangle.Height/2);
+            //Point upPoint = new Point(rectangle.Left + rectangle.Width/2, rectangle.Top);
+            //Point rightPoint = new Point(rectangle.Right, rectangle.Top + rectangle.Height/2);
+            //Point downPoint = new Point(rectangle.Left + rectangle.Width/2, rectangle.Bottom);
+
+            //Pen pen = new Pen(Color.Black);
+
+            //graphics.DrawLine(pen, leftPoint, rightPoint);
+            //graphics.DrawLine(pen, upPoint, downPoint);
+
 
             /*
              * Данный способо перечеркивает эллипс, а не прямоугольник.
@@ -80,22 +82,29 @@ namespace LibraryElements.CalculationBlocks
              *      6. Находим координаты всех точек пересечения в исходной системе координат
              */
 
-            // Координаты центра в исходной системе координат
-            int Cx = rectangle.Left + rectangle.Width/2;
-            int Cy = rectangle.Top + rectangle.Height/2;
+            if (rectangle.Width != 15 && rectangle.Height != 15)
+            {
 
-            int a = rectangle.Width/2; // большая полуось
-            int b = rectangle.Height/2; // малая полуось
+            }
+
+            // Координаты центра в исходной системе координат
+            int Cx = rectangle.Left + rectangle.Width / 2;
+            int Cy = rectangle.Top + rectangle.Height / 2;
+
+            double a = rectangle.Width / 2.0; // большая полуось
+            double b = rectangle.Height / 2.0; // малая полуось
 
             // Угол, между осью абсцисс и радиус-вектором от центра координат до угла прямоугольника
-            double phi = Math.Atan2(b, a);
+            double phi = Math.Atan(b / a);
 
             // Длина радиус-вектора от центра координат до точки пересечения эллипса с с прямой, проходящей через центр координат и угол прямоугольника
-            double r = b/(Math.Sqrt(1 - Math.Pow(Math.E*Math.Cos(phi), 2)));
+            double a1 = Math.Pow(b * Math.Cos(phi), 2);
+            double a2 = Math.Pow(a * Math.Sin(phi), 2);
+            double r = a * b / (Math.Sqrt(a1 + a2));
 
             // Находим координаты точки пересечения в новой системе координат
-            double Ax = r*Math.Sin(phi);
-            double Ay = r*Math.Cos(phi);
+            double Ay = r * Math.Sin(phi);
+            double Ax = r * Math.Cos(phi);
 
             // Находим координаты точек пересечения в исходной системе координат
             Point leftUpPoint = new Point((int)(Cx - Ax), (int)(Cy - Ay));
@@ -141,12 +150,12 @@ namespace LibraryElements.CalculationBlocks
             //08h - "отключен" - серый
             switch (analogValueResult)
             {
-                case 0: return (Color)GetRecord("Исправен").Value;
-                case 1: return (Color)GetRecord("Срабатывание").Value;
-                case 2: return (Color)GetRecord("Не исправен").Value;
-                case 6: return (Color)GetRecord("Обрыв ВОД").Value;
-                case 8: return (Color)GetRecord("Отключен").Value;
-                default: return (Color)GetRecord("Неизвестное состояние").Value;
+                case 0: return (Color)GetRecord("Цвет состояния \"Исправен\"").Value;
+                case 1: return (Color)GetRecord("Цвет состояния \"Срабатывание\"").Value;
+                case 2: return (Color)GetRecord("Цвет состояния \"Не исправен\"").Value;
+                case 6: return (Color)GetRecord("Цвет состояния \"Обрыв ВОД\"").Value;
+                case 8: return (Color)GetRecord("Цвет состояния \"Отключен\"").Value;
+                default: return (Color)GetRecord("Цвет неизвестного состояния").Value;
             }            
         }
 
