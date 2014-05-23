@@ -175,6 +175,8 @@ namespace WindowsForms
                 e.Graphics.ScaleTransform( sel.Scale.X, sel.Scale.Y );
                 sel.DrawElement( e.Graphics );
                 e.Graphics.ResetTransform( );
+
+                Application.DoEvents();
             }
         }
         /// <summary>
