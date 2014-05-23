@@ -284,7 +284,7 @@ namespace HelperControlsLibrary
                 var tag = (TagDescription)row.Tag;
                 if (tag == null || !tag.Result.Equals(format) || row.Cells[1].Value.Equals(value)) continue;
 
-                row.Cells[1].Value = value.ToString();
+                row.Cells[1].Value = tag.Source.ValueAsString;
 
                 return true;
             }

@@ -279,6 +279,13 @@ namespace Calculator
                         //case TypeOfTag.DateTime: // выводитьс€ как стринг
                         //    OnChangeValFormTI( this.tRezFormulaEval.IdTagIE, DateTime.Parse( @var.Item1 ) );
                         //    break;
+                    case TypeOfTag.Combo:
+                        // –аньше приходил текст перечислени€. Ёто не подходит. —ейчас конвертирую в Single (формат по-умолчанию дл€ TagEnum), а затем в Int
+                        // дл€ мнемосхемы (по анологии с дискретным тегом).
+                        Single singleValue = BitConverter.ToSingle(@var.Item2, 0);
+
+                        OnChangeValFormTI(this.RezFormulaEval.IdTagIE, (int)singleValue, type);
+                        break;
                     default: // выводитьс€ как стринг
                         OnChangeValFormTI( this.RezFormulaEval.IdTagIE, @var.Item1, type );
                         break;
