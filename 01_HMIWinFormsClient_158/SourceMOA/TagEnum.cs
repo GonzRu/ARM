@@ -18,11 +18,9 @@
  *#############################################################################*/
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Xml.Linq;
-using System.Text;
 using InterfaceLibrary;
 
 namespace SourceMOA
@@ -43,18 +41,26 @@ namespace SourceMOA
                 }
             }    
         }
+
 		/// <summary>
 		/// установить значение тега
 		/// </summary>
-		/// <param name="memX"></param>
         public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
         {
             this.SetValue( memX, dt, vq, TypeOfTag.Combo );
 		}
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>     
+        public override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq)
+        {
+            this.SetValueAsObject(tagValueAsObject, dt, vq, TypeOfTag.Combo);
+        }
+
         /// <summary>
         /// установить значение тега
         /// </summary>
-        /// <param name="memX"></param>
         protected override void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag )
         {
             try
@@ -80,11 +86,47 @@ namespace SourceMOA
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>
+        protected override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag)
+        {
+            try
+            {
+                TimeStamp = dt;
+                DataQuality = vq;
+
+                if (!(tagValueAsObject is Boolean) && !(tagValueAsObject is Single))
+                {
+                    Console.WriteLine("Для TagEnum отброшено значение: " + tagValueAsObject.ToString() + " " + tagValueAsObject.GetType());
+                    return;
+                }
+
+                // Делаем преобразование в Single, так как от нового ФК могут приходить Boolean дл типа BitEnum.
+                if (tagValueAsObject is Boolean)
+                    tagValueAsObject = (Boolean)tagValueAsObject ? (Single)1 : (Single)0;
+
+                // Заполняем ValueAsString
+                var indexenum = Convert.ToInt32((Single)tagValueAsObject);
+                if (slEnumsParty.ContainsKey(indexenum))
+                    this.ValueAsString = slEnumsParty[indexenum];
+
+                if (BindindTag != null)
+                    BindindTag.ReadValue();
+
+                base.SetValueAsObject(tagValueAsObject, dt, vq, typeOfTag);
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+
         /// <summary>
         /// установить значение тега
         /// по умолчанию (для его сброса)
         /// </summary>
-        /// <param name="memX"></param>
         public override void SetDefaultValue()
         {
             try

@@ -583,14 +583,14 @@ namespace DataServersLib
         /// Задает новое значение тегу на основании
         /// идентификатора DataServer, устройства и тега
         /// </summary>
-        private void SetValueTag(UInt16 dsGuid, UInt32 devGuid, UInt32 tagGuid, byte [] tagValue, DateTime tagDateTime, VarQualityNewDs tagQuality)
+        private void SetValueTag(UInt16 dsGuid, UInt32 devGuid, UInt32 tagGuid, object tagValueAsObject, DateTime tagDateTime, VarQualityNewDs tagQuality)
         {
             IDevice dev = (from d in lstDev4ThisDS where d.UniObjectGUID == devGuid select d).Single<IDevice>();
 
             ITag tag = dev.GetTag(tagGuid);
 
             if (tag != null)
-                tag.SetValue(tagValue, tagDateTime, tagQuality);
+                tag.SetValueAsObject(tagValueAsObject, tagDateTime, tagQuality);
         }
         #endregion
     }

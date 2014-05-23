@@ -35,23 +35,26 @@ namespace SourceMOA
             DefValue = "0";
             ValueDim = 2;
         }
+
 	    /// <summary>
 	    /// установить значение тега
-	    /// </summary>
-	    /// <param name="memX"></param>
-	    /// <param name="dt"></param>
-	    /// <param name="vq"></param>        
+	    /// </summary>     
         public override void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq )
         {
             this.SetValue( memX, dt, vq, TypeOfTag.Analog );
         }
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>     
+        public override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq)
+        {
+            this.SetValueAsObject(tagValueAsObject, dt, vq, TypeOfTag.Analog);
+        }
+
 	    /// <summary>
 	    /// установить значение тега
 	    /// </summary>
-	    /// <param name="memX"></param>
-	    /// <param name="dt"></param>
-	    /// <param name="vq"></param>
-        /// <param name="typeOfTag"> </param>
         protected override void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag )
         {
             try
@@ -74,6 +77,30 @@ namespace SourceMOA
 				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
 			}
 		}
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>
+        protected override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag)
+        {
+            try
+            {
+                TimeStamp = dt;
+                DataQuality = vq;
+
+                ValueAsString = ((Single) tagValueAsObject).ToString(String.Format("N{0}", this.ValueDim));
+
+                if (BindindTag != null)
+                    BindindTag.ReadValue();
+
+                base.SetValueAsObject(tagValueAsObject, dt, vq, typeOfTag);
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+
         /// <summary>
         /// установить значение тега
         /// по умолчанию (для его сброса)

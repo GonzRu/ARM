@@ -104,13 +104,17 @@ namespace InterfaceLibrary
         /// типов enum
         /// </summary>
         SortedList<int,string> SlEnumsParty { get; }
+
         /// <summary>
         /// установить значение тега
         /// </summary>
-        /// <param name="memX"></param>
-        /// <param name="dt"></param>
-        /// <param name="vq"></param>
         void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq);
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>
+        void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq);
+
         /// <summary>
         /// установить значение тега
         /// по умолчанию (для его сброса)

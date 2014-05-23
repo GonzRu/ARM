@@ -19,7 +19,7 @@ namespace ProviderCustomerExchangeLib.WCF
         /// <summary>
         /// событие изменения значения тега
         /// </summary>
-        public event Action<UInt16, UInt32, UInt32, byte[], DateTime, VarQualityNewDs> OnTagValueChanged;	    
+        public event Action<UInt16, UInt32, UInt32, object, DateTime, VarQualityNewDs> OnTagValueChanged;	    
         #endregion
 
         #region private
@@ -360,7 +360,7 @@ namespace ProviderCustomerExchangeLib.WCF
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
                 else
-                    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, kvp.Value.VarValueAsObject.ToString()));
+                    Console.WriteLine(string.Format("{0} : {1}   {2}", kvp.Key, kvp.Value.VarValueAsObject.ToString(), kvp.Value.VarValueAsObject.GetType()));
 
             foreach (var tag in tv)
             {
@@ -376,40 +376,11 @@ namespace ProviderCustomerExchangeLib.WCF
                     if (tag.Value.VarValueAsObject == null)
                         continue;
 
-                    // Перевод значения тега в byte []
-                    byte[] byteArrTagValue = null;
-
-                    Object varValueAsObject = tag.Value.VarValueAsObject;                   
-                    if (tag.Value.VarValueAsObject is Boolean)
-                        byteArrTagValue = BitConverter.GetBytes((Boolean)varValueAsObject);
-                    else if (tag.Value.VarValueAsObject is DateTime)
-                        byteArrTagValue = BitConverter.GetBytes(((DateTime)varValueAsObject).Ticks);
-                    else if (tag.Value.VarValueAsObject is Single)
-                        byteArrTagValue = BitConverter.GetBytes((Single)varValueAsObject);
-                    else if (tag.Value.VarValueAsObject is Int32)
-                    {
-                        Int32 v = (Int32) varValueAsObject;
-                        Single s = (Single) v;
-                        byteArrTagValue = BitConverter.GetBytes(s);
-                    }
-                    else if (tag.Value.VarValueAsObject is String)
-                    {
-                        var encoder = System.Text.Encoding.GetEncoding(SourceMOA.Tag.StringValueEncoding);
-
-                        byteArrTagValue = encoder.GetBytes(tag.Value.VarValueAsObject.ToString());
-                    }
-
-                    if (byteArrTagValue == null)
-                    {
-                        Console.WriteLine("Значение тега не было разобрано - " + tag.Value.VarValueAsObject.GetType().ToString());
-                        continue;
-                    }
-
                     // VarQualityNewDs
                     VarQualityNewDs tagQuality = (VarQualityNewDs)tag.Value.VarQuality;
 
                     if (OnTagValueChanged != null)
-                        OnTagValueChanged(dsGuid, devGuid, tagGuid, byteArrTagValue, DateTime.Now, tagQuality);
+                        OnTagValueChanged(dsGuid, devGuid, tagGuid, tag.Value.VarValueAsObject, DateTime.Now, tagQuality);                    
                 }
                 catch
                 {

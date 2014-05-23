@@ -33,15 +33,22 @@ namespace SourceMOA
 		/// <summary>
 		/// установить значение тега
 		/// </summary>
-		/// <param name="memX"></param>
         public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
         {
             this.SetValue( memX, dt, vq, TypeOfTag.String );
 		}
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>     
+        public override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq)
+        {
+            this.SetValueAsObject(tagValueAsObject, dt, vq, TypeOfTag.String);
+        }
+
         /// <summary>
         /// установить значение тега
         /// </summary>
-        /// <param name="memX"></param>
         protected override void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag )
         {
             try
@@ -62,11 +69,34 @@ namespace SourceMOA
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>
+        protected override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag)
+        {
+            try
+            {
+                TimeStamp = dt;
+                DataQuality = vq;
+
+                ValueAsString = tagValueAsObject.ToString();
+
+                if (BindindTag != null)
+                    BindindTag.ReadValue();
+
+                base.SetValueAsObject(tagValueAsObject, dt, vq, typeOfTag);
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+
         /// <summary>
         /// установить значение тега
         /// по умолчанию (для его сброса)
         /// </summary>
-        /// <param name="memX"></param>
         public override void SetDefaultValue()
         {
             try

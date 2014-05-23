@@ -217,20 +217,15 @@ namespace SourceMOA
         static public ushort StringValueEncoding = 866;   // по умолчанию
         
         #region public-методы реализации интерфейса ...
+
 	    /// <summary>
 	    /// установить значение тега
 	    /// </summary>
-	    /// <param name="memX"></param>
-	    /// <param name="dt"></param>
-	    /// <param name="vq"></param>
 	    public abstract void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq );
+
 	    /// <summary>
 	    /// установить значение тега
 	    /// </summary>
-	    /// <param name="memX"></param>
-	    /// <param name="dt"></param>
-	    /// <param name="vq"></param>
-	    /// <param name="typeOfTag"> </param>
 	    protected virtual void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag )
         {
             timeStamp = dt;
@@ -249,11 +244,33 @@ namespace SourceMOA
             if ( OnChangeValue != null )
                 OnChangeValue( new Tuple<string, byte[], DateTime, VarQualityNewDs>( ValueAsString, ValueAsMemX, timeStamp, DataQuality ), typeOfTag );
         }
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>
+        public abstract void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq);
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>
+        protected virtual void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag)
+        {
+            timeStamp = dt;
+            dataQuality = vq;
+
+            valueAsMemX = ConverObjectToByteArray(tagValueAsObject);
+
+            if (OnChangeVar != null)
+                OnChangeVar(new Tuple<string, byte[], DateTime, VarQualityNewDs>(ValueAsString, ValueAsMemX, timeStamp, DataQuality));
+
+            if (OnChangeValue != null)
+                OnChangeValue(new Tuple<string, byte[], DateTime, VarQualityNewDs>(ValueAsString, ValueAsMemX, timeStamp, DataQuality), typeOfTag);
+        }
+
         /// <summary>
         /// установить значение тега
         /// по умолчанию (для его сброса)
         /// </summary>
-        /// <param name="memX"></param>
         public virtual void SetDefaultValue()
         {
         }
@@ -296,5 +313,39 @@ namespace SourceMOA
 			}
 		}
 		#endregion
-	}
+
+        #region Private-методы
+
+        /// <summary>
+        /// Преобразует объект в массив байтов
+        /// </summary>
+        private byte[] ConverObjectToByteArray(object tagValueAsObject)
+        {
+            // Перевод значения тега в byte []
+            byte[] byteArrTagValue = null;
+
+            if (tagValueAsObject is Boolean)
+                byteArrTagValue = BitConverter.GetBytes((Boolean)tagValueAsObject);
+            else if (tagValueAsObject is DateTime)
+                byteArrTagValue = BitConverter.GetBytes(((DateTime)tagValueAsObject).Ticks);
+            else if (tagValueAsObject is Single)
+                byteArrTagValue = BitConverter.GetBytes((Single)tagValueAsObject);
+            else if (tagValueAsObject is Int32)
+            {
+                Int32 v = (Int32)tagValueAsObject;
+                Single s = (Single)v;
+                byteArrTagValue = BitConverter.GetBytes(s);
+            }
+            else if (tagValueAsObject is String)
+            {
+                var encoder = System.Text.Encoding.GetEncoding(SourceMOA.Tag.StringValueEncoding);
+
+                byteArrTagValue = encoder.GetBytes(tagValueAsObject.ToString());
+            }
+
+            return byteArrTagValue;
+        }
+
+        #endregion
+    }
 }

@@ -18,10 +18,8 @@
  *#############################################################################*/
 
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using InterfaceLibrary;
 
 namespace SourceMOA
@@ -32,18 +30,26 @@ namespace SourceMOA
         {
             TypeOfTagHMI = TypeOfTag.Discret;
         }
+
 		/// <summary>
 		/// установить значение тега
 		/// </summary>
-		/// <param name="memX"></param>
 		public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
 		{
 			this.SetValue( memX, dt, vq, TypeOfTag.Discret );
 		}
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>     
+        public override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq)
+        {
+            this.SetValueAsObject(tagValueAsObject, dt, vq, TypeOfTag.Discret);
+        }
+
         /// <summary>
         /// установить значение тега
         /// </summary>
-        /// <param name="memX"></param>
         protected override void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag )
         {
             try
@@ -70,11 +76,45 @@ namespace SourceMOA
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
+
+        /// <summary>
+        /// установить значение тега
+        /// </summary>
+        protected override void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag)
+        {
+            try
+            {
+                TimeStamp = dt;
+                DataQuality = vq;
+
+                if (!(tagValueAsObject is Boolean))
+                {
+                    Console.WriteLine("Для TagDiscret отброшено значение: " + tagValueAsObject.ToString() + " " + tagValueAsObject.GetType());
+                    return;
+                }
+
+                Boolean tmp = (Boolean) tagValueAsObject;
+
+                if (IsInverse && (this.DataQuality == VarQualityNewDs.vqGood))
+                    tmp = !tmp;
+
+                ValueAsString = tmp.ToString(CultureInfo.InvariantCulture);
+
+                if (BindindTag != null)
+                    BindindTag.ReadValue();
+
+                base.SetValueAsObject(tmp, dt, vq, typeOfTag);
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+        }
+
         /// <summary>
         /// установить значение тега
         /// по умолчанию (для его сброса)
         /// </summary>
-        /// <param name="memX"></param>
         public override void SetDefaultValue()
         {
             try
