@@ -84,26 +84,44 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\DSRouterService\DSRouterService.wsdl" />
-    <None Include="Service References\DSRouterService\DSRouterService.xsd">
+    <None Include="Service References\DSRouterService\DSRouterService1.wsdl" />
+    <None Include="Service References\DSRouterService\mex.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DSRouterService\DSRouterService1.xsd">
+    <None Include="Service References\DSRouterService\mex1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DSRouterService\DSRouterService2.xsd">
+    <None Include="Service References\DSRouterService\mex2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DSRouterService\DSRouterService3.xsd">
+    <None Include="Service References\DSRouterService\mex3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DSRouterService\DSRouterService4.xsd">
+    <None Include="Service References\DSRouterService\mex4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DSRouterService\DSRouterService5.xsd">
+    <None Include="Service References\DSRouterService\mex5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSTagValue.datasource">
+    <None Include="Service References\DSRouterService\mex6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterUser.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.LstError.datasource">

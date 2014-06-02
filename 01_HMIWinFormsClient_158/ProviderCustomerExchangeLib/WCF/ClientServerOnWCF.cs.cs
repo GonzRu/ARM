@@ -348,10 +348,10 @@ namespace ProviderCustomerExchangeLib.WCF
         /// <summary>
         /// Обработчик события в Callback при появлении нового значения
         /// </summary>
-        private void NewTagValueHandler(Dictionary<string, DSTagValue> tv)
+        private void NewTagValueHandler(Dictionary<string, DSRouterTagValue> tv)
         {
             Console.WriteLine("Порция данных");
-            foreach (KeyValuePair<string, DSTagValue> kvp in tv)
+            foreach (KeyValuePair<string, DSRouterTagValue> kvp in tv)
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
                 else

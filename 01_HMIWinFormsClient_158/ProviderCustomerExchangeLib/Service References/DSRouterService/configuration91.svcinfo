@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="LqwJMUG/VTNT2YWua/ZYBAZVzfw=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="l/97ttAyCz0BxXIWvc/wOonbqdk=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IDSRouter">
       <properties>
@@ -118,10 +118,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IDSRouter" contract="DSRouterService.IDSRouter" bindingType="netTcpBinding" address="net.tcp://localhost:3332/DSRouter.DSRouterService" bindingConfiguration="NetTcpBinding_IDSRouter">
+    <endpoint name="NetTcpBinding_IDSRouter" contract="DSRouterService.IDSRouter" bindingType="netTcpBinding" address="net.tcp://localhost:3332/DSRouter.DSRouterService/" bindingConfiguration="NetTcpBinding_IDSRouter">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:3332/DSRouter.DSRouterService</serializedValue>
+          <serializedValue>net.tcp://localhost:3332/DSRouter.DSRouterService/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
