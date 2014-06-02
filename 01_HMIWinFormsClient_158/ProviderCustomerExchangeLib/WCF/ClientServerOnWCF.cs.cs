@@ -296,6 +296,7 @@ namespace ProviderCustomerExchangeLib.WCF
                 {
                     if (getTagsValuesUpdatedCompletedEventArgs.Result.Count > 0)
                     {
+                        Console.WriteLine("Пришло обновление тегов");
                         NewTagValueHandler(getTagsValuesUpdatedCompletedEventArgs.Result);
                     }
                     else
@@ -349,12 +350,6 @@ namespace ProviderCustomerExchangeLib.WCF
         /// </summary>
         private void NewTagValueHandler(Dictionary<string, DSTagValue> tv)
         {
-            if (tv.Count == 0)
-            {
-                Console.WriteLine("Обновлений для тегов нет.");
-                return;
-            }
-
             Console.WriteLine("Порция данных");
             foreach (KeyValuePair<string, DSTagValue> kvp in tv)
                 if (kvp.Value.VarValueAsObject == null)
@@ -364,6 +359,14 @@ namespace ProviderCustomerExchangeLib.WCF
 
             foreach (var tag in tv)
             {
+                // VarQualityNewDs
+                VarQualityNewDs tagQuality = (VarQualityNewDs)tag.Value.VarQuality;
+                if (tagQuality != VarQualityNewDs.vqGood && tagQuality != VarQualityNewDs.vqHandled)
+                    continue;
+
+                if (tag.Value.VarValueAsObject == null)
+                    continue;
+
                 string key = tag.Key.ToString();
                 var split = key.Split('.');
 
@@ -372,12 +375,6 @@ namespace ProviderCustomerExchangeLib.WCF
                     UInt16 dsGuid = UInt16.Parse(split[0]);
                     UInt32 devGuid = UInt32.Parse(split[1]);
                     UInt32 tagGuid = UInt32.Parse(split[2]);
-                
-                    if (tag.Value.VarValueAsObject == null)
-                        continue;
-
-                    // VarQualityNewDs
-                    VarQualityNewDs tagQuality = (VarQualityNewDs)tag.Value.VarQuality;
 
                     if (OnTagValueChanged != null)
                         OnTagValueChanged(dsGuid, devGuid, tagGuid, tag.Value.VarValueAsObject, DateTime.Now, tagQuality);                    
