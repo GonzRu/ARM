@@ -53,11 +53,13 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
-
+                // Проверяем, произошло ли изменение значения тега или его качества
                 var enco = Encoding.GetEncoding( Tag.StringValueEncoding );
-                ValueAsString = enco.GetString( memX );
+                string newValueAsString = enco.GetString( memX );
+                //if (ValueAsString == newValueAsString && DataQuality == vq)
+                //    return;
+
+                ValueAsString = newValueAsString;
 
                 if ( this.BindindTag != null )
                     this.BindindTag.ReadValue();
@@ -77,8 +79,9 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
+                // Проверяем, произошло ли изменение значения тега или его качества
+                //if (ValueAsString == tagValueAsObject.ToString() && DataQuality == vq)
+                //    return;
 
                 ValueAsString = tagValueAsObject.ToString();
 

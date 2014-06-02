@@ -59,13 +59,15 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
-
-                ValueAsString = memX.Length == 8
+                // Проверяем, произошло ли изменение значения тега или его качества
+                string newValueAsString = memX.Length == 8
                                     ? Convert.ToSingle( BitConverter.ToDouble( memX, 0 ) ).ToString(
                                         string.Format( "F{0}", this.ValueDim ) )
                                     : BitConverter.ToSingle( memX, 0 ).ToString( string.Format( "F{0}", this.ValueDim ) );
+                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
+                //    return;
+
+                ValueAsString = newValueAsString;
 
 				if (BindindTag != null)
 					BindindTag.ReadValue();
@@ -85,10 +87,12 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
+                // Проверяем, произошло ли изменение значения тега или его качества
+                string newValueAsString = ((Single) tagValueAsObject).ToString(String.Format("N{0}", this.ValueDim));
+                //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)
+                //    return;
 
-                ValueAsString = ((Single) tagValueAsObject).ToString(String.Format("N{0}", this.ValueDim));
+                ValueAsString = newValueAsString;
 
                 if (BindindTag != null)
                     BindindTag.ReadValue();

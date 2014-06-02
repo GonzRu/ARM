@@ -53,12 +53,13 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dtt;
-                DataQuality = vq;
-
-                //DateTime dt = DateTime.FromBinary(BitConverter.ToInt64(memX,0));
+                // Проверяем, произошло ли изменение значения тега или его качества
                 var dt = new DateTime( BitConverter.ToInt64( memX, 0 ) );
-                this.ValueAsString = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat( dt );
+                string newValueAsString = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat( dt );
+                //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)
+                //    return;
+
+                ValueAsString = newValueAsString;
 
                 if ( this.BindindTag != null )
                     this.BindindTag.ReadValue();
@@ -79,10 +80,12 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
+                // Проверяем, произошло ли изменение значения тега или его качества
+                string newValueAsString = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat((DateTime)tagValueAsObject);
+                //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)
+                //    return;
 
-                ValueAsString = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat((DateTime)tagValueAsObject);
+                ValueAsString = newValueAsString;
 
                 if (BindindTag != null)
                     BindindTag.ReadValue();

@@ -65,16 +65,17 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
+                var tagEnumValueAsSingle = BitConverter.ToSingle( memX, 0 );
+                var tagEnumValueAsInt32 = Convert.ToInt32(tagEnumValueAsSingle);
 
-                var sind = BitConverter.ToSingle( memX, 0 );
-                //var sind = Convert.ToInt32( memX[0] );
+                // Проверяем, произошло ли изменение значения тега или его качества
+                string newValueAsString = String.Empty;
+                if (slEnumsParty.ContainsKey(tagEnumValueAsInt32))
+                    newValueAsString = slEnumsParty[tagEnumValueAsInt32];
+                //if (ValueAsString == newValueAsString && DataQuality == vq)
+                //    return;
 
-                var indexenum = Convert.ToInt32( sind );
-
-                if ( slEnumsParty.ContainsKey( indexenum ) )
-                    this.ValueAsString = slEnumsParty[indexenum];
+                ValueAsString = newValueAsString;
 
                 if ( this.BindindTag != null )
                     this.BindindTag.ReadValue();
@@ -94,9 +95,6 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
-
                 if (!(tagValueAsObject is Boolean) && !(tagValueAsObject is Single))
                 {
                     Console.WriteLine("Для TagEnum отброшено значение: " + tagValueAsObject.ToString() + " " + tagValueAsObject.GetType());
@@ -107,10 +105,15 @@ namespace SourceMOA
                 if (tagValueAsObject is Boolean)
                     tagValueAsObject = (Boolean)tagValueAsObject ? (Single)1 : (Single)0;
 
-                // Заполняем ValueAsString
+                string newValueAsString = String.Empty;
                 var indexenum = Convert.ToInt32((Single)tagValueAsObject);
                 if (slEnumsParty.ContainsKey(indexenum))
-                    this.ValueAsString = slEnumsParty[indexenum];
+                    newValueAsString = slEnumsParty[indexenum];
+                //if (ValueAsString == newValueAsString && DataQuality == vq)
+                //    return;
+
+                // Заполняем ValueAsString
+                ValueAsString = newValueAsString;
 
                 if (BindindTag != null)
                     BindindTag.ReadValue();

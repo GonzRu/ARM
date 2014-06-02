@@ -54,15 +54,16 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
-
                 var tmp = BitConverter.ToBoolean( memX, 0 );
-
                 if ( IsInverse && ( this.DataQuality == VarQualityNewDs.vqGood ) )
                     tmp = !tmp;
 
-                this.ValueAsString = tmp.ToString( CultureInfo.InvariantCulture );
+                // Проверяем, произошло ли изменение значения тега или его качества
+                string newValueAsString = tmp.ToString( CultureInfo.InvariantCulture );
+                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
+                //    return;
+
+                ValueAsString = newValueAsString;
 
                 memX = BitConverter.GetBytes( tmp );
 
@@ -84,9 +85,6 @@ namespace SourceMOA
         {
             try
             {
-                TimeStamp = dt;
-                DataQuality = vq;
-
                 if (!(tagValueAsObject is Boolean))
                 {
                     Console.WriteLine("Для TagDiscret отброшено значение: " + tagValueAsObject.ToString() + " " + tagValueAsObject.GetType());
@@ -94,11 +92,15 @@ namespace SourceMOA
                 }
 
                 Boolean tmp = (Boolean) tagValueAsObject;
-
                 if (IsInverse && (this.DataQuality == VarQualityNewDs.vqGood))
                     tmp = !tmp;
 
-                ValueAsString = tmp.ToString(CultureInfo.InvariantCulture);
+                // Проверяем, произошло ли изменение значения тега или его качества
+                string newValueAsString = tmp.ToString(CultureInfo.InvariantCulture);
+                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
+                //    return;
+
+                ValueAsString = newValueAsString;
 
                 if (BindindTag != null)
                     BindindTag.ReadValue();
