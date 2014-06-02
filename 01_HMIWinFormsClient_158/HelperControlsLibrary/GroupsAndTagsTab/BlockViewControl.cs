@@ -284,7 +284,10 @@ namespace HelperControlsLibrary
                 var tag = (TagDescription)row.Tag;
                 if (tag == null || !tag.Result.Equals(format) || row.Cells[1].Value.Equals(value)) continue;
 
-                row.Cells[1].Value = tag.Source.ValueAsString;
+                if (tag.Source.TypeOfTagHMI == TypeOfTag.Discret)
+                    row.Cells[1].Value = value;
+                else
+                    row.Cells[1].Value = tag.Source.ValueAsString;
 
                 return true;
             }
@@ -572,12 +575,21 @@ namespace HelperControlsLibrary
 
                     break;
                 case TypeOfTag.Analog:
-                case TypeOfTag.Discret:
                     var analogCell = new DataGridViewTextBoxCell();
                     analogCell.Value = (string.IsNullOrEmpty(tagDescription.Source.ValueAsString))
                                            ? "0"
                                            : tagDescription.Source.ValueAsString;
                     newRow.Cells.Add(analogCell);
+
+                    newRow.Cells.Add(new DataGridViewTextBoxCell { Value = tagDescription.Uom });
+
+                    break;
+                case TypeOfTag.Discret:
+                    var discretCell = new DataGridViewTextBoxCell();
+                    discretCell.Value = (string.IsNullOrEmpty(tagDescription.Source.ValueAsString))
+                                           ? "0"
+                                           : tagDescription.Source.ValueAsString.Equals("True", StringComparison.OrdinalIgnoreCase) ? "1" : "0";
+                    newRow.Cells.Add(discretCell);
 
                     newRow.Cells.Add( new DataGridViewTextBoxCell { Value = tagDescription.Uom } );
 
