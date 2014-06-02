@@ -413,18 +413,26 @@ namespace HelperControlsLibrary
                 foreach (var row in tagsTableDataGridView.Rows)
                 {
                     var dataGridRow = row as DataGridViewRow;
+                    TagDescription tagDescription;
 
-                    if (dataGridRow.Tag != null)
+                    if (dataGridRow.Tag == null)
+                        continue;
+
+                    // ReadOnly уставки
+                    tagDescription = dataGridRow.Tag as TagDescription;
+                    if (tagDescription.Source.AccessToValue == "r")
                     {
-                        TagDescription tagDescription = dataGridRow.Tag as TagDescription;
-                        if (tagDescription.Source.AccessToValue == "r")
-                        {
-                            dataGridRow.Cells[3].ReadOnly = true;
-                            continue;
-                        }
-                    }
+                        dataGridRow.Cells[3].ReadOnly = true;
+                        continue;
+                    }                    
 
                     var c = dataGridRow.Cells[1];
+
+                    // Всплывающая подсказка
+                    if (!String.IsNullOrWhiteSpace(tagDescription.Source.MinValue) && !String.IsNullOrWhiteSpace(tagDescription.Source.MaxValue))
+                        c.ToolTipText = String.Format("{0} - {1}", tagDescription.Source.MinValue, tagDescription.Source.MaxValue);
+                    else
+                        c.ToolTipText = "Нет данных об ограничениях на значение";
 
                     if (c.Value == null)
                         continue;
