@@ -470,29 +470,6 @@ namespace DataServersLib
 		#endregion
 
 		#region private-методы
-        /// <summary>
-        /// сформировать список устройств указанного DS
-        /// </summary>
-        /// <param name="xAttribute"></param>
-        /// <returns></returns>
-        //private List<IDevice> GetDSDevises(string path2prgdevcfg, XElement xe_ds)
-        //{
-        //    lstDev4ThisDS = new List<IDevice>();
-
-        //    try
-        //    {
-        //        var xe_srcs = xe_ds.Element("Sources").Elements("Source");
-
-        //        //foreach (var xe_src in xe_srcs)
-        //        //    CustomizeDevicesList(path2prgdevcfg, xe_src, ref lstDevices, uint.Parse(xe_ds.Attribute("UniDS_GUID").Value));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-        //    }
-
-        //    return lstDev4ThisDS;
-        //}
 
         void CreateInterConnectComponentBySpecificProtocol(XElement dataServerXMLDescribe)
         {
@@ -534,7 +511,7 @@ namespace DataServersLib
                 if (exchangeProviderName.ToLower() == "wcf")
                 {
                     reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
-                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTag;
+                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTagAsObject;
                 }
                 else
                 {
@@ -583,7 +560,21 @@ namespace DataServersLib
         /// Задает новое значение тегу на основании
         /// идентификатора DataServer, устройства и тега
         /// </summary>
-        private void SetValueTag(UInt16 dsGuid, UInt32 devGuid, UInt32 tagGuid, object tagValueAsObject, DateTime tagDateTime, VarQualityNewDs tagQuality)
+        private void SetValueTag(UInt16 dsGuid, UInt32 devGuid, UInt32 tagGuid, byte[] tagByteValue, DateTime tagDateTime, VarQualityNewDs tagQuality)
+        {
+            IDevice dev = (from d in lstDev4ThisDS where d.UniObjectGUID == devGuid select d).Single<IDevice>();
+            
+            ITag tag = dev.GetTag(tagGuid);
+
+            if (tag != null)
+                tag.SetValue(tagByteValue, tagDateTime, tagQuality);
+        }
+
+        /// <summary>
+        /// Задает новое значение тегу на основании
+        /// идентификатора DataServer, устройства и тега
+        /// </summary>
+        private void SetValueTagAsObject(UInt16 dsGuid, UInt32 devGuid, UInt32 tagGuid, object tagValueAsObject, DateTime tagDateTime, VarQualityNewDs tagQuality)
         {
             IDevice dev = (from d in lstDev4ThisDS where d.UniObjectGUID == devGuid select d).Single<IDevice>();
 
