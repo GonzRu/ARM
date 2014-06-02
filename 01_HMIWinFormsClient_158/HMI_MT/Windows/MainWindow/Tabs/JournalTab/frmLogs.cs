@@ -38,6 +38,7 @@ namespace HMI_MT
         private DataTable dataTableForOscEkra;  // таблица с осциллограммами экр
         private DataTable dataTableForDiag;  // таблица с диаграммами
         private DataTable dataTableForOscBresler; // таблица для осциллограмм бреслера
+        private DataTable dataTableForOscComTrade; // таблица для осциллограмм типа ComTrade
 
         DataTable dtA;   // таблица с авариями
         DataTable dt;   
@@ -788,6 +789,9 @@ namespace HMI_MT
                     case "Diagramm":
                         GetOscDiagList(5, out dataTableForDiag);
                         break;
+                    case "ComTrade":
+                        GetOscDiagList(13, out dataTableForOscComTrade);
+                        break;
                     default:
                         throw new Exception("Осциллограммы данного типа устройства не поддерживаются");
                 }
@@ -887,6 +891,7 @@ namespace HMI_MT
             oscdg.ShowOSCDg(0, dataTableForOscEkra, ide);
             oscdg.ShowOSCDg(0, dataTableForDiag, ide);
             oscdg.ShowOSCDg(0, dataTableForOscBresler, ide);
+            oscdg.ShowOSCDg(0, dataTableForOscComTrade, ide);
             #region MyRegion
             // по ide найти запись в dto, извлечь блок с осциллограммой (диаграммой), записать в файл, запустить fastview
 
