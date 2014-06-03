@@ -92,40 +92,6 @@ namespace CommonUtils
             }
 
             return xeDescDev; //GetXElementFrom_PrgDevCFG(numFC, numDev);
-
-            #region старый код
-            //xdoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "Project" + Path.DirectorySeparatorChar + "PrgDevCFG.cdp");
-            //IEnumerable<XElement> iefcs = xdoc.Element("MT").Element("Configuration").Elements("FC");
-            //foreach (XElement xefc in iefcs)
-            //{
-            //    if (xefc.Attribute("numFC").Value == numFC.ToString())
-            //    {
-            //        IEnumerable<XElement> devs = xefc.Element("FCDevices").Elements("Device");
-
-            //        foreach (XElement xed in devs)
-            //        {
-            //            if (numDev == int.Parse(xed.Element("NumDev").Value))
-            //                return xed;
-            //        }
-            //    }
-            //}
-
-            //iefcs = xdoc.Element("MT").Element("Configuration").Elements("PS");
-            //foreach (XElement xefc in iefcs)
-            //{
-            //    if (xefc.Attribute("numFC").Value == numFC.ToString())
-            //    {
-            //        IEnumerable<XElement> devs = xefc.Element("PSDevices").Elements("Device");
-
-            //        foreach (XElement xed in devs)
-            //        {
-            //            if (numDev == int.Parse(xed.Element("NumDev").Value))
-            //                return xed;
-            //        }
-            //    }
-            //}
-            //return null; 
-            #endregion
         }
         /// <summary>
         /// 
