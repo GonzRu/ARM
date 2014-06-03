@@ -215,6 +215,8 @@ namespace HMI_MT
             }
 
             new KvitWindow(messages, comment).ShowDialog();
+
+            DisplayMessages();
         }
 
         private void KvitAllMessages()
@@ -242,6 +244,8 @@ namespace HMI_MT
             }
 
             new KvitWindow(messages, comment).ShowDialog();
+
+            DisplayMessages();
         }
 
         private void KvitMessagesByDeviceGuid()
@@ -276,6 +280,38 @@ namespace HMI_MT
             }
 
             new KvitWindow(messages, comment).ShowDialog();
+
+            DisplayMessages();
+        }
+
+        /// <summary>
+        /// Обработчик события нажатия на кнопку "Квитировать всё"
+        /// </summary>
+        private void kvitAllInDBButtonClick(object sender, EventArgs e)
+        {
+            string comment = String.Empty;
+            foreach (var item in messagesListView.Items)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment)
+                {
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
+
+                    break;
+                }
+            }
+
+            new KvitWindow(comment).ShowDialog();
+
+            DisplayMessages();
         }
 
         #region Handlers

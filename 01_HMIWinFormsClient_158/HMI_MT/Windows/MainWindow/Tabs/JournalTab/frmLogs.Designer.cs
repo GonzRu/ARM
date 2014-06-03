@@ -113,6 +113,7 @@ namespace HMI_MT
             this.autoUpdateCheckBox = new System.Windows.Forms.CheckBox();
             this.updateButton = new System.Windows.Forms.Button();
             this.kvitirovanieGroupBox = new System.Windows.Forms.GroupBox();
+            this.kvitAllInDBButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.kvitByDeviceTypeButton = new System.Windows.Forms.Button();
             this.DeviceTypesComboBox = new System.Windows.Forms.ComboBox();
@@ -923,6 +924,7 @@ namespace HMI_MT
             // 
             // kvitirovanieGroupBox
             // 
+            this.kvitirovanieGroupBox.Controls.Add(this.kvitAllInDBButton);
             this.kvitirovanieGroupBox.Controls.Add(this.groupBox1);
             this.kvitirovanieGroupBox.Controls.Add(this.kvitAllButton);
             this.kvitirovanieGroupBox.Controls.Add(this.kvitSelectMsgButton);
@@ -932,6 +934,16 @@ namespace HMI_MT
             this.kvitirovanieGroupBox.TabIndex = 0;
             this.kvitirovanieGroupBox.TabStop = false;
             this.kvitirovanieGroupBox.Text = " витирование";
+            // 
+            // kvitAllInDBButton
+            // 
+            this.kvitAllInDBButton.Location = new System.Drawing.Point(90, 49);
+            this.kvitAllInDBButton.Name = "kvitAllInDBButton";
+            this.kvitAllInDBButton.Size = new System.Drawing.Size(181, 23);
+            this.kvitAllInDBButton.TabIndex = 3;
+            this.kvitAllInDBButton.Text = " витировать все сообщени€";
+            this.kvitAllInDBButton.UseVisualStyleBackColor = true;
+            this.kvitAllInDBButton.Click += new System.EventHandler(this.kvitAllInDBButtonClick);
             // 
             // groupBox1
             // 
@@ -965,19 +977,19 @@ namespace HMI_MT
             // 
             // kvitAllButton
             // 
-            this.kvitAllButton.Location = new System.Drawing.Point(258, 33);
+            this.kvitAllButton.Location = new System.Drawing.Point(189, 21);
             this.kvitAllButton.Name = "kvitAllButton";
-            this.kvitAllButton.Size = new System.Drawing.Size(101, 23);
+            this.kvitAllButton.Size = new System.Drawing.Size(181, 23);
             this.kvitAllButton.TabIndex = 1;
-            this.kvitAllButton.Text = " витировать всЄ";
+            this.kvitAllButton.Text = " витировать все показанные";
             this.kvitAllButton.UseVisualStyleBackColor = true;
             this.kvitAllButton.Click += new System.EventHandler(this.kvitAllButton_Click);
             // 
             // kvitSelectMsgButton
             // 
-            this.kvitSelectMsgButton.Location = new System.Drawing.Point(20, 33);
+            this.kvitSelectMsgButton.Location = new System.Drawing.Point(20, 21);
             this.kvitSelectMsgButton.Name = "kvitSelectMsgButton";
-            this.kvitSelectMsgButton.Size = new System.Drawing.Size(217, 23);
+            this.kvitSelectMsgButton.Size = new System.Drawing.Size(161, 23);
             this.kvitSelectMsgButton.TabIndex = 0;
             this.kvitSelectMsgButton.Text = " витировать выделенные сообщени€";
             this.kvitSelectMsgButton.UseVisualStyleBackColor = true;
@@ -1128,5 +1140,6 @@ namespace HMI_MT
        private System.Windows.Forms.DataGridViewTextBoxColumn clmIDAvar;
        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdFcBlock;
        private System.Windows.Forms.DataGridViewTextBoxColumn clmBlockId;
+       private System.Windows.Forms.Button kvitAllInDBButton;
     }
 }
