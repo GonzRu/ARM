@@ -308,6 +308,9 @@ namespace MessagePanel
                     if (AlarmMessagesAppeared != null)
                         AlarmMessagesAppeared();
                 }
+
+                if (_messages == null)
+                    _messages = new List<TableEventLogAlarm>();
             }
             catch (Exception)
             {
