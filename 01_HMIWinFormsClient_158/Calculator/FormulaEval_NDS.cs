@@ -53,9 +53,6 @@ namespace Calculator
         /// другой вариант делегата 
         /// дл€ событи€ извещени€ об изменении знач. тега
         /// </summary>
-        /// <param name="strtagident"></param>
-        /// <param name="valTag"></param>
-        /// <returns></returns>
         public delegate bool ChangeValFormTI( string strtagident, object valTag, TypeOfTag type );
 
         /// <summary>
@@ -65,16 +62,11 @@ namespace Calculator
         public event ChangeValFormTI OnChangeValFormTI;
         #endregion
 
+        #region Constructor
+
         /// <summary>
         /// конструктор
         /// </summary>
-        /// <param name="configuration"></param>
-        /// <param name="aTag"></param>
-        /// <param name="f"></param>
-        /// <param name="aCaptionIE"></param>
-        /// <param name="aDimIE"></param>
-        /// <param name="tot"></param>
-        /// <param name="toP"></param>
         public FormulaEvalNds( IConfiguration configuration, string aTag, string f, string aCaptionIE, string aDimIE )
         {
             this.sourceFormula = aTag;
@@ -123,13 +115,6 @@ namespace Calculator
         /// <summary>
         /// конструктор дл€ нового DataServer
         /// </summary>
-        /// <param name="configuration"></param>
-        /// <param name="aTag"></param>
-        /// <param name="f"></param>
-        /// <param name="aCaptionIE"></param>
-        /// <param name="aDimIE"></param>
-        /// <param name="tot"></param>
-        /// <param name="toP"></param>
         public FormulaEvalNds( IConfiguration configuration, string aTag, string aCaptionIE, string aDimIE )
         {
             this.sourceFormula = aTag;
@@ -168,16 +153,14 @@ namespace Calculator
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
             }
         }
+
+        #endregion
+
+        #region Private-metods
+
         /// <summary>
         /// св€зка с тегом 1
         /// </summary>
-        /// <param name="configuration"></param>
-        /// <param name="lFC"></param>
-        /// <param name="lDevice"></param>
-        /// <param name="lGroup"></param>
-        /// <param name="lVariable"></param>
-        /// <param name="lBitMsk"></param>
-        /// <returns></returns>
         private bool TagControlSet( IConfiguration configuration, int lFC, int lDevice, int lGroup, int lVariable, string lBitMsk, string aCaptionIE, string aDimIE )
         {
             try
@@ -218,13 +201,6 @@ namespace Calculator
         /// <summary>
         /// св€зка с тегом - вариант дл€ нового описани€ (Ѕћ–«-100)
         /// </summary>
-        /// <param name="configuration"></param>
-        /// <param name="lFC"></param>
-        /// <param name="lDevice"></param>
-        /// <param name="lGroup"></param>
-        /// <param name="lVariable"></param>
-        /// <param name="lBitMsk"></param>
-        /// <returns></returns>
         private bool TagControlSet( IConfiguration configuration, uint lds, uint lDevice, uint tagGuid, string aCaptionIE, string aDimIE )
         {
             try
@@ -267,34 +243,30 @@ namespace Calculator
 
             try
             {
-                switch ( type )
-                {
-                        //case TypeOfTag.Combo: // выводитьс€ как стринг
-                    case TypeOfTag.Discret: // преобразовываетс€ из true/false
-                        OnChangeValFormTI( this.RezFormulaEval.IdTagIE, Convert.ToBoolean( @var.Item1 ) ? 1 : 0, type );
-                        break;
-                        //case TypeOfTag.Analog: // выводитьс€ как стринг
-                        //    OnChangeValFormTI( this.tRezFormulaEval.IdTagIE, Convert.ToSingle( @var.Item1 ) );
-                        //    break;
-                        //case TypeOfTag.DateTime: // выводитьс€ как стринг
-                        //    OnChangeValFormTI( this.tRezFormulaEval.IdTagIE, DateTime.Parse( @var.Item1 ) );
-                        //    break;
-                    case TypeOfTag.Combo:
-                        // –аньше приходил текст перечислени€. Ёто не подходит. —ейчас конвертирую в Single (формат по-умолчанию дл€ TagEnum), а затем в Int
-                        // дл€ мнемосхемы (по анологии с дискретным тегом).
-                        Single singleValue = BitConverter.ToSingle(@var.Item2, 0);
-
-                        OnChangeValFormTI(this.RezFormulaEval.IdTagIE, (int)singleValue, type);
-                        break;
-                    default: // выводитьс€ как стринг
-                        OnChangeValFormTI( this.RezFormulaEval.IdTagIE, @var.Item1, type );
-                        break;
-                }
+                OnChangeValFormTI(this.RezFormulaEval.IdTagIE, ConvertTagValueAsObjectToFormulaEvalTagValueType(var, type), type);
             }
             catch ( Exception exception )
             {
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( exception );
             }
         }
+
+        private object ConvertTagValueAsObjectToFormulaEvalTagValueType(Tuple<string, byte[], DateTime, VarQualityNewDs> @var, TypeOfTag type)
+        {
+            switch (type)
+            {
+                case TypeOfTag.Discret: // преобразовываетс€ из true/false
+                    return Convert.ToBoolean(@var.Item1) ? 1 : 0;
+                case TypeOfTag.Combo:
+                    // –аньше приходил текст перечислени€. Ёто не подходит. —ейчас конвертирую в Single (формат по-умолчанию дл€ TagEnum), а затем в Int
+                    // дл€ мнемосхемы (по анологии с дискретным тегом).
+                    Single singleValue = BitConverter.ToSingle(@var.Item2, 0);
+                    return (int) singleValue;
+                default: // выводитьс€ как стринг
+                    return @var.Item1;
+            }
+        }
+
+        #endregion
     }
 }
