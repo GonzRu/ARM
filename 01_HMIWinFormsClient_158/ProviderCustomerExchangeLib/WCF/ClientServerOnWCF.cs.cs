@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.ComponentModel;
+using System.Linq;
 using System.ServiceModel;
 using System.Timers;
 using System.Xml.Linq;
@@ -350,12 +351,16 @@ namespace ProviderCustomerExchangeLib.WCF
         /// </summary>
         private void NewTagValueHandler(Dictionary<string, DSRouterTagValue> tv)
         {
+            #if DEBUG
+            tv = (from pair in tv orderby pair.Key select pair).ToDictionary(pair => pair.Key, pair => pair.Value);
+            
             Console.WriteLine("Порция данных");
             foreach (KeyValuePair<string, DSRouterTagValue> kvp in tv)
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
                 else
                     Console.WriteLine(string.Format("{0} : {1}   {2}", kvp.Key, kvp.Value.VarValueAsObject.ToString(), kvp.Value.VarValueAsObject.GetType()));
+            #endif
 
             foreach (var tag in tv)
             {
