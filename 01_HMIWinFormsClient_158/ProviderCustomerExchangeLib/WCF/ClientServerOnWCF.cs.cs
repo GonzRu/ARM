@@ -359,7 +359,7 @@ namespace ProviderCustomerExchangeLib.WCF
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
                 else
-                    Console.WriteLine(string.Format("{0} : {1}   {2}", kvp.Key, kvp.Value.VarValueAsObject.ToString(), kvp.Value.VarValueAsObject.GetType()));
+                    Console.WriteLine(string.Format("{0} : {1}  {2}  {3}", kvp.Key, kvp.Value.VarValueAsObject.ToString(), kvp.Value.VarValueAsObject.GetType(), (VarQualityNewDs)kvp.Value.VarQuality));
             #endif
 
             foreach (var tag in tv)
