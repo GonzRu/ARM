@@ -3,7 +3,7 @@
   <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd2" namespace="http://schemas.microsoft.com/Message" />
   <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfDataServer_Lib" />
   <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSRouterService" />
+  <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" />
   <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:element name="GetDSValueAsByteBuffer">
     <xs:complexType>
@@ -401,7 +401,7 @@
   <xs:element name="GetTagsValueResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetTagsValueResult" nillable="true" type="q4:ArrayOfKeyValueOfstringDSRouterTagValuedPx40uxt" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetTagsValueResult" nillable="true" type="q4:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -413,7 +413,7 @@
   <xs:element name="GetTagsValuesUpdatedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetTagsValuesUpdatedResult" nillable="true" type="q5:ArrayOfKeyValueOfstringDSRouterTagValuedPx40uxt" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetTagsValuesUpdatedResult" nillable="true" type="q5:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -429,7 +429,7 @@
   <xs:element name="AuthorizationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="AuthorizationResult" nillable="true" type="q6:DSRouterUser" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="AuthorizationResult" nillable="true" type="q6:RouterAuthResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -441,7 +441,7 @@
   <xs:element name="GetUsersListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="GetUsersListResult" nillable="true" type="q7:ArrayOfDSRouterUser" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetUsersListResult" nillable="true" type="q7:ArrayOfDSRouterUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -453,7 +453,7 @@
   <xs:element name="GetUserGroupsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="GetUserGroupsListResult" nillable="true" type="q8:ArrayOfDSRouterUserGroup" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetUserGroupsListResult" nillable="true" type="q8:ArrayOfDSRouterUserGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -505,7 +505,7 @@
   <xs:element name="GetEventsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="GetEventsResult" nillable="true" type="q10:ArrayOfDSRouterEventValue" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetEventsResult" nillable="true" type="q10:ArrayOfDSRouterEventValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -535,21 +535,7 @@
   <xs:element name="GetHistoricalDataByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetHistoricalDataByIDResult" nillable="true" type="q11:ArrayOfKeyValueOfstringDSRouterTagValuedPx40uxt" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetHistoricalDataByEvent">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="dsRouterEvent" nillable="true" type="q12:DSRouterEventValue" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetHistoricalDataByEventResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetHistoricalDataByEventResult" nillable="true" type="q13:ArrayOfKeyValueOfstringDSRouterTagValuedPx40uxt" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetHistoricalDataByIDResult" nillable="true" type="q11:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -573,7 +559,7 @@
   <xs:element name="GetNotReceiptedEventsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="GetNotReceiptedEventsResult" nillable="true" type="q14:ArrayOfDSRouterEventValue" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetNotReceiptedEventsResult" nillable="true" type="q12:ArrayOfDSRouterEventValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -592,7 +578,7 @@
   <xs:element name="ReceiptEvents">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="eventValues" nillable="true" type="q15:ArrayOfDSRouterEventValue" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="eventValues" nillable="true" type="q13:ArrayOfDSRouterEventValue" />
         <xs:element minOccurs="0" name="receiptComment" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -613,7 +599,7 @@
   <xs:element name="GetSettingsSetsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="GetSettingsSetsListResult" nillable="true" type="q16:ArrayOfDSRouterSettingsSet" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetSettingsSetsListResult" nillable="true" type="q14:ArrayOfDSRouterSettingsSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -621,14 +607,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="settingsSetID" type="xs:int" />
-        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tagsList" nillable="true" type="q17:ArrayOfstring" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tagsList" nillable="true" type="q15:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetValuesFromSettingsSetResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetValuesFromSettingsSetResult" nillable="true" type="q18:ArrayOfKeyValueOfstringDSRouterTagValuedPx40uxt" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetValuesFromSettingsSetResult" nillable="true" type="q16:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -637,7 +623,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
         <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
-        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tagsValues" nillable="true" type="q19:ArrayOfKeyValueOfstringDSRouterTagValuedPx40uxt" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tagsValues" nillable="true" type="q17:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -652,7 +638,7 @@
         <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
         <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
         <xs:element minOccurs="0" name="commandID" nillable="true" type="xs:string" />
-        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="parameters" nillable="true" type="q20:ArrayOfanyType" />
+        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="parameters" nillable="true" type="q18:ArrayOfanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -672,7 +658,7 @@
   <xs:element name="GetDocumentsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DSRouterService" minOccurs="0" name="GetDocumentsListResult" nillable="true" type="q21:ArrayOfDSRouterDocumentDataValue" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetDocumentsListResult" nillable="true" type="q19:ArrayOfDSRouterDocumentDataValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -790,7 +776,7 @@
   <xs:element name="NotifyChangedTags">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="lstChangedTags" nillable="true" type="q22:ArrayOfKeyValueOfstringDSRouterTagValuedPx40uxt" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="lstChangedTags" nillable="true" type="q20:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

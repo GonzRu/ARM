@@ -60,10 +60,13 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterTagValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterTagValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
@@ -76,6 +79,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
     public partial class DSRouterTagValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -137,7 +141,136 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterUser", Namespace="http://schemas.datacontract.org/2004/07/DSRouterService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RouterAuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class RouterAuthResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult> DSAuthResultsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult> DSAuthResults {
+            get {
+                return this.DSAuthResultsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DSAuthResultsField, value) != true)) {
+                    this.DSAuthResultsField = value;
+                    this.RaisePropertyChanged("DSAuthResults");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterAuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterAuthResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.AuthResult AuthResultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.DSRouterUser UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.AuthResult AuthResult {
+            get {
+                return this.AuthResultField;
+            }
+            set {
+                if ((this.AuthResultField.Equals(value) != true)) {
+                    this.AuthResultField = value;
+                    this.RaisePropertyChanged("AuthResult");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    public enum AuthResult : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ok = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WrongLoginOrPassword = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoConnectionToDb = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoConnectionToDs = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 5,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterUser", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
     public partial class DSRouterUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -246,7 +379,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterUserGroup", Namespace="http://schemas.datacontract.org/2004/07/DSRouterService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterUserGroup", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
     public partial class DSRouterUserGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -269,7 +402,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         private string GroupNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int GroupRightField;
+        private string GroupRightField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -347,12 +480,12 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int GroupRight {
+        public string GroupRight {
             get {
                 return this.GroupRightField;
             }
             set {
-                if ((this.GroupRightField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.GroupRightField, value) != true)) {
                     this.GroupRightField = value;
                     this.RaisePropertyChanged("GroupRight");
                 }
@@ -371,7 +504,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterEventValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterEventValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
     public partial class DSRouterEventValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -608,7 +741,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterSettingsSet", Namespace="http://schemas.datacontract.org/2004/07/DSRouterService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterSettingsSet", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
     public partial class DSRouterSettingsSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -685,7 +818,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterDocumentDataValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterDocumentDataValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
     public partial class DSRouterDocumentDataValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -1037,12 +1170,12 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetTagsValuesUpdated(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/Authorization", ReplyAction="http://tempuri.org/IDSRouter/AuthorizationResponse")]
-        ProviderCustomerExchangeLib.DSRouterService.DSRouterUser Authorization(string userName, string userPassword, bool isFirstEnter);
+        ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult Authorization(string userName, string userPassword, bool isFirstEnter);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/Authorization", ReplyAction="http://tempuri.org/IDSRouter/AuthorizationResponse")]
         System.IAsyncResult BeginAuthorization(string userName, string userPassword, bool isFirstEnter, System.AsyncCallback callback, object asyncState);
         
-        ProviderCustomerExchangeLib.DSRouterService.DSRouterUser EndAuthorization(System.IAsyncResult result);
+        ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult EndAuthorization(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetUsersList", ReplyAction="http://tempuri.org/IDSRouter/GetUsersListResponse")]
         ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[] GetUsersList();
@@ -1099,14 +1232,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         System.IAsyncResult BeginGetHistoricalDataByID(ushort dsGuid, int dataID, System.AsyncCallback callback, object asyncState);
         
         System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetHistoricalDataByID(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetHistoricalDataByEvent", ReplyAction="http://tempuri.org/IDSRouter/GetHistoricalDataByEventResponse")]
-        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetHistoricalDataByEvent(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue dsRouterEvent);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetHistoricalDataByEvent", ReplyAction="http://tempuri.org/IDSRouter/GetHistoricalDataByEventResponse")]
-        System.IAsyncResult BeginGetHistoricalDataByEvent(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue dsRouterEvent, System.AsyncCallback callback, object asyncState);
-        
-        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetHistoricalDataByEvent(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExist", ReplyAction="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExistResponse")]
         bool IsNotReceiptedEventsExist();
@@ -1168,6 +1293,9 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
@@ -1180,6 +1308,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
@@ -1250,6 +1379,9 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
@@ -1262,6 +1394,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
@@ -1826,10 +1959,10 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
             this.results = results;
         }
         
-        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser Result {
+        public ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterUser)(this.results[0]));
+                return ((ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult)(this.results[0]));
             }
         }
     }
@@ -1955,25 +2088,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         private object[] results;
         
         public GetHistoricalDataByIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetHistoricalDataByEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetHistoricalDataByEventCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -2408,12 +2522,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         
         private System.Threading.SendOrPostCallback onGetHistoricalDataByIDCompletedDelegate;
         
-        private BeginOperationDelegate onBeginGetHistoricalDataByEventDelegate;
-        
-        private EndOperationDelegate onEndGetHistoricalDataByEventDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetHistoricalDataByEventCompletedDelegate;
-        
         private BeginOperationDelegate onBeginIsNotReceiptedEventsExistDelegate;
         
         private EndOperationDelegate onEndIsNotReceiptedEventsExistDelegate;
@@ -2611,8 +2719,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         public event System.EventHandler<GetOscillogramAsUrlByIDCompletedEventArgs> GetOscillogramAsUrlByIDCompleted;
         
         public event System.EventHandler<GetHistoricalDataByIDCompletedEventArgs> GetHistoricalDataByIDCompleted;
-        
-        public event System.EventHandler<GetHistoricalDataByEventCompletedEventArgs> GetHistoricalDataByEventCompleted;
         
         public event System.EventHandler<IsNotReceiptedEventsExistCompletedEventArgs> IsNotReceiptedEventsExistCompleted;
         
@@ -4190,7 +4296,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
             base.InvokeAsync(this.onBeginGetTagsValuesUpdatedDelegate, null, this.onEndGetTagsValuesUpdatedDelegate, this.onGetTagsValuesUpdatedCompletedDelegate, userState);
         }
         
-        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser Authorization(string userName, string userPassword, bool isFirstEnter) {
+        public ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult Authorization(string userName, string userPassword, bool isFirstEnter) {
             return base.Channel.Authorization(userName, userPassword, isFirstEnter);
         }
         
@@ -4200,7 +4306,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser EndAuthorization(System.IAsyncResult result) {
+        public ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult EndAuthorization(System.IAsyncResult result) {
             return base.Channel.EndAuthorization(result);
         }
         
@@ -4212,7 +4318,7 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         }
         
         private object[] OnEndAuthorization(System.IAsyncResult result) {
-            ProviderCustomerExchangeLib.DSRouterService.DSRouterUser retVal = this.EndAuthorization(result);
+            ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult retVal = this.EndAuthorization(result);
             return new object[] {
                     retVal};
         }
@@ -4612,56 +4718,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
             base.InvokeAsync(this.onBeginGetHistoricalDataByIDDelegate, new object[] {
                         dsGuid,
                         dataID}, this.onEndGetHistoricalDataByIDDelegate, this.onGetHistoricalDataByIDCompletedDelegate, userState);
-        }
-        
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetHistoricalDataByEvent(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue dsRouterEvent) {
-            return base.Channel.GetHistoricalDataByEvent(dsRouterEvent);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginGetHistoricalDataByEvent(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue dsRouterEvent, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetHistoricalDataByEvent(dsRouterEvent, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetHistoricalDataByEvent(System.IAsyncResult result) {
-            return base.Channel.EndGetHistoricalDataByEvent(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetHistoricalDataByEvent(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue dsRouterEvent = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue)(inValues[0]));
-            return this.BeginGetHistoricalDataByEvent(dsRouterEvent, callback, asyncState);
-        }
-        
-        private object[] OnEndGetHistoricalDataByEvent(System.IAsyncResult result) {
-            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> retVal = this.EndGetHistoricalDataByEvent(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetHistoricalDataByEventCompleted(object state) {
-            if ((this.GetHistoricalDataByEventCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetHistoricalDataByEventCompleted(this, new GetHistoricalDataByEventCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetHistoricalDataByEventAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue dsRouterEvent) {
-            this.GetHistoricalDataByEventAsync(dsRouterEvent, null);
-        }
-        
-        public void GetHistoricalDataByEventAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue dsRouterEvent, object userState) {
-            if ((this.onBeginGetHistoricalDataByEventDelegate == null)) {
-                this.onBeginGetHistoricalDataByEventDelegate = new BeginOperationDelegate(this.OnBeginGetHistoricalDataByEvent);
-            }
-            if ((this.onEndGetHistoricalDataByEventDelegate == null)) {
-                this.onEndGetHistoricalDataByEventDelegate = new EndOperationDelegate(this.OnEndGetHistoricalDataByEvent);
-            }
-            if ((this.onGetHistoricalDataByEventCompletedDelegate == null)) {
-                this.onGetHistoricalDataByEventCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetHistoricalDataByEventCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetHistoricalDataByEventDelegate, new object[] {
-                        dsRouterEvent}, this.onEndGetHistoricalDataByEventDelegate, this.onGetHistoricalDataByEventCompletedDelegate, userState);
         }
         
         public bool IsNotReceiptedEventsExist() {

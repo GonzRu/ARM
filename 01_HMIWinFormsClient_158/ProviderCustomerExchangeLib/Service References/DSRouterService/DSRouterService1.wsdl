@@ -15,7 +15,7 @@
       <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd2" namespace="http://schemas.microsoft.com/Message" />
       <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfDataServer_Lib" />
       <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSRouterService" />
+      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" />
       <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
@@ -234,12 +234,6 @@
   </wsdl:message>
   <wsdl:message name="IDSRouter_GetHistoricalDataByID_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetHistoricalDataByIDResponse" />
-  </wsdl:message>
-  <wsdl:message name="IDSRouter_GetHistoricalDataByEvent_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetHistoricalDataByEvent" />
-  </wsdl:message>
-  <wsdl:message name="IDSRouter_GetHistoricalDataByEvent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetHistoricalDataByEventResponse" />
   </wsdl:message>
   <wsdl:message name="IDSRouter_IsNotReceiptedEventsExist_InputMessage">
     <wsdl:part name="parameters" element="tns:IsNotReceiptedEventsExist" />
@@ -497,10 +491,6 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetHistoricalDataByID">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetHistoricalDataByID" message="tns:IDSRouter_GetHistoricalDataByID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetHistoricalDataByIDResponse" message="tns:IDSRouter_GetHistoricalDataByID_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetHistoricalDataByEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetHistoricalDataByEvent" message="tns:IDSRouter_GetHistoricalDataByEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetHistoricalDataByEventResponse" message="tns:IDSRouter_GetHistoricalDataByEvent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="IsNotReceiptedEventsExist">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExist" message="tns:IDSRouter_IsNotReceiptedEventsExist_InputMessage" />
@@ -914,15 +904,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetHistoricalDataByEvent">
-      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetHistoricalDataByEvent" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="IsNotReceiptedEventsExist">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExist" style="document" />
       <wsdl:input>
@@ -1097,9 +1078,9 @@
   </wsdl:binding>
   <wsdl:service name="DSRouterService">
     <wsdl:port name="NetTcpBinding_IDSRouter" binding="tns:NetTcpBinding_IDSRouter">
-      <soap12:address location="net.tcp://localhost:3332/DSRouter.DSRouterService/" />
+      <soap12:address location="net.tcp://localhost:3332/DSRouter.DSRouterService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:3332/DSRouter.DSRouterService/</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:3332/DSRouter.DSRouterService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

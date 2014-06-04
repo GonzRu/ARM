@@ -138,6 +138,9 @@
     <None Include="Service References\DSRouterService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DSRouterService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
