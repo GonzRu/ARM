@@ -101,7 +101,7 @@ namespace ProviderCustomerExchangeLib.WCF
         {
             try
             {
-                var endPointAddr = string.Format( "net.tcp://{0}:{1}/DSRouter.DSRouterService", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin );
+                var endPointAddr = string.Format( "net.tcp://{0}:{1}/DSRouter.DSRouterService/DSRouterService.svc", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin );
                 var tcpBinding = new NetTcpBinding { TransactionFlow = false };
                 tcpBinding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
                 tcpBinding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
@@ -111,7 +111,6 @@ namespace ProviderCustomerExchangeLib.WCF
                 tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
 
                 var endpointAddress = new EndpointAddress( endPointAddr );
-                //WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
                 WCFproxy = new DSRouterClient(new InstanceContext(handler), tcpBinding, endpointAddress);
 
                 handler.OnNewError += NewErrorFromCallBackHandler;
