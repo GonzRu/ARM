@@ -156,7 +156,8 @@ namespace WindowsForms
                     var region = BaseRegion.GetRegion( search );
                     if ( region != null )
                     {
-                        region.ChangeValue += ( sender, e ) => base.Refresh();
+                        //region.ChangeValue += ( sender, e ) => base.Refresh();
+                        region.ChangeValue += (sender, e) => { search.DrawElement(this.CreateGraphics()); };
                         CalculationElements.Add( region );
                     }
                 }
