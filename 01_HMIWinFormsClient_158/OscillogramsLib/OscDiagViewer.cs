@@ -414,7 +414,14 @@ namespace OscillogramsLib
 
       private string GetFName(DataRow dr)
       {
-         string ifa = (string)dr["BlockName"] + "_#_" + Convert.ToString(dr["BlockID"]) + "_#Tblock_" + Convert.ToString(dr["TimeBlock"]) + "_#TFC_" + Convert.ToString(dr["TimeFC"]);
+          string ifa = String.Empty;
+
+          var device = HMI_MT_Settings.HMI_Settings.CONFIGURATION.GetLink2Device(0, UInt32.Parse(dr["BlockID"].ToString()));
+          if (device != null)
+              ifa = String.Format("{0}____{1}____{2}", device.Description, dr["BlockName"], Convert.ToString(dr["TimeFC"]));
+          else
+              // На всякий случай.
+              ifa = String.Format("{0}____{1}", dr["BlockName"], Convert.ToString(dr["TimeFC"]));
 
          // удаляем пробелы
          string[] sp = ifa.Split(new char[]{' '});
