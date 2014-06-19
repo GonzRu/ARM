@@ -581,7 +581,15 @@ namespace DataServersLib
             ITag tag = dev.GetTag(tagGuid);
 
             if (tag != null)
+            {
+                if (tagValueAsObject == null || tagQuality == VarQualityNewDs.vqDsr2DsBadConnection)
+                {
+                    tag.SetDefaultValue();
+                    return;
+                }
+
                 tag.SetValueAsObject(tagValueAsObject, tagDateTime, tagQuality);
+            }
         }
         #endregion
     }

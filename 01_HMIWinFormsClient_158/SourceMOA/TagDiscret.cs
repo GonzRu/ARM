@@ -119,25 +119,7 @@ namespace SourceMOA
         /// </summary>
         public override void SetDefaultValue()
         {
-            try
-            {
-                bool defvalue = false;
-
-                this.ValueAsString = defvalue.ToString();
-
-                byte[] memx = new byte[1];
-
-                memx = BitConverter.GetBytes(defvalue);
-
-                if (this.BindindTag != null)
-                    this.BindindTag.ReadValue();
-
-                //base.SetValue(memx);
-            }
-            catch (Exception ex)
-            {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-            }
+            SetValueAsObject(false, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
 	}
 }

@@ -104,25 +104,7 @@ namespace SourceMOA
         /// </summary>
         public override void SetDefaultValue()
         {
-            try
-            {
-                DateTime defvalue = DateTime.MinValue;
-
-                this.ValueAsString = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(defvalue);
-
-                //byte[] memx = new byte[8];
-
-                this.ValueAsMemX = BitConverter.GetBytes(defvalue.Ticks);
-
-                if (this.BindindTag != null)
-                    this.BindindTag.ReadValue();
-
-                //base.SetValue(memx);
-            }
-            catch (Exception ex)
-            {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-            }
+            SetValueAsObject(DateTime.MinValue, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
 
 	}

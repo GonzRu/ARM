@@ -365,11 +365,6 @@ namespace ProviderCustomerExchangeLib.WCF
             {
                 // VarQualityNewDs
                 VarQualityNewDs tagQuality = (VarQualityNewDs)tag.Value.VarQuality;
-                if (tagQuality != VarQualityNewDs.vqGood && tagQuality != VarQualityNewDs.vqHandled)
-                    continue;
-
-                if (tag.Value.VarValueAsObject == null)
-                    continue;
 
                 string key = tag.Key.ToString();
                 var split = key.Split('.');
