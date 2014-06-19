@@ -87,6 +87,14 @@ namespace SourceMOA
         {
             try
             {
+                if (!(tagValueAsObject is Single))
+                {
+#if DEBUG
+                    Console.WriteLine(String.Format("Для TagAnalog ({0}.{1}.{2}) отброшено значение: {3} {4}", Device.UniDS_GUID, Device.UniObjectGUID, TagGUID, tagValueAsObject.ToString(), tagValueAsObject.GetType()));
+#endif
+                    return;
+                }
+
                 // Проверяем, произошло ли изменение значения тега или его качества
                 string newValueAsString = ((Single) tagValueAsObject).ToString(String.Format("N{0}", this.ValueDim));
                 //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)

@@ -97,7 +97,9 @@ namespace SourceMOA
             {
                 if (!(tagValueAsObject is Boolean) && !(tagValueAsObject is Single))
                 {
-                    Console.WriteLine("Для TagEnum отброшено значение: " + tagValueAsObject.ToString() + " " + tagValueAsObject.GetType());
+#if DEBUG
+                    Console.WriteLine(String.Format("Для TagEnum ({0}.{1}.{2}) отброшено значение: {3} {4}", Device.UniDS_GUID, Device.UniObjectGUID, TagGUID, tagValueAsObject.ToString(), tagValueAsObject.GetType()));
+#endif
                     return;
                 }
 

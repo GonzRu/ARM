@@ -87,7 +87,9 @@ namespace SourceMOA
             {
                 if (!(tagValueAsObject is Boolean))
                 {
-                    Console.WriteLine("Для TagDiscret отброшено значение: " + tagValueAsObject.ToString() + " " + tagValueAsObject.GetType());
+#if DEBUG
+                    Console.WriteLine(String.Format("Для TagDiscret ({0}.{1}.{2}) отброшено значение: {3} {4}", Device.UniDS_GUID, Device.UniObjectGUID, TagGUID, tagValueAsObject.ToString(), tagValueAsObject.GetType()));
+#endif
                     return;
                 }
 
