@@ -287,6 +287,27 @@ namespace ProviderCustomerExchangeLib.WCF
             (WCFproxy as DSRouterClient).GetTagsValuesUpdatedAsync();
         }
 
+        /// <summary>
+        /// Получить ссылку на осциллограмму
+        /// </summary>
+        public string GetOscillogramAsUrlById(UInt16 dsGuid, Int32 oscGuid)
+        {
+            try
+            {
+                //var result = WCFproxy.Authorization("alex", "s", false);
+                var relativeUrl = WCFproxy.GetOscillogramAsUrlByID(dsGuid, oscGuid);
+                if (String.IsNullOrEmpty(relativeUrl))
+                    return null;
+
+                return String.Format("http://{0}/DSRouter.DSRouterService{1}", HMI_Settings.IPADDRES_SERVER, relativeUrl);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return null;
+        }
+
         #region DSRouterClient Async Metods Handlers
         private void OnGetTagsValuesUpdatedCompleted(object sender, GetTagsValuesUpdatedCompletedEventArgs getTagsValuesUpdatedCompletedEventArgs)
         {

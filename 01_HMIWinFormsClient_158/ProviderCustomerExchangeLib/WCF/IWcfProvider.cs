@@ -21,5 +21,10 @@ namespace ProviderCustomerExchangeLib.WCF
         /// Запрос значений тегов, чьи значения изменились
         /// </summary>
         void GetTagsValuesUpdated();
+
+        /// <summary>
+        /// Получить ссылку на осциллограмму
+        /// </summary>
+        string GetOscillogramAsUrlById(UInt16 dsGuid, Int32 oscGuid);
     }
 }

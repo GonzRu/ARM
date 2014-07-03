@@ -255,6 +255,14 @@ namespace RequsEtntryLib
         {
             return htReqList;
         }
+
+        /// <summary>
+        /// Получить ссылку на осциллограмму
+        /// </summary>
+        public string GetOscillogramAsUrlById(UInt16 dsGuid, Int32 oscGuid)
+        {
+            return _wcfProvider.GetOscillogramAsUrlById(dsGuid, oscGuid);
+        }
 		#endregion
 
 		#region private-методы

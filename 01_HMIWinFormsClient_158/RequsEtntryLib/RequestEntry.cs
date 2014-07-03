@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Text;
 using InterfaceLibrary;
 using BlockDataComposer;
+using ProviderCustomerExchangeLib.WCF;
 
 namespace RequsEtntryLib
 {
@@ -91,6 +92,19 @@ namespace RequsEtntryLib
 		#endregion
 
 		#region public-методы реализации интерфейсa IRequestEntry
+
+        /// <summary>
+        /// Получить ссылку на осциллограмму
+        /// </summary>
+        public string GetOscillogramAsUrlById(UInt16 dsGuid, Int32 oscGuid)
+        {
+            var exchangeProvider = (BCD as OrdinalBlokDataComposer).PROVCUST as IWcfProvider;
+            if (exchangeProvider == null)
+                return null;
+
+            return exchangeProvider.GetOscillogramAsUrlById(dsGuid, oscGuid);
+        }
+
 		/// <summary>
 		/// подписаться на обновление тегов
 		/// </summary>

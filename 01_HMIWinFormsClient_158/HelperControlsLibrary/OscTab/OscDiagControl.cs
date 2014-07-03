@@ -37,7 +37,6 @@ namespace HelperControlsLibrary
         /// </summary>
         private void SelectUserControl3BtnUpdateClick( object sender, EventArgs e )
         {
-            oscdg.IdFC = 0;
             oscdg.IdDev = (int)UniDevId;
             oscdg.DTStartData = selectUserControl3.dtpStartDateAvar.Value;
             oscdg.DTStartTime = selectUserControl3.dtpStartTimeAvar.Value;
@@ -45,7 +44,7 @@ namespace HelperControlsLibrary
             oscdg.DTEndTime = selectUserControl3.dtpEndTimeAvar.Value;
             oscdg.TypeRec =
                 CommonUtils.CommonUtils.GetTypeBlockData4ThisDev(
-                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Osc, (uint)(oscdg.IdFC * 256 + oscdg.IdDev ) );
+                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Osc, (uint)(oscdg.IdDev ) );
 
             // извлекаем данные по осциллограммам
             dtO = oscdg.Do_SQLProc();
@@ -53,6 +52,9 @@ namespace HelperControlsLibrary
             dgvOscill.Rows.Clear();
             for ( var curRow = 0; curRow < dtO.Rows.Count; curRow++ )
             {
+                if (dtO.Rows[curRow]["BlockID"].ToString() != UniDevId.ToString())
+                    continue;
+
                 var i = dgvOscill.Rows.Add();   // номер строки
                 dgvOscill["clmChBoxOsc", i].Value = false;
                 dgvOscill["clmBlockNameOsc", i].Value = dtO.Rows[curRow]["BlockName"];
@@ -65,13 +67,16 @@ namespace HelperControlsLibrary
 
             oscdg.TypeRec =
                 CommonUtils.CommonUtils.GetTypeBlockData4ThisDev(
-                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Diagramm, (uint)(oscdg.IdFC * 256 + oscdg.IdDev) );
+                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Diagramm, (uint)(oscdg.IdDev) );
             
             // извлекаем данные по диаграммам
             dtG = oscdg.Do_SQLProc();
             dgvDiag.Rows.Clear();
             for ( var curRow = 0; curRow < dtG.Rows.Count; curRow++ )
             {
+                if (dtO.Rows[curRow]["BlockID"].ToString() != UniDevId.ToString())
+                    continue;
+
                 var i = dgvDiag.Rows.Add();   // номер строки
                 dgvDiag["clmChBoxDiag", i].Value = false;
                 dgvDiag["clmBlockNameDiag", i].Value = dtG.Rows[curRow]["BlockName"];
@@ -112,7 +117,7 @@ namespace HelperControlsLibrary
                  * в дальнейшем нужно придумать механизм когда на данном этапе
                  * будет известен реальный номер DS
                  */
-                oscdg.ShowOSCDg( 0, dtG, (int)de.Value );
+                oscdg.ShowOSCDg( 0, (int)de.Value );
             }
             catch
             {
@@ -143,7 +148,7 @@ namespace HelperControlsLibrary
             try
             {
                 var de = dgvOscill["clmID", e.RowIndex];
-                oscdg.ShowOSCDg( 0, dtO, (int)de.Value );
+                oscdg.ShowOSCDg( 0, (int)de.Value );
             }
             catch
             {
