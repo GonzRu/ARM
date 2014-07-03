@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using HMI_MT_Settings;
+using Ionic.Zip;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using HMI_MT_Settings;
-using InterfaceLibrary;
 
 namespace OscillogramsLib
 {
-    //public delegate void OSCReadyHandler();
-
    public class OscDiagViewer
    {
       #region private
@@ -23,15 +19,6 @@ namespace OscillogramsLib
       SqlConnection asqlconnect;
       DataSet aDS;
       SqlDataAdapter aSDA;
-      /// <summary>
-      /// массив идентиф осциллограмм, 
-      /// выделенных для объединения
-      /// </summary>
-       ArrayList ArrIDE;
-       //bool isReqOSCRead;    // флаг необходимости чтения осциллограммы
-
-       UInt32 idReqOsc = 0;        // идентификатор записи с осциллограммой в БД
-       UInt32 DsNumber = 0;
       #endregion
 
       #region Свойства
@@ -103,44 +90,10 @@ namespace OscillogramsLib
       //}
       //short cntSelectOSC = 1;
       #endregion
-      #region Осциллограммы
-      /// <summary>
-      /// список осциллограмм для чтения 
-      /// (требуется для случая объединения осциллограмм, 
-      /// когда их читается несколько)
-      /// </summary>
-      public SortedList<int, string> slOsc4Read = new SortedList<int, string>();
-      public bool CancelOSCRead
-      {
-          get { return cancelOSCRead; }
-          set
-          {
-              cancelOSCRead = value;
-              if (value)
-                  stopwatch.Stop();
-          }
-      }
-      bool cancelOSCRead;
-
-      /// <summary>
-      /// флаг показывающий состояние получения осциллограммы
-      /// </summary>
-      public bool IsOSCinProcessing;
-      // массив содержимого осциллограммы
-      public byte[] arrOsc;
-      // событие готовности осциллограммы
-      //public event OSCReadyHandler OSCReadyEvent;
-      /// <summary>
-      /// класс для замера времени
-      /// </summary>
-      Stopwatch stopwatch;
-      #endregion
 
       #region конструктор, уничтожение объекта
       public OscDiagViewer()
       {
-         ArrIDE = new ArrayList();
-
          // получение строк соединения и поставщика данных из файла *.config
          asqlconnect = new SqlConnection(HMI_MT_Settings.HMI_Settings.ProviderPtkSql);
          try
@@ -152,8 +105,6 @@ namespace OscillogramsLib
             System.Diagnostics.Trace.TraceInformation("\n" + DateTime.Now.ToString() + "исключение в : frmLogs : OscBD() ");
             return;
          }
-
-         stopwatch = new Stopwatch();
       }
 
       /// <summary>
@@ -200,6 +151,8 @@ namespace OscillogramsLib
          DeleteThis(false);
       }
       #endregion
+
+      #region Считывание списка осциллограмм
 
       public DataTable Do_SQLProc()
       {
@@ -286,390 +239,103 @@ namespace OscillogramsLib
          cmd.Parameters.Add(pid);  
       }
 
+      #endregion
+
       /// <summary>
       /// сформировать имя файла и вызвать OscView
       /// </summary>
-      /// <param Name="?"></param>
-      /// <param Name="?"></param>
-      public void ShowOSCDg(UInt32 ds, DataTable dt, int ide)
+      public void ShowOSCDg(UInt16 dsGuid, int oscGuid)
       {
-         byte[] arrO = null;
-         string ifa = String.Empty;
-         short cntSelectOSC = 1;
-         if (dt == null)
-            return;
-         
-         DsNumber = ds;
-
-         // по ide найти запись в dt, извлечь блок с осциллограммой (диаграммой), записать в файл, запустить fastview
-         // перечисляем записи в dt
-         int curRow;
-
-         for (curRow = 0; curRow < dt.Rows.Count; curRow++)
-         {
-            if (ide == ((int)dt.Rows[curRow]["ID"]))
-            {
-               arrO = GetArrBlockData(dt, curRow);
-               ifa = GetFName(dt.Rows[curRow]);
-               break;
-            }
-            else
-               continue;
-         }
-
-         if (String.IsNullOrEmpty(ifa))
-            return;
-
-         AddOSC2List(ide, ifa);
-         StartProceccReadOSC(cntSelectOSC);
-      }
-
-      /// <summary>
-      /// установить требование для чтения осциллограммы с сервера
-      /// </summary>
-      /// <param Name="idrec"></param>
-      void SetReqForOSCRead(UInt32 idrec)
-      {
-          stopwatch.Reset();
-          stopwatch.Start();
-          //isReqOSCRead = true;
-          idReqOsc = idrec;
-          cancelOSCRead = false;
-
-          // запрос к серверу на чтение осциллограммы
-          IOscillogramma osc = HMI_MT_Settings.HMI_Settings.CONFIGURATION.GetOscData(DsNumber, idrec);
-
-          osc.OnOscReady += new OSCReadyHandler(osc_OnOscReady);
-
-          // запуск диалогового окна с изображением процесса получения осциллограммы
-          using (dlgOscReceiveProcess dlgORP = new dlgOscReceiveProcess(osc))  //this
+          using (dlgOscReceiveProcess dlgORP = new dlgOscReceiveProcess())
           {
+              var cancallationTokenSource = new System.Threading.CancellationTokenSource();
+
+              var task = new Task<bool>(() => StartDownloadOscillogram(dsGuid, oscGuid, cancallationTokenSource.Token));
+              task.ContinueWith((t) =>
+              {
+                  dlgORP.Close();
+
+                  if (t.Result)
+                      MessageBox.Show("Не удалось скачать осциллограмму.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              });
+
+              task.Start();
+
               dlgORP.ShowDialog();
+
+              if (dlgORP.DialogResult == DialogResult.Cancel)
+              {
+                  cancallationTokenSource.Cancel();
+              }
           }
       }
 
-      void osc_OnOscReady( IOscillogramma osc)
-      {
-          ClientDataForExchange_OSCReadyEvent(osc.ContentBlockOsc);
-      }
-
-      MemoryStream ms_arrosc4copy;
-
-      public void SetArrOSC(byte[] arrosc)
-      {
-          arrOsc = new byte[arrosc.Length];
-          Buffer.BlockCopy(arrosc, 0, arrOsc, 0, arrosc.Length);
-
-          // чтобы развязать связку диалогового окна и этого класса создадим таймер, 
-          // по срабатыванию которого вызовется событие окончания чтения осциллограммы
-          tmrOscevent = new System.Timers.Timer();
-          tmrOscevent.Elapsed += new System.Timers.ElapsedEventHandler(tmrOscevent_Elapsed);
-          tmrOscevent.Interval = 500;
-          ms_arrosc4copy = new MemoryStream(arrosc);
-          tmrOscevent.Start();
-          //ClientDataForExchange_OSCReadyEvent(arrosc);
-      }
-
-      System.Timers.Timer tmrOscevent;
-
-      void tmrOscevent_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-      {
-          tmrOscevent.Stop();
-
-          ClientDataForExchange_OSCReadyEvent(ms_arrosc4copy.ToArray());
-      }
-
       /// <summary>
-      /// 
+      /// Делает запрос на осциллограмму, скачивает и запускает её
       /// </summary>
-      /// <param Name="ide">идентификатор записи с блоком данных в БД</param>
-      /// <param Name="ifa">имя файла для записи осц.</param>
-      private void AddOSC2List(int ide, string ifa)
+      private bool StartDownloadOscillogram(UInt16 dsGuid, int oscGuid, CancellationToken cancellationToken)
       {
-          if (!slOsc4Read.ContainsKey(ide))
-              slOsc4Read.Add(ide, ifa);
-      }
+          #region Получение ссылки от роутера
+          var oscUrl = HMI_Settings.CONFIGURATION.GetDataServer(dsGuid).ReqEntry.GetOscillogramAsUrlById(dsGuid, oscGuid);
 
-      short cntSelectOSC;
-      /// <summary>
-      /// старт процесса чтения осциллограммы
-      /// </summary>
-      public void StartProceccReadOSC(short cntselectOSC)
-      {
-          /*   работаем только с первой записью, 
-               если список пуст, то это говорит о том, что все осциллограммы считаны
-           */
-          cntSelectOSC = cntselectOSC;
-          SetReqForOSCRead(Convert.ToUInt32(slOsc4Read.ElementAt(0).Key));
-      }
+          if (oscUrl == null)
+              return true;
+          #endregion
 
-      private byte[] GetArrBlockData(DataTable dt, int curRow)
-      {
-         //if (HMI_Settings.IsLocalSystem)
-         //   return (byte[])dt.Rows[curRow]["Data"];
-         //else
-            return null;
-      }
+          if (cancellationToken.IsCancellationRequested)
+              return false;
 
+          #region Загрузка архива с осциллограммами
+          var pathToOscDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Oscillogramms");
+          if (!Directory.Exists(pathToOscDir))
+              Directory.CreateDirectory(pathToOscDir);
 
-      private string GetFName(DataRow dr)
-      {
-          string ifa = String.Empty;
+          var pathToTempFile = Path.Combine(Path.GetTempPath(), Path.GetFileName((new Uri(oscUrl)).LocalPath));
 
-          var device = HMI_MT_Settings.HMI_Settings.CONFIGURATION.GetLink2Device(0, UInt32.Parse(dr["BlockID"].ToString()));
-          if (device != null)
-              ifa = String.Format("{0}____{1}____{2}", device.Description, dr["BlockName"], Convert.ToString(dr["TimeFC"]));
-          else
-              // На всякий случай.
-              ifa = String.Format("{0}____{1}", dr["BlockName"], Convert.ToString(dr["TimeFC"]));
-
-         // удаляем пробелы
-         string[] sp = ifa.Split(new char[]{' '});
-         StringBuilder sb = new StringBuilder();
-         for (int i = 0; i < sp.Length; i++)
-         {
-            sb.Append(sp[i]);
-         }
-         string sbb = sb.ToString();
-         sb.Length = 0;
-         for (int i = 0; i < sbb.Length; i++)
-         {
-            if (sbb[i] == '.' || sbb[i] == '/' || sbb[i] == '\\' || sbb[i] == '/' || sbb[i] == ':')
-               sb.Append('_');
-            else
-               sb.Append(sbb[i]);
-         }
-
-         ifa = sb.ToString();
-         AddExtended(dr, ref ifa);
-
-         return ifa;
-      }
-
-      /// <summary>
-      /// добавить расширение файла в 
-      /// соответствии с типом блока 
-      /// и типом данных (осциллограмма или диаграмма)
-      /// </summary>
-      private void AddExtended(DataRow dr, ref string ifa)
-      {
-          int it = (int) dr["TypeID"];
-          XDocument projectCfgXDocument = XDocument.Load(HMI_Settings.PathToPrjFile);
-          var oscInfoXElements = projectCfgXDocument.Element("Project").Element("OscDiagInSummaryLog").Elements();
-
-          foreach (var oscInfoXElement in oscInfoXElements)
+          WebClient webClient = new WebClient();
+          try
           {
-              if (Boolean.Parse(oscInfoXElement.Attribute("isenable").Value))
-                  if (Int32.Parse(oscInfoXElement.Attribute("value").Value) == it)
-                  {
-                      ifa += "." + oscInfoXElement.Attribute("fileExtension").Value;
-                      break;
-                  }
+              webClient.DownloadFile(oscUrl, pathToTempFile);
           }
+          catch (Exception ex)
+          {
+              return true;
+          }
+          #endregion
+
+          if (cancellationToken.IsCancellationRequested)
+              return false;
+
+          #region Распаковка архива
+          string pathToExtractZipOscDir = null;
+          using (ZipFile zipFile = new ZipFile(pathToTempFile, System.Text.Encoding.GetEncoding("cp866")))
+          {
+              pathToExtractZipOscDir = Path.Combine(pathToOscDir, Path.GetFileName(zipFile.Name));
+
+              if (Directory.Exists(pathToExtractZipOscDir))
+                  Directory.Delete(pathToExtractZipOscDir, true);
+              else
+                  Directory.CreateDirectory(pathToExtractZipOscDir);
+
+              zipFile.ExtractAll(pathToExtractZipOscDir);
+          }
+          #endregion
+
+          if (cancellationToken.IsCancellationRequested)
+              return false;
+
+          #region Запуск OscView
+          string pathToOscView = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "OscView", "OscView.exe");
+
+          Process oscViewProcess = new Process();
+          oscViewProcess.StartInfo.FileName = pathToOscView;
+
+          oscViewProcess.StartInfo.Arguments = String.Format("\"{0}\"", Directory.GetFiles(pathToExtractZipOscDir)[0]);
+
+          oscViewProcess.Start();
+          #endregion
+
+          return false;
       }
-
-      ArrayList asb = new ArrayList();
-
-      void ClientDataForExchange_OSCReadyEvent(byte[] arrosc)
-      {
-          StringBuilder sb = new StringBuilder();
-
-            try
-			{
-                /*
-                * осциллограмма может состоять из нескольких кусков,
-                * поэтому полученный пакет имеет формат исходя 
-                * из которого можно эти куски вычленить:
-                * 1 байт - число кусков;
-                * 2 байта - длина очередного куска
-                * n байт - содержимое очередного куска
-                */
-                BinaryReader br = new BinaryReader(new MemoryStream(arrosc));
-
-                // выясним сколько фрагментов в осциллограмме
-                byte cntfragments = 1;//br.ReadByte();
-
-                asb.Add(slOsc4Read.ElementAt(0).Value);  // добавили название файла с осциллограммой
-
-                // выяснили раздельно имя файла и его расширение
-                string filename = AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms\\" + Path.GetFileNameWithoutExtension(slOsc4Read.ElementAt(0).Value);
-                string fileextens = Path.GetExtension(slOsc4Read.ElementAt(0).Value);
-
-                CreateOscFile(filename, fileextens, br);
-
-                // удаляем верхнюю запись в списке считываемых осциллограмм
-                slOsc4Read.RemoveAt(0);
-
-                // если есть другие фрагменты осциллограммы то формируем файлы из них
-                for (int i = 1; i < cntfragments; i++)
-                    CreateOscFile(filename + "_" + i.ToString() /*номер фрагмента*/, fileextens, br);
-
-                if (slOsc4Read.Count != 0)
-                {
-                    StartProceccReadOSC(cntSelectOSC); // читаем дальше осциллограммы
-                    return;
-                }
-
-                // все осциллограммы прочитаны - запускаем fastview OscView.exe
-                stopwatch.Stop();    // остановили подсчет времени
-
-                // запускаем OscView.exe
-                string oscviewexePath = AppDomain.CurrentDomain.BaseDirectory + "\\OscView\\OscView.exe";
-                if (!File.Exists(oscviewexePath))
-                {
-                    MessageBox.Show("Отсутствует файл запуска OscView. Путь : " + oscviewexePath, "(725) ClientDataForExchange.cs : ClientDataForExchange_OSCReadyEvent", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                Process prc = new Process();
-
-                switch (cntSelectOSC)
-                {
-                    case 0:
-                        return;
-                    case 1:
-                        prc.StartInfo.FileName = oscviewexePath;
-                        prc.StartInfo.Arguments = "\"" + AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms\\" + asb[0].ToString() + "\"";
-                        break;
-                    default: // 2 и более осциллограммы
-                        sb = new StringBuilder();
-                        foreach (string s in asb)
-                        {
-                            sb.Append("\"" + s.ToString() + "\"");
-                            sb.Append(" ");
-                        }
-                        prc.StartInfo.FileName = oscviewexePath;
-                        prc.StartInfo.Arguments = "-o " + sb.ToString();
-                        break;
-                }
-                prc.Start();
-                asb.Clear();
-                slOsc4Read.Clear();
-            }
-			catch(Exception ex)
-			{
-				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
-			}
-      }
-
-      private void CreateOscFile(string p, string e, BinaryReader br)
-      {
-          FileStream f;
-          int lenfragment = 0;
-			try
-			{
-                try
-                {
-                    //lenfragment = br.ReadInt32();
-                    lenfragment = (int)br.BaseStream.Length;
-                    f = File.Create(p + e);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    f = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms\\" + "последняя_осциллограмма.osc");//ifa
-                }
-
-                f.Write(br.ReadBytes((int)lenfragment), 0, (int)lenfragment);
-                f.Close();
-            }
-			catch(Exception ex)
-			{
-				TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
-			}
-      }
-
-      /// <summary>
-      /// возвращает строку с временем в сек
-      /// прошедшим с начала формирования осциллограмм(ы)
-      /// </summary>
-      /// <returns></returns>
-      public string GetStrTimeReadOSC()
-      {
-          return Convert.ToString(stopwatch.ElapsedTicks / Stopwatch.Frequency);
-      }
-
-      private void RunOscView(string ifa,byte[] arrO)
-      {
-         #region запись в файл, запуск OscView
-         FileStream f = null;
-         try
-         {
-            f = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms\\" + ifa);
-         }
-         catch (Exception ex)
-         {
-            System.Windows.Forms.MessageBox.Show(ex.ToString() + "\nФайл : " + AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms\\" + ifa, "Просмотр осциллограмм/диаграмм", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-            return;
-         }
-
-         f.Write(arrO, 0, arrO.Length);
-         f.Close();
-         // запускаем fastview
-
-         Process prc = new Process();
-         prc.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "\\OscView\\OscView.exe  ";
-         prc.StartInfo.Arguments = "\"" + AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms\\" + ifa + "\"";
-         prc.Start();
-         #endregion
-      }
-
-   #region Объединение осциллограмм/диаграмм
-      public void ClearArrayIDE()
-      {
-         ArrIDE.Clear(); 
-      }
-	   /// <summary>
-      /// добавление идентификатора в массив идентификаторов
-      /// осциллограмм для объединения
-      /// </summary>
-      public void AddIde2ArrayIde(int ide) 
-      {
-         ArrIDE.Add(ide);
-      }
-
-      public void ShowUnionOSCDg(DataTable drc)
-      {
-         ArrayList asb = new ArrayList();    // для хранения имен файлов
-         string ifa;
-
-         // перечисляем записи в таблице dbO, смотрим отмеченные, формируем файлы, вызываем fastview
-         short cntSelectOSC = 0;
-         foreach (DataRow dr in drc.Rows)
-         {
-            if (!ArrIDE.Contains(dr["Id"]))
-               continue;
-
-            // формируем имя файла - сохраняем имя в массиве
-            ifa = AppDomain.CurrentDomain.BaseDirectory + "\\Oscillogramms\\" + GetFName(dr);
-
-            asb.Add(ifa);
-
-            //HMI_Settings.ClientDFE.AddOSC2List((int)dr["Id"], ifa); 
-               cntSelectOSC++;
-         }
-
-         //HMI_Settings.ClientDFE.StartProceccReadOSC(cntSelectOSC); // старт процесса чтения осциллограмм
-      }
-
-      private void RunOscDiagViewUnion(ArrayList listf)
-      {
-         // запускаем OscView
-         Process prc = new Process();
-         StringBuilder sb = new StringBuilder();
-
-         foreach (string s in listf)
-         {
-            // каждыый путь д.б. заключен в свои отдельные кавычки
-            sb.Append("\"" +s + "\"");
-            sb.Append(" ");
-         }
-         prc.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + "\\OscView\\OscView.exe  ";
-         
-         prc.StartInfo.Arguments = "-o " + sb.ToString();
-
-         prc.Start();
-      }
-	#endregion
    }
 }
