@@ -52,6 +52,9 @@ namespace HelperControlsLibrary
             dgvOscill.Rows.Clear();
             for ( var curRow = 0; curRow < dtO.Rows.Count; curRow++ )
             {
+                if (dtO.Rows[curRow]["BlockID"].ToString() != UniDevId.ToString())
+                    continue;
+
                 var i = dgvOscill.Rows.Add();   // номер строки
                 dgvOscill["clmChBoxOsc", i].Value = false;
                 dgvOscill["clmBlockNameOsc", i].Value = dtO.Rows[curRow]["BlockName"];
@@ -71,6 +74,9 @@ namespace HelperControlsLibrary
             dgvDiag.Rows.Clear();
             for ( var curRow = 0; curRow < dtG.Rows.Count; curRow++ )
             {
+                if (dtO.Rows[curRow]["BlockID"].ToString() != UniDevId.ToString())
+                    continue;
+
                 var i = dgvDiag.Rows.Add();   // номер строки
                 dgvDiag["clmChBoxDiag", i].Value = false;
                 dgvDiag["clmBlockNameDiag", i].Value = dtG.Rows[curRow]["BlockName"];
