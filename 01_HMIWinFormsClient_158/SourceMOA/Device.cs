@@ -151,16 +151,11 @@ namespace SourceMOA
 			            new Exception( String.Format( "***{0}@{1}***:{2}", UniObjectGUID.ToString( "D3" ), TypeName, ex.Message ) ) );
 			    }
                 
-
-				//CreateListTagsDevice(xdoc_dev);
                 CreateListTagsDevice(xdoc_dev.GetTagsList());
 
-				//listDevGroupsHierarchy = CreateGroupHierarchy(xdoc_dev.Element("Device").Element("Groups"));
                 listDevGroupsHierarchy = CreateGroupHierarchy(xdoc_dev.GetGroupsSection());
 
-                //if (xdoc_dev.Element("Device").Elements("Commands").Count() != 0)
                 if (xdoc_dev.CommandsSectionExist())
-                    //lstDeviceCommand = CreateCmdList(xdoc_dev.Element("Device").Element("Commands"));
                     lstDeviceCommand = CreateCmdList(xdoc_dev.GetCommandsSection());
 
                 #region Считывание информации о том, какие компоненты устройства отображать
@@ -225,7 +220,7 @@ namespace SourceMOA
 
             var node = xElement.Element( "TypeOfBlocks" );
             if ( node == null )
-                throw new Exception( "В файле описания отсудствует ветка \"TypeOfBlocks\"" );
+                throw new Exception( "В файле описания отсутствует ветка \"TypeOfBlocks\"" );
 
             IEnumerable<XElement> xe_TypeOfBlocks = node.Elements( "TypeOfBlock" );
 
@@ -364,28 +359,6 @@ namespace SourceMOA
 		#endregion
 			
 		#region private-методы
-		/// <summary>
-		/// заполнить список тегов устройства
-		/// </summary>
-		/// <param name="xeObj">секция описания источника</param>
-		/// <param name="path2SrcPrgDevCfg">путь к файлу PrgDevCfg источника</param>
-        //private void CreateListTagsDevice(XDocument xdoc_dev)
-        //{
-        //    TagsFactory tf = new TagsFactory();
-        //    uint tmp = 0;
-        //    try
-        //    {
-        //        foreach (var xe_tag in xdoc_dev.Element("Device").Element("Tags").Elements("Tag"))
-        //        {
-        //            tmp = uint.Parse(xe_tag.Attribute("TagGUID").Value);
-        //            slDeviceTags.Add(tmp, tf.CreateTag(xe_tag, this));
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
-        //    }
-        //}
         private void CreateListTagsDevice(List<XElement> taglist)
         {
             TagsFactory tf = new TagsFactory();
@@ -403,11 +376,11 @@ namespace SourceMOA
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
             }
         }
+
 		/// <summary>
 		/// создать структуру с иерархией групп 
 		/// и входящими в них тегами 
 		/// </summary>
-		/// <param name="xdoc_dev"></param>
 		private List<IGroup> CreateGroupHierarchy(XElement xeGroupHierarchy)
 		{
 			// список групп первого уровня
