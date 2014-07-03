@@ -112,7 +112,7 @@ namespace HelperControlsLibrary
                  * в дальнейшем нужно придумать механизм когда на данном этапе
                  * будет известен реальный номер DS
                  */
-                oscdg.ShowOSCDg( 0, dtG, (int)de.Value );
+                oscdg.ShowOSCDg( 0, (int)de.Value );
             }
             catch
             {
@@ -143,7 +143,7 @@ namespace HelperControlsLibrary
             try
             {
                 var de = dgvOscill["clmID", e.RowIndex];
-                oscdg.ShowOSCDg( 0, dtO, (int)de.Value );
+                oscdg.ShowOSCDg( 0, (int)de.Value );
             }
             catch
             {
