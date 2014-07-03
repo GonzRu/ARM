@@ -43,7 +43,7 @@ namespace BlockDataComposer
 		/// <summary>
 		/// ссылка на компонент взаимодействия
 		/// </summary>
-		IProviderCustomer PROVCUST;
+		public IProviderCustomer PROVCUST;
 		#endregion
 
 		#region конструктор(ы)

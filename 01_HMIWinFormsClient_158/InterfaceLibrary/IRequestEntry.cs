@@ -71,5 +71,10 @@ namespace InterfaceLibrary
 		/// обновить инфо запросив данные по активным тегам
 		/// </summary>
 		void UpdateHMIInfo();
+
+        /// <summary>
+        /// Получить ссылку на осциллограмму
+        /// </summary>
+        string GetOscillogramAsUrlById(UInt16 dsGuid, Int32 oscGuid);
 	}
 }
