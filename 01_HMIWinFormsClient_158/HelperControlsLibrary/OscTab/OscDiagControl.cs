@@ -37,7 +37,6 @@ namespace HelperControlsLibrary
         /// </summary>
         private void SelectUserControl3BtnUpdateClick( object sender, EventArgs e )
         {
-            oscdg.IdFC = 0;
             oscdg.IdDev = (int)UniDevId;
             oscdg.DTStartData = selectUserControl3.dtpStartDateAvar.Value;
             oscdg.DTStartTime = selectUserControl3.dtpStartTimeAvar.Value;
@@ -45,7 +44,7 @@ namespace HelperControlsLibrary
             oscdg.DTEndTime = selectUserControl3.dtpEndTimeAvar.Value;
             oscdg.TypeRec =
                 CommonUtils.CommonUtils.GetTypeBlockData4ThisDev(
-                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Osc, (uint)(oscdg.IdFC * 256 + oscdg.IdDev ) );
+                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Osc, (uint)(oscdg.IdDev ) );
 
             // извлекаем данные по осциллограммам
             dtO = oscdg.Do_SQLProc();
@@ -65,7 +64,7 @@ namespace HelperControlsLibrary
 
             oscdg.TypeRec =
                 CommonUtils.CommonUtils.GetTypeBlockData4ThisDev(
-                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Diagramm, (uint)(oscdg.IdFC * 256 + oscdg.IdDev) );
+                    InterfaceLibrary.TypeBlockData4Req.TypeBlockData4Req_Diagramm, (uint)(oscdg.IdDev) );
             
             // извлекаем данные по диаграммам
             dtG = oscdg.Do_SQLProc();

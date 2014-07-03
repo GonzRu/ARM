@@ -31,15 +31,7 @@ namespace OscillogramsLib
           set { idDev = value; }
       }
       int idDev;
-      /// <summary>
-      /// id источника
-      /// </summary>
-      public int IdFC
-      {
-          get { return idFC; }
-          set { idFC = value; }
-      }
-      int idFC;
+
       /// <summary>
       /// тип записи
       /// </summary>
@@ -81,14 +73,6 @@ namespace OscillogramsLib
       }
       DateTime dTEndTime;
 
-      ///// <summary>
-      ///// число выделенных осц или диагр
-      ///// </summary>
-      //public short CntSelectOSC 
-      //{
-      //   set { cntSelectOSC = value; }
-      //}
-      //short cntSelectOSC = 1;
       #endregion
 
       #region конструктор, уничтожение объекта
@@ -189,7 +173,7 @@ namespace OscillogramsLib
          SqlParameter pipFC = new SqlParameter();
          pipFC.ParameterName = "@IP";
          pipFC.SqlDbType = SqlDbType.BigInt;
-         pipFC.Value = idFC;
+         pipFC.Value = 0;
          pipFC.Direction = ParameterDirection.Input;
          cmd.Parameters.Add(pipFC);
 
@@ -197,7 +181,7 @@ namespace OscillogramsLib
          SqlParameter pidBlock = new SqlParameter();
          pidBlock.ParameterName = "@id";
          pidBlock.SqlDbType = SqlDbType.Int;
-         pidBlock.Value = idDev + idFC * 256;
+         pidBlock.Value = idDev;
          pidBlock.Direction = ParameterDirection.Input;
          cmd.Parameters.Add(pidBlock);
 
