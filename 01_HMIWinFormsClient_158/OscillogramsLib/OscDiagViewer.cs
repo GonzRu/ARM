@@ -257,49 +257,45 @@ namespace OscillogramsLib
       /// <summary>
       /// Делает запрос на осциллограмму, скачивает и запускает её
       /// </summary>
+      /// <returns>Возвращает false, если всё прошло хорошо. True - если не удалось показать осциллограмму</returns>
       private bool StartDownloadOscillogram(UInt16 dsGuid, int oscGuid, CancellationToken cancellationToken)
       {
-          #region Получение ссылки от роутера
-          var oscUrl = HMI_Settings.CONFIGURATION.GetDataServer(dsGuid).ReqEntry.GetOscillogramAsUrlById(dsGuid, oscGuid);
+          #region Получение содержимого ахива с осциллограммами от роутера
+          var oscDataAndName = HMI_Settings.CONFIGURATION.GetDataServer(dsGuid).ReqEntry.GetOscillogramAsByteArray(dsGuid, oscGuid);
 
-          if (oscUrl == null)
+          if (oscDataAndName == null)
               return true;
           #endregion
 
           if (cancellationToken.IsCancellationRequested)
               return false;
 
-          #region Загрузка архива с осциллограммами
-          var pathToOscDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Oscillogramms");
-          if (!Directory.Exists(pathToOscDir))
-              Directory.CreateDirectory(pathToOscDir);
+          #region Сохранение архива с осциллограммами
+          var pathToTempFile = Path.GetTempFileName();
 
-          var pathToTempFile = Path.Combine(Path.GetTempPath(), Path.GetFileName((new Uri(oscUrl)).LocalPath));
+          var stream = File.Create(pathToTempFile);
+          stream.Write(oscDataAndName.Item1, 0, oscDataAndName.Item1.Length);
 
-          WebClient webClient = new WebClient();
-          try
-          {
-              webClient.DownloadFile(oscUrl, pathToTempFile);
-          }
-          catch (Exception ex)
-          {
-              return true;
-          }
+          stream.Close();
           #endregion
 
           if (cancellationToken.IsCancellationRequested)
               return false;
 
           #region Распаковка архива
+          var pathToOscDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Oscillogramms");
+          if (!Directory.Exists(pathToOscDir))
+              Directory.CreateDirectory(pathToOscDir);
+
           string pathToExtractZipOscDir = null;
           using (ZipFile zipFile = new ZipFile(pathToTempFile, System.Text.Encoding.GetEncoding("cp866")))
           {
-              pathToExtractZipOscDir = Path.Combine(pathToOscDir, Path.GetFileName(zipFile.Name));
+              pathToExtractZipOscDir = Path.Combine(pathToOscDir, Path.GetFileNameWithoutExtension(oscDataAndName.Item2));
 
               if (Directory.Exists(pathToExtractZipOscDir))
                   Directory.Delete(pathToExtractZipOscDir, true);
-              else
-                  Directory.CreateDirectory(pathToExtractZipOscDir);
+
+              Directory.CreateDirectory(pathToExtractZipOscDir);
 
               zipFile.ExtractAll(pathToExtractZipOscDir);
           }
@@ -309,14 +305,22 @@ namespace OscillogramsLib
               return false;
 
           #region Запуск OscView
-          string pathToOscView = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "OscView", "OscView.exe");
+          try
+          {
+              string pathToOscView = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "OscView", "OscView.exe");
 
-          Process oscViewProcess = new Process();
-          oscViewProcess.StartInfo.FileName = pathToOscView;
+              Process oscViewProcess = new Process();
+              oscViewProcess.StartInfo.FileName = pathToOscView;
 
-          oscViewProcess.StartInfo.Arguments = String.Format("\"{0}\"", Directory.GetFiles(pathToExtractZipOscDir)[0]);
+              oscViewProcess.StartInfo.Arguments = String.Format("\"{0}\"", Directory.GetFiles(pathToExtractZipOscDir)[0]);
 
-          oscViewProcess.Start();
+              oscViewProcess.Start();
+          }
+          catch (Exception ex)
+          {
+              TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 0, "Исключение при запуске OscView : " + ex.Message);
+              return true;
+          }
           #endregion
 
           return false;
