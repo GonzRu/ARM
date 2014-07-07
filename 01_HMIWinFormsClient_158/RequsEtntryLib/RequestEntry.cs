@@ -105,6 +105,18 @@ namespace RequsEtntryLib
             return exchangeProvider.GetOscillogramAsUrlById(dsGuid, oscGuid);
         }
 
+        /// <summary>
+        /// Получить содержимое архива с осциллограммами и его имя
+        /// </summary>
+        public Tuple<byte[], string> GetOscillogramAsByteArray(UInt16 dsGuid, Int32 oscGuid)
+        {
+            var exchangeProvider = (BCD as OrdinalBlokDataComposer).PROVCUST as IWcfProvider;
+            if (exchangeProvider == null)
+                return null;
+
+            return exchangeProvider.GetOscillogramAsByteArray(dsGuid, oscGuid);
+        }
+
 		/// <summary>
 		/// подписаться на обновление тегов
 		/// </summary>

@@ -308,6 +308,22 @@ namespace ProviderCustomerExchangeLib.WCF
             return null;
         }
 
+        /// <summary>
+        /// Получить содержимое архива с осциллограммами и его имя
+        /// </summary>
+        public Tuple<byte[], string> GetOscillogramAsByteArray(UInt16 dsGuid, Int32 oscGuid)
+        {
+            try
+            {
+                return WCFproxy.GetOscillogramAsByteArray(dsGuid, oscGuid);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return null;
+        }
+
         #region DSRouterClient Async Metods Handlers
         private void OnGetTagsValuesUpdatedCompleted(object sender, GetTagsValuesUpdatedCompletedEventArgs getTagsValuesUpdatedCompletedEventArgs)
         {

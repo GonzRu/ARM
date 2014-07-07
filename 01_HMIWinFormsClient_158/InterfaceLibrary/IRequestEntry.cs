@@ -76,5 +76,9 @@ namespace InterfaceLibrary
         /// Получить ссылку на осциллограмму
         /// </summary>
         string GetOscillogramAsUrlById(UInt16 dsGuid, Int32 oscGuid);
+        /// <summary>
+        /// Получить содержимое архива с осциллограммами и его имя
+        /// </summary>
+        Tuple<byte[], string> GetOscillogramAsByteArray(UInt16 dsGuid, Int32 oscGuid);
 	}
 }

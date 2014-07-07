@@ -263,6 +263,15 @@ namespace RequsEtntryLib
         {
             return _wcfProvider.GetOscillogramAsUrlById(dsGuid, oscGuid);
         }
+
+        /// <summary>
+        /// Получить содержимое архива с осциллограммами и его имя
+        /// </summary>
+        public Tuple<byte[], string> GetOscillogramAsByteArray(UInt16 dsGuid, Int32 oscGuid)
+        {
+            return _wcfProvider.GetOscillogramAsByteArray(dsGuid, oscGuid);
+        }
+
 		#endregion
 
 		#region private-методы
