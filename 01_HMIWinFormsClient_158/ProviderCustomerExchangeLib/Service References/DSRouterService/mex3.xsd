@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="DSRouterTagValue">
     <xs:sequence>
       <xs:element minOccurs="0" name="VarQuality" type="xs:unsignedInt" />
@@ -76,6 +77,7 @@
       <xs:element minOccurs="0" name="DevGuid" type="xs:unsignedInt" />
       <xs:element minOccurs="0" name="DsGuid" type="xs:unsignedShort" />
       <xs:element minOccurs="0" name="EventDataID" type="xs:int" />
+      <xs:element minOccurs="0" name="EventDataType" type="tns:DSRouterEventDataType" />
       <xs:element minOccurs="0" name="EventID" type="xs:int" />
       <xs:element minOccurs="0" name="EventSourceComment" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EventSourceName" nillable="true" type="xs:string" />
@@ -89,6 +91,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DSRouterEventValue" nillable="true" type="tns:DSRouterEventValue" />
+  <xs:simpleType name="DSRouterEventDataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Ustavki" />
+      <xs:enumeration value="Alarm" />
+      <xs:enumeration value="Oscillogram" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DSRouterEventDataType" nillable="true" type="tns:DSRouterEventDataType" />
   <xs:complexType name="ArrayOfDSRouterSettingsSet">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DSRouterSettingsSet" nillable="true" type="tns:DSRouterSettingsSet" />

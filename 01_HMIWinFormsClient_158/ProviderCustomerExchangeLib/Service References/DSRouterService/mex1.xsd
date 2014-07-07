@@ -462,7 +462,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="groupName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="groupComment" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="groupRight" type="xs:int" />
+        <xs:element minOccurs="0" name="groupRight" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -524,6 +524,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetOscillogramAsByteArray">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
+        <xs:element minOccurs="0" name="eventDataID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOscillogramAsByteArrayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="GetOscillogramAsByteArrayResult" nillable="true" type="q11:TupleOfbase64Binarystring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetHistoricalDataByID">
     <xs:complexType>
       <xs:sequence>
@@ -535,7 +550,7 @@
   <xs:element name="GetHistoricalDataByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetHistoricalDataByIDResult" nillable="true" type="q11:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetHistoricalDataByIDResult" nillable="true" type="q12:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -559,7 +574,7 @@
   <xs:element name="GetNotReceiptedEventsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetNotReceiptedEventsResult" nillable="true" type="q12:ArrayOfDSRouterEventValue" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetNotReceiptedEventsResult" nillable="true" type="q13:ArrayOfDSRouterEventValue" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -578,7 +593,7 @@
   <xs:element name="ReceiptEvents">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="eventValues" nillable="true" type="q13:ArrayOfDSRouterEventValue" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="eventValues" nillable="true" type="q14:ArrayOfDSRouterEventValue" />
         <xs:element minOccurs="0" name="receiptComment" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -599,15 +614,15 @@
   <xs:element name="GetSettingsSetsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetSettingsSetsListResult" nillable="true" type="q14:ArrayOfDSRouterSettingsSet" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" minOccurs="0" name="GetSettingsSetsListResult" nillable="true" type="q15:ArrayOfDSRouterSettingsSet" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetValuesFromSettingsSet">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
         <xs:element minOccurs="0" name="settingsSetID" type="xs:int" />
-        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tagsList" nillable="true" type="q15:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -746,8 +761,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
-        <xs:element minOccurs="0" name="devGuid" type="xs:int" />
-        <xs:element minOccurs="0" name="tagGuid" type="xs:int" />
+        <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="tagGuid" type="xs:unsignedInt" />
         <xs:element minOccurs="0" name="valinobject" nillable="true" type="xs:anyType" />
       </xs:sequence>
     </xs:complexType>
@@ -756,9 +771,85 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
-        <xs:element minOccurs="0" name="devGuid" type="xs:int" />
-        <xs:element minOccurs="0" name="tagGuid" type="xs:int" />
+        <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="tagGuid" type="xs:unsignedInt" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTagAnalogTransformationRatio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
+        <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="tagGuid" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTagAnalogTransformationRatioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTagAnalogTransformationRatioResult" nillable="true" type="xs:anyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetTagAnalogTransformationRatio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
+        <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="tagGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="transformationRatio" nillable="true" type="xs:anyType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetTagAnalogTransformationRatioResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReSetTagAnalogTransformationRatio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
+        <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="tagGuid" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReSetTagAnalogTransformationRatioResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsInverseDiscretTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
+        <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="tagGuid" type="xs:unsignedInt" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsInverseDiscretTagResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsInverseDiscretTagResult" nillable="true" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InverseDiscretTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="dsGuid" type="xs:unsignedShort" />
+        <xs:element minOccurs="0" name="devGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="tagGuid" type="xs:unsignedInt" />
+        <xs:element minOccurs="0" name="newInverseValue" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InverseDiscretTagResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="NewErrorEvent">

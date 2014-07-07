@@ -229,6 +229,12 @@
   <wsdl:message name="IDSRouter_GetOscillogramAsUrlByID_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOscillogramAsUrlByIDResponse" />
   </wsdl:message>
+  <wsdl:message name="IDSRouter_GetOscillogramAsByteArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOscillogramAsByteArray" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetOscillogramAsByteArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOscillogramAsByteArrayResponse" />
+  </wsdl:message>
   <wsdl:message name="IDSRouter_GetHistoricalDataByID_InputMessage">
     <wsdl:part name="parameters" element="tns:GetHistoricalDataByID" />
   </wsdl:message>
@@ -330,6 +336,36 @@
   </wsdl:message>
   <wsdl:message name="IDSRouter_ReSetTagValueFromHMI_InputMessage">
     <wsdl:part name="parameters" element="tns:ReSetTagValueFromHMI" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagAnalogTransformationRatio_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagAnalogTransformationRatio" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagAnalogTransformationRatio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagAnalogTransformationRatioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_SetTagAnalogTransformationRatio_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTagAnalogTransformationRatio" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_SetTagAnalogTransformationRatio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTagAnalogTransformationRatioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_ReSetTagAnalogTransformationRatio_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReSetTagAnalogTransformationRatio" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_ReSetTagAnalogTransformationRatio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReSetTagAnalogTransformationRatioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_IsInverseDiscretTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsInverseDiscretTag" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_IsInverseDiscretTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsInverseDiscretTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_InverseDiscretTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:InverseDiscretTag" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_InverseDiscretTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InverseDiscretTagResponse" />
   </wsdl:message>
   <wsdl:message name="IDSRouter_NewErrorEvent_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NewErrorEvent" />
@@ -488,6 +524,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetOscillogramAsUrlByID" message="tns:IDSRouter_GetOscillogramAsUrlByID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetOscillogramAsUrlByIDResponse" message="tns:IDSRouter_GetOscillogramAsUrlByID_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetOscillogramAsByteArray">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetOscillogramAsByteArray" message="tns:IDSRouter_GetOscillogramAsByteArray_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetOscillogramAsByteArrayResponse" message="tns:IDSRouter_GetOscillogramAsByteArray_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetHistoricalDataByID">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetHistoricalDataByID" message="tns:IDSRouter_GetHistoricalDataByID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetHistoricalDataByIDResponse" message="tns:IDSRouter_GetHistoricalDataByID_OutputMessage" />
@@ -557,6 +597,26 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReSetTagValueFromHMI">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/ReSetTagValueFromHMI" message="tns:IDSRouter_ReSetTagValueFromHMI_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTagAnalogTransformationRatio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatio" message="tns:IDSRouter_GetTagAnalogTransformationRatio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatioResponse" message="tns:IDSRouter_GetTagAnalogTransformationRatio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SetTagAnalogTransformationRatio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatio" message="tns:IDSRouter_SetTagAnalogTransformationRatio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatioResponse" message="tns:IDSRouter_SetTagAnalogTransformationRatio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReSetTagAnalogTransformationRatio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/ReSetTagAnalogTransformationRatio" message="tns:IDSRouter_ReSetTagAnalogTransformationRatio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/ReSetTagAnalogTransformationRatioResponse" message="tns:IDSRouter_ReSetTagAnalogTransformationRatio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="IsInverseDiscretTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/IsInverseDiscretTag" message="tns:IDSRouter_IsInverseDiscretTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/IsInverseDiscretTagResponse" message="tns:IDSRouter_IsInverseDiscretTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="InverseDiscretTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/InverseDiscretTag" message="tns:IDSRouter_InverseDiscretTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/InverseDiscretTagResponse" message="tns:IDSRouter_InverseDiscretTag_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewErrorEvent">
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/NewErrorEvent" message="tns:IDSRouter_NewErrorEvent_OutputCallbackMessage" />
@@ -895,6 +955,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetOscillogramAsByteArray">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetOscillogramAsByteArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetHistoricalDataByID">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetHistoricalDataByID" style="document" />
       <wsdl:input>
@@ -1051,6 +1120,51 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="GetTagAnalogTransformationRatio">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTagAnalogTransformationRatio">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReSetTagAnalogTransformationRatio">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/ReSetTagAnalogTransformationRatio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsInverseDiscretTag">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/IsInverseDiscretTag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InverseDiscretTag">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/InverseDiscretTag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NewErrorEvent">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/NewErrorEvent" style="document" />
       <wsdl:output>
@@ -1078,9 +1192,9 @@
   </wsdl:binding>
   <wsdl:service name="DSRouterService">
     <wsdl:port name="NetTcpBinding_IDSRouter" binding="tns:NetTcpBinding_IDSRouter">
-      <soap12:address location="net.tcp://localhost:3332/DSRouter.DSRouterService" />
+      <soap12:address location="net.tcp://localhost:3332/DSRouter.DSRouterService/DSRouterService.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:3332/DSRouter.DSRouterService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:3332/DSRouter.DSRouterService/DSRouterService.svc</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
