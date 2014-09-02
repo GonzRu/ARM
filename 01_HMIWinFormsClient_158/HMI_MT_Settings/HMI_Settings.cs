@@ -17,16 +17,16 @@
  * Используется ...
  *#############################################################################*/
 
+using DebugStatisticLibrary;
+using InterfaceLibrary;
+using MessagePanel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
-using System.Xml.Linq;
-using InterfaceLibrary;
 using System.Windows.Forms;
-using DebugStatisticLibrary;
-using MessagePanel;
+using System.Xml.Linq;
 
 namespace HMI_MT_Settings
 {
