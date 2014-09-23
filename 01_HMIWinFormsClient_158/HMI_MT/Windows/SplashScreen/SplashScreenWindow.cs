@@ -130,24 +130,18 @@ namespace HMI_MT.Windows.SplashScreen
 
                 #region Load Project.cfg & configuration.cfg & PanelState.xml XML
 
-                try
-                {
-                    HMI_Settings.XDoc4PathToPrjFile = XDocument.Load(HMI_Settings.PathToPrjFile);
-                    HMI_Settings.XDoc4PathToConfigurationFile = XDocument.Load(HMI_Settings.PathToConfigurationFile);
-                    HMI_Settings.XDoc4PathPanelState_xml = XDocument.Load(HMI_Settings.PathPanelState_xml);
-                }
-                catch
-                {
-                    throw new Exception();
-                }
+                HMI_Settings.XDoc4PathToPrjFile = XDocument.Load(HMI_Settings.PathToPrjFile);
+                HMI_Settings.XDoc4PathToConfigurationFile = XDocument.Load(HMI_Settings.PathToConfigurationFile);
+                HMI_Settings.XDoc4PathPanelState_xml = XDocument.Load(HMI_Settings.PathPanelState_xml);
 
                 #endregion
 
                 // смотрим существование папки для осциллограмм и диаграмм
                 CreateFolderForOscAndDiagram();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(this, "Во время проверки конфигурации произошла ошибка." + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(1);
             }
         }
