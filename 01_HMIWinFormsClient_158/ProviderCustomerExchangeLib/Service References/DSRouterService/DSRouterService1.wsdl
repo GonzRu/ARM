@@ -12,13 +12,73 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd2" namespace="http://schemas.microsoft.com/Message" />
-      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfDataServer_Lib" />
+      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" />
       <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" />
-      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/InterfaceLibrary" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IDSRouter_GetTagTrend_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagTrend" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagTrend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagTrendResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagTrendsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagTrendsList" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagTrendsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagTrendsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTrendSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendSettings" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTrendSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_SetTrendSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTrendSettings" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_SetTrendSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTrendSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetDailyReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyReport" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetDailyReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetDailyReportAsByteArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyReportAsByteArray" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetDailyReportAsByteArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDailyReportAsByteArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetEventsReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsReport" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetEventsReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetEventsReportAsByteArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsReportAsByteArray" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetEventsReportAsByteArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsReportAsByteArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagsReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsReport" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagsReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagsReportAsByteArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsReportAsByteArray" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagsReportAsByteArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsReportAsByteArrayResponse" />
+  </wsdl:message>
   <wsdl:message name="IDSRouter_GetDSValueAsByteBuffer_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDSValueAsByteBuffer" />
   </wsdl:message>
@@ -289,6 +349,12 @@
   <wsdl:message name="IDSRouter_CommandRun_OutputMessage">
     <wsdl:part name="parameters" element="tns:CommandRunResponse" />
   </wsdl:message>
+  <wsdl:message name="IDSRouter_CommandStateCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:CommandStateCheck" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_CommandStateCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CommandStateCheckResponse" />
+  </wsdl:message>
   <wsdl:message name="IDSRouter_GetDocumentsList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDocumentsList" />
   </wsdl:message>
@@ -367,6 +433,18 @@
   <wsdl:message name="IDSRouter_InverseDiscretTag_OutputMessage">
     <wsdl:part name="parameters" element="tns:InverseDiscretTagResponse" />
   </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagsListWithEnabledTrendSave_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsListWithEnabledTrendSave" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTagsListWithEnabledTrendSave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsListWithEnabledTrendSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTrendDateTimeRanges_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendDateTimeRanges" />
+  </wsdl:message>
+  <wsdl:message name="IDSRouter_GetTrendDateTimeRanges_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrendDateTimeRangesResponse" />
+  </wsdl:message>
   <wsdl:message name="IDSRouter_NewErrorEvent_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NewErrorEvent" />
   </wsdl:message>
@@ -380,6 +458,46 @@
     <wsdl:part name="parameters" element="tns:NotifyCMDExecuted" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IDSRouter">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTagTrend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTagTrend" message="tns:IDSRouter_GetTagTrend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTagTrendResponse" message="tns:IDSRouter_GetTagTrend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTagTrendsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTagTrendsList" message="tns:IDSRouter_GetTagTrendsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTagTrendsListResponse" message="tns:IDSRouter_GetTagTrendsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTrendSettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTrendSettings" message="tns:IDSRouter_GetTrendSettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTrendSettingsResponse" message="tns:IDSRouter_GetTrendSettings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SetTrendSettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/SetTrendSettings" message="tns:IDSRouter_SetTrendSettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/SetTrendSettingsResponse" message="tns:IDSRouter_SetTrendSettings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetDailyReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetDailyReport" message="tns:IDSRouter_GetDailyReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetDailyReportResponse" message="tns:IDSRouter_GetDailyReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetDailyReportAsByteArray">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetDailyReportAsByteArray" message="tns:IDSRouter_GetDailyReportAsByteArray_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetDailyReportAsByteArrayResponse" message="tns:IDSRouter_GetDailyReportAsByteArray_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetEventsReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetEventsReport" message="tns:IDSRouter_GetEventsReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetEventsReportResponse" message="tns:IDSRouter_GetEventsReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetEventsReportAsByteArray">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetEventsReportAsByteArray" message="tns:IDSRouter_GetEventsReportAsByteArray_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetEventsReportAsByteArrayResponse" message="tns:IDSRouter_GetEventsReportAsByteArray_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTagsReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTagsReport" message="tns:IDSRouter_GetTagsReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTagsReportResponse" message="tns:IDSRouter_GetTagsReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTagsReportAsByteArray">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTagsReportAsByteArray" message="tns:IDSRouter_GetTagsReportAsByteArray_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTagsReportAsByteArrayResponse" message="tns:IDSRouter_GetTagsReportAsByteArray_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetDSValueAsByteBuffer">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetDSValueAsByteBuffer" message="tns:IDSRouter_GetDSValueAsByteBuffer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetDSValueAsByteBufferResponse" message="tns:IDSRouter_GetDSValueAsByteBuffer_OutputMessage" />
@@ -564,6 +682,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/CommandRun" message="tns:IDSRouter_CommandRun_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/CommandRunResponse" message="tns:IDSRouter_CommandRun_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CommandStateCheck">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/CommandStateCheck" message="tns:IDSRouter_CommandStateCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/CommandStateCheckResponse" message="tns:IDSRouter_CommandStateCheck_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetDocumentsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetDocumentsList" message="tns:IDSRouter_GetDocumentsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetDocumentsListResponse" message="tns:IDSRouter_GetDocumentsList_OutputMessage" />
@@ -618,6 +740,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/InverseDiscretTag" message="tns:IDSRouter_InverseDiscretTag_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/InverseDiscretTagResponse" message="tns:IDSRouter_InverseDiscretTag_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTagsListWithEnabledTrendSave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTagsListWithEnabledTrendSave" message="tns:IDSRouter_GetTagsListWithEnabledTrendSave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTagsListWithEnabledTrendSaveResponse" message="tns:IDSRouter_GetTagsListWithEnabledTrendSave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTrendDateTimeRanges">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDSRouter/GetTrendDateTimeRanges" message="tns:IDSRouter_GetTrendDateTimeRanges_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/GetTrendDateTimeRangesResponse" message="tns:IDSRouter_GetTrendDateTimeRanges_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NewErrorEvent">
       <wsdl:output wsaw:Action="http://tempuri.org/IDSRouter/NewErrorEvent" message="tns:IDSRouter_NewErrorEvent_OutputCallbackMessage" />
     </wsdl:operation>
@@ -634,6 +764,96 @@
   <wsdl:binding name="NetTcpBinding_IDSRouter" type="tns:IDSRouter">
     <wsp:PolicyReference URI="#NetTcpBinding_IDSRouter_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetTagTrend">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTagTrend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTagTrendsList">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTagTrendsList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrendSettings">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTrendSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTrendSettings">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/SetTrendSettings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyReport">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetDailyReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyReportAsByteArray">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetDailyReportAsByteArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsReport">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetEventsReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsReportAsByteArray">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetEventsReportAsByteArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTagsReport">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTagsReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTagsReportAsByteArray">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTagsReportAsByteArray" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetDSValueAsByteBuffer">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetDSValueAsByteBuffer" style="document" />
       <wsdl:input>
@@ -1045,6 +1265,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CommandStateCheck">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/CommandStateCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetDocumentsList">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetDocumentsList" style="document" />
       <wsdl:input>
@@ -1158,6 +1387,24 @@
     </wsdl:operation>
     <wsdl:operation name="InverseDiscretTag">
       <soap12:operation soapAction="http://tempuri.org/IDSRouter/InverseDiscretTag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTagsListWithEnabledTrendSave">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTagsListWithEnabledTrendSave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrendDateTimeRanges">
+      <soap12:operation soapAction="http://tempuri.org/IDSRouter/GetTrendDateTimeRanges" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

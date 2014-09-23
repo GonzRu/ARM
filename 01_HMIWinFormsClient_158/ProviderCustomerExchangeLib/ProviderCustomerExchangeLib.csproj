@@ -118,10 +118,16 @@
     <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DSRouterService\ProviderCustomerExchangeLib.DSRouterService.LstError.datasource">
