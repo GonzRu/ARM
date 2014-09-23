@@ -102,9 +102,7 @@ namespace ProviderCustomerExchangeLib.WCF
             try
             {
                 var endPointAddr = string.Format( "net.tcp://{0}:{1}/DSRouter.DSRouterService/DSRouterService.svc", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin );
-                var tcpBinding = new NetTcpBinding { TransactionFlow = false };
-                tcpBinding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
-                tcpBinding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
+                var tcpBinding = new NetTcpBinding();
                 tcpBinding.Security.Mode = SecurityMode.None;
                 tcpBinding.MaxReceivedMessageSize = int.MaxValue; // 150000000;
                 tcpBinding.MaxBufferSize = int.MaxValue; // 1500000;
