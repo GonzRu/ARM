@@ -548,7 +548,10 @@ namespace HMI_MT
             using (SqlConnection UserBDSqlConnection = new SqlConnection(HMI_Settings.ProviderPtkSql))
             {
                 SqlCommand sc = UserBDSqlConnection.CreateCommand();
-                sc.CommandText = "SELECT * FROM vUserLog WHERE LocalTime BETWEEN '" + tim_start.ToString() + "' AND '" + tim_end.ToString() + "' ORDER BY LocalTime DESC";
+                sc.CommandText = "SELECT * FROM vUserLog WHERE LocalTime BETWEEN @StartTime AND @EndTime ORDER BY LocalTime DESC";
+                sc.Parameters.AddWithValue("@StartTime", tim_start);
+                sc.Parameters.AddWithValue("@EndTime", tim_end);
+
                 SqlDataAdapter sda = new SqlDataAdapter(sc);
                 sda.Fill(dt);
             }
