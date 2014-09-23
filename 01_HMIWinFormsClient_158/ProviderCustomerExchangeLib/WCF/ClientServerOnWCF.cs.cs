@@ -391,7 +391,7 @@ namespace ProviderCustomerExchangeLib.WCF
             Console.WriteLine("Порция данных");
             foreach (KeyValuePair<string, DSRouterTagValue> kvp in tv)
                 if (kvp.Value.VarValueAsObject == null)
-                    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
+                    Console.WriteLine(string.Format("{0} : {1} {2}", kvp.Key, "null", (VarQualityNewDs)kvp.Value.VarQuality));
                 else
                     Console.WriteLine(string.Format("{0} : {1}  {2}  {3}", kvp.Key, kvp.Value.VarValueAsObject.ToString(), kvp.Value.VarValueAsObject.GetType(), (VarQualityNewDs)kvp.Value.VarQuality));
             #endif
