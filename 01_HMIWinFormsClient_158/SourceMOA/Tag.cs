@@ -37,6 +37,15 @@ namespace SourceMOA
 
         #endregion
 
+        #region Constructor
+
+        protected Tag()
+        {
+            SetDefaultValue();
+        }
+
+        #endregion
+
         #region Свойства
 
         /// <summary>
