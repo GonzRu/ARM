@@ -49,81 +49,81 @@ using NormalModeLibrary.Windows;
 
 namespace HMI_MT
 {
-	/// <summary>
-	/// Класс главной формы приложения HMI_MT
-	/// </summary>
-	public partial class MainForm : Form
-   {
-		#region public
+    /// <summary>
+    /// Класс главной формы приложения HMI_MT
+    /// </summary>
+    public partial class MainForm : Form
+    {
+        #region public
 
-		public Form Form_ez;
+        public Form Form_ez;
 
-		/// <summary>
-		/// признак текущей связи с БД
-		/// </summary>
-		public bool isBDConnection = true;
+        /// <summary>
+        /// признак текущей связи с БД
+        /// </summary>
+        public bool isBDConnection = true;
 
-		/// <summary>
-		/// признак текущей связи с БД
-		/// </summary>
-		public bool isFCConnection = true;
+        /// <summary>
+        /// признак текущей связи с БД
+        /// </summary>
+        public bool isFCConnection = true;
 
-		/// <summary>
-		/// признак входа в систему без БД
-		/// </summary>
-		public bool loginToArmWOBD = false;
+        /// <summary>
+        /// признак входа в систему без БД
+        /// </summary>
+        public bool loginToArmWOBD = false;
 
-		/// <summary>
-		/// признак записи в БД изменения состояния работы Logger'а
-		/// 0 - логгер работает в обычном режиме;
-		/// 1 - логгер прекратил работу - производим запись в журналы
-		/// 2 - логгер возобновил работу -  производим запись в журналы
-		/// </summary>
-		public int isWriteMesLoggerAliveToBD = 0;
+        /// <summary>
+        /// признак записи в БД изменения состояния работы Logger'а
+        /// 0 - логгер работает в обычном режиме;
+        /// 1 - логгер прекратил работу - производим запись в журналы
+        /// 2 - логгер возобновил работу -  производим запись в журналы
+        /// </summary>
+        public int isWriteMesLoggerAliveToBD = 0;
 
-		/// <summary>
-		/// массив форм для предотвращения повторного открытия
-		/// </summary>
-		public ArrayList arrFrm = new ArrayList();
+        /// <summary>
+        /// массив форм для предотвращения повторного открытия
+        /// </summary>
+        public ArrayList arrFrm = new ArrayList();
 
-		/// <summary>
-		/// времена и даты в разных форматах
-		/// </summary>
-		public string[] tsdt;
+        /// <summary>
+        /// времена и даты в разных форматах
+        /// </summary>
+        public string[] tsdt;
 
-		/// <summary>
-		/// файл журнала
-		/// </summary>
-		public string strLogFilename;
+        /// <summary>
+        /// файл журнала
+        /// </summary>
+        public string strLogFilename;
 
-		/// <summary>
-		/// класс для изменения элемента в статусной строке    
-		/// </summary>
-		public StatusBarLabel StatusBLabel;
+        /// <summary>
+        /// класс для изменения элемента в статусной строке    
+        /// </summary>
+        public StatusBarLabel StatusBLabel;
 
-    	public SYSTEMTIME systemTime;
-		/// <summary>
-		/// DataSet для перечня событий пользователя
-		/// </summary>
+        public SYSTEMTIME systemTime;
+        /// <summary>
+        /// DataSet для перечня событий пользователя
+        /// </summary>
         public DataSet aDS;
-		#endregion
+        #endregion
 
-		#region private
+        #region private
 
-	    private frmLogs Form_ev;
-	    private frmAutorization Form_ea;
+        private frmLogs Form_ev;
+        private frmAutorization Form_ea;
 
         bool bEnter;    // признак первоначального входа на главную форму
-	  
-		/// <summary>
-		/// ссылка на дерево логической конфигурации устройств
-		/// </summary>
-        TreeViewLogicalConfig tvlc;
-        
-		StringDictionary strDictionary = new StringDictionary(); // создание словаря для хранения перечня действий пользователя из БД;
 
-	    private Form formClock;
-		#endregion
+        /// <summary>
+        /// ссылка на дерево логической конфигурации устройств
+        /// </summary>
+        TreeViewLogicalConfig tvlc;
+
+        StringDictionary strDictionary = new StringDictionary(); // создание словаря для хранения перечня действий пользователя из БД;
+
+        private Form formClock;
+        #endregion
 
         #region к печати
         //Переменная для хранения текста для печати.
@@ -146,7 +146,7 @@ namespace HMI_MT
             InitializeComponent();
 
             try
-			{
+            {
                 this.DoubleBuffered = true;
                 CenterToScreen();       // центрирование формы
 
@@ -155,22 +155,22 @@ namespace HMI_MT
                 Cursor = Cursors.Default;//.Hand;
                 CheckForIllegalCrossThreadCalls = false;
 
-			    if (String.IsNullOrEmpty(HMI_Settings.AuraUrl))
-			        рАПСАураToolStripMenuItem.Visible = false;
+                if (String.IsNullOrEmpty(HMI_Settings.AuraUrl))
+                    рАПСАураToolStripMenuItem.Visible = false;
 
-			    режимРасширенногоВыводаИнформацииToolStripMenuItem.Checked = HMI_Settings.IsDebugMode;
-			}
-			catch(Exception ex)
-			{
-				TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-			}
+                режимРасширенногоВыводаИнформацииToolStripMenuItem.Checked = HMI_Settings.IsDebugMode;
+            }
+            catch (Exception ex)
+            {
+                TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
         }
         #endregion
 
         #region загрузка и активация формы
         private void MainForm_Load(object sender, EventArgs e)
         {
-			try
+            try
             {
                 HMI_Settings.Link2MainForm = this;
 
@@ -206,550 +206,551 @@ namespace HMI_MT
                                                        Settings.Default.SpeedAccessTreeViewWidth = scDeviceObjectConfig.Width;
                                                        Settings.Default.Save();
                                                    };
-                 
+
             }
-			catch(Exception ex)
-			{
-				TraceSourceDiagMes.WriteDiagnosticMSG(ex );
-			}
+            catch (Exception ex)
+            {
+                TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
         }
 
         /// <summary>
         /// реакция на потерю связи с DS
         /// </summary>
-      void CONFIGURATION_OnConfigDSCommunicationLoss4Client(bool state)
-      {
-          // * информация о связи с фк поступает от сервера как пакет типа 8, 
-          // * при его обработке устанавливаются признаки в классе фк для верхнего уровня
-          // * и мы ими здесь пользуемся для отображения, кроме этого эти признаки используются 
-          // * в функции Configurator.ReceivePacketInThread()
-          // */
+        void CONFIGURATION_OnConfigDSCommunicationLoss4Client(bool state)
+        {
+            // * информация о связи с фк поступает от сервера как пакет типа 8, 
+            // * при его обработке устанавливаются признаки в классе фк для верхнего уровня
+            // * и мы ими здесь пользуемся для отображения, кроме этого эти признаки используются 
+            // * в функции Configurator.ReceivePacketInThread()
+            // */
 
-          StringBuilder sbm_noConnection = new StringBuilder();
+            StringBuilder sbm_noConnection = new StringBuilder();
 
-          // формируем итоговое сообщение в строке статуса о состоянии фк    
-          if ( state )
-          {
-              sbm_noConnection.Append( "Нет связи с Сервером данных " );
-              LinkSetTextISB( sbConnectFC, sbm_noConnection.ToString(), Color.Yellow );
-              ResetSchemaStateProtocol();
-          }
-          else
-          {
-              LinkSetTextISB( sbConnectFC, "Есть связь с Сервером данных", sbMesIE.BackColor ); // для восстановления цвета взяли чужой фон
-          }
-      }
+            // формируем итоговое сообщение в строке статуса о состоянии фк    
+            if (state)
+            {
+                sbm_noConnection.Append("Нет связи с Сервером данных ");
+                LinkSetTextISB(sbConnectFC, sbm_noConnection.ToString(), Color.Yellow);
+                ResetSchemaStateProtocol();
+            }
+            else
+            {
+                LinkSetTextISB(sbConnectFC, "Есть связь с Сервером данных", sbMesIE.BackColor); // для восстановления цвета взяли чужой фон
+            }
+        }
 
-      #region Настройка БД
-      /// <summary>
-      /// формируем настройки на базу данных (из файла Project.cfg)
-      /// </summary>
-      private void InitSettingsToBD()
-      {
-         // подпишемся на изменение состояния связи с БД
-         DBConnectionControl dbcc = new DBConnectionControl(HMI_Settings.ProviderPtkSql);
-         dbcc.OnBDConnection += new BDConnection(dbcc_OnBDConnection);
-         dbcc.SetInterval(5000);
-         dbcc.StartControlConnection2BD();
-      }
+        #region Настройка БД
+        /// <summary>
+        /// формируем настройки на базу данных (из файла Project.cfg)
+        /// </summary>
+        private void InitSettingsToBD()
+        {
+            // подпишемся на изменение состояния связи с БД
+            DBConnectionControl dbcc = new DBConnectionControl(HMI_Settings.ProviderPtkSql);
+            dbcc.OnBDConnection += new BDConnection(dbcc_OnBDConnection);
+            dbcc.SetInterval(5000);
+            dbcc.StartControlConnection2BD();
+        }
 
-      void dbcc_OnBDConnection(bool state)
-      {
-          // формируем итоговое сообщение в строке статуса о состоянии фк    
-          if (!state)
-          {
-              LinkSetTextISB(sbConnectBD, "Нет связи с Базой данных ", Color.Yellow);
-          }
-          else
-              LinkSetTextISB(sbConnectBD, "Есть связь с Базой данных", sbMesIE.BackColor); // для восстановления цвета взяли чужой фон
-      }
-      #endregion Настройка БД
+        void dbcc_OnBDConnection(bool state)
+        {
+            // формируем итоговое сообщение в строке статуса о состоянии фк    
+            if (!state)
+            {
+                LinkSetTextISB(sbConnectBD, "Нет связи с Базой данных ", Color.Yellow);
+            }
+            else
+                LinkSetTextISB(sbConnectBD, "Есть связь с Базой данных", sbMesIE.BackColor); // для восстановления цвета взяли чужой фон
+        }
+        #endregion Настройка БД
 
 
-      /// <summary>
-      /// инициализировать название главного окна именем проекта
-      /// </summary>
-      private void SetTitleMainWindowByPrgName(){
-         // открываем файл проекта
-         string FILE_NAME = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "Project" + Path.DirectorySeparatorChar + "Project.cfg";
+        /// <summary>
+        /// инициализировать название главного окна именем проекта
+        /// </summary>
+        private void SetTitleMainWindowByPrgName()
+        {
+            // открываем файл проекта
+            string FILE_NAME = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "Project" + Path.DirectorySeparatorChar + "Project.cfg";
 
-         CommonUtils.CommonUtils.LoadXml(FILE_NAME);
+            CommonUtils.CommonUtils.LoadXml(FILE_NAME);
 
-         XmlTextReader reader = new XmlTextReader(FILE_NAME);
-         XmlDocument doc = new XmlDocument();
-         doc.Load(reader);
-         reader.Close();
+            XmlTextReader reader = new XmlTextReader(FILE_NAME);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+            reader.Close();
 
-         // выделим узел по условию
-         XmlNode oldCd;
-         XmlElement root = doc.DocumentElement;
+            // выделим узел по условию
+            XmlNode oldCd;
+            XmlElement root = doc.DocumentElement;
 
-         oldCd = root.SelectSingleNode("/Project/NamePTK");
-         this.Text = oldCd.InnerText.Trim();
+            oldCd = root.SelectSingleNode("/Project/NamePTK");
+            this.Text = oldCd.InnerText.Trim();
 
-         XDocument xdsb = XDocument.Load(FILE_NAME);
+            XDocument xdsb = XDocument.Load(FILE_NAME);
 
-         sbMesIE.Text = xdsb.Element("Project").Element("NamePTKStatusBar").Value;
-      }
+            sbMesIE.Text = xdsb.Element("Project").Element("NamePTKStatusBar").Value;
+        }
 
-      /// <summary>
-      /// инициализировать строку номером и датой сборки
-      /// </summary>
-      /// <param Name="strprop"></param>
-      private string SetAssemblyVertion()//ref string strprop
-      {
-         FileInfo fvi = new FileInfo(Application.ExecutablePath);
+        /// <summary>
+        /// инициализировать строку номером и датой сборки
+        /// </summary>
+        /// <param Name="strprop"></param>
+        private string SetAssemblyVertion()//ref string strprop
+        {
+            FileInfo fvi = new FileInfo(Application.ExecutablePath);
 
-         return sbMesIE.Text + " (сборка: " + Assembly.GetExecutingAssembly().GetName().Version + " от " + fvi.LastWriteTime.ToShortDateString() + ")";
-      }
+            return sbMesIE.Text + " (сборка: " + Assembly.GetExecutingAssembly().GetName().Version + " от " + fvi.LastWriteTime.ToShortDateString() + ")";
+        }
 
-      /// <summary>
-      /// установить размер и позицию главной формы
-      /// </summary>
-      private void SetPositionAndSizeForMainForm()
-      {
-		  this.Width = Screen.PrimaryScreen.WorkingArea.Width;//.Bounds.
-		  this.Height = Screen.PrimaryScreen.WorkingArea.Height;//.Bounds
+        /// <summary>
+        /// установить размер и позицию главной формы
+        /// </summary>
+        private void SetPositionAndSizeForMainForm()
+        {
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width;//.Bounds.
+            this.Height = Screen.PrimaryScreen.WorkingArea.Height;//.Bounds
 
-         this.Left = 0;
-         this.Top = 0;
-      }
+            this.Left = 0;
+            this.Top = 0;
+        }
 
-      private void MainForm_Shown(object sender, EventArgs e)
-      {
-         MainFormActivate();
-      }
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            MainFormActivate();
+        }
 
-      /// <summary>
-      /// Действия при активизации формы
-      /// </summary>
-      private void MainFormActivate()
-      {
-         if( bEnter )
-            return;
+        /// <summary>
+        /// Действия при активизации формы
+        /// </summary>
+        private void MainFormActivate()
+        {
+            if (bEnter)
+                return;
 
-         bEnter = true;  // значение при запуске
+            bEnter = true;  // значение при запуске
 
-         HMI_Settings.CurrentDateTime = DateTime.Now;
+            HMI_Settings.CurrentDateTime = DateTime.Now;
 
-         tsdt = HMI_Settings.CurrentDateTime.GetDateTimeFormats();
+            tsdt = HMI_Settings.CurrentDateTime.GetDateTimeFormats();
 
-         aDS = new DataSet("ptk"); // инициашизация DataSet
+            aDS = new DataSet("ptk"); // инициашизация DataSet
 
-         // проверка соединения с БД при входе в ситсему
+            // проверка соединения с БД при входе в ситсему
             TestAndTryConnectionBD();
 
-		  // инициализация класса GPS для получения инф о состоянии антенны GPS
+            // инициализация класса GPS для получения инф о состоянии антенны GPS
             //GPS gpsInfo = GPS.Iinstance;
             //gpsInfo.InitGPSInfo( HMI_Settings.PathToPrgDevCFG_cdp,HMI_Settings.PathPanelState_xml, Configurator.KB);
             //gpsInfo.OnChangeGPSActive+=new ChangeGPSActive(gpsInfo_OnChangeGPSActive);
-      }
+        }
 
-      #region проверка возможности соединения с БД и старт ПТК в нормальном или ограниченном режиме
-      /// <summary>
-      /// проверить возможность соединения с БД
-      /// с возможностью формирования и запоминания 
-      /// новой строки соединения
-      /// </summary>
-      private void TestAndTryConnectionBD()
-      {
-          if (IsConnectionWithBD())
-          {
-              StartInNormalMode();
-              return;
-          }
-
-          switch (MessageBox.Show("Соединение с БД отсутсвует. \nСистема будет запущена в режиме просмотра. \nПродолжить (Ok), Завершить работу (Отмена).", "Нет соединения с БД", MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1))
-          {
-              case DialogResult.OK:
-                  StartWithoutBD();
-                  break;
-              case DialogResult.Cancel:
-                  ExitWithoutAskDialog();
-                  break;
-              default:
-                  break;
-          }
-      }
-
-      /// <summary>
-      /// проверка соединения с БД при входе в систему
-      /// </summary>
-      /// <returns></returns>
-      private bool IsConnectionWithBD()
-      {
-          DebugStatistics.WindowStatistics.AddStatistic( "Проверка связи с базой данных." );
-
-          // получение строк соединения и поставщика данных из файла *.config
-          SqlConnection asqlconnect = new SqlConnection(HMI_Settings.ProviderPtkSql);
-          try
-          {
-              asqlconnect.Open();
-          }
-          catch (SqlException ex)
-          {
-              string errorMes = "";
-              // интеграция всех возвращаемых ошибок
-              foreach (SqlError connectError in ex.Errors)
-                  errorMes += connectError.Message + " (ощибка: " + connectError.Number.ToString() + ") ";
-              MessageBox.Show("Нет связи с БД (при запуске АРМ)" + errorMes, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-             CommonUtils.CommonUtils.WriteEventToLog(21, "Нет связи с БД (при запуске АРМ)" + errorMes, false);//, true, false ); // событие нет связи с БД
-
-              asqlconnect.Close();
-
-              DebugStatistics.WindowStatistics.AddStatistic( "Проверка связи с базой данных завершено." );
-
-              return false;
-          }
-          catch (Exception ex)
-          {
-              asqlconnect.Close();
-
-              MessageBox.Show("Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
-              CommonUtils.CommonUtils.WriteEventToLog(21, "Нет связи с БД (при запуске АРМ): " + ex.Message, false);
-
-              DebugStatistics.WindowStatistics.AddStatistic( "Проверка связи с базой данных завершено." );
-
-              return false;
-          }
-
-          DebugStatistics.WindowStatistics.AddStatistic( "Проверка связи с базой данных завершено." );
-
-          return true;
-      }
-
-      /// <summary>
-      /// читаем перечень событий пользователя
-      /// </summary>
-      private void GetUserAction()
-      {
-          DebugStatistics.WindowStatistics.AddStatistic( "Чтение данных о пользователях." );
-
-          DataBaseReq dbs = new DataBaseReq(HMI_Settings.ProviderPtkSql, "UserAction~Show");
-
-          // запоминаем в StringDictionary
-          DataTable dt = new DataTable();
-          try
-          {
-              dt = dbs.GetTableAsResultCMD();
-          }
-          catch (Exception ex)
-          {
-              string errMes = ex.Message;
-              errMes += "\nЭто исключение возможно в случае когда пользователь базе есть, но права чтения/записи и owner ему не назначены.)\n Приложение будет завершено.";
-              MessageBox.Show(errMes, this.Name, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-
-              Process.GetCurrentProcess().Kill();
-          }
-
-          dbs.CloseConnection();
-
-          for (int curRow = 0; curRow < dt.Rows.Count; curRow++)
-              strDictionary.Add((dt.Rows[curRow]["Id"]).ToString(), dt.Rows[curRow]["ActionName"].ToString());
-
-          DebugStatistics.WindowStatistics.AddStatistic( "Чтение данных о пользователях завершено." );
-      }
-
-      /// <summary>
-      /// Запрос логина для входа в систему
-      /// </summary>
-      private void GetLogin()
-      {
-          DebugStatistics.WindowStatistics.AddStatistic( "Подготовка к запросу логин\\пароля." );
-
-          Form_ea = new frmAutorization(this, Target.EnterToSystem);
-          Form_ea.TopMost = false;
-
-          if (HMI_Settings.isNeedLoginAndPassword)
-          {
-              while ((DialogResult = Form_ea.ShowDialog()) != DialogResult.OK)
-              {
-                  ExitWithAskDialog();
-              }
-          }
-          else
-          {
-              HMI_MT_Settings.HMI_Settings.UserName = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("IsNeedLoginAndPassword").Attribute("nameDefault").Value;
-              HMI_MT_Settings.HMI_Settings.UserPassword = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("IsNeedLoginAndPassword").Attribute("passDefault").Value;
-              Form_ea.DoEnterWithoutPassword(HMI_MT_Settings.HMI_Settings.UserName, HMI_MT_Settings.HMI_Settings.UserPassword);
-          }
-
-          NewUserLoged();
-      }
-
-      /// <summary>
-      /// старт системы в нормальном режиме
-      /// </summary>
-      private void StartInNormalMode()
-      {
-          DebugStatistics.WindowStatistics.AddStatistic( "Старт системы." );
-
-          // читаем перечень событий пользователя
-          GetUserAction();
-
-          // запрашиваем логин
-          GetLogin();
-
-          // создаем главную мнемосхему
-          //AddOwnedForm(frmSpScr);
-          //frmSpScr.Show();
-          Application.DoEvents();
-
-          DebugStatistics.WindowStatistics.AddStatistic( "Формирование левой панели и физической конфигурации." );
-          // формируем левую панель логической и физической конфигурации устройств и проекта
-          StartForm();
-          DebugStatistics.WindowStatistics.AddStatistic( "Формирование левой панели и физической конфигурации завершено." );
-
-          CreateMainMnemo();
-
-          // событие начала нормальной работы
-          CommonUtils.CommonUtils.WriteEventToLog(1, "", true);
-      }
-
-      /// <summary>
-      /// старт системы в ограниченном режиме
-      /// </summary>
-      private void StartWithoutBD()
-      {
-          DebugStatistics.WindowStatistics.AddStatistic( "Старт системы с ограничениями." );
-
-          isBDConnection = false;
-
-          LinkSetTextISB(sbConnectBD, "Нет связи с БД", Color.Yellow);
-
-          // событие начала работы без БД
-          CommonUtils.CommonUtils.WriteEventToLog(1, "Вход в систему без БД",  false);
-
-          loginToArmWOBD = true;	// устанавливаем признак входа в систему без БД
-
-          // права
-          HMI_Settings.UserRight = "11111111111111111111111111111111";
-      }
-      #endregion
-
-      /// <summary>
-      /// заполнение панели слева - деревья конфигурации устройств
-      /// </summary>
-      void StartForm()
-      {
-          // заполним дерево конфигурации устройств
-          TreeViewConfig tvc = new TreeViewConfig(tvDevConfig, null, this);//KB
-
-          // заполним дерево логической конфигурации устройств
-          tvlc = new TreeViewLogicalConfig(tvLogicalObjectsConfig, this);
-      }
-      #endregion
-
-      #region Работа с формой
-      /// <summary>
-      /// реакция на изменение размеров окна
-      /// </summary>
-      /// <param Name="sender"></param>
-      /// <param Name="e"></param>
-      private void MainForm_ResizeEnd(object sender, EventArgs e)
-		{
-			double dT = Convert.ToDouble(this.Width);
-			double scale = dT / 1024;
-			dT = scale * 768;
-			this.Height = Convert.ToInt32(dT);
-
-			if (this.Width < 1024 | this.Height < 768)
-			{
-				this.Width = 1024;
-				this.Height = 768;
-			}
-      }
-
-      private void MainForm_MdiChildActivate( object sender, EventArgs e )
-      {
-         if (!HMI_Settings.IsShowTabForms)
-         {
-            tabForms.Visible = false;
-            return;
-         }
-
-         if (this.ActiveMdiChild == null)
-            tabForms.Visible = false; // If no any child form, hide tabControl
-         else
-         {
-            this.ActiveMdiChild.WindowState = FormWindowState.Maximized; // Child form always maximized
-
-            // If child form is new and no has tabPage, create new tabPage
-            if (this.ActiveMdiChild.Tag == null)
+        #region проверка возможности соединения с БД и старт ПТК в нормальном или ограниченном режиме
+        /// <summary>
+        /// проверить возможность соединения с БД
+        /// с возможностью формирования и запоминания 
+        /// новой строки соединения
+        /// </summary>
+        private void TestAndTryConnectionBD()
+        {
+            if (IsConnectionWithBD())
             {
-               // Add a tabPage to tabControl with child form caption
-               TabPage tp = new TabPage( this.ActiveMdiChild.Text );
-               tp.Tag = this.ActiveMdiChild;
-               tp.Parent = tabForms;
-               tabForms.SelectedTab = tp;
+                StartInNormalMode();
+                return;
+            }
 
-               if ( this.ClientRectangle.Height < ActiveMdiChild.Bounds.Height )
-                  ActiveMdiChild.Height = this.ClientRectangle.Height;
+            switch (MessageBox.Show("Соединение с БД отсутсвует. \nСистема будет запущена в режиме просмотра. \nПродолжить (Ok), Завершить работу (Отмена).", "Нет соединения с БД", MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1))
+            {
+                case DialogResult.OK:
+                    StartWithoutBD();
+                    break;
+                case DialogResult.Cancel:
+                    ExitWithoutAskDialog();
+                    break;
+                default:
+                    break;
+            }
+        }
 
-               this.ActiveMdiChild.Tag = tp;
-               this.ActiveMdiChild.FormClosed += new FormClosedEventHandler( ActiveMdiChild_FormClosed );
+        /// <summary>
+        /// проверка соединения с БД при входе в систему
+        /// </summary>
+        /// <returns></returns>
+        private bool IsConnectionWithBD()
+        {
+            DebugStatistics.WindowStatistics.AddStatistic("Проверка связи с базой данных.");
+
+            // получение строк соединения и поставщика данных из файла *.config
+            SqlConnection asqlconnect = new SqlConnection(HMI_Settings.ProviderPtkSql);
+            try
+            {
+                asqlconnect.Open();
+            }
+            catch (SqlException ex)
+            {
+                string errorMes = "";
+                // интеграция всех возвращаемых ошибок
+                foreach (SqlError connectError in ex.Errors)
+                    errorMes += connectError.Message + " (ощибка: " + connectError.Number.ToString() + ") ";
+                MessageBox.Show("Нет связи с БД (при запуске АРМ)" + errorMes, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CommonUtils.CommonUtils.WriteEventToLog(21, "Нет связи с БД (при запуске АРМ)" + errorMes, false);//, true, false ); // событие нет связи с БД
+
+                asqlconnect.Close();
+
+                DebugStatistics.WindowStatistics.AddStatistic("Проверка связи с базой данных завершено.");
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                asqlconnect.Close();
+
+                MessageBox.Show("Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CommonUtils.CommonUtils.WriteEventToLog(21, "Нет связи с БД (при запуске АРМ): " + ex.Message, false);
+
+                DebugStatistics.WindowStatistics.AddStatistic("Проверка связи с базой данных завершено.");
+
+                return false;
+            }
+
+            DebugStatistics.WindowStatistics.AddStatistic("Проверка связи с базой данных завершено.");
+
+            return true;
+        }
+
+        /// <summary>
+        /// читаем перечень событий пользователя
+        /// </summary>
+        private void GetUserAction()
+        {
+            DebugStatistics.WindowStatistics.AddStatistic("Чтение данных о пользователях.");
+
+            DataBaseReq dbs = new DataBaseReq(HMI_Settings.ProviderPtkSql, "UserAction~Show");
+
+            // запоминаем в StringDictionary
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = dbs.GetTableAsResultCMD();
+            }
+            catch (Exception ex)
+            {
+                string errMes = ex.Message;
+                errMes += "\nЭто исключение возможно в случае когда пользователь базе есть, но права чтения/записи и owner ему не назначены.)\n Приложение будет завершено.";
+                MessageBox.Show(errMes, this.Name, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+
+                Process.GetCurrentProcess().Kill();
+            }
+
+            dbs.CloseConnection();
+
+            for (int curRow = 0; curRow < dt.Rows.Count; curRow++)
+                strDictionary.Add((dt.Rows[curRow]["Id"]).ToString(), dt.Rows[curRow]["ActionName"].ToString());
+
+            DebugStatistics.WindowStatistics.AddStatistic("Чтение данных о пользователях завершено.");
+        }
+
+        /// <summary>
+        /// Запрос логина для входа в систему
+        /// </summary>
+        private void GetLogin()
+        {
+            DebugStatistics.WindowStatistics.AddStatistic("Подготовка к запросу логин\\пароля.");
+
+            Form_ea = new frmAutorization(this, Target.EnterToSystem);
+            Form_ea.TopMost = false;
+
+            if (HMI_Settings.isNeedLoginAndPassword)
+            {
+                while ((DialogResult = Form_ea.ShowDialog()) != DialogResult.OK)
+                {
+                    ExitWithAskDialog();
+                }
             }
             else
             {
-               for (int i = 0; i < tabForms.TabPages.Count; i++)
-               {
-                  TabPage tpp = tabForms.TabPages[i];
-                  if (tpp.Tag == this.ActiveMdiChild)
-                  {
-                     tabForms.SelectedTab = tpp;
-                     //tpp.Select();
-                     break;
-                  }
-               }
+                HMI_MT_Settings.HMI_Settings.UserName = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("IsNeedLoginAndPassword").Attribute("nameDefault").Value;
+                HMI_MT_Settings.HMI_Settings.UserPassword = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("IsNeedLoginAndPassword").Attribute("passDefault").Value;
+                Form_ea.DoEnterWithoutPassword(HMI_MT_Settings.HMI_Settings.UserName, HMI_MT_Settings.HMI_Settings.UserPassword);
             }
 
-            if (!tabForms.Visible)
-               tabForms.Visible = true;
-         }
-      }
-      // If child form closed, remove tabPage
-      private void ActiveMdiChild_FormClosed( object sender, FormClosedEventArgs e )
-      {
-         ( ( sender as Form ).Tag as TabPage ).Dispose( );
-      }
+            NewUserLoged();
+        }
 
-      private void tabForms_SelectedIndexChanged( object sender, EventArgs e )
-      {
-         //if (( tabForms.SelectedTab != null ) && ( tabForms.SelectedTab.Tag != null ))
-         //   ( tabForms.SelectedTab.Tag as Form ).Select( );
+        /// <summary>
+        /// старт системы в нормальном режиме
+        /// </summary>
+        private void StartInNormalMode()
+        {
+            DebugStatistics.WindowStatistics.AddStatistic("Старт системы.");
 
-         // спрячем/покажем подчиненные окна
-         for( int i = 0 ; i < tabForms.TabPages.Count ; i++ )
-         {
-            TabPage tp = tabForms.TabPages [ i ];
-            foreach( Form frowned in ( tp.Tag as Form as Form ).OwnedForms )
-               frowned.Hide();
-         }
+            // читаем перечень событий пользователя
+            GetUserAction();
 
-         if( ( tabForms.SelectedTab != null ) && ( tabForms.SelectedTab.Tag != null ) )
-         {
-            ( tabForms.SelectedTab.Tag as Form ).Select();
-            foreach (Form frowned in (tabForms.SelectedTab.Tag as Form).OwnedForms)
+            // запрашиваем логин
+            GetLogin();
+
+            // создаем главную мнемосхему
+            //AddOwnedForm(frmSpScr);
+            //frmSpScr.Show();
+            Application.DoEvents();
+
+            DebugStatistics.WindowStatistics.AddStatistic("Формирование левой панели и физической конфигурации.");
+            // формируем левую панель логической и физической конфигурации устройств и проекта
+            StartForm();
+            DebugStatistics.WindowStatistics.AddStatistic("Формирование левой панели и физической конфигурации завершено.");
+
+            CreateMainMnemo();
+
+            // событие начала нормальной работы
+            CommonUtils.CommonUtils.WriteEventToLog(1, "", true);
+        }
+
+        /// <summary>
+        /// старт системы в ограниченном режиме
+        /// </summary>
+        private void StartWithoutBD()
+        {
+            DebugStatistics.WindowStatistics.AddStatistic("Старт системы с ограничениями.");
+
+            isBDConnection = false;
+
+            LinkSetTextISB(sbConnectBD, "Нет связи с БД", Color.Yellow);
+
+            // событие начала работы без БД
+            CommonUtils.CommonUtils.WriteEventToLog(1, "Вход в систему без БД", false);
+
+            loginToArmWOBD = true;	// устанавливаем признак входа в систему без БД
+
+            // права
+            HMI_Settings.UserRight = "11111111111111111111111111111111";
+        }
+        #endregion
+
+        /// <summary>
+        /// заполнение панели слева - деревья конфигурации устройств
+        /// </summary>
+        void StartForm()
+        {
+            // заполним дерево конфигурации устройств
+            TreeViewConfig tvc = new TreeViewConfig(tvDevConfig, null, this);//KB
+
+            // заполним дерево логической конфигурации устройств
+            tvlc = new TreeViewLogicalConfig(tvLogicalObjectsConfig, this);
+        }
+        #endregion
+
+        #region Работа с формой
+        /// <summary>
+        /// реакция на изменение размеров окна
+        /// </summary>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            double dT = Convert.ToDouble(this.Width);
+            double scale = dT / 1024;
+            dT = scale * 768;
+            this.Height = Convert.ToInt32(dT);
+
+            if (this.Width < 1024 | this.Height < 768)
             {
-                var viewWindow = frowned as ViewWindow;
-                if (viewWindow != null)
-                    viewWindow.ShowIfNeed();
+                this.Width = 1024;
+                this.Height = 768;
+            }
+        }
+
+        private void MainForm_MdiChildActivate(object sender, EventArgs e)
+        {
+            if (!HMI_Settings.IsShowTabForms)
+            {
+                tabForms.Visible = false;
+                return;
+            }
+
+            if (this.ActiveMdiChild == null)
+                tabForms.Visible = false; // If no any child form, hide tabControl
+            else
+            {
+                this.ActiveMdiChild.WindowState = FormWindowState.Maximized; // Child form always maximized
+
+                // If child form is new and no has tabPage, create new tabPage
+                if (this.ActiveMdiChild.Tag == null)
+                {
+                    // Add a tabPage to tabControl with child form caption
+                    TabPage tp = new TabPage(this.ActiveMdiChild.Text);
+                    tp.Tag = this.ActiveMdiChild;
+                    tp.Parent = tabForms;
+                    tabForms.SelectedTab = tp;
+
+                    if (this.ClientRectangle.Height < ActiveMdiChild.Bounds.Height)
+                        ActiveMdiChild.Height = this.ClientRectangle.Height;
+
+                    this.ActiveMdiChild.Tag = tp;
+                    this.ActiveMdiChild.FormClosed += new FormClosedEventHandler(ActiveMdiChild_FormClosed);
+                }
                 else
-                    frowned.Show();
+                {
+                    for (int i = 0; i < tabForms.TabPages.Count; i++)
+                    {
+                        TabPage tpp = tabForms.TabPages[i];
+                        if (tpp.Tag == this.ActiveMdiChild)
+                        {
+                            tabForms.SelectedTab = tpp;
+                            //tpp.Select();
+                            break;
+                        }
+                    }
+                }
+
+                if (!tabForms.Visible)
+                    tabForms.Visible = true;
             }
-         }
-      }
-      #endregion
+        }
+        // If child form closed, remove tabPage
+        private void ActiveMdiChild_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((sender as Form).Tag as TabPage).Dispose();
+        }
 
-      #region пункты главного меню
-      #region Печать
-      private void printDocument1_PrintPage( object sender, System.Drawing.Printing.PrintPageEventArgs e )
-      {
-         //Создаем экземпляр graph класса Graphics
-         Graphics graph = e.Graphics;
-         //Создаем объект font, которому устанавливаем 
-         // шрифт элемента rtbText
-         //Font font = rtbText.Font;
-         //Получаем значение межстрочного интервала - высоту шрифта Т1, 134
-         float HeightFont = font.GetHeight( graph );
-         //Создаем экземпляр stringformat класса StringFormat для определения 
-         //дополнительных параметров форматирования текста.
-         StringFormat stringformat = new StringFormat( );
-         //Создаем экземляры  rectanglefFull и rectanglefText класса RectangleF для 
-         //определния областей печати и текста. Т1, 104
-         RectangleF rectanglefFull, rectanglefText;
-         //Создаем переменные для подсчета числа символов и строк.
-         int NumberSymbols, NumberLines;
-         //В качестве области печати устанавливаем объект rectanglefFull
-         if (graph.VisibleClipBounds.X < 0) rectanglefFull = e.MarginBounds;
-         else
-            //Определяем   объект  rectanglefFull
-            rectanglefFull = new RectangleF(
-               //Устанавливаем координату  X  
-                e.MarginBounds.Left - ( e.PageBounds.Width - graph.VisibleClipBounds.Width ) / 2,
-               //Устанавливаем координату  Y
-                e.MarginBounds.Top - ( e.PageBounds.Height - graph.VisibleClipBounds.Height ) / 2,
-               //Устанавливаем ширину области
-                e.MarginBounds.Width,
-               //Устанавливаем высоту области
-                e.MarginBounds.Height );
-         rectanglefText = RectangleF.Inflate( rectanglefFull, 0, -2 * HeightFont );
-         //Определяем число строк
-         int NumDisplayLines = ( int )Math.Floor( rectanglefText.Height / HeightFont );
-         //Устанавливаем высоту области
-         rectanglefText.Height = NumDisplayLines * HeightFont;
+        private void tabForms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (( tabForms.SelectedTab != null ) && ( tabForms.SelectedTab.Tag != null ))
+            //   ( tabForms.SelectedTab.Tag as Form ).Select( );
 
-         if (prt.rtbText.WordWrap)
-         {
-            stringformat.Trimming = StringTrimming.Word;
-         }
-         else
-         {
-            stringformat.Trimming = StringTrimming.EllipsisCharacter;
-            stringformat.FormatFlags |= StringFormatFlags.NoWrap;
-         }
-         //При печати выбранных страниц переходим к первой стартовой странице
-         while (( PageNumber < StartPage ) && ( stringPrintText.Length > 0 ))
-         {
-            if (prt.rtbText.WordWrap)
-               //Измеряем текстовые переменные, 
-               //формирующие печать,  и возвращаем число символов NumberSymbols
-               //и число строк NumberLines
-               graph.MeasureString( stringPrintText, font, rectanglefText.Size, stringformat, out NumberSymbols, out NumberLines );
+            // спрячем/покажем подчиненные окна
+            for (int i = 0; i < tabForms.TabPages.Count; i++)
+            {
+                TabPage tp = tabForms.TabPages[i];
+                foreach (Form frowned in (tp.Tag as Form as Form).OwnedForms)
+                    frowned.Hide();
+            }
+
+            if ((tabForms.SelectedTab != null) && (tabForms.SelectedTab.Tag != null))
+            {
+                (tabForms.SelectedTab.Tag as Form).Select();
+                foreach (Form frowned in (tabForms.SelectedTab.Tag as Form).OwnedForms)
+                {
+                    var viewWindow = frowned as ViewWindow;
+                    if (viewWindow != null)
+                        viewWindow.ShowIfNeed();
+                    else
+                        frowned.Show();
+                }
+            }
+        }
+        #endregion
+
+        #region пункты главного меню
+        #region Печать
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            //Создаем экземпляр graph класса Graphics
+            Graphics graph = e.Graphics;
+            //Создаем объект font, которому устанавливаем 
+            // шрифт элемента rtbText
+            //Font font = rtbText.Font;
+            //Получаем значение межстрочного интервала - высоту шрифта Т1, 134
+            float HeightFont = font.GetHeight(graph);
+            //Создаем экземпляр stringformat класса StringFormat для определения 
+            //дополнительных параметров форматирования текста.
+            StringFormat stringformat = new StringFormat();
+            //Создаем экземляры  rectanglefFull и rectanglefText класса RectangleF для 
+            //определния областей печати и текста. Т1, 104
+            RectangleF rectanglefFull, rectanglefText;
+            //Создаем переменные для подсчета числа символов и строк.
+            int NumberSymbols, NumberLines;
+            //В качестве области печати устанавливаем объект rectanglefFull
+            if (graph.VisibleClipBounds.X < 0) rectanglefFull = e.MarginBounds;
             else
-               NumberSymbols = SymbolsInLines( stringPrintText, NumDisplayLines );
-            stringPrintText = stringPrintText.Substring( NumberSymbols );
-            //Увеличиваем число страниц 
-            PageNumber++;
-         }
-         //Если длина строки stringPrintText равняется нулю (нет текста для печати),
-         // Останавливаем печать
-         if (stringPrintText.Length == 0)
-         {
-            e.Cancel = true;
-            return;
-         }
-         //Выводим (рисуем) текст для печати - stringPrintText, используем для этого шрифт font,
-         //кисть черного цвета  - Brushes.Black, область печати - rectanglefText,
-         //передаем строку  дополнительного форматирования stringformat
-         graph.DrawString( stringPrintText, font, Brushes.Black, rectanglefText, stringformat );
-         //Получаем текст для следующей страницы
-         if (prt.rtbText.WordWrap)
-            graph.MeasureString( stringPrintText, font, rectanglefText.Size, stringformat, out NumberSymbols, out NumberLines );
-         else
-            NumberSymbols = SymbolsInLines( stringPrintText, NumDisplayLines );
-         stringPrintText = stringPrintText.Substring( NumberSymbols );
-         //Очищаем объект stringformat, использованный для формирования полей.
-         stringformat = new StringFormat( );
-         //Добавляем  вывод на каждую страницу ее номер
-         stringformat.Alignment = StringAlignment.Far;
-         graph.DrawString( "Страница " + PageNumber, font, Brushes.Black, rectanglefFull, stringformat );
-         PageNumber++;
-         //Cнова проверяем, имеется ли текст для печати и номер страницы, заданной для печати
-         e.HasMorePages = ( stringPrintText.Length > 0 ) && ( PageNumber < StartPage + NumPages );
-         //Для печати из окна предварительного просмотра  снова инициализируем переменные
-         if (!e.HasMorePages)
-         {
-            stringPrintText = prt.rtbText.Text;
-            StartPage = 1;
-            NumPages = printDialog1.PrinterSettings.MaximumPage;
-            PageNumber = 1;
-         }
-      }
+                //Определяем   объект  rectanglefFull
+                rectanglefFull = new RectangleF(
+                    //Устанавливаем координату  X  
+                    e.MarginBounds.Left - (e.PageBounds.Width - graph.VisibleClipBounds.Width) / 2,
+                    //Устанавливаем координату  Y
+                    e.MarginBounds.Top - (e.PageBounds.Height - graph.VisibleClipBounds.Height) / 2,
+                    //Устанавливаем ширину области
+                    e.MarginBounds.Width,
+                    //Устанавливаем высоту области
+                    e.MarginBounds.Height);
+            rectanglefText = RectangleF.Inflate(rectanglefFull, 0, -2 * HeightFont);
+            //Определяем число строк
+            int NumDisplayLines = (int)Math.Floor(rectanglefText.Height / HeightFont);
+            //Устанавливаем высоту области
+            rectanglefText.Height = NumDisplayLines * HeightFont;
 
-      int SymbolsInLines( string stringPrintText, int NumLines )
+            if (prt.rtbText.WordWrap)
+            {
+                stringformat.Trimming = StringTrimming.Word;
+            }
+            else
+            {
+                stringformat.Trimming = StringTrimming.EllipsisCharacter;
+                stringformat.FormatFlags |= StringFormatFlags.NoWrap;
+            }
+            //При печати выбранных страниц переходим к первой стартовой странице
+            while ((PageNumber < StartPage) && (stringPrintText.Length > 0))
+            {
+                if (prt.rtbText.WordWrap)
+                    //Измеряем текстовые переменные, 
+                    //формирующие печать,  и возвращаем число символов NumberSymbols
+                    //и число строк NumberLines
+                    graph.MeasureString(stringPrintText, font, rectanglefText.Size, stringformat, out NumberSymbols, out NumberLines);
+                else
+                    NumberSymbols = SymbolsInLines(stringPrintText, NumDisplayLines);
+                stringPrintText = stringPrintText.Substring(NumberSymbols);
+                //Увеличиваем число страниц 
+                PageNumber++;
+            }
+            //Если длина строки stringPrintText равняется нулю (нет текста для печати),
+            // Останавливаем печать
+            if (stringPrintText.Length == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+            //Выводим (рисуем) текст для печати - stringPrintText, используем для этого шрифт font,
+            //кисть черного цвета  - Brushes.Black, область печати - rectanglefText,
+            //передаем строку  дополнительного форматирования stringformat
+            graph.DrawString(stringPrintText, font, Brushes.Black, rectanglefText, stringformat);
+            //Получаем текст для следующей страницы
+            if (prt.rtbText.WordWrap)
+                graph.MeasureString(stringPrintText, font, rectanglefText.Size, stringformat, out NumberSymbols, out NumberLines);
+            else
+                NumberSymbols = SymbolsInLines(stringPrintText, NumDisplayLines);
+            stringPrintText = stringPrintText.Substring(NumberSymbols);
+            //Очищаем объект stringformat, использованный для формирования полей.
+            stringformat = new StringFormat();
+            //Добавляем  вывод на каждую страницу ее номер
+            stringformat.Alignment = StringAlignment.Far;
+            graph.DrawString("Страница " + PageNumber, font, Brushes.Black, rectanglefFull, stringformat);
+            PageNumber++;
+            //Cнова проверяем, имеется ли текст для печати и номер страницы, заданной для печати
+            e.HasMorePages = (stringPrintText.Length > 0) && (PageNumber < StartPage + NumPages);
+            //Для печати из окна предварительного просмотра  снова инициализируем переменные
+            if (!e.HasMorePages)
+            {
+                stringPrintText = prt.rtbText.Text;
+                StartPage = 1;
+                NumPages = printDialog1.PrinterSettings.MaximumPage;
+                PageNumber = 1;
+            }
+        }
+
+        int SymbolsInLines(string stringPrintText, int NumLines)
         {
             int index = 0;
-            for( int i = 0; i < NumLines; i++ )
+            for (int i = 0; i < NumLines; i++)
             {
-                index = 1 + stringPrintText.IndexOf( '\n', index );
-                if( index == 0 )
+                index = 1 + stringPrintText.IndexOf('\n', index);
+                if (index == 0)
                     return stringPrintText.Length;
             }
             return index;
         }
-      #endregion
-      #endregion
+        #endregion
+        #endregion
 
         #region выход из приложения
 
@@ -786,8 +787,8 @@ namespace HMI_MT
         /// </summary>
         /// <param Name="sender"></param>
         /// <param Name="e"></param>
-		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
-		{
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             ExitWithAskDialog();
         }
 
@@ -801,166 +802,166 @@ namespace HMI_MT
             ExitWithAskDialog();
         }
 
-      private void CloseNetManager()
-      {
-         #region убиваем сетевой манеджер
-         // вначале определим что в данном сеансе является поставщиком данных - локальный DataServer или
-         // сетевой клиент
-         string nameprc = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("SystemDescribe").Attribute("pipeEXEname").Value;
+        private void CloseNetManager()
+        {
+            #region убиваем сетевой манеджер
+            // вначале определим что в данном сеансе является поставщиком данных - локальный DataServer или
+            // сетевой клиент
+            string nameprc = HMI_Settings.XDoc4PathToPrjFile.Element("Project").Element("SystemDescribe").Attribute("pipeEXEname").Value;
 
-         if (!String.IsNullOrEmpty(nameprc))
-         {
-            Process[] prmans;
+            if (!String.IsNullOrEmpty(nameprc))
+            {
+                Process[] prmans;
 
-            prmans = Process.GetProcessesByName(nameprc);
+                prmans = Process.GetProcessesByName(nameprc);
 
-            foreach (Process pr in prmans)
-               pr.Kill();
+                foreach (Process pr in prmans)
+                    pr.Kill();
 
-            prmans = Process.GetProcessesByName(nameprc + ".vshost");
+                prmans = Process.GetProcessesByName(nameprc + ".vshost");
 
-            foreach (Process pr in prmans)
-               pr.Kill();
+                foreach (Process pr in prmans)
+                    pr.Kill();
 
-            Thread.Sleep(2000);
-         }
-         #endregion
-      }
+                Thread.Sleep(2000);
+            }
+            #endregion
+        }
 
-      private void DoExit()
-      {
-         // сохраняем профайл пользователя
-         // готовим таблицы для запоминания профайла пользователя
-         // ...
+        private void DoExit()
+        {
+            // сохраняем профайл пользователя
+            // готовим таблицы для запоминания профайла пользователя
+            // ...
 
-		  try
-		  {
-			  // закрываем все дочерние окна
-			  Form[] arrF = this.MdiChildren;
-			  for (int i = 0; i < arrF.Length; i++)
-				  arrF[i].Close();
+            try
+            {
+                // закрываем все дочерние окна
+                Form[] arrF = this.MdiChildren;
+                for (int i = 0; i < arrF.Length; i++)
+                    arrF[i].Close();
 
-			  // сериализуем и сохраняем DataSet в файле - профайле пользователя
-			  //DSProfile.WriteXml(Application.StartupPath + Path.DirectorySeparatorChar + "UserProfile_" + UserName + ".upf", XmlWriteMode.IgnoreSchema);
+                // сериализуем и сохраняем DataSet в файле - профайле пользователя
+                //DSProfile.WriteXml(Application.StartupPath + Path.DirectorySeparatorChar + "UserProfile_" + UserName + ".upf", XmlWriteMode.IgnoreSchema);
 
-			  #region закрываем логи трассировки
-			  TraceSourceLib.TraceSourceDiagMes.CloseLog();
-			  #endregion
+                #region закрываем логи трассировки
+                TraceSourceLib.TraceSourceDiagMes.CloseLog();
+                #endregion
 
-			  CloseNetManager();
+                CloseNetManager();
 
-			  // закрываем экземпляр pipe-клиента
-              //HMI_Settings.ClientDFE.Close();
-		  }
-		  catch (Exception ex)
-		  {
-			  TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-		  }
-		  finally 
-		  {
-			  TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 1657, DateTime.Now.ToString() + " : (1657)MainForm.cs : DoExit() : Выход из приложения");
-			  TraceSourceLib.TraceSourceDiagMes.FlushLog();
+                // закрываем экземпляр pipe-клиента
+                //HMI_Settings.ClientDFE.Close();
+            }
+            catch (Exception ex)
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
+            }
+            finally
+            {
+                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 1657, DateTime.Now.ToString() + " : (1657)MainForm.cs : DoExit() : Выход из приложения");
+                TraceSourceLib.TraceSourceDiagMes.FlushLog();
 
-			  // убиваемся об стену
-			  Process.GetCurrentProcess().Kill();
-		  }
-      }
-      #endregion
+                // убиваемся об стену
+                Process.GetCurrentProcess().Kill();
+            }
+        }
+        #endregion
 
-      #region Строка статуса
-      #region для потокобезопасного вызова процедуры (статусная строка)
-      /*==========================================================================*
+        #region Строка статуса
+        #region для потокобезопасного вызова процедуры (статусная строка)
+        /*==========================================================================*
 			*   private void void LinkSetText(object Value)
 			*      для потокобезопасного вызова процедуры
 			*==========================================================================*/
-        delegate void SetTextCallback( ToolStripStatusLabel sbLabel, string sbLabelText, Color sbItemColor );
+        delegate void SetTextCallback(ToolStripStatusLabel sbLabel, string sbLabelText, Color sbItemColor);
 
-        public void LinkSetTextISB( ToolStripStatusLabel sbLabel, string sbLabelText, Color sbItemColor )
+        public void LinkSetTextISB(ToolStripStatusLabel sbLabel, string sbLabelText, Color sbItemColor)
         {
-            if( statusStrip1.InvokeRequired )
-                {
-                    SetTextItemSB( sbLabel, sbLabelText, sbItemColor );
-                }
-                else
-                {
-                    sbLabel.Text = sbLabelText;
-                    sbLabel.BackColor = sbItemColor;
-                }
+            if (statusStrip1.InvokeRequired)
+            {
+                SetTextItemSB(sbLabel, sbLabelText, sbItemColor);
+            }
+            else
+            {
+                sbLabel.Text = sbLabelText;
+                sbLabel.BackColor = sbItemColor;
+            }
         }
 
         /*==========================================================================*
         * private void SetText(object Value)
         * //для потокобезопасного вызова процедуры
         *==========================================================================*/
-        private void SetTextItemSB( ToolStripStatusLabel sbLabel, string sbLabelText, Color sbItemColor )
+        private void SetTextItemSB(ToolStripStatusLabel sbLabel, string sbLabelText, Color sbItemColor)
         {
-           try
-           {
-              if( statusStrip1.InvokeRequired )
-              {
-                 SetTextCallback d = new SetTextCallback( SetTextItemSB );
-                 this.Invoke( d, new object[] { sbLabel, sbLabelText, sbItemColor } );
-              }
-              else
-              {
-                 sbLabel.Text = sbLabelText;
-                 sbLabel.BackColor = sbItemColor;
-              }
-           }
-           catch
-           {
-              return;
-           }
+            try
+            {
+                if (statusStrip1.InvokeRequired)
+                {
+                    SetTextCallback d = new SetTextCallback(SetTextItemSB);
+                    this.Invoke(d, new object[] { sbLabel, sbLabelText, sbItemColor });
+                }
+                else
+                {
+                    sbLabel.Text = sbLabelText;
+                    sbLabel.BackColor = sbItemColor;
+                }
+            }
+            catch
+            {
+                return;
+            }
         }
         #endregion
-      #endregion
+        #endregion
 
-      #region удаленное взаимодействие
-      /// <summary>
-      /// команда на рестарт сервера
-      /// </summary>
-      /// <param Name="sender"></param>
-      /// <param Name="e"></param>
-      private void ReconnectServer()
-      {
-          Trace.TraceInformation(DateTime.Now.ToString() + " :(3791) MainForm.cs : команда на рестарт сервера : ");
-          using (TcpClient client = new TcpClient())
-          {
-              try
-              {
-                  client.Connect(IPAddress.Parse(HMI_Settings.IPADDRES_SERVER), 9871);
-                  using (NetworkStream ns = client.GetStream())
-                  {
-                      BinaryWriter bw = new BinaryWriter(ns);
-                      BinaryReader br = new BinaryReader(ns);
-                      bw.Write("restart");
-                      bw.Flush();
-                      br.ReadString();
-                      Trace.TraceInformation(DateTime.Now.ToString() + " :(3802) MainForm.cs : команда на рестарт сервера : выполнено");
-                      //MessageBox.Show("Выполнено.", this.Text, MessageBonnssswwwxButtons.OK, MessageBoxIcon.Information);
-                  }
-              }
-              catch (Exception ex)
-              {
-                  Trace.TraceInformation(DateTime.Now.ToString() + " :(3861) MainForm.cs : восстановитьСвязьССерверомToolStripMenuItem_Click : " + ex.Message);
-                  TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 3854, "Не удалось установить связь с сервером.\nВозможная причины:\n1. Недоступен канал связи.\n2. ПО сервера не работает.");
-              }
-          }
-      }
-      #endregion
+        #region удаленное взаимодействие
+        /// <summary>
+        /// команда на рестарт сервера
+        /// </summary>
+        /// <param Name="sender"></param>
+        /// <param Name="e"></param>
+        private void ReconnectServer()
+        {
+            Trace.TraceInformation(DateTime.Now.ToString() + " :(3791) MainForm.cs : команда на рестарт сервера : ");
+            using (TcpClient client = new TcpClient())
+            {
+                try
+                {
+                    client.Connect(IPAddress.Parse(HMI_Settings.IPADDRES_SERVER), 9871);
+                    using (NetworkStream ns = client.GetStream())
+                    {
+                        BinaryWriter bw = new BinaryWriter(ns);
+                        BinaryReader br = new BinaryReader(ns);
+                        bw.Write("restart");
+                        bw.Flush();
+                        br.ReadString();
+                        Trace.TraceInformation(DateTime.Now.ToString() + " :(3802) MainForm.cs : команда на рестарт сервера : выполнено");
+                        //MessageBox.Show("Выполнено.", this.Text, MessageBonnssswwwxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Trace.TraceInformation(DateTime.Now.ToString() + " :(3861) MainForm.cs : восстановитьСвязьССерверомToolStripMenuItem_Click : " + ex.Message);
+                    TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 3854, "Не удалось установить связь с сервером.\nВозможная причины:\n1. Недоступен канал связи.\n2. ПО сервера не работает.");
+                }
+            }
+        }
+        #endregion
 
-    #region главная мнемосхема
-		/// <summary>
-      /// создание главной мнемосхемы арм'а или формы быстрого доступа
-      /// </summary>
-		private void CreateMainMnemo( )
-		{
-		    DebugStatistics.WindowStatistics.AddStatistic( "Подготовка и запуск мнемосхемы." );
-		    Form_ez = new NewMainMnemo( HMI_Settings.MainMnenoSchema, this, false ) { MdiParent = this };
-		    Form_ez.Show( );
-		    DebugStatistics.WindowStatistics.AddStatistic( "Подготовка и запуск мнемосхемы выполнен." );
-		}
-    #endregion   
+        #region главная мнемосхема
+        /// <summary>
+        /// создание главной мнемосхемы арм'а или формы быстрого доступа
+        /// </summary>
+        private void CreateMainMnemo()
+        {
+            DebugStatistics.WindowStatistics.AddStatistic("Подготовка и запуск мнемосхемы.");
+            Form_ez = new NewMainMnemo(HMI_Settings.MainMnenoSchema, this, false) { MdiParent = this };
+            Form_ez.Show();
+            DebugStatistics.WindowStatistics.AddStatistic("Подготовка и запуск мнемосхемы выполнен.");
+        }
+        #endregion
 
         #region Private-Metods
         /// <summary>
@@ -968,12 +969,12 @@ namespace HMI_MT
         /// </summary>
         private void ResetSchemaStateProtocol()
         {
-            for ( int i = 0; i < MdiChildren.Length; i++ )
+            for (int i = 0; i < MdiChildren.Length; i++)
             {
                 var win = MdiChildren[i] as IResetStateProtocol;
-                if ( win != null )
-                    win.ResetProtocol( );
-            } 
+                if (win != null)
+                    win.ResetProtocol();
+            }
         }
         #endregion
 
@@ -981,13 +982,13 @@ namespace HMI_MT
         /// <summary>
         /// Schema
         /// </summary>
-        private void RibbonButtonSchemaClick( object sender, EventArgs e )
+        private void RibbonButtonSchemaClick(object sender, EventArgs e)
         {
             Form[] arrF = MdiChildren;
-            for ( int i = 0; i < arrF.Length; i++ )
+            for (int i = 0; i < arrF.Length; i++)
             {
                 var main = arrF[i] as NewMainMnemo;
-                if ( main != null && !main.OwnerSchema )
+                if (main != null && !main.OwnerSchema)
                 {
                     arrF[i].Focus();
                     return;
@@ -995,13 +996,13 @@ namespace HMI_MT
             }
 
             // выводим главную мнемосхему
-            CreateMainMnemo( );
+            CreateMainMnemo();
         }
 
         /// <summary>
         /// Open tree
         /// </summary>
-        private void RibbonButtonOpenTreeClick( object sender, EventArgs e )
+        private void RibbonButtonOpenTreeClick(object sender, EventArgs e)
         {
             scDeviceObjectConfig.Visible = true;
         }
@@ -1009,7 +1010,7 @@ namespace HMI_MT
         /// <summary>
         /// Close tree
         /// </summary>
-        private void RibbonButtonCloseTreeClick( object sender, EventArgs e )
+        private void RibbonButtonCloseTreeClick(object sender, EventArgs e)
         {
             scDeviceObjectConfig.Visible = false;
         }
@@ -1025,12 +1026,12 @@ namespace HMI_MT
         /// <summary>
         /// Diagnostic panel
         /// </summary>
-        private void RibbonButtonDiagnosticPanelClick( object sender, EventArgs e )
+        private void RibbonButtonDiagnosticPanelClick(object sender, EventArgs e)
         {
-            if ( !File.Exists( HMI_Settings.PathPanelState_xml ) )
+            if (!File.Exists(HMI_Settings.PathPanelState_xml))
             {
-                MessageBox.Show( "Файл с описанием панели состояния устройств PanelState.xml не существует.", "MainForm.cs(667)",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information );
+                MessageBox.Show("Файл с описанием панели состояния устройств PanelState.xml не существует.", "MainForm.cs(667)",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -1042,22 +1043,22 @@ namespace HMI_MT
                     return;
                 }
 
-            var diagPanel = new FrmDiagPanel( this ) { MdiParent = this };
-            diagPanel.Show( );
+            var diagPanel = new FrmDiagPanel(this) { MdiParent = this };
+            diagPanel.Show();
         }
         /// <summary>
         /// Current mode
         /// </summary>
-        private void RibbonButtonCurrentModeClick( object sender, EventArgs e )
+        private void RibbonButtonCurrentModeClick(object sender, EventArgs e)
         {
             NormalModeLibrary.ComponentFactory.EditUserWindows(HMI_Settings.UserName);
         }
         /// <summary>
         /// Clock
         /// </summary>
-        private void RibbonButtonClockClick( object sender, EventArgs e )
+        private void RibbonButtonClockClick(object sender, EventArgs e)
         {
-            if ( this.formClock == null || this.formClock.IsDisposed )
+            if (this.formClock == null || this.formClock.IsDisposed)
             {
                 this.formClock = new ClockForm { Owner = this };
                 this.formClock.Show();
@@ -1068,35 +1069,35 @@ namespace HMI_MT
         /// <summary>
         /// Journals
         /// </summary>
-        private void RibbonButtonJournalsClick( object sender, EventArgs e )
+        private void RibbonButtonJournalsClick(object sender, EventArgs e)
         {
             Form[] arrF = this.MdiChildren;
-            for ( int i = 0; i < arrF.Length; i++ )
-                if ( arrF[i].Name == "frmLogs" )
+            for (int i = 0; i < arrF.Length; i++)
+                if (arrF[i].Name == "frmLogs")
                 {
                     arrF[i].Focus();
                     return;
                 }
             // выводим журнал событий устройств
-            Form_ev = new frmLogs( this );
+            Form_ev = new frmLogs(this);
             Form_ev.MdiParent = this;
             Form_ev.Show();
-            if ( !isBDConnection )
+            if (!isBDConnection)
                 Form_ev.Close();
         }
         /// <summary>
         /// Administration
         /// </summary>
-        private void RibbonButtonAdministrationClick( object sender, EventArgs e )
+        private void RibbonButtonAdministrationClick(object sender, EventArgs e)
         {
             ToolStripMenuItem ti = (ToolStripMenuItem)sender;
 
-            if ( !CommonUtils.CommonUtils.IsUserActionBan( CommonUtils.CommonUtils.UserActionType.b03_Administrate_Users, HMI_MT_Settings.HMI_Settings.UserRight ) )
+            if (!CommonUtils.CommonUtils.IsUserActionBan(CommonUtils.CommonUtils.UserActionType.b03_Administrate_Users, HMI_MT_Settings.HMI_Settings.UserRight))
             {
-                foreach ( ToolStripDropDownItem tsddi in ti.DropDownItems )
+                foreach (ToolStripDropDownItem tsddi in ti.DropDownItems)
                 {
-                    if ( tsddi.Tag != null )
-                        if ( (bool)tsddi.Tag )
+                    if (tsddi.Tag != null)
+                        if ((bool)tsddi.Tag)
                         {
                             tsddi.Available = true;
                             tsddi.Visible = true;
@@ -1105,10 +1106,10 @@ namespace HMI_MT
             }
             else
             {
-                foreach ( ToolStripDropDownItem tsddi in ti.DropDownItems )
+                foreach (ToolStripDropDownItem tsddi in ti.DropDownItems)
                 {
 
-                    if ( tsddi.Available && tsddi.Visible )
+                    if (tsddi.Available && tsddi.Visible)
                     {
                         tsddi.Tag = true;
                         tsddi.Available = false;
@@ -1121,49 +1122,49 @@ namespace HMI_MT
         /// <summary>
         /// Use access
         /// </summary>
-        private void RibbonButtonUseAccessClick( object sender, EventArgs e )
+        private void RibbonButtonUseAccessClick(object sender, EventArgs e)
         {
             Form[] arrF = this.MdiChildren;
-            for ( int i = 0; i < arrF.Length; i++ )
-                if ( arrF[i].Name == "frmUserGroupRights" )
+            for (int i = 0; i < arrF.Length; i++)
+                if (arrF[i].Name == "frmUserGroupRights")
                 {
                     arrF[i].Focus();
                     return;
                 }
 
             // получение строк соединения и поставщика данных из файла *.config
-            SqlConnection asqlconnect = new SqlConnection( HMI_Settings.ProviderPtkSql );
+            SqlConnection asqlconnect = new SqlConnection(HMI_Settings.ProviderPtkSql);
             try
             {
                 asqlconnect.Open();
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
                 asqlconnect.Close();
-                MessageBox.Show( "Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                MessageBox.Show("Нет связи с Сервером" + Environment.NewLine + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 return;
             }
 
-            frmUserGroupRights fa = new frmUserGroupRights( this );
+            frmUserGroupRights fa = new frmUserGroupRights(this);
             fa.MdiParent = this;
             fa.WindowState = FormWindowState.Maximized;
             fa.Show();
         }
-	    /// <summary>
+        /// <summary>
         /// Set PTK clock
         /// </summary>
-        private void RibbonButtonSetPTKClockClick( object sender, EventArgs e )
+        private void RibbonButtonSetPTKClockClick(object sender, EventArgs e)
         {
-            if ( CommonUtils.CommonUtils.IsUserActionBan( CommonUtils.CommonUtils.UserActionType.b04_Set_Time, HMI_MT_Settings.HMI_Settings.UserRight ) )
+            if (CommonUtils.CommonUtils.IsUserActionBan(CommonUtils.CommonUtils.UserActionType.b04_Set_Time, HMI_MT_Settings.HMI_Settings.UserRight))
                 return;
 
-            if ( HMI_Settings.IsGPSActive )
+            if (HMI_Settings.IsGPSActive)
             {
-                MessageBox.Show( "Антенна GPS активна. /nРучная установка времени невозможна.", "Установка времени ПТК", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                MessageBox.Show("Антенна GPS активна. /nРучная установка времени невозможна.", "Установка времени ПТК", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            using ( dlgSetSystemTime dsst = new dlgSetSystemTime( this ) )
+            using (dlgSetSystemTime dsst = new dlgSetSystemTime(this))
             {
                 dsst.ShowDialog();
             }
@@ -1171,7 +1172,7 @@ namespace HMI_MT
         /// <summary>
         /// Reset all commands
         /// </summary>
-        private void RibbonButtonResetAllCommandsClick( object sender, EventArgs e )
+        private void RibbonButtonResetAllCommandsClick(object sender, EventArgs e)
         {
             ////проверяем состояние команд
             //foreach (DataSource aFc in KB)
@@ -1189,9 +1190,9 @@ namespace HMI_MT
         /// <summary>
         /// View commands
         /// </summary>
-        private void RibbonButtonViewCommandsClick( object sender, EventArgs e )
+        private void RibbonButtonViewCommandsClick(object sender, EventArgs e)
         {
-            switch ( ( sender as ToolStripMenuItem ).Checked.ToString().ToLower() )
+            switch ((sender as ToolStripMenuItem).Checked.ToString().ToLower())
             {
                 case "true":
                     dvrd = new dlgViewReqestData();
@@ -1200,29 +1201,29 @@ namespace HMI_MT
                 case "false":
                     dvrd.Close();
                     break;
-            }   
+            }
         }
         /// <summary>
         /// Reconnect
         /// </summary>
-        private void RibbonButtonReconnectClick( object sender, EventArgs e )
+        private void RibbonButtonReconnectClick(object sender, EventArgs e)
         {
             ReconnectServer();
         }
         /// <summary>
         /// Switch user
         /// </summary>
-        private void RibbonMenuButtonSwitchUserClick( object sender, EventArgs e )
+        private void RibbonMenuButtonSwitchUserClick(object sender, EventArgs e)
         {
             // закрываем все дочерние окна
             Form[] arrF = this.MdiChildren;
-            for ( int i = 0; i < arrF.Length; i++ )
+            for (int i = 0; i < arrF.Length; i++)
                 arrF[i].Close();
 
             // выводим форму авторизации
-            Form_ea = new frmAutorization( this, Target.ChangeUser );
+            Form_ea = new frmAutorization(this, Target.ChangeUser);
 
-            while ( ( DialogResult = Form_ea.ShowDialog() ) != DialogResult.OK )
+            while ((DialogResult = Form_ea.ShowDialog()) != DialogResult.OK)
             {
                 ExitWithAskDialog();
             }
@@ -1235,31 +1236,31 @@ namespace HMI_MT
         /// <summary>
         /// Block system
         /// </summary>
-        private void RibbonMenuButtonBlockSystemClick( object sender, EventArgs e )
+        private void RibbonMenuButtonBlockSystemClick(object sender, EventArgs e)
         {
             // сворачиваем все дочерние окна
             Form[] arrF = this.MdiChildren;
-            for ( int i = 0; i < arrF.Length; i++ )
+            for (int i = 0; i < arrF.Length; i++)
                 arrF[i].WindowState = FormWindowState.Minimized;
             // документирование действия пользователя
-            CommonUtils.CommonUtils.WriteEventToLog( 15, "Блокировка системы", true );//, true, false );
+            CommonUtils.CommonUtils.WriteEventToLog(15, "Блокировка системы", true);//, true, false );
 
             // запрашиваем логин
-            Form_ea = new frmAutorization( this, Target.BlockSystem );
+            Form_ea = new frmAutorization(this, Target.BlockSystem);
 
-            while ( ( DialogResult = Form_ea.ShowDialog() ) != DialogResult.OK )
+            while ((DialogResult = Form_ea.ShowDialog()) != DialogResult.OK)
             {
-                if ( askIsNeedExitProgram() )
+                if (askIsNeedExitProgram())
                 {
                     ExitWithAskDialog();
                 }
             }
             // документирование действия пользователя
-            CommonUtils.CommonUtils.WriteEventToLog( 16, "Разблокировка системы", true );//, true, false );
+            CommonUtils.CommonUtils.WriteEventToLog(16, "Разблокировка системы", true);//, true, false );
 
             // разворачиваем все дочерние окна
             arrF = this.MdiChildren;
-            for ( int i = 0; i < arrF.Length; i++ )
+            for (int i = 0; i < arrF.Length; i++)
                 arrF[i].WindowState = FormWindowState.Maximized;
 
             NewUserLoged();
@@ -1267,15 +1268,15 @@ namespace HMI_MT
         /// <summary>
         /// User information
         /// </summary>
-        private void RibbonMenuButtonUserInformationClick( object sender, EventArgs e )
+        private void RibbonMenuButtonUserInformationClick(object sender, EventArgs e)
         {
-            MessageBox.Show( "Имя пользователя: \t" + HMI_Settings.UserName + "\n\nГруппа прав: \t\t" +
-                HMI_Settings.GroupName, "Информация о текущем пользователе", MessageBoxButtons.OK, MessageBoxIcon.Information );
+            MessageBox.Show("Имя пользователя: \t" + HMI_Settings.UserName + "\n\nГруппа прав: \t\t" +
+                HMI_Settings.GroupName, "Информация о текущем пользователе", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         /// <summary>
         /// About
         /// </summary>
-        private void RibbonMenuButtonAboutClick( object sender, EventArgs e )
+        private void RibbonMenuButtonAboutClick(object sender, EventArgs e)
         {
             AboutForm af = new AboutForm();
             af.ShowDialog();
@@ -1283,32 +1284,32 @@ namespace HMI_MT
         /// <summary>
         /// Exit
         /// </summary>
-        private void RibbonMenuButtonExitClick( object sender, EventArgs e )
+        private void RibbonMenuButtonExitClick(object sender, EventArgs e)
         {
             ExitWithAskDialog();
         }
         /// <summary>
         /// Print
         /// </summary>
-        internal void RibbonMenuButtonPrintClick( object sender, EventArgs e )
+        internal void RibbonMenuButtonPrintClick(object sender, EventArgs e)
         {
             var form = ActiveMdiChild as HelperControlsLibrary.ReportLibrary.IReport;
-            if ( form == null )
+            if (form == null)
             {
-                MessageBox.Show( this, "Печать данных не поддерживается", "Информация", MessageBoxButtons.OK,
-                                 MessageBoxIcon.Information );
+                MessageBox.Show(this, "Печать данных не поддерживается", "Информация", MessageBoxButtons.OK,
+                                 MessageBoxIcon.Information);
                 return;
             }
 
-            form.Print( );
+            form.Print();
         }
 
         /// <summary>
         /// РАПС Аура
         /// </summary>
-        private void RibbonMenuButtonAuraClick( object sender, EventArgs e )
+        private void RibbonMenuButtonAuraClick(object sender, EventArgs e)
         {
-            Process.Start( HMI_Settings.AuraUrl );
+            Process.Start(HMI_Settings.AuraUrl);
         }
 
         private void режимРасширенногоВыводаИнформацииToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1360,25 +1361,25 @@ namespace HMI_MT
             tabForms.SelectedIndexChanged += TabFormsOnSelectedIndexChanged;
         }
 
-	    private void TabFormsOnSelectedIndexChanged(object sender, EventArgs eventArgs)
-	    {
-	        TabControl tabControl = sender as TabControl;
+        private void TabFormsOnSelectedIndexChanged(object sender, EventArgs eventArgs)
+        {
+            TabControl tabControl = sender as TabControl;
 
             if (tabControl.SelectedTab != null && tabControl.SelectedTab.Text == "Ведомости и журналы")
             {
                 StopJournalAlarmTimer();
             }
-	    }
-
-	    private void MessageProviderOnMessagesUpdated()
-        {
-                if (tabForms.SelectedTab != null && tabForms.SelectedTab.Text != "Ведомости и журналы")
-                {
-                    StartJournalAlarmTimer();
-                }
         }
 
-	    private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        private void MessageProviderOnMessagesUpdated()
+        {
+            if (tabForms.SelectedTab != null && tabForms.SelectedTab.Text != "Ведомости и журналы")
+            {
+                StartJournalAlarmTimer();
+            }
+        }
+
+        private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
             if (ведомостиИЖурналыToolStripMenuItem.BackColor == Color.Yellow)
                 ведомостиИЖурналыToolStripMenuItem.BackColor = SystemColors.Control;
@@ -1388,7 +1389,7 @@ namespace HMI_MT
 
         private void StartJournalAlarmTimer()
         {
-           _journalAlarmTimer.Start(); 
+            _journalAlarmTimer.Start();
         }
 
         private void StopJournalAlarmTimer()
@@ -1397,7 +1398,7 @@ namespace HMI_MT
             ведомостиИЖурналыToolStripMenuItem.BackColor = SystemColors.Control;
         }
 
-        
-	    #endregion
-   }
+
+        #endregion
+    }
 }
