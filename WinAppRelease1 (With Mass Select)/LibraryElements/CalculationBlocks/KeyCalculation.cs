@@ -34,6 +34,12 @@ namespace LibraryElements.CalculationBlocks
         public void DrawElement( Graphics graphics, Rectangle rectangle )
         {
             this.elementRectangle = rectangle;
+
+            // Костыль! Стало нужно все зарисовывать, так как в связи с последними изменениями - при изменении значения тега
+            // теперь перерисовывается не вся мнемосхема, а только один элемент. В связи с чем для данного элемента могут
+            // оставаться артефакты при смене состояния
+            graphics.FillRectangle(new SolidBrush(Color.FromArgb(192, 192, 192)), this.elementRectangle);
+
             // Отрисовка элемента расчетных данных
             switch ( (DrawRotate)GetRecord( "Rotate" ).Value )
             {
