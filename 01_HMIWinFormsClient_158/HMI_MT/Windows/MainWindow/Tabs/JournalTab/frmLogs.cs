@@ -732,6 +732,12 @@ namespace HMI_MT
 
                 var devGuid = uint.Parse(dtA.Rows[curRow]["BlockID"].ToString());
                 var device = HMI_Settings.CONFIGURATION.GetLink2Device(0, devGuid);
+                if (device == null)
+                {
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 0, "frmLogs:GetAlarmEvents() : при запросе осциллограмм в бд оказалась запись с номером устройства, которое отсутствует в конфигурации АРМа");
+                    dgvAvar.Rows.RemoveAt(i);
+                    continue;
+                }
 
                 // Тип блока
                 dgvAvar["clmBlockName", i].Value = dtA.Rows[curRow]["BlockName"];
