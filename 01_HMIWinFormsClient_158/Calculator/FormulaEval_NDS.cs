@@ -156,6 +156,27 @@ namespace Calculator
 
         #endregion
 
+        #region Public Metods
+
+        /// <summary>
+        /// Костыльный метод для получения текущего значения тега в формате данного класса
+        /// </summary>
+        public object GetCurrentValue()
+        {
+            if (LinkVariableNewDs == null)
+                return null;
+
+            return ConvertTagValueAsObjectToFormulaEvalTagValueType(
+                    new Tuple<string, byte[], DateTime, VarQualityNewDs>(
+                        LinkVariableNewDs.ValueAsString,
+                        LinkVariableNewDs.ValueAsMemX,
+                        LinkVariableNewDs.TimeStamp,
+                        LinkVariableNewDs.DataQuality),
+                    LinkVariableNewDs.TypeOfTagHMI);
+        }
+
+        #endregion
+
         #region Private-metods
 
         /// <summary>

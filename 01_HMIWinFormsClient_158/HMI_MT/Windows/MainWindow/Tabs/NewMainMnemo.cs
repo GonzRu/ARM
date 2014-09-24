@@ -220,6 +220,9 @@ namespace HMI_MT
                         {
                             ev.OnChangeValFormTI += cr.LinkSetText;
                             taglist.Add( ev.LinkVariableNewDs );
+
+                            // Задаем CalculationRegion - текущее значение
+                            cr.LinkSetText(link.Result, ev.GetCurrentValue(), ev.LinkVariableNewDs.TypeOfTagHMI);
                         }
                     }
 
@@ -233,6 +236,9 @@ namespace HMI_MT
                         {
                             ev.OnChangeValFormTI += cr.LinkSetTextStatusDev;
                             taglist.Add( ev.LinkVariableNewDs );
+
+                            // Задаем CalculationRegion - текущее значение
+                            cr.LinkSetTextStatusDev("", ev.GetCurrentValue(), ev.LinkVariableNewDs.TypeOfTagHMI);
                         }
                     }
                 }
