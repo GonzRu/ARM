@@ -274,17 +274,27 @@ namespace Calculator
 
         private object ConvertTagValueAsObjectToFormulaEvalTagValueType(Tuple<string, byte[], DateTime, VarQualityNewDs> @var, TypeOfTag type)
         {
+            if (var.Item4 == VarQualityNewDs.vqGood || var.Item4 == VarQualityNewDs.vqHandled)
+                switch (type)
+                {
+                    case TypeOfTag.Discret: // преобразовываетс€ из true/false
+                        return Convert.ToBoolean(@var.Item1) ? 1 : 0;
+                    case TypeOfTag.Combo:
+                        // –аньше приходил текст перечислени€. Ёто не подходит. —ейчас конвертирую в Single (формат по-умолчанию дл€ TagEnum), а затем в Int
+                        // дл€ мнемосхемы (по анологии с дискретным тегом).
+                        Single singleValue = BitConverter.ToSingle(@var.Item2, 0);
+                        return (int) singleValue;
+                    default: // выводитьс€ как стринг
+                        return @var.Item1;
+                }
+
             switch (type)
             {
-                case TypeOfTag.Discret: // преобразовываетс€ из true/false
-                    return Convert.ToBoolean(@var.Item1) ? 1 : 0;
+                case TypeOfTag.Discret:
                 case TypeOfTag.Combo:
-                    // –аньше приходил текст перечислени€. Ёто не подходит. —ейчас конвертирую в Single (формат по-умолчанию дл€ TagEnum), а затем в Int
-                    // дл€ мнемосхемы (по анологии с дискретным тегом).
-                    Single singleValue = BitConverter.ToSingle(@var.Item2, 0);
-                    return (int) singleValue;
+                    return 0;
                 default: // выводитьс€ как стринг
-                    return @var.Item1;
+                    return "NA";
             }
         }
 
