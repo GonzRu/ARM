@@ -23,14 +23,25 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
  	public class TagDateTime : Tag
-	{
+    {
+        #region Constructors
+
         public TagDateTime()
         {
             TypeOfTagHMI = TypeOfTag.DateTime;
             DefValue = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(DateTime.MinValue);
         }
 
- 	    /// <summary>
+        #endregion
+
+        #region Public properties
+
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
  	    /// установить значение тега
  	    /// </summary>
  	    public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
@@ -107,5 +118,6 @@ namespace SourceMOA
             SetValueAsObject(DateTime.MinValue, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
 
-	}
+        #endregion
+    }
 }

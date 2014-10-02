@@ -23,11 +23,8 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagAnalog : Tag, ITagDim
-	{
-        /// <summary>
-        /// Кол-во знаков после запятой
-        /// </summary>
-        public ushort ValueDim { get; set; }
+    {
+        #region Constructors
 
         public TagAnalog()
         {
@@ -36,7 +33,26 @@ namespace SourceMOA
             ValueDim = 2;
         }
 
+        #endregion
+
+        #region Public Properties
+
 	    /// <summary>
+
+	    #endregion
+
+        #region Implementation ITagDim
+
+        /// <summary>
+        /// Кол-во знаков после запятой
+        /// </summary>
+        public ushort ValueDim { get; set; }
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
 	    /// установить значение тега
 	    /// </summary>     
         public override void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq )
@@ -121,5 +137,7 @@ namespace SourceMOA
         {
             SetValueAsObject((Single)0, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }

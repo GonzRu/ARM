@@ -25,13 +25,31 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagDiscret : Tag
-	{
+    {
+        #region Constructors
+
         public TagDiscret()
         {
             TypeOfTagHMI = TypeOfTag.Discret;
         }
 
-		/// <summary>
+        #endregion
+
+        #region Public properties
+
+        /// <summary>
+        /// Строковое представление значения тега
+        /// </summary>
+        public override string ValueAsString
+        {
+            get { return BitConverter.ToBoolean(ValueAsMemX, 0).ToString(CultureInfo.InvariantCulture); }
+        }
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
 		/// установить значение тега
 		/// </summary>
 		public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)

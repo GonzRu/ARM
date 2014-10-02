@@ -24,13 +24,24 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagString : Tag
-	{
+    {
+        #region Constructors
+
         public TagString()
         {
             TypeOfTagHMI = TypeOfTag.String;
         }
 
-		/// <summary>
+        #endregion
+
+        #region Public properties
+
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
 		/// установить значение тега
 		/// </summary>
         public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
@@ -104,5 +115,7 @@ namespace SourceMOA
         {
             SetValueAsObject(String.Empty, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }

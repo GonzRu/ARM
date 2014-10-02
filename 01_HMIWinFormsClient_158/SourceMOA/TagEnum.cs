@@ -26,7 +26,9 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagEnum : Tag
-	{
+    {
+        #region Constructors
+
         public TagEnum(XElement xetag)
         {
             TypeOfTagHMI = TypeOfTag.Combo;
@@ -42,7 +44,16 @@ namespace SourceMOA
             }    
         }
 
-		/// <summary>
+        #endregion
+
+        #region Public properties
+
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
 		/// установить значение тега
 		/// </summary>
         public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
@@ -136,5 +147,7 @@ namespace SourceMOA
         {
             SetValueAsObject((Single)0, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }
