@@ -124,18 +124,7 @@ namespace SourceMOA
         /// <summary>
         ///  значение как строка
         /// </summary>
-        public string ValueAsString
-        {
-            get
-            {
-                return valueAsString;
-            }
-            set
-            {
-                valueAsString = value;
-            }
-        }
-        string valueAsString = String.Empty;
+        public abstract string ValueAsString { get; }
 
         /// <summary>
         ///  значение как массив байт

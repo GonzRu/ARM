@@ -76,13 +76,6 @@ namespace SourceMOA
                 if ( IsInverse && ( this.DataQuality == VarQualityNewDs.vqGood ) )
                     tmp = !tmp;
 
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = tmp.ToString( CultureInfo.InvariantCulture );
-                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
                 memX = BitConverter.GetBytes( tmp );
 
                 if ( this.BindindTag != null )
@@ -114,13 +107,6 @@ namespace SourceMOA
                 Boolean tmp = (Boolean) tagValueAsObject;
                 if (IsInverse && (this.DataQuality == VarQualityNewDs.vqGood))
                     tmp = !tmp;
-
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = tmp.ToString(CultureInfo.InvariantCulture);
-                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
 
                 if (BindindTag != null)
                     BindindTag.ReadValue();

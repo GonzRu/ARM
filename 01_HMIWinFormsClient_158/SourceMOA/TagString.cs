@@ -36,6 +36,17 @@ namespace SourceMOA
 
         #region Public properties
 
+        /// <summary>
+        /// Строковое представление значения тега
+        /// </summary>
+        public override string ValueAsString
+        {
+            get
+            {
+                var enco = Encoding.GetEncoding(Tag.StringValueEncoding);
+                return enco.GetString(ValueAsMemX);
+            }
+        }
 
         #endregion
 
@@ -64,14 +75,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                var enco = Encoding.GetEncoding( Tag.StringValueEncoding );
-                string newValueAsString = enco.GetString( memX );
-                //if (ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
                 if ( this.BindindTag != null )
                     this.BindindTag.ReadValue();
 
@@ -90,12 +93,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                //if (ValueAsString == tagValueAsObject.ToString() && DataQuality == vq)
-                //    return;
-
-                ValueAsString = tagValueAsObject.ToString();
-
                 if (BindindTag != null)
                     BindindTag.ReadValue();
 

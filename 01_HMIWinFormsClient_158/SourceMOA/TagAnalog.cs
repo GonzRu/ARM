@@ -38,6 +38,17 @@ namespace SourceMOA
         #region Public Properties
 
 	    /// <summary>
+	    /// Строковое представление значения тега
+	    /// </summary>
+	    public override string ValueAsString
+	    {
+	        get
+	        {
+	            return ValueAsMemX.Length == 8
+                    ? Convert.ToSingle(BitConverter.ToDouble(ValueAsMemX, 0)).ToString(string.Format("F{0}", this.ValueDim))
+                    : BitConverter.ToSingle(ValueAsMemX, 0).ToString(string.Format("F{0}", this.ValueDim));
+	        }
+	    }
 
 	    #endregion
 
@@ -75,16 +86,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = memX.Length == 8
-                                    ? Convert.ToSingle( BitConverter.ToDouble( memX, 0 ) ).ToString(
-                                        string.Format( "F{0}", this.ValueDim ) )
-                                    : BitConverter.ToSingle( memX, 0 ).ToString( string.Format( "F{0}", this.ValueDim ) );
-                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
 				if (BindindTag != null)
 					BindindTag.ReadValue();
 
@@ -110,13 +111,6 @@ namespace SourceMOA
 #endif
                     return;
                 }
-
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = ((Single) tagValueAsObject).ToString(String.Format("N{0}", this.ValueDim));
-                //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
 
                 if (BindindTag != null)
                     BindindTag.ReadValue();
