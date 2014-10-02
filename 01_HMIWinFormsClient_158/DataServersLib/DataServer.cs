@@ -511,7 +511,7 @@ namespace DataServersLib
                 if (exchangeProviderName.ToLower() == "wcf")
                 {
                     reqEntry = reqfact.CreateRequestEntry("wcf", provCust);
-                    (provCust as ClientServerOnWCF).OnTagValueChanged += SetValueTagAsObject;
+                    (provCust as WcfProvider).OnTagValueChanged += SetValueTagAsObject;
                 }
                 else
                 {

@@ -49,7 +49,7 @@
     </Compile>
     <Compile Include="TCPSocket\ClientServerOnTCPSockets.cs" />
     <Compile Include="WCF\CallbackHandler.cs" />
-    <Compile Include="WCF\ClientServerOnWCF.cs.cs" />
+    <Compile Include="WCF\WcfProvider.cs" />
     <Compile Include="UDPSocket\ClientServerOn_MOA_UDPSockets.cs" />
     <Compile Include="IPacketParser.cs" />
     <Compile Include="IProviderCustomer.cs" />

@@ -14,7 +14,7 @@ using ProviderCustomerExchangeLib.DSRouterService;
 
 namespace ProviderCustomerExchangeLib.WCF
 {
-	public class ClientServerOnWCF : IProviderCustomer, IWcfProvider
+	public class WcfProvider : IProviderCustomer, IWcfProvider
     {
         #region События
         /// <summary>
@@ -41,7 +41,7 @@ namespace ProviderCustomerExchangeLib.WCF
 		#endregion
 
         #region конструктор(ы)
-        public ClientServerOnWCF( XElement srcinfo )
+        public WcfProvider( XElement srcinfo )
 		{
             try
             {
@@ -390,6 +390,7 @@ namespace ProviderCustomerExchangeLib.WCF
             
             Console.WriteLine("Порция данных");
             foreach (KeyValuePair<string, DSRouterTagValue> kvp in tv)
+                if (kvp.Key.Contains("1000"))
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1} {2}", kvp.Key, "null", (VarQualityNewDs)kvp.Value.VarQuality));
                 else
@@ -417,7 +418,7 @@ namespace ProviderCustomerExchangeLib.WCF
                 {
                     TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 0,
                                                                          String.Format(
-                                                                             "ProviderCustomerExchange.ClientServerOnWCF::NewTagValueHandler: Ошибка при разборе нового значения тега: {0}",
+                                                                             "ProviderCustomerExchange.WcfProvider::NewTagValueHandler: Ошибка при разборе нового значения тега: {0}",
                                                                              key));
                 }
             }
