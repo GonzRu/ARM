@@ -25,85 +25,123 @@ namespace InterfaceLibrary
 {
     public interface ITag
     {
+        #region Events
+
         // объявляем событие
         event ChVarNewDs OnChangeVar;
         event ChVarNewDsNew OnChangeValue;
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         /// привязка для обновления
         /// </summary>
         Binding BindindTag { get; set; }
+
         /// <summary>
         ///  доступность тега - 
         ///  готовность к обработке
         /// </summary>
         string TagEnable { get; }
+
         /// <summary>
         ///  доступность тега - 
         ///  готовность к обработке
         /// </summary>
         bool IsEnable { get; }
+
         /// <summary>
         ///  название тега		
         /// </summary>
         string TagName { get; }
+
         /// <summary>
         /// уник номер тега
         /// </summary>
         uint TagGUID { get; }
+
         /// <summary>
         ///  тип тега - 
         /// </summary>
         string Type { get; }
+
         /// <summary>
         ///  тип-вид тега:
         ///  Analog, Discret, Combo, DateTime
         /// </summary>
         TypeOfTag TypeOfTagHMI { get; set; }
+
         /// <summary>
         /// ссылка на устройство
         /// </summary>
         IDevice Device { get; }
+
         /// <summary>
         ///  единица измерения
         /// </summary>
         string Unit { get; }
+
         /// <summary>
         ///  нижняя граница значения
         /// </summary>
         string MinValue { get; }
+
         /// <summary>
         ///  верхняя граница значения
         /// </summary>
         string MaxValue { get; }
+
         /// <summary>
         ///  значение по умолчанию
         /// </summary>
         string DefValue { get; }
+
         /// <summary>
         ///  доступ по чтению записи
         /// </summary>
         string AccessToValue { get; }
+
         /// <summary>
         ///  значение как строка
         /// </summary>
         string ValueAsString { get; }
+
         /// <summary>
         ///  значение как массив байт
         /// </summary>
         byte[] ValueAsMemX { get; }
+
         /// <summary>
         ///  метка времени
         /// </summary>
-        DateTime TimeStamp { get; set;}
+        DateTime TimeStamp { get; set; }
+
         /// <summary>
         ///  качество тега
         /// </summary>
         VarQualityNewDs DataQuality { get; set; }
+
         /// <summary>
         /// список членов перечисления для 
         /// типов enum
         /// </summary>
-        SortedList<int,string> SlEnumsParty { get; }
+        SortedList<int, string> SlEnumsParty { get; }
+
+        /// <summary>
+        /// признак инверсии для логич тегов
+        /// </summary>
+        bool IsInverse { get; set; }
+
+        /// <summary>
+        /// признак изменения тега со стороны HMI (уставки)
+        /// </summary>
+        bool IsHMIChange { get; set; }
+
+        #endregion
+
+        #region Metods
 
         /// <summary>
         /// установить значение тега
@@ -119,18 +157,10 @@ namespace InterfaceLibrary
         /// установить значение тега
         /// по умолчанию (для его сброса)
         /// </summary>
-        /// <param name="memX"></param>
         void SetDefaultValue();
-        /// <summary>
-        /// признак инверсии для логич тегов
-        /// </summary>
-        bool IsInverse{get; set;}
-        /// <summary>
-        /// признак изменения тега
-        /// со стороны HMI
-        /// (уставки)
-        /// </summary>
-        bool IsHMIChange { get; set; }
+
+
+        #endregion
     }
 
     public interface ITagDim
