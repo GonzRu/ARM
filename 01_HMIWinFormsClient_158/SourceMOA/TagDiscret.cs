@@ -127,5 +127,7 @@ namespace SourceMOA
         {
             SetValueAsObject(false, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }

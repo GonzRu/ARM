@@ -28,7 +28,7 @@ namespace SourceMOA
 
         public TagAnalog()
         {
-            TypeOfTagHMI = TypeOfTag.Analog;          
+            TypeOfTagHMI = TypeOfTag.Analog;
             DefValue = "0";
             ValueDim = 2;
         }
