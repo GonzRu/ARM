@@ -37,7 +37,8 @@ namespace ProviderCustomerExchangeLib.WCF
 	    private readonly BackgroundWorker bgw = new BackgroundWorker( );
         private readonly CallbackHandler handler = new CallbackHandler( );
 
-	    private readonly Timer timer = new Timer( 30000 );
+	    private readonly Timer _pingTimer = new Timer(3000);
+	    private readonly Timer _createConnectionTimer = new Timer();
 		#endregion
 
         #region конструктор(ы)
@@ -48,44 +49,38 @@ namespace ProviderCustomerExchangeLib.WCF
                 HMI_Settings.IPADDRES_SERVER = srcinfo.Element("IPAddress").Attribute("value").Value;
                 HMI_Settings.PORTin = int.Parse(srcinfo.Element("Port").Attribute("value").Value);
 
-                CreateProxyFromCode( );
+                //CreateProxyFromCode( );
 
-                arrForReceiveData = new ArrayForExchange( );
+                arrForReceiveData = new ArrayForExchange();
                 arrForReceiveData.packetAppearance += this.ArrForReceiveDataPacketAppearance;
 
                 bgw.DoWork += this.BgwDoWork;
 
-                timer.Elapsed += delegate
+                _pingTimer.Elapsed += delegate
                                      {
                                          try
                                          {
-                                             timer.Stop();
-
-                                             var idch = WCFproxy as DSRouterClient;
-                                                if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
-                                             {
-                                                 WCFproxy = null;
-                                                 if (this.CreateProxyFromCode())
-                                                 {
-                                                     if (OnProxyRecreated != null)
-                                                         OnProxyRecreated();
-
-                                                     if (OnDSCommunicationLoss != null)
-                                                         OnDSCommunicationLoss(false);
-                                                 }
-                                             }
+                                             _pingTimer.Stop();
+                                             (WCFproxy as DSRouterClient).GetCurrentDateTime();
+                                             _pingTimer.Start();
                                          }
                                          catch ( Exception exception )
                                          {
-                                             TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( exception );
+                                             var connectionLost = OnDSCommunicationLoss;
+                                             if (connectionLost != null)
+                                                 connectionLost(true);
+
+                                             _createConnectionTimer.Start();
                                          }
-                                         finally
-                                         {
-                                             timer.Start();
-                                         }
+
+
                                      };
-                timer.Interval = 3000;
-                timer.Start( );
+                _pingTimer.Interval = 3000;
+
+                _createConnectionTimer = new Timer();
+                _createConnectionTimer.Interval = 3000;
+                _createConnectionTimer.Elapsed += (sender, args) => CreateProxyFromCode();
+                _createConnectionTimer.Start();
             }
             catch (Exception ex)
             {
@@ -101,6 +96,14 @@ namespace ProviderCustomerExchangeLib.WCF
         {
             try
             {
+                _createConnectionTimer.Stop();
+
+                if (WCFproxy != null)
+                {
+                    (WCFproxy as DSRouterClient).GetTagsValueCompleted -= OnGetTagsValueCompleted;
+                    (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted -= OnGetTagsValuesUpdatedCompleted;
+                }
+
                 var endPointAddr = string.Format( "net.tcp://{0}:{1}/DSRouter.DSRouterService/DSRouterService.svc", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin );
                 var tcpBinding = new NetTcpBinding();
                 tcpBinding.Security.Mode = SecurityMode.None;
@@ -120,13 +123,20 @@ namespace ProviderCustomerExchangeLib.WCF
             }
             catch ( Exception ex )
             {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
+                Console.WriteLine("Не удалось установить соединение с роутером.");
 
-                if (OnDSCommunicationLoss != null)
-                    OnDSCommunicationLoss(true);
+                _createConnectionTimer.Start();
 
                 return false;
             }
+
+            _pingTimer.Start();
+
+            if (OnProxyRecreated != null)
+                OnProxyRecreated();
+
+            if (OnDSCommunicationLoss != null)
+                OnDSCommunicationLoss(false);
 
             return true;
         }
@@ -342,8 +352,8 @@ namespace ProviderCustomerExchangeLib.WCF
                 }
                 else
                 {
-                    if (OnDSCommunicationLoss != null)
-                        OnDSCommunicationLoss(true);
+                    //if (OnDSCommunicationLoss != null)
+                    //    OnDSCommunicationLoss(true);
                     TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "При выполнении GetTagsValuesUpdatedAsync произошла ошабка.");
                 }
             }
@@ -390,7 +400,6 @@ namespace ProviderCustomerExchangeLib.WCF
             
             Console.WriteLine("Порция данных");
             foreach (KeyValuePair<string, DSRouterTagValue> kvp in tv)
-                if (kvp.Key.Contains("1000"))
                 if (kvp.Value.VarValueAsObject == null)
                     Console.WriteLine(string.Format("{0} : {1} {2}", kvp.Key, "null", (VarQualityNewDs)kvp.Value.VarQuality));
                 else
