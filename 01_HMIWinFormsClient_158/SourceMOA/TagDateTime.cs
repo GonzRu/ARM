@@ -23,14 +23,36 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
  	public class TagDateTime : Tag
-	{
+    {
+        #region Constructors
+
         public TagDateTime()
         {
             TypeOfTagHMI = TypeOfTag.DateTime;
             DefValue = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(DateTime.MinValue);
         }
 
- 	    /// <summary>
+        #endregion
+
+        #region Public properties
+
+        /// <summary>
+        /// Строковое представление значения тега
+        /// </summary>
+        public override string ValueAsString
+        {
+            get
+            {
+                var dt = new DateTime(BitConverter.ToInt64(ValueAsMemX, 0));
+                return CommonUtils.CommonUtils.GetTimeInMTRACustomFormat(dt);
+            }
+        }
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
  	    /// установить значение тега
  	    /// </summary>
  	    public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
@@ -53,14 +75,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                var dt = new DateTime( BitConverter.ToInt64( memX, 0 ) );
-                string newValueAsString = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat( dt );
-                //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
                 if ( this.BindindTag != null )
                     this.BindindTag.ReadValue();
 
@@ -80,13 +94,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = CommonUtils.CommonUtils.GetTimeInMTRACustomFormat((DateTime)tagValueAsObject);
-                //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
                 if (BindindTag != null)
                     BindindTag.ReadValue();
 
@@ -107,5 +114,6 @@ namespace SourceMOA
             SetValueAsObject(DateTime.MinValue, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
 
-	}
+        #endregion
+    }
 }

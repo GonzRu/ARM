@@ -25,13 +25,31 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagDiscret : Tag
-	{
+    {
+        #region Constructors
+
         public TagDiscret()
         {
             TypeOfTagHMI = TypeOfTag.Discret;
         }
 
-		/// <summary>
+        #endregion
+
+        #region Public properties
+
+        /// <summary>
+        /// Строковое представление значения тега
+        /// </summary>
+        public override string ValueAsString
+        {
+            get { return BitConverter.ToBoolean(ValueAsMemX, 0).ToString(CultureInfo.InvariantCulture); }
+        }
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
 		/// установить значение тега
 		/// </summary>
 		public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
@@ -57,13 +75,6 @@ namespace SourceMOA
                 var tmp = BitConverter.ToBoolean( memX, 0 );
                 if ( IsInverse && ( this.DataQuality == VarQualityNewDs.vqGood ) )
                     tmp = !tmp;
-
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = tmp.ToString( CultureInfo.InvariantCulture );
-                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
 
                 memX = BitConverter.GetBytes( tmp );
 
@@ -97,13 +108,6 @@ namespace SourceMOA
                 if (IsInverse && (this.DataQuality == VarQualityNewDs.vqGood))
                     tmp = !tmp;
 
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = tmp.ToString(CultureInfo.InvariantCulture);
-                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
                 if (BindindTag != null)
                     BindindTag.ReadValue();
 
@@ -123,5 +127,7 @@ namespace SourceMOA
         {
             SetValueAsObject(false, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }

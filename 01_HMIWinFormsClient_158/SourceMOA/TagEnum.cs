@@ -26,7 +26,9 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagEnum : Tag
-	{
+    {
+        #region Constructors
+
         public TagEnum(XElement xetag)
         {
             TypeOfTagHMI = TypeOfTag.Combo;
@@ -42,7 +44,31 @@ namespace SourceMOA
             }    
         }
 
-		/// <summary>
+        #endregion
+
+        #region Public properties
+
+        /// <summary>
+        /// Строковое представление значения тега
+        /// </summary>
+        public override string ValueAsString
+        {
+            get
+            {
+                var tagEnumValueAsInt32 = Convert.ToInt32(BitConverter.ToSingle(ValueAsMemX, 0));
+
+                if (slEnumsParty.ContainsKey(tagEnumValueAsInt32))
+                    return slEnumsParty[tagEnumValueAsInt32];
+
+                return String.Empty;
+            }
+        }
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
 		/// установить значение тега
 		/// </summary>
         public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
@@ -65,18 +91,6 @@ namespace SourceMOA
         {
             try
             {
-                var tagEnumValueAsSingle = BitConverter.ToSingle( memX, 0 );
-                var tagEnumValueAsInt32 = Convert.ToInt32(tagEnumValueAsSingle);
-
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = String.Empty;
-                if (slEnumsParty.ContainsKey(tagEnumValueAsInt32))
-                    newValueAsString = slEnumsParty[tagEnumValueAsInt32];
-                //if (ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
                 if ( this.BindindTag != null )
                     this.BindindTag.ReadValue();
 
@@ -107,16 +121,6 @@ namespace SourceMOA
                 if (tagValueAsObject is Boolean)
                     tagValueAsObject = (Boolean)tagValueAsObject ? (Single)1 : (Single)0;
 
-                string newValueAsString = String.Empty;
-                var indexenum = Convert.ToInt32((Single)tagValueAsObject);
-                if (slEnumsParty.ContainsKey(indexenum))
-                    newValueAsString = slEnumsParty[indexenum];
-                //if (ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                // Заполняем ValueAsString
-                ValueAsString = newValueAsString;
-
                 if (BindindTag != null)
                     BindindTag.ReadValue();
 
@@ -136,5 +140,7 @@ namespace SourceMOA
         {
             SetValueAsObject((Single)0, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }
