@@ -200,6 +200,10 @@ namespace SourceMOA
         /// </summary>
         protected virtual void SetValueAsObject(object tagValueAsObject, DateTime dt, VarQualityNewDs vq, TypeOfTag typeOfTag)
         {
+            var tmpValueAsMemX = ConverObjectToByteArray(tagValueAsObject);
+            if (tmpValueAsMemX.Equals(ValueAsMemX) && DataQuality == vq)
+                return;
+
             TimeStamp = dt;
             DataQuality = vq;
 
