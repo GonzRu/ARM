@@ -1,16 +1,14 @@
-﻿using System;
+﻿using HMI_MT_Settings;
+using InterfaceLibrary;
+using ProviderCustomerExchangeLib.DSRouterService;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
-using System.Linq;
 using System.ServiceModel;
 using System.Timers;
 using System.Xml.Linq;
-
-using HMI_MT_Settings;
-using System.Collections.Generic;
-using InterfaceLibrary;
-using ProviderCustomerExchangeLib.DSRouterService;
 
 namespace ProviderCustomerExchangeLib.WCF
 {
@@ -42,7 +40,8 @@ namespace ProviderCustomerExchangeLib.WCF
 		#endregion
 
         #region конструктор(ы)
-        public WcfProvider( XElement srcinfo )
+
+        public WcfProvider(XElement srcinfo)
 		{
             try
             {
@@ -87,7 +86,10 @@ namespace ProviderCustomerExchangeLib.WCF
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
             }
         }
-		#endregion
+
+	    #endregion
+
+        #region Private metods
 
         /// <summary>
         /// создание прокси из кода
@@ -140,6 +142,9 @@ namespace ProviderCustomerExchangeLib.WCF
 
             return true;
         }
+
+
+        #endregion
 
         #region public-методы реализации интерфейса IProviderCustomer
         public PacketQueque NetPackQ { get; set; }
