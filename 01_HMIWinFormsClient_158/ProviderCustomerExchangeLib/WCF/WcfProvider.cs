@@ -36,7 +36,8 @@ namespace ProviderCustomerExchangeLib.WCF
         private readonly CallbackHandler handler = new CallbackHandler( );
 
 	    private readonly Timer _pingTimer = new Timer(3000);
-	    private readonly Timer _createConnectionTimer = new Timer();
+	    private readonly Timer _createConnectionTimer;
+
 		#endregion
 
         #region конструктор(ы)
@@ -48,37 +49,18 @@ namespace ProviderCustomerExchangeLib.WCF
                 HMI_Settings.IPADDRES_SERVER = srcinfo.Element("IPAddress").Attribute("value").Value;
                 HMI_Settings.PORTin = int.Parse(srcinfo.Element("Port").Attribute("value").Value);
 
-                //CreateProxyFromCode( );
-
                 arrForReceiveData = new ArrayForExchange();
                 arrForReceiveData.packetAppearance += this.ArrForReceiveDataPacketAppearance;
 
                 bgw.DoWork += this.BgwDoWork;
 
-                _pingTimer.Elapsed += delegate
-                                     {
-                                         try
-                                         {
-                                             _pingTimer.Stop();
-                                             (WCFproxy as DSRouterClient).GetCurrentDateTime();
-                                             _pingTimer.Start();
-                                         }
-                                         catch ( Exception exception )
-                                         {
-                                             var connectionLost = OnDSCommunicationLoss;
-                                             if (connectionLost != null)
-                                                 connectionLost(true);
-
-                                             _createConnectionTimer.Start();
-                                         }
-
-
-                                     };
+                _createConnectionTimer = new Timer();
+                _pingTimer.Elapsed += PingTimerOnElapsed;
                 _pingTimer.Interval = 3000;
 
                 _createConnectionTimer = new Timer();
                 _createConnectionTimer.Interval = 3000;
-                _createConnectionTimer.Elapsed += (sender, args) => CreateProxyFromCode();
+                _createConnectionTimer.Elapsed += CreateConnectionTimerOnElapsed;
                 _createConnectionTimer.Start();
             }
             catch (Exception ex)
@@ -91,58 +73,64 @@ namespace ProviderCustomerExchangeLib.WCF
 
         #region Private metods
 
+        #region Методы для работы с созданием и поддержанием канала связи
+
         /// <summary>
-        /// создание прокси из кода
+        /// Создаем прокси из кода
         /// </summary>
-        private bool CreateProxyFromCode( )
+	    private void CreateDsRouterProxy()
+	    {
+            _createConnectionTimer.Stop();
+
+            if (WCFproxy != null)
+            {
+                (WCFproxy as DSRouterClient).GetTagsValueCompleted -= OnGetTagsValueCompleted;
+                (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted -= OnGetTagsValuesUpdatedCompleted;
+            }
+
+            var endPointAddr = string.Format("net.tcp://{0}:{1}/DSRouter.DSRouterService/DSRouterService.svc", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin);
+            var tcpBinding = new NetTcpBinding();
+            tcpBinding.Security.Mode = SecurityMode.None;
+            tcpBinding.MaxReceivedMessageSize = int.MaxValue; // 150000000;
+            tcpBinding.MaxBufferSize = int.MaxValue; // 1500000;
+            tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
+
+            var endpointAddress = new EndpointAddress(endPointAddr);
+            WCFproxy = new DSRouterClient(new InstanceContext(handler), tcpBinding, endpointAddress);
+
+            handler.OnNewError += NewErrorFromCallBackHandler;
+
+            (WCFproxy as DSRouterClient).GetTagsValueCompleted += OnGetTagsValueCompleted;
+            (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted += OnGetTagsValuesUpdatedCompleted;
+
+            (WCFproxy as DSRouterClient).Open();
+	    }
+
+        /// <summary>
+        /// Оповещает всех о том, что соединение установлено
+        /// </summary>
+	    private void ConnectionEstablished()
         {
-            try
-            {
-                _createConnectionTimer.Stop();
+            var onProxyRecreated = OnProxyRecreated;
+            if (onProxyRecreated != null)
+                onProxyRecreated();
 
-                if (WCFproxy != null)
-                {
-                    (WCFproxy as DSRouterClient).GetTagsValueCompleted -= OnGetTagsValueCompleted;
-                    (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted -= OnGetTagsValuesUpdatedCompleted;
-                }
+            var onDsCommunicationLoss = OnDSCommunicationLoss;
+            if (onDsCommunicationLoss != null)
+                onDsCommunicationLoss(false);
+	    }
 
-                var endPointAddr = string.Format( "net.tcp://{0}:{1}/DSRouter.DSRouterService/DSRouterService.svc", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin );
-                var tcpBinding = new NetTcpBinding();
-                tcpBinding.Security.Mode = SecurityMode.None;
-                tcpBinding.MaxReceivedMessageSize = int.MaxValue; // 150000000;
-                tcpBinding.MaxBufferSize = int.MaxValue; // 1500000;
-                tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
+        /// <summary>
+        /// Оповещает всех о том, что соединение разорвано
+        /// </summary>
+	    private void ConnectionClosed()
+	    {
+            var connectionLost = OnDSCommunicationLoss;
+            if (connectionLost != null)
+                connectionLost(true);
+	    }
 
-                var endpointAddress = new EndpointAddress( endPointAddr );
-                WCFproxy = new DSRouterClient(new InstanceContext(handler), tcpBinding, endpointAddress);
-
-                handler.OnNewError += NewErrorFromCallBackHandler;
-
-                (WCFproxy as DSRouterClient).GetTagsValueCompleted += OnGetTagsValueCompleted;
-                (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted += OnGetTagsValuesUpdatedCompleted;
-
-                (WCFproxy as DSRouterClient).Open();
-            }
-            catch ( Exception ex )
-            {
-                Console.WriteLine("Не удалось установить соединение с роутером.");
-
-                _createConnectionTimer.Start();
-
-                return false;
-            }
-
-            _pingTimer.Start();
-
-            if (OnProxyRecreated != null)
-                OnProxyRecreated();
-
-            if (OnDSCommunicationLoss != null)
-                OnDSCommunicationLoss(false);
-
-            return true;
-        }
-
+        #endregion
 
         #endregion
 
@@ -438,11 +426,58 @@ namespace ProviderCustomerExchangeLib.WCF
             }
         }
 
-
         private void NewErrorFromCallBackHandler(string errorStr)
         {
             throw new NotImplementedException("NewErrorFromCallBackHandler");
         }
+        #endregion
+
+        #region Handlers
+
+        /// <summary>
+        /// Событие срабатывания таймера создания прокси
+        /// </summary>
+        private void CreateConnectionTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            _createConnectionTimer.Stop();
+
+            try
+            {
+                CreateDsRouterProxy();
+
+                ConnectionEstablished();
+
+                _pingTimer.Start();
+            }
+            catch (Exception)
+            {
+                /*
+                 * Из-за того, как сделано отображение состояния связи
+                 * в главном окне, то приходится каждый раз вызывать событие
+                 * о потери связи.
+                 */
+                ConnectionClosed();
+
+                _createConnectionTimer.Start();
+            }
+        }
+
+        private void PingTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            try
+            {
+                _pingTimer.Stop();
+
+                (WCFproxy as DSRouterClient).GetCurrentDateTime();
+
+                _pingTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                _createConnectionTimer.Start();
+            }
+        }
+
         #endregion
     }
 }
