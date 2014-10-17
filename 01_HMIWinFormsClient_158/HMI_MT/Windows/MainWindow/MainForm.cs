@@ -218,20 +218,10 @@ namespace HMI_MT
         /// реакция на потерю связи с DS
         /// </summary>
         void CONFIGURATION_OnConfigDSCommunicationLoss4Client(bool state)
-        {
-            // * информация о связи с фк поступает от сервера как пакет типа 8, 
-            // * при его обработке устанавливаются признаки в классе фк для верхнего уровня
-            // * и мы ими здесь пользуемся для отображения, кроме этого эти признаки используются 
-            // * в функции Configurator.ReceivePacketInThread()
-            // */
-
-            StringBuilder sbm_noConnection = new StringBuilder();
-
-            // формируем итоговое сообщение в строке статуса о состоянии фк    
+        {  
             if (state)
             {
-                sbm_noConnection.Append("Нет связи с Сервером данных ");
-                LinkSetTextISB(sbConnectFC, sbm_noConnection.ToString(), Color.Yellow);
+                LinkSetTextISB(sbConnectFC, "Нет связи с Сервером данных ", Color.Yellow);
                 ResetSchemaStateProtocol();
             }
             else
