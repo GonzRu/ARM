@@ -24,13 +24,35 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagString : Tag
-	{
+    {
+        #region Constructors
+
         public TagString()
         {
             TypeOfTagHMI = TypeOfTag.String;
         }
 
-		/// <summary>
+        #endregion
+
+        #region Public properties
+
+        /// <summary>
+        /// Строковое представление значения тега
+        /// </summary>
+        public override string ValueAsString
+        {
+            get
+            {
+                var enco = Encoding.GetEncoding(Tag.StringValueEncoding);
+                return enco.GetString(ValueAsMemX);
+            }
+        }
+
+        #endregion
+
+        #region Public metods
+
+        /// <summary>
 		/// установить значение тега
 		/// </summary>
         public override void SetValue(byte[] memX, DateTime dt, VarQualityNewDs vq)
@@ -53,14 +75,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                var enco = Encoding.GetEncoding( Tag.StringValueEncoding );
-                string newValueAsString = enco.GetString( memX );
-                //if (ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
                 if ( this.BindindTag != null )
                     this.BindindTag.ReadValue();
 
@@ -79,12 +93,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                //if (ValueAsString == tagValueAsObject.ToString() && DataQuality == vq)
-                //    return;
-
-                ValueAsString = tagValueAsObject.ToString();
-
                 if (BindindTag != null)
                     BindindTag.ReadValue();
 
@@ -102,24 +110,9 @@ namespace SourceMOA
         /// </summary>
         public override void SetDefaultValue()
         {
-            try
-            {
-                string defvalue = string.Empty;
-                this.ValueAsString = defvalue;
-
-                System.Text.Encoding enco = Encoding.GetEncoding(Tag.StringValueEncoding);
-
-                byte[] memx = enco.GetBytes(defvalue);
-
-                if (this.BindindTag != null)
-                    this.BindindTag.ReadValue();
-
-                //base.SetValue(memx);
-            }
-            catch (Exception ex)
-            {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-            }
+            SetValueAsObject(String.Empty, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }

@@ -15,12 +15,87 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DSTagValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LstError", Namespace="http://schemas.datacontract.org/2004/07/InterfaceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class LstError : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[] lstErrorField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] lstError {
+            get {
+                return this.lstErrorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.lstErrorField, value) != true)) {
+                    this.lstErrorField = value;
+                    this.RaisePropertyChanged("lstError");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterTagValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue>))]
-    public partial class DSTagValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(object[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[][]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventDataType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
+    public partial class DSRouterTagValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -79,15 +154,18 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LstError", Namespace="http://schemas.datacontract.org/2004/07/WcfDataServer_Lib")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterAuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
     [System.SerializableAttribute()]
-    public partial class LstError : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class DSRouterAuthResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] lstErrorField;
+        private ProviderCustomerExchangeLib.DSRouterService.AuthResult AuthResultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.DSRouterUser UserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -100,14 +178,1279 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] lstError {
+        public ProviderCustomerExchangeLib.DSRouterService.AuthResult AuthResult {
             get {
-                return this.lstErrorField;
+                return this.AuthResultField;
             }
             set {
-                if ((object.ReferenceEquals(this.lstErrorField, value) != true)) {
-                    this.lstErrorField = value;
-                    this.RaisePropertyChanged("lstError");
+                if ((this.AuthResultField.Equals(value) != true)) {
+                    this.AuthResultField = value;
+                    this.RaisePropertyChanged("AuthResult");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterTrendSettings", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterTrendSettings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<float> AbsoluteErrorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EnableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private uint MaxCacheMinutesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private uint MaxCacheValuesCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<float> RelativeErrorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private uint SampleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<float> AbsoluteError {
+            get {
+                return this.AbsoluteErrorField;
+            }
+            set {
+                if ((this.AbsoluteErrorField.Equals(value) != true)) {
+                    this.AbsoluteErrorField = value;
+                    this.RaisePropertyChanged("AbsoluteError");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Enable {
+            get {
+                return this.EnableField;
+            }
+            set {
+                if ((this.EnableField.Equals(value) != true)) {
+                    this.EnableField = value;
+                    this.RaisePropertyChanged("Enable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public uint MaxCacheMinutes {
+            get {
+                return this.MaxCacheMinutesField;
+            }
+            set {
+                if ((this.MaxCacheMinutesField.Equals(value) != true)) {
+                    this.MaxCacheMinutesField = value;
+                    this.RaisePropertyChanged("MaxCacheMinutes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public uint MaxCacheValuesCount {
+            get {
+                return this.MaxCacheValuesCountField;
+            }
+            set {
+                if ((this.MaxCacheValuesCountField.Equals(value) != true)) {
+                    this.MaxCacheValuesCountField = value;
+                    this.RaisePropertyChanged("MaxCacheValuesCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<float> RelativeError {
+            get {
+                return this.RelativeErrorField;
+            }
+            set {
+                if ((this.RelativeErrorField.Equals(value) != true)) {
+                    this.RelativeErrorField = value;
+                    this.RaisePropertyChanged("RelativeError");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public uint Sample {
+            get {
+                return this.SampleField;
+            }
+            set {
+                if ((this.SampleField.Equals(value) != true)) {
+                    this.SampleField = value;
+                    this.RaisePropertyChanged("Sample");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterDailyReportSettings", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterDailyReportSettings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension ReportExtensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportTamplateNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension ReportExtension {
+            get {
+                return this.ReportExtensionField;
+            }
+            set {
+                if ((this.ReportExtensionField.Equals(value) != true)) {
+                    this.ReportExtensionField = value;
+                    this.RaisePropertyChanged("ReportExtension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportTamplateName {
+            get {
+                return this.ReportTamplateNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportTamplateNameField, value) != true)) {
+                    this.ReportTamplateNameField = value;
+                    this.RaisePropertyChanged("ReportTamplateName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterReportExtension", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    public enum DSRouterReportExtension : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        xls = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        xlsx = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        doc = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        pdf = 3,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterEventsReportSettings", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterEventsReportSettings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private uint DeviceGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ushort DsGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EndDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension ReportExtensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportTamplateNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime StartDateTimeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public uint DeviceGuid {
+            get {
+                return this.DeviceGuidField;
+            }
+            set {
+                if ((this.DeviceGuidField.Equals(value) != true)) {
+                    this.DeviceGuidField = value;
+                    this.RaisePropertyChanged("DeviceGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ushort DsGuid {
+            get {
+                return this.DsGuidField;
+            }
+            set {
+                if ((this.DsGuidField.Equals(value) != true)) {
+                    this.DsGuidField = value;
+                    this.RaisePropertyChanged("DsGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EndDateTime {
+            get {
+                return this.EndDateTimeField;
+            }
+            set {
+                if ((this.EndDateTimeField.Equals(value) != true)) {
+                    this.EndDateTimeField = value;
+                    this.RaisePropertyChanged("EndDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension ReportExtension {
+            get {
+                return this.ReportExtensionField;
+            }
+            set {
+                if ((this.ReportExtensionField.Equals(value) != true)) {
+                    this.ReportExtensionField = value;
+                    this.RaisePropertyChanged("ReportExtension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportTamplateName {
+            get {
+                return this.ReportTamplateNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportTamplateNameField, value) != true)) {
+                    this.ReportTamplateNameField = value;
+                    this.RaisePropertyChanged("ReportTamplateName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime StartDateTime {
+            get {
+                return this.StartDateTimeField;
+            }
+            set {
+                if ((this.StartDateTimeField.Equals(value) != true)) {
+                    this.StartDateTimeField = value;
+                    this.RaisePropertyChanged("StartDateTime");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterTagsReportSettings", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterTagsReportSettings : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EndDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private uint IntervalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension ReportExtensionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReportTamplateNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime StartDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[] TagsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EndDateTime {
+            get {
+                return this.EndDateTimeField;
+            }
+            set {
+                if ((this.EndDateTimeField.Equals(value) != true)) {
+                    this.EndDateTimeField = value;
+                    this.RaisePropertyChanged("EndDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public uint Interval {
+            get {
+                return this.IntervalField;
+            }
+            set {
+                if ((this.IntervalField.Equals(value) != true)) {
+                    this.IntervalField = value;
+                    this.RaisePropertyChanged("Interval");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension ReportExtension {
+            get {
+                return this.ReportExtensionField;
+            }
+            set {
+                if ((this.ReportExtensionField.Equals(value) != true)) {
+                    this.ReportExtensionField = value;
+                    this.RaisePropertyChanged("ReportExtension");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReportTamplateName {
+            get {
+                return this.ReportTamplateNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReportTamplateNameField, value) != true)) {
+                    this.ReportTamplateNameField = value;
+                    this.RaisePropertyChanged("ReportTamplateName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime StartDateTime {
+            get {
+                return this.StartDateTimeField;
+            }
+            set {
+                if ((this.StartDateTimeField.Equals(value) != true)) {
+                    this.StartDateTimeField = value;
+                    this.RaisePropertyChanged("StartDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] Tags {
+            get {
+                return this.TagsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TagsField, value) != true)) {
+                    this.TagsField = value;
+                    this.RaisePropertyChanged("Tags");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RouterAuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class RouterAuthResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult> DSAuthResultsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult> DSAuthResults {
+            get {
+                return this.DSAuthResultsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DSAuthResultsField, value) != true)) {
+                    this.DSAuthResultsField = value;
+                    this.RaisePropertyChanged("DSAuthResults");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthResult", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    public enum AuthResult : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ok = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WrongLoginOrPassword = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoConnectionToDb = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoConnectionToDs = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 5,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterUser", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup DsRouterUserGroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EditDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDateTime {
+            get {
+                return this.CreateDateTimeField;
+            }
+            set {
+                if ((this.CreateDateTimeField.Equals(value) != true)) {
+                    this.CreateDateTimeField = value;
+                    this.RaisePropertyChanged("CreateDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup DsRouterUserGroup {
+            get {
+                return this.DsRouterUserGroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DsRouterUserGroupField, value) != true)) {
+                    this.DsRouterUserGroupField = value;
+                    this.RaisePropertyChanged("DsRouterUserGroup");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EditDateTime {
+            get {
+                return this.EditDateTimeField;
+            }
+            set {
+                if ((this.EditDateTimeField.Equals(value) != true)) {
+                    this.EditDateTimeField = value;
+                    this.RaisePropertyChanged("EditDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserID {
+            get {
+                return this.UserIDField;
+            }
+            set {
+                if ((this.UserIDField.Equals(value) != true)) {
+                    this.UserIDField = value;
+                    this.RaisePropertyChanged("UserID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterUserGroup", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterUserGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EditDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GroupCommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GroupIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GroupNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GroupRightField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDateTime {
+            get {
+                return this.CreateDateTimeField;
+            }
+            set {
+                if ((this.CreateDateTimeField.Equals(value) != true)) {
+                    this.CreateDateTimeField = value;
+                    this.RaisePropertyChanged("CreateDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EditDateTime {
+            get {
+                return this.EditDateTimeField;
+            }
+            set {
+                if ((this.EditDateTimeField.Equals(value) != true)) {
+                    this.EditDateTimeField = value;
+                    this.RaisePropertyChanged("EditDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GroupComment {
+            get {
+                return this.GroupCommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupCommentField, value) != true)) {
+                    this.GroupCommentField = value;
+                    this.RaisePropertyChanged("GroupComment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GroupID {
+            get {
+                return this.GroupIDField;
+            }
+            set {
+                if ((this.GroupIDField.Equals(value) != true)) {
+                    this.GroupIDField = value;
+                    this.RaisePropertyChanged("GroupID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GroupName {
+            get {
+                return this.GroupNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupNameField, value) != true)) {
+                    this.GroupNameField = value;
+                    this.RaisePropertyChanged("GroupName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GroupRight {
+            get {
+                return this.GroupRightField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupRightField, value) != true)) {
+                    this.GroupRightField = value;
+                    this.RaisePropertyChanged("GroupRight");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterEventValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterEventValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private uint DevGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ushort DsGuidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EventDataIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ProviderCustomerExchangeLib.DSRouterService.DSRouterEventDataType EventDataTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EventIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EventSourceCommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EventSourceNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EventTextField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EventTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsNeedReceiptField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsReceiptedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceiptMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ReceiptTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceiptUserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public uint DevGuid {
+            get {
+                return this.DevGuidField;
+            }
+            set {
+                if ((this.DevGuidField.Equals(value) != true)) {
+                    this.DevGuidField = value;
+                    this.RaisePropertyChanged("DevGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ushort DsGuid {
+            get {
+                return this.DsGuidField;
+            }
+            set {
+                if ((this.DsGuidField.Equals(value) != true)) {
+                    this.DsGuidField = value;
+                    this.RaisePropertyChanged("DsGuid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int EventDataID {
+            get {
+                return this.EventDataIDField;
+            }
+            set {
+                if ((this.EventDataIDField.Equals(value) != true)) {
+                    this.EventDataIDField = value;
+                    this.RaisePropertyChanged("EventDataID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterEventDataType EventDataType {
+            get {
+                return this.EventDataTypeField;
+            }
+            set {
+                if ((this.EventDataTypeField.Equals(value) != true)) {
+                    this.EventDataTypeField = value;
+                    this.RaisePropertyChanged("EventDataType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int EventID {
+            get {
+                return this.EventIDField;
+            }
+            set {
+                if ((this.EventIDField.Equals(value) != true)) {
+                    this.EventIDField = value;
+                    this.RaisePropertyChanged("EventID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EventSourceComment {
+            get {
+                return this.EventSourceCommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventSourceCommentField, value) != true)) {
+                    this.EventSourceCommentField = value;
+                    this.RaisePropertyChanged("EventSourceComment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EventSourceName {
+            get {
+                return this.EventSourceNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventSourceNameField, value) != true)) {
+                    this.EventSourceNameField = value;
+                    this.RaisePropertyChanged("EventSourceName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EventText {
+            get {
+                return this.EventTextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EventTextField, value) != true)) {
+                    this.EventTextField = value;
+                    this.RaisePropertyChanged("EventText");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EventTime {
+            get {
+                return this.EventTimeField;
+            }
+            set {
+                if ((this.EventTimeField.Equals(value) != true)) {
+                    this.EventTimeField = value;
+                    this.RaisePropertyChanged("EventTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsNeedReceipt {
+            get {
+                return this.IsNeedReceiptField;
+            }
+            set {
+                if ((this.IsNeedReceiptField.Equals(value) != true)) {
+                    this.IsNeedReceiptField = value;
+                    this.RaisePropertyChanged("IsNeedReceipt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsReceipted {
+            get {
+                return this.IsReceiptedField;
+            }
+            set {
+                if ((this.IsReceiptedField.Equals(value) != true)) {
+                    this.IsReceiptedField = value;
+                    this.RaisePropertyChanged("IsReceipted");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceiptMessage {
+            get {
+                return this.ReceiptMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceiptMessageField, value) != true)) {
+                    this.ReceiptMessageField = value;
+                    this.RaisePropertyChanged("ReceiptMessage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ReceiptTime {
+            get {
+                return this.ReceiptTimeField;
+            }
+            set {
+                if ((this.ReceiptTimeField.Equals(value) != true)) {
+                    this.ReceiptTimeField = value;
+                    this.RaisePropertyChanged("ReceiptTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceiptUser {
+            get {
+                return this.ReceiptUserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceiptUserField, value) != true)) {
+                    this.ReceiptUserField = value;
+                    this.RaisePropertyChanged("ReceiptUser");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterEventDataType", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    public enum DSRouterEventDataType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ustavki = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Alarm = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Oscillogram = 3,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterSettingsSet", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterSettingsSet : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SettingsSetCommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime SettingsSetDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SettingsSetIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SettingsSetComment {
+            get {
+                return this.SettingsSetCommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SettingsSetCommentField, value) != true)) {
+                    this.SettingsSetCommentField = value;
+                    this.RaisePropertyChanged("SettingsSetComment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime SettingsSetDateTime {
+            get {
+                return this.SettingsSetDateTimeField;
+            }
+            set {
+                if ((this.SettingsSetDateTimeField.Equals(value) != true)) {
+                    this.SettingsSetDateTimeField = value;
+                    this.RaisePropertyChanged("SettingsSetDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SettingsSetID {
+            get {
+                return this.SettingsSetIDField;
+            }
+            set {
+                if ((this.SettingsSetIDField.Equals(value) != true)) {
+                    this.SettingsSetIDField = value;
+                    this.RaisePropertyChanged("SettingsSetID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EnumerationCommandStates", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    public enum EnumerationCommandStates : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        undefined = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        sentFromClientToRouter = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        sentFromRouterToDataServer = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        sentFromDataServerToFC = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        sentFromFCToDevice = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        complete = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        cmdactive = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        cmdCancelAtDataServerByTimer = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        cmdDiscardByDataServer = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        cmdDiscardEcuRtu = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        cmdUnknown = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        cmdNotSend_DSR_2_DS = 11,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DSRouterDocumentDataValue", Namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS")]
+    [System.SerializableAttribute()]
+    public partial class DSRouterDocumentDataValue : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DocumentAddDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DocumentCommentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DocumentFileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DocumentIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DocumentUserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime DocumentAddDate {
+            get {
+                return this.DocumentAddDateField;
+            }
+            set {
+                if ((this.DocumentAddDateField.Equals(value) != true)) {
+                    this.DocumentAddDateField = value;
+                    this.RaisePropertyChanged("DocumentAddDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentComment {
+            get {
+                return this.DocumentCommentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentCommentField, value) != true)) {
+                    this.DocumentCommentField = value;
+                    this.RaisePropertyChanged("DocumentComment");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentFileName {
+            get {
+                return this.DocumentFileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentFileNameField, value) != true)) {
+                    this.DocumentFileNameField = value;
+                    this.RaisePropertyChanged("DocumentFileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DocumentID {
+            get {
+                return this.DocumentIDField;
+            }
+            set {
+                if ((this.DocumentIDField.Equals(value) != true)) {
+                    this.DocumentIDField = value;
+                    this.RaisePropertyChanged("DocumentID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DocumentUserName {
+            get {
+                return this.DocumentUserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DocumentUserNameField, value) != true)) {
+                    this.DocumentUserNameField = value;
+                    this.RaisePropertyChanged("DocumentUserName");
                 }
             }
         }
@@ -125,6 +1468,86 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DSRouterService.IDSRouter", CallbackContract=typeof(ProviderCustomerExchangeLib.DSRouterService.IDSRouterCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IDSRouter {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagTrend", ReplyAction="http://tempuri.org/IDSRouter/GetTagTrendResponse")]
+        System.Tuple<System.DateTime, object>[] GetTagTrend(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagTrend", ReplyAction="http://tempuri.org/IDSRouter/GetTagTrendResponse")]
+        System.IAsyncResult BeginGetTagTrend(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime, System.AsyncCallback callback, object asyncState);
+        
+        System.Tuple<System.DateTime, object>[] EndGetTagTrend(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagTrendsList", ReplyAction="http://tempuri.org/IDSRouter/GetTagTrendsListResponse")]
+        System.Tuple<System.DateTime, object>[][] GetTagTrendsList(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagTrendsList", ReplyAction="http://tempuri.org/IDSRouter/GetTagTrendsListResponse")]
+        System.IAsyncResult BeginGetTagTrendsList(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime, System.AsyncCallback callback, object asyncState);
+        
+        System.Tuple<System.DateTime, object>[][] EndGetTagTrendsList(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTrendSettings", ReplyAction="http://tempuri.org/IDSRouter/GetTrendSettingsResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings GetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTrendSettings", ReplyAction="http://tempuri.org/IDSRouter/GetTrendSettingsResponse")]
+        System.IAsyncResult BeginGetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings EndGetTrendSettings(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/SetTrendSettings", ReplyAction="http://tempuri.org/IDSRouter/SetTrendSettingsResponse")]
+        void SetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid, ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings trendSettings);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/SetTrendSettings", ReplyAction="http://tempuri.org/IDSRouter/SetTrendSettingsResponse")]
+        System.IAsyncResult BeginSetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid, ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings trendSettings, System.AsyncCallback callback, object asyncState);
+        
+        void EndSetTrendSettings(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDailyReport", ReplyAction="http://tempuri.org/IDSRouter/GetDailyReportResponse")]
+        string GetDailyReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetDailyReport", ReplyAction="http://tempuri.org/IDSRouter/GetDailyReportResponse")]
+        System.IAsyncResult BeginGetDailyReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings, System.AsyncCallback callback, object asyncState);
+        
+        string EndGetDailyReport(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDailyReportAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetDailyReportAsByteArrayResponse")]
+        byte[] GetDailyReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetDailyReportAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetDailyReportAsByteArrayResponse")]
+        System.IAsyncResult BeginGetDailyReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings, System.AsyncCallback callback, object asyncState);
+        
+        byte[] EndGetDailyReportAsByteArray(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetEventsReport", ReplyAction="http://tempuri.org/IDSRouter/GetEventsReportResponse")]
+        string GetEventsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetEventsReport", ReplyAction="http://tempuri.org/IDSRouter/GetEventsReportResponse")]
+        System.IAsyncResult BeginGetEventsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings, System.AsyncCallback callback, object asyncState);
+        
+        string EndGetEventsReport(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetEventsReportAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetEventsReportAsByteArrayResponse")]
+        byte[] GetEventsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetEventsReportAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetEventsReportAsByteArrayResponse")]
+        System.IAsyncResult BeginGetEventsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings, System.AsyncCallback callback, object asyncState);
+        
+        byte[] EndGetEventsReportAsByteArray(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagsReport", ReplyAction="http://tempuri.org/IDSRouter/GetTagsReportResponse")]
+        string GetTagsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagsReport", ReplyAction="http://tempuri.org/IDSRouter/GetTagsReportResponse")]
+        System.IAsyncResult BeginGetTagsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings, System.AsyncCallback callback, object asyncState);
+        
+        string EndGetTagsReport(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagsReportAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetTagsReportAsByteArrayResponse")]
+        byte[] GetTagsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagsReportAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetTagsReportAsByteArrayResponse")]
+        System.IAsyncResult BeginGetTagsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings, System.AsyncCallback callback, object asyncState);
+        
+        byte[] EndGetTagsReportAsByteArray(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDSValueAsByteBuffer", ReplyAction="http://tempuri.org/IDSRouter/GetDSValueAsByteBufferResponse")]
         byte[] GetDSValueAsByteBuffer(ushort DSGuid, byte[] arr);
@@ -302,38 +1725,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         
         string EndGetRTUTagName(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagsValue", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValueResponse")]
-        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> GetTagsValue(string[] request);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagsValue", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValueResponse")]
-        System.IAsyncResult BeginGetTagsValue(string[] request, System.AsyncCallback callback, object asyncState);
-        
-        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> EndGetTagsValue(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagsValuesUpdated", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValuesUpdatedResponse")]
-        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> GetTagsValuesUpdated();
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagsValuesUpdated", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValuesUpdatedResponse")]
-        System.IAsyncResult BeginGetTagsValuesUpdated(System.AsyncCallback callback, object asyncState);
-        
-        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> EndGetTagsValuesUpdated(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDSRouter/SubscribeRTUTags")]
-        void SubscribeRTUTags(string[] request);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IDSRouter/SubscribeRTUTags")]
-        System.IAsyncResult BeginSubscribeRTUTags(string[] request, System.AsyncCallback callback, object asyncState);
-        
-        void EndSubscribeRTUTags(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDSRouter/UnscribeRTUTags")]
-        void UnscribeRTUTags(string[] request);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IDSRouter/UnscribeRTUTags")]
-        System.IAsyncResult BeginUnscribeRTUTags(string[] request, System.AsyncCallback callback, object asyncState);
-        
-        void EndUnscribeRTUTags(System.IAsyncResult result);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDSLastErrorsGUID", ReplyAction="http://tempuri.org/IDSRouter/GetDSLastErrorsGUIDResponse")]
         ProviderCustomerExchangeLib.DSRouterService.LstError GetDSLastErrorsGUID(ushort DSGuid);
         
@@ -381,6 +1772,434 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         System.IAsyncResult BeginPing(System.AsyncCallback callback, object asyncState);
         
         void EndPing(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagsValue", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValueResponse")]
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetTagsValue(string[] ATagIDsList);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagsValue", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValueResponse")]
+        System.IAsyncResult BeginGetTagsValue(string[] ATagIDsList, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetTagsValue(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagsValuesUpdated", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValuesUpdatedResponse")]
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetTagsValuesUpdated();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagsValuesUpdated", ReplyAction="http://tempuri.org/IDSRouter/GetTagsValuesUpdatedResponse")]
+        System.IAsyncResult BeginGetTagsValuesUpdated(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetTagsValuesUpdated(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/Authorization", ReplyAction="http://tempuri.org/IDSRouter/AuthorizationResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult Authorization(string userName, string userPassword, bool isFirstEnter);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/Authorization", ReplyAction="http://tempuri.org/IDSRouter/AuthorizationResponse")]
+        System.IAsyncResult BeginAuthorization(string userName, string userPassword, bool isFirstEnter, System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult EndAuthorization(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetUsersList", ReplyAction="http://tempuri.org/IDSRouter/GetUsersListResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[] GetUsersList();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetUsersList", ReplyAction="http://tempuri.org/IDSRouter/GetUsersListResponse")]
+        System.IAsyncResult BeginGetUsersList(System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[] EndGetUsersList(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetUserGroupsList", ReplyAction="http://tempuri.org/IDSRouter/GetUserGroupsListResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[] GetUserGroupsList();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetUserGroupsList", ReplyAction="http://tempuri.org/IDSRouter/GetUserGroupsListResponse")]
+        System.IAsyncResult BeginGetUserGroupsList(System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[] EndGetUserGroupsList(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/CreateUserGroup", ReplyAction="http://tempuri.org/IDSRouter/CreateUserGroupResponse")]
+        bool CreateUserGroup(string groupName, string groupComment, string groupRight);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/CreateUserGroup", ReplyAction="http://tempuri.org/IDSRouter/CreateUserGroupResponse")]
+        System.IAsyncResult BeginCreateUserGroup(string groupName, string groupComment, string groupRight, System.AsyncCallback callback, object asyncState);
+        
+        bool EndCreateUserGroup(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/CreateUser", ReplyAction="http://tempuri.org/IDSRouter/CreateUserResponse")]
+        bool CreateUser(string userName, string userPassword, string userComment, int userGroupID);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/CreateUser", ReplyAction="http://tempuri.org/IDSRouter/CreateUserResponse")]
+        System.IAsyncResult BeginCreateUser(string userName, string userPassword, string userComment, int userGroupID, System.AsyncCallback callback, object asyncState);
+        
+        bool EndCreateUser(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetEvents", ReplyAction="http://tempuri.org/IDSRouter/GetEventsResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] GetEvents(System.DateTime dateTimeFrom, System.DateTime dateTimeTo, bool needSystemEvents, bool needUserEvents, bool needTerminalEvents, System.Tuple<ushort, uint>[] requestDevicesList);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetEvents", ReplyAction="http://tempuri.org/IDSRouter/GetEventsResponse")]
+        System.IAsyncResult BeginGetEvents(System.DateTime dateTimeFrom, System.DateTime dateTimeTo, bool needSystemEvents, bool needUserEvents, bool needTerminalEvents, System.Tuple<ushort, uint>[] requestDevicesList, System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] EndGetEvents(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetOscillogramAsUrlByID", ReplyAction="http://tempuri.org/IDSRouter/GetOscillogramAsUrlByIDResponse")]
+        string GetOscillogramAsUrlByID(ushort dsGuid, int eventDataID);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetOscillogramAsUrlByID", ReplyAction="http://tempuri.org/IDSRouter/GetOscillogramAsUrlByIDResponse")]
+        System.IAsyncResult BeginGetOscillogramAsUrlByID(ushort dsGuid, int eventDataID, System.AsyncCallback callback, object asyncState);
+        
+        string EndGetOscillogramAsUrlByID(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetOscillogramAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetOscillogramAsByteArrayResponse")]
+        System.Tuple<byte[], string> GetOscillogramAsByteArray(ushort dsGuid, int eventDataID);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetOscillogramAsByteArray", ReplyAction="http://tempuri.org/IDSRouter/GetOscillogramAsByteArrayResponse")]
+        System.IAsyncResult BeginGetOscillogramAsByteArray(ushort dsGuid, int eventDataID, System.AsyncCallback callback, object asyncState);
+        
+        System.Tuple<byte[], string> EndGetOscillogramAsByteArray(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetHistoricalDataByID", ReplyAction="http://tempuri.org/IDSRouter/GetHistoricalDataByIDResponse")]
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetHistoricalDataByID(ushort dsGuid, int dataID);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetHistoricalDataByID", ReplyAction="http://tempuri.org/IDSRouter/GetHistoricalDataByIDResponse")]
+        System.IAsyncResult BeginGetHistoricalDataByID(ushort dsGuid, int dataID, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetHistoricalDataByID(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExist", ReplyAction="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExistResponse")]
+        bool IsNotReceiptedEventsExist();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExist", ReplyAction="http://tempuri.org/IDSRouter/IsNotReceiptedEventsExistResponse")]
+        System.IAsyncResult BeginIsNotReceiptedEventsExist(System.AsyncCallback callback, object asyncState);
+        
+        bool EndIsNotReceiptedEventsExist(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetNotReceiptedEvents", ReplyAction="http://tempuri.org/IDSRouter/GetNotReceiptedEventsResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] GetNotReceiptedEvents();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetNotReceiptedEvents", ReplyAction="http://tempuri.org/IDSRouter/GetNotReceiptedEventsResponse")]
+        System.IAsyncResult BeginGetNotReceiptedEvents(System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] EndGetNotReceiptedEvents(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/ReceiptAllEvents", ReplyAction="http://tempuri.org/IDSRouter/ReceiptAllEventsResponse")]
+        void ReceiptAllEvents(string receiptComment);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/ReceiptAllEvents", ReplyAction="http://tempuri.org/IDSRouter/ReceiptAllEventsResponse")]
+        System.IAsyncResult BeginReceiptAllEvents(string receiptComment, System.AsyncCallback callback, object asyncState);
+        
+        void EndReceiptAllEvents(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/ReceiptEvents", ReplyAction="http://tempuri.org/IDSRouter/ReceiptEventsResponse")]
+        void ReceiptEvents(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] eventValues, string receiptComment);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/ReceiptEvents", ReplyAction="http://tempuri.org/IDSRouter/ReceiptEventsResponse")]
+        System.IAsyncResult BeginReceiptEvents(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] eventValues, string receiptComment, System.AsyncCallback callback, object asyncState);
+        
+        void EndReceiptEvents(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetSettingsSetsList", ReplyAction="http://tempuri.org/IDSRouter/GetSettingsSetsListResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[] GetSettingsSetsList(ushort dsGuid, uint devGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetSettingsSetsList", ReplyAction="http://tempuri.org/IDSRouter/GetSettingsSetsListResponse")]
+        System.IAsyncResult BeginGetSettingsSetsList(ushort dsGuid, uint devGuid, System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[] EndGetSettingsSetsList(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetValuesFromSettingsSet", ReplyAction="http://tempuri.org/IDSRouter/GetValuesFromSettingsSetResponse")]
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetValuesFromSettingsSet(ushort dsGuid, int settingsSetID);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetValuesFromSettingsSet", ReplyAction="http://tempuri.org/IDSRouter/GetValuesFromSettingsSetResponse")]
+        System.IAsyncResult BeginGetValuesFromSettingsSet(ushort dsGuid, int settingsSetID, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetValuesFromSettingsSet(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/SaveSettingsToDevice", ReplyAction="http://tempuri.org/IDSRouter/SaveSettingsToDeviceResponse")]
+        void SaveSettingsToDevice(ushort dsGuid, uint devGuid, System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> tagsValues);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/SaveSettingsToDevice", ReplyAction="http://tempuri.org/IDSRouter/SaveSettingsToDeviceResponse")]
+        System.IAsyncResult BeginSaveSettingsToDevice(ushort dsGuid, uint devGuid, System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> tagsValues, System.AsyncCallback callback, object asyncState);
+        
+        void EndSaveSettingsToDevice(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/CommandRun", ReplyAction="http://tempuri.org/IDSRouter/CommandRunResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[][]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventDataType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
+        void CommandRun(string ACommandID, object[] AParameters);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/CommandRun", ReplyAction="http://tempuri.org/IDSRouter/CommandRunResponse")]
+        System.IAsyncResult BeginCommandRun(string ACommandID, object[] AParameters, System.AsyncCallback callback, object asyncState);
+        
+        void EndCommandRun(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/CommandStateCheck", ReplyAction="http://tempuri.org/IDSRouter/CommandStateCheckResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates CommandStateCheck(string ACommandID);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/CommandStateCheck", ReplyAction="http://tempuri.org/IDSRouter/CommandStateCheckResponse")]
+        System.IAsyncResult BeginCommandStateCheck(string ACommandID, System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates EndCommandStateCheck(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDocumentsList", ReplyAction="http://tempuri.org/IDSRouter/GetDocumentsListResponse")]
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[] GetDocumentsList(ushort dsGuid, int devGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetDocumentsList", ReplyAction="http://tempuri.org/IDSRouter/GetDocumentsListResponse")]
+        System.IAsyncResult BeginGetDocumentsList(ushort dsGuid, int devGuid, System.AsyncCallback callback, object asyncState);
+        
+        ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[] EndGetDocumentsList(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetDocumentByID", ReplyAction="http://tempuri.org/IDSRouter/GetDocumentByIDResponse")]
+        string GetDocumentByID(ushort dsGuid, int documentId);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetDocumentByID", ReplyAction="http://tempuri.org/IDSRouter/GetDocumentByIDResponse")]
+        System.IAsyncResult BeginGetDocumentByID(ushort dsGuid, int documentId, System.AsyncCallback callback, object asyncState);
+        
+        string EndGetDocumentByID(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/InitUploadFileSession", ReplyAction="http://tempuri.org/IDSRouter/InitUploadFileSessionResponse")]
+        bool InitUploadFileSession(ushort dsGuid, int devGuid, string fileName, string comment);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/InitUploadFileSession", ReplyAction="http://tempuri.org/IDSRouter/InitUploadFileSessionResponse")]
+        System.IAsyncResult BeginInitUploadFileSession(ushort dsGuid, int devGuid, string fileName, string comment, System.AsyncCallback callback, object asyncState);
+        
+        bool EndInitUploadFileSession(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/UploadFileChunk", ReplyAction="http://tempuri.org/IDSRouter/UploadFileChunkResponse")]
+        bool UploadFileChunk(byte[] fileChunkBytes);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/UploadFileChunk", ReplyAction="http://tempuri.org/IDSRouter/UploadFileChunkResponse")]
+        System.IAsyncResult BeginUploadFileChunk(byte[] fileChunkBytes, System.AsyncCallback callback, object asyncState);
+        
+        bool EndUploadFileChunk(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/SaveUploadedFile", ReplyAction="http://tempuri.org/IDSRouter/SaveUploadedFileResponse")]
+        string SaveUploadedFile();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/SaveUploadedFile", ReplyAction="http://tempuri.org/IDSRouter/SaveUploadedFileResponse")]
+        System.IAsyncResult BeginSaveUploadedFile(System.AsyncCallback callback, object asyncState);
+        
+        string EndSaveUploadedFile(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/TerminateUploadFileSession", ReplyAction="http://tempuri.org/IDSRouter/TerminateUploadFileSessionResponse")]
+        void TerminateUploadFileSession();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/TerminateUploadFileSession", ReplyAction="http://tempuri.org/IDSRouter/TerminateUploadFileSessionResponse")]
+        System.IAsyncResult BeginTerminateUploadFileSession(System.AsyncCallback callback, object asyncState);
+        
+        void EndTerminateUploadFileSession(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetCurrentDateTime", ReplyAction="http://tempuri.org/IDSRouter/GetCurrentDateTimeResponse")]
+        System.DateTime GetCurrentDateTime();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetCurrentDateTime", ReplyAction="http://tempuri.org/IDSRouter/GetCurrentDateTimeResponse")]
+        System.IAsyncResult BeginGetCurrentDateTime(System.AsyncCallback callback, object asyncState);
+        
+        System.DateTime EndGetCurrentDateTime(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDSRouter/SetTagValueFromHMI")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[][]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventDataType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
+        void SetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid, object valinobject);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IDSRouter/SetTagValueFromHMI")]
+        System.IAsyncResult BeginSetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid, object valinobject, System.AsyncCallback callback, object asyncState);
+        
+        void EndSetTagValueFromHMI(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDSRouter/ReSetTagValueFromHMI")]
+        void ReSetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IDSRouter/ReSetTagValueFromHMI")]
+        System.IAsyncResult BeginReSetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState);
+        
+        void EndReSetTagValueFromHMI(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatioResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[][]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventDataType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
+        object GetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/GetTagAnalogTransformationRatioResponse")]
+        System.IAsyncResult BeginGetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState);
+        
+        object EndGetTagAnalogTransformationRatio(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatioResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.LstError))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(byte[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<ushort, ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, object>[][]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<ushort, uint>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<byte[], string>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Tuple<System.DateTime, System.DateTime>))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterReportExtension))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterAuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.AuthResult))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventDataType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue))]
+        void SetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, object transformationRatio);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/SetTagAnalogTransformationRatioResponse")]
+        System.IAsyncResult BeginSetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, object transformationRatio, System.AsyncCallback callback, object asyncState);
+        
+        void EndSetTagAnalogTransformationRatio(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/ReSetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/ReSetTagAnalogTransformationRatioResponse")]
+        void ReSetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/ReSetTagAnalogTransformationRatio", ReplyAction="http://tempuri.org/IDSRouter/ReSetTagAnalogTransformationRatioResponse")]
+        System.IAsyncResult BeginReSetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState);
+        
+        void EndReSetTagAnalogTransformationRatio(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/IsInverseDiscretTag", ReplyAction="http://tempuri.org/IDSRouter/IsInverseDiscretTagResponse")]
+        System.Nullable<bool> IsInverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/IsInverseDiscretTag", ReplyAction="http://tempuri.org/IDSRouter/IsInverseDiscretTagResponse")]
+        System.IAsyncResult BeginIsInverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState);
+        
+        System.Nullable<bool> EndIsInverseDiscretTag(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/InverseDiscretTag", ReplyAction="http://tempuri.org/IDSRouter/InverseDiscretTagResponse")]
+        void InverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid, bool newInverseValue);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/InverseDiscretTag", ReplyAction="http://tempuri.org/IDSRouter/InverseDiscretTagResponse")]
+        System.IAsyncResult BeginInverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid, bool newInverseValue, System.AsyncCallback callback, object asyncState);
+        
+        void EndInverseDiscretTag(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTagsListWithEnabledTrendSave", ReplyAction="http://tempuri.org/IDSRouter/GetTagsListWithEnabledTrendSaveResponse")]
+        string[] GetTagsListWithEnabledTrendSave();
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTagsListWithEnabledTrendSave", ReplyAction="http://tempuri.org/IDSRouter/GetTagsListWithEnabledTrendSaveResponse")]
+        System.IAsyncResult BeginGetTagsListWithEnabledTrendSave(System.AsyncCallback callback, object asyncState);
+        
+        string[] EndGetTagsListWithEnabledTrendSave(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDSRouter/GetTrendDateTimeRanges", ReplyAction="http://tempuri.org/IDSRouter/GetTrendDateTimeRangesResponse")]
+        System.Tuple<System.DateTime, System.DateTime>[] GetTrendDateTimeRanges(ushort dsGuid, uint devGuid, uint tagGuid);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDSRouter/GetTrendDateTimeRanges", ReplyAction="http://tempuri.org/IDSRouter/GetTrendDateTimeRangesResponse")]
+        System.IAsyncResult BeginGetTrendDateTimeRanges(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState);
+        
+        System.Tuple<System.DateTime, System.DateTime>[] EndGetTrendDateTimeRanges(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -403,10 +2222,10 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         void EndPong(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IDSRouter/NotifyChangedTags")]
-        void NotifyChangedTags(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> lstChangedTags);
+        void NotifyChangedTags(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> lstChangedTags);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IDSRouter/NotifyChangedTags")]
-        System.IAsyncResult BeginNotifyChangedTags(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> lstChangedTags, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginNotifyChangedTags(System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> lstChangedTags, System.AsyncCallback callback, object asyncState);
         
         void EndNotifyChangedTags(System.IAsyncResult result);
         
@@ -421,6 +2240,177 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IDSRouterChannel : ProviderCustomerExchangeLib.DSRouterService.IDSRouter, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagTrendCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagTrendCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Tuple<System.DateTime, object>[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Tuple<System.DateTime, object>[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagTrendsListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagTrendsListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Tuple<System.DateTime, object>[][] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Tuple<System.DateTime, object>[][])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTrendSettingsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTrendSettingsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetDailyReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetDailyReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetDailyReportAsByteArrayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetDailyReportAsByteArrayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public byte[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetEventsReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetEventsReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetEventsReportAsByteArrayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetEventsReportAsByteArrayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public byte[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagsReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagsReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagsReportAsByteArrayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagsReportAsByteArrayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public byte[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((byte[])(this.results[0]));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -824,44 +2814,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetTagsValueCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetTagsValueCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue>)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetTagsValuesUpdatedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetTagsValuesUpdatedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue>)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class GetDSLastErrorsGUIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -919,7 +2871,561 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagsValueCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagsValueCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagsValuesUpdatedCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagsValuesUpdatedCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AuthorizationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public AuthorizationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetUsersListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetUsersListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetUserGroupsListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetUserGroupsListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CreateUserGroupCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public CreateUserGroupCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CreateUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public CreateUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetEventsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetEventsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetOscillogramAsUrlByIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetOscillogramAsUrlByIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetOscillogramAsByteArrayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetOscillogramAsByteArrayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Tuple<byte[], string> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Tuple<byte[], string>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetHistoricalDataByIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetHistoricalDataByIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class IsNotReceiptedEventsExistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public IsNotReceiptedEventsExistCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetNotReceiptedEventsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetNotReceiptedEventsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetSettingsSetsListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetSettingsSetsListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetValuesFromSettingsSetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetValuesFromSettingsSetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CommandStateCheckCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public CommandStateCheckCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetDocumentsListCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetDocumentsListCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetDocumentByIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetDocumentByIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class InitUploadFileSessionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public InitUploadFileSessionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UploadFileChunkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public UploadFileChunkCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class SaveUploadedFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public SaveUploadedFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetCurrentDateTimeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetCurrentDateTimeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.DateTime Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.DateTime)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagAnalogTransformationRatioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagAnalogTransformationRatioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public object Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((object)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class IsInverseDiscretTagCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public IsInverseDiscretTagCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Nullable<bool> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Nullable<bool>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTagsListWithEnabledTrendSaveCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTagsListWithEnabledTrendSaveCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public string[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTrendDateTimeRangesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTrendDateTimeRangesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Tuple<System.DateTime, System.DateTime>[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Tuple<System.DateTime, System.DateTime>[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class DSRouterClient : System.ServiceModel.DuplexClientBase<ProviderCustomerExchangeLib.DSRouterService.IDSRouter>, ProviderCustomerExchangeLib.DSRouterService.IDSRouter {
+        
+        private BeginOperationDelegate onBeginGetTagTrendDelegate;
+        
+        private EndOperationDelegate onEndGetTagTrendDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagTrendCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTagTrendsListDelegate;
+        
+        private EndOperationDelegate onEndGetTagTrendsListDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagTrendsListCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTrendSettingsDelegate;
+        
+        private EndOperationDelegate onEndGetTrendSettingsDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTrendSettingsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSetTrendSettingsDelegate;
+        
+        private EndOperationDelegate onEndSetTrendSettingsDelegate;
+        
+        private System.Threading.SendOrPostCallback onSetTrendSettingsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetDailyReportDelegate;
+        
+        private EndOperationDelegate onEndGetDailyReportDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetDailyReportCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetDailyReportAsByteArrayDelegate;
+        
+        private EndOperationDelegate onEndGetDailyReportAsByteArrayDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetDailyReportAsByteArrayCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetEventsReportDelegate;
+        
+        private EndOperationDelegate onEndGetEventsReportDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetEventsReportCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetEventsReportAsByteArrayDelegate;
+        
+        private EndOperationDelegate onEndGetEventsReportAsByteArrayDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetEventsReportAsByteArrayCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTagsReportDelegate;
+        
+        private EndOperationDelegate onEndGetTagsReportDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagsReportCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTagsReportAsByteArrayDelegate;
+        
+        private EndOperationDelegate onEndGetTagsReportAsByteArrayDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagsReportAsByteArrayCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetDSValueAsByteBufferDelegate;
         
@@ -1053,30 +3559,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         
         private System.Threading.SendOrPostCallback onGetRTUTagNameCompletedDelegate;
         
-        private BeginOperationDelegate onBeginGetTagsValueDelegate;
-        
-        private EndOperationDelegate onEndGetTagsValueDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetTagsValueCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginGetTagsValuesUpdatedDelegate;
-        
-        private EndOperationDelegate onEndGetTagsValuesUpdatedDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetTagsValuesUpdatedCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginSubscribeRTUTagsDelegate;
-        
-        private EndOperationDelegate onEndSubscribeRTUTagsDelegate;
-        
-        private System.Threading.SendOrPostCallback onSubscribeRTUTagsCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginUnscribeRTUTagsDelegate;
-        
-        private EndOperationDelegate onEndUnscribeRTUTagsDelegate;
-        
-        private System.Threading.SendOrPostCallback onUnscribeRTUTagsCompletedDelegate;
-        
         private BeginOperationDelegate onBeginGetDSLastErrorsGUIDDelegate;
         
         private EndOperationDelegate onEndGetDSLastErrorsGUIDDelegate;
@@ -1113,6 +3595,222 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         
         private System.Threading.SendOrPostCallback onPingCompletedDelegate;
         
+        private BeginOperationDelegate onBeginGetTagsValueDelegate;
+        
+        private EndOperationDelegate onEndGetTagsValueDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagsValueCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTagsValuesUpdatedDelegate;
+        
+        private EndOperationDelegate onEndGetTagsValuesUpdatedDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagsValuesUpdatedCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginAuthorizationDelegate;
+        
+        private EndOperationDelegate onEndAuthorizationDelegate;
+        
+        private System.Threading.SendOrPostCallback onAuthorizationCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetUsersListDelegate;
+        
+        private EndOperationDelegate onEndGetUsersListDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetUsersListCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetUserGroupsListDelegate;
+        
+        private EndOperationDelegate onEndGetUserGroupsListDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetUserGroupsListCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginCreateUserGroupDelegate;
+        
+        private EndOperationDelegate onEndCreateUserGroupDelegate;
+        
+        private System.Threading.SendOrPostCallback onCreateUserGroupCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginCreateUserDelegate;
+        
+        private EndOperationDelegate onEndCreateUserDelegate;
+        
+        private System.Threading.SendOrPostCallback onCreateUserCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetEventsDelegate;
+        
+        private EndOperationDelegate onEndGetEventsDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetEventsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetOscillogramAsUrlByIDDelegate;
+        
+        private EndOperationDelegate onEndGetOscillogramAsUrlByIDDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetOscillogramAsUrlByIDCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetOscillogramAsByteArrayDelegate;
+        
+        private EndOperationDelegate onEndGetOscillogramAsByteArrayDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetOscillogramAsByteArrayCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetHistoricalDataByIDDelegate;
+        
+        private EndOperationDelegate onEndGetHistoricalDataByIDDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetHistoricalDataByIDCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginIsNotReceiptedEventsExistDelegate;
+        
+        private EndOperationDelegate onEndIsNotReceiptedEventsExistDelegate;
+        
+        private System.Threading.SendOrPostCallback onIsNotReceiptedEventsExistCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetNotReceiptedEventsDelegate;
+        
+        private EndOperationDelegate onEndGetNotReceiptedEventsDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetNotReceiptedEventsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginReceiptAllEventsDelegate;
+        
+        private EndOperationDelegate onEndReceiptAllEventsDelegate;
+        
+        private System.Threading.SendOrPostCallback onReceiptAllEventsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginReceiptEventsDelegate;
+        
+        private EndOperationDelegate onEndReceiptEventsDelegate;
+        
+        private System.Threading.SendOrPostCallback onReceiptEventsCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetSettingsSetsListDelegate;
+        
+        private EndOperationDelegate onEndGetSettingsSetsListDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetSettingsSetsListCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetValuesFromSettingsSetDelegate;
+        
+        private EndOperationDelegate onEndGetValuesFromSettingsSetDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetValuesFromSettingsSetCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSaveSettingsToDeviceDelegate;
+        
+        private EndOperationDelegate onEndSaveSettingsToDeviceDelegate;
+        
+        private System.Threading.SendOrPostCallback onSaveSettingsToDeviceCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginCommandRunDelegate;
+        
+        private EndOperationDelegate onEndCommandRunDelegate;
+        
+        private System.Threading.SendOrPostCallback onCommandRunCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginCommandStateCheckDelegate;
+        
+        private EndOperationDelegate onEndCommandStateCheckDelegate;
+        
+        private System.Threading.SendOrPostCallback onCommandStateCheckCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetDocumentsListDelegate;
+        
+        private EndOperationDelegate onEndGetDocumentsListDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetDocumentsListCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetDocumentByIDDelegate;
+        
+        private EndOperationDelegate onEndGetDocumentByIDDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetDocumentByIDCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginInitUploadFileSessionDelegate;
+        
+        private EndOperationDelegate onEndInitUploadFileSessionDelegate;
+        
+        private System.Threading.SendOrPostCallback onInitUploadFileSessionCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginUploadFileChunkDelegate;
+        
+        private EndOperationDelegate onEndUploadFileChunkDelegate;
+        
+        private System.Threading.SendOrPostCallback onUploadFileChunkCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSaveUploadedFileDelegate;
+        
+        private EndOperationDelegate onEndSaveUploadedFileDelegate;
+        
+        private System.Threading.SendOrPostCallback onSaveUploadedFileCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginTerminateUploadFileSessionDelegate;
+        
+        private EndOperationDelegate onEndTerminateUploadFileSessionDelegate;
+        
+        private System.Threading.SendOrPostCallback onTerminateUploadFileSessionCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetCurrentDateTimeDelegate;
+        
+        private EndOperationDelegate onEndGetCurrentDateTimeDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetCurrentDateTimeCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSetTagValueFromHMIDelegate;
+        
+        private EndOperationDelegate onEndSetTagValueFromHMIDelegate;
+        
+        private System.Threading.SendOrPostCallback onSetTagValueFromHMICompletedDelegate;
+        
+        private BeginOperationDelegate onBeginReSetTagValueFromHMIDelegate;
+        
+        private EndOperationDelegate onEndReSetTagValueFromHMIDelegate;
+        
+        private System.Threading.SendOrPostCallback onReSetTagValueFromHMICompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTagAnalogTransformationRatioDelegate;
+        
+        private EndOperationDelegate onEndGetTagAnalogTransformationRatioDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagAnalogTransformationRatioCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginSetTagAnalogTransformationRatioDelegate;
+        
+        private EndOperationDelegate onEndSetTagAnalogTransformationRatioDelegate;
+        
+        private System.Threading.SendOrPostCallback onSetTagAnalogTransformationRatioCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginReSetTagAnalogTransformationRatioDelegate;
+        
+        private EndOperationDelegate onEndReSetTagAnalogTransformationRatioDelegate;
+        
+        private System.Threading.SendOrPostCallback onReSetTagAnalogTransformationRatioCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginIsInverseDiscretTagDelegate;
+        
+        private EndOperationDelegate onEndIsInverseDiscretTagDelegate;
+        
+        private System.Threading.SendOrPostCallback onIsInverseDiscretTagCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginInverseDiscretTagDelegate;
+        
+        private EndOperationDelegate onEndInverseDiscretTagDelegate;
+        
+        private System.Threading.SendOrPostCallback onInverseDiscretTagCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTagsListWithEnabledTrendSaveDelegate;
+        
+        private EndOperationDelegate onEndGetTagsListWithEnabledTrendSaveDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTagsListWithEnabledTrendSaveCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTrendDateTimeRangesDelegate;
+        
+        private EndOperationDelegate onEndGetTrendDateTimeRangesDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTrendDateTimeRangesCompletedDelegate;
+        
         public DSRouterClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
         }
@@ -1132,6 +3830,26 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         public DSRouterClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
         }
+        
+        public event System.EventHandler<GetTagTrendCompletedEventArgs> GetTagTrendCompleted;
+        
+        public event System.EventHandler<GetTagTrendsListCompletedEventArgs> GetTagTrendsListCompleted;
+        
+        public event System.EventHandler<GetTrendSettingsCompletedEventArgs> GetTrendSettingsCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SetTrendSettingsCompleted;
+        
+        public event System.EventHandler<GetDailyReportCompletedEventArgs> GetDailyReportCompleted;
+        
+        public event System.EventHandler<GetDailyReportAsByteArrayCompletedEventArgs> GetDailyReportAsByteArrayCompleted;
+        
+        public event System.EventHandler<GetEventsReportCompletedEventArgs> GetEventsReportCompleted;
+        
+        public event System.EventHandler<GetEventsReportAsByteArrayCompletedEventArgs> GetEventsReportAsByteArrayCompleted;
+        
+        public event System.EventHandler<GetTagsReportCompletedEventArgs> GetTagsReportCompleted;
+        
+        public event System.EventHandler<GetTagsReportAsByteArrayCompletedEventArgs> GetTagsReportAsByteArrayCompleted;
         
         public event System.EventHandler<GetDSValueAsByteBufferCompletedEventArgs> GetDSValueAsByteBufferCompleted;
         
@@ -1177,14 +3895,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         
         public event System.EventHandler<GetRTUTagNameCompletedEventArgs> GetRTUTagNameCompleted;
         
-        public event System.EventHandler<GetTagsValueCompletedEventArgs> GetTagsValueCompleted;
-        
-        public event System.EventHandler<GetTagsValuesUpdatedCompletedEventArgs> GetTagsValuesUpdatedCompleted;
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SubscribeRTUTagsCompleted;
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UnscribeRTUTagsCompleted;
-        
         public event System.EventHandler<GetDSLastErrorsGUIDCompletedEventArgs> GetDSLastErrorsGUIDCompleted;
         
         public event System.EventHandler<GetDSLastErrorGUIDCompletedEventArgs> GetDSLastErrorGUIDCompleted;
@@ -1196,6 +3906,603 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> RegisterForErrorEventCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> PingCompleted;
+        
+        public event System.EventHandler<GetTagsValueCompletedEventArgs> GetTagsValueCompleted;
+        
+        public event System.EventHandler<GetTagsValuesUpdatedCompletedEventArgs> GetTagsValuesUpdatedCompleted;
+        
+        public event System.EventHandler<AuthorizationCompletedEventArgs> AuthorizationCompleted;
+        
+        public event System.EventHandler<GetUsersListCompletedEventArgs> GetUsersListCompleted;
+        
+        public event System.EventHandler<GetUserGroupsListCompletedEventArgs> GetUserGroupsListCompleted;
+        
+        public event System.EventHandler<CreateUserGroupCompletedEventArgs> CreateUserGroupCompleted;
+        
+        public event System.EventHandler<CreateUserCompletedEventArgs> CreateUserCompleted;
+        
+        public event System.EventHandler<GetEventsCompletedEventArgs> GetEventsCompleted;
+        
+        public event System.EventHandler<GetOscillogramAsUrlByIDCompletedEventArgs> GetOscillogramAsUrlByIDCompleted;
+        
+        public event System.EventHandler<GetOscillogramAsByteArrayCompletedEventArgs> GetOscillogramAsByteArrayCompleted;
+        
+        public event System.EventHandler<GetHistoricalDataByIDCompletedEventArgs> GetHistoricalDataByIDCompleted;
+        
+        public event System.EventHandler<IsNotReceiptedEventsExistCompletedEventArgs> IsNotReceiptedEventsExistCompleted;
+        
+        public event System.EventHandler<GetNotReceiptedEventsCompletedEventArgs> GetNotReceiptedEventsCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ReceiptAllEventsCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ReceiptEventsCompleted;
+        
+        public event System.EventHandler<GetSettingsSetsListCompletedEventArgs> GetSettingsSetsListCompleted;
+        
+        public event System.EventHandler<GetValuesFromSettingsSetCompletedEventArgs> GetValuesFromSettingsSetCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SaveSettingsToDeviceCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CommandRunCompleted;
+        
+        public event System.EventHandler<CommandStateCheckCompletedEventArgs> CommandStateCheckCompleted;
+        
+        public event System.EventHandler<GetDocumentsListCompletedEventArgs> GetDocumentsListCompleted;
+        
+        public event System.EventHandler<GetDocumentByIDCompletedEventArgs> GetDocumentByIDCompleted;
+        
+        public event System.EventHandler<InitUploadFileSessionCompletedEventArgs> InitUploadFileSessionCompleted;
+        
+        public event System.EventHandler<UploadFileChunkCompletedEventArgs> UploadFileChunkCompleted;
+        
+        public event System.EventHandler<SaveUploadedFileCompletedEventArgs> SaveUploadedFileCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> TerminateUploadFileSessionCompleted;
+        
+        public event System.EventHandler<GetCurrentDateTimeCompletedEventArgs> GetCurrentDateTimeCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SetTagValueFromHMICompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ReSetTagValueFromHMICompleted;
+        
+        public event System.EventHandler<GetTagAnalogTransformationRatioCompletedEventArgs> GetTagAnalogTransformationRatioCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SetTagAnalogTransformationRatioCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ReSetTagAnalogTransformationRatioCompleted;
+        
+        public event System.EventHandler<IsInverseDiscretTagCompletedEventArgs> IsInverseDiscretTagCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> InverseDiscretTagCompleted;
+        
+        public event System.EventHandler<GetTagsListWithEnabledTrendSaveCompletedEventArgs> GetTagsListWithEnabledTrendSaveCompleted;
+        
+        public event System.EventHandler<GetTrendDateTimeRangesCompletedEventArgs> GetTrendDateTimeRangesCompleted;
+        
+        public System.Tuple<System.DateTime, object>[] GetTagTrend(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime) {
+            return base.Channel.GetTagTrend(dsGuid, devGuid, tagGuid, startDateTime, endDateTime);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagTrend(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagTrend(dsGuid, devGuid, tagGuid, startDateTime, endDateTime, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Tuple<System.DateTime, object>[] EndGetTagTrend(System.IAsyncResult result) {
+            return base.Channel.EndGetTagTrend(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagTrend(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            System.DateTime startDateTime = ((System.DateTime)(inValues[3]));
+            System.DateTime endDateTime = ((System.DateTime)(inValues[4]));
+            return this.BeginGetTagTrend(dsGuid, devGuid, tagGuid, startDateTime, endDateTime, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagTrend(System.IAsyncResult result) {
+            System.Tuple<System.DateTime, object>[] retVal = this.EndGetTagTrend(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagTrendCompleted(object state) {
+            if ((this.GetTagTrendCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagTrendCompleted(this, new GetTagTrendCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagTrendAsync(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime) {
+            this.GetTagTrendAsync(dsGuid, devGuid, tagGuid, startDateTime, endDateTime, null);
+        }
+        
+        public void GetTagTrendAsync(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime, object userState) {
+            if ((this.onBeginGetTagTrendDelegate == null)) {
+                this.onBeginGetTagTrendDelegate = new BeginOperationDelegate(this.OnBeginGetTagTrend);
+            }
+            if ((this.onEndGetTagTrendDelegate == null)) {
+                this.onEndGetTagTrendDelegate = new EndOperationDelegate(this.OnEndGetTagTrend);
+            }
+            if ((this.onGetTagTrendCompletedDelegate == null)) {
+                this.onGetTagTrendCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagTrendCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagTrendDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid,
+                        startDateTime,
+                        endDateTime}, this.onEndGetTagTrendDelegate, this.onGetTagTrendCompletedDelegate, userState);
+        }
+        
+        public System.Tuple<System.DateTime, object>[][] GetTagTrendsList(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime) {
+            return base.Channel.GetTagTrendsList(dsGuid, devGuid, tagGuid, startDateTime, endDateTime);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagTrendsList(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagTrendsList(dsGuid, devGuid, tagGuid, startDateTime, endDateTime, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Tuple<System.DateTime, object>[][] EndGetTagTrendsList(System.IAsyncResult result) {
+            return base.Channel.EndGetTagTrendsList(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagTrendsList(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            System.DateTime startDateTime = ((System.DateTime)(inValues[3]));
+            System.DateTime endDateTime = ((System.DateTime)(inValues[4]));
+            return this.BeginGetTagTrendsList(dsGuid, devGuid, tagGuid, startDateTime, endDateTime, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagTrendsList(System.IAsyncResult result) {
+            System.Tuple<System.DateTime, object>[][] retVal = this.EndGetTagTrendsList(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagTrendsListCompleted(object state) {
+            if ((this.GetTagTrendsListCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagTrendsListCompleted(this, new GetTagTrendsListCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagTrendsListAsync(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime) {
+            this.GetTagTrendsListAsync(dsGuid, devGuid, tagGuid, startDateTime, endDateTime, null);
+        }
+        
+        public void GetTagTrendsListAsync(ushort dsGuid, uint devGuid, uint tagGuid, System.DateTime startDateTime, System.DateTime endDateTime, object userState) {
+            if ((this.onBeginGetTagTrendsListDelegate == null)) {
+                this.onBeginGetTagTrendsListDelegate = new BeginOperationDelegate(this.OnBeginGetTagTrendsList);
+            }
+            if ((this.onEndGetTagTrendsListDelegate == null)) {
+                this.onEndGetTagTrendsListDelegate = new EndOperationDelegate(this.OnEndGetTagTrendsList);
+            }
+            if ((this.onGetTagTrendsListCompletedDelegate == null)) {
+                this.onGetTagTrendsListCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagTrendsListCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagTrendsListDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid,
+                        startDateTime,
+                        endDateTime}, this.onEndGetTagTrendsListDelegate, this.onGetTagTrendsListCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings GetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid) {
+            return base.Channel.GetTrendSettings(dsGuid, devGuid, tagGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTrendSettings(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings EndGetTrendSettings(System.IAsyncResult result) {
+            return base.Channel.EndGetTrendSettings(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTrendSettings(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            return this.BeginGetTrendSettings(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTrendSettings(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings retVal = this.EndGetTrendSettings(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTrendSettingsCompleted(object state) {
+            if ((this.GetTrendSettingsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTrendSettingsCompleted(this, new GetTrendSettingsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTrendSettingsAsync(ushort dsGuid, uint devGuid, uint tagGuid) {
+            this.GetTrendSettingsAsync(dsGuid, devGuid, tagGuid, null);
+        }
+        
+        public void GetTrendSettingsAsync(ushort dsGuid, uint devGuid, uint tagGuid, object userState) {
+            if ((this.onBeginGetTrendSettingsDelegate == null)) {
+                this.onBeginGetTrendSettingsDelegate = new BeginOperationDelegate(this.OnBeginGetTrendSettings);
+            }
+            if ((this.onEndGetTrendSettingsDelegate == null)) {
+                this.onEndGetTrendSettingsDelegate = new EndOperationDelegate(this.OnEndGetTrendSettings);
+            }
+            if ((this.onGetTrendSettingsCompletedDelegate == null)) {
+                this.onGetTrendSettingsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTrendSettingsCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTrendSettingsDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid}, this.onEndGetTrendSettingsDelegate, this.onGetTrendSettingsCompletedDelegate, userState);
+        }
+        
+        public void SetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid, ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings trendSettings) {
+            base.Channel.SetTrendSettings(dsGuid, devGuid, tagGuid, trendSettings);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSetTrendSettings(ushort dsGuid, uint devGuid, uint tagGuid, ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings trendSettings, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSetTrendSettings(dsGuid, devGuid, tagGuid, trendSettings, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndSetTrendSettings(System.IAsyncResult result) {
+            base.Channel.EndSetTrendSettings(result);
+        }
+        
+        private System.IAsyncResult OnBeginSetTrendSettings(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings trendSettings = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings)(inValues[3]));
+            return this.BeginSetTrendSettings(dsGuid, devGuid, tagGuid, trendSettings, callback, asyncState);
+        }
+        
+        private object[] OnEndSetTrendSettings(System.IAsyncResult result) {
+            this.EndSetTrendSettings(result);
+            return null;
+        }
+        
+        private void OnSetTrendSettingsCompleted(object state) {
+            if ((this.SetTrendSettingsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SetTrendSettingsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SetTrendSettingsAsync(ushort dsGuid, uint devGuid, uint tagGuid, ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings trendSettings) {
+            this.SetTrendSettingsAsync(dsGuid, devGuid, tagGuid, trendSettings, null);
+        }
+        
+        public void SetTrendSettingsAsync(ushort dsGuid, uint devGuid, uint tagGuid, ProviderCustomerExchangeLib.DSRouterService.DSRouterTrendSettings trendSettings, object userState) {
+            if ((this.onBeginSetTrendSettingsDelegate == null)) {
+                this.onBeginSetTrendSettingsDelegate = new BeginOperationDelegate(this.OnBeginSetTrendSettings);
+            }
+            if ((this.onEndSetTrendSettingsDelegate == null)) {
+                this.onEndSetTrendSettingsDelegate = new EndOperationDelegate(this.OnEndSetTrendSettings);
+            }
+            if ((this.onSetTrendSettingsCompletedDelegate == null)) {
+                this.onSetTrendSettingsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSetTrendSettingsCompleted);
+            }
+            base.InvokeAsync(this.onBeginSetTrendSettingsDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid,
+                        trendSettings}, this.onEndSetTrendSettingsDelegate, this.onSetTrendSettingsCompletedDelegate, userState);
+        }
+        
+        public string GetDailyReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings) {
+            return base.Channel.GetDailyReport(reportSettings);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetDailyReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetDailyReport(reportSettings, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndGetDailyReport(System.IAsyncResult result) {
+            return base.Channel.EndGetDailyReport(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetDailyReport(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings)(inValues[0]));
+            return this.BeginGetDailyReport(reportSettings, callback, asyncState);
+        }
+        
+        private object[] OnEndGetDailyReport(System.IAsyncResult result) {
+            string retVal = this.EndGetDailyReport(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetDailyReportCompleted(object state) {
+            if ((this.GetDailyReportCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetDailyReportCompleted(this, new GetDailyReportCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetDailyReportAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings) {
+            this.GetDailyReportAsync(reportSettings, null);
+        }
+        
+        public void GetDailyReportAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings, object userState) {
+            if ((this.onBeginGetDailyReportDelegate == null)) {
+                this.onBeginGetDailyReportDelegate = new BeginOperationDelegate(this.OnBeginGetDailyReport);
+            }
+            if ((this.onEndGetDailyReportDelegate == null)) {
+                this.onEndGetDailyReportDelegate = new EndOperationDelegate(this.OnEndGetDailyReport);
+            }
+            if ((this.onGetDailyReportCompletedDelegate == null)) {
+                this.onGetDailyReportCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDailyReportCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetDailyReportDelegate, new object[] {
+                        reportSettings}, this.onEndGetDailyReportDelegate, this.onGetDailyReportCompletedDelegate, userState);
+        }
+        
+        public byte[] GetDailyReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings) {
+            return base.Channel.GetDailyReportAsByteArray(reportSettings);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetDailyReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetDailyReportAsByteArray(reportSettings, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public byte[] EndGetDailyReportAsByteArray(System.IAsyncResult result) {
+            return base.Channel.EndGetDailyReportAsByteArray(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetDailyReportAsByteArray(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings)(inValues[0]));
+            return this.BeginGetDailyReportAsByteArray(reportSettings, callback, asyncState);
+        }
+        
+        private object[] OnEndGetDailyReportAsByteArray(System.IAsyncResult result) {
+            byte[] retVal = this.EndGetDailyReportAsByteArray(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetDailyReportAsByteArrayCompleted(object state) {
+            if ((this.GetDailyReportAsByteArrayCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetDailyReportAsByteArrayCompleted(this, new GetDailyReportAsByteArrayCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetDailyReportAsByteArrayAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings) {
+            this.GetDailyReportAsByteArrayAsync(reportSettings, null);
+        }
+        
+        public void GetDailyReportAsByteArrayAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterDailyReportSettings reportSettings, object userState) {
+            if ((this.onBeginGetDailyReportAsByteArrayDelegate == null)) {
+                this.onBeginGetDailyReportAsByteArrayDelegate = new BeginOperationDelegate(this.OnBeginGetDailyReportAsByteArray);
+            }
+            if ((this.onEndGetDailyReportAsByteArrayDelegate == null)) {
+                this.onEndGetDailyReportAsByteArrayDelegate = new EndOperationDelegate(this.OnEndGetDailyReportAsByteArray);
+            }
+            if ((this.onGetDailyReportAsByteArrayCompletedDelegate == null)) {
+                this.onGetDailyReportAsByteArrayCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDailyReportAsByteArrayCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetDailyReportAsByteArrayDelegate, new object[] {
+                        reportSettings}, this.onEndGetDailyReportAsByteArrayDelegate, this.onGetDailyReportAsByteArrayCompletedDelegate, userState);
+        }
+        
+        public string GetEventsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings) {
+            return base.Channel.GetEventsReport(reportSettings);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetEventsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetEventsReport(reportSettings, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndGetEventsReport(System.IAsyncResult result) {
+            return base.Channel.EndGetEventsReport(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetEventsReport(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings)(inValues[0]));
+            return this.BeginGetEventsReport(reportSettings, callback, asyncState);
+        }
+        
+        private object[] OnEndGetEventsReport(System.IAsyncResult result) {
+            string retVal = this.EndGetEventsReport(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetEventsReportCompleted(object state) {
+            if ((this.GetEventsReportCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetEventsReportCompleted(this, new GetEventsReportCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetEventsReportAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings) {
+            this.GetEventsReportAsync(reportSettings, null);
+        }
+        
+        public void GetEventsReportAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings, object userState) {
+            if ((this.onBeginGetEventsReportDelegate == null)) {
+                this.onBeginGetEventsReportDelegate = new BeginOperationDelegate(this.OnBeginGetEventsReport);
+            }
+            if ((this.onEndGetEventsReportDelegate == null)) {
+                this.onEndGetEventsReportDelegate = new EndOperationDelegate(this.OnEndGetEventsReport);
+            }
+            if ((this.onGetEventsReportCompletedDelegate == null)) {
+                this.onGetEventsReportCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetEventsReportCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetEventsReportDelegate, new object[] {
+                        reportSettings}, this.onEndGetEventsReportDelegate, this.onGetEventsReportCompletedDelegate, userState);
+        }
+        
+        public byte[] GetEventsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings) {
+            return base.Channel.GetEventsReportAsByteArray(reportSettings);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetEventsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetEventsReportAsByteArray(reportSettings, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public byte[] EndGetEventsReportAsByteArray(System.IAsyncResult result) {
+            return base.Channel.EndGetEventsReportAsByteArray(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetEventsReportAsByteArray(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings)(inValues[0]));
+            return this.BeginGetEventsReportAsByteArray(reportSettings, callback, asyncState);
+        }
+        
+        private object[] OnEndGetEventsReportAsByteArray(System.IAsyncResult result) {
+            byte[] retVal = this.EndGetEventsReportAsByteArray(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetEventsReportAsByteArrayCompleted(object state) {
+            if ((this.GetEventsReportAsByteArrayCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetEventsReportAsByteArrayCompleted(this, new GetEventsReportAsByteArrayCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetEventsReportAsByteArrayAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings) {
+            this.GetEventsReportAsByteArrayAsync(reportSettings, null);
+        }
+        
+        public void GetEventsReportAsByteArrayAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventsReportSettings reportSettings, object userState) {
+            if ((this.onBeginGetEventsReportAsByteArrayDelegate == null)) {
+                this.onBeginGetEventsReportAsByteArrayDelegate = new BeginOperationDelegate(this.OnBeginGetEventsReportAsByteArray);
+            }
+            if ((this.onEndGetEventsReportAsByteArrayDelegate == null)) {
+                this.onEndGetEventsReportAsByteArrayDelegate = new EndOperationDelegate(this.OnEndGetEventsReportAsByteArray);
+            }
+            if ((this.onGetEventsReportAsByteArrayCompletedDelegate == null)) {
+                this.onGetEventsReportAsByteArrayCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetEventsReportAsByteArrayCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetEventsReportAsByteArrayDelegate, new object[] {
+                        reportSettings}, this.onEndGetEventsReportAsByteArrayDelegate, this.onGetEventsReportAsByteArrayCompletedDelegate, userState);
+        }
+        
+        public string GetTagsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings) {
+            return base.Channel.GetTagsReport(reportSettings);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagsReport(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagsReport(reportSettings, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndGetTagsReport(System.IAsyncResult result) {
+            return base.Channel.EndGetTagsReport(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagsReport(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings)(inValues[0]));
+            return this.BeginGetTagsReport(reportSettings, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagsReport(System.IAsyncResult result) {
+            string retVal = this.EndGetTagsReport(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagsReportCompleted(object state) {
+            if ((this.GetTagsReportCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagsReportCompleted(this, new GetTagsReportCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagsReportAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings) {
+            this.GetTagsReportAsync(reportSettings, null);
+        }
+        
+        public void GetTagsReportAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings, object userState) {
+            if ((this.onBeginGetTagsReportDelegate == null)) {
+                this.onBeginGetTagsReportDelegate = new BeginOperationDelegate(this.OnBeginGetTagsReport);
+            }
+            if ((this.onEndGetTagsReportDelegate == null)) {
+                this.onEndGetTagsReportDelegate = new EndOperationDelegate(this.OnEndGetTagsReport);
+            }
+            if ((this.onGetTagsReportCompletedDelegate == null)) {
+                this.onGetTagsReportCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagsReportCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagsReportDelegate, new object[] {
+                        reportSettings}, this.onEndGetTagsReportDelegate, this.onGetTagsReportCompletedDelegate, userState);
+        }
+        
+        public byte[] GetTagsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings) {
+            return base.Channel.GetTagsReportAsByteArray(reportSettings);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagsReportAsByteArray(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagsReportAsByteArray(reportSettings, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public byte[] EndGetTagsReportAsByteArray(System.IAsyncResult result) {
+            return base.Channel.EndGetTagsReportAsByteArray(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagsReportAsByteArray(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings)(inValues[0]));
+            return this.BeginGetTagsReportAsByteArray(reportSettings, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagsReportAsByteArray(System.IAsyncResult result) {
+            byte[] retVal = this.EndGetTagsReportAsByteArray(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagsReportAsByteArrayCompleted(object state) {
+            if ((this.GetTagsReportAsByteArrayCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagsReportAsByteArrayCompleted(this, new GetTagsReportAsByteArrayCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagsReportAsByteArrayAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings) {
+            this.GetTagsReportAsByteArrayAsync(reportSettings, null);
+        }
+        
+        public void GetTagsReportAsByteArrayAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterTagsReportSettings reportSettings, object userState) {
+            if ((this.onBeginGetTagsReportAsByteArrayDelegate == null)) {
+                this.onBeginGetTagsReportAsByteArrayDelegate = new BeginOperationDelegate(this.OnBeginGetTagsReportAsByteArray);
+            }
+            if ((this.onEndGetTagsReportAsByteArrayDelegate == null)) {
+                this.onEndGetTagsReportAsByteArrayDelegate = new EndOperationDelegate(this.OnEndGetTagsReportAsByteArray);
+            }
+            if ((this.onGetTagsReportAsByteArrayCompletedDelegate == null)) {
+                this.onGetTagsReportAsByteArrayCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagsReportAsByteArrayCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagsReportAsByteArrayDelegate, new object[] {
+                        reportSettings}, this.onEndGetTagsReportAsByteArrayDelegate, this.onGetTagsReportAsByteArrayCompletedDelegate, userState);
+        }
         
         public byte[] GetDSValueAsByteBuffer(ushort DSGuid, byte[] arr) {
             return base.Channel.GetDSValueAsByteBuffer(DSGuid, arr);
@@ -2344,202 +5651,6 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
                         TagGUID}, this.onEndGetRTUTagNameDelegate, this.onGetRTUTagNameCompletedDelegate, userState);
         }
         
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> GetTagsValue(string[] request) {
-            return base.Channel.GetTagsValue(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginGetTagsValue(string[] request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetTagsValue(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> EndGetTagsValue(System.IAsyncResult result) {
-            return base.Channel.EndGetTagsValue(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetTagsValue(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string[] request = ((string[])(inValues[0]));
-            return this.BeginGetTagsValue(request, callback, asyncState);
-        }
-        
-        private object[] OnEndGetTagsValue(System.IAsyncResult result) {
-            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> retVal = this.EndGetTagsValue(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetTagsValueCompleted(object state) {
-            if ((this.GetTagsValueCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetTagsValueCompleted(this, new GetTagsValueCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetTagsValueAsync(string[] request) {
-            this.GetTagsValueAsync(request, null);
-        }
-        
-        public void GetTagsValueAsync(string[] request, object userState) {
-            if ((this.onBeginGetTagsValueDelegate == null)) {
-                this.onBeginGetTagsValueDelegate = new BeginOperationDelegate(this.OnBeginGetTagsValue);
-            }
-            if ((this.onEndGetTagsValueDelegate == null)) {
-                this.onEndGetTagsValueDelegate = new EndOperationDelegate(this.OnEndGetTagsValue);
-            }
-            if ((this.onGetTagsValueCompletedDelegate == null)) {
-                this.onGetTagsValueCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagsValueCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetTagsValueDelegate, new object[] {
-                        request}, this.onEndGetTagsValueDelegate, this.onGetTagsValueCompletedDelegate, userState);
-        }
-        
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> GetTagsValuesUpdated() {
-            return base.Channel.GetTagsValuesUpdated();
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginGetTagsValuesUpdated(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetTagsValuesUpdated(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> EndGetTagsValuesUpdated(System.IAsyncResult result) {
-            return base.Channel.EndGetTagsValuesUpdated(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetTagsValuesUpdated(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return this.BeginGetTagsValuesUpdated(callback, asyncState);
-        }
-        
-        private object[] OnEndGetTagsValuesUpdated(System.IAsyncResult result) {
-            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSTagValue> retVal = this.EndGetTagsValuesUpdated(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetTagsValuesUpdatedCompleted(object state) {
-            if ((this.GetTagsValuesUpdatedCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetTagsValuesUpdatedCompleted(this, new GetTagsValuesUpdatedCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetTagsValuesUpdatedAsync() {
-            this.GetTagsValuesUpdatedAsync(null);
-        }
-        
-        public void GetTagsValuesUpdatedAsync(object userState) {
-            if ((this.onBeginGetTagsValuesUpdatedDelegate == null)) {
-                this.onBeginGetTagsValuesUpdatedDelegate = new BeginOperationDelegate(this.OnBeginGetTagsValuesUpdated);
-            }
-            if ((this.onEndGetTagsValuesUpdatedDelegate == null)) {
-                this.onEndGetTagsValuesUpdatedDelegate = new EndOperationDelegate(this.OnEndGetTagsValuesUpdated);
-            }
-            if ((this.onGetTagsValuesUpdatedCompletedDelegate == null)) {
-                this.onGetTagsValuesUpdatedCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagsValuesUpdatedCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetTagsValuesUpdatedDelegate, null, this.onEndGetTagsValuesUpdatedDelegate, this.onGetTagsValuesUpdatedCompletedDelegate, userState);
-        }
-        
-        public void SubscribeRTUTags(string[] request) {
-            base.Channel.SubscribeRTUTags(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginSubscribeRTUTags(string[] request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginSubscribeRTUTags(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndSubscribeRTUTags(System.IAsyncResult result) {
-            base.Channel.EndSubscribeRTUTags(result);
-        }
-        
-        private System.IAsyncResult OnBeginSubscribeRTUTags(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string[] request = ((string[])(inValues[0]));
-            return this.BeginSubscribeRTUTags(request, callback, asyncState);
-        }
-        
-        private object[] OnEndSubscribeRTUTags(System.IAsyncResult result) {
-            this.EndSubscribeRTUTags(result);
-            return null;
-        }
-        
-        private void OnSubscribeRTUTagsCompleted(object state) {
-            if ((this.SubscribeRTUTagsCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.SubscribeRTUTagsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void SubscribeRTUTagsAsync(string[] request) {
-            this.SubscribeRTUTagsAsync(request, null);
-        }
-        
-        public void SubscribeRTUTagsAsync(string[] request, object userState) {
-            if ((this.onBeginSubscribeRTUTagsDelegate == null)) {
-                this.onBeginSubscribeRTUTagsDelegate = new BeginOperationDelegate(this.OnBeginSubscribeRTUTags);
-            }
-            if ((this.onEndSubscribeRTUTagsDelegate == null)) {
-                this.onEndSubscribeRTUTagsDelegate = new EndOperationDelegate(this.OnEndSubscribeRTUTags);
-            }
-            if ((this.onSubscribeRTUTagsCompletedDelegate == null)) {
-                this.onSubscribeRTUTagsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSubscribeRTUTagsCompleted);
-            }
-            base.InvokeAsync(this.onBeginSubscribeRTUTagsDelegate, new object[] {
-                        request}, this.onEndSubscribeRTUTagsDelegate, this.onSubscribeRTUTagsCompletedDelegate, userState);
-        }
-        
-        public void UnscribeRTUTags(string[] request) {
-            base.Channel.UnscribeRTUTags(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginUnscribeRTUTags(string[] request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginUnscribeRTUTags(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public void EndUnscribeRTUTags(System.IAsyncResult result) {
-            base.Channel.EndUnscribeRTUTags(result);
-        }
-        
-        private System.IAsyncResult OnBeginUnscribeRTUTags(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string[] request = ((string[])(inValues[0]));
-            return this.BeginUnscribeRTUTags(request, callback, asyncState);
-        }
-        
-        private object[] OnEndUnscribeRTUTags(System.IAsyncResult result) {
-            this.EndUnscribeRTUTags(result);
-            return null;
-        }
-        
-        private void OnUnscribeRTUTagsCompleted(object state) {
-            if ((this.UnscribeRTUTagsCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.UnscribeRTUTagsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void UnscribeRTUTagsAsync(string[] request) {
-            this.UnscribeRTUTagsAsync(request, null);
-        }
-        
-        public void UnscribeRTUTagsAsync(string[] request, object userState) {
-            if ((this.onBeginUnscribeRTUTagsDelegate == null)) {
-                this.onBeginUnscribeRTUTagsDelegate = new BeginOperationDelegate(this.OnBeginUnscribeRTUTags);
-            }
-            if ((this.onEndUnscribeRTUTagsDelegate == null)) {
-                this.onEndUnscribeRTUTagsDelegate = new EndOperationDelegate(this.OnEndUnscribeRTUTags);
-            }
-            if ((this.onUnscribeRTUTagsCompletedDelegate == null)) {
-                this.onUnscribeRTUTagsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUnscribeRTUTagsCompleted);
-            }
-            base.InvokeAsync(this.onBeginUnscribeRTUTagsDelegate, new object[] {
-                        request}, this.onEndUnscribeRTUTagsDelegate, this.onUnscribeRTUTagsCompletedDelegate, userState);
-        }
-        
         public ProviderCustomerExchangeLib.DSRouterService.LstError GetDSLastErrorsGUID(ushort DSGuid) {
             return base.Channel.GetDSLastErrorsGUID(DSGuid);
         }
@@ -2835,6 +5946,1868 @@ namespace ProviderCustomerExchangeLib.DSRouterService {
                 this.onPingCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnPingCompleted);
             }
             base.InvokeAsync(this.onBeginPingDelegate, null, this.onEndPingDelegate, this.onPingCompletedDelegate, userState);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetTagsValue(string[] ATagIDsList) {
+            return base.Channel.GetTagsValue(ATagIDsList);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagsValue(string[] ATagIDsList, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagsValue(ATagIDsList, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetTagsValue(System.IAsyncResult result) {
+            return base.Channel.EndGetTagsValue(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagsValue(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string[] ATagIDsList = ((string[])(inValues[0]));
+            return this.BeginGetTagsValue(ATagIDsList, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagsValue(System.IAsyncResult result) {
+            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> retVal = this.EndGetTagsValue(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagsValueCompleted(object state) {
+            if ((this.GetTagsValueCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagsValueCompleted(this, new GetTagsValueCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagsValueAsync(string[] ATagIDsList) {
+            this.GetTagsValueAsync(ATagIDsList, null);
+        }
+        
+        public void GetTagsValueAsync(string[] ATagIDsList, object userState) {
+            if ((this.onBeginGetTagsValueDelegate == null)) {
+                this.onBeginGetTagsValueDelegate = new BeginOperationDelegate(this.OnBeginGetTagsValue);
+            }
+            if ((this.onEndGetTagsValueDelegate == null)) {
+                this.onEndGetTagsValueDelegate = new EndOperationDelegate(this.OnEndGetTagsValue);
+            }
+            if ((this.onGetTagsValueCompletedDelegate == null)) {
+                this.onGetTagsValueCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagsValueCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagsValueDelegate, new object[] {
+                        ATagIDsList}, this.onEndGetTagsValueDelegate, this.onGetTagsValueCompletedDelegate, userState);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetTagsValuesUpdated() {
+            return base.Channel.GetTagsValuesUpdated();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagsValuesUpdated(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagsValuesUpdated(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetTagsValuesUpdated(System.IAsyncResult result) {
+            return base.Channel.EndGetTagsValuesUpdated(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagsValuesUpdated(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetTagsValuesUpdated(callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagsValuesUpdated(System.IAsyncResult result) {
+            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> retVal = this.EndGetTagsValuesUpdated(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagsValuesUpdatedCompleted(object state) {
+            if ((this.GetTagsValuesUpdatedCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagsValuesUpdatedCompleted(this, new GetTagsValuesUpdatedCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagsValuesUpdatedAsync() {
+            this.GetTagsValuesUpdatedAsync(null);
+        }
+        
+        public void GetTagsValuesUpdatedAsync(object userState) {
+            if ((this.onBeginGetTagsValuesUpdatedDelegate == null)) {
+                this.onBeginGetTagsValuesUpdatedDelegate = new BeginOperationDelegate(this.OnBeginGetTagsValuesUpdated);
+            }
+            if ((this.onEndGetTagsValuesUpdatedDelegate == null)) {
+                this.onEndGetTagsValuesUpdatedDelegate = new EndOperationDelegate(this.OnEndGetTagsValuesUpdated);
+            }
+            if ((this.onGetTagsValuesUpdatedCompletedDelegate == null)) {
+                this.onGetTagsValuesUpdatedCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagsValuesUpdatedCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagsValuesUpdatedDelegate, null, this.onEndGetTagsValuesUpdatedDelegate, this.onGetTagsValuesUpdatedCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult Authorization(string userName, string userPassword, bool isFirstEnter) {
+            return base.Channel.Authorization(userName, userPassword, isFirstEnter);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginAuthorization(string userName, string userPassword, bool isFirstEnter, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginAuthorization(userName, userPassword, isFirstEnter, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult EndAuthorization(System.IAsyncResult result) {
+            return base.Channel.EndAuthorization(result);
+        }
+        
+        private System.IAsyncResult OnBeginAuthorization(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            string userPassword = ((string)(inValues[1]));
+            bool isFirstEnter = ((bool)(inValues[2]));
+            return this.BeginAuthorization(userName, userPassword, isFirstEnter, callback, asyncState);
+        }
+        
+        private object[] OnEndAuthorization(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.RouterAuthResult retVal = this.EndAuthorization(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnAuthorizationCompleted(object state) {
+            if ((this.AuthorizationCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.AuthorizationCompleted(this, new AuthorizationCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void AuthorizationAsync(string userName, string userPassword, bool isFirstEnter) {
+            this.AuthorizationAsync(userName, userPassword, isFirstEnter, null);
+        }
+        
+        public void AuthorizationAsync(string userName, string userPassword, bool isFirstEnter, object userState) {
+            if ((this.onBeginAuthorizationDelegate == null)) {
+                this.onBeginAuthorizationDelegate = new BeginOperationDelegate(this.OnBeginAuthorization);
+            }
+            if ((this.onEndAuthorizationDelegate == null)) {
+                this.onEndAuthorizationDelegate = new EndOperationDelegate(this.OnEndAuthorization);
+            }
+            if ((this.onAuthorizationCompletedDelegate == null)) {
+                this.onAuthorizationCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAuthorizationCompleted);
+            }
+            base.InvokeAsync(this.onBeginAuthorizationDelegate, new object[] {
+                        userName,
+                        userPassword,
+                        isFirstEnter}, this.onEndAuthorizationDelegate, this.onAuthorizationCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[] GetUsersList() {
+            return base.Channel.GetUsersList();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetUsersList(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetUsersList(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[] EndGetUsersList(System.IAsyncResult result) {
+            return base.Channel.EndGetUsersList(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetUsersList(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetUsersList(callback, asyncState);
+        }
+        
+        private object[] OnEndGetUsersList(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterUser[] retVal = this.EndGetUsersList(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetUsersListCompleted(object state) {
+            if ((this.GetUsersListCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetUsersListCompleted(this, new GetUsersListCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetUsersListAsync() {
+            this.GetUsersListAsync(null);
+        }
+        
+        public void GetUsersListAsync(object userState) {
+            if ((this.onBeginGetUsersListDelegate == null)) {
+                this.onBeginGetUsersListDelegate = new BeginOperationDelegate(this.OnBeginGetUsersList);
+            }
+            if ((this.onEndGetUsersListDelegate == null)) {
+                this.onEndGetUsersListDelegate = new EndOperationDelegate(this.OnEndGetUsersList);
+            }
+            if ((this.onGetUsersListCompletedDelegate == null)) {
+                this.onGetUsersListCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetUsersListCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetUsersListDelegate, null, this.onEndGetUsersListDelegate, this.onGetUsersListCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[] GetUserGroupsList() {
+            return base.Channel.GetUserGroupsList();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetUserGroupsList(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetUserGroupsList(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[] EndGetUserGroupsList(System.IAsyncResult result) {
+            return base.Channel.EndGetUserGroupsList(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetUserGroupsList(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetUserGroupsList(callback, asyncState);
+        }
+        
+        private object[] OnEndGetUserGroupsList(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterUserGroup[] retVal = this.EndGetUserGroupsList(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetUserGroupsListCompleted(object state) {
+            if ((this.GetUserGroupsListCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetUserGroupsListCompleted(this, new GetUserGroupsListCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetUserGroupsListAsync() {
+            this.GetUserGroupsListAsync(null);
+        }
+        
+        public void GetUserGroupsListAsync(object userState) {
+            if ((this.onBeginGetUserGroupsListDelegate == null)) {
+                this.onBeginGetUserGroupsListDelegate = new BeginOperationDelegate(this.OnBeginGetUserGroupsList);
+            }
+            if ((this.onEndGetUserGroupsListDelegate == null)) {
+                this.onEndGetUserGroupsListDelegate = new EndOperationDelegate(this.OnEndGetUserGroupsList);
+            }
+            if ((this.onGetUserGroupsListCompletedDelegate == null)) {
+                this.onGetUserGroupsListCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetUserGroupsListCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetUserGroupsListDelegate, null, this.onEndGetUserGroupsListDelegate, this.onGetUserGroupsListCompletedDelegate, userState);
+        }
+        
+        public bool CreateUserGroup(string groupName, string groupComment, string groupRight) {
+            return base.Channel.CreateUserGroup(groupName, groupComment, groupRight);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginCreateUserGroup(string groupName, string groupComment, string groupRight, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCreateUserGroup(groupName, groupComment, groupRight, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public bool EndCreateUserGroup(System.IAsyncResult result) {
+            return base.Channel.EndCreateUserGroup(result);
+        }
+        
+        private System.IAsyncResult OnBeginCreateUserGroup(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string groupName = ((string)(inValues[0]));
+            string groupComment = ((string)(inValues[1]));
+            string groupRight = ((string)(inValues[2]));
+            return this.BeginCreateUserGroup(groupName, groupComment, groupRight, callback, asyncState);
+        }
+        
+        private object[] OnEndCreateUserGroup(System.IAsyncResult result) {
+            bool retVal = this.EndCreateUserGroup(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnCreateUserGroupCompleted(object state) {
+            if ((this.CreateUserGroupCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CreateUserGroupCompleted(this, new CreateUserGroupCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CreateUserGroupAsync(string groupName, string groupComment, string groupRight) {
+            this.CreateUserGroupAsync(groupName, groupComment, groupRight, null);
+        }
+        
+        public void CreateUserGroupAsync(string groupName, string groupComment, string groupRight, object userState) {
+            if ((this.onBeginCreateUserGroupDelegate == null)) {
+                this.onBeginCreateUserGroupDelegate = new BeginOperationDelegate(this.OnBeginCreateUserGroup);
+            }
+            if ((this.onEndCreateUserGroupDelegate == null)) {
+                this.onEndCreateUserGroupDelegate = new EndOperationDelegate(this.OnEndCreateUserGroup);
+            }
+            if ((this.onCreateUserGroupCompletedDelegate == null)) {
+                this.onCreateUserGroupCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateUserGroupCompleted);
+            }
+            base.InvokeAsync(this.onBeginCreateUserGroupDelegate, new object[] {
+                        groupName,
+                        groupComment,
+                        groupRight}, this.onEndCreateUserGroupDelegate, this.onCreateUserGroupCompletedDelegate, userState);
+        }
+        
+        public bool CreateUser(string userName, string userPassword, string userComment, int userGroupID) {
+            return base.Channel.CreateUser(userName, userPassword, userComment, userGroupID);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginCreateUser(string userName, string userPassword, string userComment, int userGroupID, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCreateUser(userName, userPassword, userComment, userGroupID, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public bool EndCreateUser(System.IAsyncResult result) {
+            return base.Channel.EndCreateUser(result);
+        }
+        
+        private System.IAsyncResult OnBeginCreateUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string userName = ((string)(inValues[0]));
+            string userPassword = ((string)(inValues[1]));
+            string userComment = ((string)(inValues[2]));
+            int userGroupID = ((int)(inValues[3]));
+            return this.BeginCreateUser(userName, userPassword, userComment, userGroupID, callback, asyncState);
+        }
+        
+        private object[] OnEndCreateUser(System.IAsyncResult result) {
+            bool retVal = this.EndCreateUser(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnCreateUserCompleted(object state) {
+            if ((this.CreateUserCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CreateUserCompleted(this, new CreateUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CreateUserAsync(string userName, string userPassword, string userComment, int userGroupID) {
+            this.CreateUserAsync(userName, userPassword, userComment, userGroupID, null);
+        }
+        
+        public void CreateUserAsync(string userName, string userPassword, string userComment, int userGroupID, object userState) {
+            if ((this.onBeginCreateUserDelegate == null)) {
+                this.onBeginCreateUserDelegate = new BeginOperationDelegate(this.OnBeginCreateUser);
+            }
+            if ((this.onEndCreateUserDelegate == null)) {
+                this.onEndCreateUserDelegate = new EndOperationDelegate(this.OnEndCreateUser);
+            }
+            if ((this.onCreateUserCompletedDelegate == null)) {
+                this.onCreateUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCreateUserCompleted);
+            }
+            base.InvokeAsync(this.onBeginCreateUserDelegate, new object[] {
+                        userName,
+                        userPassword,
+                        userComment,
+                        userGroupID}, this.onEndCreateUserDelegate, this.onCreateUserCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] GetEvents(System.DateTime dateTimeFrom, System.DateTime dateTimeTo, bool needSystemEvents, bool needUserEvents, bool needTerminalEvents, System.Tuple<ushort, uint>[] requestDevicesList) {
+            return base.Channel.GetEvents(dateTimeFrom, dateTimeTo, needSystemEvents, needUserEvents, needTerminalEvents, requestDevicesList);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetEvents(System.DateTime dateTimeFrom, System.DateTime dateTimeTo, bool needSystemEvents, bool needUserEvents, bool needTerminalEvents, System.Tuple<ushort, uint>[] requestDevicesList, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetEvents(dateTimeFrom, dateTimeTo, needSystemEvents, needUserEvents, needTerminalEvents, requestDevicesList, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] EndGetEvents(System.IAsyncResult result) {
+            return base.Channel.EndGetEvents(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.DateTime dateTimeFrom = ((System.DateTime)(inValues[0]));
+            System.DateTime dateTimeTo = ((System.DateTime)(inValues[1]));
+            bool needSystemEvents = ((bool)(inValues[2]));
+            bool needUserEvents = ((bool)(inValues[3]));
+            bool needTerminalEvents = ((bool)(inValues[4]));
+            System.Tuple<ushort, uint>[] requestDevicesList = ((System.Tuple<ushort, uint>[])(inValues[5]));
+            return this.BeginGetEvents(dateTimeFrom, dateTimeTo, needSystemEvents, needUserEvents, needTerminalEvents, requestDevicesList, callback, asyncState);
+        }
+        
+        private object[] OnEndGetEvents(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] retVal = this.EndGetEvents(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetEventsCompleted(object state) {
+            if ((this.GetEventsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetEventsCompleted(this, new GetEventsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetEventsAsync(System.DateTime dateTimeFrom, System.DateTime dateTimeTo, bool needSystemEvents, bool needUserEvents, bool needTerminalEvents, System.Tuple<ushort, uint>[] requestDevicesList) {
+            this.GetEventsAsync(dateTimeFrom, dateTimeTo, needSystemEvents, needUserEvents, needTerminalEvents, requestDevicesList, null);
+        }
+        
+        public void GetEventsAsync(System.DateTime dateTimeFrom, System.DateTime dateTimeTo, bool needSystemEvents, bool needUserEvents, bool needTerminalEvents, System.Tuple<ushort, uint>[] requestDevicesList, object userState) {
+            if ((this.onBeginGetEventsDelegate == null)) {
+                this.onBeginGetEventsDelegate = new BeginOperationDelegate(this.OnBeginGetEvents);
+            }
+            if ((this.onEndGetEventsDelegate == null)) {
+                this.onEndGetEventsDelegate = new EndOperationDelegate(this.OnEndGetEvents);
+            }
+            if ((this.onGetEventsCompletedDelegate == null)) {
+                this.onGetEventsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetEventsCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetEventsDelegate, new object[] {
+                        dateTimeFrom,
+                        dateTimeTo,
+                        needSystemEvents,
+                        needUserEvents,
+                        needTerminalEvents,
+                        requestDevicesList}, this.onEndGetEventsDelegate, this.onGetEventsCompletedDelegate, userState);
+        }
+        
+        public string GetOscillogramAsUrlByID(ushort dsGuid, int eventDataID) {
+            return base.Channel.GetOscillogramAsUrlByID(dsGuid, eventDataID);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetOscillogramAsUrlByID(ushort dsGuid, int eventDataID, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetOscillogramAsUrlByID(dsGuid, eventDataID, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndGetOscillogramAsUrlByID(System.IAsyncResult result) {
+            return base.Channel.EndGetOscillogramAsUrlByID(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetOscillogramAsUrlByID(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            int eventDataID = ((int)(inValues[1]));
+            return this.BeginGetOscillogramAsUrlByID(dsGuid, eventDataID, callback, asyncState);
+        }
+        
+        private object[] OnEndGetOscillogramAsUrlByID(System.IAsyncResult result) {
+            string retVal = this.EndGetOscillogramAsUrlByID(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetOscillogramAsUrlByIDCompleted(object state) {
+            if ((this.GetOscillogramAsUrlByIDCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetOscillogramAsUrlByIDCompleted(this, new GetOscillogramAsUrlByIDCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetOscillogramAsUrlByIDAsync(ushort dsGuid, int eventDataID) {
+            this.GetOscillogramAsUrlByIDAsync(dsGuid, eventDataID, null);
+        }
+        
+        public void GetOscillogramAsUrlByIDAsync(ushort dsGuid, int eventDataID, object userState) {
+            if ((this.onBeginGetOscillogramAsUrlByIDDelegate == null)) {
+                this.onBeginGetOscillogramAsUrlByIDDelegate = new BeginOperationDelegate(this.OnBeginGetOscillogramAsUrlByID);
+            }
+            if ((this.onEndGetOscillogramAsUrlByIDDelegate == null)) {
+                this.onEndGetOscillogramAsUrlByIDDelegate = new EndOperationDelegate(this.OnEndGetOscillogramAsUrlByID);
+            }
+            if ((this.onGetOscillogramAsUrlByIDCompletedDelegate == null)) {
+                this.onGetOscillogramAsUrlByIDCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetOscillogramAsUrlByIDCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetOscillogramAsUrlByIDDelegate, new object[] {
+                        dsGuid,
+                        eventDataID}, this.onEndGetOscillogramAsUrlByIDDelegate, this.onGetOscillogramAsUrlByIDCompletedDelegate, userState);
+        }
+        
+        public System.Tuple<byte[], string> GetOscillogramAsByteArray(ushort dsGuid, int eventDataID) {
+            return base.Channel.GetOscillogramAsByteArray(dsGuid, eventDataID);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetOscillogramAsByteArray(ushort dsGuid, int eventDataID, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetOscillogramAsByteArray(dsGuid, eventDataID, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Tuple<byte[], string> EndGetOscillogramAsByteArray(System.IAsyncResult result) {
+            return base.Channel.EndGetOscillogramAsByteArray(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetOscillogramAsByteArray(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            int eventDataID = ((int)(inValues[1]));
+            return this.BeginGetOscillogramAsByteArray(dsGuid, eventDataID, callback, asyncState);
+        }
+        
+        private object[] OnEndGetOscillogramAsByteArray(System.IAsyncResult result) {
+            System.Tuple<byte[], string> retVal = this.EndGetOscillogramAsByteArray(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetOscillogramAsByteArrayCompleted(object state) {
+            if ((this.GetOscillogramAsByteArrayCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetOscillogramAsByteArrayCompleted(this, new GetOscillogramAsByteArrayCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetOscillogramAsByteArrayAsync(ushort dsGuid, int eventDataID) {
+            this.GetOscillogramAsByteArrayAsync(dsGuid, eventDataID, null);
+        }
+        
+        public void GetOscillogramAsByteArrayAsync(ushort dsGuid, int eventDataID, object userState) {
+            if ((this.onBeginGetOscillogramAsByteArrayDelegate == null)) {
+                this.onBeginGetOscillogramAsByteArrayDelegate = new BeginOperationDelegate(this.OnBeginGetOscillogramAsByteArray);
+            }
+            if ((this.onEndGetOscillogramAsByteArrayDelegate == null)) {
+                this.onEndGetOscillogramAsByteArrayDelegate = new EndOperationDelegate(this.OnEndGetOscillogramAsByteArray);
+            }
+            if ((this.onGetOscillogramAsByteArrayCompletedDelegate == null)) {
+                this.onGetOscillogramAsByteArrayCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetOscillogramAsByteArrayCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetOscillogramAsByteArrayDelegate, new object[] {
+                        dsGuid,
+                        eventDataID}, this.onEndGetOscillogramAsByteArrayDelegate, this.onGetOscillogramAsByteArrayCompletedDelegate, userState);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetHistoricalDataByID(ushort dsGuid, int dataID) {
+            return base.Channel.GetHistoricalDataByID(dsGuid, dataID);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetHistoricalDataByID(ushort dsGuid, int dataID, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetHistoricalDataByID(dsGuid, dataID, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetHistoricalDataByID(System.IAsyncResult result) {
+            return base.Channel.EndGetHistoricalDataByID(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetHistoricalDataByID(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            int dataID = ((int)(inValues[1]));
+            return this.BeginGetHistoricalDataByID(dsGuid, dataID, callback, asyncState);
+        }
+        
+        private object[] OnEndGetHistoricalDataByID(System.IAsyncResult result) {
+            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> retVal = this.EndGetHistoricalDataByID(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetHistoricalDataByIDCompleted(object state) {
+            if ((this.GetHistoricalDataByIDCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetHistoricalDataByIDCompleted(this, new GetHistoricalDataByIDCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetHistoricalDataByIDAsync(ushort dsGuid, int dataID) {
+            this.GetHistoricalDataByIDAsync(dsGuid, dataID, null);
+        }
+        
+        public void GetHistoricalDataByIDAsync(ushort dsGuid, int dataID, object userState) {
+            if ((this.onBeginGetHistoricalDataByIDDelegate == null)) {
+                this.onBeginGetHistoricalDataByIDDelegate = new BeginOperationDelegate(this.OnBeginGetHistoricalDataByID);
+            }
+            if ((this.onEndGetHistoricalDataByIDDelegate == null)) {
+                this.onEndGetHistoricalDataByIDDelegate = new EndOperationDelegate(this.OnEndGetHistoricalDataByID);
+            }
+            if ((this.onGetHistoricalDataByIDCompletedDelegate == null)) {
+                this.onGetHistoricalDataByIDCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetHistoricalDataByIDCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetHistoricalDataByIDDelegate, new object[] {
+                        dsGuid,
+                        dataID}, this.onEndGetHistoricalDataByIDDelegate, this.onGetHistoricalDataByIDCompletedDelegate, userState);
+        }
+        
+        public bool IsNotReceiptedEventsExist() {
+            return base.Channel.IsNotReceiptedEventsExist();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginIsNotReceiptedEventsExist(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginIsNotReceiptedEventsExist(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public bool EndIsNotReceiptedEventsExist(System.IAsyncResult result) {
+            return base.Channel.EndIsNotReceiptedEventsExist(result);
+        }
+        
+        private System.IAsyncResult OnBeginIsNotReceiptedEventsExist(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginIsNotReceiptedEventsExist(callback, asyncState);
+        }
+        
+        private object[] OnEndIsNotReceiptedEventsExist(System.IAsyncResult result) {
+            bool retVal = this.EndIsNotReceiptedEventsExist(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnIsNotReceiptedEventsExistCompleted(object state) {
+            if ((this.IsNotReceiptedEventsExistCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.IsNotReceiptedEventsExistCompleted(this, new IsNotReceiptedEventsExistCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void IsNotReceiptedEventsExistAsync() {
+            this.IsNotReceiptedEventsExistAsync(null);
+        }
+        
+        public void IsNotReceiptedEventsExistAsync(object userState) {
+            if ((this.onBeginIsNotReceiptedEventsExistDelegate == null)) {
+                this.onBeginIsNotReceiptedEventsExistDelegate = new BeginOperationDelegate(this.OnBeginIsNotReceiptedEventsExist);
+            }
+            if ((this.onEndIsNotReceiptedEventsExistDelegate == null)) {
+                this.onEndIsNotReceiptedEventsExistDelegate = new EndOperationDelegate(this.OnEndIsNotReceiptedEventsExist);
+            }
+            if ((this.onIsNotReceiptedEventsExistCompletedDelegate == null)) {
+                this.onIsNotReceiptedEventsExistCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnIsNotReceiptedEventsExistCompleted);
+            }
+            base.InvokeAsync(this.onBeginIsNotReceiptedEventsExistDelegate, null, this.onEndIsNotReceiptedEventsExistDelegate, this.onIsNotReceiptedEventsExistCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] GetNotReceiptedEvents() {
+            return base.Channel.GetNotReceiptedEvents();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetNotReceiptedEvents(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetNotReceiptedEvents(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] EndGetNotReceiptedEvents(System.IAsyncResult result) {
+            return base.Channel.EndGetNotReceiptedEvents(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetNotReceiptedEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetNotReceiptedEvents(callback, asyncState);
+        }
+        
+        private object[] OnEndGetNotReceiptedEvents(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] retVal = this.EndGetNotReceiptedEvents(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetNotReceiptedEventsCompleted(object state) {
+            if ((this.GetNotReceiptedEventsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetNotReceiptedEventsCompleted(this, new GetNotReceiptedEventsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetNotReceiptedEventsAsync() {
+            this.GetNotReceiptedEventsAsync(null);
+        }
+        
+        public void GetNotReceiptedEventsAsync(object userState) {
+            if ((this.onBeginGetNotReceiptedEventsDelegate == null)) {
+                this.onBeginGetNotReceiptedEventsDelegate = new BeginOperationDelegate(this.OnBeginGetNotReceiptedEvents);
+            }
+            if ((this.onEndGetNotReceiptedEventsDelegate == null)) {
+                this.onEndGetNotReceiptedEventsDelegate = new EndOperationDelegate(this.OnEndGetNotReceiptedEvents);
+            }
+            if ((this.onGetNotReceiptedEventsCompletedDelegate == null)) {
+                this.onGetNotReceiptedEventsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetNotReceiptedEventsCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetNotReceiptedEventsDelegate, null, this.onEndGetNotReceiptedEventsDelegate, this.onGetNotReceiptedEventsCompletedDelegate, userState);
+        }
+        
+        public void ReceiptAllEvents(string receiptComment) {
+            base.Channel.ReceiptAllEvents(receiptComment);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginReceiptAllEvents(string receiptComment, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginReceiptAllEvents(receiptComment, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndReceiptAllEvents(System.IAsyncResult result) {
+            base.Channel.EndReceiptAllEvents(result);
+        }
+        
+        private System.IAsyncResult OnBeginReceiptAllEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string receiptComment = ((string)(inValues[0]));
+            return this.BeginReceiptAllEvents(receiptComment, callback, asyncState);
+        }
+        
+        private object[] OnEndReceiptAllEvents(System.IAsyncResult result) {
+            this.EndReceiptAllEvents(result);
+            return null;
+        }
+        
+        private void OnReceiptAllEventsCompleted(object state) {
+            if ((this.ReceiptAllEventsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ReceiptAllEventsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ReceiptAllEventsAsync(string receiptComment) {
+            this.ReceiptAllEventsAsync(receiptComment, null);
+        }
+        
+        public void ReceiptAllEventsAsync(string receiptComment, object userState) {
+            if ((this.onBeginReceiptAllEventsDelegate == null)) {
+                this.onBeginReceiptAllEventsDelegate = new BeginOperationDelegate(this.OnBeginReceiptAllEvents);
+            }
+            if ((this.onEndReceiptAllEventsDelegate == null)) {
+                this.onEndReceiptAllEventsDelegate = new EndOperationDelegate(this.OnEndReceiptAllEvents);
+            }
+            if ((this.onReceiptAllEventsCompletedDelegate == null)) {
+                this.onReceiptAllEventsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnReceiptAllEventsCompleted);
+            }
+            base.InvokeAsync(this.onBeginReceiptAllEventsDelegate, new object[] {
+                        receiptComment}, this.onEndReceiptAllEventsDelegate, this.onReceiptAllEventsCompletedDelegate, userState);
+        }
+        
+        public void ReceiptEvents(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] eventValues, string receiptComment) {
+            base.Channel.ReceiptEvents(eventValues, receiptComment);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginReceiptEvents(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] eventValues, string receiptComment, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginReceiptEvents(eventValues, receiptComment, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndReceiptEvents(System.IAsyncResult result) {
+            base.Channel.EndReceiptEvents(result);
+        }
+        
+        private System.IAsyncResult OnBeginReceiptEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] eventValues = ((ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[])(inValues[0]));
+            string receiptComment = ((string)(inValues[1]));
+            return this.BeginReceiptEvents(eventValues, receiptComment, callback, asyncState);
+        }
+        
+        private object[] OnEndReceiptEvents(System.IAsyncResult result) {
+            this.EndReceiptEvents(result);
+            return null;
+        }
+        
+        private void OnReceiptEventsCompleted(object state) {
+            if ((this.ReceiptEventsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ReceiptEventsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ReceiptEventsAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] eventValues, string receiptComment) {
+            this.ReceiptEventsAsync(eventValues, receiptComment, null);
+        }
+        
+        public void ReceiptEventsAsync(ProviderCustomerExchangeLib.DSRouterService.DSRouterEventValue[] eventValues, string receiptComment, object userState) {
+            if ((this.onBeginReceiptEventsDelegate == null)) {
+                this.onBeginReceiptEventsDelegate = new BeginOperationDelegate(this.OnBeginReceiptEvents);
+            }
+            if ((this.onEndReceiptEventsDelegate == null)) {
+                this.onEndReceiptEventsDelegate = new EndOperationDelegate(this.OnEndReceiptEvents);
+            }
+            if ((this.onReceiptEventsCompletedDelegate == null)) {
+                this.onReceiptEventsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnReceiptEventsCompleted);
+            }
+            base.InvokeAsync(this.onBeginReceiptEventsDelegate, new object[] {
+                        eventValues,
+                        receiptComment}, this.onEndReceiptEventsDelegate, this.onReceiptEventsCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[] GetSettingsSetsList(ushort dsGuid, uint devGuid) {
+            return base.Channel.GetSettingsSetsList(dsGuid, devGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetSettingsSetsList(ushort dsGuid, uint devGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetSettingsSetsList(dsGuid, devGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[] EndGetSettingsSetsList(System.IAsyncResult result) {
+            return base.Channel.EndGetSettingsSetsList(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetSettingsSetsList(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            return this.BeginGetSettingsSetsList(dsGuid, devGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndGetSettingsSetsList(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterSettingsSet[] retVal = this.EndGetSettingsSetsList(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetSettingsSetsListCompleted(object state) {
+            if ((this.GetSettingsSetsListCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetSettingsSetsListCompleted(this, new GetSettingsSetsListCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetSettingsSetsListAsync(ushort dsGuid, uint devGuid) {
+            this.GetSettingsSetsListAsync(dsGuid, devGuid, null);
+        }
+        
+        public void GetSettingsSetsListAsync(ushort dsGuid, uint devGuid, object userState) {
+            if ((this.onBeginGetSettingsSetsListDelegate == null)) {
+                this.onBeginGetSettingsSetsListDelegate = new BeginOperationDelegate(this.OnBeginGetSettingsSetsList);
+            }
+            if ((this.onEndGetSettingsSetsListDelegate == null)) {
+                this.onEndGetSettingsSetsListDelegate = new EndOperationDelegate(this.OnEndGetSettingsSetsList);
+            }
+            if ((this.onGetSettingsSetsListCompletedDelegate == null)) {
+                this.onGetSettingsSetsListCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetSettingsSetsListCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetSettingsSetsListDelegate, new object[] {
+                        dsGuid,
+                        devGuid}, this.onEndGetSettingsSetsListDelegate, this.onGetSettingsSetsListCompletedDelegate, userState);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> GetValuesFromSettingsSet(ushort dsGuid, int settingsSetID) {
+            return base.Channel.GetValuesFromSettingsSet(dsGuid, settingsSetID);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetValuesFromSettingsSet(ushort dsGuid, int settingsSetID, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetValuesFromSettingsSet(dsGuid, settingsSetID, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> EndGetValuesFromSettingsSet(System.IAsyncResult result) {
+            return base.Channel.EndGetValuesFromSettingsSet(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetValuesFromSettingsSet(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            int settingsSetID = ((int)(inValues[1]));
+            return this.BeginGetValuesFromSettingsSet(dsGuid, settingsSetID, callback, asyncState);
+        }
+        
+        private object[] OnEndGetValuesFromSettingsSet(System.IAsyncResult result) {
+            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> retVal = this.EndGetValuesFromSettingsSet(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetValuesFromSettingsSetCompleted(object state) {
+            if ((this.GetValuesFromSettingsSetCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetValuesFromSettingsSetCompleted(this, new GetValuesFromSettingsSetCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetValuesFromSettingsSetAsync(ushort dsGuid, int settingsSetID) {
+            this.GetValuesFromSettingsSetAsync(dsGuid, settingsSetID, null);
+        }
+        
+        public void GetValuesFromSettingsSetAsync(ushort dsGuid, int settingsSetID, object userState) {
+            if ((this.onBeginGetValuesFromSettingsSetDelegate == null)) {
+                this.onBeginGetValuesFromSettingsSetDelegate = new BeginOperationDelegate(this.OnBeginGetValuesFromSettingsSet);
+            }
+            if ((this.onEndGetValuesFromSettingsSetDelegate == null)) {
+                this.onEndGetValuesFromSettingsSetDelegate = new EndOperationDelegate(this.OnEndGetValuesFromSettingsSet);
+            }
+            if ((this.onGetValuesFromSettingsSetCompletedDelegate == null)) {
+                this.onGetValuesFromSettingsSetCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetValuesFromSettingsSetCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetValuesFromSettingsSetDelegate, new object[] {
+                        dsGuid,
+                        settingsSetID}, this.onEndGetValuesFromSettingsSetDelegate, this.onGetValuesFromSettingsSetCompletedDelegate, userState);
+        }
+        
+        public void SaveSettingsToDevice(ushort dsGuid, uint devGuid, System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> tagsValues) {
+            base.Channel.SaveSettingsToDevice(dsGuid, devGuid, tagsValues);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSaveSettingsToDevice(ushort dsGuid, uint devGuid, System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> tagsValues, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSaveSettingsToDevice(dsGuid, devGuid, tagsValues, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndSaveSettingsToDevice(System.IAsyncResult result) {
+            base.Channel.EndSaveSettingsToDevice(result);
+        }
+        
+        private System.IAsyncResult OnBeginSaveSettingsToDevice(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> tagsValues = ((System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue>)(inValues[2]));
+            return this.BeginSaveSettingsToDevice(dsGuid, devGuid, tagsValues, callback, asyncState);
+        }
+        
+        private object[] OnEndSaveSettingsToDevice(System.IAsyncResult result) {
+            this.EndSaveSettingsToDevice(result);
+            return null;
+        }
+        
+        private void OnSaveSettingsToDeviceCompleted(object state) {
+            if ((this.SaveSettingsToDeviceCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SaveSettingsToDeviceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SaveSettingsToDeviceAsync(ushort dsGuid, uint devGuid, System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> tagsValues) {
+            this.SaveSettingsToDeviceAsync(dsGuid, devGuid, tagsValues, null);
+        }
+        
+        public void SaveSettingsToDeviceAsync(ushort dsGuid, uint devGuid, System.Collections.Generic.Dictionary<string, ProviderCustomerExchangeLib.DSRouterService.DSRouterTagValue> tagsValues, object userState) {
+            if ((this.onBeginSaveSettingsToDeviceDelegate == null)) {
+                this.onBeginSaveSettingsToDeviceDelegate = new BeginOperationDelegate(this.OnBeginSaveSettingsToDevice);
+            }
+            if ((this.onEndSaveSettingsToDeviceDelegate == null)) {
+                this.onEndSaveSettingsToDeviceDelegate = new EndOperationDelegate(this.OnEndSaveSettingsToDevice);
+            }
+            if ((this.onSaveSettingsToDeviceCompletedDelegate == null)) {
+                this.onSaveSettingsToDeviceCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSaveSettingsToDeviceCompleted);
+            }
+            base.InvokeAsync(this.onBeginSaveSettingsToDeviceDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagsValues}, this.onEndSaveSettingsToDeviceDelegate, this.onSaveSettingsToDeviceCompletedDelegate, userState);
+        }
+        
+        public void CommandRun(string ACommandID, object[] AParameters) {
+            base.Channel.CommandRun(ACommandID, AParameters);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginCommandRun(string ACommandID, object[] AParameters, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCommandRun(ACommandID, AParameters, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndCommandRun(System.IAsyncResult result) {
+            base.Channel.EndCommandRun(result);
+        }
+        
+        private System.IAsyncResult OnBeginCommandRun(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string ACommandID = ((string)(inValues[0]));
+            object[] AParameters = ((object[])(inValues[1]));
+            return this.BeginCommandRun(ACommandID, AParameters, callback, asyncState);
+        }
+        
+        private object[] OnEndCommandRun(System.IAsyncResult result) {
+            this.EndCommandRun(result);
+            return null;
+        }
+        
+        private void OnCommandRunCompleted(object state) {
+            if ((this.CommandRunCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CommandRunCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CommandRunAsync(string ACommandID, object[] AParameters) {
+            this.CommandRunAsync(ACommandID, AParameters, null);
+        }
+        
+        public void CommandRunAsync(string ACommandID, object[] AParameters, object userState) {
+            if ((this.onBeginCommandRunDelegate == null)) {
+                this.onBeginCommandRunDelegate = new BeginOperationDelegate(this.OnBeginCommandRun);
+            }
+            if ((this.onEndCommandRunDelegate == null)) {
+                this.onEndCommandRunDelegate = new EndOperationDelegate(this.OnEndCommandRun);
+            }
+            if ((this.onCommandRunCompletedDelegate == null)) {
+                this.onCommandRunCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCommandRunCompleted);
+            }
+            base.InvokeAsync(this.onBeginCommandRunDelegate, new object[] {
+                        ACommandID,
+                        AParameters}, this.onEndCommandRunDelegate, this.onCommandRunCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates CommandStateCheck(string ACommandID) {
+            return base.Channel.CommandStateCheck(ACommandID);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginCommandStateCheck(string ACommandID, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCommandStateCheck(ACommandID, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates EndCommandStateCheck(System.IAsyncResult result) {
+            return base.Channel.EndCommandStateCheck(result);
+        }
+        
+        private System.IAsyncResult OnBeginCommandStateCheck(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string ACommandID = ((string)(inValues[0]));
+            return this.BeginCommandStateCheck(ACommandID, callback, asyncState);
+        }
+        
+        private object[] OnEndCommandStateCheck(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.EnumerationCommandStates retVal = this.EndCommandStateCheck(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnCommandStateCheckCompleted(object state) {
+            if ((this.CommandStateCheckCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CommandStateCheckCompleted(this, new CommandStateCheckCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CommandStateCheckAsync(string ACommandID) {
+            this.CommandStateCheckAsync(ACommandID, null);
+        }
+        
+        public void CommandStateCheckAsync(string ACommandID, object userState) {
+            if ((this.onBeginCommandStateCheckDelegate == null)) {
+                this.onBeginCommandStateCheckDelegate = new BeginOperationDelegate(this.OnBeginCommandStateCheck);
+            }
+            if ((this.onEndCommandStateCheckDelegate == null)) {
+                this.onEndCommandStateCheckDelegate = new EndOperationDelegate(this.OnEndCommandStateCheck);
+            }
+            if ((this.onCommandStateCheckCompletedDelegate == null)) {
+                this.onCommandStateCheckCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCommandStateCheckCompleted);
+            }
+            base.InvokeAsync(this.onBeginCommandStateCheckDelegate, new object[] {
+                        ACommandID}, this.onEndCommandStateCheckDelegate, this.onCommandStateCheckCompletedDelegate, userState);
+        }
+        
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[] GetDocumentsList(ushort dsGuid, int devGuid) {
+            return base.Channel.GetDocumentsList(dsGuid, devGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetDocumentsList(ushort dsGuid, int devGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetDocumentsList(dsGuid, devGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[] EndGetDocumentsList(System.IAsyncResult result) {
+            return base.Channel.EndGetDocumentsList(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetDocumentsList(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            int devGuid = ((int)(inValues[1]));
+            return this.BeginGetDocumentsList(dsGuid, devGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndGetDocumentsList(System.IAsyncResult result) {
+            ProviderCustomerExchangeLib.DSRouterService.DSRouterDocumentDataValue[] retVal = this.EndGetDocumentsList(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetDocumentsListCompleted(object state) {
+            if ((this.GetDocumentsListCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetDocumentsListCompleted(this, new GetDocumentsListCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetDocumentsListAsync(ushort dsGuid, int devGuid) {
+            this.GetDocumentsListAsync(dsGuid, devGuid, null);
+        }
+        
+        public void GetDocumentsListAsync(ushort dsGuid, int devGuid, object userState) {
+            if ((this.onBeginGetDocumentsListDelegate == null)) {
+                this.onBeginGetDocumentsListDelegate = new BeginOperationDelegate(this.OnBeginGetDocumentsList);
+            }
+            if ((this.onEndGetDocumentsListDelegate == null)) {
+                this.onEndGetDocumentsListDelegate = new EndOperationDelegate(this.OnEndGetDocumentsList);
+            }
+            if ((this.onGetDocumentsListCompletedDelegate == null)) {
+                this.onGetDocumentsListCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDocumentsListCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetDocumentsListDelegate, new object[] {
+                        dsGuid,
+                        devGuid}, this.onEndGetDocumentsListDelegate, this.onGetDocumentsListCompletedDelegate, userState);
+        }
+        
+        public string GetDocumentByID(ushort dsGuid, int documentId) {
+            return base.Channel.GetDocumentByID(dsGuid, documentId);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetDocumentByID(ushort dsGuid, int documentId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetDocumentByID(dsGuid, documentId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndGetDocumentByID(System.IAsyncResult result) {
+            return base.Channel.EndGetDocumentByID(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetDocumentByID(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            int documentId = ((int)(inValues[1]));
+            return this.BeginGetDocumentByID(dsGuid, documentId, callback, asyncState);
+        }
+        
+        private object[] OnEndGetDocumentByID(System.IAsyncResult result) {
+            string retVal = this.EndGetDocumentByID(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetDocumentByIDCompleted(object state) {
+            if ((this.GetDocumentByIDCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetDocumentByIDCompleted(this, new GetDocumentByIDCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetDocumentByIDAsync(ushort dsGuid, int documentId) {
+            this.GetDocumentByIDAsync(dsGuid, documentId, null);
+        }
+        
+        public void GetDocumentByIDAsync(ushort dsGuid, int documentId, object userState) {
+            if ((this.onBeginGetDocumentByIDDelegate == null)) {
+                this.onBeginGetDocumentByIDDelegate = new BeginOperationDelegate(this.OnBeginGetDocumentByID);
+            }
+            if ((this.onEndGetDocumentByIDDelegate == null)) {
+                this.onEndGetDocumentByIDDelegate = new EndOperationDelegate(this.OnEndGetDocumentByID);
+            }
+            if ((this.onGetDocumentByIDCompletedDelegate == null)) {
+                this.onGetDocumentByIDCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDocumentByIDCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetDocumentByIDDelegate, new object[] {
+                        dsGuid,
+                        documentId}, this.onEndGetDocumentByIDDelegate, this.onGetDocumentByIDCompletedDelegate, userState);
+        }
+        
+        public bool InitUploadFileSession(ushort dsGuid, int devGuid, string fileName, string comment) {
+            return base.Channel.InitUploadFileSession(dsGuid, devGuid, fileName, comment);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginInitUploadFileSession(ushort dsGuid, int devGuid, string fileName, string comment, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginInitUploadFileSession(dsGuid, devGuid, fileName, comment, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public bool EndInitUploadFileSession(System.IAsyncResult result) {
+            return base.Channel.EndInitUploadFileSession(result);
+        }
+        
+        private System.IAsyncResult OnBeginInitUploadFileSession(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            int devGuid = ((int)(inValues[1]));
+            string fileName = ((string)(inValues[2]));
+            string comment = ((string)(inValues[3]));
+            return this.BeginInitUploadFileSession(dsGuid, devGuid, fileName, comment, callback, asyncState);
+        }
+        
+        private object[] OnEndInitUploadFileSession(System.IAsyncResult result) {
+            bool retVal = this.EndInitUploadFileSession(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnInitUploadFileSessionCompleted(object state) {
+            if ((this.InitUploadFileSessionCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.InitUploadFileSessionCompleted(this, new InitUploadFileSessionCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void InitUploadFileSessionAsync(ushort dsGuid, int devGuid, string fileName, string comment) {
+            this.InitUploadFileSessionAsync(dsGuid, devGuid, fileName, comment, null);
+        }
+        
+        public void InitUploadFileSessionAsync(ushort dsGuid, int devGuid, string fileName, string comment, object userState) {
+            if ((this.onBeginInitUploadFileSessionDelegate == null)) {
+                this.onBeginInitUploadFileSessionDelegate = new BeginOperationDelegate(this.OnBeginInitUploadFileSession);
+            }
+            if ((this.onEndInitUploadFileSessionDelegate == null)) {
+                this.onEndInitUploadFileSessionDelegate = new EndOperationDelegate(this.OnEndInitUploadFileSession);
+            }
+            if ((this.onInitUploadFileSessionCompletedDelegate == null)) {
+                this.onInitUploadFileSessionCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnInitUploadFileSessionCompleted);
+            }
+            base.InvokeAsync(this.onBeginInitUploadFileSessionDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        fileName,
+                        comment}, this.onEndInitUploadFileSessionDelegate, this.onInitUploadFileSessionCompletedDelegate, userState);
+        }
+        
+        public bool UploadFileChunk(byte[] fileChunkBytes) {
+            return base.Channel.UploadFileChunk(fileChunkBytes);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginUploadFileChunk(byte[] fileChunkBytes, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUploadFileChunk(fileChunkBytes, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public bool EndUploadFileChunk(System.IAsyncResult result) {
+            return base.Channel.EndUploadFileChunk(result);
+        }
+        
+        private System.IAsyncResult OnBeginUploadFileChunk(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            byte[] fileChunkBytes = ((byte[])(inValues[0]));
+            return this.BeginUploadFileChunk(fileChunkBytes, callback, asyncState);
+        }
+        
+        private object[] OnEndUploadFileChunk(System.IAsyncResult result) {
+            bool retVal = this.EndUploadFileChunk(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnUploadFileChunkCompleted(object state) {
+            if ((this.UploadFileChunkCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UploadFileChunkCompleted(this, new UploadFileChunkCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UploadFileChunkAsync(byte[] fileChunkBytes) {
+            this.UploadFileChunkAsync(fileChunkBytes, null);
+        }
+        
+        public void UploadFileChunkAsync(byte[] fileChunkBytes, object userState) {
+            if ((this.onBeginUploadFileChunkDelegate == null)) {
+                this.onBeginUploadFileChunkDelegate = new BeginOperationDelegate(this.OnBeginUploadFileChunk);
+            }
+            if ((this.onEndUploadFileChunkDelegate == null)) {
+                this.onEndUploadFileChunkDelegate = new EndOperationDelegate(this.OnEndUploadFileChunk);
+            }
+            if ((this.onUploadFileChunkCompletedDelegate == null)) {
+                this.onUploadFileChunkCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUploadFileChunkCompleted);
+            }
+            base.InvokeAsync(this.onBeginUploadFileChunkDelegate, new object[] {
+                        fileChunkBytes}, this.onEndUploadFileChunkDelegate, this.onUploadFileChunkCompletedDelegate, userState);
+        }
+        
+        public string SaveUploadedFile() {
+            return base.Channel.SaveUploadedFile();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSaveUploadedFile(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSaveUploadedFile(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string EndSaveUploadedFile(System.IAsyncResult result) {
+            return base.Channel.EndSaveUploadedFile(result);
+        }
+        
+        private System.IAsyncResult OnBeginSaveUploadedFile(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginSaveUploadedFile(callback, asyncState);
+        }
+        
+        private object[] OnEndSaveUploadedFile(System.IAsyncResult result) {
+            string retVal = this.EndSaveUploadedFile(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnSaveUploadedFileCompleted(object state) {
+            if ((this.SaveUploadedFileCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SaveUploadedFileCompleted(this, new SaveUploadedFileCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SaveUploadedFileAsync() {
+            this.SaveUploadedFileAsync(null);
+        }
+        
+        public void SaveUploadedFileAsync(object userState) {
+            if ((this.onBeginSaveUploadedFileDelegate == null)) {
+                this.onBeginSaveUploadedFileDelegate = new BeginOperationDelegate(this.OnBeginSaveUploadedFile);
+            }
+            if ((this.onEndSaveUploadedFileDelegate == null)) {
+                this.onEndSaveUploadedFileDelegate = new EndOperationDelegate(this.OnEndSaveUploadedFile);
+            }
+            if ((this.onSaveUploadedFileCompletedDelegate == null)) {
+                this.onSaveUploadedFileCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSaveUploadedFileCompleted);
+            }
+            base.InvokeAsync(this.onBeginSaveUploadedFileDelegate, null, this.onEndSaveUploadedFileDelegate, this.onSaveUploadedFileCompletedDelegate, userState);
+        }
+        
+        public void TerminateUploadFileSession() {
+            base.Channel.TerminateUploadFileSession();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginTerminateUploadFileSession(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginTerminateUploadFileSession(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndTerminateUploadFileSession(System.IAsyncResult result) {
+            base.Channel.EndTerminateUploadFileSession(result);
+        }
+        
+        private System.IAsyncResult OnBeginTerminateUploadFileSession(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginTerminateUploadFileSession(callback, asyncState);
+        }
+        
+        private object[] OnEndTerminateUploadFileSession(System.IAsyncResult result) {
+            this.EndTerminateUploadFileSession(result);
+            return null;
+        }
+        
+        private void OnTerminateUploadFileSessionCompleted(object state) {
+            if ((this.TerminateUploadFileSessionCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.TerminateUploadFileSessionCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void TerminateUploadFileSessionAsync() {
+            this.TerminateUploadFileSessionAsync(null);
+        }
+        
+        public void TerminateUploadFileSessionAsync(object userState) {
+            if ((this.onBeginTerminateUploadFileSessionDelegate == null)) {
+                this.onBeginTerminateUploadFileSessionDelegate = new BeginOperationDelegate(this.OnBeginTerminateUploadFileSession);
+            }
+            if ((this.onEndTerminateUploadFileSessionDelegate == null)) {
+                this.onEndTerminateUploadFileSessionDelegate = new EndOperationDelegate(this.OnEndTerminateUploadFileSession);
+            }
+            if ((this.onTerminateUploadFileSessionCompletedDelegate == null)) {
+                this.onTerminateUploadFileSessionCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnTerminateUploadFileSessionCompleted);
+            }
+            base.InvokeAsync(this.onBeginTerminateUploadFileSessionDelegate, null, this.onEndTerminateUploadFileSessionDelegate, this.onTerminateUploadFileSessionCompletedDelegate, userState);
+        }
+        
+        public System.DateTime GetCurrentDateTime() {
+            return base.Channel.GetCurrentDateTime();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetCurrentDateTime(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetCurrentDateTime(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.DateTime EndGetCurrentDateTime(System.IAsyncResult result) {
+            return base.Channel.EndGetCurrentDateTime(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetCurrentDateTime(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetCurrentDateTime(callback, asyncState);
+        }
+        
+        private object[] OnEndGetCurrentDateTime(System.IAsyncResult result) {
+            System.DateTime retVal = this.EndGetCurrentDateTime(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetCurrentDateTimeCompleted(object state) {
+            if ((this.GetCurrentDateTimeCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetCurrentDateTimeCompleted(this, new GetCurrentDateTimeCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetCurrentDateTimeAsync() {
+            this.GetCurrentDateTimeAsync(null);
+        }
+        
+        public void GetCurrentDateTimeAsync(object userState) {
+            if ((this.onBeginGetCurrentDateTimeDelegate == null)) {
+                this.onBeginGetCurrentDateTimeDelegate = new BeginOperationDelegate(this.OnBeginGetCurrentDateTime);
+            }
+            if ((this.onEndGetCurrentDateTimeDelegate == null)) {
+                this.onEndGetCurrentDateTimeDelegate = new EndOperationDelegate(this.OnEndGetCurrentDateTime);
+            }
+            if ((this.onGetCurrentDateTimeCompletedDelegate == null)) {
+                this.onGetCurrentDateTimeCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetCurrentDateTimeCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetCurrentDateTimeDelegate, null, this.onEndGetCurrentDateTimeDelegate, this.onGetCurrentDateTimeCompletedDelegate, userState);
+        }
+        
+        public void SetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid, object valinobject) {
+            base.Channel.SetTagValueFromHMI(dsGuid, devGuid, tagGuid, valinobject);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid, object valinobject, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSetTagValueFromHMI(dsGuid, devGuid, tagGuid, valinobject, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndSetTagValueFromHMI(System.IAsyncResult result) {
+            base.Channel.EndSetTagValueFromHMI(result);
+        }
+        
+        private System.IAsyncResult OnBeginSetTagValueFromHMI(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            object valinobject = ((object)(inValues[3]));
+            return this.BeginSetTagValueFromHMI(dsGuid, devGuid, tagGuid, valinobject, callback, asyncState);
+        }
+        
+        private object[] OnEndSetTagValueFromHMI(System.IAsyncResult result) {
+            this.EndSetTagValueFromHMI(result);
+            return null;
+        }
+        
+        private void OnSetTagValueFromHMICompleted(object state) {
+            if ((this.SetTagValueFromHMICompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SetTagValueFromHMICompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SetTagValueFromHMIAsync(ushort dsGuid, uint devGuid, uint tagGuid, object valinobject) {
+            this.SetTagValueFromHMIAsync(dsGuid, devGuid, tagGuid, valinobject, null);
+        }
+        
+        public void SetTagValueFromHMIAsync(ushort dsGuid, uint devGuid, uint tagGuid, object valinobject, object userState) {
+            if ((this.onBeginSetTagValueFromHMIDelegate == null)) {
+                this.onBeginSetTagValueFromHMIDelegate = new BeginOperationDelegate(this.OnBeginSetTagValueFromHMI);
+            }
+            if ((this.onEndSetTagValueFromHMIDelegate == null)) {
+                this.onEndSetTagValueFromHMIDelegate = new EndOperationDelegate(this.OnEndSetTagValueFromHMI);
+            }
+            if ((this.onSetTagValueFromHMICompletedDelegate == null)) {
+                this.onSetTagValueFromHMICompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSetTagValueFromHMICompleted);
+            }
+            base.InvokeAsync(this.onBeginSetTagValueFromHMIDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid,
+                        valinobject}, this.onEndSetTagValueFromHMIDelegate, this.onSetTagValueFromHMICompletedDelegate, userState);
+        }
+        
+        public void ReSetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid) {
+            base.Channel.ReSetTagValueFromHMI(dsGuid, devGuid, tagGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginReSetTagValueFromHMI(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginReSetTagValueFromHMI(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndReSetTagValueFromHMI(System.IAsyncResult result) {
+            base.Channel.EndReSetTagValueFromHMI(result);
+        }
+        
+        private System.IAsyncResult OnBeginReSetTagValueFromHMI(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            return this.BeginReSetTagValueFromHMI(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndReSetTagValueFromHMI(System.IAsyncResult result) {
+            this.EndReSetTagValueFromHMI(result);
+            return null;
+        }
+        
+        private void OnReSetTagValueFromHMICompleted(object state) {
+            if ((this.ReSetTagValueFromHMICompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ReSetTagValueFromHMICompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ReSetTagValueFromHMIAsync(ushort dsGuid, uint devGuid, uint tagGuid) {
+            this.ReSetTagValueFromHMIAsync(dsGuid, devGuid, tagGuid, null);
+        }
+        
+        public void ReSetTagValueFromHMIAsync(ushort dsGuid, uint devGuid, uint tagGuid, object userState) {
+            if ((this.onBeginReSetTagValueFromHMIDelegate == null)) {
+                this.onBeginReSetTagValueFromHMIDelegate = new BeginOperationDelegate(this.OnBeginReSetTagValueFromHMI);
+            }
+            if ((this.onEndReSetTagValueFromHMIDelegate == null)) {
+                this.onEndReSetTagValueFromHMIDelegate = new EndOperationDelegate(this.OnEndReSetTagValueFromHMI);
+            }
+            if ((this.onReSetTagValueFromHMICompletedDelegate == null)) {
+                this.onReSetTagValueFromHMICompletedDelegate = new System.Threading.SendOrPostCallback(this.OnReSetTagValueFromHMICompleted);
+            }
+            base.InvokeAsync(this.onBeginReSetTagValueFromHMIDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid}, this.onEndReSetTagValueFromHMIDelegate, this.onReSetTagValueFromHMICompletedDelegate, userState);
+        }
+        
+        public object GetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid) {
+            return base.Channel.GetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public object EndGetTagAnalogTransformationRatio(System.IAsyncResult result) {
+            return base.Channel.EndGetTagAnalogTransformationRatio(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagAnalogTransformationRatio(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            return this.BeginGetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagAnalogTransformationRatio(System.IAsyncResult result) {
+            object retVal = this.EndGetTagAnalogTransformationRatio(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagAnalogTransformationRatioCompleted(object state) {
+            if ((this.GetTagAnalogTransformationRatioCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagAnalogTransformationRatioCompleted(this, new GetTagAnalogTransformationRatioCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagAnalogTransformationRatioAsync(ushort dsGuid, uint devGuid, uint tagGuid) {
+            this.GetTagAnalogTransformationRatioAsync(dsGuid, devGuid, tagGuid, null);
+        }
+        
+        public void GetTagAnalogTransformationRatioAsync(ushort dsGuid, uint devGuid, uint tagGuid, object userState) {
+            if ((this.onBeginGetTagAnalogTransformationRatioDelegate == null)) {
+                this.onBeginGetTagAnalogTransformationRatioDelegate = new BeginOperationDelegate(this.OnBeginGetTagAnalogTransformationRatio);
+            }
+            if ((this.onEndGetTagAnalogTransformationRatioDelegate == null)) {
+                this.onEndGetTagAnalogTransformationRatioDelegate = new EndOperationDelegate(this.OnEndGetTagAnalogTransformationRatio);
+            }
+            if ((this.onGetTagAnalogTransformationRatioCompletedDelegate == null)) {
+                this.onGetTagAnalogTransformationRatioCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagAnalogTransformationRatioCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagAnalogTransformationRatioDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid}, this.onEndGetTagAnalogTransformationRatioDelegate, this.onGetTagAnalogTransformationRatioCompletedDelegate, userState);
+        }
+        
+        public void SetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, object transformationRatio) {
+            base.Channel.SetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid, transformationRatio);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginSetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, object transformationRatio, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginSetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid, transformationRatio, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndSetTagAnalogTransformationRatio(System.IAsyncResult result) {
+            base.Channel.EndSetTagAnalogTransformationRatio(result);
+        }
+        
+        private System.IAsyncResult OnBeginSetTagAnalogTransformationRatio(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            object transformationRatio = ((object)(inValues[3]));
+            return this.BeginSetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid, transformationRatio, callback, asyncState);
+        }
+        
+        private object[] OnEndSetTagAnalogTransformationRatio(System.IAsyncResult result) {
+            this.EndSetTagAnalogTransformationRatio(result);
+            return null;
+        }
+        
+        private void OnSetTagAnalogTransformationRatioCompleted(object state) {
+            if ((this.SetTagAnalogTransformationRatioCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.SetTagAnalogTransformationRatioCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void SetTagAnalogTransformationRatioAsync(ushort dsGuid, uint devGuid, uint tagGuid, object transformationRatio) {
+            this.SetTagAnalogTransformationRatioAsync(dsGuid, devGuid, tagGuid, transformationRatio, null);
+        }
+        
+        public void SetTagAnalogTransformationRatioAsync(ushort dsGuid, uint devGuid, uint tagGuid, object transformationRatio, object userState) {
+            if ((this.onBeginSetTagAnalogTransformationRatioDelegate == null)) {
+                this.onBeginSetTagAnalogTransformationRatioDelegate = new BeginOperationDelegate(this.OnBeginSetTagAnalogTransformationRatio);
+            }
+            if ((this.onEndSetTagAnalogTransformationRatioDelegate == null)) {
+                this.onEndSetTagAnalogTransformationRatioDelegate = new EndOperationDelegate(this.OnEndSetTagAnalogTransformationRatio);
+            }
+            if ((this.onSetTagAnalogTransformationRatioCompletedDelegate == null)) {
+                this.onSetTagAnalogTransformationRatioCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnSetTagAnalogTransformationRatioCompleted);
+            }
+            base.InvokeAsync(this.onBeginSetTagAnalogTransformationRatioDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid,
+                        transformationRatio}, this.onEndSetTagAnalogTransformationRatioDelegate, this.onSetTagAnalogTransformationRatioCompletedDelegate, userState);
+        }
+        
+        public void ReSetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid) {
+            base.Channel.ReSetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginReSetTagAnalogTransformationRatio(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginReSetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndReSetTagAnalogTransformationRatio(System.IAsyncResult result) {
+            base.Channel.EndReSetTagAnalogTransformationRatio(result);
+        }
+        
+        private System.IAsyncResult OnBeginReSetTagAnalogTransformationRatio(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            return this.BeginReSetTagAnalogTransformationRatio(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndReSetTagAnalogTransformationRatio(System.IAsyncResult result) {
+            this.EndReSetTagAnalogTransformationRatio(result);
+            return null;
+        }
+        
+        private void OnReSetTagAnalogTransformationRatioCompleted(object state) {
+            if ((this.ReSetTagAnalogTransformationRatioCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ReSetTagAnalogTransformationRatioCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ReSetTagAnalogTransformationRatioAsync(ushort dsGuid, uint devGuid, uint tagGuid) {
+            this.ReSetTagAnalogTransformationRatioAsync(dsGuid, devGuid, tagGuid, null);
+        }
+        
+        public void ReSetTagAnalogTransformationRatioAsync(ushort dsGuid, uint devGuid, uint tagGuid, object userState) {
+            if ((this.onBeginReSetTagAnalogTransformationRatioDelegate == null)) {
+                this.onBeginReSetTagAnalogTransformationRatioDelegate = new BeginOperationDelegate(this.OnBeginReSetTagAnalogTransformationRatio);
+            }
+            if ((this.onEndReSetTagAnalogTransformationRatioDelegate == null)) {
+                this.onEndReSetTagAnalogTransformationRatioDelegate = new EndOperationDelegate(this.OnEndReSetTagAnalogTransformationRatio);
+            }
+            if ((this.onReSetTagAnalogTransformationRatioCompletedDelegate == null)) {
+                this.onReSetTagAnalogTransformationRatioCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnReSetTagAnalogTransformationRatioCompleted);
+            }
+            base.InvokeAsync(this.onBeginReSetTagAnalogTransformationRatioDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid}, this.onEndReSetTagAnalogTransformationRatioDelegate, this.onReSetTagAnalogTransformationRatioCompletedDelegate, userState);
+        }
+        
+        public System.Nullable<bool> IsInverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid) {
+            return base.Channel.IsInverseDiscretTag(dsGuid, devGuid, tagGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginIsInverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginIsInverseDiscretTag(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Nullable<bool> EndIsInverseDiscretTag(System.IAsyncResult result) {
+            return base.Channel.EndIsInverseDiscretTag(result);
+        }
+        
+        private System.IAsyncResult OnBeginIsInverseDiscretTag(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            return this.BeginIsInverseDiscretTag(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndIsInverseDiscretTag(System.IAsyncResult result) {
+            System.Nullable<bool> retVal = this.EndIsInverseDiscretTag(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnIsInverseDiscretTagCompleted(object state) {
+            if ((this.IsInverseDiscretTagCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.IsInverseDiscretTagCompleted(this, new IsInverseDiscretTagCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void IsInverseDiscretTagAsync(ushort dsGuid, uint devGuid, uint tagGuid) {
+            this.IsInverseDiscretTagAsync(dsGuid, devGuid, tagGuid, null);
+        }
+        
+        public void IsInverseDiscretTagAsync(ushort dsGuid, uint devGuid, uint tagGuid, object userState) {
+            if ((this.onBeginIsInverseDiscretTagDelegate == null)) {
+                this.onBeginIsInverseDiscretTagDelegate = new BeginOperationDelegate(this.OnBeginIsInverseDiscretTag);
+            }
+            if ((this.onEndIsInverseDiscretTagDelegate == null)) {
+                this.onEndIsInverseDiscretTagDelegate = new EndOperationDelegate(this.OnEndIsInverseDiscretTag);
+            }
+            if ((this.onIsInverseDiscretTagCompletedDelegate == null)) {
+                this.onIsInverseDiscretTagCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnIsInverseDiscretTagCompleted);
+            }
+            base.InvokeAsync(this.onBeginIsInverseDiscretTagDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid}, this.onEndIsInverseDiscretTagDelegate, this.onIsInverseDiscretTagCompletedDelegate, userState);
+        }
+        
+        public void InverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid, bool newInverseValue) {
+            base.Channel.InverseDiscretTag(dsGuid, devGuid, tagGuid, newInverseValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginInverseDiscretTag(ushort dsGuid, uint devGuid, uint tagGuid, bool newInverseValue, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginInverseDiscretTag(dsGuid, devGuid, tagGuid, newInverseValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public void EndInverseDiscretTag(System.IAsyncResult result) {
+            base.Channel.EndInverseDiscretTag(result);
+        }
+        
+        private System.IAsyncResult OnBeginInverseDiscretTag(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            bool newInverseValue = ((bool)(inValues[3]));
+            return this.BeginInverseDiscretTag(dsGuid, devGuid, tagGuid, newInverseValue, callback, asyncState);
+        }
+        
+        private object[] OnEndInverseDiscretTag(System.IAsyncResult result) {
+            this.EndInverseDiscretTag(result);
+            return null;
+        }
+        
+        private void OnInverseDiscretTagCompleted(object state) {
+            if ((this.InverseDiscretTagCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.InverseDiscretTagCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void InverseDiscretTagAsync(ushort dsGuid, uint devGuid, uint tagGuid, bool newInverseValue) {
+            this.InverseDiscretTagAsync(dsGuid, devGuid, tagGuid, newInverseValue, null);
+        }
+        
+        public void InverseDiscretTagAsync(ushort dsGuid, uint devGuid, uint tagGuid, bool newInverseValue, object userState) {
+            if ((this.onBeginInverseDiscretTagDelegate == null)) {
+                this.onBeginInverseDiscretTagDelegate = new BeginOperationDelegate(this.OnBeginInverseDiscretTag);
+            }
+            if ((this.onEndInverseDiscretTagDelegate == null)) {
+                this.onEndInverseDiscretTagDelegate = new EndOperationDelegate(this.OnEndInverseDiscretTag);
+            }
+            if ((this.onInverseDiscretTagCompletedDelegate == null)) {
+                this.onInverseDiscretTagCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnInverseDiscretTagCompleted);
+            }
+            base.InvokeAsync(this.onBeginInverseDiscretTagDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid,
+                        newInverseValue}, this.onEndInverseDiscretTagDelegate, this.onInverseDiscretTagCompletedDelegate, userState);
+        }
+        
+        public string[] GetTagsListWithEnabledTrendSave() {
+            return base.Channel.GetTagsListWithEnabledTrendSave();
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTagsListWithEnabledTrendSave(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTagsListWithEnabledTrendSave(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public string[] EndGetTagsListWithEnabledTrendSave(System.IAsyncResult result) {
+            return base.Channel.EndGetTagsListWithEnabledTrendSave(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTagsListWithEnabledTrendSave(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetTagsListWithEnabledTrendSave(callback, asyncState);
+        }
+        
+        private object[] OnEndGetTagsListWithEnabledTrendSave(System.IAsyncResult result) {
+            string[] retVal = this.EndGetTagsListWithEnabledTrendSave(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTagsListWithEnabledTrendSaveCompleted(object state) {
+            if ((this.GetTagsListWithEnabledTrendSaveCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTagsListWithEnabledTrendSaveCompleted(this, new GetTagsListWithEnabledTrendSaveCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTagsListWithEnabledTrendSaveAsync() {
+            this.GetTagsListWithEnabledTrendSaveAsync(null);
+        }
+        
+        public void GetTagsListWithEnabledTrendSaveAsync(object userState) {
+            if ((this.onBeginGetTagsListWithEnabledTrendSaveDelegate == null)) {
+                this.onBeginGetTagsListWithEnabledTrendSaveDelegate = new BeginOperationDelegate(this.OnBeginGetTagsListWithEnabledTrendSave);
+            }
+            if ((this.onEndGetTagsListWithEnabledTrendSaveDelegate == null)) {
+                this.onEndGetTagsListWithEnabledTrendSaveDelegate = new EndOperationDelegate(this.OnEndGetTagsListWithEnabledTrendSave);
+            }
+            if ((this.onGetTagsListWithEnabledTrendSaveCompletedDelegate == null)) {
+                this.onGetTagsListWithEnabledTrendSaveCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTagsListWithEnabledTrendSaveCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTagsListWithEnabledTrendSaveDelegate, null, this.onEndGetTagsListWithEnabledTrendSaveDelegate, this.onGetTagsListWithEnabledTrendSaveCompletedDelegate, userState);
+        }
+        
+        public System.Tuple<System.DateTime, System.DateTime>[] GetTrendDateTimeRanges(ushort dsGuid, uint devGuid, uint tagGuid) {
+            return base.Channel.GetTrendDateTimeRanges(dsGuid, devGuid, tagGuid);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.IAsyncResult BeginGetTrendDateTimeRanges(ushort dsGuid, uint devGuid, uint tagGuid, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTrendDateTimeRanges(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public System.Tuple<System.DateTime, System.DateTime>[] EndGetTrendDateTimeRanges(System.IAsyncResult result) {
+            return base.Channel.EndGetTrendDateTimeRanges(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetTrendDateTimeRanges(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ushort dsGuid = ((ushort)(inValues[0]));
+            uint devGuid = ((uint)(inValues[1]));
+            uint tagGuid = ((uint)(inValues[2]));
+            return this.BeginGetTrendDateTimeRanges(dsGuid, devGuid, tagGuid, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTrendDateTimeRanges(System.IAsyncResult result) {
+            System.Tuple<System.DateTime, System.DateTime>[] retVal = this.EndGetTrendDateTimeRanges(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTrendDateTimeRangesCompleted(object state) {
+            if ((this.GetTrendDateTimeRangesCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTrendDateTimeRangesCompleted(this, new GetTrendDateTimeRangesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTrendDateTimeRangesAsync(ushort dsGuid, uint devGuid, uint tagGuid) {
+            this.GetTrendDateTimeRangesAsync(dsGuid, devGuid, tagGuid, null);
+        }
+        
+        public void GetTrendDateTimeRangesAsync(ushort dsGuid, uint devGuid, uint tagGuid, object userState) {
+            if ((this.onBeginGetTrendDateTimeRangesDelegate == null)) {
+                this.onBeginGetTrendDateTimeRangesDelegate = new BeginOperationDelegate(this.OnBeginGetTrendDateTimeRanges);
+            }
+            if ((this.onEndGetTrendDateTimeRangesDelegate == null)) {
+                this.onEndGetTrendDateTimeRangesDelegate = new EndOperationDelegate(this.OnEndGetTrendDateTimeRanges);
+            }
+            if ((this.onGetTrendDateTimeRangesCompletedDelegate == null)) {
+                this.onGetTrendDateTimeRangesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTrendDateTimeRangesCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTrendDateTimeRangesDelegate, new object[] {
+                        dsGuid,
+                        devGuid,
+                        tagGuid}, this.onEndGetTrendDateTimeRangesDelegate, this.onGetTrendDateTimeRangesCompletedDelegate, userState);
         }
     }
 }

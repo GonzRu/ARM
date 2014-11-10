@@ -18,16 +18,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:3333/DSRouterService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:3333/DSRouter.DSRouterService/mex" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DSRouterService.xsd" MetadataType="Schema" ID="d9fcb6f1-8cc8-4ea5-894a-39e9e94b55b8" SourceId="1" SourceUrl="http://localhost:3333/DSRouterService.svc?xsd=xsd4" />
-    <MetadataFile FileName="DSRouterService1.xsd" MetadataType="Schema" ID="7f522137-b7a7-436c-88f4-702036617a2d" SourceId="1" SourceUrl="http://localhost:3333/DSRouterService.svc?xsd=xsd5" />
-    <MetadataFile FileName="DSRouterService2.xsd" MetadataType="Schema" ID="ce9a40c1-d3d1-4851-8aa3-908b36fc4390" SourceId="1" SourceUrl="http://localhost:3333/DSRouterService.svc?xsd=xsd1" />
-    <MetadataFile FileName="DSRouterService3.xsd" MetadataType="Schema" ID="0aeded02-cc36-4a0c-ada6-650e5ca52fcf" SourceId="1" SourceUrl="http://localhost:3333/DSRouterService.svc?xsd=xsd0" />
-    <MetadataFile FileName="DSRouterService.wsdl" MetadataType="Wsdl" ID="1d9d66d5-fd43-420d-9384-6c2dae7f7de4" SourceId="1" SourceUrl="http://localhost:3333/DSRouterService.svc" />
-    <MetadataFile FileName="DSRouterService4.xsd" MetadataType="Schema" ID="b6138b42-0826-42a7-af94-7e89eea33657" SourceId="1" SourceUrl="http://localhost:3333/DSRouterService.svc?xsd=xsd2" />
-    <MetadataFile FileName="DSRouterService5.xsd" MetadataType="Schema" ID="4a734f8d-8046-4fdc-bb32-16cb0e53d6fe" SourceId="1" SourceUrl="http://localhost:3333/DSRouterService.svc?xsd=xsd3" />
+    <MetadataFile FileName="mex.xsd" MetadataType="Schema" ID="ce382d1f-52cb-4ed9-b2f5-ac4d574da103" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd6" />
+    <MetadataFile FileName="mex1.xsd" MetadataType="Schema" ID="071636e8-fd9a-477d-8e91-125c42e09aaf" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd0" />
+    <MetadataFile FileName="mex2.xsd" MetadataType="Schema" ID="7f840a12-2a3c-4e82-8983-a2504e05543a" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd1" />
+    <MetadataFile FileName="mex3.xsd" MetadataType="Schema" ID="b6b2fd14-ca0a-45fa-aa14-7d25ab86d490" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd5" />
+    <MetadataFile FileName="mex4.xsd" MetadataType="Schema" ID="40234591-dbf0-4f8a-8f16-306893a74f2d" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd4" />
+    <MetadataFile FileName="mex5.xsd" MetadataType="Schema" ID="0991a9d2-e728-4f72-9a2a-fb0c02b81b02" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd2" />
+    <MetadataFile FileName="DSRouterService1.wsdl" MetadataType="Wsdl" ID="526d1fa8-befb-42e3-8b04-31594e08acd5" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex" />
+    <MetadataFile FileName="mex6.xsd" MetadataType="Schema" ID="826060a6-89a7-443f-b991-d432f30d78ca" SourceId="1" SourceUrl="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -19,22 +19,18 @@
  *#############################################################################*/
 
 
-using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.IO;
-using InterfaceLibrary;
-using System.Xml.Linq;
-using DataServersLib;
-using RequsEtntryLib;
-using System.Diagnostics;
 using CommandLib;
-using System.Windows.Forms;
+using DataServersLib;
+using InterfaceLibrary;
 using OscillogramsLib;
-using System.Threading;
-using System.ComponentModel;
+using RequsEtntryLib;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Configuration
 {
@@ -47,12 +43,6 @@ namespace Configuration
         /// </summary>
         public event ConfigDSCommunicationLoss4Client OnConfigDSCommunicationLoss4Client;
         #endregion
-
-		#region Свойства
-		#endregion
-
-		#region public
-		#endregion
 
 		#region private
         /// <summary>
@@ -72,16 +62,12 @@ namespace Configuration
         /// для чтения блока данных (уставки, аварии, осциллограммы, диаграммы)
         /// </summary>
         Dictionary<string, string> dlTypeBlockArchivData;
-        /// <summary>
-        /// для запуска процесса чтения осциллограммы в отдельном потоке
-        /// </summary>
-        BackgroundWorker bgwoscill = new BackgroundWorker();
+
 		#endregion
 
 		#region конструктор(ы)
         public Configuration ()
         {
-            //slUniDSObjects = new SortedList<uint, KeyValuePair<XElement, List<IDevice>>>();
         }
 		#endregion
 
@@ -164,9 +150,6 @@ namespace Configuration
 
                 // создаем список значений типов архивных записей
                 dlTypeBlockArchivData = new Dictionary<string,string>();
-
-                // получение осциллограммы в отдельном потоке
-                bgwoscill.DoWork += new DoWorkEventHandler(bgwoscill_DoWork);
             }
             catch (Exception ex)
             {
@@ -217,7 +200,6 @@ namespace Configuration
         /// возвратить список устройств указанного DataServer
         /// </summary>
         /// <param name="dsnumber">уник номер DataServer</param>
-        /// <returns></returns>
         public List<IDevice> GetDataServerDevices(uint dsnumber)
         {
             List<IDevice> lstDSDevices = null;
@@ -237,9 +219,6 @@ namespace Configuration
         /// <summary>
         /// получить ссылку на устройство
         /// </summary>
-        /// <param name="ds"></param>
-        /// <param name="uniDevGuid"></param>
-        /// <returns></returns>
         public IDevice GetLink2Device(uint ds, uint uniDevGuid)
         {
             IDevice dev = null;
@@ -271,9 +250,6 @@ namespace Configuration
         /// <summary>
         /// ссылка на тег 
         /// </summary>
-        /// <param name="ds"></param>
-        /// <param name="uniDevGuid"></param>
-        /// <param name="uniTagGuid"></param>
         public ITag GetLink2Tag(uint ds, uint uniDevGuid, uint uniTagGuid)
         {
             ITag tag = null;
@@ -329,11 +305,6 @@ namespace Configuration
         /// для тегов конкретного источника, если он
         /// формируется по определенному алгоритму
         /// </summary>
-        /// <param name="unids_guid"></param>
-        /// <param name="src_name"></param>
-        /// <param name="idreg"></param>
-        /// <param name="bitMsk"></param>
-        /// <returns></returns>
         public uint GetTagGUID(int unids_guid, string src_name, string str_dev_ident_in_src_notation)
         {
             uint rez = 0;
@@ -417,50 +388,11 @@ namespace Configuration
 
             return cmd;
         }
-        /// <summary>
-        /// запросить данные (уставки, аварии, осциллограммы из БД)
-        /// </summary>
-        /// <param name="ds"></param>
-        /// <param name="objectGuid"></param>
-        /// <param name="comment"></param>
-        /// <param name="?"></param>
-        /// <returns></returns>
-        //public IRequestData GetData(uint ds, uint objectGuid, string comment, ArrayList arparams)
-        //{
-        //    IRequestData reqdata = null;
-
-        //    RequestDataFactory rdf = new RequestDataFactory();
-        //    try
-        //    {
-        //        #region подготовка массива параметров arrParams для выполнения запроса
-        //        ArrayList arrParams = new ArrayList();
-        //        arrParams.Add(ds);
-        //        arrParams.Add(objectGuid);
-        //        arrParams.Add(arparams);
-        //        #endregion
-
-        //        reqdata = rdf.CreateRequestData(comment, arrParams);
-
-        //        IDataServer dse = GetDataServer(ds);
-        //        dse.ExecuteRequest(reqdata);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex );
-        //    }
-
-        //    return reqdata;
-        //}
 
         /// <summary>
         /// перегруженный вариант запроса данных (уставки, аварии) из БД
         /// клиент ждет специфич ответа по запросу от DS
         /// </summary>
-        /// <param name="ds"></param>
-        /// <param name="objectGuid"></param>
-        /// <param name="comment"></param>
-        /// <param name="?"></param>
-        /// <returns></returns>
         public IRequestData GetData(uint ds, uint objectGuid, string comment, ArrayList arparams, Int32 uniGuidRequest)
         {
             IRequestData reqdata = null;
@@ -497,28 +429,7 @@ namespace Configuration
         /// <param name="idrec"></param>
         public IOscillogramma GetOscData(uint ds, UInt32 idrec)
         {
-            IOscillogramma osc = null;
-
-            OscFactory of = new OscFactory();
-            try
-            {
-                osc = of.CreateOscillogramm(ds, "simple", idrec);
-                //cmd.OnCmdExecuted += new CmdExecuted(cmd_OnCmdExecuted);
-
-                // запуск в отдельном потоке
-                bgwoscill.RunWorkerAsync(osc);
-            }
-            catch (Exception ex)
-            {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-            }
-
-            return osc;
-        }
-
-        void bgwoscill_DoWork(object sender, DoWorkEventArgs e)
-        {
-            ActiveOscillograms.AddOsc(e.Argument as IOscillogramma);
+            throw new NotImplementedException("Устаревший метод: Configuration:GetOscData()");
         }
 
         /// <summary>
@@ -584,45 +495,18 @@ namespace Configuration
         }
         #endregion
 
-        #region public-методы
-        #endregion
-
         #region private-методы
         void ds_OnDSCommunicationLoss4Client(bool state)
         {
             if (OnConfigDSCommunicationLoss4Client != null)
                 OnConfigDSCommunicationLoss4Client(state);
         }
-        ///// <summary>
-        ///// сформировать список устройств указанного DS
-        ///// </summary>
-        ///// <param name="xAttribute"></param>
-        ///// <returns></returns>
-        //private List<IDevice> GetDSDevises(string path2prgdevcfg, XElement xe_ds)
-        //{
-        //    List<IDevice> lstDevices = new List<IDevice>();
-
-        //    try
-        //    {
-        //        var xe_srcs = xe_ds.Element("Sources").Elements("Source");
-
-        //        //foreach (var xe_src in xe_srcs)
-        //        //    CustomizeDevicesList(path2prgdevcfg, xe_src, ref lstDevices, uint.Parse(xe_ds.Attribute("UniDS_GUID").Value));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-        //    }
-
-        //    return lstDevices;
-        //}
 
         /// <summary>
         /// проверка существования устройства
         /// с одинаковым objectGUID в обшем списке устройств
         /// отдельного DS. или проверка его доступности для обработки
         /// </summary>
-        /// <returns></returns>
         bool IsDevMayBeHandling(XElement xedev4test, List<IDevice> lstDevices)
         {
             try
@@ -649,9 +533,6 @@ namespace Configuration
         /// получить ссылку на конфигурацию 
         /// источника по номеру ds и имени источника
         /// </summary>
-        /// <param name="unids_guid"></param>
-        /// <param name="src_name"></param>
-        /// <returns></returns>
         private ISourceConfiguration GetSrcCfgByName(int unids_guid, string src_name)
         {
             ISourceConfiguration srccfg = null;

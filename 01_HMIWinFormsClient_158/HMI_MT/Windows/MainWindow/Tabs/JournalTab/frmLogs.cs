@@ -215,6 +215,8 @@ namespace HMI_MT
             }
 
             new KvitWindow(messages, comment).ShowDialog();
+
+            DisplayMessages();
         }
 
         private void KvitAllMessages()
@@ -242,6 +244,8 @@ namespace HMI_MT
             }
 
             new KvitWindow(messages, comment).ShowDialog();
+
+            DisplayMessages();
         }
 
         private void KvitMessagesByDeviceGuid()
@@ -276,6 +280,38 @@ namespace HMI_MT
             }
 
             new KvitWindow(messages, comment).ShowDialog();
+
+            DisplayMessages();
+        }
+
+        /// <summary>
+        /// Обработчик события нажатия на кнопку "Квитировать всё"
+        /// </summary>
+        private void kvitAllInDBButtonClick(object sender, EventArgs e)
+        {
+            string comment = String.Empty;
+            foreach (var item in messagesListView.Items)
+            {
+                TableEventLogAlarm message = (item as ListViewItem).Tag as TableEventLogAlarm;
+
+                if (message.ReceiptComment)
+                {
+                    var commentWindow = new GetCommentWindow();
+                    var result = commentWindow.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        return;
+
+                    if (result == DialogResult.OK)
+                        comment = commentWindow.Comment;
+
+                    break;
+                }
+            }
+
+            new KvitWindow(comment).ShowDialog();
+
+            DisplayMessages();
         }
 
         #region Handlers
@@ -512,7 +548,10 @@ namespace HMI_MT
             using (SqlConnection UserBDSqlConnection = new SqlConnection(HMI_Settings.ProviderPtkSql))
             {
                 SqlCommand sc = UserBDSqlConnection.CreateCommand();
-                sc.CommandText = "SELECT * FROM vUserLog WHERE LocalTime BETWEEN '" + tim_start.ToString() + "' AND '" + tim_end.ToString() + "' ORDER BY LocalTime DESC";
+                sc.CommandText = "SELECT * FROM vUserLog WHERE LocalTime BETWEEN @StartTime AND @EndTime ORDER BY LocalTime DESC";
+                sc.Parameters.AddWithValue("@StartTime", tim_start);
+                sc.Parameters.AddWithValue("@EndTime", tim_end);
+
                 SqlDataAdapter sda = new SqlDataAdapter(sc);
                 sda.Fill(dt);
             }
@@ -693,6 +732,12 @@ namespace HMI_MT
 
                 var devGuid = uint.Parse(dtA.Rows[curRow]["BlockID"].ToString());
                 var device = HMI_Settings.CONFIGURATION.GetLink2Device(0, devGuid);
+                if (device == null)
+                {
+                    TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Critical, 0, "frmLogs:GetAlarmEvents() : при запросе осциллограмм в бд оказалась запись с номером устройства, которое отсутствует в конфигурации АРМа");
+                    dgvAvar.Rows.RemoveAt(i);
+                    continue;
+                }
 
                 // Тип блока
                 dgvAvar["clmBlockName", i].Value = dtA.Rows[curRow]["BlockName"];
@@ -826,6 +871,9 @@ namespace HMI_MT
                 var devGuid = uint.Parse(dtog.Rows[curRow]["BlockID"].ToString());
                 var device = HMI_Settings.CONFIGURATION.GetLink2Device(0, devGuid);
 
+                // Добавляем ссылку на IDevice для того, чтобы потом узнать номер DS
+                dgvOscill.Rows[i].Tag = device;
+
                 // Тип блока
                 dgvOscill["clmBlockNameOsc", i].Value = dtog.Rows[curRow]["BlockName"];
 
@@ -860,18 +908,16 @@ namespace HMI_MT
             if (e.ColumnIndex != 3)
                 return;
 
-            string ifa = String.Empty;         // имя файла
-            DataGridViewCell de;
-            char[] sep = { ' ' };
-            int ide = 0; // номер блока
-            string strType = String.Empty; // тип блока - осц. или диаг.
+            uint dsGuid = 0;
+            int oscId = 0;
 
             try
             {
-                de = dgvOscill["clmID", e.RowIndex];
-                ide = (int)de.Value;
-                de = dgvOscill["clmViewOsc", e.RowIndex];    // тип - осциллограмма или диаграмма
-                strType = (string)de.Value;
+                var device = dgvOscill.Rows[e.RowIndex].Tag as IDevice;
+                if (device != null)
+                    dsGuid = device.UniDS_GUID;
+
+                oscId = (int)dgvOscill["clmID", e.RowIndex].Value;
             }
             catch
             {
@@ -879,28 +925,7 @@ namespace HMI_MT
                 return;
             }
 
-            /*
-             * первый аргумент номер DS,
-             * сейсчас для отработки механизма задана константа (0)
-             * в дальнейшем нужно придумать механизм когда на данном этапе
-             * будет известен реальный номер DS
-             */
-            // пока можно только осциллограммы старых БМРЗ (dtO)
-            oscdg.ShowOSCDg(0, dataTableForOscBmrz, ide);
-            oscdg.ShowOSCDg(0, dataTableForOscBmrz100, ide);
-            oscdg.ShowOSCDg(0, dataTableForOscEkra, ide);
-            oscdg.ShowOSCDg(0, dataTableForDiag, ide);
-            oscdg.ShowOSCDg(0, dataTableForOscBresler, ide);
-            oscdg.ShowOSCDg(0, dataTableForOscComTrade, ide);
-            #region MyRegion
-            // по ide найти запись в dto, извлечь блок с осциллограммой (диаграммой), записать в файл, запустить fastview
-
-            //oscdg.CntSelectOSC = 1;   // пока в этой вкладке можно работать только с одной осциллограммой или диаграммой
-
-            //oscdg.ShowOSCDg(dtO, ide);
-            //oscdg.ShowOSCDg(dtOE, ide);
-
-            #endregion
+            oscdg.ShowOSCDg((ushort)dsGuid, oscId);
         }
         #endregion
 

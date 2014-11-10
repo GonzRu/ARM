@@ -23,20 +23,47 @@ using InterfaceLibrary;
 namespace SourceMOA
 {
 	public class TagAnalog : Tag, ITagDim
-	{
+    {
+        #region Constructors
+
+        public TagAnalog()
+        {
+            TypeOfTagHMI = TypeOfTag.Analog;
+            DefValue = "0";
+            ValueDim = 2;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+	    /// <summary>
+	    /// Строковое представление значения тега
+	    /// </summary>
+	    public override string ValueAsString
+	    {
+	        get
+	        {
+	            return ValueAsMemX.Length == 8
+                    ? Convert.ToSingle(BitConverter.ToDouble(ValueAsMemX, 0)).ToString(string.Format("F{0}", this.ValueDim))
+                    : BitConverter.ToSingle(ValueAsMemX, 0).ToString(string.Format("F{0}", this.ValueDim));
+	        }
+	    }
+
+	    #endregion
+
+        #region Implementation ITagDim
+
         /// <summary>
         /// Кол-во знаков после запятой
         /// </summary>
         public ushort ValueDim { get; set; }
 
-        public TagAnalog()
-        {
-            TypeOfTagHMI = TypeOfTag.Analog;          
-            DefValue = "0";
-            ValueDim = 2;
-        }
+        #endregion
 
-	    /// <summary>
+        #region Public metods
+
+        /// <summary>
 	    /// установить значение тега
 	    /// </summary>     
         public override void SetValue( byte[] memX, DateTime dt, VarQualityNewDs vq )
@@ -59,16 +86,6 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = memX.Length == 8
-                                    ? Convert.ToSingle( BitConverter.ToDouble( memX, 0 ) ).ToString(
-                                        string.Format( "F{0}", this.ValueDim ) )
-                                    : BitConverter.ToSingle( memX, 0 ).ToString( string.Format( "F{0}", this.ValueDim ) );
-                //if (this.ValueAsString == newValueAsString && DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
-
 				if (BindindTag != null)
 					BindindTag.ReadValue();
 
@@ -87,12 +104,13 @@ namespace SourceMOA
         {
             try
             {
-                // Проверяем, произошло ли изменение значения тега или его качества
-                string newValueAsString = ((Single) tagValueAsObject).ToString(String.Format("N{0}", this.ValueDim));
-                //if (this.ValueAsString == newValueAsString && this.DataQuality == vq)
-                //    return;
-
-                ValueAsString = newValueAsString;
+                if (!(tagValueAsObject is Single))
+                {
+#if DEBUG
+                    Console.WriteLine(String.Format("Для TagAnalog ({0}.{1}.{2}) отброшено значение: {3} {4}", Device.UniDS_GUID, Device.UniObjectGUID, TagGUID, tagValueAsObject.ToString(), tagValueAsObject.GetType()));
+#endif
+                    return;
+                }
 
                 if (BindindTag != null)
                     BindindTag.ReadValue();
@@ -111,24 +129,9 @@ namespace SourceMOA
         /// </summary>
         public override void SetDefaultValue()
         {
-            try
-            {
-                const Single defvalue = 0;
-                ValueAsString = defvalue.ToString("F2");
-
-                //byte[] memx = new byte[4];
-
-                ValueAsMemX = BitConverter.GetBytes(defvalue);
-
-                if (BindindTag != null)
-                    BindindTag.ReadValue();
-
-                //base.SetValue(memx);
-            }
-            catch (Exception ex)
-            {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
-            }
+            SetValueAsObject((Single)0, DateTime.Now, VarQualityNewDs.vqUndefined);
         }
-	}
+
+        #endregion
+    }
 }

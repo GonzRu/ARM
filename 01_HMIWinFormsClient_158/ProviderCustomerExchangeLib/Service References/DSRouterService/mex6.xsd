@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="DSRouterTrendSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AbsoluteError" nillable="true" type="xs:float" />
+      <xs:element minOccurs="0" name="Enable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MaxCacheMinutes" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="MaxCacheValuesCount" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="RelativeError" nillable="true" type="xs:float" />
+      <xs:element minOccurs="0" name="Sample" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterTrendSettings" nillable="true" type="tns:DSRouterTrendSettings" />
+  <xs:complexType name="DSRouterDailyReportSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ReportExtension" type="tns:DSRouterReportExtension" />
+      <xs:element minOccurs="0" name="ReportTamplateName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterDailyReportSettings" nillable="true" type="tns:DSRouterDailyReportSettings" />
+  <xs:simpleType name="DSRouterReportExtension">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="xls" />
+      <xs:enumeration value="xlsx" />
+      <xs:enumeration value="doc" />
+      <xs:enumeration value="pdf" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DSRouterReportExtension" nillable="true" type="tns:DSRouterReportExtension" />
+  <xs:complexType name="DSRouterEventsReportSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeviceGuid" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="DsGuid" type="xs:unsignedShort" />
+      <xs:element minOccurs="0" name="EndDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ReportExtension" type="tns:DSRouterReportExtension" />
+      <xs:element minOccurs="0" name="ReportTamplateName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartDateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterEventsReportSettings" nillable="true" type="tns:DSRouterEventsReportSettings" />
+  <xs:complexType name="DSRouterTagsReportSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Interval" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ReportExtension" type="tns:DSRouterReportExtension" />
+      <xs:element minOccurs="0" name="ReportTamplateName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartDateTime" type="xs:dateTime" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Tags" nillable="true" type="q1:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterTagsReportSettings" nillable="true" type="tns:DSRouterTagsReportSettings" />
+  <xs:complexType name="DSRouterTagValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="VarQuality" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="VarValueAsObject" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterTagValue" nillable="true" type="tns:DSRouterTagValue" />
+  <xs:complexType name="RouterAuthResult">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DSAuthResults" nillable="true" type="q2:ArrayOfKeyValueOfunsignedShortDSRouterAuthResultTaOvbGk8" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RouterAuthResult" nillable="true" type="tns:RouterAuthResult" />
+  <xs:complexType name="DSRouterAuthResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthResult" type="tns:AuthResult" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:DSRouterUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterAuthResult" nillable="true" type="tns:DSRouterAuthResult" />
+  <xs:simpleType name="AuthResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="WrongLoginOrPassword" />
+      <xs:enumeration value="NoConnectionToDb" />
+      <xs:enumeration value="NoConnectionToDs" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AuthResult" nillable="true" type="tns:AuthResult" />
+  <xs:complexType name="DSRouterUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DsRouterUserGroup" nillable="true" type="tns:DSRouterUserGroup" />
+      <xs:element minOccurs="0" name="EditDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterUser" nillable="true" type="tns:DSRouterUser" />
+  <xs:complexType name="DSRouterUserGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EditDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GroupComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupID" type="xs:int" />
+      <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupRight" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterUserGroup" nillable="true" type="tns:DSRouterUserGroup" />
+  <xs:complexType name="ArrayOfDSRouterUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DSRouterUser" nillable="true" type="tns:DSRouterUser" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDSRouterUser" nillable="true" type="tns:ArrayOfDSRouterUser" />
+  <xs:complexType name="ArrayOfDSRouterUserGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DSRouterUserGroup" nillable="true" type="tns:DSRouterUserGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDSRouterUserGroup" nillable="true" type="tns:ArrayOfDSRouterUserGroup" />
+  <xs:complexType name="ArrayOfDSRouterEventValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DSRouterEventValue" nillable="true" type="tns:DSRouterEventValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDSRouterEventValue" nillable="true" type="tns:ArrayOfDSRouterEventValue" />
+  <xs:complexType name="DSRouterEventValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DevGuid" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="DsGuid" type="xs:unsignedShort" />
+      <xs:element minOccurs="0" name="EventDataID" type="xs:int" />
+      <xs:element minOccurs="0" name="EventDataType" type="tns:DSRouterEventDataType" />
+      <xs:element minOccurs="0" name="EventID" type="xs:int" />
+      <xs:element minOccurs="0" name="EventSourceComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventSourceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsNeedReceipt" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsReceipted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReceiptMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceiptTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ReceiptUser" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterEventValue" nillable="true" type="tns:DSRouterEventValue" />
+  <xs:simpleType name="DSRouterEventDataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Ustavki" />
+      <xs:enumeration value="Alarm" />
+      <xs:enumeration value="Oscillogram" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DSRouterEventDataType" nillable="true" type="tns:DSRouterEventDataType" />
+  <xs:complexType name="ArrayOfDSRouterSettingsSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DSRouterSettingsSet" nillable="true" type="tns:DSRouterSettingsSet" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDSRouterSettingsSet" nillable="true" type="tns:ArrayOfDSRouterSettingsSet" />
+  <xs:complexType name="DSRouterSettingsSet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SettingsSetComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SettingsSetDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SettingsSetID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterSettingsSet" nillable="true" type="tns:DSRouterSettingsSet" />
+  <xs:simpleType name="EnumerationCommandStates">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="undefined" />
+      <xs:enumeration value="sentFromClientToRouter" />
+      <xs:enumeration value="sentFromRouterToDataServer" />
+      <xs:enumeration value="sentFromDataServerToFC" />
+      <xs:enumeration value="sentFromFCToDevice" />
+      <xs:enumeration value="complete" />
+      <xs:enumeration value="cmdactive" />
+      <xs:enumeration value="cmdCancelAtDataServerByTimer" />
+      <xs:enumeration value="cmdDiscardByDataServer" />
+      <xs:enumeration value="cmdDiscardEcuRtu" />
+      <xs:enumeration value="cmdUnknown" />
+      <xs:enumeration value="cmdNotSend_DSR_2_DS" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EnumerationCommandStates" nillable="true" type="tns:EnumerationCommandStates" />
+  <xs:complexType name="ArrayOfDSRouterDocumentDataValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DSRouterDocumentDataValue" nillable="true" type="tns:DSRouterDocumentDataValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDSRouterDocumentDataValue" nillable="true" type="tns:ArrayOfDSRouterDocumentDataValue" />
+  <xs:complexType name="DSRouterDocumentDataValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentAddDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocumentComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentFileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentID" type="xs:int" />
+      <xs:element minOccurs="0" name="DocumentUserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSRouterDocumentDataValue" nillable="true" type="tns:DSRouterDocumentDataValue" />
+</xs:schema>

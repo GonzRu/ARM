@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:3333/DSRouter.DSRouterService/mex?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" />
+  <xs:complexType name="ArrayOfstring">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+  <xs:complexType name="ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringDSRouterTagValueTaOvbGk8">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" nillable="true" type="xs:string" />
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" name="Value" nillable="true" type="q1:DSRouterTagValue" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" nillable="true" type="tns:ArrayOfKeyValueOfstringDSRouterTagValueTaOvbGk8" />
+  <xs:complexType name="ArrayOfKeyValueOfunsignedShortDSRouterAuthResultTaOvbGk8">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfunsignedShortDSRouterAuthResultTaOvbGk8">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" type="xs:unsignedShort" />
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DSRouterServiceIIS" name="Value" nillable="true" type="q2:DSRouterAuthResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfunsignedShortDSRouterAuthResultTaOvbGk8" nillable="true" type="tns:ArrayOfKeyValueOfunsignedShortDSRouterAuthResultTaOvbGk8" />
+  <xs:complexType name="ArrayOfanyType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfanyType" nillable="true" type="tns:ArrayOfanyType" />
+</xs:schema>

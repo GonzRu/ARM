@@ -78,7 +78,7 @@ namespace HMI_MT.Windows.SplashScreen
             {
                 #region Project Dir
 
-                string pathToProjectDir = AppDomain.CurrentDomain.BaseDirectory + "Project";
+                string pathToProjectDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Project");
                 if (!Directory.Exists(pathToProjectDir))
                 {
                     MessageBox.Show("Не найдена папка с конфигурацией.", "Ошибка", MessageBoxButtons.OK,
@@ -91,7 +91,7 @@ namespace HMI_MT.Windows.SplashScreen
                 #region Project.cfg
 
                 // проверяем существование файла конфигурации  проекта Project.cfg и файла конфигурации устройств проекта
-                HMI_Settings.PathToPrjFile = pathToProjectDir + Path.DirectorySeparatorChar + "Project.cfg";
+                HMI_Settings.PathToPrjFile = Path.Combine(pathToProjectDir, "Project.cfg");
 
                 if (!File.Exists(HMI_Settings.PathToPrjFile))
                 {
@@ -104,8 +104,7 @@ namespace HMI_MT.Windows.SplashScreen
                 #region Configuration.cfg
 
                 // проверяем существование файла конфигурации устройств проекта Configuration.cfg 
-                HMI_Settings.PathToConfigurationFile = AppDomain.CurrentDomain.BaseDirectory + "Project" +
-                                                       Path.DirectorySeparatorChar + "Configuration.cfg";
+                HMI_Settings.PathToConfigurationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Project", "Configuration.cfg");
 
                 if (!File.Exists(HMI_Settings.PathToConfigurationFile))
                 {
@@ -119,8 +118,7 @@ namespace HMI_MT.Windows.SplashScreen
                 #region PanelState.xml
 
                 // проверяем существование файла с адаптерами для описания состояния ПТК
-                HMI_Settings.PathPanelState_xml = AppDomain.CurrentDomain.BaseDirectory + "Project" +
-                                                  Path.DirectorySeparatorChar + "PanelState.xml";
+                HMI_Settings.PathPanelState_xml = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Project", "PanelState.xml");
                 if (!File.Exists(HMI_Settings.PathPanelState_xml))
                 {
                     MessageBox.Show("Не найден файл PanleState.cfg", "Ошибка", MessageBoxButtons.OK,
@@ -132,24 +130,18 @@ namespace HMI_MT.Windows.SplashScreen
 
                 #region Load Project.cfg & configuration.cfg & PanelState.xml XML
 
-                try
-                {
-                    HMI_Settings.XDoc4PathToPrjFile = XDocument.Load(HMI_Settings.PathToPrjFile);
-                    HMI_Settings.XDoc4PathToConfigurationFile = XDocument.Load(HMI_Settings.PathToConfigurationFile);
-                    HMI_Settings.XDoc4PathPanelState_xml = XDocument.Load(HMI_Settings.PathPanelState_xml);
-                }
-                catch
-                {
-                    throw new Exception();
-                }
+                HMI_Settings.XDoc4PathToPrjFile = XDocument.Load(HMI_Settings.PathToPrjFile);
+                HMI_Settings.XDoc4PathToConfigurationFile = XDocument.Load(HMI_Settings.PathToConfigurationFile);
+                HMI_Settings.XDoc4PathPanelState_xml = XDocument.Load(HMI_Settings.PathPanelState_xml);
 
                 #endregion
 
                 // смотрим существование папки для осциллограмм и диаграмм
                 CreateFolderForOscAndDiagram();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(this, "Во время проверки конфигурации произошла ошибка." + ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(1);
             }
         }

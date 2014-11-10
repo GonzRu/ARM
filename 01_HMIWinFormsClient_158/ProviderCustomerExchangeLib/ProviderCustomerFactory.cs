@@ -43,7 +43,7 @@ namespace ProviderCustomerExchangeLib
 				{
 					case "wcf":
                     case "wcf-old":
-                        provconsch = new ClientServerOnWCF(srcinfo);
+                        provconsch = new WcfProvider(srcinfo);
 						break;
 					case "pipe":
 						provconsch = new ClientServerOnPipes();

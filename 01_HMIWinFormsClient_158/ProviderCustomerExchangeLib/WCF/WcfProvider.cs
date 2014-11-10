@@ -1,19 +1,18 @@
-﻿using System;
+﻿using HMI_MT_Settings;
+using InterfaceLibrary;
+using ProviderCustomerExchangeLib.DSRouterService;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
 using System.ServiceModel;
 using System.Timers;
 using System.Xml.Linq;
 
-using HMI_MT_Settings;
-using System.Collections.Generic;
-using InterfaceLibrary;
-using ProviderCustomerExchangeLib.DSRouterService;
-
 namespace ProviderCustomerExchangeLib.WCF
 {
-	public class ClientServerOnWCF : IProviderCustomer, IWcfProvider
+	public class WcfProvider : IProviderCustomer, IWcfProvider
     {
         #region События
         /// <summary>
@@ -36,102 +35,104 @@ namespace ProviderCustomerExchangeLib.WCF
 	    private readonly BackgroundWorker bgw = new BackgroundWorker( );
         private readonly CallbackHandler handler = new CallbackHandler( );
 
-	    private readonly Timer timer = new Timer( 30000 );
+	    private readonly Timer _pingTimer = new Timer(3000);
+	    private readonly Timer _createConnectionTimer;
+
 		#endregion
 
         #region конструктор(ы)
-        public ClientServerOnWCF( XElement srcinfo )
+
+        public WcfProvider(XElement srcinfo)
 		{
             try
             {
                 HMI_Settings.IPADDRES_SERVER = srcinfo.Element("IPAddress").Attribute("value").Value;
                 HMI_Settings.PORTin = int.Parse(srcinfo.Element("Port").Attribute("value").Value);
 
-                CreateProxyFromCode( );
-
-                arrForReceiveData = new ArrayForExchange( );
+                arrForReceiveData = new ArrayForExchange();
                 arrForReceiveData.packetAppearance += this.ArrForReceiveDataPacketAppearance;
 
                 bgw.DoWork += this.BgwDoWork;
 
-                timer.Elapsed += delegate
-                                     {
-                                         try
-                                         {
-                                             timer.Stop();
+                _createConnectionTimer = new Timer();
+                _pingTimer.Elapsed += PingTimerOnElapsed;
+                _pingTimer.Interval = 3000;
 
-                                             var idch = WCFproxy as DSRouterClient;
-                                                if ( idch != null && ( idch.State == CommunicationState.Faulted || idch.State == CommunicationState.Closed ) )
-                                             {
-                                                 WCFproxy = null;
-                                                 if (this.CreateProxyFromCode())
-                                                 {
-                                                     if (OnProxyRecreated != null)
-                                                         OnProxyRecreated();
-
-                                                     if (OnDSCommunicationLoss != null)
-                                                         OnDSCommunicationLoss(false);
-                                                 }
-                                             }
-                                         }
-                                         catch ( Exception exception )
-                                         {
-                                             TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( exception );
-                                         }
-                                         finally
-                                         {
-                                             timer.Start();
-                                         }
-                                     };
-                timer.Interval = 3000;
-                timer.Start( );
+                _createConnectionTimer = new Timer();
+                _createConnectionTimer.Interval = 3000;
+                _createConnectionTimer.Elapsed += CreateConnectionTimerOnElapsed;
+                _createConnectionTimer.Start();
             }
             catch (Exception ex)
             {
                 TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(ex);
             }
         }
-		#endregion
+
+	    #endregion
+
+        #region Private metods
+
+        #region Методы для работы с созданием и поддержанием канала связи
 
         /// <summary>
-        /// создание прокси из кода
+        /// Создаем прокси из кода
         /// </summary>
-        private bool CreateProxyFromCode( )
+	    private void CreateDsRouterProxy()
+	    {
+            _createConnectionTimer.Stop();
+
+            if (WCFproxy != null)
+            {
+                (WCFproxy as DSRouterClient).GetTagsValueCompleted -= OnGetTagsValueCompleted;
+                (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted -= OnGetTagsValuesUpdatedCompleted;
+            }
+
+            var endPointAddr = string.Format("net.tcp://{0}:{1}/DSRouter.DSRouterService/DSRouterService.svc", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin);
+            var tcpBinding = new NetTcpBinding();
+            tcpBinding.Security.Mode = SecurityMode.None;
+            tcpBinding.MaxReceivedMessageSize = int.MaxValue; // 150000000;
+            tcpBinding.MaxBufferSize = int.MaxValue; // 1500000;
+            tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
+
+            var endpointAddress = new EndpointAddress(endPointAddr);
+            WCFproxy = new DSRouterClient(new InstanceContext(handler), tcpBinding, endpointAddress);
+
+            handler.OnNewError += NewErrorFromCallBackHandler;
+
+            (WCFproxy as DSRouterClient).GetTagsValueCompleted += OnGetTagsValueCompleted;
+            (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted += OnGetTagsValuesUpdatedCompleted;
+
+            (WCFproxy as DSRouterClient).Open();
+	    }
+
+        /// <summary>
+        /// Оповещает всех о том, что соединение установлено
+        /// </summary>
+	    private void ConnectionEstablished()
         {
-            try
-            {
-                var endPointAddr = string.Format( "net.tcp://{0}:{1}/DSRouter.DSRouterService", HMI_Settings.IPADDRES_SERVER, HMI_Settings.PORTin );
-                var tcpBinding = new NetTcpBinding { TransactionFlow = false };
-                tcpBinding.Security.Transport.ProtectionLevel = System.Net.Security.ProtectionLevel.EncryptAndSign;
-                tcpBinding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;
-                tcpBinding.Security.Mode = SecurityMode.None;
-                tcpBinding.MaxReceivedMessageSize = int.MaxValue; // 150000000;
-                tcpBinding.MaxBufferSize = int.MaxValue; // 1500000;
-                tcpBinding.ReaderQuotas.MaxArrayLength = int.MaxValue; // 1500000;
+            var onProxyRecreated = OnProxyRecreated;
+            if (onProxyRecreated != null)
+                onProxyRecreated();
 
-                var endpointAddress = new EndpointAddress( endPointAddr );
-                //WCFproxy = DuplexChannelFactory<IDSRouter>.CreateChannel( handler, tcpBinding, endpointAddress );
-                WCFproxy = new DSRouterClient(new InstanceContext(handler), tcpBinding, endpointAddress);
+            var onDsCommunicationLoss = OnDSCommunicationLoss;
+            if (onDsCommunicationLoss != null)
+                onDsCommunicationLoss(false);
+	    }
 
-                handler.OnNewError += NewErrorFromCallBackHandler;
+        /// <summary>
+        /// Оповещает всех о том, что соединение разорвано
+        /// </summary>
+	    private void ConnectionClosed()
+	    {
+            var connectionLost = OnDSCommunicationLoss;
+            if (connectionLost != null)
+                connectionLost(true);
+	    }
 
-                (WCFproxy as DSRouterClient).GetTagsValueCompleted += OnGetTagsValueCompleted;
-                (WCFproxy as DSRouterClient).GetTagsValuesUpdatedCompleted += OnGetTagsValuesUpdatedCompleted;
+        #endregion
 
-                (WCFproxy as DSRouterClient).Open();
-            }
-            catch ( Exception ex )
-            {
-                TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG( ex );
-
-                if (OnDSCommunicationLoss != null)
-                    OnDSCommunicationLoss(true);
-
-                return false;
-            }
-
-            return true;
-        }
+        #endregion
 
         #region public-методы реализации интерфейса IProviderCustomer
         public PacketQueque NetPackQ { get; set; }
@@ -287,6 +288,43 @@ namespace ProviderCustomerExchangeLib.WCF
             (WCFproxy as DSRouterClient).GetTagsValuesUpdatedAsync();
         }
 
+        /// <summary>
+        /// Получить ссылку на осциллограмму
+        /// </summary>
+        public string GetOscillogramAsUrlById(UInt16 dsGuid, Int32 oscGuid)
+        {
+            try
+            {
+                //var result = WCFproxy.Authorization("alex", "s", false);
+                var relativeUrl = WCFproxy.GetOscillogramAsUrlByID(dsGuid, oscGuid);
+                if (String.IsNullOrEmpty(relativeUrl))
+                    return null;
+
+                return String.Format("http://{0}/DSRouter.DSRouterService{1}", HMI_Settings.IPADDRES_SERVER, relativeUrl);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Получить содержимое архива с осциллограммами и его имя
+        /// </summary>
+        public Tuple<byte[], string> GetOscillogramAsByteArray(UInt16 dsGuid, Int32 oscGuid)
+        {
+            try
+            {
+                return WCFproxy.GetOscillogramAsByteArray(dsGuid, oscGuid);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return null;
+        }
+
         #region DSRouterClient Async Metods Handlers
         private void OnGetTagsValuesUpdatedCompleted(object sender, GetTagsValuesUpdatedCompletedEventArgs getTagsValuesUpdatedCompletedEventArgs)
         {
@@ -307,8 +345,8 @@ namespace ProviderCustomerExchangeLib.WCF
                 }
                 else
                 {
-                    if (OnDSCommunicationLoss != null)
-                        OnDSCommunicationLoss(true);
+                    //if (OnDSCommunicationLoss != null)
+                    //    OnDSCommunicationLoss(true);
                     TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Warning, 0, "При выполнении GetTagsValuesUpdatedAsync произошла ошабка.");
                 }
             }
@@ -348,24 +386,23 @@ namespace ProviderCustomerExchangeLib.WCF
         /// <summary>
         /// Обработчик события в Callback при появлении нового значения
         /// </summary>
-        private void NewTagValueHandler(Dictionary<string, DSTagValue> tv)
+        private void NewTagValueHandler(Dictionary<string, DSRouterTagValue> tv)
         {
+            #if DEBUG
+            tv = (from pair in tv orderby pair.Key select pair).ToDictionary(pair => pair.Key, pair => pair.Value);
+            
             Console.WriteLine("Порция данных");
-            foreach (KeyValuePair<string, DSTagValue> kvp in tv)
+            foreach (KeyValuePair<string, DSRouterTagValue> kvp in tv)
                 if (kvp.Value.VarValueAsObject == null)
-                    Console.WriteLine(string.Format("{0} : {1}", kvp.Key, "null"));
+                    Console.WriteLine(string.Format("{0} : {1} {2}", kvp.Key, "null", (VarQualityNewDs)kvp.Value.VarQuality));
                 else
-                    Console.WriteLine(string.Format("{0} : {1}   {2}", kvp.Key, kvp.Value.VarValueAsObject.ToString(), kvp.Value.VarValueAsObject.GetType()));
+                    Console.WriteLine(string.Format("{0} : {1}  {2}  {3}", kvp.Key, kvp.Value.VarValueAsObject.ToString(), kvp.Value.VarValueAsObject.GetType(), (VarQualityNewDs)kvp.Value.VarQuality));
+            #endif
 
             foreach (var tag in tv)
             {
                 // VarQualityNewDs
                 VarQualityNewDs tagQuality = (VarQualityNewDs)tag.Value.VarQuality;
-                if (tagQuality != VarQualityNewDs.vqGood && tagQuality != VarQualityNewDs.vqHandled)
-                    continue;
-
-                if (tag.Value.VarValueAsObject == null)
-                    continue;
 
                 string key = tag.Key.ToString();
                 var split = key.Split('.');
@@ -383,17 +420,64 @@ namespace ProviderCustomerExchangeLib.WCF
                 {
                     TraceSourceLib.TraceSourceDiagMes.WriteDiagnosticMSG(TraceEventType.Error, 0,
                                                                          String.Format(
-                                                                             "ProviderCustomerExchange.ClientServerOnWCF::NewTagValueHandler: Ошибка при разборе нового значения тега: {0}",
+                                                                             "ProviderCustomerExchange.WcfProvider::NewTagValueHandler: Ошибка при разборе нового значения тега: {0}",
                                                                              key));
                 }
             }
         }
 
-
         private void NewErrorFromCallBackHandler(string errorStr)
         {
             throw new NotImplementedException("NewErrorFromCallBackHandler");
         }
+        #endregion
+
+        #region Handlers
+
+        /// <summary>
+        /// Событие срабатывания таймера создания прокси
+        /// </summary>
+        private void CreateConnectionTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            _createConnectionTimer.Stop();
+
+            try
+            {
+                CreateDsRouterProxy();
+
+                ConnectionEstablished();
+
+                _pingTimer.Start();
+            }
+            catch (Exception)
+            {
+                /*
+                 * Из-за того, как сделано отображение состояния связи
+                 * в главном окне, то приходится каждый раз вызывать событие
+                 * о потери связи.
+                 */
+                ConnectionClosed();
+
+                _createConnectionTimer.Start();
+            }
+        }
+
+        private void PingTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            try
+            {
+                _pingTimer.Stop();
+
+                (WCFproxy as DSRouterClient).GetCurrentDateTime();
+
+                _pingTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                _createConnectionTimer.Start();
+            }
+        }
+
         #endregion
     }
 }

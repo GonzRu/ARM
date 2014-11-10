@@ -10,7 +10,7 @@ namespace HMI_MT_Settings
 {
     public delegate void NewError( string strerror );
     public delegate void PingPongDelegate( bool state );
-    public delegate void NewTagValues(Dictionary<string, DSTagValue> tv);
+    public delegate void NewTagValues(Dictionary<string, DSRouterTagValue> tv);
 
     public class CallbackHandler : IDSRouterCallback
     {
@@ -178,7 +178,7 @@ namespace HMI_MT_Settings
         #endregion
 
         #region Информирование об изменениях в тегах
-        public void NotifyChangedTags(Dictionary<string, DSTagValue> lstChangedTags)
+        public void NotifyChangedTags(Dictionary<string, DSRouterTagValue> lstChangedTags)
         {
             try
             {
@@ -191,7 +191,7 @@ namespace HMI_MT_Settings
             }
         }
         public IAsyncResult BeginNotifyChangedTags(
-            System.Collections.Generic.Dictionary<string, DSTagValue> rr, AsyncCallback tt, object yy )
+            System.Collections.Generic.Dictionary<string, DSRouterTagValue> rr, AsyncCallback tt, object yy)
         {
             IAsyncResult rez = null;
             try

@@ -44,6 +44,15 @@ namespace HMI_MT
 
             _param = new Tuple<uint, string>(deviceGuid, comment);
         }
+
+        public KvitWindow(string comment)
+        {
+            InitializeComponent();
+
+            InitBackgroundWorker();
+
+            _param = comment;
+        }
         #endregion Constructors
 
         #region Handlers
@@ -147,7 +156,7 @@ namespace HMI_MT
 
                 doWorkEventArgs.Result = HMI_MT_Settings.HMI_Settings.MessageProvider.KvotDeviceMessages(deviceGuid, comment);
             }
-            else
+            else if (doWorkEventArgs.Argument is Tuple<List<TableEventLogAlarm>, string>)
             {
                 var param = doWorkEventArgs.Argument as Tuple<List<TableEventLogAlarm>, string>;
                 var messages = param.Item1;
@@ -167,6 +176,13 @@ namespace HMI_MT
                 }
 
                 doWorkEventArgs.Result = new Tuple<int, int>(i - 1 - failureCount, failureCount);
+            }
+            else if (doWorkEventArgs.Argument is String)
+            {
+                var param = doWorkEventArgs.Argument as string;
+
+                doWorkEventArgs.Result = HMI_MT_Settings.HMI_Settings.MessageProvider.KvotAllMessages(param);
+                backgroundWorker.ReportProgress(100);
             }
         }
         #endregion Private Metods
