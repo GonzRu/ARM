@@ -240,7 +240,8 @@ namespace OscillogramsLib
                   dlgORP.Close();
 
                   if (t.Result)
-                      MessageBox.Show("Не удалось скачать осциллограмму.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                      // Конечно тот ещё говнокод я тут намутил, но что поделать
+                      MessageBox.Show(Application.OpenForms[0], "Не удалось скачать осциллограмму.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
               });
 
               task.Start();
